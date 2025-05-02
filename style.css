@@ -1,0 +1,159 @@
+/* Accent color used throughout the site for consistent branding */
+:root {
+  --accent-color: #4dd0e1;
+}
+
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #0d0d0d; /* Dark background */
+  color: #f0f0f0;           /* Light text for contrast */
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.6;
+}
+
+/* Hero Section Styles */
+#hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('hero-bg.jpg') center center/cover no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+#hero h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3em;
+  margin-bottom: 0.2em;
+}
+#hero .tagline {
+  font-size: 1.4em;
+  color: #cccccc;
+}
+
+/* Introduction Section */
+#about {
+  padding: 4em 2em;
+  max-width: 800px;
+  margin: 0 auto;
+}
+#about h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+#about p {
+  margin-bottom: 1em;
+}
+
+/* Highlights Section */
+#highlights {
+  padding: 4em 2em;
+  max-width: 800px;
+  margin: 0 auto;
+}
+#highlights h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+#highlights ul {
+  list-style: none;
+  padding: 0;
+}
+#highlights li {
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0.5em 0;
+  padding: 0.5em 1em;
+  border-left: 4px solid var(--accent-color);
+}
+#highlights li strong {
+  color: var(--accent-color);
+}
+
+/* Gallery Section */
+#gallery-section {
+  padding: 4em 2em;
+}
+#gallery-section h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 1em;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1em;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.gallery img {
+  width: 100%;
+  border: 2px solid #444;
+  border-radius: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Dossier Section */
+#dossier {
+  padding: 4em 2em;
+  max-width: 800px;
+  margin: 0 auto;
+}
+#dossier h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+#dossier p {
+  margin-bottom: 1em;
+}
+.downloads {
+  list-style: none;
+  padding: 0;
+}
+.downloads li {
+  display: inline-block;
+  margin: 0.5em 0.5em 0.5em 0;
+}
+.downloads .btn {
+  text-decoration: none;
+  color: #f0f0f0;
+  border: 2px solid var(--accent-color);
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+.downloads .btn:hover {
+  background-color: var(--accent-color);
+  color: #000;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2em;
+  color: #777;
+}
+footer p {
+  font-size: 0.9em;
+}
+
+/* Responsive Adjustments for smaller screens */
+@media (max-width: 600px) {
+  #hero h1 {
+    font-size: 2.2em;
+  }
+  #hero .tagline {
+    font-size: 1.2em;
+  }
+}
