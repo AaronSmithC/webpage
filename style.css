@@ -15,6 +15,20 @@ body {
   font-family: 'Open Sans', sans-serif;
   line-height: 1.6;
 }
+.btn-white {
+  display: inline-block;
+  background-color: white;
+  color: black;
+  font-weight: 600;
+  padding: 0.75em 1.5em;
+  border-radius: 1.5em;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  transition: background-color 0.2s ease;
+}
+.btn-white:hover {
+  background-color: #e4e4e4;
+}
 
 /* Hero Section Styles */
 #hero {
