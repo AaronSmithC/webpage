@@ -1,90 +1,133 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Large Movement Model (LMM)</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 2em;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        header {
-            background-color: #222;
-            color: white;
-            padding: 1em 2em;
-        }
-        h1 {
-            margin-top: 0;
-        }
-        main {
-            max-width: 800px;
-            margin: auto;
-        }
-        footer {
-            margin-top: 4em;
-            font-size: 0.85em;
-            color: #666;
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Large Movement Model (LMM) Dossier</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.6;
+      color: #222;
+    }
+    h1, h2, h3 {
+      color: #003366;
+    }
+    ul {
+      margin-left: 1em;
+    }
+    .footer {
+      margin-top: 60px;
+      font-size: 0.9em;
+      color: #666;
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Large Movement Model (LMM)</h1>
-        <p>The Next Frontier in Artificial Intelligence</p>
-    </header>
-    <main>
-        <h2>🧠 What is a Large Movement Model?</h2>
-        <p>
-            A Large Movement Model (LMM)—or Human Movement Model (HMM)—is a new class of AI system, trained not on language or images, but on the deep patterns of human motion. Where language models predict words, LMMs predict
-            posture, intent, and physical behavior—joint by joint, frame by frame.
-        </p>
 
-        <h2>📦 Why it Matters</h2>
-        <ul>
-            <li>Animate realistic, expressive avatars</li>
-            <li>Control wearable robotics and exosuits</li>
-            <li>Detect motor disorders or asymmetries</li>
-            <li>Power humanoid robots with adaptive motion</li>
-            <li>Simulate real human behavior in digital worlds</li>
-        </ul>
+  <h1>Large Movement Model (LMM)</h1>
+  <p><strong>Prepared by:</strong> Aegis Station Infrastructure LLC<br>
+     <strong>Version:</strong> v1.0 – July 2025<br>
+     <strong>Status:</strong> Public Release<br>
+     <strong>Contact:</strong> <a href="mailto:engage@aegisstation.com">engage@aegisstation.com</a><br>
+     <strong>URL:</strong> <a href="https://aegisstation.com/dossiers/LMM_Dossier.pdf">https://aegisstation.com/dossiers/LMM_Dossier.pdf</a></p>
 
-        <h2>🚀 Why Now?</h2>
-        <p>
-            Three forces are converging: multiview motion data, biomechanics modeling, and 
-            transformer-scale AI systems. Together, they make human-level motion understanding not just possible—but inevitable.
-        </p>
+  <h2>What is a Large Movement Model?</h2>
+  <p>A Large Movement Model (LMM) is a deep neural network trained on high-dimensional human movement data. It learns statistical and biomechanical patterns of motion, predicting future posture or joint states in response to prior movements, contextual goals, and environmental constraints—analogous to how a Large Language Model (LLM) predicts the next word.</p>
 
-        <h2>💡 Our Vision</h2>
-        <p>
-            Understanding movement is understanding people. We believe LMMs will be as foundational 
-            to embodied intelligence as LLMs are to natural language.
-        </p>
+  <h3>Core Features</h3>
+  <ul>
+    <li>Probabilistic priors on joint motion</li>
+    <li>Learned transitions between postures</li>
+    <li>Intent-aware behavior generation</li>
+    <li>Recovery from perturbations and context adaptation</li>
+  </ul>
 
-        <h2>🏷️ Staking the Claim</h2>
-        <p>
-            “Large Movement Model (LMM)” is a term we use at <strong>Aegis Station Infrastructure LLC</strong> to describe a new class of scalable, human-aware AI systems trained on real-world motion at scale.
-            Aegis Station Infrastructure LLC is actively developing this concept as part of our broader work in scalable embodied intelligence.
-        </p>
-        <a href="dossiers/LMM_Dossier.pdf" target="_blank" style="
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: #2e2e2e;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-">
-  📄 Download the LMM Dossier
-</a>
-    </main>
-    <footer>
-        &copy; 2025 Aegis Station Infrastructure LLC. All rights reserved.
-    </footer>
+  <h2>Mapping LLM to LMM</h2>
+  <ul>
+    <li><strong>Token:</strong> Word → Joint angle or posture vector</li>
+    <li><strong>Sentence:</strong> Phrase → Motion sequence</li>
+    <li><strong>Grammar:</strong> Syntax → Kinematic rules</li>
+    <li><strong>Semantics:</strong> Meaning → Intent</li>
+    <li><strong>Next-token prediction:</strong> → Next-pose prediction</li>
+  </ul>
+
+  <h2>Built-In Constraints</h2>
+  <ul>
+    <li>Fixed joints and DOFs</li>
+    <li>Known limits and ranges</li>
+    <li>Symmetry and biomechanics</li>
+    <li>Reusable movement primitives</li>
+    <li>Energy-efficiency and goal-seeking behavior</li>
+  </ul>
+
+  <h2>Applications of LMMs</h2>
+  <ul>
+    <li>Robotics and collaborative control</li>
+    <li>Prosthetic motion prediction</li>
+    <li>Animation and VR realism</li>
+    <li>Healthcare and fall prevention</li>
+    <li>Human-aware AI and simulation</li>
+  </ul>
+
+  <h2>3D Motion from Video</h2>
+  <h3>1. Single-View Estimation</h3>
+  <p>Uses 2D keypoints (OpenPose, BlazePose) then infers 3D (VideoPose3D, VIBE). Good accessibility, but suffers from depth ambiguity.</p>
+
+  <h3>2. Multi-Camera MoCap</h3>
+  <p>Triangulates joint positions using synchronized views. High accuracy, but hardware-intensive.</p>
+
+  <h2>Key Tools</h2>
+  <ul>
+    <li>OpenPose, VideoPose3D, VIBE</li>
+    <li>SMPL / SMPL-X</li>
+    <li>AMASS Dataset, PARE</li>
+  </ul>
+
+  <h2>Challenges</h2>
+  <ul>
+    <li>Monocular depth ambiguity</li>
+    <li>Occlusion and crowded scenes</li>
+    <li>Fine detail (hands, face)</li>
+    <li>Physics and force data missing</li>
+  </ul>
+
+  <h2>Sports Footage for LMM Training</h2>
+  <p>Professional sports are ideal due to synchronized cameras and dynamic, labeled motion. Multi-agent interaction and biomechanical realism make it rich training ground.</p>
+
+  <h3>Public Datasets</h3>
+  <ul>
+    <li>NBA Courtside 3D</li>
+    <li>SoccerNet</li>
+    <li>OpenTrack</li>
+  </ul>
+
+  <h2>Predictive Applications of LMMs</h2>
+  <ul>
+    <li><strong>Intent Prediction:</strong> Anticipate goals and actions</li>
+    <li><strong>Motion Completion:</strong> Plausible movement continuation</li>
+    <li><strong>Trajectory Forecasting:</strong> Anticipate paths in real-world space</li>
+    <li><strong>Task Anticipation:</strong> Understand upcoming actions</li>
+    <li><strong>Human-Robot Coordination:</strong> Real-time motion alignment</li>
+    <li><strong>Accessibility:</strong> Preemptive assistance for instability</li>
+  </ul>
+
+  <h2>Security and Surveillance Data</h2>
+  <p>Facilities like correctional institutions and stadiums use fixed multi-camera setups, ideal for motion reconstruction. Sharing anonymized data can help build models while improving incident prevention and staff efficiency.</p>
+
+  <h2>Partnership Strategy</h2>
+  <ul>
+    <li>Correctional facilities: early warning and anomaly detection</li>
+    <li>Stadiums: crowd flow modeling and athlete performance</li>
+    <li>Transportation hubs: pedestrian motion and congestion prediction</li>
+  </ul>
+
+  <div class="footer">
+    <p><strong>© 2025 Aegis Station Infrastructure LLC</strong> – Originators of the “Large Movement Model” concept. We welcome responsible collaboration, licensing inquiries, and academic partnerships.</p>
+  </div>
+
 </body>
 </html>
