@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MovementModeler – Privacy Policy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --bg: #0b0b0f;
+      --card: #111319;
+      --accent: #ff3355;
+      --accent2: #2ea8ff;
+      --text: #f5f5f7;
+      --muted: #a0a4b8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                   "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(circle at top, #1b2035 0, #05060a 55%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 32px 18px 64px;
+    }
+    header {
+      padding: 18px 22px 20px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #151826, #05060a);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.7);
+      margin-bottom: 28px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.75rem;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    h1 span.logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 15px rgba(255,51,85,0.75);
+    }
+    .subtitle {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .meta {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .meta strong { color: #ffffff; }
+
+    section.card {
+      background: rgba(5, 6, 12, 0.92);
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 20px 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 14px 35px rgba(0,0,0,0.75);
+      backdrop-filter: blur(14px);
+    }
+    section.card h2 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+    p { margin: 0 0 10px; }
+    ul {
+      margin: 0 0 10px 1.2rem;
+      padding: 0;
+    }
+    li { margin-bottom: 6px; }
+
+    a {
+      color: var(--accent2);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+
+    .tagline {
+      font-size: 0.92rem;
+      color: var(--muted);
+      border-left: 3px solid var(--accent2);
+      padding-left: 10px;
+      margin-top: 6px;
+    }
+
+    @media (min-width: 720px) {
+      .page { padding-top: 48px; }
+      header { padding: 22px 26px 22px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>
+      <span class="logo-dot"></span>
+      MovementModeler – Privacy Policy
+    </h1>
+    <div class="subtitle">
+      Privacy-first stick-figure motion extraction from video.
+    </div>
+    <div class="meta">
+      <strong>Effective date:</strong> December 1, 2025<br>
+      <strong>App:</strong> MovementModeler for iOS<br>
+      <strong>Developer:</strong> LMM Technologies Inc. (Aegis Station Infrastructure LLC)
+    </div>
+  </header>
+
+  <section class="card">
+    <h2>1. Overview</h2>
+    <p>
+      MovementModeler is a motion-analysis utility that converts videos on your device
+      into stick-figure animations and BODY_25-style JSON data. This privacy policy
+      explains what information the app handles and how it is used.
+    </p>
+    <p class="tagline">
+      In short: your videos and extracted motion data stay on your device unless you decide to export or share them.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>2. Information We Collect</h2>
+    <p>
+      MovementModeler is designed to collect and store as little personal data as possible.
+    </p>
+    <p><strong>We do <em>not</em>:</strong></p>
+    <ul>
+      <li>Create user accounts or profiles.</li>
+      <li>Track you across apps or websites.</li>
+      <li>Collect analytics via third-party SDKs.</li>
+      <li>Upload your videos or motion data to our servers (we do not operate any backend for this app).</li>
+    </ul>
+    <p><strong>The app may access or process:</strong></p>
+    <ul>
+      <li><strong>Videos you select</strong> from your device’s photo library or camera, solely to extract poses and render stick-figure animations.</li>
+      <li><strong>Exported files</strong> (JSON or video) that you choose to save or share using the iOS share sheet.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>3. On-Device Processing</h2>
+    <p>
+      All pose detection and stick-figure rendering are performed locally on your device
+      using Apple’s Vision and related frameworks. We do not receive copies of:
+    </p>
+    <ul>
+      <li>Your input videos.</li>
+      <li>The generated stick-figure videos.</li>
+      <li>The exported JSON data.</li>
+    </ul>
+    <p>
+      Any files you create with MovementModeler are stored where you choose (for example,
+      in the Files app, your photo library, or a cloud service selected in the iOS share sheet).
+      Those services have their own privacy policies.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>4. Permissions</h2>
+    <p>
+      MovementModeler may request access to the following system resources:
+    </p>
+    <ul>
+      <li><strong>Photo Library</strong> – to allow you to select existing videos for analysis and to save exported stick videos if you choose.</li>
+      <li><strong>Camera</strong> – optional, to let you record new clips directly in the app for processing.</li>
+      <li><strong>Microphone</strong> – only when recording video through the app, so your video includes audio if you wish. Audio is not analyzed by MovementModeler.</li>
+    </ul>
+    <p>
+      You can change these permissions at any time in your iOS Settings. If you revoke access,
+      some features (such as loading videos from the library or recording new ones) may no longer work.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>5. Crash Reports & Diagnostics</h2>
+    <p>
+      With your system settings, Apple may provide us with anonymous or aggregated crash reports
+      and performance data through Xcode / App Store Connect. These reports may include:
+    </p>
+    <ul>
+      <li>Device model and iOS version</li>
+      <li>App version and basic performance data</li>
+      <li>Non-personal diagnostic information related to the crash</li>
+    </ul>
+    <p>
+      We use this information only to improve app stability and performance. We do not use it
+      to identify individual users or to track behavior across apps.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>6. How Your Data Is Shared</h2>
+    <p>
+      MovementModeler only shares data when <strong>you explicitly choose to do so</strong>,
+      for example by:
+    </p>
+    <ul>
+      <li>Saving a stick-figure video to your library or Files.</li>
+      <li>Exporting BODY_25 JSON and sending it via Messages, Mail, AirDrop, or another app.</li>
+    </ul>
+    <p>
+      Once exported, your files are governed by the privacy practices of the apps and services you share them with.
+      We do not control or monitor those services.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>7. Children’s Privacy</h2>
+    <p>
+      MovementModeler is a technical / creative tool intended for general audiences, including
+      developers, researchers, and creators. We do not knowingly collect personal information from
+      children under 13. If you believe a child has provided personal information through this app,
+      please contact us so we can work with Apple to address the issue.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>8. Data Retention</h2>
+    <p>
+      Because MovementModeler performs processing locally on your device and does not maintain
+      its own user accounts or cloud storage, you control how long your videos and exported
+      files are kept. You can delete them at any time from the Photos app, Files app, or whichever
+      storage service you used.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>9. Changes to This Policy</h2>
+    <p>
+      We may update this Privacy Policy from time to time as the app evolves or as legal
+      requirements change. When we do, we will update the “Effective date” at the top of this page.
+      Material changes may also be noted in the app’s release notes.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>10. Contact</h2>
+    <p>
+      If you have any questions about this Privacy Policy or how MovementModeler handles information, please contact:
+    </p>
+    <p>
+      <strong>LMM Technologies Inc.</strong><br>
+      Email: <a href="mailto:contact@aegisstation.com">contact@aegisstation.com</a><br>
+      Website: <a href="https://www.aegisstation.com" target="_blank" rel="noopener">https://www.aegisstation.com/MovementModeler.html</a>
+    </p>
+  </section>
+
+</div>
+</body>
+</html>
