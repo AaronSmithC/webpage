@@ -26,7 +26,7 @@
     header p {
       font-size: 1.1rem;
       opacity: 0.95;
-      max-width: 700px;
+      max-width: 760px;
       margin: 0.75rem auto 0;
     }
     main {
@@ -87,12 +87,15 @@
 
 <header>
   <h1>Large Movement Model (LMM)</h1>
-  <p>A foundational AI model for human motion — bringing LLM-style sequence intelligence to how people move in the real world.</p>
+  <p>
+    A foundational AI model for motion — learning from sequences of bodies, hands, faces, objects, and vehicles the way language models learn from text.
+  </p>
 </header>
+
 <section style="background:#f0f4ff; padding:1.25rem 1rem; text-align:center; border-bottom:1px solid #d6e2ff;">
   <p style="margin:0; font-size:1rem; color:#003366;">
-    Looking for on-device motion extraction? Try our companion app 
-    <strong>MovementModeler</strong> — convert video into clean BODY-25 stick-figure motion.
+    Want on-device motion extraction today? Try our companion app
+    <strong>MovementModeler</strong> — turn iPhone video into clean BODY-25 stick-figure motion and JSON exports.
   </p>
   <a href="https://apps.apple.com/us/app/movementmodeler/id6755984861" 
      target="_blank" rel="noopener noreferrer" 
@@ -103,88 +106,127 @@
       style="height:34px;">
   </a>
 </section>
+
 <main>
   <section>
     <h2>What is a Large Movement Model?</h2>
     <p>
-      The <span class="highlight">Large Movement Model (LMM)</span> is a general-purpose AI system built around
-      human motion as its core data type. Instead of learning from words, LMM learns from
-      <span class="highlight">sequences of movement</span>—patterns of joints, limbs, balance and timing—
-      allowing it to recognize activities, forecast what comes next, and evaluate the quality of motion
-      across many real-world settings.
+      The <span class="highlight">Large Movement Model (LMM)</span> is a general-purpose AI system that treats
+      <span class="highlight">motion itself</span> as the core data type. Instead of learning from words and sentences,
+      LMM learns from <span class="highlight">sequences of movement</span>—joint positions, trajectories, interactions,
+      and timing across people, tools, and vehicles.
     </p>
     <p>
-      Think of it as “an LLM for motion”: a single model that can be adapted to digital health,
-      safety, sports, robotics, and other domains where how people move actually matters.
+      In the same way large language models model how text unfolds, LMM models how motion unfolds:
+      recognizing activities, forecasting what comes next, and evaluating how plausible or “healthy”
+      a movement is across many real-world settings.
+    </p>
+    <p>
+      You can think of it as an <em>“LLM for motion”</em>—a shared model family that can be adapted to
+      digital health, safety, sports, robotics, and other embodied AI domains.
     </p>
   </section>
 
   <section>
     <h2>Why Motion, Why Now?</h2>
     <p>
-      Text, images, and audio all have mature foundation models. Human motion does not.
-      Today, most systems that reason about movement are narrow, one-off solutions:
-      one model for rehab, another for sports, another for security. LMM is designed to
-      change that by treating motion itself as a first-class sequence domain.
+      Text, images, and audio already have mature foundation models. Motion does not.
+      Today, most systems that reason about movement are narrow point solutions:
+      one model for rehab, another for sports, another for driving or security.
     </p>
+    <p>
+      LMM is designed to treat motion as a first-class sequence domain, so that the same
+      underlying representation and model family can support:
+    </p>
+    <ul>
+      <li>Full-body human movement (gait, posture, activities)</li>
+      <li>Fine movements of hands, fingers, and face</li>
+      <li>Objects and tools (balls, bats, canes, industrial tools)</li>
+      <li>Vehicles and macro-objects (cars, forklifts, delivery robots)</li>
+      <li>Multi-agent and crowd dynamics (people and vehicles together)</li>
+    </ul>
     <div class="pill-row">
       <span class="pill">Cross-domain by design</span>
-      <span class="pill">Biomechanically grounded</span>
-      <span class="pill">Built for real environments</span>
+      <span class="pill">Biomechanically and physically grounded</span>
+      <span class="pill">Built for real environments, not lab demos</span>
     </div>
   </section>
 
   <section>
     <h2>Anchor Application Domains</h2>
     <p>
-      We are actively developing and validating LMM across three anchor verticals, with
+      We are actively developing and validating LMM across three initial verticals, with
       additional domains to follow:
     </p>
     <ul>
-      <li><strong>Digital Health & Rehabilitation</strong> – Gait and balance analytics, compensation and fall-risk signatures, and objective progress tracking from routine rehab sessions.</li>
-      <li><strong>Security & Safety Intelligence</strong> – Motion-aware anomaly detection and behavior understanding for CCTV, with a focus on privacy-preserving, pose-based analysis instead of identity.</li>
-      <li><strong>Sports Analytics</strong> – Biomechanics, fatigue and injury-risk indicators, and team-level motion patterns that drive spacing, effort, and game dynamics.</li>
+      <li>
+        <strong>Digital Health &amp; Rehabilitation</strong> – Gait and balance analytics, detection of compensation and fall-risk signatures, and objective progress tracking from routine rehab sessions and home exercises.
+      </li>
+      <li>
+        <strong>Security, Safety &amp; Industrial Monitoring</strong> – Motion-aware anomaly detection and behavior understanding for CCTV and workplace video, with a focus on privacy-preserving, pose-based analysis instead of identity-first tracking.
+      </li>
+      <li>
+        <strong>Sports &amp; Performance Analytics</strong> – Biomechanics, fatigue and injury-risk indicators, and team-level motion patterns that shape spacing, effort, and game dynamics.
+      </li>
     </ul>
     <p>
-      The same underlying model family can also be adapted to <em>collaborative robotics,
-      AR/VR avatars, human–AI interaction, and other embodied AI use cases</em> as the
-      ecosystem matures.
+      The same underlying motion representation can also be extended to
+      <em>collaborative robotics, AR/VR avatars, human–AI interaction, and other embodied AI use cases</em>
+      as the ecosystem matures.
     </p>
   </section>
 
   <section>
     <h2>How LMM Works (High Level)</h2>
     <p>
-      LMM operates on normalized representations of human motion derived from video and
-      other sensors. These sequences are turned into compact motion “tokens” that a
-      transformer-style model can process, much like language tokens in an LLM. The model
-      learns:
+      At a high level, LMM operates on normalized motion sequences derived from video and other sensors.
+      A typical pipeline looks like:
     </p>
     <ul>
-      <li>How activities unfold over time (from micro-movements to longer behaviors)</li>
-      <li>What constitutes physically plausible, biomechanically consistent motion</li>
-      <li>How to predict near-term futures and complete partial or occluded motion</li>
+      <li><strong>1. Capture</strong> – Video or multi-camera streams from clinics, courts, gyms, or workplaces.</li>
+      <li><strong>2. Pose &amp; Trajectory Extraction</strong> – Pose estimators and trackers produce keypoints for people, hands, faces, tools, and vehicles.</li>
+      <li><strong>3. Normalization</strong> – Sequences are centered, scaled, re-timed, and tagged with metadata (domain, confidence, occlusion, temporal scale).</li>
+      <li><strong>4. Motion Tokens</strong> – Frames, short windows, and/or learned motion primitives are turned into compact “tokens” analogous to words in language modeling.</li>
+      <li><strong>5. LMM Inference</strong> – A transformer-style (and, in future phases, mixture-of-experts and diffusion) model reasons over these tokens to classify, forecast, and score motion.</li>
     </ul>
     <p>
-      Implementation details—specific datasets, tokenization schemes, architectures, and
-      training strategies—are part of our internal R&amp;D program and partner discussions.
+      This architecture allows a single model family to support tasks such as activity recognition,
+      short-term motion prediction, sequence completion, and motion-quality scoring.
     </p>
   </section>
 
   <section>
-    <h2>Partnerships & Pilots</h2>
+    <h2>How MovementModeler Fits In</h2>
     <p>
-      LMM is being developed by <strong>Aegis Station Infrastructure LLC</strong> as an early
-      entrant in motion-centric foundation models. We’re currently:
+      <strong>MovementModeler</strong> is our on-device front door into the LMM ecosystem. It lets users:
     </p>
     <ul>
-      <li>Building and testing LMM prototypes on curated motion datasets</li>
-      <li>Exploring research collaborations with universities and labs</li>
-      <li>Scoping pilot projects with organizations in rehab, security, and sports</li>
+      <li>Convert iPhone video into stabilized stick-figure motion clips</li>
+      <li>Export BODY-25 JSON for use in research and computer-vision pipelines</li>
+      <li>Experiment with smoothing, tracking, and motion visualization without any server setup</li>
     </ul>
     <p>
-      If you are interested in partnering on research, pilots, or future licensing, we’d be
-      glad to talk.
+      Under the hood, the same kinds of normalized skeleton data and export formats that MovementModeler
+      produces are exactly what LMM consumes at larger scale. The app is a practical tool today and a
+      data/interaction bridge into tomorrow’s motion foundation models.
+    </p>
+  </section>
+
+  <section>
+    <h2>Partnerships &amp; Pilots</h2>
+    <p>
+      LMM is being developed by <strong>LMM Technologies Inc.</strong>, a spin-out of
+      <strong>Aegis Station Infrastructure LLC</strong>, as an early entrant in motion-centric
+      foundation models. We are currently:
+    </p>
+    <ul>
+      <li>Building and testing LMM prototypes on curated, de-identified motion datasets</li>
+      <li>Collaborating with academic partners on model design, tokenization, and evaluation</li>
+      <li>Scoping pilot projects with organizations in rehab, safety/security, and sports analytics</li>
+    </ul>
+    <p>
+      If you are interested in research collaborations, pilot deployments, or future licensing and APIs,
+      we’d be glad to talk.
     </p>
   </section>
 
@@ -199,7 +241,8 @@
 </main>
 
 <footer>
-  &copy; 2025 Aegis Station Infrastructure LLC. Large Movement Model (LMM)&trade;. All rights reserved.
+  &copy; 2025 LMM Technologies Inc. &amp; Aegis Station Infrastructure LLC.
+  Large Movement Model (LMM)&trade;. All rights reserved.
 </footer>
 
 </body>
