@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MovementModeler for Education</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --text-main: #222;
+      --text-muted: #555;
+      --accent: #0d6efd;
+      --accent-soft: rgba(13,110,253,0.08);
+      --accent-dark: #001F3F;
+      --card-bg: #ffffff;
+      --card-border: #e1e5ea;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      background: radial-gradient(circle at top left, #014f86, #001F3F);
+      color: #fff;
+      padding: 2.5rem 1.5rem 3rem;
+      text-align: center;
+    }
+
+    header .inner { max-width: 960px; margin: 0 auto; }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.6rem;
+      letter-spacing: 0.03em;
+    }
+
+    header p.subtitle {
+      margin: 0.9rem auto 1.4rem;
+      font-size: 1.05rem;
+      max-width: 680px;
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+
+    .cta-row {
+      margin-top: 1.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+
+    .btn-primary, .btn-ghost {
+      border-radius: 999px;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: var(--accent-dark);
+      border-color: rgba(255,255,255,0.8);
+    }
+    .btn-primary:hover { background: #f6f7fb; }
+
+    .btn-ghost {
+      background: transparent;
+      color: #fff;
+      border-color: rgba(255,255,255,0.4);
+    }
+    .btn-ghost:hover { background: rgba(0,0,0,0.12); }
+
+    main {
+      max-width: 1040px;
+      margin: -1.25rem auto 3.5rem;
+      padding: 0 1.25rem;
+    }
+
+    .section { margin-top: 2.5rem; }
+
+    .section h2 { font-size: 1.55rem; margin: 0 0 0.8rem; }
+
+    .section p.lead {
+      margin: 0 0 1.4rem;
+      max-width: 720px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-size: 0.98rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      padding: 1.15rem 1.2rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+    }
+
+    .card h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+    .card p { margin: 0; font-size: 0.9rem; line-height: 1.6; color: var(--text-muted); }
+
+    .taglist { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.65rem; }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #083c74;
+      border: 1px solid rgba(13,110,253,0.18);
+    }
+
+    .pill-inline {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6c757d;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .list {
+      margin: 0.2rem 0 0;
+      padding-left: 1.1rem;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+    .list li + li { margin-top: 0.2rem; }
+
+    .code-snippet {
+      margin-top: 0.7rem;
+      background: #0b1020;
+      color: #f8fafc;
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      overflow-x: auto;
+      border: 1px solid #151b2f;
+    }
+    .code-snippet pre { margin: 0; white-space: pre; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .callout {
+      background: #fff;
+      border-radius: 14px;
+      border: 1px dashed rgba(13,110,253,0.4);
+      padding: 1rem 1.1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .callout strong { color: var(--text-main); }
+
+    .faq-item {
+      margin-bottom: 1rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid #e4e7ec;
+    }
+    .faq-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+    .faq-item h3 { font-size: 0.98rem; margin: 0 0 0.3rem; }
+    .faq-item p { margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+    footer {
+      padding: 1.8rem 1.5rem 2.2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #6c757d;
+    }
+
+    @media (max-width: 720px) {
+      header { padding: 2rem 1.25rem 2.5rem; }
+      header h1 { font-size: 2.2rem; }
+      main { margin-top: -0.75rem; }
+      .two-col { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <div class="pill"><span>MovementModeler for Education</span></div>
+    <h1>Turn Everyday Video into<br> Stick-Figures and Motion Data</h1>
+    <p class="subtitle">
+      MovementModeler is a small, practical iOS app for getting motion data out of real-world video.
+      Any short clip — staged or in the wild — can become a stick-figure visualization and BODY-25 style pose data, straight from an iPhone.
+    </p>
+
+    <div class="cta-row">
+      <a href="https://apps.apple.com/us/app/movementmodeler/id6755984861" class="btn-primary" target="_blank" rel="noopener">
+        <span>View on the App Store</span>
+      </a>
+      <a href="https://github.com/AaronSmithC/movementmodeler-tools" class="btn-ghost" target="_blank" rel="noopener">
+        <span>Python Tools Repo</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="section">
+    <h2>What MovementModeler Does</h2>
+    <p class="lead">
+      MovementModeler is a way to collect and inspect motion data without setting up a lab or wrestling with a full pipeline first.
+      It&rsquo;s just: phone, video, data.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Motion Data, Anywhere</h3>
+        <p>
+          Record or import video on the phone students already carry. MovementModeler works indoors and outdoors, including in bright sunlight.
+          As with any vision system, stable framing and reasonable video quality help the tracking.
+        </p>
+        <div class="taglist">
+          <span class="tag">Pocket-sized data collection</span>
+          <span class="tag">Works outdoors</span>
+          <span class="tag">Real-world footage</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Stick-Figure Visualizations</h3>
+        <p>
+          Generate stick-figure videos that make movement easier to see and discuss.
+          Students can scrub and replay clips for quick visual QC before doing any analysis.
+        </p>
+        <div class="taglist">
+          <span class="tag">In-class demos</span>
+          <span class="tag">Visual QC</span>
+          <span class="tag">MP4 export</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Pose Data for Analysis</h3>
+        <p>
+          Export BODY-25 style pose data per frame and per person. From there, it&rsquo;s your world — Python, MATLAB, R, or whatever tools you prefer
+          for features, metrics, and models.
+        </p>
+        <div class="taglist">
+          <span class="tag">BODY-25 style JSON</span>
+          <span class="tag">Per-frame data</span>
+          <span class="tag">Multi-person</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Where It Might Fit</h2>
+    <p class="lead">
+      These are just a few places MovementModeler can be useful.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <span class="pill-inline">Computer Vision &amp; Machine Learning</span>
+        <h3>Pose Estimation &amp; Beyond</h3>
+        <ul class="list">
+          <li>Intro labs on keypoints, occlusion, and tracking.</li>
+          <li>Small projects on action recognition or gesture classification.</li>
+          <li>Capstones that start from students&rsquo; own recordings instead of static datasets.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="pill-inline">Biomechanics &amp; PT / OT</span>
+        <h3>Movement &amp; Gait</h3>
+        <ul class="list">
+          <li>Comparing joint trajectories between conditions or techniques.</li>
+          <li>Teaching kinematics with simple stick-figures and time series.</li>
+          <li>Linking qualitative observation to basic quantitative measures.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="pill-inline">Sports Science &amp; Performance</span>
+        <h3>Technique &amp; Consistency</h3>
+        <ul class="list">
+          <li>Looking at form in jumps, cuts, pivots, or landings.</li>
+          <li>Exploring left–right differences or stability over time.</li>
+          <li>Letting students try simple performance metrics of their own.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>From Video to Data, Briefly</h2>
+    <div class="two-col">
+      <div>
+        <p class="lead">
+          The workflow is straightforward. The goal is to get out of the way so students can focus on the ideas you&rsquo;re teaching.
+        </p>
+        <ul class="list">
+          <li><strong>1. Capture or import.</strong> Film on an iPhone or use an existing clip.</li>
+          <li><strong>2. Check the stick-figure.</strong> Quick visual QC and light cleanup for obvious spikes/noise.</li>
+          <li><strong>3. Export for analysis.</strong> Use the JSON in notebooks and the MP4 in reports/presentations.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Python Tools (Optional)</h3>
+          <p>
+            For classes that already use OpenPose-style tooling, we maintain two small scripts that help bridge MovementModeler exports into common workflows.
+          </p>
+
+          <div class="code-snippet">
+            <pre><code># 1) MovementModeler clip export -> per-frame OpenPose-style JSON
+python scripts/mm_to_openpose.py movementmodeler_clip.json frames_json/
+
+# 2) Per-frame JSON -> stick-figure MP4
+python scripts/mm_json_dir_to_stickmp4.py frames_json/</code></pre>
+          </div>
+
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.65rem;">
+            Repo: <a href="https://github.com/AaronSmithC/movementmodeler-tools" target="_blank" rel="noopener">movementmodeler-tools</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>If you&rsquo;d like to see it in action</h2>
+    <div class="two-col">
+      <div>
+        <p class="lead">
+          A short screen capture showing the basic flow: import a clip, inspect the stick-figure, clean up obvious spikes, and export MP4 + JSON.
+        </p>
+
+        <div class="card">
+          <h3>Quick notes for best results</h3>
+          <ul class="list">
+            <li>Stable framing helps.</li>
+            <li>Higher resolution and less motion blur generally track better.</li>
+            <li>Outdoor clips in bright sunlight work well.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="callout">
+          <strong>1-minute demo</strong><br><br>
+
+          <div id="videoThumbnail" style="
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            margin: 0.25rem 0 0.25rem;
+            max-width: 260px;
+          ">
+            <img src="images/thumb.png" alt="MovementModeler Demo Thumbnail" style="
+              width: 25%;
+              border-radius: 10px;
+              box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+            ">
+            <div style="
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              background: rgba(0,0,0,0.55);
+              width: 58px;
+              height: 58px;
+              border-radius: 50%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            ">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </div>
+
+          <div style="font-size:0.85rem; margin-top:0.5rem;">
+            Tap to play fullscreen.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Instructor FAQ</h2>
+
+    <div class="faq-item">
+      <h3>Where can students use MovementModeler?</h3>
+      <p>
+        Anywhere they can film. The app works indoors and outdoors, including in direct sunlight. Steady framing and clear subjects help the results.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Do students need special hardware?</h3>
+      <p>
+        Just a reasonably recent iPhone. Analysis can happen in whatever environment you already use — Python, MATLAB, etc.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What does the export look like?</h3>
+      <p>
+        Exports include stick-figure MP4s and BODY-25 style pose data with coordinates and confidence values per joint, per frame, per person.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can we build our own tools on top?</h3>
+      <p>
+        Yes. The intent is that you and your students treat the exported data as raw material. The optional tools repo exists to make it easier to slot into existing workflows.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  MovementModeler &mdash; a small tool from Aegis Station Infrastructure LLC · Questions:
+  <a href="mailto:engage@aegisstation.com">engage@aegisstation.com</a>.
+</footer>
+
+<!-- Fullscreen Video Modal -->
+<div id="videoModal" style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+">
+  <video id="demoVideo" controls playsinline style="
+    width: 92%;
+    max-width: 520px;
+    border-radius: 12px;
+    box-shadow: 0 0 24px rgba(0,0,0,0.4);
+  ">
+    <source src="images/screen_capture.mov" type="video/mp4">
+  </video>
+</div>
+
+<script>
+  const videoModal = document.getElementById('videoModal');
+  const demoVideo = document.getElementById('demoVideo');
+  const videoThumbnail = document.getElementById('videoThumbnail');
+
+  if (videoThumbnail) {
+    videoThumbnail.addEventListener('click', () => {
+      videoModal.style.display = 'flex';
+      demoVideo.currentTime = 0;
+      demoVideo.play();
+    });
+  }
+
+  if (videoModal) {
+    videoModal.addEventListener('click', (e) => {
+      if (e.target === videoModal) {
+        demoVideo.pause();
+        videoModal.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
