@@ -88,7 +88,7 @@
 
     <!-- ⭐ PERFECT VIDEO PLACEMENT -->
     <video 
-      src="images/stickvideo_1765436543.MP4"
+      src="images/export_preview.mp4"
       autoplay
       muted
       loop
@@ -138,30 +138,54 @@
          align-items:center;
        ">
 
-    <!-- Left: Screenshot -->
- <div class="preview-img" 
+<!-- Left: Demo thumbnail (click → fullscreen video) -->
+<!-- Left: Demo thumbnail (tap to play demo) -->
+<div class="preview-img"
      style="
        background:var(--card);
        border:1px solid var(--stroke);
        border-radius:16px;
        padding:18px;
-       text-align:center;      /* helper */
+       display:flex;
+       justify-content:center;
      ">
 
-  <a href="images/screenshot.PNG" target="_blank" style="display:inline-block;">
-    <img 
-      src="images/screenshot.PNG"
-      alt="MovementModeler app screenshot"
-      style="
-        width:260px;           /* tweak this number until it feels right */
-        max-width:50%;
-        border-radius:14px;
-        display:block;
-        margin:0 auto;         /* <<< hard center */
-        cursor:pointer;
-      ">
-  </a>
+  <div id="demoThumb"
+       style="
+         position:relative;
+         width:100%;
+         max-width:420px;
+         cursor:pointer;
+       ">
 
+    <img src="images/thumb.png"
+         alt="MovementModeler demo"
+         style="
+           width:50%;
+           border-radius:14px;
+           display:block;
+         ">
+
+    <!-- Play icon -->
+    <div style="
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      background:rgba(0,0,0,0.55);
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    ">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    </div>
+
+  </div>
 </div>
 
     <!-- Right: Text -->
@@ -271,5 +295,48 @@
   <!-- Footer -->
   <p class="footer">© 2025 LMM Technologies Inc. • MovementModeler</p>
 </div>
+<!-- Demo video modal -->
+<div id="demoModal"
+     style="
+       display:none;
+       position:fixed;
+       inset:0;
+       background:rgba(0,0,0,0.9);
+       z-index:9999;
+       align-items:center;
+       justify-content:center;
+     ">
+
+  <video id="demoVideo"
+         src="images/screen_capture.mov"
+         autoplay
+         muted
+         loop
+         playsinline
+         style="
+           max-width:92%;
+           max-height:92%;
+           border-radius:14px;
+           background:#000;
+         ">
+  </video>
+</div>
+
+<script>
+  const thumb = document.getElementById('demoThumb');
+  const modal = document.getElementById('demoModal');
+  const video = document.getElementById('demoVideo');
+
+  thumb.addEventListener('click', () => {
+    modal.style.display = 'flex';
+    video.currentTime = 0;
+    video.play();
+  });
+
+  modal.addEventListener('click', () => {
+    video.pause();
+    modal.style.display = 'none';
+  });
+</script>
 </body>
 </html>
