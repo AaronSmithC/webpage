@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +37,32 @@
       padding:0 20px;
     }
 
+    /* Buttons */
+    .btn-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:center;
+      margin-top:18px;
+    }
+    .btn{
+      display:inline-block;
+      padding:12px 18px;
+      border-radius:10px;
+      font-weight:700;
+      border:1px solid transparent;
+      text-decoration:none;
+    }
+    .btn-primary{
+      background:var(--accent);
+      color:#fff;
+    }
+    .btn-secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--stroke);
+    }
+
     /* Hero */
     .hero{
       padding:80px 0 60px;
@@ -45,14 +72,14 @@
 
     .hero h1{
       font-size:3rem;
-      margin-bottom:12px;
+      margin:0 0 12px;
     }
 
     .hero h2{
       font-size:1.25rem;
       font-weight:400;
       color:var(--muted);
-      margin-bottom:36px;
+      margin:0 0 22px;
     }
 
     .hero img{
@@ -60,6 +87,7 @@
       max-width:900px;
       border-radius:14px;
       box-shadow:0 20px 60px rgba(0,0,0,0.6);
+      margin-top:18px;
     }
 
     /* Sections */
@@ -74,17 +102,18 @@
 
     h3{
       font-size:1.9rem;
-      margin-bottom:16px;
+      margin:0 0 16px;
     }
 
     p{
       font-size:1.05rem;
       color:#e5e9f5;
-      margin-bottom:18px;
+      margin:0 0 18px;
     }
 
     ul{
       padding-left:20px;
+      margin:0;
     }
 
     li{
@@ -140,7 +169,8 @@
       border-radius:10px;
       background:var(--accent);
       color:#fff;
-      font-weight:600;
+      font-weight:700;
+      text-decoration:none;
     }
   </style>
 </head>
@@ -151,9 +181,8 @@
   <header class="hero">
     <div class="container">
       <h1>Aegis Orbital Compute Node (AOCN)</h1>
-      <h2>Orbital Compute Spine for Power-Intensive, Heat-Limited Workloads</h2>
+      <h2>LEO compute architecture constrained by power generation, heat rejection, and serviceability</h2>
 
-      <!-- Replace image path as needed -->
       <img
         src="images/AOCN.png"
         alt="AOCN in low Earth orbit with large radiator panels and solar arrays"
@@ -165,29 +194,39 @@
   <section>
     <div class="container">
       <h3>Program Positioning</h3>
-      <p>
-        The <strong>Aegis Orbital Compute Node (AOCN)</strong> is a modular, shielded, power-dense
-        compute platform deployed in <strong>Low Earth Orbit (LEO)</strong>, designed to host
-        high-energy, thermally constrained computational workloads that strain terrestrial
-        infrastructure.
-      </p>
-      <p>
-        AOCN is not a general-purpose cloud replacement. It is an <em>orbital accelerator layer</em> —
-        a compute spine intended for workloads where continuous power availability, thermal isolation,
-        physical security, or space adjacency provide strategic advantages.
-      </p>
+<p>
+  The <strong>Aegis Orbital Compute Node (AOCN)</strong> is a modular compute platform intended for
+  deployment in <strong>Low Earth Orbit (LEO)</strong>. The architecture is sized and organized around
+  first-order physical constraints: electrical power generation, waste heat rejection, radiation
+  environment, and on-orbit serviceability.
+</p>
+
+<p>
+  AOCN is not intended to replicate terrestrial data centers in orbit. It is structured as an
+  orbital compute accelerator for workloads where power density, thermal isolation, or space
+  adjacency dominate over latency or interactive access.
+</p>
     </div>
   </section>
 
   <!-- DESIGN PHILOSOPHY -->
   <section>
     <div class="container">
-      <h3>Design Philosophy</h3>
+      <h3>Design Constraints and Assumptions</h3>
       <ul>
-        <li><strong>Thermal realism over compute hype:</strong> Heat rejection, not compute density, sets system scale.</li>
-        <li><strong>Infrastructure-first modularity:</strong> Compute is a payload; power, cooling, shielding, and comms are the product.</li>
-        <li><strong>Evolutionary deployment:</strong> Solar-powered LEO nodes today, higher-power nuclear or cislunar variants later — without redesign.</li>
-      </ul>
+  <li>
+    <strong>Thermal scaling:</strong> Radiator area and heat transport capacity determine maximum
+    sustained compute power.
+  </li>
+  <li>
+    <strong>Infrastructure separation:</strong> Power generation, thermal control, shielding, and
+    communications are treated as persistent infrastructure; compute hardware is replaceable.
+  </li>
+  <li>
+    <strong>Incremental deployment:</strong> Nodes are designed to be deployed, serviced, and
+    upgraded independently rather than as a single monolithic structure.
+  </li>
+</ul>
     </div>
   </section>
 
@@ -225,9 +264,38 @@
 
       <div class="callout">
         <p>
-          In space, nearly all electrical power becomes waste heat.
-          <strong>AOCN is sized by thermodynamics, not marketing assumptions.</strong>
-        </p>
+  At steady state, essentially all electrical input power is rejected as heat.
+  Radiator geometry, operating temperature, and loop architecture therefore set the upper bound
+  on continuous compute output.
+</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCALE REFERENCE -->
+  <section>
+    <div class="container">
+      <h3>Scale Reference</h3>
+      <p>
+  Radiator sizing is included here for physical scale reference. One American football field
+  (including end zones) has an area of approximately 5,350 m².
+</p>
+
+      <div class="spec-grid">
+        <div class="spec">
+          <strong>Radiator Area</strong>
+          2,000–5,000 m²<br/>
+          (~0.37–0.93 football fields)
+        </div>
+        <div class="spec">
+          <strong>Interpretation</strong>
+Radiator surface area required for multi-megawatt-class systems is comparable to that of large
+crewed platforms, despite significantly smaller pressurized volumes.
+        </div>
+        <div class="spec">
+          <strong>Design implication</strong>
+          Modular panels and replaceable wings are treated as first-order infrastructure.
+        </div>
       </div>
     </div>
   </section>
@@ -246,46 +314,70 @@
     </div>
   </section>
 
+  <!-- MODULARITY & SCALING -->
+  <section>
+    <div class="container">
+      <h3>Modularity & Scaling</h3>
+      <p>
+  As deployable surface area increases, structural flexibility, attitude control authority,
+  deployment complexity, and fault-domain size increase nonlinearly. Beyond a moderate scale,
+  distributing capability across multiple nodes becomes simpler than increasing the size of a
+  single structure.
+</p>
+
+<ul>
+  <li>
+    <strong>Fault containment:</strong> Smaller thermal loops and pressure volumes limit the impact
+    of punctures or component failures.
+  </li>
+  <li>
+    <strong>Control:</strong> Shorter spans reduce bending modes and pointing disturbances,
+    particularly for optical communications.
+  </li>
+  <li>
+    <strong>Lifecycle:</strong> Compute payloads can be refreshed independently of power and thermal
+    infrastructure.
+  </li>
+</ul>
+    </div>
+  </section>
+
   <!-- STRATEGIC RATIONALE -->
   <section>
     <div class="container">
-      <h3>Strategic Rationale</h3>
+      <h3>Architectural Summary</h3>
       <p>
-        The AOCN approach recognizes a simple truth:
-      </p>
-      <p style="font-size:1.3rem; font-weight:600;">
-        In space, compute is easy. Heat rejection is infrastructure.
-      </p>
-      <p>
-        Aegis Station Infrastructure already builds large-scale orbital infrastructure.
-        Orbital compute is a natural extension — not a speculative detour.
-      </p>
+  In orbit, compute hardware is not the primary scaling constraint. Power generation and heat
+  rejection dominate system size, mass, and operational complexity.
+</p>
+
+<p>
+  AOCN treats these constraints explicitly and organizes compute capability around infrastructure
+  that can be assembled, serviced, and expanded using current spaceflight technologies.
+</p>
     </div>
   </section>
-<!-- PDF Download -->
-<section>
-  <div class="container">
-    <h3>Download the Dossier</h3>
-    <p>
-      Full technical overview of AOCN — positioning, architecture, thermal scaling,
-      and LEO operating assumptions — in a printable PDF format.
-    </p>
 
-    <div class="spec"
-         style="max-width: 720px; margin: 24px auto 0; text-align:center; padding: 22px;">
-      <a href="dossiers/Aegis_Orbital_Compute_Node.pdf"
-         target="_blank"
-         rel="noopener"
-         style="display:inline-block; padding:14px 22px; border-radius:10px; background:var(--accent); color:#fff; font-weight:700;">
-        View / Download AOCN Dossier (PDF)
-      </a>
+  <!-- PDF DOWNLOAD (BOTTOM) -->
+  <section>
+    <div class="container">
+      <h3>Technical Reference</h3>
+      <p>
+        Full technical overview of AOCN — positioning, architecture, thermal scaling,
+        and LEO operating assumptions — in a printable PDF format.
+      </p>
 
-      <div style="margin-top: 12px; color: var(--muted); font-size: 0.95rem;">
-        If the PDF doesn’t open in your browser, right-click and choose “Save Link As…”
+      <div class="spec" style="max-width: 720px; margin: 24px auto 0; text-align:center;">
+        <a class="btn btn-primary" href="dossiers/Aegis_Orbital_Compute_Node.pdf" target="_blank" rel="noopener">
+          View / Technical Dossier (PDF)
+        </a>
+        <div style="margin-top: 12px; color: var(--muted); font-size: 0.95rem;">
+          If the PDF doesn’t open in your browser, right-click and choose “Save Link As…”
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
   <!-- FOOTER CTA -->
   <div class="footer-cta">
     <div class="container">
