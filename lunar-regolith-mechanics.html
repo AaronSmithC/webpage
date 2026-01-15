@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Regolith Mechanics Head (RMH) | Pre-Operational Lunar Geotechnics</title>
+  <meta name="description" content="A requirements-style concept for a minimal, repeatable in-situ geotechnical capability that should precede mobility-dependent lunar surface activities." />
+
+  <style>
+    :root{
+      --bg:#0a0b10;
+      --card:#11131a;
+      --text:#e9eefb;
+      --muted:#a9b3c9;
+      --accent:#3b82f6;
+      --stroke:#1f2430;
+      --good:#22c55e;
+      --warn:#f59e0b;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1000px;margin:0 auto;padding:24px}
+    header{padding:18px 0 8px}
+    .kicker{color:var(--muted);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+    h1{font-size:40px;line-height:1.1;margin:10px 0 8px}
+    .subhead{color:var(--muted);font-size:18px;max-width:850px;line-height:1.55;margin:0 0 18px}
+    .hero{
+      display:grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap:16px;
+      align-items:stretch;
+      margin:18px 0 18px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--stroke);
+      border-radius:16px;
+      padding:18px;
+    }
+    .hero .card{min-height:220px}
+    .schematic{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:14px;
+      background:linear-gradient(180deg, rgba(59,130,246,.12), rgba(59,130,246,.04));
+      border:1px dashed rgba(59,130,246,.35);
+      height:100%;
+      text-align:center;
+      padding:14px;
+      color:var(--muted);
+    }
+    .schematic strong{color:var(--text)}
+    .pillrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+    .pill{
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.02);
+      color:var(--muted);
+      font-size:13px;
+      padding:8px 10px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+    .grid{display:grid;grid-template-columns: 1fr 1fr;gap:16px;margin:16px 0}
+    h2{font-size:22px;margin:0 0 10px}
+    h3{font-size:16px;margin:0 0 8px;color:var(--text)}
+    p{color:var(--muted);line-height:1.7;margin:10px 0}
+    ul{margin:10px 0 0 18px;color:var(--muted);line-height:1.7}
+    li{margin:6px 0}
+    .note{
+      border-left:3px solid var(--accent);
+      padding:10px 12px;
+      background:rgba(59,130,246,.08);
+      border-radius:12px;
+      color:var(--muted);
+      margin:12px 0 0;
+    }
+    .reqs{width:100%;border-collapse:separate;border-spacing:0;margin-top:10px;overflow:hidden;border-radius:14px;border:1px solid var(--stroke)}
+    .reqs th, .reqs td{padding:12px 12px;border-bottom:1px solid var(--stroke);vertical-align:top}
+    .reqs th{background:rgba(255,255,255,.03);text-align:left;font-size:13px;color:var(--text)}
+    .reqs td{font-size:14px;color:var(--muted)}
+    .reqs tr:last-child td{border-bottom:none}
+    .tag{
+      display:inline-block;
+      font-size:12px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      color:var(--muted);
+      background:rgba(255,255,255,.02);
+      margin-right:6px;
+      margin-top:4px;
+    }
+    .twoCol{display:grid;grid-template-columns: 1fr 1fr;gap:14px}
+    .mini{font-size:13px;color:var(--muted)}
+    .callout{
+      background:rgba(34,197,94,.08);
+      border:1px solid rgba(34,197,94,.25);
+      border-radius:14px;
+      padding:14px;
+      margin-top:12px;
+    }
+    .callout strong{color:var(--text)}
+    footer{margin:26px 0 8px;color:var(--muted);font-size:13px}
+    .hr{height:1px;background:var(--stroke);margin:18px 0}
+    @media (max-width: 860px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .twoCol{grid-template-columns:1fr}
+      h1{font-size:34px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="kicker">Reference Concept • Pre-Operational Capability</div>
+      <h1>Regolith Mechanics Head (RMH)</h1>
+      <div class="subhead">
+        A requirements-style definition of a minimal, repeatable <strong>in-situ geotechnical capability</strong>
+        that should precede mobility-dependent lunar surface activities (rovers, repeated traffic, anchoring, drilling, and emplacement).
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="card">
+        <h2 style="margin-bottom:8px">What this page is</h2>
+        <p>
+          This is a neutral definition of a minimal “RMH-class” investigation: a compact, rover- or lander-hosted
+          capability for measuring <strong>regolith mechanical behavior at operational scale</strong>.
+          It is not a product announcement, not a solicitation, and not a claim of planned development.
+        </p>
+        <div class="pillrow" aria-label="Scope tags">
+          <span class="pill">Geotechnical, not geology</span>
+          <span class="pill">Design parameters, not inference</span>
+          <span class="pill">Mobility risk reduction</span>
+          <span class="pill">Repeatable test recipe</span>
+        </div>
+        <div class="note">
+          <strong>Core idea:</strong> before vehicles, traffic, or structures depend on lunar ground behavior,
+          that behavior should be measured directly in the wheel/footing interaction zone.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="schematic">
+          <div>
+            <a href="images/RMH.png" target="_blank" rel="noopener">
+  <img
+    src="images/RMH.png"
+    alt="Regolith Mechanics Head (RMH) block diagram: actuator spine to load pad or penetration cone to engineering data products."
+    style="max-width:100%; height:auto; border-radius:12px; border:1px solid var(--stroke);"
+  />
+</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="hr"></div>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Why this capability is needed</h2>
+        <p>
+          As lunar missions move from one-off demonstrations to sustained surface activity, a practical operational gap becomes more consequential:
+          <strong>quantified regolith mechanics at the scale mobility systems actually interact with</strong>.
+        </p>
+        <ul>
+          <li>Mobility risk is often driven by unknown load–sinkage and shear behavior, not by lack of rugged hardware.</li>
+          <li>Terrain “looks safe” is not a substitute for measured bearing capacity, compaction response, and strength gradients.</li>
+          <li>Repeated traffic changes the ground. First-pass performance can differ materially from tenth-pass performance.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Scope of application</h2>
+        <p>RMH-class characterization should precede or accompany:</p>
+        <ul>
+          <li>Sustained rover operations and long traverses</li>
+          <li>Heavy or repeated surface traffic (logistics loops, staging areas, routes)</li>
+          <li>Anchoring, drilling, and emplacement activities</li>
+          <li>Construction-adjacent operations and site preparation</li>
+          <li>Operations in poorly constrained terrain (e.g., polar regions, heterogeneous slopes)</li>
+        </ul>
+        <p class="mini">
+          RMH-class characterization complements science payloads; it is focused on operational mechanics rather than compositional discovery.
+        </p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Measurement objectives</h2>
+      <div class="twoCol">
+        <div>
+          <h3>Primary (minimum) objectives</h3>
+          <ul>
+            <li>Measure <strong>load-dependent sinkage</strong> under controlled normal force</li>
+            <li>Estimate <strong>bearing capacity and stiffness proxies</strong> from load–sinkage response</li>
+            <li>Measure <strong>penetration resistance vs depth</strong> across the wheel-interaction zone</li>
+            <li>Quantify <strong>disturbance / compaction sensitivity</strong> via pre/post measurements</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Recommended (mission-dependent)</h3>
+          <ul>
+            <li>Correlate slip with tractive force via a simple reaction load reference (tether/push)</li>
+            <li>Capture environmental context (temperature shallow profile, surface texture documentation)</li>
+            <li>Replicate tests at multiple micro-sites to bound variability and uncertainty</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>Success criterion:</strong> outputs are directly usable by rover and surface-ops engineers (plots + tables),
+        not only raw telemetry or qualitative descriptions.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Functional requirements (requirements-style)</h2>
+
+      <table class="reqs" role="table" aria-label="RMH functional requirements">
+        <thead>
+          <tr>
+            <th style="width:20%">ID</th>
+            <th style="width:20%">Function</th>
+            <th>Requirement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>RMH-F-001</strong></td>
+            <td>Normal load testing</td>
+            <td>
+              The system shall apply controlled normal force to the regolith surface and measure resulting deformation (sinkage) as a function of load.
+              <div class="tag">Load–sinkage</div><div class="tag">Bearing proxy</div><div class="tag">Compaction</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>RMH-F-002</strong></td>
+            <td>Penetration profiling</td>
+            <td>
+              The system shall measure penetration resistance continuously as a function of depth to a minimum depth representative of the wheel/footing interaction zone.
+              <div class="tag">0–30 cm class</div><div class="tag">Layering</div><div class="tag">Strength gradient</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>RMH-F-003</strong></td>
+            <td>Disturbance sensitivity</td>
+            <td>
+              The system shall support repeat measurements at disturbed and undisturbed locations to quantify changes in mechanical response due to traffic or loading.
+              <div class="tag">Pre/post</div><div class="tag">First-pass vs repeated-pass</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>RMH-F-004</strong> <span class="mini">(recommended)</span></td>
+            <td>Traction correlation</td>
+            <td>
+              When paired with a reaction load reference, the system should enable correlation of wheel slip with tractive force to generate drawbar pull vs slip relationships.
+              <div class="tag">Traction envelope</div><div class="tag">Slip limits</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>RMH-F-005</strong></td>
+            <td>Time synchronization</td>
+            <td>
+              The system shall timestamp all measurements and synchronize with rover state data (pose, wheel speed, IMU where available) to support reconstruction of test conditions.
+              <div class="tag">Engineering traceability</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="mini" style="margin-top:10px">
+        Note: quantitative thresholds (forces, depths, accuracies) are mission- and platform-dependent and should be set by the mobility and surface-ops requirements of the host system.
+      </p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Conceptual device elements</h2>
+        <ul>
+          <li><strong>Actuator spine:</strong> a single linear actuation axis suitable for both surface loading and penetration tasks</li>
+          <li><strong>Load interface:</strong> footpad / plate with known area (optionally two areas to capture scale sensitivity)</li>
+          <li><strong>Penetration interface:</strong> cone or rod for shallow profiling</li>
+          <li><strong>Sensor set (minimum):</strong> force, displacement/depth, timestamps</li>
+          <li><strong>Optional:</strong> reaction load measurement (tether/push), shallow temperature, context imaging</li>
+        </ul>
+        <div class="note">
+          <strong>Design bias:</strong> reduce part count and qualification burden. A single actuator and limited toolfaces often provide the best reliability-to-information ratio.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Minimal test recipe (one-site, one-sol class)</h2>
+        <ol style="margin:10px 0 0 18px;color:var(--muted);line-height:1.7">
+          <li><strong>Baseline penetration profiles</strong> at 2–3 micro-sites (depth resistance vs depth)</li>
+          <li><strong>Load ramp test</strong> (incremental or continuous) to produce a load–sinkage curve</li>
+          <li><strong>Repeat loading</strong> at the same point to observe compaction response</li>
+          <li><strong>Post-disturbance penetration</strong> to quantify strength/density change</li>
+          <li><strong>Optional traction runs</strong> with reaction reference to map drawbar pull vs slip</li>
+        </ol>
+        <p class="mini" style="margin-top:10px">
+          This recipe is intentionally compact: it prioritizes engineering-usable parameters over broad exploratory mapping.
+        </p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Data products</h2>
+      <p>
+        RMH-class investigations should deliver a small set of standardized outputs suitable for mobility modeling and trafficability assessment:
+      </p>
+      <div class="twoCol">
+        <div>
+          <h3>Plots (minimum set)</h3>
+          <ul>
+            <li><strong>Load vs sinkage</strong> (with repeat cycles where performed)</li>
+            <li><strong>Penetration resistance vs depth</strong> (multiple micro-sites)</li>
+            <li><strong>Pre/post disturbance comparison</strong> (delta curves)</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Tables (minimum set)</h3>
+          <ul>
+            <li>Test metadata: location, timestamps, instrument configuration</li>
+            <li>Derived proxies: stiffness/bearing indicators, layer depth markers</li>
+            <li>Uncertainty bounds or observed variability across micro-sites</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note">
+        <strong>Engineering usability requirement:</strong> a mobility team should be able to plug outputs into a model or spreadsheet without bespoke interpretation.
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Ballpark cost (ROM)</h2>
+        <p>
+          Order-of-magnitude cost for a flight-qualified RMH-class investigation payload (excluding rover/lander bus and launch) typically falls in:
+        </p>
+        <ul>
+          <li><strong>$7M–$12M</strong> for minimal load + penetration + disturbance capability</li>
+          <li><strong>$12M–$22M</strong> with traction correlation (reaction reference), higher autonomy, and additional operational maturity</li>
+        </ul>
+        <p class="mini">
+          These ranges are planning-grade estimates intended for early architecture budgeting and discussion, not vendor quotes.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Where it fits in mission planning</h2>
+        <ul>
+          <li>Precursor step before committing to sustained mobility routes or surface logistics loops</li>
+          <li>Input to site selection for repeated operations (staging, roads, pads, anchors)</li>
+          <li>Complements compositional payloads by addressing mechanical uncertainty</li>
+          <li>Improves design margins and reduces conservatism driven by unknown terrain behavior</li>
+        </ul>
+        <div class="callout">
+          <strong>Framing:</strong> as surface operations scale, measured regolith mechanics becomes an enabling capability rather than an optional add-on.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Relationship to mission risk</h2>
+      <p>
+        Absence of RMH-class measurements prior to sustained mobility or construction-adjacent operations constitutes a known operational risk,
+        including unexpected sinkage, traction loss, immobilization, or overloading of mobility systems.
+      </p>
+      <p class="mini">
+        RMH-class characterization reduces epistemic uncertainty; it does not eliminate all risk and does not replace disciplined operational constraints.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Standardization potential</h2>
+      <p>
+        Standardizing RMH-class investigations across missions enables cross-site comparability and accumulation of empirical lunar geotechnical datasets.
+        Over time, this reduces the need to “relearn” terrain behavior and supports better-grounded design and operational margins.
+      </p>
+    </section>
+
+    <footer>
+      <div class="hr"></div>
+      <div>
+        <strong>Note:</strong> This page is intentionally written in a neutral, requirements-style format to support discussion.
+        It describes a capability class and data products that may be implemented by any qualified mission team.
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
