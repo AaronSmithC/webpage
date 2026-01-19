@@ -191,3 +191,75 @@ footer p {
     font-size: 1.2em;
   }
 }
+/* ================================
+   Related Tool Footer (Lab-style)
+   ================================ */
+
+.related-tool {
+  border-top: 1px solid #222;
+  padding: 3em 2em 2em;
+  background-color: #0d0d0d;
+}
+
+.related-tool-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.related-tool-kicker {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 0.6em;
+}
+
+.related-tool-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.6em;
+}
+
+.related-tool-title a {
+  color: #f0f0f0;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(240, 240, 240, 0.25);
+}
+
+.related-tool-title a:hover {
+  border-bottom-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.related-tool-sep {
+  margin: 0 0.4em;
+  color: #666;
+}
+
+.related-tool-subtitle {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.related-tool-desc {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-bottom: 1em;
+  max-width: 70ch;
+}
+
+.related-tool-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.related-tool-tags span {
+  font-size: 0.75rem;
+  color: #aaa;
+  border: 1px solid #333;
+  padding: 0.25em 0.6em;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.03);
+}
