@@ -66,6 +66,30 @@
       font-size: 0.9rem;
       color: #666;
     }
+/* Hard clamp: prevent any horizontal overflow anywhere */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Hard clamp: no image can exceed its container */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Specifically clamp the LUNET diagram to the text column */
+.lunet-image {
+  margin: 2em 0;
+  width: 100%;
+}
+
+.lunet-image img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
   </style>
 </head>
 
@@ -92,7 +116,7 @@
     </p>
 
     <div class="lunet-image">
-  <img src="images/lunet.PNG"
+  <img src="images/lunet.png"
        alt="LUNET node network diagram showing Polar, Mid-Latitude, and Equatorial nodes with staged hops"
        loading="lazy">
 </div>
