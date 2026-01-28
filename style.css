@@ -40,12 +40,6 @@ body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.25);
   transition: background-color 0.2s ease;
 }
-.accessibility-note {
-  font-size: 0.85rem;
-  color: #888;
-  margin-top: 1.5em;
-  text-align: center;
-}
 .btn:hover {
   background-color: #005FCC;
 }
@@ -167,6 +161,12 @@ body {
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
+.accessibility-note {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 1.5em;
+  text-align: center;
+}
 .downloads .btn:hover {
   background-color: var(--accent-color);
   color: #000;
@@ -261,16 +261,5 @@ footer p {
   border: 1px solid #333;
   padding: 0.25em 0.6em;
   border-radius: 3px;
-
-  .lunet-image {
-  margin: 2em 0;
-  text-align: center;
-}
-
-.lunet-image img {
-  max-width: 100%;
-  height: auto;
-  border: 1px solid #ddd;
-}
   background: rgba(255, 255, 255, 0.03);
 }
