@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Extravehicular Structural Inspection Capability (ESIC)</title>
+  <meta name="description"
+        content="A requirements-style reference defining a minimal, repeatable extravehicular inspection capability for long-duration human-rated orbital platforms." />
+
+  <style>
+    :root{
+      --bg:#0a0b10;
+      --card:#11131a;
+      --text:#e9eefb;
+      --muted:#a9b3c9;
+      --accent:#3b82f6;
+      --stroke:#1f2430;
+      --good:#22c55e;
+      --warn:#f59e0b;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1000px;margin:0 auto;padding:24px}
+    header{padding:18px 0 8px}
+    .kicker{color:var(--muted);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+    h1{font-size:40px;line-height:1.1;margin:10px 0 8px}
+    .subhead{color:var(--muted);font-size:18px;max-width:850px;line-height:1.55;margin:0 0 18px}
+    .card{
+      background:var(--card);
+      border:1px solid var(--stroke);
+      border-radius:16px;
+      padding:18px;
+      margin-bottom:16px;
+    }
+    h2{font-size:22px;margin:0 0 10px}
+    h3{font-size:16px;margin:0 0 8px}
+    p{color:var(--muted);line-height:1.7;margin:10px 0}
+    ul{margin:10px 0 0 18px;color:var(--muted);line-height:1.7}
+    li{margin:6px 0}
+    .pillrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+    .pill{
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.02);
+      color:var(--muted);
+      font-size:13px;
+      padding:8px 10px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+    .note{
+      border-left:3px solid var(--accent);
+      padding:10px 12px;
+      background:rgba(59,130,246,.08);
+      border-radius:12px;
+      color:var(--muted);
+      margin-top:12px;
+    }
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .reqs{width:100%;border-collapse:separate;border-spacing:0;margin-top:10px;
+      border-radius:14px;border:1px solid var(--stroke);overflow:hidden}
+    .reqs th,.reqs td{padding:12px;border-bottom:1px solid var(--stroke);vertical-align:top}
+    .reqs th{background:rgba(255,255,255,.03);font-size:13px;text-align:left}
+    .reqs td{font-size:14px;color:var(--muted)}
+    .reqs tr:last-child td{border-bottom:none}
+    .tag{
+      display:inline-block;font-size:12px;padding:4px 8px;border-radius:999px;
+      border:1px solid var(--stroke);color:var(--muted);
+      background:rgba(255,255,255,.02);margin-right:6px;margin-top:4px;
+    }
+    .mini{font-size:13px;color:var(--muted)}
+    @media (max-width:860px){
+      .grid{grid-template-columns:1fr}
+      h1{font-size:34px}
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Reference Concept • Operational Safety Capability</div>
+  <h1>Extravehicular Structural Inspection Capability (ESIC)</h1>
+  <div class="subhead">
+    A requirements-style definition of a minimal, repeatable
+    <strong>extravehicular inspection capability</strong>
+    intended to support safe, long-duration operation of human-rated orbital platforms.
+  </div>
+</header>
+
+<section class="card">
+  <h2>What this page is</h2>
+  <p>
+    This page defines a neutral <strong>capability class</strong> for inspecting pressurized
+    space structures from the extravehicular environment. It is not a product announcement,
+    not a vehicle design, and not a solicitation.
+  </p>
+  <div class="pillrow">
+    <span class="pill">Extravehicular, microgravity context</span>
+    <span class="pill">Safety & certification oriented</span>
+    <span class="pill">Repeatable inspection</span>
+    <span class="pill">Engineering-usable outputs</span>
+  </div>
+  <div class="note">
+    <strong>Core idea:</strong> long-duration orbital platforms require a systematic,
+    repeatable means of inspecting their external structure without relying on ad hoc EVA
+    or opportunistic imagery.
+  </div>
+</section>
+
+<section class="grid">
+  <div class="card">
+    <h2>Why this capability is needed</h2>
+    <ul>
+      <li>Micrometeoroid and orbital debris impacts accumulate over time.</li>
+      <li>Thermal cycling, fatigue, and joint degradation are not directly observable from inside the pressure vessel.</li>
+      <li>Visual inspection during EVA is episodic, costly, and difficult to standardize.</li>
+      <li>Early detection enables repair, mitigation, and informed operational decisions.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Scope of application</h2>
+    <p>ESIC-class inspection should apply to:</p>
+    <ul>
+      <li>Orbital stations and ports</li>
+      <li>Propellant depots and logistics nodes</li>
+      <li>Long-duration pressurized spacecraft</li>
+      <li>Platforms without frequent EVA cadence</li>
+    </ul>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Inspection objectives</h2>
+  <div class="grid">
+    <div>
+      <h3>Primary objectives</h3>
+      <ul>
+        <li>Detect surface damage, deformation, or anomalies</li>
+        <li>Track change over time at known locations</li>
+        <li>Verify post-repair or post-event condition</li>
+        <li>Support continued operation decisions</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Recommended (mission-dependent)</h3>
+      <ul>
+        <li>Geometry or depth estimation of damage features</li>
+        <li>Thermal or material-context correlation</li>
+        <li>Anomaly flagging and prioritization</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Functional requirements (requirements-style)</h2>
+  <table class="reqs">
+    <thead>
+      <tr>
+        <th style="width:20%">ID</th>
+        <th style="width:20%">Function</th>
+        <th>Requirement</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>ESIC-F-001</strong></td>
+        <td>Extravehicular access</td>
+        <td>
+          The capability shall operate in the extravehicular environment to observe
+          external structural surfaces not visible from internal locations.
+          <div class="tag">Microgravity</div><div class="tag">Off-structure</div>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>ESIC-F-002</strong></td>
+        <td>Repeatability</td>
+        <td>
+          The capability shall support repeat inspections of the same locations to
+          enable change detection over time.
+          <div class="tag">Trending</div><div class="tag">Baseline comparison</div>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>ESIC-F-003</strong></td>
+        <td>Localization</td>
+        <td>
+          Inspection data shall be associated with known structural locations to
+          support engineering assessment and follow-up action.
+          <div class="tag">Traceability</div>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>ESIC-F-004</strong></td>
+        <td>Data usability</td>
+        <td>
+          Outputs shall be suitable for engineering review without bespoke interpretation
+          or vendor-specific tooling.
+          <div class="tag">Engineering-ready</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="card">
+  <h2>Data products</h2>
+  <div class="grid">
+    <div>
+      <h3>Minimum</h3>
+      <ul>
+        <li>Time-stamped visual records</li>
+        <li>Location-referenced inspection points</li>
+        <li>Change-over-time comparisons</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Optional / mission-dependent</h3>
+      <ul>
+        <li>Depth or geometry estimates</li>
+        <li>Thermal context</li>
+        <li>Automated anomaly indicators</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Relationship to mission risk</h2>
+  <p>
+    Absence of a repeatable extravehicular inspection capability increases the risk
+    of undetected structural degradation, delayed response to damage, and unnecessary
+    operational conservatism.
+  </p>
+  <p>
+    Because extravehicular inspection underpins crew safety and platform certification,
+    the underlying capability should be operator-owned, auditable, and repeatable across missions.
+  </p>
+  <p class="mini">
+    ESIC-class inspection reduces epistemic uncertainty; it does not eliminate all risk
+    and does not replace disciplined operational constraints.
+  </p>
+</section>
+
+<footer class="mini">
+  <p>
+    <strong>Note:</strong> This reference intentionally avoids prescribing a specific
+    vehicle, propulsion method, or sensing suite. Multiple implementations may satisfy
+    the same capability definition.
+  </p>
+</footer>
+
+</div>
+</body>
+</html>
