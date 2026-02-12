@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+  <title>Aegis Station — Program Architecture & Technical Domains</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Aegis Station program decomposition: the primary systems, engineering domains, and integration functions required to design, build, and integrate a system-of-systems space infrastructure program."/>
+  <meta name="keywords" content="Aegis Station, systems engineering, program architecture, space infrastructure, ECLSS, ISRU, lunar logistics, in-space assembly, interface control, MBSE"/>
+  <meta name="author" content="Aegis Station"/>
+
+  <!-- Social -->
+  <meta property="og:title" content="Aegis Station — Program Architecture & Technical Domains"/>
+  <meta property="og:description" content="Systems and domains required to build and integrate Aegis Station as a system-of-systems program."/>
+  <meta property="og:type" content="website"/>
+
+  <!-- Fonts & Site CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+
+  <style>
+    /* Page-local styling to match your existing dark aesthetic without requiring new CSS files */
+    body { background:#0b0b0b; color:#e8e8e8; font-family:"Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem; }
+    .kicker { color:#bdbdbd; margin: 0 0 0.75rem; }
+    h1, h2, h3 { font-family:"Orbitron", system-ui, sans-serif; letter-spacing: 0.5px; }
+    h1 { font-size: 2.1rem; margin: 0.25rem 0 0.75rem; }
+    h2 { font-size: 1.35rem; margin: 2.0rem 0 0.75rem; }
+    h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color:#f0f0f0; }
+    p { line-height: 1.65; color:#d7d7d7; }
+    a { color:#ffffff; text-decoration: underline; }
+    .rule { border:0; border-top:1px solid #2d2d2d; margin: 1.75rem 0; }
+    .note { color:#b9b9b9; font-size: 0.95rem; }
+    .grid { display:grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 760px) { .grid { grid-template-columns: 1fr 1fr; } }
+    .card {
+      border: 1px solid #2b2b2b;
+      background: #101010;
+      border-radius: 14px;
+      padding: 1.1rem 1.1rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    }
+    .card ul { margin: 0.6rem 0 0; padding-left: 1.1rem; color:#d7d7d7; }
+    .card li { margin: 0.35rem 0; }
+    .toc {
+      border: 1px solid #2b2b2b;
+      background: #0f0f0f;
+      border-radius: 14px;
+      padding: 1rem 1rem;
+      margin-top: 1.25rem;
+    }
+    .toc a { text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    .toc ul { list-style:none; padding:0; margin:0; line-height:1.75; }
+    .pill {
+      display:inline-block;
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      border:1px solid #2b2b2b;
+      background:#141414;
+      font-size: 0.85rem;
+      color:#cfcfcf;
+      margin-right: 0.4rem;
+      margin-top: 0.35rem;
+    }
+    .back {
+      display:inline-block;
+      margin-top: 1rem;
+      padding: 0.7rem 1.0rem;
+      border-radius: 10px;
+      border:1px solid #2b2b2b;
+      background:#141414;
+      text-decoration:none;
+    }
+    .back:hover { background:#1a1a1a; }
+    .section-lead { color:#cfcfcf; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <p class="kicker">Aegis Station</p>
+    <h1>Program Architecture & Technical Domains</h1>
+
+    <p class="section-lead">
+      Aegis Station is a system-of-systems program. The station is only one element within a broader architecture that
+      includes transportation, shielding logistics, autonomy, in-space assembly, and lunar surface operations.
+      This page outlines the primary systems and technical disciplines required to design, build, and integrate the program.
+    </p>
+
+    <div class="toc">
+      <strong style="font-family: Orbitron, system-ui, sans-serif;">On this page</strong>
+      <ul>
+        <li><a href="#orbital-habitat">1. Orbital Habitat Systems</a></li>
+        <li><a href="#transport-logistics">2. Transportation & Logistics Systems</a></li>
+        <li><a href="#lunar-surface">3. Lunar Surface Systems</a></li>
+        <li><a href="#assembly-maintenance">4. In-Space Assembly & Maintenance</a></li>
+        <li><a href="#integration">5. Program-Level Integration</a></li>
+      </ul>
+    </div>
+
+    <hr class="rule"/>
+
+    <!-- 1 -->
+    <section id="orbital-habitat">
+      <h2>1. Orbital Habitat Systems</h2>
+      <p class="note">
+        Focus: rotating structures, shielding and fluid management, crew life support, power, and long-duration operability.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Large-Scale Rotating Structures</h3>
+          <p>Structural engineering at full scale under continuous rotation and 1g-equivalent loads.</p>
+          <ul>
+            <li>Ring fabrication, modular segmentation, and orbital assembly tolerances</li>
+            <li>Hub–ring interfaces, load paths, and structural margins under spin</li>
+            <li>Materials, fatigue life, micrometeoroid tolerance, and maintainability</li>
+          </ul>
+          <div>
+            <span class="pill">Aerospace structures</span>
+            <span class="pill">FEA / loads</span>
+            <span class="pill">Mechanisms</span>
+            <span class="pill">Orbital assembly</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Rotational Dynamics & Stability</h3>
+          <p>Spin-up sequencing, stability, resonance avoidance, and mass management at habitat scale.</p>
+          <ul>
+            <li>Spin-up plans, damping, and vibration / modal management</li>
+            <li>Mass asymmetry handling, trim, and operational balance constraints</li>
+            <li>Attitude control interactions with rotating masses</li>
+          </ul>
+          <div>
+            <span class="pill">Dynamics</span>
+            <span class="pill">Controls</span>
+            <span class="pill">Vibration</span>
+            <span class="pill">GNC</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Radiation Shielding & Fluid Systems</h3>
+          <p>Water shielding as both protection and an operational fluid system.</p>
+          <ul>
+            <li>Segmented water containment, slosh suppression, and fault isolation</li>
+            <li>Fill / top-off logistics, flow control, monitoring, and filtration</li>
+            <li>Thermal coupling and heat rejection integration</li>
+          </ul>
+          <div>
+            <span class="pill">Fluids</span>
+            <span class="pill">CFD</span>
+            <span class="pill">Thermal</span>
+            <span class="pill">Radiation</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Environmental Control & Life Support (ECLSS)</h3>
+          <p>Long-duration crew systems designed around reliability, maintainability, and safety.</p>
+          <ul>
+            <li>Air revitalization, water recovery, and waste processing</li>
+            <li>Biosecurity, contamination control, and sensor-rich monitoring</li>
+            <li>Fire containment strategies compatible with artificial gravity</li>
+          </ul>
+          <div>
+            <span class="pill">ECLSS</span>
+            <span class="pill">Reliability</span>
+            <span class="pill">Safety</span>
+            <span class="pill">Human factors</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Power Generation & Distribution</h3>
+          <p>High-availability power architecture with redundancy and fault containment.</p>
+          <ul>
+            <li>Solar array systems, storage, and power management</li>
+            <li>Rotating-to-fixed transfer, distribution buses, and protection</li>
+            <li>Load shedding, redundancy zoning, and maintainable layouts</li>
+          </ul>
+          <div>
+            <span class="pill">Power</span>
+            <span class="pill">Energy storage</span>
+            <span class="pill">Redundancy</span>
+            <span class="pill">Fault protection</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Habitat Ops & Safety Architecture</h3>
+          <p>Operating rules and physical design features that preserve continuity of operations.</p>
+          <ul>
+            <li>Compartmentalization, isolation strategy, and emergency routing</li>
+            <li>Maintainability, spares strategy, and on-orbit servicing provisions</li>
+            <li>Operations planning, telemetry, and autonomy support</li>
+          </ul>
+          <div>
+            <span class="pill">Ops</span>
+            <span class="pill">Safety</span>
+            <span class="pill">Maintainability</span>
+            <span class="pill">Autonomy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule"/>
+
+    <!-- 2 -->
+    <section id="transport-logistics">
+      <h2>2. Transportation & Logistics Systems</h2>
+      <p class="note">
+        Focus: moving mass—water, propellant, cargo, crew—between the lunar surface, lunar orbit, and Earth.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Lunar Tanker Fleet</h3>
+          <p>Autonomous surface-to-orbit water transport at sustained cadence.</p>
+          <ul>
+            <li>Autonomous ascent/descent cycles, turnaround, and reliability engineering</li>
+            <li>Cartridge handling, transfer interfaces, and docking/berthing systems</li>
+            <li>Fleet operations, maintenance regimes, spares, and performance tracking</li>
+          </ul>
+          <div>
+            <span class="pill">Autonomy</span>
+            <span class="pill">Propulsion</span>
+            <span class="pill">Fleet ops</span>
+            <span class="pill">Ground systems</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Luna–Aegis Shuttle</h3>
+          <p>Reusable crew/cargo ferry linking polar surface sites and the station.</p>
+          <ul>
+            <li>Precision landing, surface handling, and rapid reflight considerations</li>
+            <li>Docking automation, crew safety, and life-support-in-transit</li>
+            <li>Interfaces to rovers, depots, and station logistics</li>
+          </ul>
+          <div>
+            <span class="pill">Reusable lander</span>
+            <span class="pill">Docking</span>
+            <span class="pill">Human rating</span>
+            <span class="pill">Avionics</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Earth–Aegis Long-Hauler</h3>
+          <p>Interorbital transport and cargo movement at scale.</p>
+          <ul>
+            <li>Modular freight and passenger integration, mission tailoring</li>
+            <li>Propulsion blocks, power/thermal, and maintainable configurations</li>
+            <li>Rendezvous, docking, and depot-based refueling interfaces</li>
+          </ul>
+          <div>
+            <span class="pill">Transport</span>
+            <span class="pill">Propulsion</span>
+            <span class="pill">Thermal</span>
+            <span class="pill">Docking</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Orbital Logistics & Handling</h3>
+          <p>Material handling is a first-class system in an infrastructure program.</p>
+          <ul>
+            <li>Docking/berthing, pressurized transfer, and cargo staging</li>
+            <li>Cartridge insertion/removal systems and balance management</li>
+            <li>Inventory tracking, spares logistics, and warehousing in orbit</li>
+          </ul>
+          <div>
+            <span class="pill">Material handling</span>
+            <span class="pill">Interfaces</span>
+            <span class="pill">Inventory</span>
+            <span class="pill">Ops</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule"/>
+
+    <!-- 3 -->
+    <section id="lunar-surface">
+      <h2>3. Lunar Surface Systems</h2>
+      <p class="note">
+        Focus: enabling sustained polar operations—extraction, processing, storage, mobility, and reliability through lunar night and thermal extremes.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>ISRU & Water Extraction</h3>
+          <p>Volatile extraction and processing systems that feed orbital logistics.</p>
+          <ul>
+            <li>Excavation and feed handling for icy regolith</li>
+            <li>Thermal processing, separation, storage, and transfer hardware</li>
+            <li>Quality control, contamination control, and system health monitoring</li>
+          </ul>
+          <div>
+            <span class="pill">ISRU</span>
+            <span class="pill">Cryo / thermal</span>
+            <span class="pill">Process engineering</span>
+            <span class="pill">Reliability</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Surface Mobility & Logistics</h3>
+          <p>Rovers and mobile platforms supporting prospecting, transport, and operations.</p>
+          <ul>
+            <li>Pressurized mobility systems, suspension/traction, and maintainability</li>
+            <li>Navigation and autonomy in regolith, low-light, and polar terrain</li>
+            <li>Docking/handling interfaces with shuttles and surface depots</li>
+          </ul>
+          <div>
+            <span class="pill">Mobility</span>
+            <span class="pill">Autonomy</span>
+            <span class="pill">Thermal</span>
+            <span class="pill">Human factors</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Surface Power & Thermal Survival</h3>
+          <p>Power architectures that support sustained operations and recovery modes.</p>
+          <ul>
+            <li>Solar + storage sizing, power management, and redundancy</li>
+            <li>Thermal control for polar extremes and survival provisions</li>
+            <li>Charging, staging, and depot-based logistics support</li>
+          </ul>
+          <div>
+            <span class="pill">Power</span>
+            <span class="pill">Thermal</span>
+            <span class="pill">Night survival</span>
+            <span class="pill">Depots</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Surface Operations & Field Maintenance</h3>
+          <p>Keeping systems running is part of the architecture—not an afterthought.</p>
+          <ul>
+            <li>Field-replaceable modules, toolchains, and repair workflows</li>
+            <li>Diagnostics, telemetry, and remote support pathways</li>
+            <li>Spare parts logistics and reliability planning</li>
+          </ul>
+          <div>
+            <span class="pill">Ops</span>
+            <span class="pill">Maintainability</span>
+            <span class="pill">Telemetry</span>
+            <span class="pill">Reliability</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule"/>
+
+    <!-- 4 -->
+    <section id="assembly-maintenance">
+      <h2>4. In-Space Assembly & Maintenance</h2>
+      <p class="note">
+        Focus: assembling, inspecting, and sustaining infrastructure in lunar orbit over decades.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Modular Orbital Assembly</h3>
+          <p>Robotic and human-compatible assembly of large modular structures.</p>
+          <ul>
+            <li>Assembly robotics, manipulators, fixtures, and alignment methods</li>
+            <li>EVA tool compatibility and maintainable interface design</li>
+            <li>Construction sequencing, tolerance stack-up, and verification</li>
+          </ul>
+          <div>
+            <span class="pill">Robotics</span>
+            <span class="pill">EVA</span>
+            <span class="pill">Construction</span>
+            <span class="pill">Verification</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Extravehicular Structural Inspection Capability (ESIC)</h3>
+          <p>External inspection and damage assessment as an operational capability.</p>
+          <ul>
+            <li>Hull inspection, micrometeoroid damage detection, and trending</li>
+            <li>Autonomous and crew-assisted inspection workflows</li>
+            <li>Repair support provisions and interface to maintenance planning</li>
+          </ul>
+          <div>
+            <span class="pill">Inspection</span>
+            <span class="pill">Autonomy</span>
+            <span class="pill">Repair support</span>
+            <span class="pill">Ops</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule"/>
+
+    <!-- 5 -->
+    <section id="integration">
+      <h2>5. Program-Level Integration</h2>
+      <p class="note">
+        Focus: preserving architectural intent while enabling flexible implementation across multiple organizations.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Systems Architecture Authority</h3>
+          <p>Centralized authority for end-to-end intent, performance, and trade management.</p>
+          <ul>
+            <li>Architecture baselines, requirements flowdown, and trade studies</li>
+            <li>Design intent preservation and end-state alignment</li>
+            <li>Cross-domain coordination and decision discipline</li>
+          </ul>
+          <div>
+            <span class="pill">Architecture</span>
+            <span class="pill">Trade studies</span>
+            <span class="pill">Requirements</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Interface Control & Configuration Management</h3>
+          <p>Interfaces are where large programs succeed or fail.</p>
+          <ul>
+            <li>Interface Control Documents (ICDs) and verification ownership</li>
+            <li>Configuration baselines, change control, and traceability</li>
+            <li>Integration sequencing and readiness gates</li>
+          </ul>
+          <div>
+            <span class="pill">ICDs</span>
+            <span class="pill">Config control</span>
+            <span class="pill">Verification</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Integration, Test & Verification</h3>
+          <p>Demonstrating that the integrated system meets intent at program scale.</p>
+          <ul>
+            <li>Incremental integration plans and system-level test strategy</li>
+            <li>Simulation, hardware-in-the-loop, and operational rehearsal</li>
+            <li>Independent verification and validation where appropriate</li>
+          </ul>
+          <div>
+            <span class="pill">IT&amp;V</span>
+            <span class="pill">Simulation</span>
+            <span class="pill">Readiness</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Program Management & MBSE</h3>
+          <p>Schedule, risk, cost, and model-based traceability across contributing teams.</p>
+          <ul>
+            <li>Risk management, schedule discipline, and milestone governance</li>
+            <li>Model-Based Systems Engineering (MBSE) for traceability and integration</li>
+            <li>Operations planning and lifecycle sustainment considerations</li>
+          </ul>
+          <div>
+            <span class="pill">PM</span>
+            <span class="pill">Risk</span>
+            <span class="pill">MBSE</span>
+            <span class="pill">Lifecycle</span>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top: 1.25rem;">
+        <strong>Execution model:</strong> best-in-class subsystem implementation paired with centralized integration authority.
+        Implementation remains flexible. Architectural intent does not.
+      </p>
+    </section>
+
+    <hr class="rule"/>
+
+    <p class="note">
+      If you’re a domain team with relevant heritage (space-rated systems, lunar surface operations, high-reliability autonomy,
+      large-scale structures, ECLSS, ISRU, or orbital assembly), Aegis Station is designed to integrate specialist contributions
+      into a coherent, buildable program.
+    </p>
+
+    <a class="back" href="index.html">← Back to Home</a>
+
+  </div>
+</body>
+</html>
