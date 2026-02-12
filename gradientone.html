@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gradient One | Aegis Station</title>
-  <meta name="description" content="Gradient One is the first artificial gravity orbital segment—spinning at 350 meters to create 1g at the floor. A full-scale testbed for Aegis Station and beyond." />
+
+  <meta name="description" content="Gradient One (G1) is a 350-meter orbital multi-gravity validation platform generating 0g, 0.16g (Moon), 0.38g (Mars), and 1g simultaneously at ~1.6 RPM—advancing artificial gravity, bioregenerative systems, and rotating habitat operations." />
+
   <link rel="stylesheet" href="/style.css" />
 
   <style>
@@ -17,7 +19,7 @@
     }
 
     main {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 2rem;
     }
@@ -28,13 +30,46 @@
       background-color: #f0f0f0;
     }
 
-    h1, h2 {
+    h1, h2, h3 {
       margin-top: 1.5rem;
       color: #222;
     }
 
+    p { margin: 0.75rem 0; }
+
     ul {
       padding-left: 1.2rem;
+      margin: 0.5rem 0 1rem 0;
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 760px) {
+      .spec-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      border: 1px solid #e2e2e2;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      background: #fff;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      margin: 0.15rem 0.25rem 0.15rem 0;
+      background: #fafafa;
     }
 
     .button {
@@ -58,43 +93,147 @@
     a:hover {
       text-decoration: underline;
     }
+
+    .muted {
+      color: #444;
+      font-size: 0.98rem;
+    }
+
+    .callout {
+      border-left: 4px solid #000;
+      padding: 0.75rem 1rem;
+      background: #fafafa;
+      margin: 1rem 0;
+    }
+
+    .gravity-list li {
+      margin: 0.3rem 0;
+    }
   </style>
 </head>
+
 <body>
   <header>
-      <div style="text-align:center; padding: 2rem 1rem;">
-    <img 
-      src="images/G1_in_Orbit.png" 
-      alt="Gradient One artificial gravity testbed in Earth orbit"
-      style="
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-      "
-    />
-  </div>
     <h1>Gradient One</h1>
-    <p>The First Floor with Gravity</p>
+    <p><strong>Orbital Multi-Gravity Validation Platform</strong></p>
+    <p class="muted">One spin. Three worlds. One baseline.</p>
   </header>
 
   <main>
     <section>
       <h2>Overview</h2>
-      <p>Gradient One is a full-scale, human-rated orbital segment designed to validate artificial gravity. Featuring a 350-meter rigid truss and an 80-meter-diameter curved pod, it rotates at ~1.6 RPM to generate 1g at the floor—exactly matching the geometry of Aegis Station.</p>
+      <p>
+        Gradient One (G1) is a 350-meter rotating orbital platform designed to validate sustained artificial gravity and mission-relevant partial-gravity environments in space.
+        Operating at ~1.6 RPM, G1 simultaneously provides Earth gravity (1g), Mars gravity (0.38g), Lunar gravity (0.16g), and a central microgravity control hub within a single continuous rotating structure.
+      </p>
+
+      <div class="callout">
+        <p>
+          G1 closes the gap between microgravity research and full-scale rotating habitat deployment by generating operational gravity environments in orbit—at scale, for long-duration campaigns.
+        </p>
+      </div>
+
+      <div>
+        <span class="pill">Artificial Gravity</span>
+        <span class="pill">Moon (0.16g)</span>
+        <span class="pill">Mars (0.38g)</span>
+        <span class="pill">Bioregenerative Systems</span>
+        <span class="pill">Rotating Habitat Operations</span>
+      </div>
     </section>
 
     <section>
-      <h2>Specifications</h2>
-      <ul>
-        <li><strong>Truss Length:</strong> 350 meters</li>
-        <li><strong>Spin Rate:</strong> ~1.6 RPM</li>
-        <li><strong>Gravity:</strong> ~1g at floor, ~0.86g at ceiling</li>
-        <li><strong>Crew Pod:</strong> 5° torus segment, 80m diameter</li>
-        <li><strong>Walking Arc:</strong> ~30.6 meters</li>
-        <li><strong>Duration:</strong> 30–90 day missions</li>
-        <li><strong>Access:</strong> EVA-based (tunnel upgrade interface reserved)</li>
-        <li><strong>Target Cost:</strong> $85M-$110M</li>
-      </ul>
+      <h2>Why It Matters</h2>
+      <p>
+        We have extensive microgravity data. We have ground centrifuge data.
+        What we do not yet have is sustained, comparative multi-gravity operational data in orbit—across lunar and Mars gravity levels, alongside a 1g baseline, within a single system.
+      </p>
+      <p>
+        Gradient One is designed to generate that dataset while validating the mechanical, fluid, and operational realities of living and working in a rotating environment.
+      </p>
+    </section>
+
+    <section>
+      <h2>Gravity Configuration</h2>
+      <p>
+        G1 uses a single fixed rotation rate (~1.6 RPM). Gravity scales with radius along the rotating truss, enabling discrete gravity “bands” without changing spin state.
+      </p>
+
+      <div class="card">
+        <h3>Simultaneous Gravity Bands</h3>
+        <ul class="gravity-list">
+          <li><strong>0g:</strong> Central non-rotating hub (microgravity control + docking)</li>
+          <li><strong>0.16g (Moon):</strong> ~56 m radius band</li>
+          <li><strong>0.38g (Mars):</strong> ~133 m radius band</li>
+          <li><strong>1g (Earth baseline):</strong> ~350 m outer band</li>
+        </ul>
+        <p class="muted">
+          This configuration supports comparative testing under identical lighting, atmosphere, instrumentation, and campaign timelines.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Architecture</h2>
+
+      <div class="spec-grid">
+        <div class="card">
+          <h3>Primary Structure</h3>
+          <ul>
+            <li><strong>Outer Radius:</strong> ~350 meters</li>
+            <li><strong>Spin Rate:</strong> ~1.6 RPM</li>
+            <li><strong>Configuration:</strong> Single rotation regime with discrete gravity bands</li>
+            <li><strong>Hub:</strong> Central non-rotating docking/control environment (0g)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Stability & Balance</h3>
+          <ul>
+            <li><strong>Counterbalance:</strong> Water-based adjustable mass system</li>
+            <li><strong>Balancing:</strong> Active mass redistribution for long-duration stability</li>
+            <li><strong>Rationale:</strong> Compensates for consumables, transfers, and biomass growth</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>What G1 Validates</h2>
+
+      <div class="spec-grid">
+        <div class="card">
+          <h3>Biological Systems</h3>
+          <ul>
+            <li>Plant growth and yield at Lunar and Mars gravity</li>
+            <li>Hydroponic performance under partial gravity and rotation</li>
+            <li>Microbial behavior, biofilm risk, and sanitation dynamics</li>
+            <li>Atmospheric trace management (humidity, VOCs/ethylene) in closed growth racks</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Human & Operations</h3>
+          <ul>
+            <li>Long-duration human work at 1g in a rotating frame</li>
+            <li>Task performance and transitions across gravity bands</li>
+            <li>Rotating utilities: power/data routing, maintenance, inspection</li>
+            <li>Operational procedures for rotating habitat segments</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="muted">
+        G1 is structured for 30–90 day campaigns with repeatable modules and instrumentation, enabling progressive refinement over multiple missions.
+      </p>
+    </section>
+
+    <section>
+      <h2>Strategic Role</h2>
+      <p>
+        Gradient One is a precursor platform to large-scale rotating habitats such as Aegis Station.
+        It enables a disciplined progression from validated rotating segments to scalable infrastructure—while producing high-value partial-gravity biological and operational datasets relevant to lunar and Mars missions.
+      </p>
     </section>
 
     <section>
@@ -111,7 +250,7 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 Aegis Station Infrastructure LLC</p>
+    <p>&copy; 2026 Aegis Station Infrastructure LLC</p>
   </footer>
 </body>
 </html>
