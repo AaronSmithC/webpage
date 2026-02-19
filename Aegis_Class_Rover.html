@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Aegis-Class Lunar Surface Mobility Platform — A pressurized, long-duration rover architecture for lunar south pole operations." />
+  <title>Aegis-Class Rover | Aegis-Class Lunar Surface Mobility Platform</title>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a2e;
+      --panel2:#0c1629;
+      --text:#e9eef7;
+      --muted:#b7c3d8;
+      --line:rgba(255,255,255,.10);
+      --accent:#7cc4ff;
+      --accent2:#66f0c8;
+      --shadow:0 18px 45px rgba(0,0,0,.35);
+      --radius:18px;
+      --max:1100px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% -10%, rgba(124,196,255,.22), transparent 60%),
+        radial-gradient(900px 600px at 110% 10%, rgba(102,240,200,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg), #070d18 55%, #060a12);
+      line-height:1.55;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 70px}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 0 22px;
+    }
+    .crumbs{
+      font-size:13px; color:var(--muted);
+      display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+    }
+    .crumbs .sep{opacity:.6}
+    header.hero{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:26px 22px;
+      position:relative;
+      overflow:hidden;
+    }
+    header.hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(700px 300px at 20% 0%, rgba(124,196,255,.18), transparent 60%),
+        radial-gradient(600px 300px at 90% 20%, rgba(102,240,200,.12), transparent 55%);
+      pointer-events:none;
+    }
+    .hero-inner{position:relative; display:grid; grid-template-columns: 1.3fr .7fr; gap:18px; align-items:start}
+    @media (max-width: 860px){
+      .hero-inner{grid-template-columns:1fr}
+    }
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+      color:rgba(233,238,247,.85);
+      padding:7px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(0,0,0,.15);
+      width:fit-content;
+      margin-bottom:12px;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:34px;
+      line-height:1.15;
+      letter-spacing:-.02em;
+    }
+    .lede{margin:0; color:var(--muted); font-size:16px; max-width:60ch}
+    .cta-card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(15,26,46,.85), rgba(12,22,41,.65));
+      border-radius:16px;
+      padding:16px;
+    }
+    .cta-title{margin:0 0 8px; font-size:14px; letter-spacing:.01em}
+    .cta-text{margin:0 0 12px; color:var(--muted); font-size:13px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid rgba(124,196,255,.45);
+      background:linear-gradient(180deg, rgba(124,196,255,.22), rgba(124,196,255,.08));
+      color:var(--text);
+      font-weight:600;
+      width:100%;
+      text-decoration:none;
+      transition:transform .08s ease, border-color .18s ease, background .18s ease;
+    }
+    .btn:hover{
+      text-decoration:none;
+      transform:translateY(-1px);
+      border-color:rgba(102,240,200,.55);
+      background:linear-gradient(180deg, rgba(102,240,200,.18), rgba(124,196,255,.08));
+    }
+    .btn svg{width:18px; height:18px; opacity:.95}
+    .grid{
+      display:grid; grid-template-columns: 1fr 1fr;
+      gap:14px;
+      margin-top:18px;
+    }
+    @media (max-width: 860px){
+      .grid{grid-template-columns:1fr}
+    }
+    section.card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:var(--radius);
+      padding:18px 18px 16px;
+    }
+    section.card h2{
+      margin:0 0 10px;
+      font-size:18px;
+      letter-spacing:-.01em;
+    }
+    .meta{
+      display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 0;
+    }
+    .pill{
+      font-size:12px;
+      color:rgba(233,238,247,.92);
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.12);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+    .list{
+      margin:10px 0 0; padding-left:18px; color:var(--muted);
+    }
+    .list li{margin:6px 0}
+    .specs{
+      margin-top:12px;
+      border-top:1px solid var(--line);
+      padding-top:12px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px 14px;
+    }
+    @media (max-width: 640px){
+      .specs{grid-template-columns:1fr}
+    }
+    .kv{
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.10);
+      border-radius:14px;
+      padding:10px 12px;
+    }
+    .kv .k{font-size:12px; color:rgba(183,195,216,.95); margin:0 0 2px}
+    .kv .v{font-size:14px; margin:0}
+    .callout{
+      margin-top:16px;
+      border:1px solid rgba(102,240,200,.22);
+      background:linear-gradient(180deg, rgba(102,240,200,.10), rgba(124,196,255,.06));
+      border-radius:var(--radius);
+      padding:16px 18px;
+    }
+    .callout h3{margin:0 0 8px; font-size:16px}
+    .callout p{margin:0; color:var(--muted)}
+    .foot{
+      margin-top:18px;
+      color:rgba(183,195,216,.8);
+      font-size:12px;
+      border-top:1px solid var(--line);
+      padding-top:14px;
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    }
+    .tiny{font-family:var(--mono); font-size:11px; opacity:.85}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <div class="crumbs">
+        <a href="/">Home</a>
+        <span class="sep">/</span>
+        <a href="/aegis-class-rover">Aegis-Class Rover</a>
+        <span class="sep">/</span>
+        <span>Aegis-Class Lunar Surface Mobility Platform</span>
+      </div>
+      <div class="crumbs">
+        <span class="pill">Architecture Reference</span>
+        <span class="pill">February 2026</span>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="kicker">Aegis-Class Rover</div>
+          <h1>Aegis-Class Lunar Surface Mobility Platform</h1>
+          <p class="lede">
+            A pressurized, long-duration lunar rover architecture designed for 30–60 day missions,
+            polar operations, and integrated logistics—combining habitation, mobility, dust control,
+            and a roof-integrated power/thermal stack sized for real field work.
+          </p>
+
+          <div class="meta" aria-label="Key attributes">
+            <span class="pill">Pressurized</span>
+            <span class="pill">30–60 day missions</span>
+            <span class="pill">Crew: 2–4</span>
+            <span class="pill">South Pole capable</span>
+            <span class="pill">Suitport + dust boundary</span>
+            <span class="pill">SSSRA roof stack</span>
+          </div>
+        </div>
+
+        <aside class="cta-card" aria-label="Document download">
+          <p class="cta-title">Download the PDF</p>
+          <p class="cta-text">
+            Formal technical dossier formatted for circulation and review.
+          </p>
+
+          <!--
+            Replace the href below with your actual path.
+            Example:
+              /dossiers/aegis_class_rover_dossier.pdf
+              /docs/aegis-class-rover-dossier.pdf
+          -->
+          <a class="btn" href="dossiers/Aegis_Class_Rover.pdf">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3v10m0 0 4-4m-4 4-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 14v5h14v-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Download PDF
+          </a>
+
+          <div class="meta" style="margin-top:12px">
+            <span class="pill">Single file</span>
+            <span class="pill">No images</span>
+            <span class="pill">Print-ready</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card" id="overview">
+        <h2>System Overview</h2>
+        <ul class="list">
+          <li><strong>Primary role:</strong> pressurized surface mobility and habitation for extended lunar field operations.</li>
+          <li><strong>Secondary roles:</strong> prospecting support, logistics transport, mobile command, emergency shelter, and storm refuge.</li>
+          <li><strong>Design objective:</strong> sustain productive crew operations without treating the cabin as a cockpit-with-bunks.</li>
+          <li><strong>Integration:</strong> sized for polar illumination geometry and dust reality; built to operate as infrastructure, not a stunt vehicle.</li>
+        </ul>
+
+        <div class="callout">
+          <h3>Constraint-driven architecture</h3>
+          <p>
+            Interior standing height drives hull size, which drives CG height, which drives track width and stability,
+            which then defines the roof footprint available for power generation and thermal rejection.
+          </p>
+        </div>
+      </section>
+
+      <section class="card" id="key-specs">
+        <h2>Baseline Key Specs</h2>
+
+        <div class="specs" role="list">
+          <div class="kv" role="listitem">
+            <p class="k">Gross vehicle mass</p>
+            <p class="v">~5,400 kg (laden)</p>
+          </div>
+          <div class="kv" role="listitem">
+            <p class="k">Crew / mission duration</p>
+            <p class="v">2–4 crew • 30–60 days</p>
+          </div>
+          <div class="kv" role="listitem">
+            <p class="k">Overall dimensions</p>
+            <p class="v">~10 m L • 4.6–4.8 m W • 3.9 m to array top</p>
+          </div>
+          <div class="kv" role="listitem">
+            <p class="k">Stability</p>
+            <p class="v">Track 4.0 m • CG ~1.54 m • SSF ~1.30</p>
+          </div>
+          <div class="kv" role="listitem">
+            <p class="k">Habitable volume</p>
+            <p class="v">~57 m³ gross • ~38–42 m³ net</p>
+          </div>
+          <div class="kv" role="listitem">
+            <p class="k">Mobility performance</p>
+            <p class="v">Cruise 10–15 km/h • Sprint 25 km/h</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="mobility">
+        <h2>Mobility & Terrain Handling</h2>
+        <ul class="list">
+          <li><strong>Mobility architecture:</strong> wide-track chassis with multi-axle stability geometry.</li>
+          <li><strong>Terrain envelope:</strong> compacted regolith plains, loose regolith, boulder fields, crater-rim transitions, shadowed terrain.</li>
+          <li><strong>Driving modes:</strong> manual, remote-supervised, and autonomous traverse with hazard detection.</li>
+          <li><strong>Operations emphasis:</strong> traction management and dust survivability over “heroic” torque.</li>
+        </ul>
+      </section>
+
+      <section class="card" id="habitation">
+        <h2>Habitation & Crew Factors</h2>
+        <ul class="list">
+          <li><strong>Interior standing height:</strong> 2.1 m clear for long-duration ergonomics and psychological health.</li>
+          <li><strong>Functional zoning:</strong> forward command, central workspace/galley, crew quarters/medical, systems bay, vestibule.</li>
+          <li><strong>Human factors:</strong> circadian lighting control, acoustic targets, privacy berths, and a “sacred” continuous aisle for emergency egress.</li>
+          <li><strong>Medical capability:</strong> fold-down bench + telemedicine workflow for multi-week autonomy.</li>
+        </ul>
+      </section>
+
+      <section class="card" id="dust">
+        <h2>Dust Boundary & EVA Interface</h2>
+        <ul class="list">
+          <li><strong>Baseline EVA concept:</strong> suitport-driven external suit storage to keep regolith outside the pressure volume.</li>
+          <li><strong>Vestibule controls:</strong> dedicated filtration, electrostatic capture, and procedural wipe-down flow.</li>
+          <li><strong>Fallback mode:</strong> vestibule can operate as a traditional airlock when required for interoperability.</li>
+        </ul>
+      </section>
+
+      <section class="card" id="power-thermal">
+        <h2>Power & Thermal Architecture</h2>
+        <ul class="list">
+          <li><strong>Roof integration:</strong> stacked solar-shade radiator architecture (SSSRA) for heading-independent rejection.</li>
+          <li><strong>Thermal sizing:</strong> radiator area selected for nominal ~1.2 kW rejection with ~1.5 kW peak capacity margin.</li>
+          <li><strong>Polar power reality:</strong> low solar elevation angles drive the need for deployable/tilted arrays and/or outpost recharge.</li>
+          <li><strong>Resilience:</strong> battery storage + fuel cell option for night, shadow, and contingency operations.</li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="card" id="notes" style="margin-top:14px">
+      <h2>Program Notes</h2>
+      <ul class="list">
+        <li><strong>Document status:</strong> Architecture reference — not a hardware commitment.</li>
+        <li><strong>Intended use:</strong> mission design, trade studies, and partner alignment on geometry, loads, and integration constraints.</li>
+        <li><strong>Next work:</strong> dust qualification testing, suitport interface definition, roof-structure/mechanism refinement, integrated power/thermal modeling, and a full-scale human-factors mock-up.</li>
+      </ul>
+    </section>
+
+    <div class="foot">
+      <div>
+        <div class="tiny">Aegis Station Infrastructure LLC • Aegis-Class Rover</div>
+        <div style="font-size:12px; color:rgba(183,195,216,.85)">Aegis-Class Lunar Surface Mobility Platform — reference page</div>
+      </div>
+      <div class="tiny">Last updated: February 2026</div>
+    </div>
+
+  </div>
+</body>
+</html>
