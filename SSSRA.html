@@ -296,6 +296,34 @@ width: 14px;
 height: 14px;
 }
 
+.download-secondary {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+font-weight: 400;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+text-decoration: none;
+color: var(–text-dim);
+padding: 10px 24px;
+border: 1px solid var(–border);
+margin-top: 14px;
+transition: all 0.3s ease;
+}
+
+.download-secondary:hover {
+color: var(–accent);
+border-color: var(–accent-dim);
+background: var(–accent-glow);
+}
+
+.download-secondary svg {
+width: 12px;
+height: 12px;
+}
+
 /* Footer */
 .footer {
 margin-top: 64px;
@@ -394,6 +422,16 @@ to { opacity: 1; transform: translateY(0); }
         <line x1="12" y1="15" x2="12" y2="3"/>
       </svg>
       Download PDF
+    </a>
+    <br>
+    <a href="dossiers/SSSRA_Variable_Reference.pdf" class="download-secondary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+      </svg>
+      Variable Reference
     </a>
   </div>
 
