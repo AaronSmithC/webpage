@@ -1,0 +1,556 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 780" width="1400" height="780">
+  <defs>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; }
+      .title { font-size: 16px; font-weight: bold; fill: #1B3A5C; }
+      .subtitle { font-size: 11px; fill: #555; font-style: italic; }
+      .label { font-size: 9px; fill: #333; }
+      .lb { font-size: 9px; fill: #1B3A5C; font-weight: bold; }
+      .lw { font-size: 8px; fill: #fff; font-weight: bold; }
+      .dim { font-size: 8px; fill: #C0392B; }
+      .dim-line { stroke: #C0392B; stroke-width: 0.7; }
+      .note { font-size: 7px; fill: #666; }
+      .eq { font-size: 6.5px; fill: #333; }
+      .eq-b { font-size: 6.5px; fill: #1B3A5C; font-weight: bold; }
+    </style>
+    <pattern id="regolith" patternUnits="userSpaceOnUse" width="8" height="8">
+      <rect width="8" height="8" fill="#D4C5A9"/>
+      <circle cx="2" cy="3" r="0.8" fill="#B8A88A"/>
+      <circle cx="6" cy="6" r="0.6" fill="#C4B494"/>
+      <circle cx="4" cy="1" r="0.5" fill="#BCA984"/>
+    </pattern>
+    <pattern id="mli" patternUnits="userSpaceOnUse" width="4" height="4">
+      <rect width="4" height="4" fill="#F5E6CC"/>
+      <line x1="0" y1="4" x2="4" y2="0" stroke="#D4C090" stroke-width="0.5"/>
+    </pattern>
+    <pattern id="batt" patternUnits="userSpaceOnUse" width="6" height="6">
+      <rect width="6" height="6" fill="#2E86C1"/>
+      <rect x="1" y="1" width="4" height="4" fill="#2874A6" rx="0.5"/>
+    </pattern>
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="780" fill="#FAFCFF"/>
+
+  <!-- Title -->
+  <text x="700" y="28" text-anchor="middle" class="title">AEGIS-CLASS ROVER — LONGITUDINAL CROSS-SECTION</text>
+  <text x="700" y="44" text-anchor="middle" class="subtitle">Port Side View, Cut Along Vehicle Centerline — All Zones Shown — Not to Scale</text>
+
+  <!-- FWD / AFT -->
+  <text x="85" y="420" text-anchor="middle" class="lb" font-size="11">← FWD</text>
+  <text x="1320" y="420" text-anchor="middle" class="lb" font-size="11">AFT →</text>
+
+  <!-- ============================================ -->
+  <!-- GROUND -->
+  <!-- ============================================ -->
+  <rect x="50" y="640" width="1300" height="50" fill="url(#regolith)"/>
+  <line x1="50" y1="640" x2="1350" y2="640" stroke="#8B7D6B" stroke-width="1.5"/>
+
+  <!-- ============================================ -->
+  <!-- THREE AXLES WITH WHEELS -->
+  <!-- ============================================ -->
+  <!-- Axle 1 (front) at ~1.5m from front = x~220 -->
+  <g transform="translate(220, 590)">
+    <ellipse cx="0" cy="0" rx="38" ry="38" fill="none" stroke="#555" stroke-width="2.5"/>
+    <ellipse cx="0" cy="0" rx="27" ry="27" fill="none" stroke="#888" stroke-width="0.8" stroke-dasharray="3,2"/>
+    <circle cx="0" cy="0" r="12" fill="#4A4A4A" stroke="#333" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="7" fill="#5A5A5A"/>
+    <text x="0" y="3" text-anchor="middle" font-size="5" fill="#CCC" font-family="Arial">M</text>
+    <!-- Grousers -->
+    <line x1="-38" y1="-4" x2="-38" y2="4" stroke="#666" stroke-width="1.5"/>
+    <line x1="-35" y1="-16" x2="-38" y2="-12" stroke="#666" stroke-width="1.5"/>
+    <line x1="-35" y1="16" x2="-38" y2="12" stroke="#666" stroke-width="1.5"/>
+    <line x1="38" y1="-4" x2="38" y2="4" stroke="#666" stroke-width="1.5"/>
+    <line x1="35" y1="-16" x2="38" y2="-12" stroke="#666" stroke-width="1.5"/>
+    <line x1="35" y1="16" x2="38" y2="12" stroke="#666" stroke-width="1.5"/>
+    <text x="0" y="55" text-anchor="middle" class="eq-b">AXLE 1</text>
+    <text x="0" y="63" text-anchor="middle" class="note" font-size="5.5">±30° steer</text>
+  </g>
+
+  <!-- Suspension arm indication axle 1 -->
+  <line x1="220" y1="575" x2="220" y2="530" stroke="#7D6608" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M215,555 L225,548 L215,541 L225,534" fill="none" stroke="#C0392B" stroke-width="1.2"/>
+
+  <!-- Axle 2 (middle) at ~4.75m = x~615 -->
+  <g transform="translate(615, 590)">
+    <ellipse cx="0" cy="0" rx="38" ry="38" fill="none" stroke="#555" stroke-width="2.5"/>
+    <ellipse cx="0" cy="0" rx="27" ry="27" fill="none" stroke="#888" stroke-width="0.8" stroke-dasharray="3,2"/>
+    <circle cx="0" cy="0" r="12" fill="#4A4A4A" stroke="#333" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="7" fill="#5A5A5A"/>
+    <text x="0" y="3" text-anchor="middle" font-size="5" fill="#CCC" font-family="Arial">M</text>
+    <line x1="-38" y1="-4" x2="-38" y2="4" stroke="#666" stroke-width="1.5"/>
+    <line x1="-35" y1="-16" x2="-38" y2="-12" stroke="#666" stroke-width="1.5"/>
+    <line x1="38" y1="-4" x2="38" y2="4" stroke="#666" stroke-width="1.5"/>
+    <line x1="35" y1="-16" x2="38" y2="-12" stroke="#666" stroke-width="1.5"/>
+    <text x="0" y="55" text-anchor="middle" class="eq-b">AXLE 2</text>
+    <text x="0" y="63" text-anchor="middle" class="note" font-size="5.5">±5° crab / 40% load</text>
+  </g>
+  <line x1="615" y1="575" x2="615" y2="530" stroke="#7D6608" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M610,555 L620,548 L610,541 L620,534" fill="none" stroke="#C0392B" stroke-width="1.2"/>
+
+  <!-- Axle 3 (rear) at ~8.0m = x~1000 -->
+  <g transform="translate(1000, 590)">
+    <ellipse cx="0" cy="0" rx="38" ry="38" fill="none" stroke="#555" stroke-width="2.5"/>
+    <ellipse cx="0" cy="0" rx="27" ry="27" fill="none" stroke="#888" stroke-width="0.8" stroke-dasharray="3,2"/>
+    <circle cx="0" cy="0" r="12" fill="#4A4A4A" stroke="#333" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="7" fill="#5A5A5A"/>
+    <text x="0" y="3" text-anchor="middle" font-size="5" fill="#CCC" font-family="Arial">M</text>
+    <line x1="-38" y1="-4" x2="-38" y2="4" stroke="#666" stroke-width="1.5"/>
+    <line x1="-35" y1="-16" x2="-38" y2="-12" stroke="#666" stroke-width="1.5"/>
+    <line x1="38" y1="-4" x2="38" y2="4" stroke="#666" stroke-width="1.5"/>
+    <line x1="35" y1="-16" x2="38" y2="-12" stroke="#666" stroke-width="1.5"/>
+    <text x="0" y="55" text-anchor="middle" class="eq-b">AXLE 3</text>
+    <text x="0" y="63" text-anchor="middle" class="note" font-size="5.5">±30° counter-steer</text>
+  </g>
+  <line x1="1000" y1="575" x2="1000" y2="530" stroke="#7D6608" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M995,555 L1005,548 L995,541 L1005,534" fill="none" stroke="#C0392B" stroke-width="1.2"/>
+
+  <!-- ============================================ -->
+  <!-- CHASSIS FRAME -->
+  <!-- ============================================ -->
+  <rect x="140" y="510" width="940" height="18" rx="3" fill="#6C757D" stroke="#4A4A4A" stroke-width="1"/>
+  <text x="610" y="522" text-anchor="middle" class="lw" font-size="7">CHASSIS FRAME (Al-Li WELDED) — 6.5 m WHEELBASE</text>
+
+  <!-- Front bumper / structure -->
+  <path d="M140,510 L110,515 Q100,518 100,525 L100,530 Q100,537 108,538 L140,528" fill="#6C757D" stroke="#4A4A4A" stroke-width="1"/>
+  <text x="105" y="548" text-anchor="middle" class="note" font-size="5.5">FWD BUMPER</text>
+
+  <!-- Rear docking interface -->
+  <path d="M1080,510 L1110,515 Q1120,518 1120,525 L1120,530 Q1120,537 1112,538 L1080,528" fill="#6C757D" stroke="#4A4A4A" stroke-width="1"/>
+  <text x="1115" y="548" text-anchor="middle" class="note" font-size="5.5">AFT DOCK</text>
+  <text x="1115" y="556" text-anchor="middle" class="note" font-size="5.5">INTERFACE</text>
+
+  <!-- ============================================ -->
+  <!-- UNDERFLOOR SYSTEMS BAY -->
+  <!-- ============================================ -->
+  <rect x="150" y="528" width="920" height="62" rx="2" fill="#E8E8E8" stroke="#999" stroke-width="0.7"/>
+
+  <!-- Battery modules (4 × 25 kWh) -->
+  <rect x="165" y="534" width="180" height="24" rx="3" fill="url(#batt)" stroke="#1A5276" stroke-width="1.5"/>
+  <text x="255" y="549" text-anchor="middle" class="lw" font-size="6">BATT MOD 1 — 25 kWh LFP</text>
+
+  <rect x="352" y="534" width="180" height="24" rx="3" fill="url(#batt)" stroke="#1A5276" stroke-width="1.5"/>
+  <text x="442" y="549" text-anchor="middle" class="lw" font-size="6">BATT MOD 2 — 25 kWh LFP</text>
+
+  <rect x="539" y="534" width="180" height="24" rx="3" fill="url(#batt)" stroke="#1A5276" stroke-width="1.5"/>
+  <text x="629" y="549" text-anchor="middle" class="lw" font-size="6">BATT MOD 3 — 25 kWh LFP</text>
+
+  <rect x="726" y="534" width="180" height="24" rx="3" fill="url(#batt)" stroke="#1A5276" stroke-width="1.5"/>
+  <text x="816" y="549" text-anchor="middle" class="lw" font-size="6">BATT MOD 4 — 25 kWh LFP</text>
+
+  <!-- Thermal barriers -->
+  <rect x="348" y="532" width="3" height="28" fill="#E74C3C" opacity="0.7"/>
+  <rect x="535" y="532" width="3" height="28" fill="#E74C3C" opacity="0.7"/>
+  <rect x="722" y="532" width="3" height="28" fill="#E74C3C" opacity="0.7"/>
+
+  <!-- Vent lines (from each module downward) -->
+  <line x1="255" y1="558" x2="255" y2="575" stroke="#E74C3C" stroke-width="0.7" stroke-dasharray="2,2"/>
+  <line x1="442" y1="558" x2="442" y2="575" stroke="#E74C3C" stroke-width="0.7" stroke-dasharray="2,2"/>
+  <line x1="629" y1="558" x2="629" y2="575" stroke="#E74C3C" stroke-width="0.7" stroke-dasharray="2,2"/>
+  <line x1="816" y1="558" x2="816" y2="575" stroke="#E74C3C" stroke-width="0.7" stroke-dasharray="2,2"/>
+  <text x="540" y="585" text-anchor="middle" class="note" fill="#E74C3C" font-size="5.5">BURST DISC + VENT LINES TO EXTERIOR (EACH MODULE)</text>
+
+  <!-- Water tanks -->
+  <rect x="165" y="562" width="140" height="22" rx="8" fill="#85C1E9" stroke="#2E86C1" stroke-width="1"/>
+  <text x="235" y="577" text-anchor="middle" class="eq-b" fill="#1A5276">POTABLE WATER (~200 kg)</text>
+
+  <!-- Gas bottles -->
+  <rect x="320" y="564" width="45" height="18" rx="8" fill="#82E0AA" stroke="#27AE60" stroke-width="0.8"/>
+  <text x="342" y="576" text-anchor="middle" class="eq" fill="#1E8449" font-size="5">O₂ COPV</text>
+  <rect x="372" y="564" width="45" height="18" rx="8" fill="#D5F5E3" stroke="#27AE60" stroke-width="0.8"/>
+  <text x="394" y="576" text-anchor="middle" class="eq" fill="#1E8449" font-size="5">N₂ COPV</text>
+
+  <!-- Thermal loop / pumps -->
+  <rect x="430" y="564" width="120" height="18" rx="2" fill="#F9E79F" stroke="#D4AC0D" stroke-width="0.8"/>
+  <text x="490" y="576" text-anchor="middle" class="eq" fill="#7D6608">THERMAL PUMPS / VALVES</text>
+
+  <!-- Fuel cell -->
+  <rect x="920" y="534" width="140" height="48" rx="3" fill="#82E0AA" stroke="#27AE60" stroke-width="1.5"/>
+  <text x="990" y="555" text-anchor="middle" class="eq-b" fill="#1E8449">FUEL CELL</text>
+  <text x="990" y="565" text-anchor="middle" class="eq" fill="#1E8449">1–3 kW / H₂-O₂</text>
+  <text x="990" y="575" text-anchor="middle" class="eq" fill="#888">+ reactant storage</text>
+
+  <!-- Thermal loop line running full length -->
+  <line x1="165" y1="530" x2="1055" y2="530" stroke="#E74C3C" stroke-width="1" stroke-dasharray="8,3"/>
+  <text x="800" y="527" class="note" fill="#E74C3C" font-size="5">← THERMAL FLUID LOOP TO SSSRA RADIATOR →</text>
+
+  <!-- ============================================ -->
+  <!-- HULL OUTLINE (side profile) -->
+  <!-- ============================================ -->
+  <!-- Main hull -->
+  <path d="M140,510 L140,260 Q140,240 160,235 L280,225 Q290,224 300,225 L1040,225 Q1060,225 1070,235 L1080,260 L1080,510" 
+        fill="#F0F4F8" stroke="#1B3A5C" stroke-width="2.5" fill-opacity="0.95"/>
+
+  <!-- Forward windshield area (angled) -->
+  <line x1="160" y1="310" x2="200" y2="260" stroke="#85C1E9" stroke-width="3"/>
+  <line x1="160" y1="355" x2="200" y2="300" stroke="#85C1E9" stroke-width="3"/>
+  <text x="150" y="290" class="note" fill="#2E86C1" font-size="6" transform="rotate(-50,150,290)">WINDOWS</text>
+
+  <!-- Wall buildup (bottom edge) -->
+  <rect x="145" y="500" width="930" height="10" fill="url(#mli)" opacity="0.4"/>
+
+  <!-- Cabin floor -->
+  <line x1="150" y1="498" x2="1070" y2="498" stroke="#8B4513" stroke-width="2"/>
+
+  <!-- ============================================ -->
+  <!-- ZONE BACKGROUNDS (inside hull) -->
+  <!-- ============================================ -->
+  <!-- Zone A background -->
+  <rect x="150" y="235" width="192" height="263" fill="#2E86C1" opacity="0.06"/>
+  <!-- Zone B -->
+  <rect x="342" y="225" width="288" height="273" fill="#27AE60" opacity="0.05"/>
+  <!-- Zone C -->
+  <rect x="630" y="225" width="264" height="273" fill="#8E44AD" opacity="0.05"/>
+  <!-- Zone D -->
+  <rect x="894" y="225" width="116" height="273" fill="#D4AC0D" opacity="0.06"/>
+  <!-- Zone E -->
+  <rect x="1010" y="225" width="60" height="273" fill="#E74C3C" opacity="0.06"/>
+
+  <!-- Zone dividers -->
+  <line x1="342" y1="228" x2="342" y2="498" stroke="#999" stroke-width="0.5" stroke-dasharray="4,3"/>
+  <line x1="630" y1="228" x2="630" y2="498" stroke="#999" stroke-width="0.5" stroke-dasharray="4,3"/>
+  <line x1="894" y1="228" x2="894" y2="498" stroke="#999" stroke-width="0.5" stroke-dasharray="4,3"/>
+  <line x1="1010" y1="228" x2="1010" y2="498" stroke="#999" stroke-width="0.5" stroke-dasharray="4,3"/>
+
+  <!-- ============================================ -->
+  <!-- ZONE LABELS (inside, top) -->
+  <!-- ============================================ -->
+  <rect x="200" y="232" width="85" height="16" rx="3" fill="#2E86C1" opacity="0.8"/>
+  <text x="242" y="243" text-anchor="middle" class="lw" font-size="7">A: COMMAND</text>
+
+  <rect x="440" y="228" width="90" height="16" rx="3" fill="#27AE60" opacity="0.8"/>
+  <text x="485" y="239" text-anchor="middle" class="lw" font-size="7">B: WORKSPACE</text>
+
+  <rect x="720" y="228" width="85" height="16" rx="3" fill="#8E44AD" opacity="0.8"/>
+  <text x="762" y="239" text-anchor="middle" class="lw" font-size="7">C: QUARTERS</text>
+
+  <rect x="912" y="228" width="75" height="16" rx="3" fill="#D4AC0D" opacity="0.8"/>
+  <text x="949" y="239" text-anchor="middle" class="lw" font-size="7">D: SYSTEMS</text>
+
+  <rect x="1018" y="228" width="44" height="16" rx="3" fill="#E74C3C" opacity="0.8"/>
+  <text x="1040" y="239" text-anchor="middle" class="lw" font-size="6">E</text>
+
+  <!-- ============================================ -->
+  <!-- ZONE A INTERIOR -->
+  <!-- ============================================ -->
+  <!-- Pilot seat (side view) -->
+  <g transform="translate(260, 430)">
+    <!-- Seat back (reclined 15°) -->
+    <rect x="-15" y="-65" width="30" height="65" rx="4" fill="#D5D8DC" stroke="#808B96" stroke-width="1" transform="rotate(-15,-15,-65)"/>
+    <!-- Seat pan -->
+    <rect x="-18" y="0" width="36" height="10" rx="2" fill="#D5D8DC" stroke="#808B96" stroke-width="1"/>
+    <!-- Headrest -->
+    <rect x="-8" y="-80" width="16" height="12" rx="4" fill="#AAB7C4" stroke="#808B96" stroke-width="0.7" transform="rotate(-15,-8,-80)"/>
+    <text x="0" y="22" text-anchor="middle" class="eq-b">PILOT SEAT</text>
+  </g>
+
+  <!-- Instrument panel -->
+  <rect x="155" y="355" width="12" height="80" rx="2" fill="#333" stroke="#222" stroke-width="1"/>
+  <rect x="158" y="360" width="6" height="20" rx="1" fill="#85C1E9"/>
+  <rect x="158" y="385" width="6" height="20" rx="1" fill="#85C1E9"/>
+  <rect x="158" y="410" width="6" height="20" rx="1" fill="#85C1E9"/>
+  <text x="155" y="448" class="eq-b" font-size="5.5">DISPLAYS</text>
+
+  <!-- Standing crew figure (Zone A, behind seat) -->
+  <g transform="translate(310, 370)">
+    <circle cx="0" cy="-50" r="9" fill="none" stroke="#1B3A5C" stroke-width="1.2"/>
+    <line x1="0" y1="-41" x2="0" y2="8" stroke="#1B3A5C" stroke-width="1.2"/>
+    <line x1="-15" y1="-25" x2="15" y2="-25" stroke="#1B3A5C" stroke-width="1.2"/>
+    <line x1="0" y1="8" x2="-8" y2="48" stroke="#1B3A5C" stroke-width="1.2"/>
+    <line x1="0" y1="8" x2="8" y2="48" stroke="#1B3A5C" stroke-width="1.2"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- ZONE B INTERIOR -->
+  <!-- ============================================ -->
+  <!-- Planning table (side view) -->
+  <rect x="420" y="450" width="120" height="4" rx="1" fill="#D6EAF8" stroke="#2E86C1" stroke-width="1"/>
+  <!-- Table leg -->
+  <line x1="430" y1="454" x2="430" y2="498" stroke="#2E86C1" stroke-width="1.5"/>
+  <line x1="530" y1="454" x2="530" y2="498" stroke="#2E86C1" stroke-width="1.5"/>
+  <text x="480" y="446" text-anchor="middle" class="eq-b">PLANNING TABLE</text>
+
+  <!-- Tool panel on wall -->
+  <rect x="350" y="290" width="8" height="120" rx="1" fill="#F0E68C" stroke="#D4AC0D" stroke-width="0.7"/>
+  <text x="370" y="345" class="eq" fill="#7D6608" font-size="5.5">TOOL PANEL</text>
+
+  <!-- Galley counter -->
+  <rect x="370" y="460" width="40" height="4" rx="1" fill="#FAD7A0" stroke="#E67E22" stroke-width="0.8"/>
+  <rect x="372" y="430" width="10" height="30" rx="2" fill="#F5B041" opacity="0.5" stroke="#E67E22" stroke-width="0.5"/>
+  <text x="390" y="425" text-anchor="middle" class="eq-b" fill="#E67E22" font-size="5.5">GALLEY</text>
+
+  <!-- Science bench -->
+  <rect x="552" y="290" width="8" height="80" rx="1" fill="#D5F5E3" stroke="#27AE60" stroke-width="0.7"/>
+  <text x="572" y="325" class="eq" fill="#27AE60" font-size="5.5">SCIENCE</text>
+  <text x="572" y="333" class="eq" fill="#27AE60" font-size="5.5">BENCH</text>
+
+  <!-- Comm station -->
+  <rect x="350" y="260" width="40" height="25" rx="2" fill="#D6EAF8" stroke="#2E86C1" stroke-width="0.7"/>
+  <text x="370" y="276" text-anchor="middle" class="eq" fill="#2E86C1" font-size="5">COMM</text>
+
+  <!-- Seated crew figure at table -->
+  <g transform="translate(475, 395)">
+    <circle cx="0" cy="-30" r="8" fill="none" stroke="#1B3A5C" stroke-width="1"/>
+    <line x1="0" y1="-22" x2="0" y2="5" stroke="#1B3A5C" stroke-width="1"/>
+    <line x1="-12" y1="-12" x2="12" y2="-12" stroke="#1B3A5C" stroke-width="1"/>
+    <line x1="0" y1="5" x2="-10" y2="35" stroke="#1B3A5C" stroke-width="1"/>
+    <line x1="0" y1="5" x2="10" y2="35" stroke="#1B3A5C" stroke-width="1"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- ZONE C INTERIOR -->
+  <!-- ============================================ -->
+  <!-- Lower berth (side view) -->
+  <rect x="650" y="450" width="140" height="45" rx="3" fill="#D2B4DE" stroke="#8E44AD" stroke-width="1.5"/>
+  <text x="720" y="472" text-anchor="middle" class="eq-b" fill="#8E44AD">LOWER BERTHS (2)</text>
+  <text x="720" y="482" text-anchor="middle" class="eq" fill="#8E44AD">2.0m × 0.70m × 0.85m each</text>
+
+  <!-- Upper berth -->
+  <rect x="660" y="385" width="120" height="40" rx="3" fill="#AED6F1" stroke="#8E44AD" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="720" y="405" text-anchor="middle" class="eq-b" fill="#8E44AD">UPPER BERTH (1)</text>
+  <text x="720" y="415" text-anchor="middle" class="eq" fill="#8E44AD">access via ladder</text>
+
+  <!-- Sleeping figure in lower berth -->
+  <g transform="translate(700, 465)">
+    <ellipse cx="-30" cy="0" rx="7" ry="6" fill="none" stroke="#1B3A5C" stroke-width="0.8"/>
+    <line x1="-23" y1="0" x2="40" y2="0" stroke="#1B3A5C" stroke-width="0.8"/>
+  </g>
+
+  <!-- Hygiene closet -->
+  <rect x="640" y="260" width="55" height="65" rx="3" fill="#AED6F1" stroke="#2E86C1" stroke-width="1"/>
+  <text x="667" y="288" text-anchor="middle" class="eq-b" fill="#1A5276">WCS</text>
+  <text x="667" y="298" text-anchor="middle" class="eq" fill="#1A5276">HYGIENE</text>
+  <text x="667" y="308" text-anchor="middle" class="eq" fill="#888">0.9×0.9m</text>
+
+  <!-- Medical bench -->
+  <rect x="710" y="260" width="100" height="30" rx="2" fill="#FADBD8" stroke="#E74C3C" stroke-width="1"/>
+  <text x="760" y="277" text-anchor="middle" class="eq-b" fill="#C0392B">MEDICAL BENCH</text>
+  <text x="760" y="286" text-anchor="middle" class="eq" fill="#C0392B">1.8m fold-down + CMO kit</text>
+
+  <!-- Storm shelter indication -->
+  <rect x="630" y="252" width="264" height="250" fill="none" stroke="#E74C3C" stroke-width="1.2" stroke-dasharray="6,4" rx="4"/>
+  <text x="762" y="350" text-anchor="middle" class="note" fill="#E74C3C" font-size="6">STORM SHELTER ZONE</text>
+  <text x="762" y="358" text-anchor="middle" class="note" fill="#E74C3C" font-size="5.5">(water wall bladders deploy here)</text>
+
+  <!-- Personal lockers -->
+  <rect x="800" y="450" width="30" height="45" rx="2" fill="#D5D8DC" stroke="#808B96" stroke-width="0.7"/>
+  <text x="815" y="470" text-anchor="middle" class="eq" font-size="5">LOCK-</text>
+  <text x="815" y="478" text-anchor="middle" class="eq" font-size="5">ERS</text>
+
+  <!-- ============================================ -->
+  <!-- ZONE D INTERIOR -->
+  <!-- ============================================ -->
+  <!-- ECLSS racks -->
+  <rect x="900" y="270" width="90" height="160" rx="2" fill="#F9E79F" stroke="#D4AC0D" stroke-width="1"/>
+  <text x="945" y="310" text-anchor="middle" class="eq-b" fill="#7D6608">ECLSS</text>
+  <text x="945" y="320" text-anchor="middle" class="eq" fill="#7D6608">RACKS</text>
+  <!-- Individual equipment blocks -->
+  <rect x="905" y="330" width="80" height="14" rx="1" fill="#FCF3CF" stroke="#D4AC0D" stroke-width="0.5"/>
+  <text x="945" y="340" text-anchor="middle" class="eq" font-size="5">CO₂ SCRUBBER (dual-bed)</text>
+  <rect x="905" y="348" width="80" height="14" rx="1" fill="#FCF3CF" stroke="#D4AC0D" stroke-width="0.5"/>
+  <text x="945" y="358" text-anchor="middle" class="eq" font-size="5">TRACE CONTAM CTRL</text>
+  <rect x="905" y="366" width="80" height="14" rx="1" fill="#FCF3CF" stroke="#D4AC0D" stroke-width="0.5"/>
+  <text x="945" y="376" text-anchor="middle" class="eq" font-size="5">HUMIDITY / CONDENSING HX</text>
+  <rect x="905" y="384" width="80" height="14" rx="1" fill="#FCF3CF" stroke="#D4AC0D" stroke-width="0.5"/>
+  <text x="945" y="394" text-anchor="middle" class="eq" font-size="5">WATER RECOVERY</text>
+  <rect x="905" y="402" width="80" height="14" rx="1" fill="#FCF3CF" stroke="#D4AC0D" stroke-width="0.5"/>
+  <text x="945" y="412" text-anchor="middle" class="eq" font-size="5">O₂/N₂ REGULATION / PDU</text>
+
+  <!-- Floor access panels -->
+  <rect x="910" y="480" width="55" height="16" rx="1" fill="none" stroke="#8B4513" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="937" y="491" text-anchor="middle" class="eq" fill="#8B4513" font-size="5">FLOOR ACCESS</text>
+
+  <!-- Spares overhead -->
+  <rect x="900" y="250" width="90" height="16" rx="2" fill="#D5D8DC" stroke="#808B96" stroke-width="0.7"/>
+  <text x="945" y="261" text-anchor="middle" class="eq" font-size="5.5" fill="#555">OVERHEAD SPARES STORAGE</text>
+
+  <!-- ============================================ -->
+  <!-- ZONE E INTERIOR -->
+  <!-- ============================================ -->
+  <!-- Dust door -->
+  <rect x="1008" y="275" width="5" height="220" rx="1" fill="#E74C3C" stroke="#C0392B" stroke-width="1"/>
+  <text x="1003" y="390" text-anchor="end" class="eq-b" fill="#C0392B" font-size="5.5">DUST DOOR</text>
+
+  <!-- Suitport (on aft wall) -->
+  <rect x="1055" y="310" width="16" height="80" rx="5" fill="#E74C3C" opacity="0.3" stroke="#C0392B" stroke-width="1.5"/>
+  <text x="1063" y="345" text-anchor="middle" class="eq-b" fill="#C0392B" font-size="5" writing-mode="tb" transform="rotate(-90,1063,345)">SUITPORT</text>
+
+  <!-- EVA suit silhouette (outside hull) -->
+  <g transform="translate(1105, 370)" opacity="0.4">
+    <circle cx="0" cy="-45" r="12" fill="none" stroke="#1B3A5C" stroke-width="1.5"/>
+    <rect x="-12" y="-33" width="24" height="50" rx="5" fill="none" stroke="#1B3A5C" stroke-width="1.5"/>
+    <line x1="-12" y1="-20" x2="-22" y2="0" stroke="#1B3A5C" stroke-width="1.5"/>
+    <line x1="12" y1="-20" x2="22" y2="0" stroke="#1B3A5C" stroke-width="1.5"/>
+    <line x1="-5" y1="17" x2="-8" y2="50" stroke="#1B3A5C" stroke-width="1.5"/>
+    <line x1="5" y1="17" x2="8" y2="50" stroke="#1B3A5C" stroke-width="1.5"/>
+    <text x="0" y="60" text-anchor="middle" class="note" fill="#1B3A5C" font-size="5.5">EVA SUIT</text>
+    <text x="0" y="68" text-anchor="middle" class="note" fill="#1B3A5C" font-size="5">(EXTERNAL)</text>
+  </g>
+
+  <!-- Ext hatch -->
+  <rect x="1068" y="290" width="8" height="120" rx="2" fill="#1B3A5C" opacity="0.25" stroke="#1B3A5C" stroke-width="1.5"/>
+
+  <!-- HEPA / dust mgmt -->
+  <rect x="1018" y="400" width="30" height="35" rx="2" fill="#FADBD8" stroke="#E74C3C" stroke-width="0.7"/>
+  <text x="1033" y="415" text-anchor="middle" class="eq" font-size="4.5" fill="#C0392B">HEPA</text>
+  <text x="1033" y="423" text-anchor="middle" class="eq" font-size="4.5" fill="#C0392B">E/S</text>
+  <text x="1033" y="431" text-anchor="middle" class="eq" font-size="4.5" fill="#C0392B">VAC</text>
+
+  <!-- ============================================ -->
+  <!-- CABIN CEILING / DUCTING -->
+  <!-- ============================================ -->
+  <rect x="160" y="232" width="910" height="12" rx="2" fill="#F5F5F5" stroke="#AAA" stroke-width="0.5"/>
+  <text x="610" y="241" text-anchor="middle" class="note" fill="#888" font-size="5.5">ECLSS DUCTING / LIGHTING / CABLE TRAYS / STORM BLADDER STOWAGE</text>
+
+  <!-- ============================================ -->
+  <!-- ROOF STRUCTURE -->
+  <!-- ============================================ -->
+  <rect x="140" y="215" width="940" height="10" rx="2" fill="#B0BEC5" stroke="#78909C" stroke-width="1"/>
+
+  <!-- ============================================ -->
+  <!-- SSSRA -->
+  <!-- ============================================ -->
+  <!-- Radiator tier -->
+  <rect x="180" y="185" width="860" height="14" rx="2" fill="#ECEFF1" stroke="#607D8B" stroke-width="1.5"/>
+  <line x1="200" y1="192" x2="1020" y2="192" stroke="#E74C3C" stroke-width="0.8" stroke-dasharray="5,3"/>
+  <text x="610" y="195" text-anchor="middle" class="lb" font-size="7">RADIATOR TIER — 6.0 m² — Al HONEYCOMB + FLUID LOOP — 1,530 W CAPACITY</text>
+
+  <!-- Clearance gap -->
+  <text x="610" y="177" text-anchor="middle" class="note" fill="#888" font-size="5.5">0.4 m GAP — LOW-ε BACKSIDE (VDA ε ≤ 0.10)</text>
+
+  <!-- Solar array tier -->
+  <rect x="150" y="148" width="920" height="12" rx="2" fill="#2E86C1" stroke="#1A5276" stroke-width="1.5"/>
+  <!-- Cell grid -->
+  <line x1="250" y1="148" x2="250" y2="160" stroke="#1A5276" stroke-width="0.4"/>
+  <line x1="350" y1="148" x2="350" y2="160" stroke="#1A5276" stroke-width="0.4"/>
+  <line x1="450" y1="148" x2="450" y2="160" stroke="#1A5276" stroke-width="0.4"/>
+  <line x1="550" y1="148" x2="550" y2="160" stroke="#1A5276" stroke-width="0.4"/>
+  <line x1="650" y1="148" x2="650" y2="160" stroke="#1A5276" stroke-width="0.4"/>
+  <line x1="750" y1="148" x2="750" y2="160" stroke="#1A5276" stroke-width="0.4"/>
+  <line x1="850" y1="148" x2="850" y2="160" stroke="#1A5276" stroke-width="0.4"/>
+  <line x1="950" y1="148" x2="950" y2="160" stroke="#1A5276" stroke-width="0.4"/>
+  <text x="610" y="145" text-anchor="middle" class="lb" font-size="7">SOLAR ARRAY TIER — 20 m² — TRIPLE-JUNCTION PV — ~724 W @ 6° SUN</text>
+
+  <!-- Truss supports -->
+  <line x1="250" y1="160" x2="255" y2="185" stroke="#78909C" stroke-width="1.2"/>
+  <line x1="610" y1="160" x2="610" y2="185" stroke="#78909C" stroke-width="1.2"/>
+  <line x1="960" y1="160" x2="955" y2="185" stroke="#78909C" stroke-width="1.2"/>
+
+  <!-- SSSRA label bracket -->
+  <rect x="440" y="118" width="340" height="20" rx="4" fill="#1B3A5C" opacity="0.08" stroke="#1B3A5C" stroke-width="0.7"/>
+  <text x="610" y="132" text-anchor="middle" class="lb" font-size="9">STACKED SOLAR-SHADE RADIATOR ARCHITECTURE (SSSRA)</text>
+
+  <!-- Deployable wing arrays (folded position, either side) -->
+  <rect x="130" y="148" width="18" height="12" rx="2" fill="#2E86C1" opacity="0.4" stroke="#1A5276" stroke-width="0.7" stroke-dasharray="3,2"/>
+  <text x="120" y="170" text-anchor="end" class="note" fill="#2E86C1" font-size="5.5">DEPLOYABLE</text>
+  <text x="120" y="178" text-anchor="end" class="note" fill="#2E86C1" font-size="5.5">WING (stowed)</text>
+
+  <rect x="1072" y="148" width="18" height="12" rx="2" fill="#2E86C1" opacity="0.4" stroke="#1A5276" stroke-width="0.7" stroke-dasharray="3,2"/>
+  <text x="1100" y="170" class="note" fill="#2E86C1" font-size="5.5">DEPLOYABLE</text>
+  <text x="1100" y="178" class="note" fill="#2E86C1" font-size="5.5">WING (stowed)</text>
+
+  <!-- Sun -->
+  <g transform="translate(60, 130)">
+    <circle cx="0" cy="0" r="14" fill="#F9E79F" stroke="#F1C40F" stroke-width="1.5"/>
+    <line x1="18" y1="0" x2="28" y2="0" stroke="#F1C40F" stroke-width="1"/>
+    <line x1="16" y1="-9" x2="24" y2="-14" stroke="#F1C40F" stroke-width="1"/>
+    <line x1="16" y1="9" x2="24" y2="14" stroke="#F1C40F" stroke-width="1"/>
+    <text x="0" y="28" text-anchor="middle" class="note" fill="#D4AC0D" font-size="6">~6° SUN</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- DIMENSION LINES -->
+  <!-- ============================================ -->
+  <!-- Overall vehicle length -->
+  <line x1="100" y1="680" x2="1120" y2="680" class="dim-line"/>
+  <line x1="100" y1="674" x2="100" y2="686" class="dim-line"/>
+  <line x1="1120" y1="674" x2="1120" y2="686" class="dim-line"/>
+  <text x="610" y="695" text-anchor="middle" class="dim" font-size="9" font-weight="bold">~10.0 m OVERALL VEHICLE LENGTH</text>
+
+  <!-- Cabin interior length -->
+  <line x1="150" y1="710" x2="1070" y2="710" class="dim-line" stroke-dasharray="3,2"/>
+  <line x1="150" y1="704" x2="150" y2="716" class="dim-line"/>
+  <line x1="1070" y1="704" x2="1070" y2="716" class="dim-line"/>
+  <text x="610" y="723" text-anchor="middle" class="dim" font-size="8">8.0 m CABIN INTERIOR LENGTH</text>
+
+  <!-- Wheelbase -->
+  <line x1="220" y1="740" x2="1000" y2="740" class="dim-line"/>
+  <line x1="220" y1="734" x2="220" y2="746" class="dim-line"/>
+  <line x1="1000" y1="734" x2="1000" y2="746" class="dim-line"/>
+  <text x="610" y="753" text-anchor="middle" class="dim" font-size="8">6.5 m WHEELBASE (AXLE 1 TO AXLE 3)</text>
+
+  <!-- Height dimensions (left side) -->
+  <!-- Ground to floor -->
+  <line x1="80" y1="640" x2="80" y2="498" class="dim-line"/>
+  <line x1="74" y1="640" x2="86" y2="640" class="dim-line"/>
+  <line x1="74" y1="498" x2="86" y2="498" class="dim-line"/>
+  <text x="70" y="573" text-anchor="end" class="dim" font-size="7">1.15m</text>
+  <text x="70" y="581" text-anchor="end" class="note" fill="#C0392B" font-size="5.5">FLOOR</text>
+
+  <!-- Floor to roof -->
+  <line x1="80" y1="498" x2="80" y2="225" class="dim-line"/>
+  <line x1="74" y1="225" x2="86" y2="225" class="dim-line"/>
+  <text x="70" y="365" text-anchor="end" class="dim" font-size="7">2.3m</text>
+  <text x="70" y="373" text-anchor="end" class="note" fill="#C0392B" font-size="5.5">CABIN</text>
+
+  <!-- Total height -->
+  <line x1="55" y1="640" x2="55" y2="148" class="dim-line"/>
+  <line x1="49" y1="640" x2="61" y2="640" class="dim-line"/>
+  <line x1="49" y1="148" x2="61" y2="148" class="dim-line"/>
+  <text x="45" y="400" text-anchor="end" class="dim" font-size="8" font-weight="bold">3.90m</text>
+  <text x="45" y="410" text-anchor="end" class="note" fill="#C0392B" font-size="6">TOTAL</text>
+
+  <!-- Ground clearance -->
+  <line x1="420" y1="640" x2="420" y2="590" class="dim-line"/>
+  <line x1="414" y1="590" x2="426" y2="590" class="dim-line"/>
+  <text x="432" y="620" class="dim" font-size="7">0.50m GND CLR</text>
+
+  <!-- ============================================ -->
+  <!-- CG MARKER -->
+  <!-- ============================================ -->
+  <g transform="translate(580, 445)">
+    <circle cx="0" cy="0" r="9" fill="none" stroke="#E74C3C" stroke-width="1.5"/>
+    <line x1="-12" y1="0" x2="12" y2="0" stroke="#E74C3C" stroke-width="1"/>
+    <line x1="0" y1="-12" x2="0" y2="12" stroke="#E74C3C" stroke-width="1"/>
+    <text x="15" y="-3" class="dim" font-size="7" font-weight="bold">CG</text>
+    <text x="15" y="6" class="dim" font-size="6">1.54m AGL</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- LEGEND -->
+  <!-- ============================================ -->
+  <rect x="1200" y="100" width="165" height="165" rx="4" fill="#fff" stroke="#CCC" stroke-width="0.7"/>
+  <text x="1282" y="116" text-anchor="middle" class="lb" font-size="8">LEGEND</text>
+  <rect x="1210" y="123" width="12" height="7" fill="url(#batt)" stroke="#1A5276" stroke-width="0.5"/>
+  <text x="1228" y="130" class="note" font-size="6">Battery Module (LFP)</text>
+  <rect x="1210" y="136" width="12" height="7" fill="#85C1E9" stroke="#2E86C1" stroke-width="0.5"/>
+  <text x="1228" y="143" class="note" font-size="6">Water Storage</text>
+  <rect x="1210" y="149" width="12" height="7" fill="#82E0AA" stroke="#27AE60" stroke-width="0.5"/>
+  <text x="1228" y="156" class="note" font-size="6">Fuel Cell / Gas</text>
+  <rect x="1210" y="162" width="12" height="7" fill="#2E86C1" stroke="#1A5276" stroke-width="0.5"/>
+  <text x="1228" y="169" class="note" font-size="6">Solar Array</text>
+  <rect x="1210" y="175" width="12" height="7" fill="#ECEFF1" stroke="#607D8B" stroke-width="0.5"/>
+  <text x="1228" y="182" class="note" font-size="6">Radiator Panel</text>
+  <rect x="1210" y="188" width="12" height="7" fill="#F9E79F" stroke="#D4AC0D" stroke-width="0.5"/>
+  <text x="1228" y="195" class="note" font-size="6">ECLSS / Systems</text>
+  <rect x="1210" y="201" width="12" height="7" fill="#D2B4DE" stroke="#8E44AD" stroke-width="0.5"/>
+  <text x="1228" y="208" class="note" font-size="6">Crew Berths</text>
+  <rect x="1210" y="214" width="12" height="7" fill="#E74C3C" opacity="0.3" stroke="#C0392B" stroke-width="0.5"/>
+  <text x="1228" y="221" class="note" font-size="6">Suitport / Airlock</text>
+  <rect x="1210" y="227" width="12" height="7" fill="#E74C3C" opacity="0.7"/>
+  <text x="1228" y="234" class="note" font-size="6">Thermal Barrier</text>
+  <line x1="1210" y1="244" x2="1222" y2="244" stroke="#E74C3C" stroke-width="0.7" stroke-dasharray="2,2"/>
+  <text x="1228" y="247" class="note" font-size="6">Vent Line / Thermal Loop</text>
+
+  <!-- Mass callout -->
+  <rect x="1200" y="280" width="165" height="50" rx="4" fill="#F0F4F8" stroke="#1B3A5C" stroke-width="0.7"/>
+  <text x="1282" y="296" text-anchor="middle" class="lb" font-size="8">KEY SPECS</text>
+  <text x="1282" y="308" text-anchor="middle" class="note" font-size="6">GVM: ~5,400 kg</text>
+  <text x="1282" y="318" text-anchor="middle" class="note" font-size="6">Battery: 100 kWh (4×25 LFP)</text>
+  <text x="1282" y="328" text-anchor="middle" class="note" font-size="6">Crew: 3 (std) / 30–60 day</text>
+
+</svg>

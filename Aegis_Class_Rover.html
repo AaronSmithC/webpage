@@ -1,365 +1,1189 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Aegis-Class Lunar Surface Mobility Platform — A pressurized, long-duration rover architecture for lunar south pole operations." />
-  <title>Aegis-Class Rover | Aegis-Class Lunar Surface Mobility Platform</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aegis-Class Rover — Pressurized Lunar Mobility Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0B1622;
+  --ink-soft: #1A2A3C;
+  --ink-muted: #2D3E50;
+  --slate: #4A6274;
+  --fog: #8FA3B4;
+  --mist: #C4D2DC;
+  --ice: #E8EEF2;
+  --white: #F4F7F9;
+  --accent: #D4A853;
+  --accent-dim: #B08C3E;
+  --accent-glow: #E8C46A;
+  --danger: #C94040;
+  --info: #3A8FBF;
+  --success: #4A9A6A;
+  --cabin-blue: #2E86C1;
+  --rad-silver: #B0BEC5;
+}
 
-  <style>
-    :root{
-      --bg:#0b1220;
-      --panel:#0f1a2e;
-      --panel2:#0c1629;
-      --text:#e9eef7;
-      --muted:#b7c3d8;
-      --line:rgba(255,255,255,.10);
-      --accent:#7cc4ff;
-      --accent2:#66f0c8;
-      --shadow:0 18px 45px rgba(0,0,0,.35);
-      --radius:18px;
-      --max:1100px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:var(--sans);
-      color:var(--text);
-      background:
-        radial-gradient(1200px 700px at 15% -10%, rgba(124,196,255,.22), transparent 60%),
-        radial-gradient(900px 600px at 110% 10%, rgba(102,240,200,.12), transparent 55%),
-        linear-gradient(180deg, var(--bg), #070d18 55%, #060a12);
-      line-height:1.55;
-    }
-    a{color:var(--accent); text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 70px}
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:10px 0 22px;
-    }
-    .crumbs{
-      font-size:13px; color:var(--muted);
-      display:flex; gap:8px; align-items:center; flex-wrap:wrap;
-    }
-    .crumbs .sep{opacity:.6}
-    header.hero{
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:26px 22px;
-      position:relative;
-      overflow:hidden;
-    }
-    header.hero:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(700px 300px at 20% 0%, rgba(124,196,255,.18), transparent 60%),
-        radial-gradient(600px 300px at 90% 20%, rgba(102,240,200,.12), transparent 55%);
-      pointer-events:none;
-    }
-    .hero-inner{position:relative; display:grid; grid-template-columns: 1.3fr .7fr; gap:18px; align-items:start}
-    @media (max-width: 860px){
-      .hero-inner{grid-template-columns:1fr}
-    }
-    .kicker{
-      display:inline-flex; gap:10px; align-items:center;
-      font-size:12px; letter-spacing:.12em; text-transform:uppercase;
-      color:rgba(233,238,247,.85);
-      padding:7px 10px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      background:rgba(0,0,0,.15);
-      width:fit-content;
-      margin-bottom:12px;
-    }
-    h1{
-      margin:0 0 10px;
-      font-size:34px;
-      line-height:1.15;
-      letter-spacing:-.02em;
-    }
-    .lede{margin:0; color:var(--muted); font-size:16px; max-width:60ch}
-    .cta-card{
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(15,26,46,.85), rgba(12,22,41,.65));
-      border-radius:16px;
-      padding:16px;
-    }
-    .cta-title{margin:0 0 8px; font-size:14px; letter-spacing:.01em}
-    .cta-text{margin:0 0 12px; color:var(--muted); font-size:13px}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding:12px 14px;
-      border-radius:12px;
-      border:1px solid rgba(124,196,255,.45);
-      background:linear-gradient(180deg, rgba(124,196,255,.22), rgba(124,196,255,.08));
-      color:var(--text);
-      font-weight:600;
-      width:100%;
-      text-decoration:none;
-      transition:transform .08s ease, border-color .18s ease, background .18s ease;
-    }
-    .btn:hover{
-      text-decoration:none;
-      transform:translateY(-1px);
-      border-color:rgba(102,240,200,.55);
-      background:linear-gradient(180deg, rgba(102,240,200,.18), rgba(124,196,255,.08));
-    }
-    .btn svg{width:18px; height:18px; opacity:.95}
-    .grid{
-      display:grid; grid-template-columns: 1fr 1fr;
-      gap:14px;
-      margin-top:18px;
-    }
-    @media (max-width: 860px){
-      .grid{grid-template-columns:1fr}
-    }
-    section.card{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:var(--radius);
-      padding:18px 18px 16px;
-    }
-    section.card h2{
-      margin:0 0 10px;
-      font-size:18px;
-      letter-spacing:-.01em;
-    }
-    .meta{
-      display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 0;
-    }
-    .pill{
-      font-size:12px;
-      color:rgba(233,238,247,.92);
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.12);
-      padding:6px 10px;
-      border-radius:999px;
-    }
-    .list{
-      margin:10px 0 0; padding-left:18px; color:var(--muted);
-    }
-    .list li{margin:6px 0}
-    .specs{
-      margin-top:12px;
-      border-top:1px solid var(--line);
-      padding-top:12px;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px 14px;
-    }
-    @media (max-width: 640px){
-      .specs{grid-template-columns:1fr}
-    }
-    .kv{
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.10);
-      border-radius:14px;
-      padding:10px 12px;
-    }
-    .kv .k{font-size:12px; color:rgba(183,195,216,.95); margin:0 0 2px}
-    .kv .v{font-size:14px; margin:0}
-    .callout{
-      margin-top:16px;
-      border:1px solid rgba(102,240,200,.22);
-      background:linear-gradient(180deg, rgba(102,240,200,.10), rgba(124,196,255,.06));
-      border-radius:var(--radius);
-      padding:16px 18px;
-    }
-    .callout h3{margin:0 0 8px; font-size:16px}
-    .callout p{margin:0; color:var(--muted)}
-    .foot{
-      margin-top:18px;
-      color:rgba(183,195,216,.8);
-      font-size:12px;
-      border-top:1px solid var(--line);
-      padding-top:14px;
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
-    }
-    .tiny{font-family:var(--mono); font-size:11px; opacity:.85}
-  </style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  background: var(--ink);
+  color: var(--mist);
+  font-size: 18px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--ink-muted); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-dim); }
+
+/* ── SELECTION ── */
+::selection { background: var(--accent); color: var(--ink); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+.container-wide { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 120% 60% at 30% 80%, rgba(46,134,193,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 40% at 80% 20%, rgba(212,168,83,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-grid-lines {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    repeating-linear-gradient(90deg, transparent, transparent 119px, rgba(255,255,255,0.015) 119px, rgba(255,255,255,0.015) 120px),
+    repeating-linear-gradient(0deg, transparent, transparent 119px, rgba(255,255,255,0.015) 119px, rgba(255,255,255,0.015) 120px);
+  pointer-events: none;
+}
+
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 0.2s forwards;
+}
+
+.hero-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: 900;
+  line-height: 0.95;
+  color: var(--white);
+  letter-spacing: -2px;
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 0.4s forwards;
+}
+
+.hero-title span {
+  display: block;
+  font-weight: 300;
+  font-size: 0.45em;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--fog);
+  margin-top: 8px;
+}
+
+.hero-line {
+  width: 80px;
+  height: 2px;
+  background: var(--accent);
+  margin: 28px 0;
+  opacity: 0;
+  animation: fadeSlideUp 0.6s 0.6s forwards;
+}
+
+.hero-desc {
+  font-size: 20px;
+  color: var(--fog);
+  max-width: 580px;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 0.7s forwards;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 48px;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 0.9s forwards;
+}
+
+.hero-stat {
+  border-left: 2px solid var(--ink-muted);
+  padding-left: 16px;
+}
+
+.hero-stat-val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent-glow);
+  line-height: 1.1;
+}
+
+.hero-stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-top: 2px;
+}
+
+.hero-cta {
+  margin-top: 48px;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 1.1s forwards;
+}
+
+.btn-dossier {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--accent-dim);
+  padding: 14px 28px;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.btn-dossier::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 100%; bottom: 0;
+  background: var(--accent);
+  opacity: 0.08;
+  transition: right 0.4s;
+}
+
+.btn-dossier:hover::before { right: 0; }
+.btn-dossier:hover { color: var(--accent-glow); border-color: var(--accent-glow); }
+
+.btn-dossier svg { width: 16px; height: 16px; fill: currentColor; }
+
+/* ── NAV ── */
+.nav-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(11,22,34,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transform: translateY(-100%);
+  animation: slideDown 0.5s 1.4s forwards;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+.nav-logo {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+
+.nav-logo em {
+  font-style: normal;
+  color: var(--accent);
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-left: 10px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--fog);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+/* ── SECTIONS ── */
+section { padding: 100px 0; position: relative; }
+
+section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: min(1200px, 90%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ink-muted), transparent);
+}
+
+.sec-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent-dim);
+  margin-bottom: 12px;
+}
+
+.sec-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.sec-lead {
+  font-size: 20px;
+  color: var(--fog);
+  max-width: 680px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+}
+
+/* ── SPEC GRID ── */
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  background: var(--ink-muted);
+  border: 1px solid var(--ink-muted);
+  margin: 48px 0;
+}
+
+.spec-card {
+  background: var(--ink);
+  padding: 28px;
+  position: relative;
+}
+
+.spec-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.spec-card:hover::before { opacity: 1; }
+
+.spec-card-val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent-glow);
+  line-height: 1.1;
+}
+
+.spec-card-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-top: 6px;
+}
+
+.spec-card-note {
+  font-size: 14px;
+  color: var(--fog);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ── SVG DIAGRAMS ── */
+.diagram-wrap {
+  margin: 48px 0;
+  border: 1px solid var(--ink-muted);
+  background: #fff;
+  padding: 16px;
+  position: relative;
+  overflow-x: auto;
+}
+
+.diagram-wrap svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.diagram-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--slate);
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* ── TWO COLUMN LAYOUT ── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* ── ZONE TABLE ── */
+.zone-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  margin: 32px 0;
+}
+
+.zone-table th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-bottom: 2px solid var(--ink-muted);
+  padding: 10px 12px;
+}
+
+.zone-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: var(--mist);
+  vertical-align: top;
+}
+
+.zone-table tr:hover td { background: rgba(212,168,83,0.03); }
+
+.zone-letter-badge {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 24px;
+  font-weight: 700;
+  font-size: 12px;
+  color: #fff;
+}
+
+.zone-a { background: #2E86C1; }
+.zone-b { background: #27AE60; }
+.zone-c { background: #8E44AD; }
+.zone-d { background: #D4AC0D; }
+.zone-e { background: #C0392B; }
+
+/* ── INLINE DATA BLOCKS ── */
+.data-block {
+  background: var(--ink-soft);
+  border-left: 3px solid var(--accent-dim);
+  padding: 20px 24px;
+  margin: 24px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--mist);
+}
+
+.data-block strong { color: var(--accent-glow); font-weight: 600; }
+.data-block em { color: var(--fog); font-style: normal; }
+
+/* ── FEATURE LIST ── */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin: 48px 0;
+}
+
+.feature {
+  border: 1px solid var(--ink-muted);
+  padding: 28px;
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.feature:hover { border-color: var(--accent-dim); }
+
+.feature-icon {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.feature h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.feature p {
+  font-size: 15px;
+  color: var(--fog);
+  line-height: 1.6;
+}
+
+/* ── SUBSYSTEM CALLOUT ── */
+.callout {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
+  padding: 28px;
+  margin: 24px 0;
+  border: 1px solid var(--ink-muted);
+  align-items: start;
+}
+
+.callout-tag {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.callout-body { font-size: 16px; color: var(--fog); line-height: 1.65; }
+.callout-body strong { color: var(--mist); }
+
+@media (max-width: 700px) {
+  .callout { grid-template-columns: 1fr; }
+}
+
+/* ── SAFETY TIERS ── */
+.tiers {
+  margin: 32px 0;
+}
+
+.tier {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.tier-num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--accent-dim);
+  flex-shrink: 0;
+  width: 44px;
+  text-align: center;
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.tier-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.tier-content h4 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+  letter-spacing: -0.2px;
+}
+
+.tier-content p {
+  font-size: 15px;
+  color: var(--fog);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── FOOTER ── */
+.footer {
+  padding: 48px 0;
+  text-align: center;
+  border-top: 1px solid var(--ink-muted);
+}
+
+.footer-logo {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--white);
+}
+
+.footer-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-top: 8px;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+  .hero-stats { flex-wrap: wrap; gap: 24px; }
+  .nav-links { display: none; }
+  .spec-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
 </head>
-
 <body>
-  <div class="wrap">
 
-    <div class="topbar">
-      <div class="crumbs">
-        <a href="/">Home</a>
-        <span class="sep">/</span>
-        <a href="/Aegis_Class_Rover">Aegis-Class Rover</a>
-        <span class="sep">/</span>
-        <span>Aegis-Class Lunar Surface Mobility Platform</span>
-      </div>
-      <div class="crumbs">
-        <span class="pill">Architecture Reference</span>
-        <span class="pill">February 2026</span>
-      </div>
-    </div>
-
-    <header class="hero">
-      <div class="hero-inner">
-        <div>
-          <div class="kicker">Aegis-Class Rover</div>
-          <h1>Aegis-Class Lunar Surface Mobility Platform</h1>
-          <p class="lede">
-            A pressurized, long-duration lunar rover architecture designed for 30–60 day missions,
-            polar operations, and integrated logistics—combining habitation, mobility, dust control,
-            and a roof-integrated power/thermal stack sized for real field work.
-          </p>
-
-          <div class="meta" aria-label="Key attributes">
-            <span class="pill">Pressurized</span>
-            <span class="pill">30–60 day missions</span>
-            <span class="pill">Crew: 2–4</span>
-            <span class="pill">South Pole capable</span>
-            <span class="pill">Suitport + dust boundary</span>
-            <span class="pill">SSSRA roof stack</span>
-          </div>
-        </div>
-
-        <aside class="cta-card" aria-label="Document download">
-          <p class="cta-title">Download the PDF</p>
-          <p class="cta-text">
-            Formal technical dossier formatted for circulation and review.
-          </p>
-
-          <!--
-            Replace the href below with your actual path.
-            Example:
-              /dossiers/aegis_class_rover_dossier.pdf
-              /docs/aegis-class-rover-dossier.pdf
-          -->
-          <a class="btn" href="dossiers/Aegis_Class_Rover.pdf">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 3v10m0 0 4-4m-4 4-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M5 14v5h14v-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Download PDF
-          </a>
-
-          <div class="meta" style="margin-top:12px">
-            <span class="pill">Single file</span>
-            <span class="pill">No images</span>
-            <span class="pill">Print-ready</span>
-          </div>
-        </aside>
-      </div>
-    </header>
-
-    <div class="grid">
-      <section class="card" id="overview">
-        <h2>System Overview</h2>
-        <ul class="list">
-          <li><strong>Primary role:</strong> pressurized surface mobility and habitation for extended lunar field operations.</li>
-          <li><strong>Secondary roles:</strong> prospecting support, logistics transport, mobile command, emergency shelter, and storm refuge.</li>
-          <li><strong>Design objective:</strong> sustain productive crew operations without treating the cabin as a cockpit-with-bunks.</li>
-          <li><strong>Integration:</strong> sized for polar illumination geometry and dust reality; built to operate as infrastructure, not a stunt vehicle.</li>
-        </ul>
-
-        <div class="callout">
-          <h3>Constraint-driven architecture</h3>
-          <p>
-            Interior standing height drives hull size, which drives CG height, which drives track width and stability,
-            which then defines the roof footprint available for power generation and thermal rejection.
-          </p>
-        </div>
-      </section>
-
-      <section class="card" id="key-specs">
-        <h2>Baseline Key Specs</h2>
-
-        <div class="specs" role="list">
-          <div class="kv" role="listitem">
-            <p class="k">Gross vehicle mass</p>
-            <p class="v">~5,400 kg (laden)</p>
-          </div>
-          <div class="kv" role="listitem">
-            <p class="k">Crew / mission duration</p>
-            <p class="v">2–4 crew • 30–60 days</p>
-          </div>
-          <div class="kv" role="listitem">
-            <p class="k">Overall dimensions</p>
-            <p class="v">~10 m L • 4.6–4.8 m W • 3.9 m to array top</p>
-          </div>
-          <div class="kv" role="listitem">
-            <p class="k">Stability</p>
-            <p class="v">Track 4.0 m • CG ~1.54 m • SSF ~1.30</p>
-          </div>
-          <div class="kv" role="listitem">
-            <p class="k">Habitable volume</p>
-            <p class="v">~57 m³ gross • ~38–42 m³ net</p>
-          </div>
-          <div class="kv" role="listitem">
-            <p class="k">Mobility performance</p>
-            <p class="v">Cruise 10–15 km/h • Sprint 25 km/h</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="card" id="mobility">
-        <h2>Mobility & Terrain Handling</h2>
-        <ul class="list">
-          <li><strong>Mobility architecture:</strong> wide-track chassis with multi-axle stability geometry.</li>
-          <li><strong>Terrain envelope:</strong> compacted regolith plains, loose regolith, boulder fields, crater-rim transitions, shadowed terrain.</li>
-          <li><strong>Driving modes:</strong> manual, remote-supervised, and autonomous traverse with hazard detection.</li>
-          <li><strong>Operations emphasis:</strong> traction management and dust survivability over “heroic” torque.</li>
-        </ul>
-      </section>
-
-      <section class="card" id="habitation">
-        <h2>Habitation & Crew Factors</h2>
-        <ul class="list">
-          <li><strong>Interior standing height:</strong> 2.1 m clear for long-duration ergonomics and psychological health.</li>
-          <li><strong>Functional zoning:</strong> forward command, central workspace/galley, crew quarters/medical, systems bay, vestibule.</li>
-          <li><strong>Human factors:</strong> circadian lighting control, acoustic targets, privacy berths, and a “sacred” continuous aisle for emergency egress.</li>
-          <li><strong>Medical capability:</strong> fold-down bench + telemedicine workflow for multi-week autonomy.</li>
-        </ul>
-      </section>
-
-      <section class="card" id="dust">
-        <h2>Dust Boundary & EVA Interface</h2>
-        <ul class="list">
-          <li><strong>Baseline EVA concept:</strong> suitport-driven external suit storage to keep regolith outside the pressure volume.</li>
-          <li><strong>Vestibule controls:</strong> dedicated filtration, electrostatic capture, and procedural wipe-down flow.</li>
-          <li><strong>Fallback mode:</strong> vestibule can operate as a traditional airlock when required for interoperability.</li>
-        </ul>
-      </section>
-
-      <section class="card" id="power-thermal">
-        <h2>Power & Thermal Architecture</h2>
-        <ul class="list">
-          <li><strong>Roof integration:</strong> stacked solar-shade radiator architecture (SSSRA) for heading-independent rejection.</li>
-          <li><strong>Thermal sizing:</strong> radiator area selected for nominal ~1.2 kW rejection with ~1.5 kW peak capacity margin.</li>
-          <li><strong>Polar power reality:</strong> low solar elevation angles drive the need for deployable/tilted arrays and/or outpost recharge.</li>
-          <li><strong>Resilience:</strong> battery storage + fuel cell option for night, shadow, and contingency operations.</li>
-        </ul>
-      </section>
-    </div>
-
-    <section class="card" id="notes" style="margin-top:14px">
-      <h2>Program Notes</h2>
-      <ul class="list">
-        <li><strong>Document status:</strong> Architecture reference — not a hardware commitment.</li>
-        <li><strong>Intended use:</strong> mission design, trade studies, and partner alignment on geometry, loads, and integration constraints.</li>
-        <li><strong>Next work:</strong> dust qualification testing, suitport interface definition, roof-structure/mechanism refinement, integrated power/thermal modeling, and a full-scale human-factors mock-up.</li>
-      </ul>
-    </section>
-
-    <div class="foot">
-      <div>
-        <div class="tiny">Aegis Station Infrastructure LLC • Aegis-Class Rover</div>
-        <div style="font-size:12px; color:rgba(183,195,216,.85)">Aegis-Class Lunar Surface Mobility Platform — reference page</div>
-      </div>
-      <div class="tiny">Last updated: February 2026</div>
-    </div>
-
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <div class="nav-logo">AEGIS <em>Rover</em></div>
+    <ul class="nav-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#vehicle">Vehicle</a></li>
+      <li><a href="#interior">Interior</a></li>
+      <li><a href="#power">Power &amp; Thermal</a></li>
+      <li><a href="#mobility">Mobility</a></li>
+      <li><a href="#safety">Safety</a></li>
+      <li><a href="dossiers/Aegis_Class_Rover.pdf">Dossier ↗</a></li>
+    </ul>
   </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-grid-lines"></div>
+  <div class="container">
+    <div class="hero-tag">Pressurized Lunar Mobility Platform</div>
+    <h1 class="hero-title">
+      Aegis-Class<br>Rover
+      <span>Command Module Specification</span>
+    </h1>
+    <div class="hero-line"></div>
+    <p class="hero-desc">
+      A pressurized, shirtsleeves lunar vehicle engineered for 30–60 days of autonomous 
+      surface operations. Not a car — a mobile habitat, integrated into the Aegis 
+      orbital–surface logistics chain.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-val">3–4</div>
+        <div class="hero-stat-label">Crew</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">60</div>
+        <div class="hero-stat-label">Day Endurance</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">500+</div>
+        <div class="hero-stat-label">km Range</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">5,400</div>
+        <div class="hero-stat-label">kg GVM</div>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="dossiers/Aegis_Class_Rover.pdf" class="btn-dossier">
+        <svg viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M12,19L8,15H10.5V12H13.5V15H16L12,19Z"/></svg>
+        Full Dossier (PDF)
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="sec-tag reveal">01 — Overview</div>
+    <h2 class="sec-title reveal">Why a Pressurized Rover</h2>
+    <p class="sec-lead reveal">
+      Open rovers solve early sortie missions. Aegis solves permanent lunar presence — 
+      eliminating the single greatest bottleneck in lunar exploration: EVA fatigue.
+    </p>
+
+    <div class="features reveal">
+      <div class="feature">
+        <div class="feature-icon">🫁</div>
+        <h3>Shirtsleeves Environment</h3>
+        <p>Full life support at 55.2 kPa / 38.7% O₂ — equivalent sea-level oxygen. Crew works, sleeps, eats, and plans without suits. Productivity multiplied 4–6× over EVA-only concepts.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">☀️</div>
+        <h3>Solar Storm Shelter</h3>
+        <p>Deployable water-wall bladders in Zone C provide ~10 cm shielding on all sides. Reduces August-1972-class SPE dose from unsurvivable to manageable emergency exposure over 12 hours.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔧</div>
+        <h3>Mobile Command Post</h3>
+        <p>Planning table, science bench with glove box, full tool storage, maintenance bench, medical station with telemedicine. The rover is a workspace, not just transport.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔗</div>
+        <h3>Aegis Ecosystem Node</h3>
+        <p>Integrated with Aegis Station (orbit), Short-Hoppers, Long-Haulers, Tankers, and WOK prospecting rovers. Closed-loop mobility and water-logistics from orbit to surface.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🤖</div>
+        <h3>Autonomous Modes</h3>
+        <p>Manual, semi-autonomous, or fully autonomous. Return-to-base and autonomous scouting modes. Forward-looking LIDAR terrain classification for path planning.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🏥</div>
+        <h3>Medical Capability</h3>
+        <p>Fold-down medical bench, full CMO kit (diagnostics, surgery, IV), AED with cardiac monitoring, telemedicine link. Pressurized refuge during EVA incidents.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VEHICLE -->
+<section id="vehicle">
+  <div class="container">
+    <div class="sec-tag reveal">02 — Vehicle Architecture</div>
+    <h2 class="sec-title reveal">Command Module Dimensions</h2>
+    <p class="sec-lead reveal">
+      Every dimension derives from a single constraint: 2.1 m interior cabin height for standing 
+      room over 30–60 day missions. The rest follows through structural, thermal, and stability logic.
+    </p>
+
+    <div class="spec-grid reveal">
+      <div class="spec-card">
+        <div class="spec-card-val">10.0 m</div>
+        <div class="spec-card-label">Overall Length</div>
+        <div class="spec-card-note">Cabin interior 8.0 m</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">4.0 m</div>
+        <div class="spec-card-label">Track Width (C-C)</div>
+        <div class="spec-card-note">~4.6–4.8 m with treads</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">3.90 m</div>
+        <div class="spec-card-label">Total Height</div>
+        <div class="spec-card-note">Incl. SSSRA array tier</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">3.4 × 8.0 m</div>
+        <div class="spec-card-label">Cabin Interior</div>
+        <div class="spec-card-note">27.2 m² floor / ~57 m³ gross</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">6.5 m</div>
+        <div class="spec-card-label">Wheelbase</div>
+        <div class="spec-card-note">3 axles, 6×6 all-wheel drive</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">1.54 m</div>
+        <div class="spec-card-label">CG Height</div>
+        <div class="spec-card-note">SSF 1.30 rollover margin</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">2.1 m</div>
+        <div class="spec-card-label">Interior Height</div>
+        <div class="spec-card-note">Standing room, full cabin</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">~100 mm</div>
+        <div class="spec-card-label">Wall Buildup</div>
+        <div class="spec-card-note">Liner / Al-Li / MLI / MMOD</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cross Section -->
+  <div class="container-wide">
+    <div class="diagram-wrap reveal">
+      <img src="Aegis_Cross_Section.svg" alt="Aegis Command Module Cross-Section — looking forward" style="width:100%;height:auto;">
+    </div>
+    <div class="diagram-label">Cross-Section — Looking Forward — All Subsystems Shown</div>
+  </div>
+
+  <!-- Longitudinal Section -->
+  <div class="container-wide" style="margin-top:48px;">
+    <div class="diagram-wrap reveal">
+      <img src="Aegis_Longitudinal_Section.svg" alt="Aegis Command Module Longitudinal Section — port side view" style="width:100%;height:auto;">
+    </div>
+    <div class="diagram-label">Longitudinal Section — Port Side View — Zones A through E</div>
+  </div>
+</section>
+
+<!-- INTERIOR -->
+<section id="interior">
+  <div class="container">
+    <div class="sec-tag reveal">03 — Interior Layout</div>
+    <h2 class="sec-title reveal">Five Zones, Fore to Aft</h2>
+    <p class="sec-lead reveal">
+      Forward is operational, aft is personal. A continuous 0.75 m aisle on the port side is the 
+      emergency egress path, stretcher route, and primary circulation spine. Dust stays at the door.
+    </p>
+
+    <table class="zone-table reveal">
+      <thead>
+        <tr>
+          <th>Zone</th>
+          <th>Name</th>
+          <th>Length</th>
+          <th>Area</th>
+          <th>Functions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="zone-letter-badge zone-a">A</span></td>
+          <td>Forward Command</td>
+          <td>1.6 m</td>
+          <td>5.4 m²</td>
+          <td>Pilot/co-pilot stations, nav displays, forward windows, hand controllers</td>
+        </tr>
+        <tr>
+          <td><span class="zone-letter-badge zone-b">B</span></td>
+          <td>Central Workspace</td>
+          <td>2.4 m</td>
+          <td>8.2 m²</td>
+          <td>Planning table, galley, tool storage, science bench, comm station</td>
+        </tr>
+        <tr>
+          <td><span class="zone-letter-badge zone-c">C</span></td>
+          <td>Crew Quarters</td>
+          <td>2.2 m</td>
+          <td>7.5 m²</td>
+          <td>3 berths (2 lower + 1 upper), hygiene closet, medical bench, lockers</td>
+        </tr>
+        <tr>
+          <td><span class="zone-letter-badge zone-d">D</span></td>
+          <td>Systems Bay</td>
+          <td>1.2 m</td>
+          <td>4.1 m²</td>
+          <td>ECLSS racks, PDU, spares, floor access panels</td>
+        </tr>
+        <tr>
+          <td><span class="zone-letter-badge zone-e">E</span></td>
+          <td>Airlock Vestibule</td>
+          <td>0.6 m</td>
+          <td>2.0 m²</td>
+          <td>Suitports (×2), dust management, HEPA, exterior hatch</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Plan View -->
+  <div class="container-wide" style="margin-top:32px;">
+    <div class="diagram-wrap reveal">
+      <img src="Aegis_Cabin_Plan_View.svg" alt="Aegis Command Module Cabin Plan View — top down" style="width:100%;height:auto;">
+    </div>
+    <div class="diagram-label">Cabin Plan View — Top-Down, Roof Removed — Equipment Placement</div>
+  </div>
+
+  <div class="container" style="margin-top:64px;">
+    <div class="two-col reveal">
+      <div>
+        <h3 style="font-family:'Outfit',sans-serif;color:var(--white);font-size:22px;font-weight:700;margin-bottom:16px;">Suitport EVA Interface</h3>
+        <p style="color:var(--fog);line-height:1.7;">
+          The baseline EVA interface uses suitports rather than a traditional airlock. The dust-covered 
+          suit never enters the cabin — crew enters from inside through a sealed hull port, seals, and 
+          detaches. On return, the suit docks and crew exits inside. This eliminates ~95% of dust ingress 
+          and saves 5–10 kg of atmosphere gas per 60-day mission. Ingress/egress takes 10–15 minutes 
+          vs. 30–45 minutes for a full airlock cycle. The vestibule can revert to traditional airlock mode 
+          if suitport seals fail.
+        </p>
+      </div>
+      <div>
+        <h3 style="font-family:'Outfit',sans-serif;color:var(--white);font-size:22px;font-weight:700;margin-bottom:16px;">Crew Habitability</h3>
+        <p style="color:var(--fog);line-height:1.7;">
+          Private sleeping berths (2.0 × 0.70 × 0.85 m) with sound-attenuating curtains, individual LED 
+          reading lights, and USB-C ports. Circadian lighting system transitions from 5000K blue-enriched 
+          (day) through 3000K warm (evening) to 1800K amber (night) on a 24-hour schedule. Zone C targets 
+          ≤45 dBA for sleep quality. No shower — body cleaning uses no-rinse wipes consistent with ISS and 
+          submarine practice. Exercise via EVA activity plus resistance bands and isometric protocols.
+        </p>
+      </div>
+    </div>
+
+    <div class="data-block reveal" style="margin-top:40px;">
+      <strong>Cabin Atmosphere:</strong> 55.2 kPa (8.0 psia) / <strong>38.7% O₂</strong> / 21.4 kPa ppO₂ (sea-level equivalent)<br>
+      <strong>Temperature:</strong> 20–22°C day, 18–19°C sleep &nbsp;|&nbsp; <strong>Humidity:</strong> 40–55% RH<br>
+      <strong>CO₂ limit:</strong> &lt;0.53 kPa nominal, alarm at 0.67 kPa &nbsp;|&nbsp; <strong>Particulate:</strong> &lt;1.0 mg/m³ respirable<br>
+      <strong>Benefit:</strong> Reduced hull structural loads + EVA prebreathe cut to ~40 min (vs. 2–4 hr from 101.3 kPa)<br>
+      <em>⚠ All interior materials must pass NASA-STD-6001 flammability at &gt;35% O₂</em>
+    </div>
+  </div>
+</section>
+
+<!-- POWER & THERMAL -->
+<section id="power">
+  <div class="container">
+    <div class="sec-tag reveal">04 — Power &amp; Thermal</div>
+    <h2 class="sec-title reveal">Stacked Solar-Shade Radiator Architecture</h2>
+    <p class="sec-lead reveal">
+      The SSSRA places a solar array tier above a flat-plate radiator, shading it from direct solar flux 
+      while generating power. A low-emissivity backside coating is the key enabler — without it, IR 
+      backradiation erodes the shade benefit.
+    </p>
+
+    <div class="spec-grid reveal">
+      <div class="spec-card">
+        <div class="spec-card-val">20 m²</div>
+        <div class="spec-card-label">Roof Solar Array</div>
+        <div class="spec-card-note">~724 W at 6° south pole sun</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">6.0 m²</div>
+        <div class="spec-card-label">Radiator Area</div>
+        <div class="spec-card-note">1,530 W rejection at degraded EoM</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">100 kWh</div>
+        <div class="spec-card-label">Battery Capacity</div>
+        <div class="spec-card-note">4 × 25 kWh LFP modules</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">1–3 kW</div>
+        <div class="spec-card-label">Fuel Cell</div>
+        <div class="spec-card-note">H₂-O₂ for night operations</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">ε ≤ 0.10</div>
+        <div class="spec-card-label">Backside Emissivity</div>
+        <div class="spec-card-note">VDA coating — ~20 W/m² IR penalty</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">310 K</div>
+        <div class="spec-card-label">Radiator Temp</div>
+        <div class="spec-card-note">Operating temp, fluid loop</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">0.4 m</div>
+        <div class="spec-card-label">Clearance Gap</div>
+        <div class="spec-card-note">Array-to-radiator spacing</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">2 × 5 m²</div>
+        <div class="spec-card-label">Deployable Wings</div>
+        <div class="spec-card-note">Tilted arrays, ~3,480 W combined</div>
+      </div>
+    </div>
+
+    <div class="data-block reveal">
+      <strong>Power Budget (24-hr traverse day):</strong><br>
+      Cruise (6 hr): <strong>4,590 W</strong> → 27.5 kWh &nbsp;|&nbsp;
+      Station-keeping (12 hr): <strong>2,170 W</strong> → 26.0 kWh &nbsp;|&nbsp;
+      Sleep (6 hr): <strong>1,200 W</strong> → 7.2 kWh<br>
+      <strong>Daily total: ~60.7 kWh</strong> &nbsp;|&nbsp; Peak transient: <strong>8,890 W</strong>
+    </div>
+
+    <h3 style="font-family:'Outfit',sans-serif;color:var(--white);font-size:22px;font-weight:700;margin-top:48px;margin-bottom:16px;" class="reveal">
+      Battery System — LFP by Design
+    </h3>
+    <p class="reveal" style="color:var(--fog);max-width:720px;line-height:1.7;">
+      NMC/NCA chemistries were explicitly rejected. Thermal runaway at 140–170°C with violent 
+      oxygen release, fire, and HF gas is unsurvivable in a sealed 57 m³ cabin. LFP (LiFePO₄) is 
+      stable above 250°C with slow, self-limiting failure and no fire. The mass penalty — 700–860 kg 
+      pack vs. 450–550 kg for NMC — is accepted. The battery sits underfloor at 0.75–0.95 m height, 
+      pulling the CG low.
+    </p>
+
+    <div class="callout reveal" style="margin-top:24px;">
+      <div class="callout-tag">Pack Architecture</div>
+      <div class="callout-body">
+        Four independent 25 kWh modules, each in a <strong>sealed stainless steel enclosure</strong> rated 2–5 bar burst. 
+        Dedicated vent line per module routes gas to hull exterior through burst disc + flame arrestor. 
+        Pyrotechnic + solid-state contactors for isolation. Ceramic fiber thermal barriers between modules. 
+        Any single module can be permanently disconnected — vehicle continues on <strong>75% capacity</strong>.
+      </div>
+    </div>
+    <div class="callout reveal">
+      <div class="callout-tag">Thermal Mgmt</div>
+      <div class="callout-body">
+        Internal cold plates bonded to each cell stack → main thermal loop → SSSRA radiator. 
+        Heat generation 150–600 W normal ops. Heating during darkness via resistive mats (200–400 W total) 
+        + MLI insulation + variable-conductance cabin coupling. Operating range: charge 5–40°C, discharge −10–55°C.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOBILITY -->
+<section id="mobility">
+  <div class="container">
+    <div class="sec-tag reveal">05 — Suspension &amp; Drivetrain</div>
+    <h2 class="sec-title reveal">6×6 All-Wheel Drive &amp; Steer</h2>
+    <p class="sec-lead reveal">
+      Six independently driven and steered wheels on three axles. No driveshafts, no differentials, 
+      no transfer cases. In-hub motors with harmonic drive reduction eliminate mechanical complexity 
+      and dust-exposed mechanisms.
+    </p>
+
+    <div class="spec-grid reveal">
+      <div class="spec-card">
+        <div class="spec-card-val">1.0 m</div>
+        <div class="spec-card-label">Wheel Diameter</div>
+        <div class="spec-card-note">Ni-Ti superelastic spring + SS mesh</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">~6 kPa</div>
+        <div class="spec-card-label">Ground Pressure</div>
+        <div class="spec-card-note">Target ≤7 kPa for south pole regolith</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">750 W</div>
+        <div class="spec-card-label">Motor (continuous)</div>
+        <div class="spec-card-note">Per wheel / 4,500 W system total</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">500 mm</div>
+        <div class="spec-card-label">Suspension Travel</div>
+        <div class="spec-card-note">±250 mm jounce/rebound</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">~6 m</div>
+        <div class="spec-card-label">Turn Radius</div>
+        <div class="spec-card-note">Front/rear counter-phase steering</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">25 km/h</div>
+        <div class="spec-card-label">Sprint Speed</div>
+        <div class="spec-card-note">Short duration, firm terrain</div>
+      </div>
+    </div>
+
+    <div class="two-col reveal" style="margin-top:48px;">
+      <div>
+        <h3 style="font-family:'Outfit',sans-serif;color:var(--white);font-size:20px;font-weight:700;margin-bottom:12px;">Suspension</h3>
+        <p style="color:var(--fog);line-height:1.7;">
+          Semi-active double-wishbone at all six stations. Titanium control arms, Ni-Ti superelastic 
+          coil springs (fatigue-immune across −170°C to +120°C), and electromechanical ball-screw 
+          dampers providing passive damping (back-EMF), semi-active rate control, and active ride-height 
+          adjustment (±100 mm). No fluids anywhere. Spring rate tuned to ~1.1 Hz ride frequency (lunar 
+          gravity corrected) for automobile-like crew comfort. Electronic anti-roll via differential 
+          damper control. Active cabin leveling on cross-slopes up to ±10°.
+        </p>
+      </div>
+      <div>
+        <h3 style="font-family:'Outfit',sans-serif;color:var(--white);font-size:20px;font-weight:700;margin-bottom:12px;">Traction Control</h3>
+        <p style="color:var(--fog);line-height:1.7;">
+          Six independent motors enable per-wheel torque vectoring, slip detection and limiting (5–25% 
+          threshold by mode), electronic stability control, and regenerative ABS. Terrain modes: Highway 
+          (5% slip, equal torque), Off-Road (15% slip, adaptive), Rock Crawl (25% slip, per-wheel override), 
+          Emergency (all limits relaxed). The real constraint is traction: at 5,400 kg on the Moon, max 
+          traction is ~4,374 N — a 10° climb demands 4,017 N (92% of limit). Slopes above 12–15° on 
+          loose regolith are traction-limited, not motor-limited.
+        </p>
+      </div>
+    </div>
+
+    <div class="data-block reveal" style="margin-top:32px;">
+      <strong>Dust Protection at Hub:</strong> Multi-stage seal — labyrinth (outer, centrifugal ejection) → 
+      magnetic particle trap (rare-earth, captures ferromagnetic fraction) → PTFE lip seal on Ti wear sleeve 
+      (replaceable at turnaround) → optional N₂ purge (~0.1–0.2 g/hr per wheel, 0.5–1.1 kg total / 60 days)
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section id="safety">
+  <div class="container">
+    <div class="sec-tag reveal">06 — Safety Architecture</div>
+    <h2 class="sec-title reveal">Four-Tier Battery Safety</h2>
+    <p class="sec-lead reveal">
+      Defense-in-depth for the most energetic system on a crewed pressurized vehicle. Every tier is 
+      independent — each layer assumes the previous has failed.
+    </p>
+
+    <div class="tiers reveal">
+      <div class="tier">
+        <div class="tier-num">1</div>
+        <div class="tier-content">
+          <h4>Cell-Level Prevention</h4>
+          <p>LFP inherent stability (olivine cathode stable >250°C, no oxygen release). CID disconnects on overpressure. PTC limits current >80–90°C. Ceramic-coated separator maintains integrity beyond polymer melt point.</p>
+        </div>
+      </div>
+      <div class="tier">
+        <div class="tier-num">2</div>
+        <div class="tier-content">
+          <h4>Module-Level Isolation</h4>
+          <p>Sealed enclosure contains worst-case multi-cell vent (2–5 bar). Dedicated vent line to hull exterior — not cabin. Ceramic fiber thermal barriers limit adjacent module surface to &lt;60°C during 200°C transient. Pyrotechnic contactor for permanent irreversible disconnect.</p>
+        </div>
+      </div>
+      <div class="tier">
+        <div class="tier-num">3</div>
+        <div class="tier-content">
+          <h4>System-Level Detection</h4>
+          <p>BMS monitors every cell at 1 Hz normal / 10 Hz anomaly. Graduated response: Advisory (log + monitor) → Caution (reduce rate, alert crew) → Warning (disconnect module, close thermal valves) → Emergency (fire pyro, auto-vent, isolate bay, master alarm).</p>
+        </div>
+      </div>
+      <div class="tier">
+        <div class="tier-num">4</div>
+        <div class="tier-content">
+          <h4>Cabin Atmosphere Protection</h4>
+          <p>ECLSS gas sensors (CO, HF, electrolyte vapor, H₂). Battery bays under negative pressure during vent. Fixed fire suppression (Novec 1230 clean agent). Crew SCBA at forward/aft stations, 30-second donning time.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Outfit',sans-serif;color:var(--white);font-size:22px;font-weight:700;margin-top:64px;margin-bottom:16px;" class="reveal">
+      Water &amp; Consumables
+    </h3>
+    <div class="data-block reveal">
+      <strong>Water:</strong> 3.2 kg/person/day gross (drinking 2.0 + food rehydration 0.5 + hygiene 0.5 + medical 0.2)<br>
+      Recovery rate 85% → <strong>net 0.48 kg/person/day</strong> → ~86 kg makeup for 60-day, 3-crew mission<br>
+      Vehicle carries <strong>~200 kg</strong> at mission start (initial fill + margin)<br><br>
+      <strong>Food:</strong> 1.8 kg/person/day × 3 crew × 60 days = <strong>324 kg</strong> (freeze-dried + thermostabilized, 16-day rotation)<br>
+      <strong>O₂:</strong> 0.84 kg/person/day × 3 × 60 = <strong>~151 kg</strong> &nbsp;|&nbsp; <strong>N₂ makeup:</strong> ~0.6–1.2 kg total
+    </div>
+  </div>
+</section>
+
+<!-- MISSION ROLES -->
+<section>
+  <div class="container">
+    <div class="sec-tag reveal">07 — Mission Roles</div>
+    <h2 class="sec-title reveal">Surface Lifecycle Platform</h2>
+
+    <div class="features reveal">
+      <div class="feature">
+        <div class="feature-icon">💧</div>
+        <h3>Water &amp; Resource Prospecting</h3>
+        <p>Carry sensors, drills, and ISRU payloads. Cargo module hauls processing equipment to sites identified by WOK prospecting rovers.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🏗️</div>
+        <h3>Construction &amp; Logistics</h3>
+        <p>Haul equipment, deploy robotics, serve as mobile command post. Train-style module configuration allows mission-specific arrangements.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🚀</div>
+        <h3>Long-Range Transport</h3>
+        <p>Move crews safely between outposts, sites, domes, and landers. Passenger module extends capacity to 24 crew for base transfers.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔭</div>
+        <h3>Science &amp; Exploration</h3>
+        <p>Pressurized visibility modules optional. Science bench with sealed glove box for regolith sample handling without cabin contamination.</p>
+      </div>
+    </div>
+
+    <div class="data-block reveal" style="margin-top:24px;">
+      <strong>Module Train Configuration:</strong><br>
+      Command Module (~10 m) + Passenger Module (~24 m, up to 24 crew) + Cargo Module (12–24 m) + Systems Module (~6 m)<br>
+      <em>All modules share standardized mechanical, electrical, and data interfaces</em>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-logo">AEGIS-CLASS ROVER</div>
+    <div class="footer-note">Architecture Reference Document — Not for Hardware Commitment</div>
+    <div style="margin-top:20px;">
+      <a href="dossiers/Aegis_Class_Rover.pdf" class="btn-dossier" style="display:inline-flex;">
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M12,19L8,15H10.5V12H13.5V15H16L12,19Z"/></svg>
+        Full Dossier (PDF)
+      </a>
+    </div>
+    <p style="font-size:12px;color:var(--slate);margin-top:24px;">Aaron Smith — Independent Systems Architect — February 2026</p>
+  </div>
+</footer>
+
+<!-- REVEAL ON SCROLL -->
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>

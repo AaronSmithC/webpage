@@ -1,0 +1,390 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <defs>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; }
+      .title { font-size: 16px; font-weight: bold; fill: #1B3A5C; }
+      .subtitle { font-size: 11px; fill: #555; font-style: italic; }
+      .label { font-size: 9px; fill: #333; }
+      .label-bold { font-size: 9px; fill: #1B3A5C; font-weight: bold; }
+      .dim { font-size: 8px; fill: #C0392B; }
+      .dim-line { stroke: #C0392B; stroke-width: 0.7; }
+      .dim-arrow { fill: #C0392B; }
+      .note { font-size: 7.5px; fill: #666; }
+      .zone-label { font-size: 10px; font-weight: bold; fill: #fff; }
+    </style>
+    <!-- Hatch pattern for regolith -->
+    <pattern id="regolith" patternUnits="userSpaceOnUse" width="8" height="8">
+      <rect width="8" height="8" fill="#D4C5A9"/>
+      <circle cx="2" cy="3" r="0.8" fill="#B8A88A"/>
+      <circle cx="6" cy="6" r="0.6" fill="#C4B494"/>
+      <circle cx="4" cy="1" r="0.5" fill="#BCA984"/>
+    </pattern>
+    <!-- Hatch for MLI -->
+    <pattern id="mli" patternUnits="userSpaceOnUse" width="4" height="4">
+      <rect width="4" height="4" fill="#F5E6CC"/>
+      <line x1="0" y1="4" x2="4" y2="0" stroke="#D4C090" stroke-width="0.5"/>
+    </pattern>
+    <!-- Battery pattern -->
+    <pattern id="battery" patternUnits="userSpaceOnUse" width="6" height="6">
+      <rect width="6" height="6" fill="#2E86C1"/>
+      <rect x="1" y="1" width="4" height="4" fill="#2874A6" rx="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#FAFCFF"/>
+
+  <!-- Title -->
+  <text x="600" y="30" text-anchor="middle" class="title">AEGIS-CLASS ROVER — COMMAND MODULE CROSS-SECTION</text>
+  <text x="600" y="46" text-anchor="middle" class="subtitle">Looking Forward (Aft Face of Zone B) — Not to Scale</text>
+
+  <!-- ============================================ -->
+  <!-- GROUND / REGOLITH -->
+  <!-- ============================================ -->
+  <rect x="100" y="750" width="900" height="60" fill="url(#regolith)"/>
+  <line x1="100" y1="750" x2="1000" y2="750" stroke="#8B7D6B" stroke-width="1.5"/>
+  <text x="550" y="785" text-anchor="middle" class="label" fill="#8B7D6B">LUNAR REGOLITH SURFACE</text>
+
+  <!-- ============================================ -->
+  <!-- WHEELS (left and right) -->
+  <!-- ============================================ -->
+  <!-- Left wheel -->
+  <g transform="translate(195, 680)">
+    <!-- Wheel body - compliant spring tire -->
+    <ellipse cx="0" cy="0" rx="42" ry="42" fill="none" stroke="#555" stroke-width="2.5"/>
+    <!-- Inner spring structure -->
+    <ellipse cx="0" cy="0" rx="30" ry="30" fill="none" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+    <!-- Hub -->
+    <circle cx="0" cy="0" r="14" fill="#4A4A4A" stroke="#333" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="8" fill="#5A5A5A"/>
+    <text x="0" y="3" text-anchor="middle" class="note" fill="#CCC" font-size="6">PMSM</text>
+    <!-- Grousers -->
+    <line x1="-42" y1="-5" x2="-42" y2="5" stroke="#666" stroke-width="2"/>
+    <line x1="-38" y1="-20" x2="-42" y2="-15" stroke="#666" stroke-width="2"/>
+    <line x1="-38" y1="20" x2="-42" y2="15" stroke="#666" stroke-width="2"/>
+    <line x1="-28" y1="-32" x2="-34" y2="-28" stroke="#666" stroke-width="2"/>
+    <line x1="-28" y1="32" x2="-34" y2="28" stroke="#666" stroke-width="2"/>
+    <!-- Labels -->
+    <text x="0" y="58" text-anchor="middle" class="label-bold">1.0 m DIA WHEEL</text>
+    <text x="0" y="68" text-anchor="middle" class="note">Ni-Ti Spring / SS Mesh</text>
+  </g>
+
+  <!-- Right wheel -->
+  <g transform="translate(905, 680)">
+    <ellipse cx="0" cy="0" rx="42" ry="42" fill="none" stroke="#555" stroke-width="2.5"/>
+    <ellipse cx="0" cy="0" rx="30" ry="30" fill="none" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+    <circle cx="0" cy="0" r="14" fill="#4A4A4A" stroke="#333" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="8" fill="#5A5A5A"/>
+    <text x="0" y="3" text-anchor="middle" class="note" fill="#CCC" font-size="6">PMSM</text>
+    <line x1="42" y1="-5" x2="42" y2="5" stroke="#666" stroke-width="2"/>
+    <line x1="38" y1="-20" x2="42" y2="-15" stroke="#666" stroke-width="2"/>
+    <line x1="38" y1="20" x2="42" y2="15" stroke="#666" stroke-width="2"/>
+    <line x1="28" y1="-32" x2="34" y2="-28" stroke="#666" stroke-width="2"/>
+    <line x1="28" y1="32" x2="34" y2="28" stroke="#666" stroke-width="2"/>
+    <text x="0" y="58" text-anchor="middle" class="label-bold">1.0 m DIA WHEEL</text>
+    <text x="0" y="68" text-anchor="middle" class="note">Ni-Ti Spring / SS Mesh</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- SUSPENSION (double wishbone, both sides) -->
+  <!-- ============================================ -->
+  <!-- Left suspension -->
+  <g>
+    <!-- Lower wishbone -->
+    <line x1="195" y1="680" x2="310" y2="660" stroke="#7D6608" stroke-width="3" stroke-linecap="round"/>
+    <!-- Upper wishbone -->
+    <line x1="195" y1="655" x2="310" y2="630" stroke="#7D6608" stroke-width="3" stroke-linecap="round"/>
+    <!-- Spring/Damper -->
+    <line x1="260" y1="660" x2="270" y2="620" stroke="#2E86C1" stroke-width="2.5"/>
+    <!-- Spring coils -->
+    <path d="M255,655 L265,650 L255,645 L265,640 L255,635 L265,630" fill="none" stroke="#C0392B" stroke-width="1.5"/>
+    <text x="240" y="618" text-anchor="middle" class="note" fill="#2E86C1">E/M DAMPER</text>
+  </g>
+  <!-- Right suspension -->
+  <g>
+    <line x1="905" y1="680" x2="790" y2="660" stroke="#7D6608" stroke-width="3" stroke-linecap="round"/>
+    <line x1="905" y1="655" x2="790" y2="630" stroke="#7D6608" stroke-width="3" stroke-linecap="round"/>
+    <line x1="840" y1="660" x2="830" y2="620" stroke="#2E86C1" stroke-width="2.5"/>
+    <path d="M845,655 L835,650 L845,645 L835,640 L845,635 L835,630" fill="none" stroke="#C0392B" stroke-width="1.5"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- CHASSIS FRAME -->
+  <!-- ============================================ -->
+  <rect x="290" y="600" width="520" height="20" rx="3" fill="#6C757D" stroke="#4A4A4A" stroke-width="1"/>
+  <text x="550" y="613" text-anchor="middle" class="label" fill="#fff" font-size="8">CHASSIS FRAME (Al-Li)</text>
+
+  <!-- ============================================ -->
+  <!-- UNDERFLOOR SYSTEMS -->
+  <!-- ============================================ -->
+  <!-- Belly pan -->
+  <rect x="300" y="620" width="500" height="85" rx="2" fill="#E8E8E8" stroke="#999" stroke-width="0.7"/>
+
+  <!-- Battery Module 1 -->
+  <rect x="310" y="628" width="100" height="35" rx="3" fill="url(#battery)" stroke="#1A5276" stroke-width="1.5"/>
+  <text x="360" y="649" text-anchor="middle" class="label" fill="#fff" font-size="7">BATT MOD 1</text>
+  <text x="360" y="658" text-anchor="middle" class="note" fill="#D6EAF8">25 kWh LFP</text>
+
+  <!-- Battery Module 2 -->
+  <rect x="420" y="628" width="100" height="35" rx="3" fill="url(#battery)" stroke="#1A5276" stroke-width="1.5"/>
+  <text x="470" y="649" text-anchor="middle" class="label" fill="#fff" font-size="7">BATT MOD 2</text>
+  <text x="470" y="658" text-anchor="middle" class="note" fill="#D6EAF8">25 kWh LFP</text>
+
+  <!-- Battery Module 3 -->
+  <rect x="530" y="628" width="100" height="35" rx="3" fill="url(#battery)" stroke="#1A5276" stroke-width="1.5"/>
+  <text x="580" y="649" text-anchor="middle" class="label" fill="#fff" font-size="7">BATT MOD 3</text>
+  <text x="580" y="658" text-anchor="middle" class="note" fill="#D6EAF8">25 kWh LFP</text>
+
+  <!-- Battery Module 4 -->
+  <rect x="640" y="628" width="100" height="35" rx="3" fill="url(#battery)" stroke="#1A5276" stroke-width="1.5"/>
+  <text x="690" y="649" text-anchor="middle" class="label" fill="#fff" font-size="7">BATT MOD 4</text>
+  <text x="690" y="658" text-anchor="middle" class="note" fill="#D6EAF8">25 kWh LFP</text>
+
+  <!-- Thermal barriers between modules -->
+  <rect x="413" y="626" width="4" height="39" fill="#E74C3C" opacity="0.6"/>
+  <rect x="523" y="626" width="4" height="39" fill="#E74C3C" opacity="0.6"/>
+  <rect x="633" y="626" width="4" height="39" fill="#E74C3C" opacity="0.6"/>
+
+  <!-- Water tanks -->
+  <rect x="310" y="670" width="150" height="28" rx="10" fill="#85C1E9" stroke="#2E86C1" stroke-width="1"/>
+  <text x="385" y="688" text-anchor="middle" class="label" fill="#1A5276" font-size="7">WATER TANKS (~200 kg)</text>
+
+  <!-- Gas bottles -->
+  <rect x="480" y="672" width="30" height="24" rx="10" fill="#82E0AA" stroke="#27AE60" stroke-width="1"/>
+  <text x="495" y="687" text-anchor="middle" class="note" fill="#1E8449" font-size="5.5">O₂</text>
+  <rect x="518" y="672" width="30" height="24" rx="10" fill="#D5F5E3" stroke="#27AE60" stroke-width="1"/>
+  <text x="533" y="687" text-anchor="middle" class="note" fill="#1E8449" font-size="5.5">N₂</text>
+
+  <!-- Thermal loop -->
+  <rect x="570" y="672" width="160" height="24" rx="3" fill="#F9E79F" stroke="#D4AC0D" stroke-width="1"/>
+  <text x="650" y="688" text-anchor="middle" class="label" fill="#7D6608" font-size="7">THERMAL LOOP / PUMPS / PDU</text>
+
+  <!-- Underfloor label -->
+  <text x="182" y="660" text-anchor="end" class="label-bold" font-size="8" fill="#555">UNDERFLOOR</text>
+  <text x="182" y="670" text-anchor="end" class="note">SYSTEMS</text>
+
+  <!-- ============================================ -->
+  <!-- CABIN PRESSURE HULL -->
+  <!-- ============================================ -->
+  <!-- Hull outer wall (with slight curvature at top) -->
+  <path d="M290,600 L290,310 Q290,290 310,285 L790,285 Q810,290 810,310 L810,600" 
+        fill="#F0F4F8" stroke="#1B3A5C" stroke-width="2.5"/>
+
+  <!-- Wall buildup indication (left) -->
+  <rect x="290" y="300" width="12" height="300" fill="url(#mli)" opacity="0.6"/>
+  <rect x="798" y="300" width="12" height="300" fill="url(#mli)" opacity="0.6"/>
+
+  <!-- Floor line -->
+  <line x1="302" y1="598" x2="798" y2="598" stroke="#8B4513" stroke-width="2"/>
+  <text x="555" y="594" text-anchor="middle" class="note" fill="#8B4513">CABIN FLOOR (Al HONEYCOMB + ANTI-SLIP)</text>
+
+  <!-- ============================================ -->
+  <!-- CABIN INTERIOR -->
+  <!-- ============================================ -->
+  <!-- Crew figure (standing, center) -->
+  <g transform="translate(550, 440)">
+    <!-- Head -->
+    <circle cx="0" cy="-60" r="12" fill="none" stroke="#1B3A5C" stroke-width="1.5"/>
+    <!-- Body -->
+    <line x1="0" y1="-48" x2="0" y2="10" stroke="#1B3A5C" stroke-width="1.5"/>
+    <!-- Arms -->
+    <line x1="-20" y1="-30" x2="20" y2="-30" stroke="#1B3A5C" stroke-width="1.5"/>
+    <!-- Legs -->
+    <line x1="0" y1="10" x2="-12" y2="60" stroke="#1B3A5C" stroke-width="1.5"/>
+    <line x1="0" y1="10" x2="12" y2="60" stroke="#1B3A5C" stroke-width="1.5"/>
+    <!-- Feet on floor -->
+    <line x1="-12" y1="60" x2="-20" y2="60" stroke="#1B3A5C" stroke-width="1.5"/>
+    <line x1="12" y1="60" x2="20" y2="60" stroke="#1B3A5C" stroke-width="1.5"/>
+    <!-- Height indicator -->
+    <text x="30" y="-50" class="note" fill="#1B3A5C">~1.8 m crew</text>
+  </g>
+
+  <!-- Aisle indication (port side) -->
+  <rect x="302" y="520" width="85" height="78" fill="#E8F6F3" opacity="0.4" stroke="#1ABC9C" stroke-width="0.7" stroke-dasharray="4,2"/>
+  <text x="345" y="565" text-anchor="middle" class="note" fill="#1ABC9C" font-size="7">AISLE</text>
+  <text x="345" y="575" text-anchor="middle" class="note" fill="#1ABC9C" font-size="6">0.75m min</text>
+
+  <!-- Equipment rack (starboard) -->
+  <rect x="720" y="380" width="75" height="218" rx="2" fill="#D5D8DC" stroke="#808B96" stroke-width="1"/>
+  <text x="757" y="450" text-anchor="middle" class="note" fill="#555" font-size="7">EQUIP</text>
+  <text x="757" y="460" text-anchor="middle" class="note" fill="#555" font-size="7">RACKS</text>
+
+  <!-- Berths indication (starboard, stacked) -->
+  <rect x="640" y="480" width="75" height="50" rx="2" fill="#D6EAF8" stroke="#2E86C1" stroke-width="1"/>
+  <text x="677" y="500" text-anchor="middle" class="note" fill="#1A5276" font-size="7">LOWER</text>
+  <text x="677" y="510" text-anchor="middle" class="note" fill="#1A5276" font-size="7">BERTHS (2)</text>
+
+  <rect x="640" y="425" width="75" height="50" rx="2" fill="#AED6F1" stroke="#2E86C1" stroke-width="1"/>
+  <text x="677" y="445" text-anchor="middle" class="note" fill="#1A5276" font-size="7">UPPER</text>
+  <text x="677" y="455" text-anchor="middle" class="note" fill="#1A5276" font-size="7">BERTH (1)</text>
+
+  <!-- ECLSS ducting overhead -->
+  <rect x="320" y="300" width="460" height="15" rx="3" fill="#F5F5F5" stroke="#AAA" stroke-width="0.7"/>
+  <text x="550" y="310" text-anchor="middle" class="note" fill="#888" font-size="6">ECLSS DUCTING / LIGHTING / CABLE TRAYS</text>
+
+  <!-- Interior height label -->
+  <text x="470" y="350" text-anchor="middle" class="label" fill="#333">PRESSURIZED CABIN</text>
+  <text x="470" y="362" text-anchor="middle" class="note" fill="#555">55.2 kPa / 38.7% O₂ / 20–22°C</text>
+
+  <!-- ============================================ -->
+  <!-- ROOF / SSSRA -->
+  <!-- ============================================ -->
+  <!-- Cabin roof structure -->
+  <rect x="290" y="275" width="520" height="12" rx="2" fill="#B0BEC5" stroke="#78909C" stroke-width="1"/>
+
+  <!-- RADIATOR TIER -->
+  <rect x="320" y="240" width="460" height="18" rx="2" fill="#ECEFF1" stroke="#607D8B" stroke-width="1.5"/>
+  <!-- Fluid loop indication -->
+  <line x1="340" y1="249" x2="760" y2="249" stroke="#E74C3C" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="550" y="253" text-anchor="middle" class="label-bold" font-size="8">RADIATOR TIER (6.0 m² / 255 W/m² / 1,530 W capacity)</text>
+
+  <!-- Gap indication -->
+  <rect x="350" y="215" width="400" height="25" fill="none" stroke="#999" stroke-width="0.5" stroke-dasharray="2,3"/>
+  <text x="550" y="231" text-anchor="middle" class="note" fill="#888">0.4 m CLEARANCE GAP</text>
+
+  <!-- SOLAR ARRAY TIER -->
+  <rect x="280" y="195" width="540" height="14" rx="2" fill="#2E86C1" stroke="#1A5276" stroke-width="1.5"/>
+  <!-- Solar cell grid lines -->
+  <line x1="340" y1="195" x2="340" y2="209" stroke="#1A5276" stroke-width="0.5"/>
+  <line x1="400" y1="195" x2="400" y2="209" stroke="#1A5276" stroke-width="0.5"/>
+  <line x1="460" y1="195" x2="460" y2="209" stroke="#1A5276" stroke-width="0.5"/>
+  <line x1="520" y1="195" x2="520" y2="209" stroke="#1A5276" stroke-width="0.5"/>
+  <line x1="580" y1="195" x2="580" y2="209" stroke="#1A5276" stroke-width="0.5"/>
+  <line x1="640" y1="195" x2="640" y2="209" stroke="#1A5276" stroke-width="0.5"/>
+  <line x1="700" y1="195" x2="700" y2="209" stroke="#1A5276" stroke-width="0.5"/>
+  <line x1="760" y1="195" x2="760" y2="209" stroke="#1A5276" stroke-width="0.5"/>
+
+  <!-- Low-ε coating label (underside) -->
+  <text x="550" y="219" text-anchor="middle" class="note" fill="#C0392B" font-size="6.5">LOW-ε BACKSIDE COATING (ε ≤ 0.10 VDA)</text>
+
+  <!-- Array label -->
+  <text x="550" y="190" text-anchor="middle" class="label-bold" font-size="8">SOLAR ARRAY TIER (20 m² / ~724 W @ 6° sun)</text>
+
+  <!-- Truss supports -->
+  <line x1="340" y1="209" x2="350" y2="240" stroke="#78909C" stroke-width="1.5"/>
+  <line x1="760" y1="209" x2="750" y2="240" stroke="#78909C" stroke-width="1.5"/>
+  <line x1="550" y1="209" x2="550" y2="240" stroke="#78909C" stroke-width="1.5"/>
+  <text x="573" y="237" class="note" fill="#78909C" font-size="6">TRUSS</text>
+
+  <!-- SSSRA bracket label -->
+  <rect x="400" y="160" width="300" height="22" rx="4" fill="#1B3A5C" opacity="0.1" stroke="#1B3A5C" stroke-width="0.7"/>
+  <text x="550" y="175" text-anchor="middle" class="label-bold" font-size="9">STACKED SOLAR-SHADE RADIATOR (SSSRA)</text>
+
+  <!-- Sun indication -->
+  <g transform="translate(110, 180)">
+    <circle cx="0" cy="0" r="15" fill="#F9E79F" stroke="#F1C40F" stroke-width="1.5"/>
+    <line x1="20" y1="0" x2="32" y2="-2" stroke="#F1C40F" stroke-width="1"/>
+    <line x1="18" y1="-10" x2="28" y2="-16" stroke="#F1C40F" stroke-width="1"/>
+    <line x1="18" y1="10" x2="28" y2="16" stroke="#F1C40F" stroke-width="1"/>
+    <text x="0" y="30" text-anchor="middle" class="note" fill="#D4AC0D">SUN @ ~6°</text>
+    <!-- Arrow showing solar flux hitting array -->
+    <line x1="35" y1="-2" x2="160" y2="15" stroke="#F1C40F" stroke-width="0.7" stroke-dasharray="4,3"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- DIMENSION LINES (right side) -->
+  <!-- ============================================ -->
+  <!-- Ground to floor -->
+  <line x1="1020" y1="750" x2="1020" y2="598" class="dim-line"/>
+  <line x1="1010" y1="750" x2="1030" y2="750" class="dim-line"/>
+  <line x1="1010" y1="598" x2="1030" y2="598" class="dim-line"/>
+  <text x="1035" y="678" class="dim" font-size="8">1.15 m</text>
+  <text x="1035" y="688" class="note" fill="#C0392B" font-size="6.5">FLOOR HT</text>
+
+  <!-- Floor to ceiling -->
+  <line x1="1060" y1="598" x2="1060" y2="287" class="dim-line"/>
+  <line x1="1050" y1="598" x2="1070" y2="598" class="dim-line"/>
+  <line x1="1050" y1="287" x2="1070" y2="287" class="dim-line"/>
+  <text x="1075" y="435" class="dim" font-size="8">2.3 m</text>
+  <text x="1075" y="445" class="note" fill="#C0392B" font-size="6.5">CABIN EXT</text>
+  <!-- Interior height -->
+  <line x1="1100" y1="595" x2="1100" y2="315" class="dim-line" stroke-dasharray="3,2"/>
+  <line x1="1090" y1="595" x2="1110" y2="595" class="dim-line"/>
+  <line x1="1090" y1="315" x2="1110" y2="315" class="dim-line"/>
+  <text x="1115" y="450" class="dim" font-size="8">2.1 m</text>
+  <text x="1115" y="460" class="note" fill="#C0392B" font-size="6.5">INTERIOR</text>
+
+  <!-- Roof to array -->
+  <line x1="1020" y1="287" x2="1020" y2="202" class="dim-line"/>
+  <line x1="1010" y1="287" x2="1030" y2="287" class="dim-line"/>
+  <line x1="1010" y1="202" x2="1030" y2="202" class="dim-line"/>
+  <text x="1035" y="248" class="dim" font-size="8">0.45 m</text>
+  <text x="1035" y="258" class="note" fill="#C0392B" font-size="6.5">SSSRA</text>
+
+  <!-- Ground to array top -->
+  <line x1="1140" y1="750" x2="1140" y2="195" class="dim-line"/>
+  <line x1="1130" y1="750" x2="1150" y2="750" class="dim-line"/>
+  <line x1="1130" y1="195" x2="1150" y2="195" class="dim-line"/>
+  <text x="1155" y="470" class="dim" font-size="9" font-weight="bold">3.90 m</text>
+  <text x="1155" y="482" class="note" fill="#C0392B" font-size="6.5">TOTAL HT</text>
+
+  <!-- Ground clearance -->
+  <line x1="1020" y1="750" x2="1020" y2="705" class="dim-line"/>
+  <line x1="1010" y1="705" x2="1030" y2="705" class="dim-line"/>
+  <text x="1035" y="730" class="dim" font-size="8">0.50 m</text>
+  <text x="1035" y="740" class="note" fill="#C0392B" font-size="6.5">GND CLR</text>
+
+  <!-- ============================================ -->
+  <!-- DIMENSION LINES (bottom — track width) -->
+  <!-- ============================================ -->
+  <line x1="195" y1="800" x2="905" y2="800" class="dim-line"/>
+  <line x1="195" y1="790" x2="195" y2="810" class="dim-line"/>
+  <line x1="905" y1="790" x2="905" y2="810" class="dim-line"/>
+  <text x="550" y="815" text-anchor="middle" class="dim" font-size="9" font-weight="bold">4.0 m TRACK WIDTH (C-C)</text>
+
+  <!-- Cabin width -->
+  <line x1="290" y1="840" x2="810" y2="840" class="dim-line"/>
+  <line x1="290" y1="830" x2="290" y2="850" class="dim-line"/>
+  <line x1="810" y1="830" x2="810" y2="850" class="dim-line"/>
+  <text x="550" y="855" text-anchor="middle" class="dim" font-size="8">3.6 m CABIN EXTERIOR WIDTH</text>
+
+  <!-- Interior width -->
+  <line x1="302" y1="865" x2="798" y2="865" class="dim-line" stroke-dasharray="3,2"/>
+  <line x1="302" y1="858" x2="302" y2="872" class="dim-line"/>
+  <line x1="798" y1="858" x2="798" y2="872" class="dim-line"/>
+  <text x="550" y="878" text-anchor="middle" class="dim" font-size="8">3.4 m CABIN INTERIOR WIDTH</text>
+
+  <!-- ============================================ -->
+  <!-- CG MARKER -->
+  <!-- ============================================ -->
+  <g transform="translate(550, 540)">
+    <!-- CG symbol -->
+    <circle cx="0" cy="0" r="10" fill="none" stroke="#E74C3C" stroke-width="1.5"/>
+    <line x1="-14" y1="0" x2="14" y2="0" stroke="#E74C3C" stroke-width="1"/>
+    <line x1="0" y1="-14" x2="0" y2="14" stroke="#E74C3C" stroke-width="1"/>
+    <text x="18" y="-4" class="dim" font-size="8" font-weight="bold">CG</text>
+    <text x="18" y="6" class="dim" font-size="7">1.54 m AGL</text>
+    <text x="18" y="15" class="dim" font-size="7">SSF = 1.30</text>
+  </g>
+
+  <!-- CG height dimension line -->
+  <line x1="150" y1="750" x2="150" y2="540" class="dim-line" stroke-dasharray="4,2"/>
+  <line x1="143" y1="750" x2="157" y2="750" class="dim-line"/>
+  <line x1="143" y1="540" x2="157" y2="540" class="dim-line"/>
+  <text x="138" y="648" text-anchor="end" class="dim" font-size="8">1.54 m</text>
+  <text x="138" y="658" text-anchor="end" class="note" fill="#C0392B" font-size="6.5">CG HT</text>
+
+  <!-- ============================================ -->
+  <!-- LEGEND -->
+  <!-- ============================================ -->
+  <rect x="20" y="60" width="160" height="115" rx="4" fill="#fff" stroke="#CCC" stroke-width="0.7"/>
+  <text x="100" y="76" text-anchor="middle" class="label-bold" font-size="8">LEGEND</text>
+  <rect x="30" y="82" width="14" height="8" fill="url(#battery)" stroke="#1A5276" stroke-width="0.5"/>
+  <text x="50" y="90" class="note">Battery Module (LFP)</text>
+  <rect x="30" y="96" width="14" height="8" fill="#85C1E9" stroke="#2E86C1" stroke-width="0.5"/>
+  <text x="50" y="104" class="note">Water Storage</text>
+  <rect x="30" y="110" width="14" height="8" fill="#2E86C1" stroke="#1A5276" stroke-width="0.5"/>
+  <text x="50" y="118" class="note">Solar Array</text>
+  <rect x="30" y="124" width="14" height="8" fill="#ECEFF1" stroke="#607D8B" stroke-width="0.5"/>
+  <text x="50" y="132" class="note">Radiator Panel</text>
+  <rect x="30" y="138" width="14" height="8" fill="#E74C3C" opacity="0.6"/>
+  <text x="50" y="146" class="note">Thermal Barrier</text>
+  <rect x="30" y="152" width="14" height="8" fill="url(#mli)" stroke="#D4C090" stroke-width="0.5"/>
+  <text x="50" y="160" class="note">MLI / Wall Buildup</text>
+
+  <!-- Wall buildup callout -->
+  <line x1="290" y1="400" x2="250" y2="380" stroke="#888" stroke-width="0.5"/>
+  <text x="178" y="378" class="note" fill="#555">WALL BUILDUP ~100 mm</text>
+  <text x="178" y="388" class="note" fill="#555">(liner / Al-Li shell / MLI / MMOD)</text>
+
+</svg>
