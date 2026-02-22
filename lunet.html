@@ -29,6 +29,11 @@
       margin-top: 2.5em;
       margin-bottom: 0.75em;
     }
+    h3 {
+      font-size: 1.15rem;
+      margin-top: 1.8em;
+      margin-bottom: 0.5em;
+    }
     .subtitle {
       font-size: 1.1rem;
       color: #444;
@@ -52,6 +57,26 @@
     li {
       margin-bottom: 0.4em;
     }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5em 0;
+      font-size: 0.95rem;
+    }
+    th {
+      background: #333;
+      color: #fff;
+      text-align: left;
+      padding: 10px 12px;
+      font-weight: 600;
+    }
+    td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    tr:nth-child(even) td {
+      background: #f8f8f8;
+    }
     .download {
       margin-top: 2.5em;
       padding-top: 1.5em;
@@ -66,30 +91,27 @@
       font-size: 0.9rem;
       color: #666;
     }
-/* Hard clamp: prevent any horizontal overflow anywhere */
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-/* Hard clamp: no image can exceed its container */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Specifically clamp the LUNET diagram to the text column */
-.lunet-image {
-  margin: 2em 0;
-  width: 100%;
-}
-
-.lunet-image img {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-}
+    /* Hard clamp: prevent any horizontal overflow anywhere */
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    /* Hard clamp: no image can exceed its container */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    /* Specifically clamp the LUNET diagram to the text column */
+    .lunet-image {
+      margin: 2em 0;
+      width: 100%;
+    }
+    .lunet-image img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
   </style>
 </head>
 
@@ -116,10 +138,10 @@ img {
     </p>
 
     <div class="lunet-image">
-  <img src="images/lunet.PNG"
-       alt="LUNET node network diagram showing Polar, Mid-Latitude, and Equatorial nodes with staged hops"
-       loading="lazy">
-</div>
+      <img src="images/lunet.png"
+           alt="LUNET node network diagram showing Polar, Mid-Latitude, and Equatorial nodes with staged hops"
+           loading="lazy">
+    </div>
 
     <h2>System Characteristics</h2>
     <ul>
@@ -127,6 +149,7 @@ img {
       <li>Refueling, recharging, diagnostics, and logistics exchange</li>
       <li>Designed for integration with lunar and orbital ISRU pipelines</li>
       <li>Independent of any single vehicle or station architecture</li>
+      <li>Scalable from initial pathfinder nodes to full network coverage</li>
     </ul>
 
     <h2>ISRU-Aligned Operations</h2>
@@ -141,11 +164,148 @@ img {
       operational resilience and scalability.
     </p>
 
+    <h3>Water as the Network Commodity</h3>
+    <p>
+      A central architectural decision in LUNET is that water&mdash;not liquid hydrogen&mdash;is the
+      commodity that moves through the network. Each node receives water deliveries and performs
+      electrolysis and liquefaction locally. This converts a network-scale cryogenic logistics problem
+      into a contained, node-local equipment problem.
+    </p>
+    <p>
+      Water is the ideal transport commodity for lunar infrastructure: indefinitely stable with no
+      boil-off, requiring no cryogenic insulation or vacuum-jacketed transfer lines, compatible with
+      standard elastomeric seals and simple disconnectable fittings, storable in rigid tanks or flexible
+      bladders, useful as radiation shielding while in storage, and presenting no explosion hazard.
+    </p>
+
+    <h2>Hydrogen Infrastructure Philosophy</h2>
+    <p>
+      Liquid hydrogen (LH<sub>2</sub>) presents unique infrastructure challenges at every stage: storage,
+      transfer, and consumption. LUNET's architecture is designed around these constraints rather than
+      attempting to overcome them through brute-force engineering.
+    </p>
+
+    <h3>Why Hydrogen Is Short-Dwell</h3>
+    <p>
+      The short-dwell principle is driven not only by boil-off losses but by the cumulative
+      degradation of transfer infrastructure itself. LH<sub>2</sub> transfer lines degrade through
+      thermal cycling fatigue (every fill/drain cycle between ambient and 20 K accumulates damage
+      in bellows, flex joints, and bayonet connections), progressive hydrogen embrittlement at welds
+      and heat-affected zones, vacuum jacket degradation as getter materials saturate and micro-leaks
+      develop, and seal wear as PTFE cold-flows and spring-energized seals lose preload.
+    </p>
+    <p>
+      On the lunar surface, replacing transfer lines is a major operation: warming, purging, joint
+      breaking, seal replacement, leak checking, vacuum jacket re-evacuation, and re-cooling. The
+      fewer times LH<sub>2</sub> is moved, and the shorter the dwell, the less infrastructure burden
+      the network carries.
+    </p>
+
+    <h3>Produce Near, Consume Fast</h3>
+    <p>
+      Each LUNET node electrolyzes water and produces LH<sub>2</sub> locally, with a short cryogenic
+      path from electrolyzer to liquefier to fill coupling&mdash;typically a few meters of plumbing.
+      This is a fundamental differentiator from depot-centric architectures that assume bulk
+      LH<sub>2</sub> movement across the lunar surface.
+    </p>
+
+    <h3>Node Design Implications</h3>
+    <ul>
+      <li>Co-locate electrolyzer, liquefier, and fill coupling with the shortest practical plumbing run</li>
+      <li>Design fill interfaces for minimum disconnect cycles&mdash;direct fill from on-site production</li>
+      <li>Stock seal consumables (indium gaskets, PTFE seal kits, spring-energized seal replacements) as standard logistics items</li>
+      <li>Redundant fill lines at high-traffic nodes to avoid single-point failures</li>
+      <li>Boil-off monitoring as standard node health telemetry</li>
+      <li>Electrolyzer membrane spares as a planned maintenance item (PEM membranes: thousands of hours lifespan)</li>
+    </ul>
+
+    <h2>Node-Level Electrolysis and Power</h2>
+    <p>
+      PEM (proton exchange membrane) electrolyzers are inherently modular, commercially available
+      from single-kilowatt to megawatt scale with identical core stack architecture. A LUNET node
+      filling a rover with a few hundred kilograms of propellant between hops requires capacity on
+      the order of a few kilowatts to approximately 20 kW&mdash;well within demonstrated hardware scale.
+      Solid oxide electrolysis (SOEC) offers higher efficiency at high operating temperatures,
+      potentially advantageous when co-located with thermal management systems.
+    </p>
+
+    <h3>Power Sizing Reference</h3>
+    <p>
+      Total node power requirements for the hydrogen production chain (electrolysis plus liquefaction)
+      at different operational cadences, assuming a reference fill of 100 kg LH<sub>2</sub> per vehicle:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Fill Interval</th>
+          <th>Electrolysis</th>
+          <th>Liquefaction</th>
+          <th>Total Power</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>14 days (1 per lunar day)</td><td>~16 kW</td><td>~7 kW</td><td>~23 kW</td></tr>
+        <tr><td>3 days</td><td>~75 kW</td><td>~35 kW</td><td>~110 kW</td></tr>
+        <tr><td>Daily fills</td><td>~230 kW</td><td>~104 kW</td><td>~334 kW</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Solar Array Sizing</h3>
+    <p>
+      Mid-latitude sites deliver approximately 200&ndash;250 W/m&sup2; from solar arrays (accounting
+      for panel efficiency, packing factor, and dust degradation). Daytime-only production:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Fill Interval</th>
+          <th>Power Required</th>
+          <th>Array Area</th>
+          <th>Approximate Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>14 days</td><td>~23 kW</td><td>~115 m&sup2;</td><td>~10 m &times; 12 m</td></tr>
+        <tr><td>3 days</td><td>~110 kW</td><td>~550 m&sup2;</td><td>~23 m &times; 24 m</td></tr>
+        <tr><td>Daily fills</td><td>~334 kW</td><td>~1,670 m&sup2;</td><td>~40 m &times; 42 m</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      A low-cadence node&mdash;serving a hopper every couple of weeks&mdash;runs its entire hydrogen
+      production chain from roughly 115 m&sup2; of solar array, deployable from a single lander. As
+      traffic grows, panels are added incrementally. The architecture scales linearly with demand.
+    </p>
+
+    <h3>Gaseous Hydrogen Alternative</h3>
+    <p>
+      Gaseous hydrogen propulsion eliminates the entire liquefaction chain at a specific impulse
+      penalty of approximately 10&ndash;15%. For short surface hops between LUNET nodes, this trade
+      may close favorably: slightly more propellant per hop in exchange for dramatically simpler and
+      more reliable node infrastructure.
+    </p>
+
+    <h2>Resupply and Logistics</h2>
+    <p>
+      With node-level electrolysis and liquefaction, LUNET resupply simplifies to water delivery
+      (from polar ISRU or Earth as backup, via simple unpressurized rovers and hoppers) plus
+      maintenance consumables (electrolyzer membranes, cryogenic seal kits, power system maintenance
+      items). These are compact, shelf-stable items that can be stockpiled.
+    </p>
+    <p>
+      This converts the hardest problem in lunar propellant logistics&mdash;moving and storing liquid
+      hydrogen&mdash;into the easiest one: moving and storing water.
+    </p>
+
     <h2>Strategic Role</h2>
     <p>
       By decoupling vehicles from mission-complete propellant loads and enabling staged exchange
       across persistent nodes, LUNET transforms lunar ISRU from demonstration into daily operations
-      that can be planned, relied upon, and scaled.
+      that can be planned, relied upon, and scaled. Its distributed architecture is fundamentally
+      more compatible with liquid hydrogen's constraints than a centralized depot model, requiring
+      no long-distance cryogenic transfer lines and enabling incremental growth as traffic demands.
     </p>
 
     <div class="download">
@@ -155,7 +315,7 @@ img {
     </div>
 
     <div class="footer">
-      © 2026 Aegis Station Infrastructure
+      &copy; 2026 Aegis Station Infrastructure
     </div>
 
   </div>
