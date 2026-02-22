@@ -4,246 +4,980 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Large Movement Model (LMM)</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #f8f9fa;
-      color: #333;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0B1F3A;
+      --navy2:  #122844;
+      --blue:   #1A5FA8;
+      --sky:    #3B8FD4;
+      --ice:    #E8F2FB;
+      --ice2:   #F4F8FD;
+      --slate:  #4A607A;
+      --mist:   #C9DCF0;
+      --white:  #FFFFFF;
+      --body:   #2C3E52;
+      --accent: #2BBFA4;
     }
-    header {
-      background-color: #001F3F;
-      color: #fff;
-      padding: 2.5rem 1.5rem;
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--body);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11,31,58,0.97);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 62px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-brand {
+      font-family: 'DM Serif Display', serif;
+      color: var(--white);
+      font-size: 1.2rem;
+      letter-spacing: 0.02em;
+    }
+    .nav-brand span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+      padding: 7rem 2rem 6rem;
       text-align: center;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.7rem;
-      letter-spacing: 0.03em;
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 110%, rgba(27,95,168,0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% -10%, rgba(43,191,164,0.12) 0%, transparent 60%);
     }
-    header p {
-      font-size: 1.1rem;
-      opacity: 0.95;
-      max-width: 760px;
-      margin: 0.75rem auto 0;
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
     }
-    main {
-      max-width: 960px;
-      margin: 2rem auto 3rem;
-      padding: 0 1rem;
+    .hero-inner { position: relative; z-index: 2; max-width: 820px; margin: 0 auto; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(43,191,164,0.12);
+      border: 1px solid rgba(43,191,164,0.3);
+      border-radius: 999px;
+      padding: 0.3rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
     }
-    section {
-      margin-bottom: 2.5rem;
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
     }
-    section h2 {
-      color: #001F3F;
-      font-size: 1.8rem;
-      margin-bottom: 0.75rem;
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
     }
-    p {
-      line-height: 1.6;
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
     }
-    ul {
-      padding-left: 1.2rem;
-      list-style-type: disc;
-      line-height: 1.6;
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
     }
-    .pill-row {
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      color: rgba(255,255,255,0.72);
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .hero-badges {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 0.75rem 0 0;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 3rem;
     }
-    .pill {
-      background: #e3ecf8;
-      color: #001F3F;
-      padding: 0.3rem 0.75rem;
+    .badge {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.85);
+      padding: 0.35rem 0.9rem;
       border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    .hero-stat-row {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.2rem;
+      color: var(--white);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 0.3rem;
+    }
+
+    /* ── SECTIONS COMMON ── */
+    .section {
+      padding: 5.5rem 2rem;
+    }
+    .section-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 0.75rem;
+    }
+    .section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+    .section p {
+      color: var(--body);
+      font-size: 1.02rem;
+      line-height: 1.75;
+      max-width: 680px;
+    }
+
+    /* ── PROBLEM ── */
+    .problem { background: var(--ice2); }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    .problem-card {
+      background: var(--white);
+      border: 1px solid var(--mist);
+      border-radius: 14px;
+      padding: 1.75rem;
+    }
+    .problem-card-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: var(--ice);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    .problem-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .problem-card p {
+      font-size: 0.93rem;
+      color: var(--slate);
+      line-height: 1.6;
+    }
+
+    /* ── APPROACH ── */
+    .approach { background: var(--white); }
+    .approach-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 2rem;
+    }
+    .approach-steps { display: flex; flex-direction: column; gap: 0; }
+    .step {
+      display: flex;
+      gap: 1.2rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--mist);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .step-body h4 {
+      font-weight: 600;
+      font-size: 0.97rem;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+    .step-body p {
+      font-size: 0.88rem;
+      color: var(--slate);
+      line-height: 1.55;
+    }
+
+    .approach-panel {
+      background: var(--navy);
+      border-radius: 18px;
+      padding: 2.25rem;
+      position: sticky;
+      top: 80px;
+    }
+    .approach-panel-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      margin-bottom: 1.4rem;
+    }
+    .token-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .token-item {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+    }
+    .token-item-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .token-item-desc {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.5;
+    }
+
+    /* ── DATASETS ── */
+    .datasets { background: var(--ice2); }
+    .dataset-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+    .dataset-card {
+      background: var(--white);
+      border: 1px solid var(--mist);
+      border-radius: 12px;
+      padding: 1.4rem;
+      border-top: 3px solid var(--blue);
+    }
+    .dataset-card h4 {
+      font-weight: 700;
+      font-size: 0.97rem;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+    .dataset-card p {
+      font-size: 0.83rem;
+      color: var(--slate);
+      line-height: 1.5;
+    }
+    .dataset-tag {
+      display: inline-block;
+      margin-top: 0.7rem;
+      background: var(--ice);
+      color: var(--blue);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── EVALUATION ── */
+    .evaluation { background: var(--white); }
+    .eval-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .eval-card {
+      border-radius: 14px;
+      padding: 1.75rem;
+    }
+    .eval-card.quant { background: #EEF6FF; border: 1px solid #C5DDF5; }
+    .eval-card.bio   { background: #EDFAF6; border: 1px solid #B4E8D8; }
+    .eval-card.clin  { background: #FFF5EC; border: 1px solid #F5D9B5; }
+    .eval-card-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
+    .eval-card h4 {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .eval-card ul {
+      padding-left: 1.1rem;
       font-size: 0.85rem;
-      font-weight: 600;
+      color: var(--slate);
+      line-height: 1.65;
     }
-    .highlight {
-      font-weight: 600;
+
+    /* ── PHASE ROADMAP ── */
+    .roadmap { background: var(--navy); overflow: hidden; position: relative; }
+    .roadmap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(27,95,168,0.25) 0%, transparent 70%);
     }
+    .roadmap .section-label { color: var(--accent); }
+    .roadmap h2 { color: var(--white); }
+    .roadmap .section-sub {
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      max-width: 560px;
+      margin-bottom: 3rem;
+    }
+    .phase-track {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .phase-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 1.75rem;
+      position: relative;
+    }
+    .phase-card.active {
+      background: rgba(43,191,164,0.1);
+      border-color: rgba(43,191,164,0.35);
+    }
+    .phase-card-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 0.5rem;
+    }
+    .phase-card.active .phase-card-label { color: var(--accent); }
+    .phase-card h4 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+    .phase-card ul {
+      padding-left: 1.1rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.65;
+    }
+    .phase-card.active ul { color: rgba(255,255,255,0.8); }
+    .active-pill {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--navy);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── FUTURE DOMAINS ── */
+    .future { background: var(--ice2); }
+    .future-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+    .future-card {
+      background: var(--white);
+      border: 1px solid var(--mist);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1.1rem;
+      align-items: flex-start;
+    }
+    .future-icon {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      background: var(--ice);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .future-card h4 {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+    .future-card p {
+      font-size: 0.86rem;
+      color: var(--slate);
+      line-height: 1.55;
+    }
+
+    /* ── MOVEMENTMODELER ── */
+    .mover { background: var(--white); border-top: 1px solid var(--mist); }
+    .mover-inner {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .mover-text { flex: 1; min-width: 260px; }
+    .mover-text h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+    .mover-text p {
+      font-size: 0.93rem;
+      color: var(--slate);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+    .mover-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid var(--mist);
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      font-size: 0.83rem;
+      color: var(--slate);
+    }
+
+    /* ── TEAM ── */
+    .team { background: var(--ice2); }
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .team-card {
+      background: var(--white);
+      border: 1px solid var(--mist);
+      border-radius: 14px;
+      padding: 1.75rem;
+    }
+    .team-card-org {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 0.4rem;
+    }
+    .team-card h4 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+    }
+    .team-card p {
+      font-size: 0.88rem;
+      color: var(--slate);
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
     footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.5);
       text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #666;
-      background-color: #eaeaea;
+      padding: 2.5rem 2rem;
+      font-size: 0.85rem;
     }
-    a {
-      color: #0074D9;
-      text-decoration: none;
+    footer strong { color: rgba(255,255,255,0.8); }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
     }
-    a:hover {
-      text-decoration: underline;
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      .problem-grid, .approach-layout, .dataset-grid,
+      .eval-grid, .phase-track, .future-grid, .team-grid {
+        grid-template-columns: 1fr;
+      }
+      .approach-panel { position: static; }
+      nav { padding: 0 1.25rem; }
+      .nav-links { gap: 1rem; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Large Movement Model (LMM)</h1>
-  <p>
-    A foundational AI model for motion — learning from sequences of bodies, hands, faces, objects, and vehicles the way language models learn from text.
-  </p>
-</header>
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">LMM<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#datasets">Data</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#team">Team</a></li>
+  </ul>
+</nav>
 
-<section style="background:#f0f4ff; padding:1.25rem 1rem; text-align:center; border-bottom:1px solid #d6e2ff;">
-  <p style="margin:0; font-size:1rem; color:#003366;">
-    Want on-device motion extraction today? Try our companion app
-    <strong>MovementModeler</strong> — turn iPhone video into clean BODY-25 stick-figure motion and JSON exports.
-  </p>
-  <a href="https://apps.apple.com/us/app/movementmodeler/id6755984861" 
-     target="_blank" rel="noopener noreferrer" 
-     style="display:inline-block; margin-top:0.7rem;">
-    <img 
-      src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-      alt="Download on the App Store"
-      style="height:34px;">
-  </a>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">NSF STTR Phase I &mdash; Digital Health</div>
+    <h1>The <em>foundation model</em><br>for human movement</h1>
+    <p class="hero-sub">
+      LMM learns from sequences of body motion the way language models learn from text —
+      bringing objective, scalable AI to physical rehabilitation assessment.
+    </p>
+    <div class="hero-badges">
+      <span class="badge">Physical Therapy &amp; Rehabilitation</span>
+      <span class="badge">Gait &amp; Functional Movement</span>
+      <span class="badge">Biomechanical AI</span>
+      <span class="badge">Markerless Motion Analysis</span>
+    </div>
+    <div class="hero-stat-row">
+      <div class="hero-stat">
+        <div class="hero-stat-num">22M+</div>
+        <div class="hero-stat-label">Americans in PT annually</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">25</div>
+        <div class="hero-stat-label">Joint keypoints tracked</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">5</div>
+        <div class="hero-stat-label">Public rehab datasets unified</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">Phase&nbsp;I</div>
+        <div class="hero-stat-label">Feasibility underway</div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<main>
-  <section>
-    <h2>What is a Large Movement Model?</h2>
-    <p>
-      The <span class="highlight">Large Movement Model (LMM)</span> is a general-purpose AI system that treats
-      <span class="highlight">motion itself</span> as the core data type. Instead of learning from words and sentences,
-      LMM learns from <span class="highlight">sequences of movement</span>—joint positions, trajectories, interactions,
-      and timing across people, tools, and vehicles.
+<!-- PROBLEM -->
+<section class="section problem" id="problem">
+  <div class="section-inner">
+    <div class="section-label">The Problem</div>
+    <h2>Rehabilitation is high-stakes,<br>yet largely unaided by AI</h2>
+    <p style="margin-bottom:2rem;">
+      Physical therapists make consequential clinical decisions every day — assessing recovery, adjusting treatment, identifying compensatory movement — almost entirely through visual observation. Objective motion data exists only in well-resourced academic labs.
     </p>
-    <p>
-      In the same way large language models model how text unfolds, LMM models how motion unfolds:
-      recognizing activities, forecasting what comes next, and evaluating how plausible or “healthy”
-      a movement is across many real-world settings.
-    </p>
-    <p>
-      You can think of it as an <em>“LLM for motion”</em>—a shared model family that can be adapted to
-      digital health, safety, sports, robotics, and other embodied AI domains.
-    </p>
-  </section>
-
-  <section>
-    <h2>Why Motion, Why Now?</h2>
-    <p>
-      Text, images, and audio already have mature foundation models. Motion does not.
-      Today, most systems that reason about movement are narrow point solutions:
-      one model for rehab, another for sports, another for driving or security.
-    </p>
-    <p>
-      LMM is designed to treat motion as a first-class sequence domain, so that the same
-      underlying representation and model family can support:
-    </p>
-    <ul>
-      <li>Full-body human movement (gait, posture, activities)</li>
-      <li>Fine movements of hands, fingers, and face</li>
-      <li>Objects and tools (balls, bats, canes, industrial tools)</li>
-      <li>Vehicles and macro-objects (cars, forklifts, delivery robots)</li>
-      <li>Multi-agent and crowd dynamics (people and vehicles together)</li>
-    </ul>
-    <div class="pill-row">
-      <span class="pill">Cross-domain by design</span>
-      <span class="pill">Biomechanically and physically grounded</span>
-      <span class="pill">Built for real environments, not lab demos</span>
+    <div class="problem-grid fade-up">
+      <div class="problem-card">
+        <div class="problem-card-icon">👁️</div>
+        <h3>Observation-dependent assessment</h3>
+        <p>PT evaluation relies on trained clinical eye and subjective rating scales like FIM and Barthel Index. Variability between clinicians is substantial and difficult to quantify.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-icon">🔬</div>
+        <h3>Lab-locked motion capture</h3>
+        <p>Gold-standard systems like Vicon cost $100K or more and require specialized lab infrastructure. Most outpatient clinics have no access to objective biomechanical measurement.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-icon">🗂️</div>
+        <h3>Fragmented, siloed data</h3>
+        <p>Existing motion AI systems use inconsistent skeletal representations and narrow datasets. No shared infrastructure exists for cross-dataset learning or longitudinal tracking.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-icon">📏</div>
+        <h3>No progress continuity</h3>
+        <p>Between clinic visits, recovery is unmeasured. Home exercises go unmonitored. Subtle improvements or regressions in movement quality go undetected until the next appointment.</p>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section>
-    <h2>Anchor Application Domains</h2>
-    <p>
-      We are actively developing and validating LMM across three initial verticals, with
-      additional domains to follow:
+<!-- APPROACH -->
+<section class="section approach" id="approach">
+  <div class="section-inner">
+    <div class="section-label">Technical Approach</div>
+    <h2>Motion as a sequence domain</h2>
+    <p style="margin-bottom:0.5rem;">
+      LMM applies the core insight behind large language models — that sequence-learning architectures discover generalizable structure from consistent, well-curated data — to the temporal evolution of human joint positions.
     </p>
-    <ul>
-      <li>
-        <strong>Digital Health &amp; Rehabilitation</strong> – Gait and balance analytics, detection of compensation and fall-risk signatures, and objective progress tracking from routine rehab sessions and home exercises.
-      </li>
-      <li>
-        <strong>Security, Safety &amp; Industrial Monitoring</strong> – Motion-aware anomaly detection and behavior understanding for CCTV and workplace video, with a focus on privacy-preserving, pose-based analysis instead of identity-first tracking.
-      </li>
-      <li>
-        <strong>Sports &amp; Performance Analytics</strong> – Biomechanics, fatigue and injury-risk indicators, and team-level motion patterns that shape spacing, effort, and game dynamics.
-      </li>
-    </ul>
-    <p>
-      The same underlying motion representation can also be extended to
-      <em>collaborative robotics, AR/VR avatars, human–AI interaction, and other embodied AI use cases</em>
-      as the ecosystem matures.
-    </p>
-  </section>
+    <div class="approach-layout">
+      <div class="approach-steps fade-up">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Pose Estimation</h4>
+            <p>Video inputs are processed through OpenPose, MMPose, and VIBE to extract BODY_25 keypoints — 25 joints covering the full clinically relevant kinematic chain.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Normalization</h4>
+            <p>Skeletons are centered on the hip midpoint, scaled to standardized torso length, and resampled to a uniform frame rate. Velocity and acceleration are computed as derived features.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Quality Control &amp; Metadata</h4>
+            <p>Each sequence receives QC metadata: per-joint confidence scores, occlusion masks, artifact detection, domain tags, and MoE-routing preparation fields.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Tokenization</h4>
+            <p>Three schemes are evaluated in parallel: per-frame tokens, windowed tokens (3–5 frames), and body-part tokens (upper, lower, core). Fidelity vs. efficiency is compared across all three.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <h4>Model Training &amp; Evaluation</h4>
+            <p>Transformer and diffusion model baselines are trained on the normalized corpus. Evaluation spans quantitative accuracy, biomechanical validity, and correlation with clinician-assigned quality scores.</p>
+          </div>
+        </div>
+      </div>
+      <div class="approach-panel fade-up">
+        <div class="approach-panel-title">Tokenization Strategies</div>
+        <div class="token-row">
+          <div class="token-item">
+            <div class="token-item-label">Per-Frame Token</div>
+            <div class="token-item-desc">Full 25-joint pose at each timestep. High fidelity, larger sequence length. Direct representation of instantaneous posture.</div>
+          </div>
+          <div class="token-item">
+            <div class="token-item-label">Windowed Token (3–5 frames)</div>
+            <div class="token-item-desc">Short temporal windows compressed into a single token. Captures short-range motion dynamics; reduces sequence length for transformer context.</div>
+          </div>
+          <div class="token-item">
+            <div class="token-item-label">Body-Part Token</div>
+            <div class="token-item-desc">Upper limb, lower limb, and core processed as separate streams. Enables specialized attention to clinically meaningful body regions.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>How LMM Works (High Level)</h2>
-    <p>
-      At a high level, LMM operates on normalized motion sequences derived from video and other sensors.
-      A typical pipeline looks like:
+<!-- DATASETS -->
+<section class="section datasets" id="datasets">
+  <div class="section-inner">
+    <div class="section-label">Data Foundation</div>
+    <h2>Curated public rehabilitation datasets</h2>
+    <p style="margin-bottom:0.5rem;">
+      Phase I draws on five complementary public motion datasets, unified under a shared BODY_25 schema. Together they provide coverage of functional exercises, quality annotations, pathological movement, and large-scale pretraining signal.
     </p>
-    <ul>
-      <li><strong>1. Capture</strong> – Video or multi-camera streams from clinics, courts, gyms, or workplaces.</li>
-      <li><strong>2. Pose &amp; Trajectory Extraction</strong> – Pose estimators and trackers produce keypoints for people, hands, faces, tools, and vehicles.</li>
-      <li><strong>3. Normalization</strong> – Sequences are centered, scaled, re-timed, and tagged with metadata (domain, confidence, occlusion, temporal scale).</li>
-      <li><strong>4. Motion Tokens</strong> – Frames, short windows, and/or learned motion primitives are turned into compact “tokens” analogous to words in language modeling.</li>
-      <li><strong>5. LMM Inference</strong> – A transformer-style (and, in future phases, mixture-of-experts and diffusion) model reasons over these tokens to classify, forecast, and score motion.</li>
-    </ul>
-    <p>
-      This architecture allows a single model family to support tasks such as activity recognition,
-      short-term motion prediction, sequence completion, and motion-quality scoring.
-    </p>
-  </section>
+    <div class="dataset-grid fade-up">
+      <div class="dataset-card">
+        <h4>UI-PRMD</h4>
+        <p>Ten common PT exercises captured with Vicon and Kinect systems. Designed specifically for rehabilitation AI research. Provides Vicon ground truth for biomechanical validation.</p>
+        <span class="dataset-tag">Exercise &amp; ROM</span>
+      </div>
+      <div class="dataset-card">
+        <h4>KiMoRe</h4>
+        <p>Rehabilitation exercises with clinician-assigned quality scores — a rare source of supervised signal linking motion data directly to clinical assessment.</p>
+        <span class="dataset-tag">Clinical Quality Scores</span>
+      </div>
+      <div class="dataset-card">
+        <h4>KIMORE</h4>
+        <p>Extension of KiMoRe including both healthy and pathological movement populations, supporting evaluation across the clinical spectrum.</p>
+        <span class="dataset-tag">Pathological Movement</span>
+      </div>
+      <div class="dataset-card">
+        <h4>PhysioNet</h4>
+        <p>Pathological gait collections including Parkinson's and Huntington's disease — directly representative of PT patient populations and neurodegenerative conditions.</p>
+        <span class="dataset-tag">Gait &amp; Neurological</span>
+      </div>
+      <div class="dataset-card">
+        <h4>AMASS</h4>
+        <p>Aggregation of 15+ motion capture datasets totaling approximately 40 hours of motion. Used for large-scale pretraining to establish robust priors before rehabilitation fine-tuning.</p>
+        <span class="dataset-tag">Pretraining Signal</span>
+      </div>
+      <div class="dataset-card" style="background: var(--navy); border-color: var(--navy);">
+        <h4 style="color:var(--white);">Why public data?</h4>
+        <p style="color:rgba(255,255,255,0.65);">All Phase I datasets are PII-free and collected under appropriate IRB protocols. Phase I establishes the infrastructure that makes the project worth partnering with in Phase II — when prospective clinical collection begins.</p>
+        <span class="dataset-tag" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);">Phase II: Clinical Partners</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>How MovementModeler Fits In</h2>
-    <p>
-      <strong>MovementModeler</strong> is our on-device front door into the LMM ecosystem. It lets users:
-    </p>
-    <ul>
-      <li>Convert iPhone video into stabilized stick-figure motion clips</li>
-      <li>Export BODY-25 JSON for use in research and computer-vision pipelines</li>
-      <li>Experiment with smoothing, tracking, and motion visualization without any server setup</li>
-    </ul>
-    <p>
-      Under the hood, the same kinds of normalized skeleton data and export formats that MovementModeler
-      produces are exactly what LMM consumes at larger scale. The app is a practical tool today and a
-      data/interaction bridge into tomorrow’s motion foundation models.
-    </p>
-  </section>
+<!-- EVALUATION -->
+<section class="section evaluation" id="evaluation">
+  <div class="section-inner">
+    <div class="section-label">Evaluation Framework</div>
+    <h2>Three levels of model validation</h2>
+    <p>Evaluation is designed to bridge engineering performance and clinical relevance — not just model accuracy, but biomechanical plausibility and alignment with how clinicians actually assess movement quality.</p>
+    <div class="eval-grid fade-up">
+      <div class="eval-card quant">
+        <div class="eval-card-icon">📐</div>
+        <h4>Quantitative Metrics</h4>
+        <ul>
+          <li>Mean squared error (MSE) on held-out sequences</li>
+          <li>Smoothness: mean jerk across predicted trajectories</li>
+          <li>Temporal consistency over long autoregressive rollouts</li>
+        </ul>
+      </div>
+      <div class="eval-card bio">
+        <div class="eval-card-icon">🦴</div>
+        <h4>Biomechanical Validity</h4>
+        <ul>
+          <li>Joint-limit violation rate (physiological ROM bounds)</li>
+          <li>Center-of-mass continuity across frames</li>
+          <li>Bilateral symmetry indices for gait sequences</li>
+        </ul>
+      </div>
+      <div class="eval-card clin">
+        <div class="eval-card-icon">🏥</div>
+        <h4>Clinical Alignment</h4>
+        <ul>
+          <li>Correlation with KiMoRe clinician-assigned scores</li>
+          <li>Movement quality scoring across exercise types</li>
+          <li>Primary bridge between model output and clinical relevance</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>Partnerships &amp; Pilots</h2>
-    <p>
-      LMM is being developed by <strong>LMM Technologies Inc.</strong>, a spin-out of
-      <strong>Aegis Station Infrastructure LLC</strong>, as an early entrant in motion-centric
-      foundation models. We are currently:
+<!-- ROADMAP -->
+<section class="section roadmap" id="roadmap">
+  <div class="section-inner" style="position:relative;z-index:2;">
+    <div class="section-label">Research Roadmap</div>
+    <h2 style="color:var(--white);">Phase I feasibility to Phase II scale</h2>
+    <p class="section-sub">
+      A 12-month Phase I establishes the pipeline, baselines, and evidence. Phase II realizes the full Mixture-of-Experts architecture with prospective clinical data.
     </p>
-    <ul>
-      <li>Building and testing LMM prototypes on curated, de-identified motion datasets</li>
-      <li>Collaborating with academic partners on model design, tokenization, and evaluation</li>
-      <li>Scoping pilot projects with organizations in rehab, safety/security, and sports analytics</li>
-    </ul>
-    <p>
-      If you are interested in research collaborations, pilot deployments, or future licensing and APIs,
-      we’d be glad to talk.
-    </p>
-  </section>
+    <div class="phase-track fade-up">
+      <div class="phase-card active">
+        <div class="active-pill">Active</div>
+        <div class="phase-card-label">Phase I &mdash; Months 1–12</div>
+        <h4>Feasibility &amp; Infrastructure</h4>
+        <ul>
+          <li>BODY_25 pipeline: pose estimation → normalization → QC → tokenization</li>
+          <li>Transformer and diffusion model baselines</li>
+          <li>Three-level evaluation framework</li>
+          <li>MoE-ready metadata and simulated routing</li>
+          <li>Open benchmark release</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-card-label">Phase II</div>
+        <h4>MoE Architecture &amp; Clinical Data</h4>
+        <ul>
+          <li>4–8 specialized MoE experts (gait, upper limb, balance, post-surgical)</li>
+          <li>Learned router trained on Phase I metadata</li>
+          <li>Prospective clinical data collection partnerships</li>
+          <li>Pilot deployments with PT and telehealth partners</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-card-label">Commercialization</div>
+        <h4>Motion Intelligence APIs</h4>
+        <ul>
+          <li>LMM Technologies Inc. licensing structure</li>
+          <li>API integration for digital health platforms</li>
+          <li>SaaS models for outpatient PT networks</li>
+          <li>Remote monitoring and longitudinal tracking</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>Contact</h2>
-    <p>
-      For inquiries about partnerships, pilots, or staying informed as we share results:
-      <br/>
-      <a href="mailto:engage@aegisstation.com">engage@aegisstation.com</a>
+<!-- FUTURE DOMAINS -->
+<section class="section future" id="future">
+  <div class="section-inner">
+    <div class="section-label">Future Expansion</div>
+    <h2>Beyond rehabilitation</h2>
+    <p style="margin-bottom:0.5rem;">
+      The same motion token schema and model architecture that powers rehabilitation analysis is designed to extend across other domains as the LMM ecosystem matures. Phase I establishes the foundation; future phases will broaden the scope.
     </p>
-  </section>
-</main>
+    <div class="future-grid fade-up">
+      <div class="future-card">
+        <div class="future-icon">⚽</div>
+        <div>
+          <h4>Sports &amp; Performance Analytics</h4>
+          <p>Biomechanical efficiency, fatigue indicators, and injury-risk signatures across athletic movement. Team-level spatial and effort dynamics.</p>
+        </div>
+      </div>
+      <div class="future-card">
+        <div class="future-icon">🔒</div>
+        <div>
+          <h4>Safety &amp; Industrial Monitoring</h4>
+          <p>Pose-based anomaly detection for workplace and public-safety video. Privacy-preserving behavior understanding without identity-first tracking.</p>
+        </div>
+      </div>
+      <div class="future-card">
+        <div class="future-icon">🤖</div>
+        <div>
+          <h4>Robotics &amp; Human-AI Interaction</h4>
+          <p>Motion priors for collaborative robots, avatar animation, and adaptive systems that respond to human movement in real time.</p>
+        </div>
+      </div>
+      <div class="future-card">
+        <div class="future-icon">🏠</div>
+        <div>
+          <h4>Home-Based Care &amp; Aging</h4>
+          <p>Continuous functional monitoring from consumer cameras. Fall-risk assessment and activity-of-daily-living tracking for aging-in-place populations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- TEAM -->
+<section class="section team" id="team">
+  <div class="section-inner">
+    <div class="section-label">Team</div>
+    <h2>Research &amp; development partners</h2>
+    <div class="team-grid fade-up">
+      <div class="team-card">
+        <div class="team-card-org">Lead Small Business</div>
+        <h4>Aegis Station Infrastructure LLC</h4>
+        <p>Chicago-based systems design and applied AI firm specializing in data pipeline architecture and machine learning infrastructure. Leads pipeline development, dataset curation, IP management, and commercialization planning. PI Aaron Smith dedicates no less than 40% effort to the project.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-card-org">Research Institution Partner</div>
+        <h4>Morgan State University / CEAMLS</h4>
+        <p>The Center for Equitable AI and Machine Learning Systems, led by Co-PI Dr. Kofi Nyarko, brings deep expertise in multimodal learning and embodied AI. Operates a Lenovo SR675 V3 cluster with NVIDIA H100 GPUs. Leads model architecture, tokenization evaluation, and benchmark dissemination. An HBCU committed to broadening participation in AI research.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOVEMENTMODELER -->
+<section class="section mover" id="movementmodeler" style="padding: 3.5rem 2rem;">
+  <div class="section-inner">
+    <div class="mover-inner">
+      <div class="mover-text">
+        <div class="section-label">Companion App</div>
+        <h3>MovementModeler</h3>
+        <p>Our on-device iOS app converts iPhone video into BODY_25 stick-figure motion and JSON exports — the same format the LMM pipeline consumes at scale. A practical tool today and a data bridge into LMM's motion infrastructure tomorrow.</p>
+        <a href="https://apps.apple.com/us/app/movementmodeler/id6755984861" target="_blank" rel="noopener noreferrer">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" style="height:38px; margin-top:0.5rem;">
+        </a>
+      </div>
+      <div style="flex-shrink:0;">
+        <div class="mover-badge">
+          <span>📱</span>
+          <span>iPhone · On-device · BODY_25 JSON export</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  &copy; 2025 LMM Technologies Inc. &amp; Aegis Station Infrastructure LLC.
-  Large Movement Model (LMM)&trade;. All rights reserved.
+  <p><strong>LMM Technologies Inc.</strong> &amp; Aegis Station Infrastructure LLC</p>
+  <p style="margin-top:0.4rem;">&copy; 2025 Large Movement Model (LMM)&trade;. All rights reserved.</p>
 </footer>
+
+<script>
+  // Scroll-triggered fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
