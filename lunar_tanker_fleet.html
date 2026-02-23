@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lunar Tanker Fleet — Aegis Station Supply Chain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<style>
+  /* ─── RESET & BASE ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --void:       #050810;
+    --deep:       #090e1a;
+    --surface:    #0d1528;
+    --panel:      #111d35;
+    --border:     #1e3158;
+    --muted:      #2a4470;
+    --amber:      #e8a825;
+    --amber-dim:  #a0721a;
+    --amber-glow: #f5c84a;
+    --ice:        #a8cce8;
+    --ice-dim:    #5a8ab0;
+    --text:       #c8d8ec;
+    --text-dim:   #6a8aaa;
+    --white:      #eef4fa;
+    --danger:     #e85c2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--void);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── STARFIELD ─── */
+  .starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .starfield::before,
+  .starfield::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 42% 8%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 62%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 83% 75%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 45%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 33%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 48% 55%, rgba(168,204,232,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 77% 12%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 93% 88%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 95%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 3% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 67% 78%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 25%, rgba(255,255,255,0.3) 0%, transparent 100%);
+  }
+  .starfield::after {
+    transform: rotate(180deg) scale(1.2);
+    opacity: 0.5;
+  }
+
+  /* ─── GRID OVERLAY ─── */
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(30,49,88,0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,49,88,0.15) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  /* ─── LAYOUT ─── */
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(5,8,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--ice-dim); font-weight: 400; }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--amber); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -40px;
+    right: -40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), var(--amber-dim), var(--border), transparent);
+  }
+  .hero-content {
+    max-width: 800px;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .eyebrow-line {
+    width: 40px;
+    height: 1px;
+    background: var(--amber);
+  }
+  .eyebrow-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 8px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 em {
+    display: block;
+    color: var(--amber);
+    font-style: normal;
+    font-size: 0.55em;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+  .hero-tagline {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--ice);
+    max-width: 520px;
+    margin: 28px 0 48px;
+    animation: fadeUp 0.8s 0.2s ease both;
+    line-height: 1.6;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 580px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .stat {
+    background: var(--deep);
+    padding: 20px 24px;
+    position: relative;
+  }
+  .stat::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .stat:hover::after { background: var(--amber); }
+  .stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--amber-glow);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .section-number {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--amber-dim);
+    letter-spacing: 0.12em;
+  }
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ─── IMAGE SECTION ─── */
+  .image-section {
+    padding: 100px 0 80px;
+  }
+  .image-placeholder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/7;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s;
+  }
+  .image-placeholder:hover { border-color: var(--muted); }
+  .image-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(30,49,88,0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,49,88,0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .image-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(232,168,37,0.03) 0%, transparent 70%);
+  }
+  /* Corner accents */
+  .img-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--amber-dim);
+    border-style: solid;
+  }
+  .img-corner.tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
+  .img-corner.tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
+  .img-corner.bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
+  .img-corner.br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+  .placeholder-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .placeholder-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    opacity: 0.25;
+  }
+  .placeholder-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .placeholder-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .image-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .caption-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+  .caption-ref {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+  }
+
+  /* ─── MISSION OVERVIEW ─── */
+  .mission-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-top: 40px;
+  }
+  .mission-card {
+    background: var(--deep);
+    padding: 36px 32px;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .mission-card:hover { background: var(--surface); }
+  .mission-card-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    color: var(--amber-dim);
+    letter-spacing: 0.15em;
+    margin-bottom: 20px;
+  }
+  .mission-card h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .mission-card p {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .mission-card-accent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .mission-card:hover .mission-card-accent { background: var(--amber); }
+
+  /* ─── SPECS TABLE ─── */
+  .specs-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .specs-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  .specs-group h4 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(30,49,88,0.5);
+    gap: 16px;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-key {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+  .spec-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ice);
+    text-align: right;
+  }
+
+  /* ─── S2S SECTION ─── */
+  .s2s-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .s2s-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .s2s-callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    padding: 28px;
+  }
+  .s2s-callout-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .s2s-callout-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--amber-glow);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .s2s-callout-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .s2s-body { }
+  .s2s-body p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .s2s-scenarios {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 40px;
+  }
+  .scenario {
+    background: var(--deep);
+    padding: 28px;
+    transition: background 0.3s;
+  }
+  .scenario:hover { background: var(--panel); }
+  .scenario-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .scenario-tag::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--amber-dim);
+  }
+  .scenario h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .scenario p {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* ─── DOCUMENT LINK ─── */
+  .doc-section {
+    padding: 80px 0 60px;
+    border-top: 1px solid var(--border);
+  }
+  .doc-card {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    background: var(--deep);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    max-width: 700px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .doc-card:hover {
+    border-color: var(--amber-dim);
+    box-shadow: 0 0 40px rgba(232,168,37,0.08);
+  }
+  .doc-icon-panel {
+    width: 80px;
+    background: var(--amber);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .doc-icon-panel svg {
+    width: 32px;
+    height: 32px;
+    fill: var(--void);
+  }
+  .doc-info {
+    padding: 24px 28px;
+    flex: 1;
+  }
+  .doc-type {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .doc-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+    letter-spacing: 0.03em;
+  }
+  .doc-subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .doc-action {
+    display: flex;
+    align-items: center;
+    padding: 24px 28px;
+    flex-shrink: 0;
+    border-left: 1px solid var(--border);
+  }
+  .doc-link {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--amber);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.2s, color 0.2s;
+  }
+  .doc-link:hover { gap: 14px; color: var(--amber-glow); }
+  .doc-link-arrow { font-size: 16px; }
+
+  /* ─── PROPELLANT SECTION ─── */
+  .prop-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .prop-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+    margin-bottom: 48px;
+  }
+  .prop-callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--ice-dim);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .prop-stat-block { }
+  .prop-stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ice-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .prop-stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--ice);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .prop-stat-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .prop-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+  .prop-body p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .prop-body p:last-child { margin-bottom: 0; }
+  .prop-phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+  .phase-card {
+    background: var(--deep);
+    padding: 32px 28px;
+    position: relative;
+    transition: background 0.3s;
+    overflow: hidden;
+  }
+  .phase-card:hover { background: var(--panel); }
+  .phase-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .phase-card:nth-child(1)::after { background: var(--amber-dim); }
+  .phase-card:nth-child(2)::after { background: var(--muted); }
+  .phase-card:nth-child(3)::after { background: var(--ice-dim); }
+  .phase-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .phase-card:nth-child(2) .phase-tag { color: var(--muted); }
+  .phase-card:nth-child(3) .phase-tag { color: var(--ice-dim); }
+  .phase-timeline {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 14px;
+    letter-spacing: 0.05em;
+  }
+  .phase-prop {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--amber-glow);
+    margin-bottom: 14px;
+    letter-spacing: 0.06em;
+  }
+  .phase-card:nth-child(2) .phase-prop { color: var(--text-dim); }
+  .phase-card:nth-child(3) .phase-prop { color: var(--ice); }
+  .phase-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .prop-tech-bar {
+    margin-top: 48px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .tech-bar-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .tech-bar-items {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .tech-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tech-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .tech-item-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    margin-top: 60px;
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .footer-copy {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #2ecc71;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(46,204,113,0.4); }
+    50%       { opacity: 0.7; box-shadow: 0 0 0 4px rgba(46,204,113,0); }
+  }
+  @keyframes scanline {
+    from { transform: translateY(-100%); }
+    to   { transform: translateY(100vh); }
+  }
+
+  /* Fade-in on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="starfield"></div>
+<div class="grid-overlay"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">LTF <span>/ Aegis Station</span></div>
+    <ul class="nav-links">
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#specs">Specs</a></li>
+      <li><a href="#s2s">S2S Ops</a></li>
+      <li><a href="#propellant">Propellant</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="page-wrap">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow-text">Aegis Station Logistics Program</div>
+      </div>
+      <h1>
+        Lunar Tanker<br>Fleet
+        <em>The Supply Chain for Space</em>
+      </h1>
+      <p class="hero-tagline">
+        45 autonomous tankers. 3.3 million metric tons. A continuous cycle of ascent, delivery, and return — building humanity's first orbital city one payload at a time.
+      </p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">45</div>
+          <div class="stat-label">Tankers</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">2,025</div>
+          <div class="stat-label">MT / Day</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">4.5 YR</div>
+          <div class="stat-label">Fill Timeline</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE -->
+<section class="image-section" id="image">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 01</span>
+      <span class="section-title">Fleet Render</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="reveal" style="border: 1px solid var(--border); overflow: hidden; line-height: 0;">
+      <img src="ltf_tanker.svg" alt="Lunar Tanker Fleet — MK1 Loaded Configuration on Lunar Surface" style="width:100%; display:block;"/>
+    </div>
+    <div class="image-caption reveal">
+      <span class="caption-text">FIG. 01 — LTF-MK1 Loaded Configuration, Lunar Surface — Water Cartridge Mounted</span>
+      <span class="caption-ref">LTF-RENDER-001</span>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission-section" id="mission">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 02</span>
+      <span class="section-title">Mission Profile</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="mission-grid reveal">
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">01 — PRIMARY</div>
+        <h3>Orbital Lift</h3>
+        <p>Surface-to-LLO water delivery to Aegis Station shield reservoirs. Fully autonomous operations across continuous 2,600 m/s ascent-and-return cycles.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">02 — EXTENDED</div>
+        <h3>Surface Distribution</h3>
+        <p>Ballistic surface hops between ISRU nodes for LOX and water redistribution. 160–940 m/s per hop — up to 6× sorties per orbital propellant load.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">03 — POST-FILL</div>
+        <h3>Depot Resupply</h3>
+        <p>After shield completion, the fleet transitions to permanent orbital logistics: LLO depots, EML1/2 hubs, and propellant staging for deep-space missions.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">04 — EMERGENCY</div>
+        <h3>Rapid Response</h3>
+        <p>1–2 tankers maintained in standby at all times. Emergency water delivery to crewed outposts achievable within 6–8 hours of dispatch authorization.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECS -->
+<section class="specs-section" id="specs">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 03</span>
+      <span class="section-title">Vehicle Specifications</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="specs-layout reveal">
+      <div class="specs-group">
+        <h4>Ascent Performance</h4>
+        <div class="spec-row">
+          <span class="spec-key">Payload</span>
+          <span class="spec-val">45,000 KG</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Launch Mass</span>
+          <span class="spec-val">~102,000 KG</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Δv (Ascent)</span>
+          <span class="spec-val">2,600 M/S</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Isp (Vacuum)</span>
+          <span class="spec-val">~360 S</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Propellant Mass</span>
+          <span class="spec-val">~52,000 KG</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Thrust Required</span>
+          <span class="spec-val">~165 KN</span>
+        </div>
+      </div>
+      <div class="specs-group">
+        <h4>Propulsion &amp; Structure</h4>
+        <div class="spec-row">
+          <span class="spec-key">Propellant</span>
+          <span class="spec-val">LOX / CH₄</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Engine Config</span>
+          <span class="spec-val">3×60 KN</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Tank Cartridge</span>
+          <span class="spec-val">49 M³</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Dimensions</span>
+          <span class="spec-val">10 M × 2.5 M</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Return Δv</span>
+          <span class="spec-val">1,800 M/S</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Round-Trip Propellant</span>
+          <span class="spec-val">~57,000 KG</span>
+        </div>
+      </div>
+      <div class="specs-group">
+        <h4>Fleet Operations</h4>
+        <div class="spec-row">
+          <span class="spec-key">Fleet Size</span>
+          <span class="spec-val">45 VEHICLES</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Daily Throughput</span>
+          <span class="spec-val">~2,025 MT</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Fill Target</span>
+          <span class="spec-val">3.3M MT</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Timeline</span>
+          <span class="spec-val">~4.5 YEARS</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Missions / Vehicle / Yr</span>
+          <span class="spec-val">60–100+</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Operation Mode</span>
+          <span class="spec-val">AUTONOMOUS</span>
+        </div>
+      </div>
+      <div class="specs-group">
+        <h4>Reusability &amp; Systems</h4>
+        <div class="spec-row">
+          <span class="spec-key">Round Trips</span>
+          <span class="spec-val">100+ CYCLES</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Landing System</span>
+          <span class="spec-val">VTOL</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Power</span>
+          <span class="spec-val">SOLAR + BATT</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Delivery Cost Est.</span>
+          <span class="spec-val">~$150 / KG</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Total Mission Cost</span>
+          <span class="spec-val">~$495B</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Architecture</span>
+          <span class="spec-val">KISS PRINCIPLE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S2S -->
+<section class="s2s-section" id="s2s">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 04</span>
+      <span class="section-title">Surface-to-Surface Operations</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="s2s-intro reveal">
+      <div>
+        <div class="s2s-callout">
+          <div class="s2s-callout-label">S2S vs Orbital Δv</div>
+          <div class="s2s-callout-value">6×</div>
+          <div class="s2s-callout-desc">More hops possible per propellant load. A 300 km surface transit requires only ~460 m/s — versus 2,600 m/s for a full orbital ascent.</div>
+        </div>
+      </div>
+      <div class="s2s-body">
+        <p>The LTF tanker requires no structural redesign for surface-to-surface operations. Its VTOL architecture and LOX/CH₄ propulsion are inherently suited to ballistic hops between ISRU nodes — ascending on a near-vertical vector, coasting at low altitude, and performing a precision landing at the destination pad.</p>
+        <p>This capability transforms a collection of isolated extraction points into an integrated logistics network, allowing surplus LOX and water to flow to nodes in deficit rather than being vented or stockpiled past capacity.</p>
+      </div>
+    </div>
+    <div class="s2s-scenarios reveal">
+      <div class="scenario">
+        <div class="scenario-tag">Scenario 01</div>
+        <h4>LOX Surplus Redistribution</h4>
+        <p>High-yield nodes producing excess liquid oxygen redistribute to nodes in deficit. Delivered LOX feeds directly into tanker refueling operations at the destination, creating a shared propellant pool across the network.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-tag">Scenario 02</div>
+        <h4>Emergency Water Resupply</h4>
+        <p>ISRU extraction failure at a crewed outpost triggers autonomous dispatch from the nearest surplus node. First delivery achievable within 6–8 hours — no crew or operator action required at the origin site.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-tag">Scenario 03</div>
+        <h4>Forward Base Pre-Positioning</h4>
+        <p>New exploration outposts 900+ km from the nearest ISRU hub receive propellant caches via a series of surface hops, establishing operational independence before local production comes online.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-tag">Scenario 04</div>
+        <h4>Routine Inter-Node Exchange</h4>
+        <p>3–5 tankers operate in dedicated S2S rotation, executing scheduled monthly rebalancing of LOX and water inventories across all active nodes under autonomous dispatch control from Aegis Station.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPELLANT ARCHITECTURE -->
+<section class="prop-section" id="propellant">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 05</span>
+      <span class="section-title">Propellant Architecture</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="prop-intro reveal">
+      <div class="prop-callout">
+        <div class="prop-stat-block">
+          <div class="prop-stat-label">Phase 1 Propellant</div>
+          <div class="prop-stat-value">LOX / CH₄</div>
+          <div class="prop-stat-desc">Proven architecture. LOX sourced locally via ISRU electrolysis. Methane imported from Earth during shield fill.</div>
+        </div>
+        <div class="prop-divider"></div>
+        <div class="prop-stat-block">
+          <div class="prop-stat-label">Phase 3 Target</div>
+          <div class="prop-stat-value">LOX / LH₂</div>
+          <div class="prop-stat-desc">Both propellants produced locally from lunar water. Isp 450s — 25% higher performance. Zero Earth import dependency.</div>
+        </div>
+        <div class="prop-divider"></div>
+        <div class="prop-stat-block">
+          <div class="prop-stat-label">Break-Even vs Imports</div>
+          <div class="prop-stat-value">6–18 mo</div>
+          <div class="prop-stat-desc">Infrastructure investment recovered against methane import costs within the first 18 months of LOX/LH₂ operations.</div>
+        </div>
+      </div>
+
+      <div class="prop-body">
+        <p>The Moon has abundant water ice. Electrolysis splits that water into liquid oxygen and liquid hydrogen — the two highest-performing chemical propellants available. The LTF's ISRU nodes are already producing both as a consequence of the shield-fill operation itself. LOX feeds directly into the current propulsion system. Hydrogen has been the missing piece.</p>
+        <p>The missing piece is now on a credible engineering path. Blue Origin's Lunar Permanence team has demonstrated zero boil-off storage of liquid hydrogen at 20K — the temperature at which LH₂ must be maintained — at twice the performance of the previous state of the art. Active cryocooling powered by the node's solar and fission power supply keeps propellant cold indefinitely, with no boil-off losses.</p>
+        <p>The program consequence is significant: rather than importing methane from Earth on every resupply cycle — a permanent, compounding dependency running into the tens of billions annually at fleet scale — the LTF transitions to a fully closed propellant loop. Water in, LOX and LH₂ out. No Earth supply chain. No launch-dependent consumables. A logistics system that is genuinely autonomous.</p>
+      </div>
+    </div>
+
+    <div class="prop-phases reveal">
+      <div class="phase-card">
+        <div class="phase-tag">Phase 01</div>
+        <div class="phase-timeline">Years 0 – 2</div>
+        <div class="phase-prop">LOX / CH₄</div>
+        <p class="phase-desc">Fleet operates on proven LOX/CH₄ propulsion while LUNET nodes are built to the full 50 kW power specification. Methane import costs are accepted during this period as the cost of mission reliability. Cryogenic and fission infrastructure is commissioned in parallel — not retrofit later.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-tag">Phase 02</div>
+        <div class="phase-timeline">Years 2 – 3</div>
+        <div class="phase-prop">Transition</div>
+        <p class="phase-desc">Node cryocoolers and LH₂ storage come online. Tankers are qualified for liquid hydrogen service. The fleet transitions progressively — early vehicles flying LOX/LH₂ missions as nodes are certified, methane imports tapering as the conversion progresses across all six LUNET sites.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-tag">Phase 03</div>
+        <div class="phase-timeline">Year 3 → Post-Fill</div>
+        <div class="phase-prop">LOX / LH₂</div>
+        <p class="phase-desc">Full fleet operates on locally produced propellants. Zero Earth import dependency. The higher Isp of LOX/LH₂ reduces propellant mass per mission, increasing payload fraction and compressing the remaining fill timeline. Post-fill, the same fleet serves Aegis Station depot and surface logistics roles indefinitely.</p>
+      </div>
+    </div>
+
+    <div class="prop-tech-bar reveal">
+      <div class="tech-bar-label">Enabling Technologies</div>
+      <div class="tech-bar-items">
+        <div class="tech-item">
+          <div class="tech-dot" style="background: var(--ice);"></div>
+          <span class="tech-item-text">Blue Origin Zero Boil-Off (2× SoA)</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot" style="background: var(--amber);"></div>
+          <span class="tech-item-text">Turbo-Brayton Cryocooler — 20K LH₂</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot" style="background: var(--text-dim);"></div>
+          <span class="tech-item-text">NASA Kilopower Fission — Lunar Night Power</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot" style="background: var(--muted);"></div>
+          <span class="tech-item-text">50 kW-Class Polar Solar Arrays</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot" style="background: var(--ice-dim);"></div>
+          <span class="tech-item-text">LOX/LH₂ Co-Storage Thermal Architecture</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="page-wrap">
+    <div class="footer-inner">
+      <div class="footer-logo">Lunar Tanker Fleet — Aegis Station Program</div>
+      <div class="footer-copy">
+        <span class="status-dot"></span>Fleet Status: Nominal
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
