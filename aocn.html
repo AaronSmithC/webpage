@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +14,10 @@
       --text:#e9eefb;
       --muted:#a9b3c9;
       --accent:#3b82f6;
+      --amber:#f59e0b;
       --stroke:#1f2430;
+      --warn:#1c1810;
+      --warn-border:#3d2f0a;
     }
 
     *{ box-sizing:border-box; }
@@ -63,6 +65,18 @@
       border-color:var(--stroke);
     }
 
+    /* Revision notice */
+    .revision-banner{
+      background: linear-gradient(135deg, #0e1520, #0a1018);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      padding: 16px 22px;
+      margin: 0 0 0 0;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+    .revision-banner strong { color: var(--text); }
+
     /* Hero */
     .hero{
       padding:80px 0 60px;
@@ -105,6 +119,15 @@
       margin:0 0 16px;
     }
 
+    h4{
+      font-size:1.1rem;
+      color: var(--muted);
+      margin: 24px 0 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
     p{
       font-size:1.05rem;
       color:#e5e9f5;
@@ -120,6 +143,18 @@
       margin-bottom:10px;
       color:#e5e9f5;
     }
+
+    /* Assumption correction callout */
+    .assumption-note {
+      background: var(--warn);
+      border: 1px solid var(--warn-border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 12px 0 0;
+      font-size: 0.93rem;
+      color: #d4b483;
+    }
+    .assumption-note strong { color: var(--amber); }
 
     /* Spec grid */
     .spec-grid{
@@ -143,6 +178,14 @@
       margin-bottom:6px;
     }
 
+    .spec .note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 6px;
+      border-top: 1px solid var(--stroke);
+      padding-top: 6px;
+    }
+
     /* Callout */
     .callout{
       background:linear-gradient(180deg,#0e1220,#0b0d18);
@@ -156,6 +199,29 @@
       font-size:1.15rem;
       margin:0;
     }
+
+    /* Thermal math table */
+    .thermal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 0.95rem;
+    }
+    .thermal-table th {
+      background: var(--card);
+      color: var(--muted);
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 1px solid var(--stroke);
+    }
+    .thermal-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--stroke);
+      color: #e5e9f5;
+    }
+    .thermal-table tr:last-child td { border-bottom: none; }
+    .thermal-table tr:hover td { background: rgba(59,130,246,0.05); }
 
     /* Footer CTA */
     .footer-cta{
@@ -184,49 +250,58 @@
       <h2>LEO compute architecture constrained by power generation, heat rejection, and serviceability</h2>
 
       <img
-        src="images/AOCN.png"
+        src="images/AOCN_concept.png"
         alt="AOCN in low Earth orbit with large radiator panels and solar arrays"
       />
     </div>
   </header>
 
+  <!-- REVISION NOTICE -->
+  <div style="background:#0d0f18; border-bottom:1px solid var(--stroke); padding: 18px 0;">
+    <div class="container">
+      <div class="revision-banner">
+        <strong>Rev. 1.1 — Assumption Review.</strong>
+        This revision corrects an internal inconsistency in the thermal control section (operating temperature vs. stated heat rejection rate), clarifies that solar array area is a co-equal structural driver alongside radiators, and adds notes on eclipse buffering mass. Substantive conclusions are unchanged.
+      </div>
+    </div>
+  </div>
+
   <!-- PROGRAM POSITIONING -->
   <section>
     <div class="container">
       <h3>Program Positioning</h3>
-<p>
-  The <strong>Aegis Orbital Compute Node (AOCN)</strong> is a modular compute platform intended for
-  deployment in <strong>Low Earth Orbit (LEO)</strong>. The architecture is sized and organized around
-  first-order physical constraints: electrical power generation, waste heat rejection, radiation
-  environment, and on-orbit serviceability.
-</p>
-
-<p>
-  AOCN is not intended to replicate terrestrial data centers in orbit. It is structured as an
-  orbital compute accelerator for workloads where power density, thermal isolation, or space
-  adjacency dominate over latency or interactive access.
-</p>
+      <p>
+        The <strong>Aegis Orbital Compute Node (AOCN)</strong> is a modular compute platform intended for
+        deployment in <strong>Low Earth Orbit (LEO)</strong>. The architecture is sized and organized around
+        first-order physical constraints: electrical power generation, waste heat rejection, radiation
+        environment, and on-orbit serviceability.
+      </p>
+      <p>
+        AOCN is not intended to replicate terrestrial data centers in orbit. It is structured as an
+        orbital compute accelerator for workloads where power density, thermal isolation, or space
+        adjacency dominate over latency or interactive access.
+      </p>
     </div>
   </section>
 
-  <!-- DESIGN PHILOSOPHY -->
+  <!-- DESIGN CONSTRAINTS -->
   <section>
     <div class="container">
       <h3>Design Constraints and Assumptions</h3>
       <ul>
-  <li>
-    <strong>Thermal scaling:</strong> Radiator area and heat transport capacity determine maximum
-    sustained compute power.
-  </li>
-  <li>
-    <strong>Infrastructure separation:</strong> Power generation, thermal control, shielding, and
-    communications are treated as persistent infrastructure; compute hardware is replaceable.
-  </li>
-  <li>
-    <strong>Incremental deployment:</strong> Nodes are designed to be deployed, serviced, and
-    upgraded independently rather than as a single monolithic structure.
-  </li>
-</ul>
+        <li>
+          <strong>Thermal scaling:</strong> Radiator area and heat transport capacity determine maximum
+          sustained compute power.
+        </li>
+        <li>
+          <strong>Infrastructure separation:</strong> Power generation, thermal control, shielding, and
+          communications are treated as persistent infrastructure; compute hardware is replaceable.
+        </li>
+        <li>
+          <strong>Incremental deployment:</strong> Nodes are designed to be deployed, serviced, and
+          upgraded independently rather than as a single monolithic structure.
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -239,6 +314,7 @@
         <div class="spec">
           <strong>Orbit</strong>
           500–600 km circular LEO
+          <div class="note">Eclipse fraction ~35% worst-case (β = 0°); improves toward sun-synchronous geometries</div>
         </div>
         <div class="spec">
           <strong>Compute Payload</strong>
@@ -247,54 +323,198 @@
         <div class="spec">
           <strong>Thermal Control</strong>
           Pumped liquid loops feeding deployable radiator panels
+          <div class="note">Radiator outlet temperature 290–330 K, dictated by COTS GPU thermal limits (junction ≤ 363 K)</div>
         </div>
         <div class="spec">
           <strong>Radiator Area</strong>
-          2,000–5,000 m² (dominant system driver)
+          1,500–3,500 m² per MW sustained input
+          <div class="note">Revised from prior estimate; see thermal assumptions section below</div>
+        </div>
+        <div class="spec">
+          <strong>Solar Array Area</strong>
+          ~2,500 m² per MW electrical output
+          <div class="note">Co-equal structural driver; ~29% efficient triple-junction GaAs at LEO solar constant (1,361 W/m²)</div>
         </div>
         <div class="spec">
           <strong>Power</strong>
           1–5 MW class solar arrays with eclipse buffering
+          <div class="note">Eclipse buffering: ~580 kWh per MW at worst-case 35-min eclipse; ~2.6 tons Li-ion per MW</div>
         </div>
         <div class="spec">
           <strong>Shielding</strong>
           Aluminum hull + targeted water shielding
         </div>
+        <div class="spec">
+          <strong>Orbit Eclipse</strong>
+          Orbital period ~96 min at 550 km; eclipse ~35 min worst-case
+          <div class="note">Battery or power-down strategy required; full-power eclipse operation imposes significant battery mass penalty</div>
+        </div>
       </div>
 
       <div class="callout">
         <p>
-  At steady state, essentially all electrical input power is rejected as heat.
-  Radiator geometry, operating temperature, and loop architecture therefore set the upper bound
-  on continuous compute output.
-</p>
+          At steady state, essentially all electrical input power is rejected as heat.
+          Radiator geometry, operating temperature, and loop architecture therefore set the upper bound
+          on continuous compute output. Solar array area is a comparable structural driver that was
+          understated in prior documentation.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- SCALE REFERENCE -->
+  <!-- THERMAL ASSUMPTIONS — KEY REVISION -->
   <section>
     <div class="container">
-      <h3>Scale Reference</h3>
+      <h3>Thermal Assumptions: Corrected</h3>
+
       <p>
-  Radiator sizing is included here for physical scale reference. One American football field
-  (including end zones) has an area of approximately 5,350 m².
-</p>
+        The prior version stated a radiator operating temperature of 350–450 K alongside a heat rejection
+        rate of 500–1,000 W/m². These figures are internally inconsistent. The Stefan-Boltzmann law
+        governs radiative heat rejection; at 350–450 K, a two-sided panel with emissivity ε ≈ 0.88
+        would reject 1,500–4,100 W/m², not 500–1,000 W/m². The lower figure is only consistent
+        with much cooler operating temperatures.
+      </p>
+
+      <p>
+        The correct framing depends on which constraint drives the design:
+      </p>
+
+      <h4>Option A — COTS GPU thermal limits drive operating temperature</h4>
+      <p>
+        Commercial GPUs have junction temperature limits of approximately 363 K (90 °C). A practical
+        cooling loop delivers coolant to the radiator at roughly 300–330 K after accounting for
+        thermal resistance across the cold plate and heat exchanger. At these temperatures, the
+        two-sided rejection rate is approximately 490–760 W/m² (theoretical), falling to
+        300–550 W/m² after applying a 0.6 effective factor for solar loading, view-factor losses,
+        and degradation margin. This supports a radiator area requirement of roughly
+        <strong>1,800–3,300 m² per MW</strong>.
+      </p>
+
+      <h4>Option B — Higher operating temperature reduces radiator area</h4>
+      <p>
+        If a different compute architecture (e.g., high-temperature ASICs or future hardware) can
+        tolerate junction temperatures allowing 350–400 K coolant outlet temperatures, the effective
+        rejection rate rises to approximately 900–1,500 W/m², reducing area requirements to
+        roughly <strong>650–1,100 m² per MW</strong>. This path is not consistent with current
+        COTS GPU constraints.
+      </p>
+
+      <p>
+        <strong>Revised working assumption for AOCN v1.0 (COTS hardware baseline):</strong>
+        radiator outlet temperature 290–330 K, effective heat rejection ~300–550 W/m²,
+        radiator area <strong>1,800–3,300 m² per MW</strong>. The prior upper bound of 5,000 m²/MW
+        is overly conservative; the prior lower bound of 2,000 m²/MW remains within range.
+      </p>
+
+      <table class="thermal-table">
+        <thead>
+          <tr>
+            <th>Radiator Outlet Temp</th>
+            <th>Two-sided Rejection (theoretical)</th>
+            <th>Effective (~×0.6 margin)</th>
+            <th>Area per MW (effective)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>275 K (2 °C)</td><td>571 W/m²</td><td>343 W/m²</td><td>2,920 m²</td></tr>
+          <tr><td>300 K (27 °C)</td><td>808 W/m²</td><td>485 W/m²</td><td>2,060 m²</td></tr>
+          <tr><td>325 K (52 °C)</td><td>1,113 W/m²</td><td>668 W/m²</td><td>1,497 m²</td></tr>
+          <tr><td>350 K (77 °C) ✕ exceeds COTS limits</td><td>1,498 W/m²</td><td>899 W/m²</td><td>1,113 m²</td></tr>
+          <tr><td>400 K (127 °C) ✕ exceeds COTS limits</td><td>2,555 W/m²</td><td>1,533 W/m²</td><td>652 m²</td></tr>
+        </tbody>
+      </table>
+
+      <div class="assumption-note" style="margin-top:18px;">
+        <strong>Correction summary:</strong> The 350–450 K operating temperature range in prior documentation is incompatible with COTS GPU cooling requirements. The correct radiator outlet temperature for this architecture is approximately 290–330 K. Heat rejection rates of 500–1,000 W/m² are plausible at this range with margins applied, but should not be paired with the 350–450 K label.
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLAR ARRAY AS CO-EQUAL DRIVER -->
+  <section>
+    <div class="container">
+      <h3>Solar Arrays: A Co-Equal Structural Driver</h3>
+
+      <p>
+        Prior documentation emphasized radiator area as the dominant system driver. Solar array area
+        is comparable in scale and should be treated with equal weight in structural and launch
+        planning.
+      </p>
 
       <div class="spec-grid">
         <div class="spec">
-          <strong>Radiator Area</strong>
-          2,000–5,000 m²<br/>
-          (~0.37–0.93 football fields)
+          <strong>Solar constant at LEO</strong>
+          ~1,361 W/m²
         </div>
         <div class="spec">
-          <strong>Interpretation</strong>
-Radiator surface area required for multi-megawatt-class systems is comparable to that of large
-crewed platforms, despite significantly smaller pressurized volumes.
+          <strong>Array efficiency (GaAs triple-junction)</strong>
+          ~28–30%
+        </div>
+        <div class="spec">
+          <strong>Array area per MW output</strong>
+          ~2,450–2,600 m²
+        </div>
+        <div class="spec">
+          <strong>Array specific power</strong>
+          ~150–200 W/kg (modern deployable arrays)
+        </div>
+        <div class="spec">
+          <strong>Array mass per MW</strong>
+          ~5–7 metric tons
+        </div>
+        <div class="spec">
+          <strong>Eclipse buffering mass per MW</strong>
+          ~2.6 tons (Li-ion at 225 Wh/kg, 35-min worst-case eclipse)
+        </div>
+      </div>
+
+      <p style="margin-top:24px;">
+        At 1 MW, the solar array footprint (~2,500 m²) is comparable to the radiator footprint
+        (~1,800–3,300 m²). Both are dominant structural and deployment drivers. Neither is
+        negligible. Total deployed surface area for a 1 MW node approaches
+        <strong>4,000–6,000 m²</strong> combining both functions.
+      </p>
+
+      <div class="callout">
+        <p>
+          An alternative architecture worth evaluating: throttle compute during eclipse periods
+          rather than buffering full power in batteries. At 1 MW sustained input, worst-case
+          eclipse buffering requires ~580 kWh (~2.6 tons of batteries). Designing for 60–70%
+          duty cycle instead substantially reduces battery mass while maintaining high average
+          throughput for non-latency-sensitive workloads.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCALE REFERENCE — UPDATED -->
+  <section>
+    <div class="container">
+      <h3>Scale Reference (Updated)</h3>
+      <p>
+        Radiator and solar array sizing are included here for physical scale reference. One American
+        football field (including end zones) has an area of approximately 5,350 m².
+      </p>
+
+      <div class="spec-grid">
+        <div class="spec">
+          <strong>Radiator Area (revised)</strong>
+          1,800–3,300 m² per MW<br/>
+          (~0.34–0.62 football fields per MW)
+        </div>
+        <div class="spec">
+          <strong>Solar Array Area</strong>
+          ~2,500 m² per MW<br/>
+          (~0.47 football fields per MW)
+        </div>
+        <div class="spec">
+          <strong>Combined deployed area (1 MW node)</strong>
+          ~4,300–5,800 m² total<br/>
+          (~0.8–1.1 football fields)
         </div>
         <div class="spec">
           <strong>Design implication</strong>
-          Modular panels and replaceable wings are treated as first-order infrastructure.
+          Both radiators and solar wings are first-order structural infrastructure. Neither can be treated as secondary in deployment or assembly planning.
         </div>
       </div>
     </div>
@@ -310,6 +530,7 @@ crewed platforms, despite significantly smaller pressurized volumes.
         <li>Swappable compute payloads without de-orbit</li>
         <li>Replaceable radiators and solar wings</li>
         <li>Autonomous operation with periodic ground tasking</li>
+        <li>Eclipse-period compute throttling as an alternative to full battery buffering</li>
       </ul>
     </div>
   </section>
@@ -319,46 +540,98 @@ crewed platforms, despite significantly smaller pressurized volumes.
     <div class="container">
       <h3>Modularity & Scaling</h3>
       <p>
-  As deployable surface area increases, structural flexibility, attitude control authority,
-  deployment complexity, and fault-domain size increase nonlinearly. Beyond a moderate scale,
-  distributing capability across multiple nodes becomes simpler than increasing the size of a
-  single structure.
-</p>
-
-<ul>
-  <li>
-    <strong>Fault containment:</strong> Smaller thermal loops and pressure volumes limit the impact
-    of punctures or component failures.
-  </li>
-  <li>
-    <strong>Control:</strong> Shorter spans reduce bending modes and pointing disturbances,
-    particularly for optical communications.
-  </li>
-  <li>
-    <strong>Lifecycle:</strong> Compute payloads can be refreshed independently of power and thermal
-    infrastructure.
-  </li>
-</ul>
+        As deployable surface area increases, structural flexibility, attitude control authority,
+        deployment complexity, and fault-domain size increase nonlinearly. Beyond a moderate scale,
+        distributing capability across multiple nodes becomes simpler than increasing the size of a
+        single structure.
+      </p>
+      <ul>
+        <li>
+          <strong>Fault containment:</strong> Smaller thermal loops and pressure volumes limit the impact
+          of punctures or component failures.
+        </li>
+        <li>
+          <strong>Control:</strong> Shorter spans reduce bending modes and pointing disturbances,
+          particularly for optical communications.
+        </li>
+        <li>
+          <strong>Lifecycle:</strong> Compute payloads can be refreshed independently of power and thermal
+          infrastructure.
+        </li>
+        <li>
+          <strong>Thermal temperature refresh:</strong> As GPU architecture evolves, cold-plate and
+          loop temperatures may increase if future hardware tolerates higher junction temperatures,
+          improving radiator specific performance without infrastructure replacement.
+        </li>
+      </ul>
     </div>
   </section>
 
-  <!-- STRATEGIC RATIONALE -->
+  <!-- REPRESENTATIVE SPECS — REVISED -->
+  <section>
+    <div class="container">
+      <h3>Representative v1.0 Node Specifications (Revised)</h3>
+
+      <div class="spec-grid">
+        <div class="spec">
+          <strong>Total Mass</strong>
+          40–80 metric tons
+          <div class="note">Includes structure, shielding, compute racks, solar arrays, batteries, and thermal hardware</div>
+        </div>
+        <div class="spec">
+          <strong>Electrical Input</strong>
+          1–2 MW
+        </div>
+        <div class="spec">
+          <strong>Compute Accelerator Power</strong>
+          200–500 kW (total rack TDP)
+          <div class="note">All accelerator power ultimately becomes waste heat; this figure represents accelerator TDP, not "useful output"</div>
+        </div>
+        <div class="spec">
+          <strong>Radiator Area (revised)</strong>
+          1,800–3,300 m² per MW sustained input
+          <div class="note">Revised down from prior 2,000–5,000 m²/MW; based on corrected 300–330 K operating temperature</div>
+        </div>
+        <div class="spec">
+          <strong>Solar Array Area</strong>
+          ~2,500–5,000 m² (1–2 MW)
+        </div>
+        <div class="spec">
+          <strong>Shielding Mass</strong>
+          15–50 tons (water + structure)
+        </div>
+        <div class="spec">
+          <strong>Battery Mass (eclipse buffer)</strong>
+          ~2.6–5.2 tons (1–2 MW, worst-case eclipse)
+          <div class="note">Throttle-on-eclipse strategy can substantially reduce this</div>
+        </div>
+        <div class="spec">
+          <strong>Operational Life</strong>
+          10–15 years per node with modular refresh
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURAL SUMMARY -->
   <section>
     <div class="container">
       <h3>Architectural Summary</h3>
       <p>
-  In orbit, compute hardware is not the primary scaling constraint. Power generation and heat
-  rejection dominate system size, mass, and operational complexity.
-</p>
-
-<p>
-  AOCN treats these constraints explicitly and organizes compute capability around infrastructure
-  that can be assembled, serviced, and expanded using current spaceflight technologies.
-</p>
+        In orbit, compute hardware is not the primary scaling constraint. Power generation and heat
+        rejection dominate system size, mass, and operational complexity.
+      </p>
+      <p>
+        AOCN treats these constraints explicitly and organizes compute capability around infrastructure
+        that can be assembled, serviced, and expanded using current spaceflight technologies. This revision
+        corrects the thermal operating temperature assumption to align with COTS GPU constraints,
+        establishes solar array area as a co-equal structural driver alongside radiators, and adds
+        eclipse buffering mass as a planning consideration.
+      </p>
     </div>
   </section>
 
-  <!-- PDF DOWNLOAD (BOTTOM) -->
+  <!-- PDF DOWNLOAD -->
   <section>
     <div class="container">
       <h3>Technical Reference</h3>
@@ -369,10 +642,10 @@ crewed platforms, despite significantly smaller pressurized volumes.
 
       <div class="spec" style="max-width: 720px; margin: 24px auto 0; text-align:center;">
         <a class="btn btn-primary" href="dossiers/Aegis_Orbital_Compute_Node.pdf" target="_blank" rel="noopener">
-          View / Technical Dossier (PDF)
+          View / Technical Dossier (PDF) — Rev. 1.1
         </a>
         <div style="margin-top: 12px; color: var(--muted); font-size: 0.95rem;">
-          If the PDF doesn’t open in your browser, right-click and choose “Save Link As…”
+          If the PDF doesn't open in your browser, right-click and choose "Save Link As…"
         </div>
       </div>
     </div>
