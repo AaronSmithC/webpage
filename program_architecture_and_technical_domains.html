@@ -76,6 +76,222 @@
     }
     .back:hover { background:#1a1a1a; }
     .section-lead { color:#cfcfcf; }
+
+    /* ── Architecture Overview Diagram ── */
+    .arch-diagram {
+      margin: 2rem 0 0;
+      font-family: "Open Sans", system-ui, sans-serif;
+    }
+    .arch-diagram .diag-label {
+      font-family: "Orbitron", system-ui, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: #666;
+      text-transform: uppercase;
+      margin-bottom: 1.1rem;
+    }
+
+    /* color tokens */
+    .arch-diagram {
+      --c-habitat:    #4a9eff;
+      --c-transport:  #ff8c42;
+      --c-lunar:      #c8a84b;
+      --c-assembly:   #5fbe8a;
+      --c-integration:#9b6bdf;
+    }
+
+    .diag-node {
+      border: 1px solid #252525;
+      background: #0f0f0f;
+      border-radius: 12px;
+      padding: 1rem 1.15rem;
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .diag-node:hover {
+      border-color: var(--nc);
+      box-shadow: 0 0 20px -6px color-mix(in srgb, var(--nc) 35%, transparent);
+    }
+    .diag-node::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 22%; bottom: 22%;
+      width: 3px;
+      border-radius: 0 2px 2px 0;
+      background: var(--nc);
+      opacity: 0.55;
+    }
+    .diag-node-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--nc);
+      margin-bottom: 0.3rem;
+      opacity: 0.85;
+    }
+    .diag-node-title {
+      font-family: "Orbitron", system-ui, sans-serif;
+      font-size: 0.82rem;
+      color: #ebebeb;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.03em;
+    }
+    .diag-node-desc {
+      font-size: 0.76rem;
+      color: #888;
+      line-height: 1.55;
+    }
+    .diag-node-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.65rem;
+    }
+    .diag-tag {
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      color: color-mix(in srgb, var(--nc) 75%, white);
+      border: 1px solid color-mix(in srgb, var(--nc) 28%, transparent);
+      background: color-mix(in srgb, var(--nc) 8%, transparent);
+      padding: 0.18rem 0.5rem;
+      border-radius: 999px;
+    }
+
+    /* habitat */
+    .dn-habitat    { --nc: var(--c-habitat); }
+    .dn-transport  { --nc: var(--c-transport); }
+    .dn-lunar      { --nc: var(--c-lunar); }
+    .dn-assembly   { --nc: var(--c-assembly); }
+    .dn-integration{ --nc: var(--c-integration); }
+
+    /* layout */
+    .diag-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+    }
+
+    /* arrows */
+    .diag-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 38px;
+      position: relative;
+    }
+    .diag-arrow::before {
+      content: '';
+      position: absolute;
+      left: 50%; top: 0; bottom: 8px;
+      width: 1px;
+      background: linear-gradient(to bottom, #252525, #383838);
+      transform: translateX(-50%);
+    }
+    .diag-arrow::after {
+      content: '';
+      position: absolute;
+      left: 50%; bottom: 0;
+      width: 6px; height: 6px;
+      border-right: 1.5px solid #444;
+      border-bottom: 1.5px solid #444;
+      transform: translateX(-50%) rotate(45deg);
+    }
+    .diag-arrow-label {
+      position: absolute;
+      font-size: 0.58rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #484848;
+      left: calc(50% + 9px);
+      white-space: nowrap;
+    }
+
+    /* dual arrows above transport */
+    .diag-arrow-dual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+      height: 38px;
+    }
+    .diag-arrow-half {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .diag-arrow-half::before {
+      content: '';
+      position: absolute;
+      left: 50%; top: 0; bottom: 8px;
+      width: 1px;
+      background: linear-gradient(to bottom, #252525, #383838);
+      transform: translateX(-50%);
+    }
+    .diag-arrow-half::after {
+      content: '';
+      position: absolute;
+      left: 50%; bottom: 0;
+      width: 6px; height: 6px;
+      border-right: 1.5px solid #444;
+      border-bottom: 1.5px solid #444;
+      transform: translateX(-50%) rotate(45deg);
+    }
+    .diag-arrow-half .diag-arrow-label {
+      top: 50%;
+      transform: translateY(-50%);
+      bottom: auto;
+    }
+
+    /* integration wrapper */
+    .diag-integration-wrap {
+      border: 1px solid color-mix(in srgb, var(--c-integration) 22%, transparent);
+      background: color-mix(in srgb, var(--c-integration) 3%, transparent);
+      border-radius: 14px;
+      padding: 1.25rem;
+      position: relative;
+      margin-top: 0.9rem;
+    }
+    .diag-integration-wrap .diag-wrap-label {
+      position: absolute;
+      top: -0.55rem;
+      left: 1.25rem;
+      background: #0b0b0b;
+      padding: 0 0.45rem;
+      font-family: "Orbitron", system-ui, sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      color: var(--c-integration);
+      text-transform: uppercase;
+    }
+    .diag-integration-wrap .diag-node {
+      border: none;
+      background: transparent;
+      padding: 0.15rem 0.5rem;
+    }
+    .diag-integration-wrap .diag-node::before { opacity: 0.4; }
+
+    /* legend */
+    .diag-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.5rem;
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid #1e1e1e;
+    }
+    .diag-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #666;
+    }
+    .diag-legend-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+    }
   </style>
 </head>
 
@@ -90,6 +306,103 @@
       includes transportation, shielding logistics, autonomy, in-space assembly, and lunar surface operations.
       This page outlines the primary systems and technical disciplines required to design, build, and integrate the program.
     </p>
+
+    <!-- Architecture Overview Diagram -->
+    <div class="arch-diagram">
+      <p class="diag-label">Architecture overview</p>
+
+      <!-- Row 1: Lunar Surface + Assembly -->
+      <div class="diag-row-2">
+        <div class="diag-node dn-lunar">
+          <div class="diag-node-eyebrow">Origin · resource foundation</div>
+          <div class="diag-node-title">Lunar Surface Systems</div>
+          <div class="diag-node-desc">Water extraction, surface mobility, power & thermal survival.</div>
+          <div class="diag-node-tags">
+            <span class="diag-tag">ISRU</span>
+            <span class="diag-tag">Mobility</span>
+            <span class="diag-tag">Night survival</span>
+          </div>
+        </div>
+        <div class="diag-node dn-assembly">
+          <div class="diag-node-eyebrow">Sustained ops</div>
+          <div class="diag-node-title">In-Space Assembly & Maintenance</div>
+          <div class="diag-node-desc">Robotic & EVA assembly. Continuous inspection over decades.</div>
+          <div class="diag-node-tags">
+            <span class="diag-tag">Robotics</span>
+            <span class="diag-tag">EVA</span>
+            <span class="diag-tag">ESIC</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dual arrows → transport -->
+      <div class="diag-arrow-dual">
+        <div class="diag-arrow-half">
+          <span class="diag-arrow-label">Water / cargo upmass</span>
+        </div>
+        <div class="diag-arrow-half">
+          <span class="diag-arrow-label">Tools / spares exchange</span>
+        </div>
+      </div>
+
+      <!-- Row 2: Transportation -->
+      <div class="diag-node dn-transport">
+        <div class="diag-node-eyebrow">Logistics layer</div>
+        <div class="diag-node-title">Transportation & Logistics Systems</div>
+        <div class="diag-node-desc">Tanker fleet, Luna–Aegis shuttle, Earth–Aegis long-hauler, and orbital handling. Moves mass between every node in the architecture.</div>
+        <div class="diag-node-tags">
+          <span class="diag-tag">Lunar tanker fleet</span>
+          <span class="diag-tag">Luna–Aegis shuttle</span>
+          <span class="diag-tag">Earth–Aegis long-hauler</span>
+          <span class="diag-tag">Orbital logistics</span>
+        </div>
+      </div>
+
+      <!-- Arrow → habitat -->
+      <div class="diag-arrow">
+        <span class="diag-arrow-label">Crew, water & cargo delivery</span>
+      </div>
+
+      <!-- Row 3: Orbital Habitat -->
+      <div class="diag-node dn-habitat">
+        <div class="diag-node-eyebrow">Destination</div>
+        <div class="diag-node-title">Orbital Habitat Systems</div>
+        <div class="diag-node-desc">Rotating structure providing 1g-equivalent. Radiation shielding, ECLSS, power generation, and long-duration operability.</div>
+        <div class="diag-node-tags">
+          <span class="diag-tag">Rotating structure</span>
+          <span class="diag-tag">Radiation / water shield</span>
+          <span class="diag-tag">ECLSS</span>
+          <span class="diag-tag">Power</span>
+        </div>
+      </div>
+
+      <!-- Integration wrapper -->
+      <div class="diag-integration-wrap">
+        <span class="diag-wrap-label">Cross-cutting · all domains</span>
+        <div class="diag-node dn-integration">
+          <div class="diag-node-eyebrow">Program authority</div>
+          <div class="diag-node-title">Program-Level Integration</div>
+          <div class="diag-node-desc">Systems architecture authority. Interface control & configuration management. Integration, test & verification. MBSE & risk discipline.<br/><span style="color:#3a3a3a;font-size:0.7rem;">Architectural intent is fixed. Implementation is flexible.</span></div>
+          <div class="diag-node-tags">
+            <span class="diag-tag">Architecture authority</span>
+            <span class="diag-tag">ICDs</span>
+            <span class="diag-tag">IT&amp;V</span>
+            <span class="diag-tag">MBSE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="diag-legend">
+        <div class="diag-legend-item"><div class="diag-legend-dot" style="background:var(--c-lunar)"></div>Lunar Surface</div>
+        <div class="diag-legend-item"><div class="diag-legend-dot" style="background:var(--c-assembly)"></div>Assembly & Maintenance</div>
+        <div class="diag-legend-item"><div class="diag-legend-dot" style="background:var(--c-transport)"></div>Transportation</div>
+        <div class="diag-legend-item"><div class="diag-legend-dot" style="background:var(--c-habitat)"></div>Orbital Habitat</div>
+        <div class="diag-legend-item"><div class="diag-legend-dot" style="background:var(--c-integration)"></div>Program Integration</div>
+      </div>
+    </div>
+
+    <hr class="rule"/>
 
     <div class="toc">
       <strong style="font-family: Orbitron, system-ui, sans-serif;">On this page</strong>
