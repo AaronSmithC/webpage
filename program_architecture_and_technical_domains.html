@@ -76,222 +76,6 @@
     }
     .back:hover { background:#1a1a1a; }
     .section-lead { color:#cfcfcf; }
-
-    /* ── Architecture Overview Diagram ── */
-    .arch-diagram {
-      margin: 2rem 0 0;
-      font-family: "Open Sans", system-ui, sans-serif;
-    }
-    .arch-diagram .diag-label {
-      font-family: "Orbitron", system-ui, sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      color: #666;
-      text-transform: uppercase;
-      margin-bottom: 1.1rem;
-    }
-
-    /* color tokens */
-    .arch-diagram {
-      --c-habitat:    #4a9eff;
-      --c-transport:  #ff8c42;
-      --c-lunar:      #c8a84b;
-      --c-assembly:   #5fbe8a;
-      --c-integration:#9b6bdf;
-    }
-
-    .diag-node {
-      border: 1px solid #252525;
-      background: #0f0f0f;
-      border-radius: 12px;
-      padding: 1rem 1.15rem;
-      position: relative;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .diag-node:hover {
-      border-color: var(--nc);
-      box-shadow: 0 0 20px -6px color-mix(in srgb, var(--nc) 35%, transparent);
-    }
-    .diag-node::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 22%; bottom: 22%;
-      width: 3px;
-      border-radius: 0 2px 2px 0;
-      background: var(--nc);
-      opacity: 0.55;
-    }
-    .diag-node-eyebrow {
-      font-size: 0.62rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--nc);
-      margin-bottom: 0.3rem;
-      opacity: 0.85;
-    }
-    .diag-node-title {
-      font-family: "Orbitron", system-ui, sans-serif;
-      font-size: 0.82rem;
-      color: #ebebeb;
-      margin-bottom: 0.4rem;
-      letter-spacing: 0.03em;
-    }
-    .diag-node-desc {
-      font-size: 0.76rem;
-      color: #888;
-      line-height: 1.55;
-    }
-    .diag-node-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-      margin-top: 0.65rem;
-    }
-    .diag-tag {
-      font-size: 0.62rem;
-      letter-spacing: 0.06em;
-      color: color-mix(in srgb, var(--nc) 75%, white);
-      border: 1px solid color-mix(in srgb, var(--nc) 28%, transparent);
-      background: color-mix(in srgb, var(--nc) 8%, transparent);
-      padding: 0.18rem 0.5rem;
-      border-radius: 999px;
-    }
-
-    /* habitat */
-    .dn-habitat    { --nc: var(--c-habitat); }
-    .dn-transport  { --nc: var(--c-transport); }
-    .dn-lunar      { --nc: var(--c-lunar); }
-    .dn-assembly   { --nc: var(--c-assembly); }
-    .dn-integration{ --nc: var(--c-integration); }
-
-    /* layout */
-    .diag-row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.9rem;
-    }
-
-    /* arrows */
-    .diag-arrow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 38px;
-      position: relative;
-    }
-    .diag-arrow::before {
-      content: '';
-      position: absolute;
-      left: 50%; top: 0; bottom: 8px;
-      width: 1px;
-      background: linear-gradient(to bottom, #252525, #383838);
-      transform: translateX(-50%);
-    }
-    .diag-arrow::after {
-      content: '';
-      position: absolute;
-      left: 50%; bottom: 0;
-      width: 6px; height: 6px;
-      border-right: 1.5px solid #444;
-      border-bottom: 1.5px solid #444;
-      transform: translateX(-50%) rotate(45deg);
-    }
-    .diag-arrow-label {
-      position: absolute;
-      font-size: 0.58rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: #484848;
-      left: calc(50% + 9px);
-      white-space: nowrap;
-    }
-
-    /* dual arrows above transport */
-    .diag-arrow-dual {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.9rem;
-      height: 38px;
-    }
-    .diag-arrow-half {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    .diag-arrow-half::before {
-      content: '';
-      position: absolute;
-      left: 50%; top: 0; bottom: 8px;
-      width: 1px;
-      background: linear-gradient(to bottom, #252525, #383838);
-      transform: translateX(-50%);
-    }
-    .diag-arrow-half::after {
-      content: '';
-      position: absolute;
-      left: 50%; bottom: 0;
-      width: 6px; height: 6px;
-      border-right: 1.5px solid #444;
-      border-bottom: 1.5px solid #444;
-      transform: translateX(-50%) rotate(45deg);
-    }
-    .diag-arrow-half .diag-arrow-label {
-      top: 50%;
-      transform: translateY(-50%);
-      bottom: auto;
-    }
-
-    /* integration wrapper */
-    .diag-integration-wrap {
-      border: 1px solid color-mix(in srgb, var(--c-integration) 22%, transparent);
-      background: color-mix(in srgb, var(--c-integration) 3%, transparent);
-      border-radius: 14px;
-      padding: 1.25rem;
-      position: relative;
-      margin-top: 0.9rem;
-    }
-    .diag-integration-wrap .diag-wrap-label {
-      position: absolute;
-      top: -0.55rem;
-      left: 1.25rem;
-      background: #0b0b0b;
-      padding: 0 0.45rem;
-      font-family: "Orbitron", system-ui, sans-serif;
-      font-size: 0.58rem;
-      letter-spacing: 0.18em;
-      color: var(--c-integration);
-      text-transform: uppercase;
-    }
-    .diag-integration-wrap .diag-node {
-      border: none;
-      background: transparent;
-      padding: 0.15rem 0.5rem;
-    }
-    .diag-integration-wrap .diag-node::before { opacity: 0.4; }
-
-    /* legend */
-    .diag-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem 1.5rem;
-      margin-top: 1.25rem;
-      padding-top: 1rem;
-      border-top: 1px solid #1e1e1e;
-    }
-    .diag-legend-item {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.62rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #666;
-    }
-    .diag-legend-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-    }
   </style>
 </head>
 
@@ -302,107 +86,11 @@
     <h1>Program Architecture & Technical Domains</h1>
 
     <p class="section-lead">
-      Aegis Station is a system-of-systems program. The station is only one element within a broader architecture that
-      includes transportation, shielding logistics, autonomy, in-space assembly, and lunar surface operations.
-      This page outlines the primary systems and technical disciplines required to design, build, and integrate the program.
+      Aegis Station is a system-of-systems program built from components that are each capable, complete, and independently
+      deployable. Lunar tanker fleets, surface extraction systems, orbital assembly capabilities, and habitat modules all have
+      standalone utility—they connect into something larger, but none of them requires the others to exist first.
+      This page outlines the primary systems and technical disciplines that make up the program.
     </p>
-
-    <!-- Architecture Overview Diagram -->
-    <div class="arch-diagram">
-      <p class="diag-label">Architecture overview</p>
-
-      <!-- Row 1: Lunar Surface + Assembly -->
-      <div class="diag-row-2">
-        <div class="diag-node dn-lunar">
-          <div class="diag-node-eyebrow">Origin · resource foundation</div>
-          <div class="diag-node-title">Lunar Surface Systems</div>
-          <div class="diag-node-desc">Water extraction, surface mobility, power & thermal survival.</div>
-          <div class="diag-node-tags">
-            <span class="diag-tag">ISRU</span>
-            <span class="diag-tag">Mobility</span>
-            <span class="diag-tag">Night survival</span>
-          </div>
-        </div>
-        <div class="diag-node dn-assembly">
-          <div class="diag-node-eyebrow">Sustained ops</div>
-          <div class="diag-node-title">In-Space Assembly & Maintenance</div>
-          <div class="diag-node-desc">Robotic & EVA assembly. Continuous inspection over decades.</div>
-          <div class="diag-node-tags">
-            <span class="diag-tag">Robotics</span>
-            <span class="diag-tag">EVA</span>
-            <span class="diag-tag">ESIC</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Dual arrows → transport -->
-      <div class="diag-arrow-dual">
-        <div class="diag-arrow-half">
-          <span class="diag-arrow-label">Water / cargo upmass</span>
-        </div>
-        <div class="diag-arrow-half">
-          <span class="diag-arrow-label">Tools / spares exchange</span>
-        </div>
-      </div>
-
-      <!-- Row 2: Transportation -->
-      <div class="diag-node dn-transport">
-        <div class="diag-node-eyebrow">Logistics layer</div>
-        <div class="diag-node-title">Transportation & Logistics Systems</div>
-        <div class="diag-node-desc">Tanker fleet, Luna–Aegis shuttle, Earth–Aegis long-hauler, and orbital handling. Moves mass between every node in the architecture.</div>
-        <div class="diag-node-tags">
-          <span class="diag-tag">Lunar tanker fleet</span>
-          <span class="diag-tag">Luna–Aegis shuttle</span>
-          <span class="diag-tag">Earth–Aegis long-hauler</span>
-          <span class="diag-tag">Orbital logistics</span>
-        </div>
-      </div>
-
-      <!-- Arrow → habitat -->
-      <div class="diag-arrow">
-        <span class="diag-arrow-label">Crew, water & cargo delivery</span>
-      </div>
-
-      <!-- Row 3: Orbital Habitat -->
-      <div class="diag-node dn-habitat">
-        <div class="diag-node-eyebrow">Destination</div>
-        <div class="diag-node-title">Orbital Habitat Systems</div>
-        <div class="diag-node-desc">Rotating structure providing 1g-equivalent. Radiation shielding, ECLSS, power generation, and long-duration operability.</div>
-        <div class="diag-node-tags">
-          <span class="diag-tag">Rotating structure</span>
-          <span class="diag-tag">Radiation / water shield</span>
-          <span class="diag-tag">ECLSS</span>
-          <span class="diag-tag">Power</span>
-        </div>
-      </div>
-
-      <!-- Integration wrapper -->
-      <div class="diag-integration-wrap">
-        <span class="diag-wrap-label">Cross-cutting · all domains</span>
-        <div class="diag-node dn-integration">
-          <div class="diag-node-eyebrow">Program authority</div>
-          <div class="diag-node-title">Program-Level Integration</div>
-          <div class="diag-node-desc">Systems architecture authority. Interface control & configuration management. Integration, test & verification. MBSE & risk discipline.<br/><span style="color:#3a3a3a;font-size:0.7rem;">Architectural intent is fixed. Implementation is flexible.</span></div>
-          <div class="diag-node-tags">
-            <span class="diag-tag">Architecture authority</span>
-            <span class="diag-tag">ICDs</span>
-            <span class="diag-tag">IT&amp;V</span>
-            <span class="diag-tag">MBSE</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Legend -->
-      <div class="diag-legend">
-        <div class="diag-legend-item"><div class="diag-legend-dot" style="background:var(--c-lunar)"></div>Lunar Surface</div>
-        <div class="diag-legend-item"><div class="diag-legend-dot" style="background:var(--c-assembly)"></div>Assembly & Maintenance</div>
-        <div class="diag-legend-item"><div class="diag-legend-dot" style="background:var(--c-transport)"></div>Transportation</div>
-        <div class="diag-legend-item"><div class="diag-legend-dot" style="background:var(--c-habitat)"></div>Orbital Habitat</div>
-        <div class="diag-legend-item"><div class="diag-legend-dot" style="background:var(--c-integration)"></div>Program Integration</div>
-      </div>
-    </div>
-
-    <hr class="rule"/>
 
     <div class="toc">
       <strong style="font-family: Orbitron, system-ui, sans-serif;">On this page</strong>
@@ -421,7 +109,8 @@
     <section id="orbital-habitat">
       <h2>1. Orbital Habitat Systems</h2>
       <p class="note">
-        Focus: rotating structures, shielding and fluid management, crew life support, power, and long-duration operability.
+        A self-contained technical domain covering rotating structures, shielding and fluid management, crew life support, power,
+        and long-duration operability. Each subsystem below is a scoped engineering program in its own right.
       </p>
 
       <div class="grid">
@@ -529,13 +218,14 @@
     <section id="transport-logistics">
       <h2>2. Transportation & Logistics Systems</h2>
       <p class="note">
-        Focus: moving mass—water, propellant, cargo, crew—between the lunar surface, lunar orbit, and Earth.
+        Each element in this domain — tanker, shuttle, long-hauler — is a complete vehicle or logistics program. They share
+        interfaces and architecture, but any one of them could be scoped, built, and operated on its own.
       </p>
 
       <div class="grid">
         <div class="card">
           <h3>Lunar Tanker Fleet</h3>
-          <p>Autonomous surface-to-orbit water transport at sustained cadence.</p>
+          <p>A complete autonomous logistics system — designed for sustained surface-to-orbit water transport, but capable as a standalone tanker program for any mission architecture.</p>
           <ul>
             <li>Autonomous ascent/descent cycles, turnaround, and reliability engineering</li>
             <li>Cartridge handling, transfer interfaces, and docking/berthing systems</li>
@@ -551,7 +241,7 @@
 
         <div class="card">
           <h3>Luna–Aegis Shuttle</h3>
-          <p>Reusable crew/cargo ferry linking polar surface sites and the station.</p>
+          <p>A reusable crew/cargo ferry linking polar surface sites and orbital destinations. Purpose-designed for Aegis operations, but scoped as an independent vehicle program.</p>
           <ul>
             <li>Precision landing, surface handling, and rapid reflight considerations</li>
             <li>Docking automation, crew safety, and life-support-in-transit</li>
@@ -605,13 +295,14 @@
     <section id="lunar-surface">
       <h2>3. Lunar Surface Systems</h2>
       <p class="note">
-        Focus: enabling sustained polar operations—extraction, processing, storage, mobility, and reliability through lunar night and thermal extremes.
+        Lunar surface operations constitute a full program on their own — extraction, processing, mobility, power, and field maintenance
+        under polar conditions. This domain has value independent of any orbital destination.
       </p>
 
       <div class="grid">
         <div class="card">
           <h3>ISRU & Water Extraction</h3>
-          <p>Volatile extraction and processing systems that feed orbital logistics.</p>
+          <p>A complete surface extraction and processing program. Designed to feed orbital logistics, but viable as a standalone ISRU capability for any lunar or cislunar architecture.</p>
           <ul>
             <li>Excavation and feed handling for icy regolith</li>
             <li>Thermal processing, separation, storage, and transfer hardware</li>
@@ -681,13 +372,14 @@
     <section id="assembly-maintenance">
       <h2>4. In-Space Assembly & Maintenance</h2>
       <p class="note">
-        Focus: assembling, inspecting, and sustaining infrastructure in lunar orbit over decades.
+        In-space assembly and inspection are generalized capabilities — applicable to any large orbital structure, not only Aegis.
+        Both represent standalone programs with broad applicability across future infrastructure.
       </p>
 
       <div class="grid">
         <div class="card">
           <h3>Modular Orbital Assembly</h3>
-          <p>Robotic and human-compatible assembly of large modular structures.</p>
+          <p>A generalized orbital construction capability — applicable to any large structure in cislunar space, not only Aegis.</p>
           <ul>
             <li>Assembly robotics, manipulators, fixtures, and alignment methods</li>
             <li>EVA tool compatibility and maintainable interface design</li>
@@ -725,7 +417,8 @@
     <section id="integration">
       <h2>5. Program-Level Integration</h2>
       <p class="note">
-        Focus: preserving architectural intent while enabling flexible implementation across multiple organizations.
+        Integration functions tie the program together — but they are also what allow each element to develop on its own timeline
+        and by specialist teams. Defined interfaces and architecture authority are what make loose coupling possible.
       </p>
 
       <div class="grid">
@@ -793,16 +486,182 @@
 
       <p style="margin-top: 1.25rem;">
         <strong>Execution model:</strong> best-in-class subsystem implementation paired with centralized integration authority.
-        Implementation remains flexible. Architectural intent does not.
+        Each element can be developed, contracted, and fielded by specialist teams. Interfaces are defined. Architectural intent is fixed. Everything else is flexible.
       </p>
     </section>
 
     <hr class="rule"/>
 
+    <!-- Architecture Diagram -->
+    <section id="architecture-diagram">
+      <h2>System-of-Systems Architecture</h2>
+      <p class="section-lead">How the domains connect — each node a capable system in its own right, the whole greater than its parts.</p>
+
+      <style>
+        .diag-wrap { width: 100%; display: flex; flex-direction: column; gap: 0; margin-top: 1.5rem; }
+        .diag-node {
+          border: 1px solid #222; border-radius: 16px; background: #101010;
+          padding: 1.25rem 1.5rem; position: relative;
+          transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .diag-node:hover {
+          border-color: var(--dn-color);
+          box-shadow: 0 0 24px -4px color-mix(in srgb, var(--dn-color) 30%, transparent);
+        }
+        .diag-node::before {
+          content: ''; position: absolute; left: 0; top: 20%; bottom: 20%;
+          width: 3px; border-radius: 0 2px 2px 0; background: var(--dn-color); opacity: 0.6;
+        }
+        .dn-label { font-family: 'Orbitron', sans-serif; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--dn-color); margin-bottom: 0.4rem; text-transform: uppercase; }
+        .dn-title { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; color: #e8e8e8; margin-bottom: 0.55rem; }
+        .dn-desc { font-size: 0.82rem; color: #888; line-height: 1.6; }
+        .dn-pills { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.85rem; }
+        .dn-pill {
+          font-size: 0.65rem; letter-spacing: 0.07em;
+          color: color-mix(in srgb, var(--dn-color) 85%, white);
+          border: 1px solid color-mix(in srgb, var(--dn-color) 30%, transparent);
+          background: color-mix(in srgb, var(--dn-color) 7%, transparent);
+          padding: 0.2rem 0.55rem; border-radius: 999px;
+        }
+        .dn-habitat    { --dn-color: #4a9eff; }
+        .dn-transport  { --dn-color: #ff8c42; }
+        .dn-lunar      { --dn-color: #c8a84b; }
+        .dn-assembly   { --dn-color: #7ec8a0; }
+        .dn-integration{ --dn-color: #b57bff; }
+        .diag-row-mid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .diag-connector { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; height: 48px; align-items: center; }
+        .diag-connector-half { display: flex; flex-direction: column; align-items: center; height: 100%; position: relative; }
+        .diag-connector-half::before {
+          content: ''; position: absolute; left: 50%; top: 0; bottom: 8px; width: 1px;
+          background: linear-gradient(to bottom, #333, #555); transform: translateX(-50%);
+        }
+        .diag-connector-half::after {
+          content: ''; position: absolute; left: 50%; bottom: 0; width: 7px; height: 7px;
+          border-right: 1.5px solid #555; border-bottom: 1.5px solid #555;
+          transform: translateX(-50%) rotate(45deg);
+        }
+        .diag-connector-label {
+          position: absolute; font-size: 0.58rem; letter-spacing: 0.1em; color: #444;
+          top: 50%; transform: translateY(-50%); left: calc(50% + 8px); white-space: nowrap;
+        }
+        .diag-arrow-down {
+          display: flex; flex-direction: column; align-items: center; height: 52px; justify-content: center; position: relative;
+        }
+        .diag-arrow-down::before {
+          content: ''; position: absolute; left: 50%; top: 0; bottom: 8px; width: 1px;
+          background: linear-gradient(to bottom, #333, #555); transform: translateX(-50%);
+        }
+        .diag-arrow-down::after {
+          content: ''; position: absolute; left: 50%; bottom: 0; width: 7px; height: 7px;
+          border-right: 1.5px solid #555; border-bottom: 1.5px solid #555;
+          transform: translateX(-50%) rotate(45deg);
+        }
+        .diag-arrow-text {
+          font-size: 0.6rem; letter-spacing: 0.1em; color: #444; text-transform: uppercase;
+          position: absolute; left: calc(50% + 10px); white-space: nowrap;
+        }
+        .diag-integration-wrap {
+          border: 1px solid color-mix(in srgb, #b57bff 25%, transparent);
+          border-radius: 20px; background: color-mix(in srgb, #b57bff 3%, transparent);
+          padding: 1.5rem; position: relative; margin-top: 1.5rem;
+        }
+        .diag-integration-wrap .wrap-label {
+          position: absolute; top: -0.6rem; left: 1.5rem;
+          background: #0b0b0b; padding: 0 0.5rem;
+          font-family: 'Orbitron', sans-serif; font-size: 0.6rem;
+          letter-spacing: 0.18em; color: #b57bff; text-transform: uppercase;
+        }
+        .diag-legend { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 2rem; justify-content: center; }
+        .diag-legend-item { display: flex; align-items: center; gap: 0.45rem; font-size: 0.65rem; letter-spacing: 0.08em; color: #888; text-transform: uppercase; }
+        .diag-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+      </style>
+
+      <div class="diag-wrap">
+
+        <div class="diag-row-mid">
+          <div class="diag-node dn-lunar">
+            <div class="dn-label">Origin</div>
+            <div class="dn-title">Lunar Surface Systems</div>
+            <div class="dn-desc">Water extraction, surface mobility, power &amp; thermal survival. The program's resource foundation.</div>
+            <div class="dn-pills">
+              <span class="dn-pill">ISRU</span><span class="dn-pill">Mobility</span>
+              <span class="dn-pill">Night survival</span><span class="dn-pill">Field maintenance</span>
+            </div>
+          </div>
+          <div class="diag-node dn-assembly">
+            <div class="dn-label">Sustained operations</div>
+            <div class="dn-title">In-Space Assembly &amp; Maintenance</div>
+            <div class="dn-desc">Robotic &amp; EVA assembly of large structures. Continuous inspection and repair over decades.</div>
+            <div class="dn-pills">
+              <span class="dn-pill">Robotics</span><span class="dn-pill">EVA</span>
+              <span class="dn-pill">ESIC</span><span class="dn-pill">Verification</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="diag-connector">
+          <div class="diag-connector-half"><span class="diag-connector-label">Water / cargo upmass</span></div>
+          <div class="diag-connector-half"><span class="diag-connector-label">Tools / spares exchange</span></div>
+        </div>
+
+        <div class="diag-node dn-transport">
+          <div class="dn-label">Logistics layer</div>
+          <div class="dn-title">Transportation &amp; Logistics Systems</div>
+          <div class="dn-desc">Tanker fleet, Luna–Aegis shuttle, Earth–Aegis long-hauler, and orbital handling. Moves mass between every node in the architecture.</div>
+          <div class="dn-pills">
+            <span class="dn-pill">Lunar tanker fleet</span><span class="dn-pill">Luna–Aegis shuttle</span>
+            <span class="dn-pill">Earth–Aegis long-hauler</span><span class="dn-pill">Orbital logistics</span>
+          </div>
+        </div>
+
+        <div class="diag-arrow-down">
+          <span class="diag-arrow-text">Crew, water, cargo delivery</span>
+        </div>
+
+        <div class="diag-node dn-habitat">
+          <div class="dn-label">Destination</div>
+          <div class="dn-title">Orbital Habitat Systems</div>
+          <div class="dn-desc">Rotating structure providing 1g-equivalent. Radiation shielding, ECLSS, power generation, and long-duration operability.</div>
+          <div class="dn-pills">
+            <span class="dn-pill">Rotating structure</span><span class="dn-pill">Radiation / water shield</span>
+            <span class="dn-pill">ECLSS</span><span class="dn-pill">Power</span><span class="dn-pill">Ops &amp; safety</span>
+          </div>
+        </div>
+
+        <div class="diag-integration-wrap">
+          <span class="wrap-label">Cross-cutting · all domains</span>
+          <div class="diag-node dn-integration" style="border:none; background:transparent; padding: 0.25rem 0.5rem;">
+            <div class="dn-label" style="margin-bottom:0.35rem;">Program authority</div>
+            <div class="dn-title">Program-Level Integration</div>
+            <div class="dn-desc">
+              Systems architecture authority. Interface control &amp; configuration management. Integration, test &amp; verification. Program management &amp; MBSE.
+              <span style="color:#444; font-size:0.72rem; display:block; margin-top:0.5rem;">Architectural intent is fixed. Implementation is flexible.</span>
+            </div>
+            <div class="dn-pills">
+              <span class="dn-pill">Architecture authority</span><span class="dn-pill">ICDs</span>
+              <span class="dn-pill">IT&amp;V</span><span class="dn-pill">MBSE</span><span class="dn-pill">Risk &amp; schedule</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="diag-legend">
+        <div class="diag-legend-item"><div class="diag-legend-dot" style="background:#c8a84b"></div> Lunar Surface</div>
+        <div class="diag-legend-item"><div class="diag-legend-dot" style="background:#7ec8a0"></div> Assembly &amp; Maintenance</div>
+        <div class="diag-legend-item"><div class="diag-legend-dot" style="background:#ff8c42"></div> Transportation</div>
+        <div class="diag-legend-item"><div class="diag-legend-dot" style="background:#4a9eff"></div> Orbital Habitat</div>
+        <div class="diag-legend-item"><div class="diag-legend-dot" style="background:#b57bff"></div> Program Integration</div>
+      </div>
+
+    </section>
+
+    <hr class="rule"/>
+
     <p class="note">
-      If you’re a domain team with relevant heritage (space-rated systems, lunar surface operations, high-reliability autonomy,
-      large-scale structures, ECLSS, ISRU, or orbital assembly), Aegis Station is designed to integrate specialist contributions
-      into a coherent, buildable program.
+      If you’re a domain team with relevant heritage — space-rated systems, lunar surface operations, high-reliability autonomy,
+      large-scale structures, ECLSS, ISRU, or orbital assembly — your work fits here as a first-class element, not just a component.
+      Each domain is designed to accept specialist contributions that stand on their own and integrate cleanly when the time comes.
     </p>
 
     <a class="back" href="index.html">← Back to Home</a>
