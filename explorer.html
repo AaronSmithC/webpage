@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,85 +10,481 @@
   <meta property="og:image" content="https://aegisstation.com/images/deep_space_explorer.png" />
   <meta property="og:url" content="https://aegisstation.com/explorer.html" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0b0b0b;
+      --surface:   #101010;
+      --border:    #2b2b2b;
+      --text:      #d7d7d7;
+      --muted:     #b9b9b9;
+      --heading:   #f0f0f0;
+      --accent:    #e8e8e8;
+      --pill-bg:   #141414;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Open Sans", system-ui, sans-serif;
+      line-height: 1.65;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 92vh;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('deep_space_explorer.png');
+      background-size: cover;
+      background-position: center 40%;
+      filter: brightness(0.38) saturate(0.6);
+      transform: scale(1.03);
+      transition: transform 12s ease-out;
+    }
+
+    .hero:hover .hero-bg {
+      transform: scale(1.07);
+    }
+
+    /* subtle vignette */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.72) 100%);
+      pointer-events: none;
+    }
+
+    /* bottom fade into page */
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 180px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      padding: 0 1.5rem;
+      max-width: 760px;
+      opacity: 0;
+      animation: fadeUp 1.1s ease 0.2s forwards;
+    }
+
+    .hero-kicker {
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: #ffffff;
+      letter-spacing: 1px;
+      line-height: 1.15;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: #c8c8c8;
+      font-style: italic;
+      max-width: 560px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 8px;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .hero-cta:hover { background: rgba(255,255,255,0.13); border-color: rgba(255,255,255,0.5); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── LAYOUT ── */
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-header {
+      margin: 3rem 0 0.75rem;
+    }
+
+    h2 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.35rem;
+      color: var(--heading);
+      letter-spacing: 0.5px;
+    }
+
+    .section-note {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin: 0.3rem 0 1rem;
+    }
+
+    .rule { border: 0; border-top: 1px solid var(--border); margin: 2.25rem 0; }
+
+    /* ── CARDS ── */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    @media (min-width: 640px) { .grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .grid.grid-3 { grid-template-columns: 1fr 1fr 1fr; } }
+
+    .card {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 1.1rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    }
+
+    .card h3 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.0rem;
+      color: var(--heading);
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.93rem;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+
+    .card ul {
+      margin: 0.5rem 0 0.75rem;
+      padding-left: 1.1rem;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+    .card li { margin: 0.3rem 0; }
+
+    /* ── SPECS TABLE ── */
+    .specs {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      margin-top: 0.5rem;
+    }
+    .specs tr { border-bottom: 1px solid var(--border); }
+    .specs tr:last-child { border-bottom: none; }
+    .specs td { padding: 0.55rem 0.5rem; color: var(--text); }
+    .specs td:first-child {
+      color: var(--muted);
+      white-space: nowrap;
+      width: 44%;
+      font-size: 0.88rem;
+    }
+
+    /* ── PILLS ── */
+    .pill {
+      display: inline-block;
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--pill-bg);
+      font-size: 0.82rem;
+      color: #cfcfcf;
+      margin-right: 0.35rem;
+      margin-top: 0.3rem;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      font-size: 1.05rem;
+      color: #cfcfcf;
+      max-width: 680px;
+      margin: 2.5rem 0 0;
+      line-height: 1.7;
+    }
+
+    /* ── MISSION CALLOUT ── */
+    .callout {
+      border-left: 3px solid #3a3a3a;
+      padding: 0.85rem 1.1rem;
+      background: #0e0e0e;
+      border-radius: 0 10px 10px 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-style: italic;
+      margin: 1.5rem 0;
+    }
+
+    /* ── DOWNLOAD ── */
+    .download-bar {
+      text-align: center;
+      margin: 3rem 0 0;
+    }
+    .download-btn {
+      display: inline-block;
+      padding: 0.8rem 1.75rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: #fff;
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .download-btn:hover { background: #1a1a1a; border-color: #555; }
+
+    .back {
+      display: inline-block;
+      margin-top: 2.5rem;
+      padding: 0.65rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+    .back:hover { background: #1a1a1a; }
+  </style>
 </head>
-<body class="bg-black text-white">
+<body>
 
-<section class="py-16">
-  <div style="max-width: 800px; margin: auto; padding: 0 1rem;">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-kicker">Aegis Station · Long-Range Crewed Spacecraft</p>
+      <h1 class="hero-title">Solar System Explorer</h1>
+      <p class="hero-sub">A mobile deep-space platform for crewed missions to Mars, the outer planets, and beyond</p>
+    </div>
+  </section>
 
-    <h1 class="text-4xl font-bold mb-6 text-center">Solar System Explorer</h1>
-    <p class="text-lg mb-10 text-center italic">A long-range human spacecraft for deep space missions</p>
+  <!-- BODY -->
+  <div class="wrap">
 
-    <h2 class="text-2xl font-semibold mt-10 mb-2">1. Mission Overview</h2>
-    <p>The Solar System Explorer is a crewed interplanetary vessel designed for long-duration missions to Mars, the outer planets, and beyond. It features rotating habitation pods, hybrid propulsion, and onboard fuel production using external water sources. It is the next step beyond Aegis Station — a mobile orbital civilization pushing the frontier outward.</p>
+    <p class="intro">
+      The Solar System Explorer is a crewed interplanetary vessel designed for long-duration missions beyond the inner solar system.
+      It is the natural successor to Aegis Station — a mobile orbital civilization that carries its own power, propulsion, and life support outward into deep space.
+    </p>
 
-    <h2 class="text-2xl font-semibold mt-10 mb-2">2. Design Philosophy</h2>
-    <ul class="list-disc pl-6">
-      <li>Hybrid propulsion: high-thrust + efficient cruise</li>
-      <li>Rotating habitation pods for artificial gravity</li>
-      <li>Onboard electrolysis and cryogenic fuel production</li>
-      <li>Redundant systems and modular architecture</li>
-      <li>Micrometeoroid strategy: survive, not dodge
-        <ul class="list-disc pl-6">
-          <li>Whipple shielding + trajectory planning</li>
-          <li>Emergency storm shelter in the central core</li>
+    <div class="callout">
+      "Best-in-class subsystem implementation paired with centralized integration authority. Implementation remains flexible. Architectural intent does not."
+    </div>
+
+    <hr class="rule"/>
+
+    <!-- DESIGN PHILOSOPHY -->
+    <div class="section-header">
+      <h2>Design Philosophy</h2>
+      <p class="section-note">Redundant, modular, and built to survive.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>Propulsion Architecture</h3>
+        <p>Hybrid propulsion optimized for departure efficiency and sustained cruise performance.</p>
+        <ul>
+          <li>High-thrust chemical/NTR stage for departure & braking burns</li>
+          <li>MPD/ion engines for cruise and fine maneuvers</li>
+          <li>Powered by 2–5 MW gas-cooled fission reactor</li>
         </ul>
-      </li>
-    </ul>
+        <div>
+          <span class="pill">Propulsion</span>
+          <span class="pill">NTR</span>
+          <span class="pill">Ion/MPD</span>
+          <span class="pill">Fission</span>
+        </div>
+      </div>
 
-    <h2 class="text-2xl font-semibold mt-10 mb-2">3. Artificial Gravity System</h2>
-    <ul class="list-disc pl-6">
-      <li>4 × 15° rotating pods on 50m booms</li>
-      <li>Spin rate: 1.5 RPM → 0.4g at floor level</li>
-      <li>Pods retract during burns</li>
-      <li>Rotating tunnel with vestibule allows transfer while spinning</li>
-    </ul>
+      <div class="card">
+        <h3>Artificial Gravity System</h3>
+        <p>Four rotating habitation pods on extended booms — retractable during burns.</p>
+        <ul>
+          <li>4 × 15° rotating pods on 50 m booms</li>
+          <li>Spin rate: 1.5 RPM → 0.4g at floor level</li>
+          <li>Rotating tunnel with vestibule allows transfer while spinning</li>
+        </ul>
+        <div>
+          <span class="pill">Rotation</span>
+          <span class="pill">Artificial-g</span>
+          <span class="pill">Human factors</span>
+        </div>
+      </div>
 
-    <h2 class="text-2xl font-semibold mt-10 mb-2">4. Propulsion & Power</h2>
-    <ul class="list-disc pl-6">
-      <li>High-thrust chemical/NTR stage for departure & braking</li>
-      <li>MPD/Ion engines for cruise and fine maneuvers</li>
-      <li>Powered by 2–5 MW gas-cooled fission reactor</li>
-    </ul>
+      <div class="card">
+        <h3>Radiation Protection</h3>
+        <p>Layered shielding strategy with a hardened storm shelter at the ship's core.</p>
+        <ul>
+          <li>Water and polyethylene shielding around habitation pods</li>
+          <li>Central storm shelter for high-radiation events</li>
+          <li>Mission planning avoids worst solar activity periods</li>
+        </ul>
+        <div>
+          <span class="pill">Radiation</span>
+          <span class="pill">Shielding</span>
+          <span class="pill">Storm shelter</span>
+        </div>
+      </div>
 
-    <h2 class="text-2xl font-semibold mt-10 mb-2">5. Fuel Production</h2>
-    <p>The ship carries an onboard electrolysis plant and cryogenic storage to convert external water into LOX and LH₂. This enables true in-situ turnaround without resupply from Earth.</p>
+      <div class="card">
+        <h3>Micrometeoroid Strategy</h3>
+        <p>Survive, don't dodge — resilience over avoidance.</p>
+        <ul>
+          <li>Whipple shielding on all exposed surfaces</li>
+          <li>Trajectory planning to reduce flux exposure</li>
+          <li>Emergency core refuge if hull is breached</li>
+        </ul>
+        <div>
+          <span class="pill">Whipple shielding</span>
+          <span class="pill">Survivability</span>
+          <span class="pill">Debris</span>
+        </div>
+      </div>
+    </div>
 
-    <h2 class="text-2xl font-semibold mt-10 mb-2">6. Radiation Protection</h2>
-    <ul class="list-disc pl-6">
-      <li>Water and polyethylene shielding around pods</li>
-      <li>Central storm shelter zone for high-radiation events</li>
-      <li>Mission planning avoids worst periods of solar activity</li>
-    </ul>
+    <hr class="rule"/>
 
-    <h2 class="text-2xl font-semibold mt-10 mb-2">7. Ship Specifications</h2>
-    <ul class="list-disc pl-6">
-      <li>Length: ~100–110 meters</li>
-      <li>Span with deployed pods: ~120–130 meters</li>
-      <li>Core diameter: ~6–8 meters</li>
-      <li>Dry mass: ~150–200 metric tons</li>
-      <li>Water and propellant: 100+ metric tons</li>
-      <li>Docking capacity: landers, tankers, resupply craft</li>
-    </ul>
+    <!-- FUEL PRODUCTION -->
+    <div class="section-header">
+      <h2>In-Situ Fuel Production</h2>
+      <p class="section-note">True operational independence — no Earth resupply required for propellant.</p>
+    </div>
+    <div class="grid">
+      <div class="card" style="grid-column: 1 / -1;">
+        <h3>Onboard Electrolysis & Cryogenic Storage</h3>
+        <p>
+          The Explorer carries an onboard electrolysis plant and cryogenic storage to convert externally sourced water into LOX and LH₂,
+          enabling full turnaround at any water-accessible destination. Tankers deliver water or ice in orbit;
+          mining drones extract water from regolith or subsurface ice at destination bodies.
+        </p>
+        <div style="margin-top:0.75rem;">
+          <span class="pill">Electrolysis</span>
+          <span class="pill">LOX / LH₂</span>
+          <span class="pill">Cryo storage</span>
+          <span class="pill">ISRU-compatible</span>
+          <span class="pill">Tanker interfaces</span>
+        </div>
+      </div>
+    </div>
 
-    <h2 class="text-2xl font-semibold mt-10 mb-2">8. Support Craft</h2>
-    <p>The Explorer is built to operate alongside:</p>
-    <ul class="list-disc pl-6">
-      <li><strong>Landers:</strong> crew and cargo to surface</li>
-      <li><strong>Tankers:</strong> deliver water/ice in orbit</li>
-      <li><strong>Mining Drones:</strong> extract water from regolith or ice</li>
-    </ul>
+    <hr class="rule"/>
 
-    <h2 class="text-2xl font-semibold mt-10 mb-2">9. Long-Term Vision</h2>
-    <p>The Solar System Explorer is designed to grow — through modular expansion, support systems, and upgrades. Future iterations may explore the Kuiper Belt, support colonization efforts around icy moons, and operate as the backbone of deep-space logistics networks.</p>
+    <!-- SPECS -->
+    <div class="section-header">
+      <h2>Ship Specifications</h2>
+      <p class="section-note">Reference dimensions and mass properties.</p>
+    </div>
+    <div class="card">
+      <table class="specs">
+        <tr><td>Length</td><td>~100–110 meters</td></tr>
+        <tr><td>Span (pods deployed)</td><td>~120–130 meters</td></tr>
+        <tr><td>Core diameter</td><td>~6–8 meters</td></tr>
+        <tr><td>Dry mass</td><td>~150–200 metric tons</td></tr>
+        <tr><td>Water & propellant</td><td>100+ metric tons</td></tr>
+        <tr><td>Habitation spin rate</td><td>1.5 RPM → 0.4g</td></tr>
+        <tr><td>Reactor output</td><td>2–5 MW (gas-cooled fission)</td></tr>
+        <tr><td>Docking capacity</td><td>Landers, tankers, resupply craft</td></tr>
+      </table>
+    </div>
+
+    <hr class="rule"/>
+
+    <!-- SUPPORT CRAFT -->
+    <div class="section-header">
+      <h2>Support Craft</h2>
+      <p class="section-note">The Explorer operates as the hub of a small fleet.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>Landers</h3>
+        <p>Crew and cargo delivery to planetary and moon surfaces. Configurable for gravity and atmospheric conditions at destination.</p>
+        <div>
+          <span class="pill">Crew transport</span>
+          <span class="pill">Surface ops</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Tankers</h3>
+        <p>Orbital water and ice delivery to feed the onboard electrolysis plant for propellant production in situ.</p>
+        <div>
+          <span class="pill">Water delivery</span>
+          <span class="pill">Cryo transfer</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Mining Drones</h3>
+        <p>Autonomous extraction of water from regolith or subsurface ice at destination bodies, feeding the logistics chain.</p>
+        <div>
+          <span class="pill">ISRU</span>
+          <span class="pill">Autonomy</span>
+          <span class="pill">Extraction</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="rule"/>
+
+    <!-- LONG-TERM VISION -->
+    <div class="section-header">
+      <h2>Long-Term Vision</h2>
+      <p class="section-note">A platform built to grow.</p>
+    </div>
+    <p style="color:#cfcfcf; max-width:700px;">
+      The Solar System Explorer is designed for iterative expansion. Future configurations may support Kuiper Belt prospecting,
+      crewed presence around icy moons, and operation as the backbone of a deep-space logistics network. Modular architecture
+      means each mission can be tailored without redesigning the core platform.
+    </p>
+
+    <div class="download-bar">
+      <a href="dossiers/Solar_System_Explorer_Dossier.pdf" class="download-btn">Download Explorer Dossier (PDF)</a>
+    </div>
+
+    <a class="back" href="index.html">← Back to Home</a>
 
   </div>
-</section>
-<div class="text-center mt-10">
-  <a href="dossiers/Solar_System_Explorer_Dossier.pdf" class="inline-block px-6 py-3 bg-white text-black font-semibold rounded hover:bg-gray-200 transition">
-    Download Explorer Dossier (PDF)
-  </a>
-</div>
 </body>
 </html>
