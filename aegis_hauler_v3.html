@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earth–Aegis Long-Hauler // Rev 3 Dossier</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #09090b;
+    --bg2:     #0e0e12;
+    --panel:   #111115;
+    --border:  #1e2028;
+    --amber:   #e8a020;
+    --amber2:  #f0c060;
+    --dimamber:#7a5010;
+    --dim:     #3a4050;
+    --text:    #c0c8d8;
+    --textdim: #606878;
+    --green:   #3a9060;
+    --red:     #c04040;
+    --blue:    #4080c0;
+    --mono:    'Share Tech Mono', monospace;
+    --cond:    'Barlow Condensed', sans-serif;
+    --body:    'Barlow', sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  /* scanline texture */
+  body::after {
+    content:'';
+    position:fixed; inset:0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    pointer-events:none;
+    z-index:9999;
+  }
+
+  .page {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px 100px;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    padding: 48px 0 36px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 52px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: end;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--amber);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--amber);
+  }
+  h1 {
+    font-family: var(--cond);
+    font-weight: 900;
+    font-size: clamp(32px, 5.5vw, 60px);
+    line-height: 0.95;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  h1 em {
+    color: var(--amber);
+    font-style: normal;
+  }
+  .tagline {
+    font-family: var(--cond);
+    font-weight: 300;
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--textdim);
+    margin-top: 10px;
+  }
+  .header-data {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--textdim);
+    line-height: 2;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(232,160,32,0.1);
+    border: 1px solid var(--dimamber);
+    color: var(--amber);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    padding: 3px 8px;
+    text-transform: uppercase;
+  }
+  .badge.green { background: rgba(58,144,96,0.1); border-color: #1a5030; color: var(--green); }
+
+  /* ─── SECTION CHROME ─── */
+  .sec-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--amber);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .sec-label::after { content:''; flex:1; height:1px; background:var(--border); }
+
+  h2 {
+    font-family: var(--cond);
+    font-weight: 700;
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 20px;
+    letter-spacing: 0.01em;
+  }
+  h3 {
+    font-family: var(--cond);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber2);
+    margin: 24px 0 10px;
+  }
+  p { font-size: 14px; line-height: 1.75; color: var(--text); margin-bottom: 14px; }
+  section { margin-bottom: 64px; }
+
+  /* ─── SVG DIAGRAM ─── */
+  .diagram-outer {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--amber);
+    padding: 36px 24px 20px;
+    margin-bottom: 52px;
+    position: relative;
+    overflow: hidden;
+  }
+  .diagram-outer::before {
+    content: 'FIG 1 — CONFIG A: STANDARD FREIGHT // AUTONOMOUS';
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--amber);
+    letter-spacing: 0.15em;
+    position: absolute;
+    top: 10px; left: 16px;
+  }
+  .diagram-outer::after {
+    content: 'REV 3 // NOT TO SCALE';
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--dim);
+    position: absolute;
+    top: 10px; right: 16px;
+  }
+  .diagram-outer.crew-config::before {
+    content: 'FIG 2 — CONFIG B: TECHNICAL CREW RUN';
+    color: #4080c0;
+  }
+  .diagram-outer svg { width:100%; height:auto; display:block; }
+
+  /* ─── SPEC TABLE ─── */
+  .spec-table {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .sk { background: var(--panel); padding: 11px 16px; font-family: var(--mono); font-size: 10px; color: var(--textdim); letter-spacing: 0.05em; text-transform: uppercase; display: flex; align-items: center; }
+  .sv { background: var(--bg2); padding: 11px 16px; font-family: var(--cond); font-size: 15px; color: var(--text); }
+  .sv small { display: block; font-size: 11px; color: var(--textdim); font-family: var(--mono); margin-top: 2px; }
+  .sv .hi { color: var(--amber2); font-weight: 600; }
+
+  /* ─── CALLOUT ─── */
+  .callout {
+    border-left: 3px solid var(--amber);
+    background: rgba(232,160,32,0.04);
+    padding: 14px 18px;
+    margin: 18px 0;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .callout.warn { border-left-color: var(--red); background: rgba(192,64,64,0.04); }
+  .callout.info { border-left-color: var(--blue); background: rgba(64,128,192,0.04); }
+  .callout strong {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+    color: var(--amber);
+  }
+  .callout.warn strong { color: var(--red); }
+  .callout.info strong { color: var(--blue); }
+
+  /* ─── PHASE CARDS ─── */
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 24px;
+  }
+  .ph {
+    background: var(--panel);
+    padding: 20px;
+    border-top: 2px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .ph:hover { border-top-color: var(--amber); }
+  .ph-n { font-family: var(--mono); font-size: 9px; color: var(--amber); letter-spacing: 0.2em; margin-bottom: 8px; }
+  .ph-t { font-family: var(--cond); font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; color: #fff; margin-bottom: 10px; }
+  .ph p { font-size: 12px; color: var(--textdim); margin:0; line-height: 1.6; }
+
+  /* ─── MODULE LIST ─── */
+  .modules {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 24px;
+  }
+  .mod {
+    background: var(--panel);
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    gap: 16px;
+    align-items: start;
+    border-left: 3px solid transparent;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .mod:hover { border-left-color: var(--amber); background: #13141a; }
+  .mod-n { font-family: var(--mono); font-size: 22px; color: var(--border); line-height: 1; padding-top: 1px; }
+  .mod:hover .mod-n { color: var(--dimamber); }
+  .mod-title { font-family: var(--cond); font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; margin-bottom: 4px; }
+  .mod-desc { font-size: 12px; color: var(--textdim); line-height: 1.55; margin:0; }
+  .mod-tag {
+    font-family: var(--mono); font-size: 9px; color: var(--amber);
+    background: rgba(232,160,32,0.07); border: 1px solid rgba(232,160,32,0.18);
+    padding: 3px 8px; white-space: nowrap; letter-spacing: 0.1em; text-transform: uppercase; height: fit-content;
+  }
+  .mod-tag.core { color: var(--green); background: rgba(58,144,96,0.07); border-color: rgba(58,144,96,0.2); }
+  .mod-tag.opt  { color: var(--textdim); background: transparent; border-color: var(--border); }
+
+  /* ─── CONSIST TABLE ─── */
+  .consist {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 24px;
+  }
+  .consist-card {
+    background: var(--panel);
+    padding: 20px;
+  }
+  .consist-card h4 {
+    font-family: var(--cond);
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .consist-card .stack {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--textdim);
+    line-height: 2;
+    margin: 10px 0;
+  }
+  .consist-card .stack span { color: var(--amber); }
+  .consist-card .stack .opt { color: var(--dim); }
+  .consist-card p { font-size: 12px; color: var(--textdim); margin:0; }
+
+  /* ─── CARGO VIZ ─── */
+  .cargo-viz {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 20px;
+    margin-bottom: 16px;
+    font-family: var(--mono);
+  }
+  .cargo-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .cargo-label { font-size: 10px; color: var(--textdim); letter-spacing: 0.1em; width: 200px; flex-shrink: 0; }
+  .cargo-bar-wrap { flex: 1; height: 10px; background: var(--border); position: relative; }
+  .cargo-bar { height: 100%; background: var(--amber); position: absolute; left:0; top:0; }
+  .cargo-bar.b2 { background: var(--amber2); }
+  .cargo-bar.over { background: var(--red); opacity:0.7; }
+  .cargo-val { font-size: 11px; color: var(--amber); width: 60px; text-align: right; flex-shrink:0; }
+
+  /* ─── PROP GRID ─── */
+  .prop-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 20px;
+  }
+  .prop-item { background: var(--panel); padding: 18px 18px; }
+  .prop-l { font-family: var(--mono); font-size: 9px; color: var(--textdim); letter-spacing: 0.15em; text-transform:uppercase; margin-bottom:6px; }
+  .prop-v { font-family: var(--cond); font-weight: 600; font-size: 16px; color: #fff; margin-bottom: 4px; }
+  .prop-note { font-size: 12px; color: var(--textdim); line-height: 1.5; }
+
+  /* ─── OPEN ITEMS ─── */
+  .open-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+  }
+  .oi {
+    background: var(--panel);
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 24px 1fr auto;
+    gap: 14px;
+    align-items: start;
+    font-size: 13px;
+  }
+  .oi-num { font-family: var(--mono); font-size: 10px; color: var(--dim); }
+  .oi-text { color: var(--text); line-height: 1.55; }
+  .oi-status {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 2px 7px; border: 1px solid; white-space: nowrap; height: fit-content;
+  }
+  .oi-status.tbd { color: var(--amber); border-color: var(--dimamber); }
+  .oi-status.open { color: var(--red); border-color: #602020; }
+  .oi-status.noted { color: var(--textdim); border-color: var(--border); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 720px) {
+    header { grid-template-columns: 1fr; }
+    .phases, .consist, .prop-grid { grid-template-columns: 1fr; }
+    .spec-table { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<header>
+  <div>
+    <div class="eyebrow">Document AEG-LH-003 // Rev 3 — Heavy Freight Respec</div>
+    <h1>EARTH–<em>AEGIS</em><br>LONG-HAULER</h1>
+    <div class="tagline">Interorbital Heavy Freight Transport // Structural Spine Architecture</div>
+  </div>
+  <div class="header-data">
+    <div style="margin-bottom:8px;">
+      <span class="badge green">● Freight Primary</span>&nbsp;
+      <span class="badge">Crew Optional</span>
+    </div>
+    <div>BASELINE CARGO: 50 T</div>
+    <div>MAX CARGO: ~90 T (TANDEM)</div>
+    <div>PROPULSION: ION + METHALOX</div>
+    <div>AUTONOMY: DEFAULT OPERATING MODE</div>
+    <div>CLASS: STRUCTURAL SPINE / MODULAR CONSIST</div>
+  </div>
+</header>
+
+<!-- DIAGRAM 1: STANDARD FREIGHT -->
+<div class="diagram-outer" style="margin-bottom:8px;">
+  <svg viewBox="0 0 1040 310" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="spineG" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#28303c"/><stop offset="100%" style="stop-color:#161c24"/>
+      </linearGradient>
+      <linearGradient id="tankG" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#1e2840"/><stop offset="50%" style="stop-color:#141e30"/><stop offset="100%" style="stop-color:#0e1620"/>
+      </linearGradient>
+      <linearGradient id="modG" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#20242e"/><stop offset="100%" style="stop-color:#131720"/>
+      </linearGradient>
+      <linearGradient id="thrG" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#e8a020;stop-opacity:0.8"/><stop offset="50%" style="stop-color:#f0c060;stop-opacity:0.3"/><stop offset="100%" style="stop-color:#e8a020;stop-opacity:0"/>
+      </linearGradient>
+      <linearGradient id="solarG" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#1a2840"/><stop offset="100%" style="stop-color:#0e1828"/>
+      </linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="bigglow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+
+    <!-- config label -->
+    <text x="520" y="22" font-family="'Share Tech Mono',monospace" font-size="9" fill="#e8a020" text-anchor="middle" letter-spacing="3">CONFIG A — STANDARD FREIGHT // AUTONOMOUS // NO CREW MODULE</text>
+    <line x1="60" y1="28" x2="980" y2="28" stroke="#1e2838" stroke-width="1"/>
+
+    <!-- ═══ STRUCTURAL SPINE ═══ -->
+    <rect x="130" y="138" width="760" height="24" rx="3" fill="url(#spineG)" stroke="#2a3545" stroke-width="1.5"/>
+    <line x1="220" y1="138" x2="220" y2="162" stroke="#1e2838" stroke-width="1"/>
+    <line x1="330" y1="138" x2="330" y2="162" stroke="#1e2838" stroke-width="1"/>
+    <line x1="440" y1="138" x2="440" y2="162" stroke="#1e2838" stroke-width="1"/>
+    <line x1="550" y1="138" x2="550" y2="162" stroke="#1e2838" stroke-width="1"/>
+    <line x1="660" y1="138" x2="660" y2="162" stroke="#1e2838" stroke-width="1"/>
+    <line x1="750" y1="138" x2="750" y2="162" stroke="#1e2838" stroke-width="1"/>
+    <line x1="820" y1="138" x2="820" y2="162" stroke="#1e2838" stroke-width="1"/>
+    <!-- spine label -->
+    <text x="480" y="154" font-family="'Share Tech Mono',monospace" font-size="7" fill="#2a3848" text-anchor="middle" letter-spacing="3">STRUCTURAL SPINE</text>
+
+    <!-- ═══ TANK CARTRIDGES ═══ -->
+    <!-- A -->
+    <rect x="220" y="168" width="200" height="58" rx="29" fill="url(#tankG)" stroke="#2a3d5a" stroke-width="1.5"/>
+    <ellipse cx="220" cy="197" rx="9" ry="29" fill="#1a2638" stroke="#2a3d5a" stroke-width="1"/>
+    <ellipse cx="420" cy="197" rx="9" ry="29" fill="#1a2638" stroke="#2a3d5a" stroke-width="1"/>
+    <line x1="253" y1="168" x2="253" y2="226" stroke="#1e3050" stroke-width="1" opacity="0.5"/>
+    <line x1="303" y1="168" x2="303" y2="226" stroke="#1e3050" stroke-width="1" opacity="0.5"/>
+    <line x1="353" y1="168" x2="353" y2="226" stroke="#1e3050" stroke-width="1" opacity="0.5"/>
+    <line x1="387" y1="168" x2="387" y2="226" stroke="#1e3050" stroke-width="1" opacity="0.5"/>
+    <rect x="246" y="161" width="10" height="10" rx="1" fill="#1a2030" stroke="#3a5070" stroke-width="1"/>
+    <rect x="374" y="161" width="10" height="10" rx="1" fill="#1a2030" stroke="#3a5070" stroke-width="1"/>
+    <text x="320" y="200" font-family="'Share Tech Mono',monospace" font-size="9" fill="#4a6080" text-anchor="middle" letter-spacing="2">CARTRIDGE A</text>
+    <text x="320" y="213" font-family="'Share Tech Mono',monospace" font-size="8" fill="#334558" text-anchor="middle" letter-spacing="1">~45 T // 10m × Ø2.5m</text>
+    <!-- B -->
+    <rect x="440" y="168" width="200" height="58" rx="29" fill="url(#tankG)" stroke="#2a3d5a" stroke-width="1.5"/>
+    <ellipse cx="440" cy="197" rx="9" ry="29" fill="#1a2638" stroke="#2a3d5a" stroke-width="1"/>
+    <ellipse cx="640" cy="197" rx="9" ry="29" fill="#1a2638" stroke="#2a3d5a" stroke-width="1"/>
+    <line x1="473" y1="168" x2="473" y2="226" stroke="#1e3050" stroke-width="1" opacity="0.5"/>
+    <line x1="523" y1="168" x2="523" y2="226" stroke="#1e3050" stroke-width="1" opacity="0.5"/>
+    <line x1="573" y1="168" x2="573" y2="226" stroke="#1e3050" stroke-width="1" opacity="0.5"/>
+    <line x1="607" y1="168" x2="607" y2="226" stroke="#1e3050" stroke-width="1" opacity="0.5"/>
+    <rect x="466" y="161" width="10" height="10" rx="1" fill="#1a2030" stroke="#3a5070" stroke-width="1"/>
+    <rect x="594" y="161" width="10" height="10" rx="1" fill="#1a2030" stroke="#3a5070" stroke-width="1"/>
+    <text x="540" y="200" font-family="'Share Tech Mono',monospace" font-size="9" fill="#4a6080" text-anchor="middle" letter-spacing="2">CARTRIDGE B</text>
+    <text x="540" y="213" font-family="'Share Tech Mono',monospace" font-size="8" fill="#334558" text-anchor="middle" letter-spacing="1">~45 T // 10m × Ø2.5m</text>
+
+    <!-- ═══ PROPULSION STACK ═══ -->
+    <rect x="858" y="122" width="80" height="60" rx="4" fill="url(#modG)" stroke="#2a3040" stroke-width="1.5"/>
+    <path d="M858 134 L838 128 L828 150 L838 172 L858 166Z" fill="#161e2c" stroke="#263040" stroke-width="1.5"/>
+    <circle cx="831" cy="150" r="5" fill="#e8a020" opacity="0.55" filter="url(#bigglow)"/>
+    <rect x="930" y="127" width="24" height="10" rx="3" fill="#131820" stroke="#e8a020" stroke-width="0.8"/>
+    <rect x="930" y="141" width="24" height="10" rx="3" fill="#131820" stroke="#e8a020" stroke-width="0.8"/>
+    <rect x="930" y="155" width="24" height="10" rx="3" fill="#131820" stroke="#e8a020" stroke-width="0.8"/>
+    <rect x="930" y="169" width="24" height="10" rx="3" fill="#131820" stroke="#e8a020" stroke-width="0.8"/>
+    <circle cx="954" cy="132" r="2.5" fill="#e8a020" filter="url(#glow)"/>
+    <circle cx="954" cy="146" r="2.5" fill="#e8a020" filter="url(#glow)"/>
+    <circle cx="954" cy="160" r="2.5" fill="#e8a020" filter="url(#glow)"/>
+    <circle cx="954" cy="174" r="2.5" fill="#e8a020" filter="url(#glow)"/>
+    <ellipse cx="975" cy="132" rx="44" ry="6" fill="url(#thrG)" opacity="0.55"/>
+    <ellipse cx="975" cy="146" rx="38" ry="5" fill="url(#thrG)" opacity="0.45"/>
+    <ellipse cx="975" cy="160" rx="38" ry="5" fill="url(#thrG)" opacity="0.45"/>
+    <ellipse cx="975" cy="174" rx="44" ry="6" fill="url(#thrG)" opacity="0.55"/>
+    <text x="895" y="198" font-family="'Share Tech Mono',monospace" font-size="8" fill="#3a4555" text-anchor="middle" letter-spacing="1.5">PROP STACK</text>
+
+    <!-- ═══ POWER / RAD BLOCK ═══ -->
+    <rect x="758" y="124" width="94" height="56" rx="3" fill="url(#modG)" stroke="#2a3040" stroke-width="1.5"/>
+    <line x1="774" y1="124" x2="774" y2="180" stroke="#1e2838" stroke-width="1"/>
+    <line x1="791" y1="124" x2="791" y2="180" stroke="#1e2838" stroke-width="1"/>
+    <line x1="808" y1="124" x2="808" y2="180" stroke="#1e2838" stroke-width="1"/>
+    <line x1="825" y1="124" x2="825" y2="180" stroke="#1e2838" stroke-width="1"/>
+    <line x1="842" y1="124" x2="842" y2="180" stroke="#1e2838" stroke-width="1"/>
+    <text x="805" y="198" font-family="'Share Tech Mono',monospace" font-size="8" fill="#3a4555" text-anchor="middle" letter-spacing="1.5">PWR / RAD</text>
+
+    <!-- ═══ COMMAND MODULE ═══ -->
+    <rect x="140" y="124" width="106" height="56" rx="3" fill="url(#modG)" stroke="#2a3555" stroke-width="1.5"/>
+    <path d="M140 124 Q106 130 90 152 Q106 174 140 180Z" fill="url(#modG)" stroke="#2a3555" stroke-width="1.5"/>
+    <circle cx="90" cy="152" r="9" fill="#131820" stroke="#e8a020" stroke-width="1.5"/>
+    <circle cx="90" cy="152" r="4" fill="#0a1018" stroke="#e8a020" stroke-width="1"/>
+    <rect x="108" y="133" width="22" height="13" rx="2" fill="#091520" stroke="#2a4060" stroke-width="1"/>
+    <rect x="134" y="133" width="14" height="12" rx="1" fill="#091520" stroke="#1e3050" stroke-width="1"/>
+    <line x1="176" y1="124" x2="176" y2="96" stroke="#2a3555" stroke-width="1.5"/>
+    <circle cx="176" cy="94" r="4" fill="#131820" stroke="#e8a020" stroke-width="1"/>
+    <line x1="176" y1="94" x2="192" y2="84" stroke="#2a3555" stroke-width="1"/>
+    <line x1="176" y1="94" x2="160" y2="84" stroke="#2a3555" stroke-width="1"/>
+    <rect x="118" y="180" width="14" height="6" rx="1" fill="#131820" stroke="#2a3040" stroke-width="1"/>
+    <rect x="118" y="118" width="14" height="6" rx="1" fill="#131820" stroke="#2a3040" stroke-width="1"/>
+    <text x="188" y="198" font-family="'Share Tech Mono',monospace" font-size="8" fill="#3a4555" text-anchor="middle" letter-spacing="1.5">CMD MODULE</text>
+
+    <!-- SOLAR ARRAYS -->
+    <rect x="628" y="46" width="136" height="70" rx="2" fill="url(#solarG)" stroke="#2a4060" stroke-width="1.2"/>
+    <line x1="628" y1="63" x2="764" y2="63" stroke="#1a3050" stroke-width="1"/>
+    <line x1="628" y1="80" x2="764" y2="80" stroke="#1a3050" stroke-width="1"/>
+    <line x1="628" y1="97" x2="764" y2="97" stroke="#1a3050" stroke-width="1"/>
+    <line x1="656" y1="46" x2="656" y2="116" stroke="#1a3050" stroke-width="1"/>
+    <line x1="690" y1="46" x2="690" y2="116" stroke="#1a3050" stroke-width="1"/>
+    <line x1="724" y1="46" x2="724" y2="116" stroke="#1a3050" stroke-width="1"/>
+    <line x1="758" y1="46" x2="758" y2="116" stroke="#1a3050" stroke-width="1"/>
+    <line x1="696" y1="116" x2="696" y2="138" stroke="#2a3555" stroke-width="2"/>
+    <rect x="634" y="192" width="120" height="58" rx="2" fill="url(#solarG)" stroke="#2a4060" stroke-width="1.2"/>
+    <line x1="634" y1="208" x2="754" y2="208" stroke="#1a3050" stroke-width="1"/>
+    <line x1="634" y1="224" x2="754" y2="224" stroke="#1a3050" stroke-width="1"/>
+    <line x1="634" y1="240" x2="754" y2="240" stroke="#1a3050" stroke-width="1"/>
+    <line x1="662" y1="192" x2="662" y2="250" stroke="#1a3050" stroke-width="1"/>
+    <line x1="694" y1="192" x2="694" y2="250" stroke="#1a3050" stroke-width="1"/>
+    <line x1="726" y1="192" x2="726" y2="250" stroke="#1a3050" stroke-width="1"/>
+    <line x1="696" y1="162" x2="696" y2="192" stroke="#2a3555" stroke-width="2"/>
+
+    <!-- DIMENSION -->
+    <line x1="90" y1="270" x2="938" y2="270" stroke="#1e2530" stroke-width="1" stroke-dasharray="3,4"/>
+    <line x1="90" y1="264" x2="90" y2="276" stroke="#2a3555" stroke-width="1.5"/>
+    <line x1="938" y1="264" x2="938" y2="276" stroke="#2a3555" stroke-width="1.5"/>
+    <text x="514" y="286" font-family="'Share Tech Mono',monospace" font-size="8" fill="#3a4555" text-anchor="middle" letter-spacing="3">~80–90m // TANDEM CARTRIDGE CONFIG</text>
+
+    <!-- ANNOTATIONS -->
+    <line x1="140" y1="124" x2="140" y2="72" stroke="#1a2530" stroke-width="1" stroke-dasharray="2,3"/>
+    <text x="62" y="66" font-family="'Share Tech Mono',monospace" font-size="8" fill="#506878" letter-spacing="1">CMD</text>
+    <line x1="320" y1="168" x2="280" y2="58" stroke="#1a2530" stroke-width="1" stroke-dasharray="2,3"/>
+    <text x="168" y="52" font-family="'Share Tech Mono',monospace" font-size="8" fill="#e8a020" letter-spacing="1">CRADLE MOUNTS</text>
+    <line x1="800" y1="124" x2="800" y2="72" stroke="#1a2530" stroke-width="1" stroke-dasharray="2,3"/>
+    <text x="742" y="66" font-family="'Share Tech Mono',monospace" font-size="8" fill="#506878" letter-spacing="1">PWR/RAD</text>
+    <line x1="895" y1="122" x2="895" y2="72" stroke="#1a2530" stroke-width="1" stroke-dasharray="2,3"/>
+    <text x="856" y="66" font-family="'Share Tech Mono',monospace" font-size="8" fill="#506878" letter-spacing="1">PROP</text>
+  </svg>
+</div>
+
+<!-- DIAGRAM 2: CREW CONFIG -->
+<div class="diagram-outer crew-config" style="margin-bottom:48px; border-top-color:#4080c0;">
+  <svg viewBox="0 0 1040 310" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="spineG2" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#28303c"/><stop offset="100%" style="stop-color:#161c24"/>
+      </linearGradient>
+      <linearGradient id="modG2" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#20242e"/><stop offset="100%" style="stop-color:#131720"/>
+      </linearGradient>
+      <linearGradient id="crewG" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#1a2540"/><stop offset="100%" style="stop-color:#0e1828"/>
+      </linearGradient>
+      <linearGradient id="cargoG" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#1e2230"/><stop offset="100%" style="stop-color:#131620"/>
+      </linearGradient>
+      <linearGradient id="thrG2" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#e8a020;stop-opacity:0.8"/><stop offset="50%" style="stop-color:#f0c060;stop-opacity:0.3"/><stop offset="100%" style="stop-color:#e8a020;stop-opacity:0"/>
+      </linearGradient>
+      <linearGradient id="solarG2" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#1a2840"/><stop offset="100%" style="stop-color:#0e1828"/>
+      </linearGradient>
+      <filter id="glow2"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="bigglow2"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+
+    <!-- config label -->
+    <text x="520" y="22" font-family="'Share Tech Mono',monospace" font-size="9" fill="#4080c0" text-anchor="middle" letter-spacing="3">CONFIG B — TECHNICAL CREW RUN // 8–12 TECHS + MIXED CARGO</text>
+    <line x1="60" y1="28" x2="980" y2="28" stroke="#1e2838" stroke-width="1"/>
+
+    <!-- ═══ STRUCTURAL SPINE ═══ -->
+    <rect x="80" y="138" width="840" height="24" rx="3" fill="url(#spineG2)" stroke="#2a3545" stroke-width="1.5"/>
+    <line x1="170" y1="138" x2="170" y2="162" stroke="#1e2838" stroke-width="1"/>
+    <line x1="300" y1="138" x2="300" y2="162" stroke="#1e2838" stroke-width="1"/>
+    <line x1="420" y1="138" x2="420" y2="162" stroke="#1e2838" stroke-width="1"/>
+    <line x1="540" y1="138" x2="540" y2="162" stroke="#1e2838" stroke-width="1"/>
+    <line x1="660" y1="138" x2="660" y2="162" stroke="#1e2838" stroke-width="1"/>
+    <line x1="770" y1="138" x2="770" y2="162" stroke="#1e2838" stroke-width="1"/>
+    <line x1="860" y1="138" x2="860" y2="162" stroke="#1e2838" stroke-width="1"/>
+    <text x="520" y="154" font-family="'Share Tech Mono',monospace" font-size="7" fill="#2a3848" text-anchor="middle" letter-spacing="3">STRUCTURAL SPINE</text>
+
+    <!-- ═══ COMMAND MODULE ═══ -->
+    <rect x="90" y="120" width="106" height="60" rx="3" fill="url(#modG2)" stroke="#2a3555" stroke-width="1.5"/>
+    <path d="M90 120 Q56 126 40 150 Q56 174 90 180Z" fill="url(#modG2)" stroke="#2a3555" stroke-width="1.5"/>
+    <circle cx="40" cy="150" r="9" fill="#131820" stroke="#e8a020" stroke-width="1.5"/>
+    <circle cx="40" cy="150" r="4" fill="#0a1018" stroke="#e8a020" stroke-width="1"/>
+    <rect x="58" y="130" width="22" height="13" rx="2" fill="#091520" stroke="#2a4060" stroke-width="1"/>
+    <rect x="84" y="130" width="14" height="12" rx="1" fill="#091520" stroke="#1e3050" stroke-width="1"/>
+    <line x1="128" y1="120" x2="128" y2="92" stroke="#2a3555" stroke-width="1.5"/>
+    <circle cx="128" cy="90" r="4" fill="#131820" stroke="#e8a020" stroke-width="1"/>
+    <line x1="128" y1="90" x2="144" y2="80" stroke="#2a3555" stroke-width="1"/>
+    <line x1="128" y1="90" x2="112" y2="80" stroke="#2a3555" stroke-width="1"/>
+    <rect x="70" y="180" width="14" height="6" rx="1" fill="#131820" stroke="#2a3040" stroke-width="1"/>
+    <rect x="70" y="114" width="14" height="6" rx="1" fill="#131820" stroke="#2a3040" stroke-width="1"/>
+    <text x="138" y="200" font-family="'Share Tech Mono',monospace" font-size="8" fill="#3a4555" text-anchor="middle" letter-spacing="1.5">CMD</text>
+
+    <!-- ═══ CREW MODULE ═══ -->
+    <rect x="202" y="116" width="130" height="68" rx="3" fill="url(#crewG)" stroke="#4070a0" stroke-width="2"/>
+    <rect x="210" y="124" width="114" height="52" rx="2" fill="#0e1828" stroke="#2a4060" stroke-width="1"/>
+    <!-- bunk lines -->
+    <line x1="210" y1="138" x2="324" y2="138" stroke="#1a2840" stroke-width="1"/>
+    <line x1="210" y1="152" x2="324" y2="152" stroke="#1a2840" stroke-width="1"/>
+    <line x1="210" y1="162" x2="324" y2="162" stroke="#1a2840" stroke-width="1"/>
+    <line x1="267" y1="124" x2="267" y2="176" stroke="#1a2840" stroke-width="1"/>
+    <!-- portholes -->
+    <circle cx="224" cy="131" r="4" fill="#091828" stroke="#2a4060" stroke-width="1"/>
+    <circle cx="310" cy="131" r="4" fill="#091828" stroke="#2a4060" stroke-width="1"/>
+    <circle cx="224" cy="169" r="4" fill="#091828" stroke="#2a4060" stroke-width="1"/>
+    <circle cx="310" cy="169" r="4" fill="#091828" stroke="#2a4060" stroke-width="1"/>
+    <!-- water shield indicator -->
+    <rect x="202" y="116" width="6" height="68" rx="2" fill="#1a3040" stroke="#2a4060" stroke-width="1" opacity="0.8"/>
+    <rect x="326" y="116" width="6" height="68" rx="2" fill="#1a3040" stroke="#2a4060" stroke-width="1" opacity="0.8"/>
+    <text x="267" y="198" font-family="'Share Tech Mono',monospace" font-size="8" fill="#4080c0" text-anchor="middle" letter-spacing="1.5">CREW MODULE</text>
+    <text x="267" y="208" font-family="'Share Tech Mono',monospace" font-size="7" fill="#2a4060" text-anchor="middle" letter-spacing="1">8–12 TECHS</text>
+
+    <!-- ═══ CARGO MODULES (x2 smaller) ═══ -->
+    <!-- cargo A -->
+    <rect x="340" y="120" width="110" height="60" rx="3" fill="url(#cargoG)" stroke="#2a3040" stroke-width="1.5"/>
+    <rect x="348" y="128" width="94" height="44" rx="2" fill="#0f1218" stroke="#1e2838" stroke-width="1"/>
+    <line x1="348" y1="142" x2="442" y2="142" stroke="#1a2030" stroke-width="1"/>
+    <line x1="348" y1="156" x2="442" y2="156" stroke="#1a2030" stroke-width="1"/>
+    <line x1="394" y1="128" x2="394" y2="172" stroke="#1a2030" stroke-width="1"/>
+    <rect x="352" y="131" width="7" height="7" fill="#131820" stroke="#2a3545" stroke-width="0.8"/>
+    <rect x="428" y="131" width="7" height="7" fill="#131820" stroke="#2a3545" stroke-width="0.8"/>
+    <rect x="352" y="162" width="7" height="7" fill="#131820" stroke="#2a3545" stroke-width="0.8"/>
+    <rect x="428" y="162" width="7" height="7" fill="#131820" stroke="#2a3545" stroke-width="0.8"/>
+    <text x="395" y="198" font-family="'Share Tech Mono',monospace" font-size="8" fill="#3a4555" text-anchor="middle" letter-spacing="1.5">CARGO A</text>
+
+    <!-- cargo B -->
+    <rect x="458" y="120" width="110" height="60" rx="3" fill="url(#cargoG)" stroke="#2a3040" stroke-width="1.5"/>
+    <rect x="466" y="128" width="94" height="44" rx="2" fill="#0f1218" stroke="#1e2838" stroke-width="1"/>
+    <line x1="466" y1="142" x2="560" y2="142" stroke="#1a2030" stroke-width="1"/>
+    <line x1="466" y1="156" x2="560" y2="156" stroke="#1a2030" stroke-width="1"/>
+    <line x1="512" y1="128" x2="512" y2="172" stroke="#1a2030" stroke-width="1"/>
+    <rect x="470" y="131" width="7" height="7" fill="#131820" stroke="#2a3545" stroke-width="0.8"/>
+    <rect x="546" y="131" width="7" height="7" fill="#131820" stroke="#2a3545" stroke-width="0.8"/>
+    <rect x="470" y="162" width="7" height="7" fill="#131820" stroke="#2a3545" stroke-width="0.8"/>
+    <rect x="546" y="162" width="7" height="7" fill="#131820" stroke="#2a3545" stroke-width="0.8"/>
+    <text x="513" y="198" font-family="'Share Tech Mono',monospace" font-size="8" fill="#3a4555" text-anchor="middle" letter-spacing="1.5">CARGO B</text>
+
+    <!-- ═══ POWER / RAD BLOCK ═══ -->
+    <rect x="756" y="122" width="94" height="56" rx="3" fill="url(#modG2)" stroke="#2a3040" stroke-width="1.5"/>
+    <line x1="772" y1="122" x2="772" y2="178" stroke="#1e2838" stroke-width="1"/>
+    <line x1="789" y1="122" x2="789" y2="178" stroke="#1e2838" stroke-width="1"/>
+    <line x1="806" y1="122" x2="806" y2="178" stroke="#1e2838" stroke-width="1"/>
+    <line x1="823" y1="122" x2="823" y2="178" stroke="#1e2838" stroke-width="1"/>
+    <line x1="840" y1="122" x2="840" y2="178" stroke="#1e2838" stroke-width="1"/>
+    <text x="803" y="198" font-family="'Share Tech Mono',monospace" font-size="8" fill="#3a4555" text-anchor="middle" letter-spacing="1.5">PWR / RAD</text>
+
+    <!-- ═══ PROPULSION STACK ═══ -->
+    <rect x="856" y="120" width="80" height="60" rx="4" fill="url(#modG2)" stroke="#2a3040" stroke-width="1.5"/>
+    <path d="M856 132 L836 126 L826 150 L836 174 L856 168Z" fill="#161e2c" stroke="#263040" stroke-width="1.5"/>
+    <circle cx="829" cy="150" r="5" fill="#e8a020" opacity="0.55" filter="url(#bigglow2)"/>
+    <rect x="928" y="125" width="24" height="10" rx="3" fill="#131820" stroke="#e8a020" stroke-width="0.8"/>
+    <rect x="928" y="139" width="24" height="10" rx="3" fill="#131820" stroke="#e8a020" stroke-width="0.8"/>
+    <rect x="928" y="153" width="24" height="10" rx="3" fill="#131820" stroke="#e8a020" stroke-width="0.8"/>
+    <rect x="928" y="167" width="24" height="10" rx="3" fill="#131820" stroke="#e8a020" stroke-width="0.8"/>
+    <circle cx="952" cy="130" r="2.5" fill="#e8a020" filter="url(#glow2)"/>
+    <circle cx="952" cy="144" r="2.5" fill="#e8a020" filter="url(#glow2)"/>
+    <circle cx="952" cy="158" r="2.5" fill="#e8a020" filter="url(#glow2)"/>
+    <circle cx="952" cy="172" r="2.5" fill="#e8a020" filter="url(#glow2)"/>
+    <ellipse cx="973" cy="130" rx="44" ry="6" fill="url(#thrG2)" opacity="0.55"/>
+    <ellipse cx="973" cy="144" rx="38" ry="5" fill="url(#thrG2)" opacity="0.45"/>
+    <ellipse cx="973" cy="158" rx="38" ry="5" fill="url(#thrG2)" opacity="0.45"/>
+    <ellipse cx="973" cy="172" rx="44" ry="6" fill="url(#thrG2)" opacity="0.55"/>
+    <text x="893" y="198" font-family="'Share Tech Mono',monospace" font-size="8" fill="#3a4555" text-anchor="middle" letter-spacing="1.5">PROP STACK</text>
+
+    <!-- SOLAR ARRAYS -->
+    <rect x="626" y="44" width="136" height="70" rx="2" fill="url(#solarG2)" stroke="#2a4060" stroke-width="1.2"/>
+    <line x1="626" y1="61" x2="762" y2="61" stroke="#1a3050" stroke-width="1"/>
+    <line x1="626" y1="78" x2="762" y2="78" stroke="#1a3050" stroke-width="1"/>
+    <line x1="626" y1="95" x2="762" y2="95" stroke="#1a3050" stroke-width="1"/>
+    <line x1="654" y1="44" x2="654" y2="114" stroke="#1a3050" stroke-width="1"/>
+    <line x1="688" y1="44" x2="688" y2="114" stroke="#1a3050" stroke-width="1"/>
+    <line x1="722" y1="44" x2="722" y2="114" stroke="#1a3050" stroke-width="1"/>
+    <line x1="756" y1="44" x2="756" y2="114" stroke="#1a3050" stroke-width="1"/>
+    <line x1="694" y1="114" x2="694" y2="138" stroke="#2a3555" stroke-width="2"/>
+    <rect x="632" y="190" width="120" height="58" rx="2" fill="url(#solarG2)" stroke="#2a4060" stroke-width="1.2"/>
+    <line x1="632" y1="206" x2="752" y2="206" stroke="#1a3050" stroke-width="1"/>
+    <line x1="632" y1="222" x2="752" y2="222" stroke="#1a3050" stroke-width="1"/>
+    <line x1="632" y1="238" x2="752" y2="238" stroke="#1a3050" stroke-width="1"/>
+    <line x1="660" y1="190" x2="660" y2="248" stroke="#1a3050" stroke-width="1"/>
+    <line x1="692" y1="190" x2="692" y2="248" stroke="#1a3050" stroke-width="1"/>
+    <line x1="724" y1="190" x2="724" y2="248" stroke="#1a3050" stroke-width="1"/>
+    <line x1="694" y1="162" x2="694" y2="190" stroke="#2a3555" stroke-width="2"/>
+
+    <!-- DIMENSION -->
+    <line x1="40" y1="270" x2="938" y2="270" stroke="#1e2530" stroke-width="1" stroke-dasharray="3,4"/>
+    <line x1="40" y1="264" x2="40" y2="276" stroke="#2a3555" stroke-width="1.5"/>
+    <line x1="938" y1="264" x2="938" y2="276" stroke="#2a3555" stroke-width="1.5"/>
+    <text x="489" y="286" font-family="'Share Tech Mono',monospace" font-size="8" fill="#3a4555" text-anchor="middle" letter-spacing="3">~70–80m // CREW + CARGO CONFIG</text>
+
+    <!-- ANNOTATIONS -->
+    <line x1="90" y1="120" x2="90" y2="70" stroke="#1a2530" stroke-width="1" stroke-dasharray="2,3"/>
+    <text x="30" y="64" font-family="'Share Tech Mono',monospace" font-size="8" fill="#506878" letter-spacing="1">CMD</text>
+    <line x1="267" y1="116" x2="267" y2="62" stroke="#1a2530" stroke-width="1" stroke-dasharray="2,3"/>
+    <text x="188" y="56" font-family="'Share Tech Mono',monospace" font-size="8" fill="#4080c0" letter-spacing="1">CREW MODULE</text>
+    <line x1="394" y1="120" x2="394" y2="62" stroke="#1a2530" stroke-width="1" stroke-dasharray="2,3"/>
+    <text x="340" y="56" font-family="'Share Tech Mono',monospace" font-size="8" fill="#506878" letter-spacing="1">CARGO ×2</text>
+    <line x1="800" y1="122" x2="800" y2="70" stroke="#1a2530" stroke-width="1" stroke-dasharray="2,3"/>
+    <text x="742" y="64" font-family="'Share Tech Mono',monospace" font-size="8" fill="#506878" letter-spacing="1">PWR/RAD</text>
+    <line x1="893" y1="120" x2="893" y2="70" stroke="#1a2530" stroke-width="1" stroke-dasharray="2,3"/>
+    <text x="855" y="64" font-family="'Share Tech Mono',monospace" font-size="8" fill="#506878" letter-spacing="1">PROP</text>
+    <!-- water shield callout -->
+    <line x1="202" y1="150" x2="168" y2="230" stroke="#1a2530" stroke-width="1" stroke-dasharray="2,3"/>
+    <text x="80" y="238" font-family="'Share Tech Mono',monospace" font-size="8" fill="#2a4060" letter-spacing="1">WATER SHIELD WALLS</text>
+  </svg>
+</div>
+
+<!-- OVERVIEW -->
+<section>
+  <div class="sec-label">01 — Concept</div>
+  <h2>Heavy Freight First</h2>
+  <p>The Earth–Aegis Long-Hauler is a modular interorbital freight vehicle designed around a structural spine architecture. Its primary mission is delivering the physical components of Aegis Station — and general lunar-orbit cargo — from LEO to LLO. Personnel transport is a secondary, optional capability enabled by bolt-on crew modules when required.</p>
+  <p>The vehicle is designed as infrastructure, not a spacecraft. Predictable, reusable, schedule-driven. Default operating mode is fully autonomous. Crew, when present, are technical specialists accompanying critical deliveries — not mission crew.</p>
+
+  <div class="callout info">
+    <strong>Design Driver</strong>
+    A single loaded tank cartridge (~45 T, 10m × Ø2.5m) is the defining payload. The vehicle is sized around this. Previous specs drove cargo capacity from propulsion limits upward — this revision drives propulsion requirements from payload mass downward.
+  </div>
+</section>
+
+<!-- KEY SPECS -->
+<section>
+  <div class="sec-label">02 — General Specifications</div>
+  <h2>Vehicle Parameters</h2>
+  <div class="spec-table">
+    <div class="sk">Configuration</div>
+    <div class="sv"><span class="hi">Structural Spine + Modular Consist</span><small>Command module and propulsion stack are permanent; cargo cradles and crew module bolt on</small></div>
+    <div class="sk">Total Length</div>
+    <div class="sv">60–90 meters<small>dependent on cargo consist — single cartridge vs tandem changes overall length</small></div>
+    <div class="sk">Baseline Cargo</div>
+    <div class="sv"><span class="hi">50 metric tons (single heavy cartridge)</span><small>e.g. one loaded tank cartridge ~45 T with margin</small></div>
+    <div class="sk">Tandem Cargo</div>
+    <div class="sv">~90 metric tons<small>two cartridges on spine; requires kick stage sizing to match — see propulsion</small></div>
+    <div class="sk">Crew Capacity</div>
+    <div class="sv">0 (autonomous) / 8–12 technicians (crewed config)<small>optional crew module; not standard fit on cargo runs</small></div>
+    <div class="sk">Transfer Duration</div>
+    <div class="sv">5–7 days<small>chemical TLI burn + ion cruise; dependent on cargo mass</small></div>
+    <div class="sk">Reusability Target</div>
+    <div class="sv">30–50 missions<small>depot-based inspection and refurbishment between runs</small></div>
+    <div class="sk">Autonomy</div>
+    <div class="sv"><span class="hi">Full autonomous operation — default mode</span><small>blackout-tolerant; mission control oversight, not supervision</small></div>
+    <div class="sk">Docking Interfaces</div>
+    <div class="sv">NASA/ESA standard (fore and aft)<small>forward port for station/depot docking; aft for tug or staged assist</small></div>
+  </div>
+</section>
+
+<!-- MISSION PHASES -->
+<section>
+  <div class="sec-label">03 — Mission Evolution</div>
+  <h2>Operational Phases</h2>
+  <div class="phases">
+    <div class="ph">
+      <div class="ph-n">PHASE 0</div>
+      <div class="ph-t">Precursor Delivery</div>
+      <p>Cargo-only runs. First station hull segments, node modules, and structural hardware. Builds route operations and refueling depot dependency before station exists. No crew modules fitted.</p>
+    </div>
+    <div class="ph">
+      <div class="ph-n">PHASE 1</div>
+      <div class="ph-t">Construction Logistics</div>
+      <p>Primary build-out phase. Repeated runs of tank cartridges, power system hardware, shielding panels, and assembly equipment. Return runs carry waste and empty hardware. Tandem cartridge runs if depot refueling is operational.</p>
+    </div>
+    <div class="ph">
+      <div class="ph-n">PHASE 2</div>
+      <div class="ph-t">Ongoing Operations</div>
+      <p>Station operational supply. Cargo for lunar lander transfer staging. Replacement hardware and consumables. Crewed runs when specialist delivery requires on-site technicians. Regular schedule, autonomous by default.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Lander Transfer Note</strong>
+    The Long-Hauler does not land. Cargo destined for the lunar surface is transferred to landers in lunar orbit. Lander payload capacity (typically 1–10 T to surface for near-term vehicles) constrains individual cargo unit sizing for surface-bound goods — but this does not affect the hauler's own cargo architecture. Station-bound hardware has no such constraint.
+  </div>
+</section>
+
+<!-- CARGO ARCHITECTURE -->
+<section>
+  <div class="sec-label">04 — Cargo Architecture</div>
+  <h2>Structural Spine & Cradle System</h2>
+  <p>The defining structural feature is a central load-bearing spine running the length of the vehicle. Tank cartridges and large cargo items mount to the spine via purpose-built cradles rather than fitting inside a pressurized hull. This allows cargo cross-section to be independent of the vehicle's module diameter, and enables tandem cartridge loading without vehicle redesign.</p>
+
+  <h3>Cargo Capacity vs Payload Types</h3>
+  <div class="cargo-viz">
+    <div class="cargo-row">
+      <div class="cargo-label">SINGLE TANK CARTRIDGE</div>
+      <div class="cargo-bar-wrap"><div class="cargo-bar" style="width:56%"></div></div>
+      <div class="cargo-val">~45 T</div>
+    </div>
+    <div class="cargo-row">
+      <div class="cargo-label">BASELINE TARGET</div>
+      <div class="cargo-bar-wrap"><div class="cargo-bar b2" style="width:62%"></div></div>
+      <div class="cargo-val">50 T</div>
+    </div>
+    <div class="cargo-row">
+      <div class="cargo-label">HULL RING SEGMENT</div>
+      <div class="cargo-bar-wrap"><div class="cargo-bar" style="width:38%"></div></div>
+      <div class="cargo-val">~30 T est.</div>
+    </div>
+    <div class="cargo-row">
+      <div class="cargo-label">POWER / REACTOR MODULE</div>
+      <div class="cargo-bar-wrap"><div class="cargo-bar" style="width:30%"></div></div>
+      <div class="cargo-val">~25 T est.</div>
+    </div>
+    <div class="cargo-row">
+      <div class="cargo-label">TANDEM CARTRIDGES</div>
+      <div class="cargo-bar-wrap"><div class="cargo-bar over" style="width:100%"></div></div>
+      <div class="cargo-val">~90 T</div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <strong>Tandem Constraint</strong>
+    Tandem cartridge runs (~90 T) are feasible structurally but drive the kick stage sizing significantly. This configuration should be treated as an enhanced variant requiring a larger or staged methalox booster, not the baseline design case.
+  </div>
+
+  <div class="spec-table" style="margin-top:20px;">
+    <div class="sk">Mounting System</div>
+    <div class="sv">Spine-mounted cradles with structural hard points rated per cartridge mass<small>EVA and robotic compatible; standardized interface across cartridge types</small></div>
+    <div class="sk">Cartridge Spec</div>
+    <div class="sv">~10m length × Ø2.5m<small>cylindrical; dense — ~45 T loaded. Cradle accommodates end caps and feed interfaces</small></div>
+    <div class="sk">ISO Pallet Cargo</div>
+    <div class="sv">Supported via adapter cradles for smaller/mixed loads<small>equipment, spares, lander-transfer cargo in smaller units</small></div>
+    <div class="sk">External / Oversized</div>
+    <div class="sv">Large structural elements (hull rings, solar truss sections) on extended spine mounts<small>mass balance must be maintained; mission planning responsibility</small></div>
+  </div>
+</section>
+
+<!-- PROPULSION -->
+<section>
+  <div class="sec-label">05 — Propulsion & Power</div>
+  <h2>Drive Systems</h2>
+  <div class="prop-grid">
+    <div class="prop-item">
+      <div class="prop-l">Primary Drive</div>
+      <div class="prop-v">Ion / Hall-Effect Array</div>
+      <div class="prop-note">Continuous low-thrust cruise phase. High specific impulse. No flip required. Scales with power available. Primary workhorse across the majority of transit time.</div>
+    </div>
+    <div class="prop-item">
+      <div class="prop-l">Kick Stage</div>
+      <div class="prop-v">Methalox — Retained & Refuelable</div>
+      <div class="prop-note">Required for TLI and lunar orbit capture. Sized for 50 T baseline cargo. Stays attached for return burns. Refueled at LEO depot or Aegis Station. Tandem runs require enlarged or staged booster — flagged as variant.</div>
+    </div>
+    <div class="prop-item">
+      <div class="prop-l">Attitude Control</div>
+      <div class="prop-v">RCS — Monopropellant</div>
+      <div class="prop-note">Docking approach, attitude hold during ion cruise, emergency reorientation. Distributed pods fore and aft along spine.</div>
+    </div>
+    <div class="prop-item">
+      <div class="prop-l">Power System</div>
+      <div class="prop-v">Solar Array 300–450 m²</div>
+      <div class="prop-note">Enlarged vs previous spec to drive ion array at heavy cargo mass. Kilopower-class fission reactor as enhanced variant for deep-space extension or high-power ion configuration.</div>
+    </div>
+    <div class="prop-item">
+      <div class="prop-l">Thermal Control</div>
+      <div class="prop-v">Active Loops + Radiator Block</div>
+      <div class="prop-note">Dedicated module. Survivable across TLI burn, extended coast, and capture burn thermal cycles.</div>
+    </div>
+    <div class="prop-item">
+      <div class="prop-l">Autonomy</div>
+      <div class="prop-v">Full Autonomous Navigation</div>
+      <div class="prop-note">Default operating mode. Blackout-tolerant. Mission control oversight rather than active supervision. Crew presence does not alter navigation authority.</div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <strong>Critical Dependency</strong>
+    The retained kick stage strategy requires methalox refueling capability at either a LEO depot or Aegis Station. This is not a background assumption — it is a hard infrastructure dependency that must be resolved in parallel with vehicle development. Without it, the vehicle reverts to expendable kick stages per run, significantly increasing operating cost.
+  </div>
+</section>
+
+<!-- MODULE CONSIST -->
+<section>
+  <div class="sec-label">06 — Modular Architecture</div>
+  <h2>Consist Configurations</h2>
+
+  <div class="consist">
+    <div class="consist-card">
+      <h4>Standard Freight Run</h4>
+      <div class="stack">
+        <div><span>CMD</span> — Command Module (permanent)</div>
+        <div><span>SPINE</span> — Structural spine with cradles</div>
+        <div><span>CGO</span> — 1–2 cartridges or mixed cargo</div>
+        <div><span>PWR</span> — Power &amp; Radiator Block</div>
+        <div><span>PROP</span> — Propulsion Stack</div>
+        <div class="opt">[ NO CREW MODULE ]</div>
+      </div>
+      <p>Fully autonomous. No crew module fitted. Maximum cargo capacity. Default configuration for all Phase 0–1 runs and routine Phase 2 supply.</p>
+    </div>
+    <div class="consist-card">
+      <h4>Technical Crew Run</h4>
+      <div class="stack">
+        <div><span>CMD</span> — Command Module</div>
+        <div><span>CREW</span> — Optional crew module (8–12 techs)</div>
+        <div><span>SPINE</span> — Structural spine with cradles</div>
+        <div><span>CGO</span> — Reduced / critical cargo</div>
+        <div><span>PWR</span> — Power &amp; Radiator Block</div>
+        <div><span>PROP</span> — Propulsion Stack</div>
+      </div>
+      <p>Crew module inserted aft of command module. Reduces available cargo spine length. Used when specialist technicians must accompany critical hardware delivery. Not a routine configuration.</p>
+    </div>
+  </div>
+
+  <h3>Module Descriptions</h3>
+  <div class="modules">
+    <div class="mod">
+      <div class="mod-n">01</div>
+      <div>
+        <div class="mod-title">Command Module</div>
+        <p class="mod-desc">Navigation, docking, communications, autonomous systems management. Forward docking port. RCS clusters fore. Antenna array. Full blackout-tolerant autonomy stack. Permanent fixture — never removed from vehicle.</p>
+      </div>
+      <div class="mod-tag core">PERMANENT</div>
+    </div>
+    <div class="mod">
+      <div class="mod-n">02</div>
+      <div>
+        <div class="mod-title">Crew Module (Optional)</div>
+        <p class="mod-desc">8–12 technician berths. Basic galley, hygiene pod. Water-wall radiation buffering. Mounts between command module and cargo spine. Not fitted on standard freight runs. When fitted, reduces cargo capacity and adds mass to propulsion budget.</p>
+      </div>
+      <div class="mod-tag opt">OPTIONAL</div>
+    </div>
+    <div class="mod">
+      <div class="mod-n">03</div>
+      <div>
+        <div class="mod-title">Structural Spine + Cradle System</div>
+        <p class="mod-desc">Central load-bearing spine running full cargo length. Cradle hard points rated for cartridge mass (~45 T each). Supports 1–2 cartridges in tandem or mixed cargo adapters. EVA and robotic compatible interfaces throughout. Permanent structural element.</p>
+      </div>
+      <div class="mod-tag core">PERMANENT</div>
+    </div>
+    <div class="mod">
+      <div class="mod-n">04</div>
+      <div>
+        <div class="mod-title">Power &amp; Radiator Block</div>
+        <p class="mod-desc">Solar array mounts (300–450 m² total). Thermal loop management, coolant reservoirs, battery racks. External radiator fin array. Primary power conditioning. Sized for ion drive demand at full cargo mass.</p>
+      </div>
+      <div class="mod-tag core">PERMANENT</div>
+    </div>
+    <div class="mod">
+      <div class="mod-n">05</div>
+      <div>
+        <div class="mod-title">Propulsion Stack</div>
+        <p class="mod-desc">Ion/Hall thruster array (primary cruise). Methalox kick stage (retained, refuelable) for TLI and capture burns. RCS aft cluster. Aft docking interface. Propellant tanks and feed lines. Sized for 50 T baseline cargo; tandem variant requires enlarged booster.</p>
+      </div>
+      <div class="mod-tag core">PERMANENT</div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN ITEMS -->
+<section>
+  <div class="sec-label">07 — Open Architecture Questions</div>
+  <h2>Unresolved Items</h2>
+  <div class="open-items">
+    <div class="oi">
+      <div class="oi-num">01</div>
+      <div class="oi-text">Refueling infrastructure: methalox availability at LEO depot or Aegis Station is a hard dependency for the retained kick stage strategy. Without it, operating economics revert to expendable kick stages. Must be resolved in parallel with vehicle development.</div>
+      <div class="oi-status open">OPEN</div>
+    </div>
+    <div class="oi">
+      <div class="oi-num">02</div>
+      <div class="oi-text">Tandem cartridge kick stage sizing: ~90 T cargo mass requires a significantly larger or staged methalox booster. Delta-v budget for TLI and capture at this mass is not yet closed. Treat tandem runs as an enhanced variant until propulsion analysis is complete.</div>
+      <div class="oi-status tbd">TBD</div>
+    </div>
+    <div class="oi">
+      <div class="oi-num">03</div>
+      <div class="oi-text">Spine structural analysis: bending moments and thermal gradients across a 60–90m structure carrying asymmetric cargo loads (one cartridge vs two) need to be characterized. Mass balance constraints for different consists must be defined.</div>
+      <div class="oi-status tbd">TBD</div>
+    </div>
+    <div class="oi">
+      <div class="oi-num">04</div>
+      <div class="oi-text">Cartridge interface standard: cradle hard points must conform to a defined interface standard shared with the station assembly team so cartridges delivered by the hauler can be directly integrated into Aegis Station without rehandling hardware.</div>
+      <div class="oi-status open">OPEN</div>
+    </div>
+    <div class="oi">
+      <div class="oi-num">05</div>
+      <div class="oi-text">Radiation exposure for technical crew: non-specialist workers aboard for crewed runs operate under occupational radiation limits. Water-wall shielding in the crew module is the baseline — adequacy for 5–7 day transit needs dosimetry confirmation.</div>
+      <div class="oi-status noted">NOTED</div>
+    </div>
+    <div class="oi">
+      <div class="oi-num">06</div>
+      <div class="oi-text">Flip-and-burn crew protocol: TLI and capture burns require vehicle reorientation with crew aboard on crewed runs. Restraint procedures and burn sequencing for non-astronaut technicians need to be defined as a crew operations document.</div>
+      <div class="oi-status noted">NOTED</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>AEG-LH-003 // REV 3</span>
+  <span>EARTH–AEGIS LONG-HAULER // HEAVY FREIGHT RESPEC</span>
+  <span>NOT FOR FLIGHT USE</span>
+</footer>
+
+</div>
+</body>
+</html>
