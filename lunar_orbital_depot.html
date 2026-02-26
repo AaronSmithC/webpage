@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Lunar Orbital Propellant Depot — Aegis Station</title>
+
+  <!-- SEO -->
+  <meta name="description" content="The Lunar Orbital Propellant Depot (LOPD) is the pre-station infrastructure node that enables methalox refueling for the Aegis Long-Hauler and Lunar Tanker fleet in lunar orbit."/>
+  <meta name="keywords" content="Aegis Station, lunar orbital depot, propellant depot, methalox, electrolysis, cislunar infrastructure, LOPD, cryogenic storage"/>
+  <meta name="author" content="A.S., Principal Architect"/>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Lunar Orbital Propellant Depot — Aegis Station"/>
+  <meta property="og:description" content="Pre-station infrastructure that decouples propellant availability from Earth launch timing. Water in. Methalox out."/>
+  <meta property="og:image" content="https://www.aegisstation.com/images/OG_Main.png"/>
+  <meta property="og:url" content="https://www.aegisstation.com/lunar_orbital_depot.html"/>
+  <meta property="og:type" content="website"/>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="https://www.aegisstation.com/favicon_from_art.ico"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+
+  <style>
+  /* ── Reset & Variables ─────────────────────────────────── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg-primary: #060608;
+    --bg-raised: #0c0c10;
+    --bg-card: #111118;
+    --border: #1e1e2a;
+    --text-primary: #e8e8ec;
+    --text-secondary: #9a9ab0;
+    --text-dim: #6a6a80;
+    --accent: #4ea8d6;
+    --accent-glow: rgba(78, 168, 214, 0.15);
+    --font-display: 'Orbitron', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+    --max-w: 860px;
+    --section-gap: 5rem;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+  a:hover { opacity: 0.8; }
+  img { max-width: 100%; height: auto; display: block; }
+
+  /* ── Layout ────────────────────────────────────────────── */
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem; }
+
+  section {
+    padding: var(--section-gap) 0;
+    border-top: 1px solid var(--border);
+  }
+  section:first-of-type { border-top: none; }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 40px rgba(78,168,214,0.15);
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+    letter-spacing: 0.04em;
+    margin-bottom: 1.25rem;
+    color: #fff;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 2.5rem 0 0.75rem;
+    color: var(--accent);
+  }
+
+  p { margin-bottom: 1rem; color: var(--text-primary); }
+  p.subdued { color: var(--text-secondary); }
+  p.kicker {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  /* ── Specs List ────────────────────────────────────────── */
+  ul.specs {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 1.5rem;
+  }
+
+  ul.specs li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  ul.specs li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  ul.specs li strong { color: var(--text-primary); }
+
+  /* ── Flow Diagram ──────────────────────────────────────── */
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .flow-node {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.65rem 1rem;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    text-align: center;
+    flex: 1 1 120px;
+    min-width: 110px;
+  }
+
+  .flow-node span {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 0.2rem;
+  }
+
+  .flow-node.accent {
+    border-color: var(--accent);
+    color: #fff;
+    background: rgba(78,168,214,0.07);
+  }
+
+  .flow-arrow {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    padding: 0 0.4rem;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 640px) {
+    .flow { flex-direction: column; align-items: stretch; }
+    .flow-arrow { text-align: center; padding: 0.2rem 0; transform: rotate(90deg); }
+  }
+
+  /* ── Info Cards ────────────────────────────────────────── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .info-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.4rem;
+  }
+
+  .info-card h4 {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+
+  .info-card p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ── Pill Row ──────────────────────────────────────────── */
+  .pill-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 1.5rem; }
+
+  .pill {
+    padding: 0.2rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    background: var(--bg-raised);
+  }
+
+  /* ── Callout ───────────────────────────────────────────── */
+  .callout {
+    border-left: 2px solid var(--accent);
+    background: rgba(78,168,214,0.05);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+  }
+
+  .callout p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  /* ── Page Header ───────────────────────────────────────── */
+  .page-header {
+    padding: 4.5rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); opacity: 1; }
+  .back-link::before { content: '←'; }
+
+  /* ── Button ────────────────────────────────────────────── */
+  .btn {
+    display: inline-block;
+    padding: 0.65rem 1.6rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-card);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    transition: all 0.25s ease;
+    text-decoration: none;
+  }
+  .btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    opacity: 1;
+  }
+
+  .btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+
+  /* ── Footer ────────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 0 2rem;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--text-secondary); }
+  footer a:hover { color: var(--accent); }
+
+  /* ── Responsive ────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    :root { --section-gap: 3.5rem; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══ PAGE HEADER ═══ -->
+<div class="page-header">
+  <div class="container">
+    <a class="back-link" href="index.html">Back to Aegis Station</a>
+    <p class="kicker">Aegis Station — Transportation & Logistics</p>
+    <h1>Lunar Orbital Propellant Depot</h1>
+    <p style="font-size:1.1rem; color:var(--text-secondary); max-width:640px; margin-top:0.75rem;">
+      Pre-station infrastructure that decouples propellant availability from Earth launch timing.
+      Water in. Methalox out. Operational before the station ring is assembled.
+    </p>
+    <div class="pill-row">
+      <span class="pill">Methalox</span>
+      <span class="pill">Electrolysis</span>
+      <span class="pill">Cryogenic storage</span>
+      <span class="pill">Autonomous ops</span>
+      <span class="pill">Short-stay habitable</span>
+      <span class="pill">Lifecycle-flexible</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ WHY THIS COMES FIRST ═══ -->
+<section id="rationale">
+  <div class="container">
+    <h2>Why This Comes First</h2>
+    <p>
+      Every other element of the Aegis logistics chain — the Long-Hauler, the Lunar Tanker Fleet,
+      eventually the station itself — depends on propellant being available in lunar orbit.
+      Without a depot, each Hauler mission must carry enough propellant for a complete round trip from Earth,
+      and each Tanker cycle is constrained by whatever propellant it can produce and carry from the surface alone.
+    </p>
+    <p>
+      The LOPD breaks both constraints. Once operational, the Hauler arrives at the depot, offloads LCH₄,
+      refuels its return burn from depot-produced LOX, and departs. The Tanker fleet tops off
+      between cycles rather than carrying full reserves on every ascent. The depot absorbs
+      production variability from the surface and smooths it into a stable supply available on demand.
+    </p>
+
+    <div class="callout">
+      <p>
+        The depot's pressurized node also gives the program its first shirt-sleeve presence in lunar orbit —
+        a maintenance-accessible, crew-visitable outpost — before the station ring is ever assembled.
+        It is the beachhead.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROPELLANT FLOW ═══ -->
+<section id="propellant-flow">
+  <div class="container">
+    <h2>Propellant Flow</h2>
+    <p class="subdued">
+      The depot operates two parallel input streams that converge into a single methalox output.
+      LOX is produced locally from water. Methane is imported. Both are stored cryogenically and dispensed on demand.
+    </p>
+
+    <h3>LOX Production — Water → Electrolysis → LOX</h3>
+    <div class="flow">
+      <div class="flow-node">Lunar Tanker<span>water cartridge delivery</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Water Reception<span>offload &amp; inventory</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node accent">Electrolysis Plant<span>H₂O → H₂ + O₂</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">LOX Storage<span>cryo tanks, ZBO target</span></div>
+    </div>
+    <ul class="specs">
+      <li>Electrolysis capacity is the <strong>rate-limiting step</strong> — it sets the water delivery cadence requirement for the LT fleet</li>
+      <li>Hydrogen byproduct vented or retained for future use (fuel cell backup, surface delivery TBD)</li>
+      <li>Water inventory provides a buffer between LT delivery cycles and continuous electrolysis demand</li>
+    </ul>
+
+    <h3>LCH₄ Supply — Import, Condition, Store</h3>
+    <div class="flow">
+      <div class="flow-node">Long-Hauler<span>LCH₄ in freight manifest</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Offload Interface<span>standardized cryo port</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node accent">Cryo Conditioning<span>liquefaction, pressure mgmt</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">LCH₄ Storage<span>cryo tanks, ZBO target</span></div>
+    </div>
+    <ul class="specs">
+      <li>Methane arrives as cargo — import dependency is a <strong>known programmatic risk</strong> tracked against ISRU methane synthesis feasibility</li>
+      <li>Hauler manifest allocation for LCH₄ is a system-level constraint driving payload trade studies</li>
+      <li>Future pathway: lunar in-situ methane synthesis (Sabatier reaction from CO₂ + H₂) could close the loop — not baselined</li>
+    </ul>
+
+    <h3>Methalox Dispensing</h3>
+    <div class="flow">
+      <div class="flow-node accent">LOX Storage</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Fueling Interface<span>flow control &amp; metering</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Long-Hauler<span>return burn tanks</span></div>
+    </div>
+    <div class="flow" style="margin-top:0.5rem;">
+      <div class="flow-node accent">LCH₄ Storage</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Fueling Interface<span>flow control &amp; metering</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Lunar Tanker Fleet<span>top-off between cycles</span></div>
+    </div>
+    <ul class="specs" style="margin-top:1.25rem;">
+      <li>Standardized fueling ports accommodate both Hauler and LT docking geometries</li>
+      <li>Autonomous fueling baseline — crew not required for routine propellant transfer operations</li>
+      <li>Metered dispensing with inventory reconciliation and leak/safing logic</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ SYSTEMS ═══ -->
+<section id="systems">
+  <div class="container">
+    <h2>Systems Architecture</h2>
+
+    <div class="card-grid">
+      <div class="info-card">
+        <h4>Cryogenic Thermal Management</h4>
+        <p>
+          Active cryo cooling to suppress boiloff in both LOX and LCH₄ tanks.
+          Zero-boiloff (ZBO) target for long-duration storage windows between Hauler arrivals.
+          Thermal isolation, multilayer insulation, and controlled venting provisions.
+          Heat rejection to space via dedicated radiator panels.
+        </p>
+      </div>
+
+      <div class="info-card">
+        <h4>Autonomous Operations</h4>
+        <p>
+          Electrolysis, storage monitoring, and propellant transfer all operate without crew present.
+          Fault detection, isolation, and recovery (FDIR) logic handles off-nominal states autonomously.
+          Remote telemetry and commanding via ground or Aegis Station once operational.
+          Safe-mode and pressurization safing on loss of comms.
+        </p>
+      </div>
+
+      <div class="info-card">
+        <h4>Short-Stay Habitability</h4>
+        <p>
+          Pressurized node supporting maintenance visits of several days.
+          Life support, crew berthing, and basic EVA prep provisions.
+          Not a long-duration habitat — crew presence is for servicing,
+          inspection, and system resets, not extended operations.
+        </p>
+      </div>
+
+      <div class="info-card">
+        <h4>Docking & Berthing Interfaces</h4>
+        <p>
+          Multiple docking ports sized for Hauler and LT approach geometries.
+          Pressurized crew transfer compatible with Hauler and Shuttle.
+          Unpressurized cargo and propellant transfer via standardized cryo fluid couplings.
+          Robotic berthing provisions for cargo handling without EVA.
+        </p>
+      </div>
+
+      <div class="info-card">
+        <h4>Power Architecture</h4>
+        <p>
+          Solar arrays sized to drive continuous electrolysis operations as the primary load.
+          Battery storage for eclipse periods and surge demand.
+          Electrolysis power draw is the dominant sizing driver — depot power budget
+          is essentially an electrolysis power budget with margin.
+        </p>
+      </div>
+
+      <div class="info-card">
+        <h4>Structural & Modular Design</h4>
+        <p>
+          Modular architecture with discrete functional nodes — electrolysis module,
+          cryo storage modules, crew node, docking adapter ring.
+          Each module launchable and assembled on-orbit or pre-integrated for single-launch delivery.
+          Interface design supports future incorporation into Aegis Station without redesign.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VEHICLE INTERFACES ═══ -->
+<section id="interfaces">
+  <div class="container">
+    <h2>Vehicle Interfaces</h2>
+    <p class="subdued">
+      The depot is a service node. Its design is downstream of the vehicles it serves.
+    </p>
+
+    <h3>Earth–Aegis Long-Hauler</h3>
+    <ul class="specs">
+      <li>Primary LCH₄ import source — methane arrives as manifest cargo, offloaded at depot cryo port</li>
+      <li>Refuels LOX for return burn from depot-produced oxidizer — closes the Earth–lunar round trip</li>
+      <li>Crew transfer via pressurized docking node during maintenance or turnaround windows</li>
+      <li>Hauler's depot interface is a hard constraint: docking geometry, flow rates, and transfer protocols are ICD-controlled</li>
+    </ul>
+
+    <h3>Lunar Tanker Fleet</h3>
+    <ul class="specs">
+      <li>Primary water delivery vehicles — LT cartridge offload feeds depot water inventory and electrolysis queue</li>
+      <li>LTs top off LCH₄/LOX at the depot between descent cycles — depot acts as a propellant buffer smoothing surface production variability</li>
+      <li>High call rate: LT docking and transfer operations are the depot's most frequent interaction, driving reliability and throughput requirements</li>
+    </ul>
+
+    <h3>Luna–Aegis Shuttle (Hopper)</h3>
+    <ul class="specs">
+      <li>Shuttle operates on LH₂/LOX — <strong>out of scope for depot propellant services</strong></li>
+      <li>Crew transfer and short-stay access via pressurized docking node is in scope</li>
+      <li>Depot may serve as a staging point for crew transiting between Hauler and Shuttle during early program phases before station is assembled</li>
+    </ul>
+
+    <div class="callout">
+      <p>
+        Interface Control Documents (ICDs) between the LOPD and each vehicle are a program-level deliverable.
+        The depot's physical and operational interfaces must be locked before any vehicle finalizes its
+        docking or propellant transfer system design.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LIFECYCLE ═══ -->
+<section id="lifecycle">
+  <div class="container">
+    <h2>Lifecycle & Program Role</h2>
+    <p>
+      The depot's relationship to Aegis Station is intentionally left open. Two futures are both valid,
+      and the architecture is designed not to force a choice prematurely.
+    </p>
+
+    <div class="card-grid">
+      <div class="info-card">
+        <h4>Option A — Absorbed into Station</h4>
+        <p>
+          Depot modules incorporate into the Aegis Station architecture as the station assembles around them.
+          The cryo storage, electrolysis plant, and docking infrastructure become station subsystems.
+          The depot becomes the propellant and logistics hub of the completed station.
+        </p>
+      </div>
+
+      <div class="info-card">
+        <h4>Option B — Permanent Standalone Node</h4>
+        <p>
+          Depot remains an independent node in lunar orbit alongside Aegis Station.
+          Provides redundancy, overflow capacity, and a separate operational asset.
+          Useful if depot orbit and station orbit differ, or if program growth warrants two nodes.
+        </p>
+      </div>
+    </div>
+
+    <p class="subdued" style="margin-top:1rem;">
+      The modular interface design ensures both options remain available without redesign.
+      Program-level architecture authority holds the decision until the tradeoffs are sufficiently resolved.
+    </p>
+
+    <div class="btn-row">
+      <a class="btn" href="index.html">← Back to Aegis Station</a>
+      <a class="btn" href="program_architecture_and_technical_domains.html">Program Architecture & Technical Domains →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <p>Aegis Station — <a href="index.html">aegisstation.com</a></p>
+    <p style="margin-top:0.5rem;">Contact: <a href="mailto:contact@aegisstation.com">contact@aegisstation.com</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
