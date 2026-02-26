@@ -1,87 +1,596 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Construction and Deployment Logistics</title>
-<!-- SEO Meta Tags -->
-<meta content="Aegis Station is a modular orbital habitat built in lunar orbit, shielded by lunar-sourced water, designed for long-term human presence in space." name="description"/>
-<meta content="Aegis Station, space habitat, lunar orbit, radiation shielding, space station, cislunar infrastructure" name="keywords"/>
-<meta content="A.S., Principal Architect" name="author"/>
-<link href="https://aegisstation.com/construction-logistics" rel="canonical"/>
-<!-- Social Media Previews: Open Graph -->
-<meta content="Construction and Deployment Logistics" property="og:title"/>
-<meta content="A modular orbital habitat shielded by lunar water, designed for long-term human presence in space." property="og:description"/>
-<meta content="https://aegisstation.com/construction_banner_LEO_landscape_old.png" property="og:image"/>
-<meta content="https://aegisstation.com/construction-logistics" property="og:url"/>
-<meta content="website" property="og:type"/>
-<!-- Twitter Card -->
-<meta content="summary_large_image" name="twitter:card">
-<meta content="Construction and Deployment Logistics" name="twitter:title">
-<meta content="A modular orbital habitat shielded by lunar-sourced water, built for humanity’s future in space." name="twitter:description">
-<meta content="https://aegisstation.com/construction_banner_LEO_landscape_old.png" name="twitter:image">
-<!-- Fonts and Styles -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;family=Open+Sans:wght@400;700&amp;display=swap" rel="stylesheet"/>
-<link href="style.css" rel="stylesheet"/>
-<!-- Favicon -->
-<link href="https://aegisstation.com/favicon_from_art.ico" rel="icon" type="image/x-icon"/>
-<link href="/site.webmanifest" rel="manifest"/>
-</meta></meta></meta></meta></head>
-<body class="bg-black text-white">
-<!-- Banner Section -->
-<section class="py-16" style="text-align: center;">
-<div style="max-width: 800px; margin: 0 auto;">
-<img alt="Aegis Construction Banner" src="images/construction_banner_LEO_landscape.png" style="max-width: 100%; border-radius: 12px; margin-bottom: 1.5rem;"/>
-<h1 style="font-size: 3rem; font-weight: bold; margin-bottom: 1rem;">🏗️ Construction &amp; Deployment</h1>
-<p style="font-size: 1.25rem; font-style: italic;">Building the First Great World in Lunar Orbit</p>
-</div>
-</section>
-<!-- Main Content -->
-<section style="max-width: 800px; margin: 0 auto; padding: 0 1.5rem 5rem 1.5rem; font-size: 1.1em; line-height: 1.75;">
-<p>Aegis Station is a modular, rotating space habitat constructed in lunar orbit. Rather than launching a fully assembled station or shielding it with Earth-supplied water, the Aegis approach emphasizes <strong>dry-orbit assembly</strong> and <strong>in-situ resource utilization</strong>. By sourcing water from the Moon and assembling the station in lunar orbit, the deployment avoids Earth-orbit traffic, reduces launch costs, and positions Aegis as the keystone of a permanent lunar economy.</p>
-<h2 class="text-3xl font-semibold mt-12">2. Launch &amp; Delivery Strategy</h2>
-<p><strong>Component Launch:</strong> Heavy-lift rockets deliver dry modular components to lunar orbit. Each launch brings ring segments, hub modules, solar arrays, ECLSS, and comm systems.</p>
-<p><strong>Earth–Aegis Long-Hauler:</strong> Modular crew and cargo vehicles handle orbital transfer between Earth and the Moon, enabling scalable delivery and flexible configuration.</p>
-<h2 class="text-3xl font-semibold mt-12">3. Orbital Assembly Operations</h2>
-<p>Assembly occurs in a stable 100 km lunar orbit. Central hub modules are connected along the station axis first. Each ring is formed from 8 segments, robotically maneuvered and locked into place. Utility systems are integrated before spin-up and habitation.</p>
-<h2 class="text-3xl font-semibold mt-12">4. Water Shielding Operations</h2>
-<p>A 3-meter-thick water layer is installed inside each ring’s outer hull to protect against radiation. Water is sourced from lunar polar ice, lifted by a 45-tanker fleet, each delivering 45 tons, and delivered at ~2,025 tons/day. Full shielding (~3,300,000 tonnes) takes approximately 4.5 years to complete.</p>
-<h2 class="text-3xl font-semibold mt-12">5. Ring Activation Timeline</h2>
-<p>Ring 1 becomes operational ~18 months from construction start. Rings 2 and 3 follow at 12–18 month intervals. Spin-up to 1g and life support systems are activated in phases.</p>
-<div class="mt-12 text-center">
-<h3 class="text-2xl font-bold mb-4">🕒 Construction Timetable</h3>
-<img alt="Aegis Station Construction Timeline" class="mx-auto rounded-lg shadow-lg" src="images/output.png" style="max-width: 100%; height: auto;"/>
-</div>
-<h2 class="text-3xl font-semibold mt-12">6. Long-Term Logistics Framework</h2>
-<p>All orbital assets—including long-haulers, tankers, and assembly tugs—remain in service for maintenance, expansion, and future missions. Aegis Station becomes the backbone of a thriving cislunar economy.</p>
-<div class="mt-16 text-center">
-  <a class="btn-white" href="dossiers/ConstructionDeploymentLogisticsv2.pdf">
-    📄 Download Construction & Deployment Dossier
-  </a>
-  <br/><br/>
-  <a class="btn-white" href="dossiers/WhoBuildsAegisStation.pdf">
-    🏗️ Who Builds Aegis Station?
-  </a>
-  <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.7;">
-    Suggested contractors by domain — not exhaustive, but a starting framework.
-  </p>
-</div>
-<p>
-    Visit <a href="https://aegisstation.com" style="color: white; text-decoration: underline;">aegisstation.com</a> for additional concept art, vehicle dossiers, and orbital system planning.
-  </p>
-</section>
-<!-- Footer -->
-<footer>
-<!-- After Learn More section -->
-<p style="text-align: center; margin-top: 60px; font-style: italic; opacity: 0.7;">
-  — A.S., Principal Architect
-</p>
-<p>Contact: <a href="mailto:contact@aegisstation.com">contact@aegisstation.com</a></p>
-<div class="accessibility-note">
-<p><strong>Aegis Station is being designed with accessibility in mind.</strong><br/>
-  We’re working to ensure space infrastructure supports people of all abilities—without barriers.</p>
-</div>
-</footer>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Construction & Deployment Logistics — Aegis Station</title>
+
+  <meta name="description" content="How Aegis Station is built: dry-orbit assembly, lunar water shielding logistics, and a phased ring activation timeline."/>
+  <meta name="keywords" content="Aegis Station, construction, orbital assembly, ISRU, lunar water, space station logistics, cislunar infrastructure"/>
+  <meta name="author" content="A.S., Principal Architect"/>
+  <link href="https://aegisstation.com/construction-logistics" rel="canonical"/>
+
+  <meta property="og:title" content="Construction & Deployment Logistics — Aegis Station"/>
+  <meta property="og:description" content="How Aegis Station is built: dry-orbit assembly, lunar water shielding logistics, and a phased ring activation timeline."/>
+  <meta property="og:image" content="https://aegisstation.com/images/construction_banner_LEO_landscape.png"/>
+  <meta property="og:url" content="https://aegisstation.com/construction-logistics"/>
+  <meta property="og:type" content="website"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+  <link href="https://aegisstation.com/favicon_from_art.ico" rel="icon" type="image/x-icon"/>
+  <link href="/site.webmanifest" rel="manifest"/>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0b0b0b;
+      --surface:  #101010;
+      --border:   #2b2b2b;
+      --text:     #d7d7d7;
+      --muted:    #b9b9b9;
+      --heading:  #f0f0f0;
+      --pill-bg:  #141414;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Open Sans", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: #fff; }
+
+    /* ── BANNER ── */
+    .banner {
+      width: 100%;
+      max-height: 480px;
+      overflow: hidden;
+      position: relative;
+    }
+    .banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: brightness(0.85) saturate(0.8);
+    }
+    .banner::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 160px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      pointer-events: none;
+    }
+
+    /* ── LAYOUT ── */
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    .page-header {
+      padding: 2.5rem 0 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.1s forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .kicker {
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(1.75rem, 4vw, 2.6rem);
+      color: #fff;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-sub {
+      font-size: 1.05rem;
+      color: #c8c8c8;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+
+    .rule { border: 0; border-top: 1px solid var(--border); margin: 2.25rem 0; }
+
+    /* ── TOC ── */
+    .toc {
+      border: 1px solid var(--border);
+      background: #0f0f0f;
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .toc-title {
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .toc ul { list-style: none; padding: 0; margin: 0; }
+    .toc li { margin: 0.3rem 0; }
+    .toc a { color: var(--text); text-decoration: none; font-size: 0.92rem; }
+    .toc a:hover { color: #fff; text-decoration: underline; }
+
+    /* ── SECTION HEADINGS ── */
+    .section-header { margin: 3rem 0 0.6rem; }
+    h2 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.3rem;
+      color: var(--heading);
+      letter-spacing: 0.5px;
+    }
+    .section-note {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin: 0.3rem 0 1rem;
+    }
+
+    h3 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.0rem;
+      color: var(--heading);
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: var(--text);
+      margin-bottom: 0.85rem;
+      font-size: 0.97rem;
+    }
+
+    /* ── GRID & CARDS ── */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    @media (min-width: 600px) { .grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .grid-3 { grid-template-columns: 1fr 1fr 1fr; } }
+
+    .card {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 1.1rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    }
+    .card p { font-size: 0.91rem; margin-bottom: 0.5rem; }
+    .card ul {
+      padding-left: 1.1rem;
+      color: var(--text);
+      font-size: 0.9rem;
+      margin: 0.5rem 0 0.75rem;
+    }
+    .card li { margin: 0.3rem 0; }
+
+    /* ── STAT ROW ── */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .stat-card {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      text-align: center;
+    }
+    .stat-value {
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.5rem;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── TIMELINE IMAGE ── */
+    .timeline-block {
+      margin: 1.5rem 0;
+    }
+    .timeline-block img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .img-caption {
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-top: 0.6rem;
+      text-align: center;
+    }
+
+    /* ── PILLS ── */
+    .pill {
+      display: inline-block;
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--pill-bg);
+      font-size: 0.82rem;
+      color: #cfcfcf;
+      margin-right: 0.35rem;
+      margin-top: 0.3rem;
+    }
+
+    /* ── CALLOUT ── */
+    .callout {
+      border-left: 3px solid #3a3a3a;
+      padding: 0.85rem 1.1rem;
+      background: #0e0e0e;
+      border-radius: 0 10px 10px 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-style: italic;
+      margin: 1.5rem 0;
+    }
+
+    /* ── DOWNLOAD ── */
+    .download-bar {
+      text-align: center;
+      margin: 2.5rem 0 0;
+    }
+    .download-btn {
+      display: inline-block;
+      padding: 0.8rem 1.75rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: #fff;
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .download-btn:hover { background: #1a1a1a; border-color: #555; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+      padding: 2rem 1.25rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    footer p { color: var(--muted); font-size: 0.88rem; margin-bottom: 0.5rem; }
+    footer a { color: var(--muted); text-decoration: underline; }
+    .accessibility-note {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      font-size: 0.85rem;
+    }
+    .accessibility-note strong { color: var(--heading); }
+
+    /* ── BACK LINK ── */
+    .back {
+      display: inline-block;
+      margin-top: 2.5rem;
+      padding: 0.65rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+    .back:hover { background: #1a1a1a; }
+  </style>
+</head>
+<body>
+
+  <!-- BANNER IMAGE -->
+  <div class="banner">
+    <img src="images/construction_banner_LEO_landscape.png" alt="Aegis Station under construction in lunar orbit"/>
+  </div>
+
+  <div class="wrap">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <p class="kicker">Aegis Station · Program Architecture</p>
+      <h1>Construction & Deployment Logistics</h1>
+      <p class="page-sub">Building the first permanent world in lunar orbit</p>
+    </div>
+
+    <!-- TOC -->
+    <nav class="toc" aria-label="Page contents">
+      <p class="toc-title">On this page</p>
+      <ul>
+        <li><a href="#approach">1. Deployment Approach</a></li>
+        <li><a href="#launch">2. Launch & Delivery Strategy</a></li>
+        <li><a href="#assembly">3. Orbital Assembly Operations</a></li>
+        <li><a href="#shielding">4. Water Shielding Operations</a></li>
+        <li><a href="#timeline">5. Ring Activation Timeline</a></li>
+        <li><a href="#logistics">6. Long-Term Logistics Framework</a></li>
+      </ul>
+    </nav>
+
+    <hr class="rule"/>
+
+    <!-- 1. APPROACH -->
+    <section id="approach">
+      <div class="section-header">
+        <h2>1. Deployment Approach</h2>
+        <p class="section-note">Dry-orbit assembly and in-situ resource utilization as core principles.</p>
+      </div>
+
+      <p>
+        Aegis Station is a modular, rotating habitat constructed in lunar orbit. Rather than launching a fully assembled station or supplying shielding water from Earth, the Aegis approach is built around <strong>dry-orbit assembly</strong> and <strong>in-situ resource utilization</strong>. Components arrive unshielded and are assembled in place; water for radiation shielding is sourced entirely from the Moon.
+      </p>
+      <p>
+        This approach avoids Earth-orbit traffic congestion, reduces launch costs by eliminating heavy water mass from the manifest, and positions Aegis Station as the operational hub of a permanent lunar supply chain from day one.
+      </p>
+
+      <div class="callout">
+        Water shielding is not a deliverable shipped from Earth — it is the first product of the lunar economy, extracted, processed, and delivered by the same logistics infrastructure that will sustain the station for decades.
+      </div>
+    </section>
+
+    <hr class="rule"/>
+
+    <!-- 2. LAUNCH & DELIVERY -->
+    <section id="launch">
+      <div class="section-header">
+        <h2>2. Launch & Delivery Strategy</h2>
+        <p class="section-note">Heavy-lift delivery of dry components; orbital transfer via the Long-Hauler fleet.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Component Launches</h3>
+          <p>Heavy-lift vehicles deliver dry modular components directly to lunar orbit. Each launch manifest is optimized for a discrete structural or systems package.</p>
+          <ul>
+            <li>Ring segments and hub modules</li>
+            <li>Solar arrays and power distribution hardware</li>
+            <li>ECLSS and communications systems</li>
+            <li>Assembly tooling and robotic platforms</li>
+          </ul>
+          <div>
+            <span class="pill">Heavy-lift</span>
+            <span class="pill">Modular</span>
+            <span class="pill">Dry mass only</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Earth–Aegis Long-Hauler</h3>
+          <p>Modular crew and cargo vehicles handle orbital transfer between Earth and the Moon, supporting both construction phases and ongoing operations.</p>
+          <ul>
+            <li>Scalable delivery cadence matched to assembly schedule</li>
+            <li>Flexible configuration for crew, cargo, or hybrid missions</li>
+            <li>Remains in service post-construction for resupply and maintenance</li>
+          </ul>
+          <div>
+            <span class="pill">Long-Hauler</span>
+            <span class="pill">Crew/cargo</span>
+            <span class="pill">Reusable</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule"/>
+
+    <!-- 3. ORBITAL ASSEMBLY -->
+    <section id="assembly">
+      <div class="section-header">
+        <h2>3. Orbital Assembly Operations</h2>
+        <p class="section-note">Robotic assembly in stable 100 km lunar orbit.</p>
+      </div>
+
+      <p>
+        Assembly takes place in a stable 100 km circular lunar orbit. The sequence is axis-first: central hub modules are connected along the station spine before ring construction begins. Each ring is formed from 8 arc segments, robotically maneuvered and locked into alignment with sub-centimeter tolerances. Utility systems — power, fluid routing, data — are integrated at the segment level before full ring closure.
+      </p>
+      <p>
+        Spin-up and life support activation follow only after structural and systems verification of the complete ring assembly. No habitation occurs in an unverified segment.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Assembly Sequence</h3>
+          <ul>
+            <li>Central hub and axis modules first</li>
+            <li>Ring segments: 8 per ring, robotic placement</li>
+            <li>Utility integration before ring closure</li>
+            <li>Structural and systems verification before spin-up</li>
+          </ul>
+          <div>
+            <span class="pill">Robotics</span>
+            <span class="pill">Modular</span>
+            <span class="pill">Verification-gated</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Orbital Parameters</h3>
+          <ul>
+            <li>100 km circular lunar orbit</li>
+            <li>Stable, low-debris construction environment</li>
+            <li>Compatible with tanker and Long-Hauler rendezvous</li>
+            <li>Positioning supports lunar surface access from day one</li>
+          </ul>
+          <div>
+            <span class="pill">100 km LLO</span>
+            <span class="pill">Rendezvous-compatible</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule"/>
+
+    <!-- 4. WATER SHIELDING -->
+    <section id="shielding">
+      <div class="section-header">
+        <h2>4. Water Shielding Operations</h2>
+        <p class="section-note">Lunar-sourced water delivered at scale by a dedicated tanker fleet.</p>
+      </div>
+
+      <p>
+        Each ring's outer hull contains a 3-meter-thick water layer providing radiation shielding for the crew inside. All water is sourced from lunar polar ice — extracted, processed, and delivered to orbit by the Aegis tanker fleet. No shielding mass is launched from Earth.
+      </p>
+
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-value">3 m</div>
+          <div class="stat-label">Shield thickness</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">45</div>
+          <div class="stat-label">Tankers in fleet</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">45 t</div>
+          <div class="stat-label">Per tanker delivery</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">~2,025 t</div>
+          <div class="stat-label">Daily throughput</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">~3.3M t</div>
+          <div class="stat-label">Total shield mass</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">~4.5 yr</div>
+          <div class="stat-label">Full fill duration</div>
+        </div>
+      </div>
+
+      <p style="margin-top:1rem;">
+        Tanker operations begin in parallel with structural assembly. Partial shielding supports early crew operations before full fill is complete, with shield depth tracked per-segment and risk managed against occupancy schedules.
+      </p>
+      <div>
+        <span class="pill">ISRU</span>
+        <span class="pill">Polar ice extraction</span>
+        <span class="pill">Tanker fleet</span>
+        <span class="pill">Phased fill</span>
+        <span class="pill">No Earth-supplied water</span>
+      </div>
+    </section>
+
+    <hr class="rule"/>
+
+    <!-- 5. TIMELINE -->
+    <section id="timeline">
+      <div class="section-header">
+        <h2>5. Ring Activation Timeline</h2>
+        <p class="section-note">Phased activation from first ring to full three-ring operations.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Ring 1</h3>
+          <p>Operational approximately 18 months from construction start. First pressurized, inhabited ring. Spin-up to 1g and life support systems activated following verification.</p>
+          <div><span class="pill">~Month 18</span><span class="pill">First habitation</span></div>
+        </div>
+        <div class="card">
+          <h3>Rings 2 & 3</h3>
+          <p>Follow at 12–18 month intervals after Ring 1. Each ring adds crew capacity, redundancy, and operational volume. Full three-ring configuration reaches design complement.</p>
+          <div><span class="pill">+12–18 mo each</span><span class="pill">Design complement</span></div>
+        </div>
+      </div>
+
+      <div class="timeline-block" style="margin-top:1.5rem;">
+        <img src="images/output.png" alt="Aegis Station construction timetable"/>
+        <p class="img-caption">Construction timetable — from first component delivery through three-ring activation</p>
+      </div>
+    </section>
+
+    <hr class="rule"/>
+
+    <!-- 6. LONG-TERM LOGISTICS -->
+    <section id="logistics">
+      <div class="section-header">
+        <h2>6. Long-Term Logistics Framework</h2>
+        <p class="section-note">Construction assets transition directly into operational infrastructure.</p>
+      </div>
+
+      <p>
+        No construction asset is retired at completion. Long-Haulers, tankers, and assembly tugs transition into operational roles — supporting maintenance cycles, shielding top-off, crew rotation, and future expansion. The logistics chain built to construct Aegis Station is the same one that sustains it.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Ongoing Fleet Roles</h3>
+          <ul>
+            <li>Tankers: shield top-off and water system maintenance</li>
+            <li>Long-Haulers: crew rotation and cargo resupply</li>
+            <li>Assembly tugs: maintenance, module additions, inspection support</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Expansion Pathway</h3>
+          <ul>
+            <li>Additional ring modules using established assembly procedures</li>
+            <li>Increased tanker cadence scales with demand</li>
+            <li>Infrastructure supports future outpost and depot expansion</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule"/>
+
+    <div class="download-bar">
+      <a href="dossiers/ConstructionDeploymentLogisticsv2.pdf" class="download-btn">Download Construction & Deployment Dossier (PDF)</a>
+    </div>
+
+    <a class="back" href="index.html">← Back to Home</a>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p style="font-style:italic; opacity:0.7;">— A.S., Principal Architect</p>
+    <p>Contact: <a href="mailto:contact@aegisstation.com">contact@aegisstation.com</a></p>
+    <div class="accessibility-note">
+      <strong>Aegis Station is being designed with accessibility in mind.</strong><br/>
+      We're working to ensure space infrastructure supports people of all abilities — without barriers.
+    </div>
+  </footer>
+
 </body>
 </html>
