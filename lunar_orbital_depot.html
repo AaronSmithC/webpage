@@ -317,6 +317,8 @@
       <span class="pill">Electrolysis</span>
       <span class="pill">Cryogenic storage</span>
       <span class="pill">Autonomous ops</span>
+      <span class="pill">Water cartridge standard</span>
+      <span class="pill">Launch economics</span>
       <span class="pill">Short-stay habitable</span>
       <span class="pill">Lifecycle-flexible</span>
     </div>
@@ -411,6 +413,181 @@
       <li>Autonomous fueling baseline — crew not required for routine propellant transfer operations</li>
       <li>Metered dispensing with inventory reconciliation and leak/safing logic</li>
     </ul>
+  </div>
+</section>
+
+<!-- ═══ WATER CARTRIDGE STANDARD ═══ -->
+<section id="cartridge">
+  <div class="container">
+    <h2>Water Cartridge Standard</h2>
+    <p>
+      Water moves through the Aegis logistics chain in standardized cartridges — a fixed hardware unit
+      that functions as both a transport vessel and a depot storage element. The cartridge is the
+      atomic unit of the water supply chain: manufactured on Earth, delivered to the lunar surface,
+      filled by ISRU operations, and flown to the depot by the Lunar Tanker Fleet.
+    </p>
+
+    <div class="card-grid" style="margin-bottom:1.5rem;">
+      <div class="info-card">
+        <h4>Physical Specification</h4>
+        <p>
+          Length: 10 m<br/>
+          Diameter: 2.5 m<br/>
+          Gross interior volume: ~49 m³<br/>
+          Full mass: 45 t<br/>
+          Dry mass: TBD
+        </p>
+      </div>
+      <div class="info-card">
+        <h4>Bladder Design</h4>
+        <p>
+          Interior inflatable/deflatable bladder contained within the outer structural cylinder.
+          Bladder collapses fully when empty — cartridge ships to the surface as a lightweight
+          structural shell and returns to orbit full. Single-use fill cycle per mission is the
+          baseline; reuse cadence TBD pending durability analysis.
+        </p>
+      </div>
+      <div class="info-card">
+        <h4>Compatibility</h4>
+        <p>
+          Sized to fit within Falcon Heavy and New Glenn payload envelopes for Earth launch.
+          Hauler freight module accommodates multiple cartridges per transit.
+          Standardized docking and fluid transfer interfaces common across depot, LT fleet,
+          and surface infrastructure.
+        </p>
+      </div>
+      <div class="info-card">
+        <h4>Open Items</h4>
+        <p>
+          Dry mass not yet defined — drives launch manifest economics and LT payload fraction.
+          Bladder material selection pending thermal, radiation, and reuse requirements.
+          Cartridges-per-Hauler transit TBD pending Hauler freight module configuration.
+          Total cartridge fleet size TBD pending ISRU cadence and depot storage requirements.
+        </p>
+      </div>
+    </div>
+
+    <h3>Role in the Logistics Chain</h3>
+    <ul class="specs">
+      <li>Cartridges are <strong>manufactured on Earth</strong> and delivered to the lunar surface via Hauler freight — they are infrastructure, not consumables</li>
+      <li>On the surface, ISRU operations fill cartridges with processed water; filled cartridges are loaded onto Lunar Tankers for ascent</li>
+      <li>At the depot, cartridges are offloaded, water is drawn into the electrolysis queue, and empty cartridges are staged for return to the surface</li>
+      <li>The cartridge fleet size sets a hard upper bound on water throughput — fleet sizing is a program-level logistics trade, not a per-vehicle decision</li>
+      <li>In the early program phase, Earth-water-filled cartridges can ride the Hauler to prime the depot before ISRU is operational</li>
+    </ul>
+
+    <div class="callout">
+      <p>
+        The inflatable bladder approach keeps empty cartridge mass low — the structural cylinder
+        is essentially dead weight on the outbound trip to the surface. Minimizing dry mass is
+        the dominant design driver: every kilogram of cartridge structure launched from Earth
+        is a kilogram that isn't water.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EARLY PROGRAM ECONOMICS ═══ -->
+<section id="economics">
+  <div class="container">
+    <h2>Early Program Economics</h2>
+    <p>
+      The first water to reach the depot comes from Earth. This is the most expensive water
+      in the program — and everyone involved knows it. The economic case for Aegis Station
+      does not depend on Earth-sourced water being cheap. It depends on Earth-sourced water
+      being <em>finite</em>: a necessary cost to establish the infrastructure that makes
+      lunar-sourced water viable at scale.
+    </p>
+
+    <h3>The Cost of Earth-Launched Water</h3>
+    <p class="subdued">
+      A 45 t full cartridge is close to the maximum payload capacity of the vehicles that can lift it.
+      Falcon Heavy (expendable) delivers ~64 t to LEO; New Glenn delivers ~45 t to LEO.
+      A single loaded cartridge consumes the majority of one heavy-lift mission —
+      before accounting for the transfer stage cost to get from LEO to lunar orbit.
+    </p>
+    <ul class="specs">
+      <li><strong>Falcon Heavy expendable:</strong> ~64 t to LEO — fits one loaded cartridge with margin; est. $150–200M per launch at current pricing</li>
+      <li><strong>New Glenn:</strong> ~45 t to LEO — one cartridge fills the manifest; pricing not fully public but in a comparable range</li>
+      <li><strong>LEO-to-lunar-orbit transfer:</strong> additional ΔV cost via dedicated tug or Hauler delivery adds further mass and cost overhead</li>
+      <li>Result: <strong>Earth-launched water arrives at the depot at very high cost per kilogram</strong> — precise figures depend on dry mass, transfer efficiency, and launch pricing at time of execution</li>
+    </ul>
+
+    <div class="callout">
+      <p>
+        This is not a problem to be solved — it is a phase to be survived. The early program
+        accepts high water costs as the price of establishing the depot, proving the end-to-end
+        system, and reaching the crossover point where lunar ISRU becomes the cheaper source.
+      </p>
+    </div>
+
+    <h3>Program Phase Transitions</h3>
+    <div class="card-grid">
+      <div class="info-card">
+        <h4>Phase 1 — Infrastructure Delivery</h4>
+        <p>
+          Hauler delivers empty cartridges, depot hardware, and LCH₄ to lunar orbit.
+          No water production yet. Depot is assembled and commissioned.
+          Cartridges are staged on the surface, ready for ISRU fill.
+          Cost per kilogram of water: not yet relevant — there is no water.
+        </p>
+      </div>
+      <div class="info-card">
+        <h4>Phase 2 — Depot Priming</h4>
+        <p>
+          A small number of Earth-water-filled cartridges ride the Hauler to prime the
+          electrolysis plant and commission end-to-end propellant production.
+          Expensive but finite — this is a one-time commissioning cost, not a sustained supply model.
+          ISRU operations beginning on the surface in parallel.
+        </p>
+      </div>
+      <div class="info-card">
+        <h4>Phase 3 — ISRU Transition</h4>
+        <p>
+          Lunar Tanker Fleet begins delivering surface-produced water.
+          Earth water imports taper and stop as LT cadence ramps.
+          Cost per kilogram of depot water begins its long decline.
+          The crossover point — where lunar water is cheaper than Earth water delivered —
+          is the program's most important economic threshold.
+        </p>
+      </div>
+      <div class="info-card">
+        <h4>Phase 4 — Sustained Operations</h4>
+        <p>
+          Depot runs on lunar water exclusively. Earth imports limited to LCH₄
+          and non-water consumables. Propellant production cost is dominated
+          by LT operations and electrolysis power, not launch costs.
+          Economic model is viable at scale.
+        </p>
+      </div>
+    </div>
+
+    <h3>The Starship Variable</h3>
+    <p>
+      Starship changes the calculus significantly — and in a non-obvious direction.
+      At projected full-reuse economics, Starship could potentially deliver
+      2–3 loaded cartridges per mission to LEO, dramatically reducing the per-kilogram
+      cost of Earth-launched water. This does not make Earth water cheap enough to
+      sustain the depot indefinitely, but it does move the crossover point —
+      potentially making it economically rational to run on Earth water longer
+      than the current heavy-lift cost structure would suggest.
+    </p>
+    <p class="subdued">
+      The program should not plan around Starship economics, but should
+      track them. If launch costs fall far enough fast enough, the ISRU
+      investment timeline and urgency changes. Architecture decisions that
+      assume expensive Earth water baked in as a permanent condition
+      may need revisiting as the launch market evolves.
+    </p>
+
+    <h3>Open Trade: Initial Water Quantity</h3>
+    <p class="subdued">
+      The total volume of Earth-sourced water required to prime the depot and commission
+      the electrolysis plant has not yet been calculated. This is a program-level open item.
+      It drives the number of Hauler missions in Phase 2, the commissioning timeline,
+      and the initial capital cost of reaching operational status.
+      Resolving this trade is a prerequisite for program-level cost estimation.
+    </p>
   </div>
 </section>
 
@@ -568,9 +745,4 @@
 <footer>
   <div class="container">
     <p>Aegis Station — <a href="index.html">aegisstation.com</a></p>
-    <p style="margin-top:0.5rem;">Contact: <a href="mailto:contact@aegisstation.com">contact@aegisstation.com</a></p>
-  </div>
-</footer>
-
-</body>
-</html>
+    <p style="margin-top:0.5rem;">Contact: <a href="/cdn-cgi/l/email-protection#ed8e8283998c8e99ad8c888a849e9e998c99848283c38e8280"><span class="__cf_emai
