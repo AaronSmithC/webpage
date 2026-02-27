@@ -1,0 +1,428 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 960" width="720" height="960" font-family="'Share Tech Mono', 'Courier New', monospace">
+  <defs>
+    <!-- Background -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#090e1a"/>
+      <stop offset="100%" stop-color="#050810"/>
+    </linearGradient>
+
+    <!-- Outer shell gradient (cut-away left face) -->
+    <linearGradient id="shellFront" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2a3a50"/>
+      <stop offset="100%" stop-color="#1a2840"/>
+    </linearGradient>
+
+    <!-- Outer shell side (right visible face) -->
+    <linearGradient id="shellSide" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1e3158"/>
+      <stop offset="60%" stop-color="#152540"/>
+      <stop offset="100%" stop-color="#0d1a2e"/>
+    </linearGradient>
+
+    <!-- Shell top cap -->
+    <linearGradient id="shellTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3a5070"/>
+      <stop offset="100%" stop-color="#1e3158"/>
+    </linearGradient>
+
+    <!-- Shell bottom cap -->
+    <linearGradient id="shellBottom" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2840"/>
+      <stop offset="100%" stop-color="#0d1a2e"/>
+    </linearGradient>
+
+    <!-- Interior cavity (exposed by cut) -->
+    <linearGradient id="interiorGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0d1a2e"/>
+      <stop offset="100%" stop-color="#091428"/>
+    </linearGradient>
+
+    <!-- Bladder (water-filled, gold/amber) -->
+    <linearGradient id="bladderGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c8922a"/>
+      <stop offset="35%" stop-color="#e8a825"/>
+      <stop offset="70%" stop-color="#d4961e"/>
+      <stop offset="100%" stop-color="#a07018"/>
+    </linearGradient>
+
+    <!-- Bladder highlight -->
+    <radialGradient id="bladderHighlight" cx="38%" cy="28%" r="45%">
+      <stop offset="0%" stop-color="#f5c84a" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#a07018" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Gas annulus (between bladder and shell interior) -->
+    <linearGradient id="gasGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2e4a"/>
+      <stop offset="100%" stop-color="#0f1e35"/>
+    </linearGradient>
+
+    <!-- Port connector metal -->
+    <linearGradient id="portGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a6080"/>
+      <stop offset="50%" stop-color="#2a4060"/>
+      <stop offset="100%" stop-color="#1e3050"/>
+    </linearGradient>
+
+    <!-- Structural skid -->
+    <linearGradient id="skidGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e3158"/>
+      <stop offset="100%" stop-color="#0d1a2e"/>
+    </linearGradient>
+
+    <!-- Dimension line arrow marker -->
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,1 L8,4 L0,7 L2,4 Z" fill="#6a8aaa"/>
+    </marker>
+    <marker id="arrowL" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse">
+      <path d="M0,1 L8,4 L0,7 L2,4 Z" fill="#6a8aaa"/>
+    </marker>
+    <marker id="arrowB" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+      <path d="M0,0.5 L6,3 L0,5.5 L1.5,3 Z" fill="#6a8aaa"/>
+    </marker>
+    <marker id="arrowBL" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse">
+      <path d="M0,0.5 L6,3 L0,5.5 L1.5,3 Z" fill="#6a8aaa"/>
+    </marker>
+
+    <!-- Subtle grid -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40,0 L0,0 L0,40" fill="none" stroke="#1e3158" stroke-width="0.3" opacity="0.4"/>
+    </pattern>
+
+    <!-- Drop shadow for bladder -->
+    <filter id="bladderShadow" x="-10%" y="-5%" width="120%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+
+    <!-- Subtle glow on bladder -->
+    <filter id="amberGlow" x="-15%" y="-10%" width="130%" height="125%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feFlood flood-color="#e8a825" flood-opacity="0.12" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <clipPath id="bodyClip">
+      <rect x="160" y="100" width="270" height="720"/>
+    </clipPath>
+  </defs>
+
+  <!-- ── BACKGROUND ── -->
+  <rect width="720" height="960" fill="url(#bgGrad)"/>
+  <rect width="720" height="960" fill="url(#grid)" opacity="0.6"/>
+
+  <!-- Subtle amber glow from center-left -->
+  <ellipse cx="300" cy="480" rx="220" ry="340" fill="#e8a825" opacity="0.025"/>
+
+  <!-- ══════════════════════════════════════════════════
+       OUTER SHELL — 3D CUTAWAY CYLINDER
+       Shell center-x=310, shell runs y=110 to y=790
+       Shell outer radius=135 (so left edge x=175, right edge x=445)
+       Cutaway shows left half open
+       ══════════════════════════════════════════════════ -->
+
+  <!-- Shell dimensions:
+       Outer cylinder: cx=310, top y=110, bottom y=790, r=135
+       Wall thickness ~14px
+       Inner cavity: r=121, visible on cut face
+  -->
+
+  <!-- === BOTTOM CAP (draw first so sides overlay) === -->
+  <!-- Bottom outer ellipse (floor of shell) -->
+  <ellipse cx="310" cy="790" rx="135" ry="28" fill="url(#shellBottom)" stroke="#1e3158" stroke-width="1.2"/>
+  <!-- Bottom inner (hollow) -->
+  <ellipse cx="310" cy="790" rx="121" ry="24" fill="#091428"/>
+
+  <!-- === RIGHT VISIBLE CYLINDER WALL (back half) === -->
+  <path d="
+    M 310,110 A 135,28 0 0,1 445,110
+    L 445,790
+    A 135,28 0 0,1 310,790
+    L 310,110
+  " fill="url(#shellSide)" stroke="none"/>
+
+  <!-- Right wall shading edge highlight -->
+  <path d="M 445,115 L 445,788" stroke="#2a4470" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- === CUT-FACE (left semicircle cross-section) === -->
+  <!-- The exposed annular ring on the cut plane, left half -->
+  <!-- Outer ring arc -->
+  <path d="M 310,110 A 135,28 0 0,0 175,110 L 175,790 A 135,28 0 0,0 310,790 Z"
+        fill="url(#shellFront)" stroke="#1e3158" stroke-width="1"/>
+
+  <!-- Interior cavity visible on cut face -->
+  <path d="M 310,112 A 121,24 0 0,0 189,112 L 189,786 A 121,24 0 0,0 310,786 Z"
+        fill="url(#interiorGrad)"/>
+
+  <!-- Cut face annular ring shading (wall thickness visible) -->
+  <!-- Top ring arc (outer - inner on left half) -->
+  <path d="M 175,110 A 135,28 0 0,1 310,110 A 121,24 0 0,0 189,110 A 121,24 0 0,0 310,110 A 135,28 0 0,0 175,110 Z"
+        fill="none"/>
+  <!-- Simpler: draw top annular ring as a stroked arc -->
+  <path d="M 175,110 A 135,28 0 0,1 310,110" fill="none" stroke="#3a5878" stroke-width="14"/>
+  <path d="M 189,110 A 121,24 0 0,1 310,110" fill="none" stroke="#0d1a2e" stroke-width="1"/>
+
+  <!-- === TOP CAP (drawn over walls) === -->
+  <!-- Outer top dome -->
+  <ellipse cx="310" cy="110" rx="135" ry="28" fill="url(#shellTop)" stroke="#2a4470" stroke-width="1.2"/>
+  <!-- Inner opening on top cut -->
+  <ellipse cx="310" cy="110" rx="121" ry="24" fill="#1a2840" opacity="0.6"/>
+
+  <!-- Top wall thickness ring visible -->
+  <path d="M 175,110 A 135,28 0 0,0 310,110" fill="none" stroke="#3a5878" stroke-width="13"/>
+  <path d="M 189,110 A 121,24 0 0,0 310,110" fill="none" stroke="#0d1e35" stroke-width="1"/>
+
+  <!-- ══════════════════════════════════════════════════
+       INTERNAL STRUCTURE — annular guide rail ring
+       (inside the shell, holds bladder)
+       ══════════════════════════════════════════════════ -->
+  <!-- Bladder cradle ring top -->
+  <path d="M 199,148 A 111,20 0 0,0 310,148" fill="none" stroke="#2a4060" stroke-width="6"/>
+  <!-- Bladder cradle ring bottom -->
+  <path d="M 199,748 A 111,20 0 0,0 310,748" fill="none" stroke="#2a4060" stroke-width="6"/>
+  <!-- Vertical guide rails -->
+  <line x1="200" y1="148" x2="200" y2="748" stroke="#1e3050" stroke-width="4"/>
+  <line x1="225" y1="148" x2="225" y2="748" stroke="#1a2840" stroke-width="2" opacity="0.5"/>
+
+  <!-- ══════════════════════════════════════════════════
+       INERT GAS ANNULUS
+       Thin gap between bladder and shell interior, visible on cut face
+       ══════════════════════════════════════════════════ -->
+  <!-- Gas zone — visible on left cut face as a thin crescent between shell inner wall and bladder -->
+  <!-- Drawn as the region between inner shell (r=121) and bladder (approx r=103) on left half -->
+  <!-- We'll draw it as a filled arc path on the cut plane -->
+  <path d="
+    M 310,162 A 121,22 0 0,0 192,162
+    L 192,738
+    A 121,22 0 0,0 310,738
+    A 108,19 0 0,1 205,738
+    L 205,162
+    A 108,19 0 0,1 310,162 Z
+  " fill="#0f2040" opacity="0.8"/>
+
+  <!-- Gas content label lines — subtle hatching to suggest gas -->
+  <line x1="196" y1="280" x2="204" y2="275" stroke="#2a4470" stroke-width="0.8" opacity="0.6"/>
+  <line x1="196" y1="310" x2="204" y2="305" stroke="#2a4470" stroke-width="0.8" opacity="0.6"/>
+  <line x1="196" y1="340" x2="204" y2="335" stroke="#2a4470" stroke-width="0.8" opacity="0.6"/>
+  <line x1="196" y1="370" x2="204" y2="365" stroke="#2a4470" stroke-width="0.8" opacity="0.6"/>
+  <line x1="196" y1="400" x2="204" y2="395" stroke="#2a4470" stroke-width="0.8" opacity="0.6"/>
+  <line x1="196" y1="430" x2="204" y2="425" stroke="#2a4470" stroke-width="0.8" opacity="0.6"/>
+  <line x1="196" y1="460" x2="204" y2="455" stroke="#2a4470" stroke-width="0.8" opacity="0.6"/>
+  <line x1="196" y1="490" x2="204" y2="485" stroke="#2a4470" stroke-width="0.8" opacity="0.6"/>
+  <line x1="196" y1="520" x2="204" y2="515" stroke="#2a4470" stroke-width="0.8" opacity="0.6"/>
+  <line x1="196" y1="550" x2="204" y2="545" stroke="#2a4470" stroke-width="0.8" opacity="0.6"/>
+  <line x1="196" y1="580" x2="204" y2="575" stroke="#2a4470" stroke-width="0.8" opacity="0.6"/>
+  <line x1="196" y1="610" x2="204" y2="605" stroke="#2a4470" stroke-width="0.8" opacity="0.6"/>
+  <line x1="196" y1="640" x2="204" y2="635" stroke="#2a4470" stroke-width="0.8" opacity="0.6"/>
+  <line x1="196" y1="670" x2="204" y2="665" stroke="#2a4470" stroke-width="0.8" opacity="0.6"/>
+  <line x1="196" y1="700" x2="204" y2="695" stroke="#2a4470" stroke-width="0.8" opacity="0.6"/>
+
+  <!-- ══════════════════════════════════════════════════
+       FLEXIBLE BLADDER (water-filled)
+       Oval/pill shape inside the shell, left half exposed as cutaway
+       Bladder cx=310, top y=162, bottom y=738, r≈104
+       ══════════════════════════════════════════════════ -->
+
+  <!-- Back half of bladder (behind cut plane) -->
+  <path d="
+    M 310,162 A 104,20 0 0,1 414,162
+    L 414,738
+    A 104,20 0 0,1 310,738
+    Z
+  " fill="#b07818" opacity="0.5" filter="url(#bladderShadow)"/>
+
+  <!-- Front half of bladder (cut face) — main amber fill -->
+  <path d="
+    M 310,162 A 104,20 0 0,0 206,162
+    L 206,738
+    A 104,20 0 0,0 310,738
+    Z
+  " fill="url(#bladderGrad)" filter="url(#amberGlow)"/>
+
+  <!-- Bladder highlight overlay -->
+  <path d="
+    M 310,162 A 104,20 0 0,0 206,162
+    L 206,738
+    A 104,20 0 0,0 310,738
+    Z
+  " fill="url(#bladderHighlight)"/>
+
+  <!-- Bladder front edge outline -->
+  <path d="
+    M 310,162 A 104,20 0 0,0 206,162
+    L 206,738
+    A 104,20 0 0,0 310,738
+  " fill="none" stroke="#e8a825" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Bladder top ellipse cap -->
+  <ellipse cx="310" cy="162" rx="104" ry="20" fill="#c88820" stroke="#e8a825" stroke-width="1" opacity="0.8"/>
+
+  <!-- Bladder bottom ellipse cap -->
+  <ellipse cx="310" cy="738" rx="104" ry="20" fill="#9a6814" opacity="0.9"/>
+
+  <!-- Bladder internal highlight line (suggests curvature) -->
+  <path d="M 250,180 Q 240,450 252,730" fill="none" stroke="#f0c050" stroke-width="2" opacity="0.2"/>
+
+  <!-- Bladder seam line -->
+  <line x1="310" y1="162" x2="310" y2="738" stroke="#c88010" stroke-width="0.8" opacity="0.3"/>
+
+  <!-- ══════════════════════════════════════════════════
+       PORT ASSEMBLY — TOP
+       Water port (center top) + Gas port (offset)
+       ══════════════════════════════════════════════════ -->
+
+  <!-- === WATER PORT === -->
+  <!-- Main vertical pipe from top cap -->
+  <rect x="302" y="60" width="16" height="54" rx="3" fill="url(#portGrad)" stroke="#2a4470" stroke-width="1"/>
+  <!-- Pipe collar at shell top -->
+  <rect x="298" y="108" width="24" height="10" rx="2" fill="#3a5878" stroke="#2a4470" stroke-width="1"/>
+  <!-- Port fitting head (external connector) -->
+  <rect x="299" y="44" width="22" height="18" rx="4" fill="#4a6888" stroke="#3a5878" stroke-width="1.2"/>
+  <!-- Connector hex detail -->
+  <rect x="303" y="47" width="14" height="12" rx="2" fill="#3a5070" stroke="#2a4470" stroke-width="0.8"/>
+  <!-- Port end cap -->
+  <rect x="301" y="36" width="18" height="10" rx="3" fill="#5a7898" stroke="#4a6080" stroke-width="1"/>
+  <!-- Pipe continuing down to bladder top -->
+  <rect x="305" y="118" width="10" height="44" rx="2" fill="#1e3050" stroke="#2a4060" stroke-width="0.8"/>
+
+  <!-- === GAS PORT === -->
+  <!-- Offset pipe to the right of water port -->
+  <!-- Horizontal run along top then down -->
+  <!-- Vertical section -->
+  <rect x="340" y="78" width="10" height="36" rx="2" fill="url(#portGrad)" stroke="#2a4470" stroke-width="0.8"/>
+  <!-- Elbow -->
+  <rect x="340" y="74" width="30" height="10" rx="2" fill="url(#portGrad)" stroke="#2a4470" stroke-width="0.8"/>
+  <!-- External fitting -->
+  <rect x="364" y="68" width="18" height="18" rx="4" fill="#4a6888" stroke="#3a5878" stroke-width="1.2"/>
+  <rect x="367" y="71" width="12" height="12" rx="2" fill="#3a5070" stroke="#2a4470" stroke-width="0.8"/>
+  <!-- Gas port end cap -->
+  <rect x="366" y="60" width="14" height="10" rx="3" fill="#5a7898" stroke="#4a6080" stroke-width="1"/>
+  <!-- Gas line running down inside shell to bladder interface -->
+  <path d="M 345,114 L 345,155" stroke="#2a4060" stroke-width="4" stroke-linecap="round"/>
+  <!-- Gas line connecting to bladder annulus -->
+  <circle cx="345" cy="158" r="5" fill="#1e3050" stroke="#2a4470" stroke-width="1"/>
+
+  <!-- ══════════════════════════════════════════════════
+       BOTTOM STRUCTURAL SKID / INTERFACE FRAME
+       ══════════════════════════════════════════════════ -->
+
+  <!-- Outer skid frame -->
+  <rect x="188" y="792" width="244" height="28" rx="2" fill="url(#skidGrad)" stroke="#1e3158" stroke-width="1.2"/>
+  <!-- Cross-members -->
+  <line x1="238" y1="792" x2="238" y2="820" stroke="#2a4060" stroke-width="3"/>
+  <line x1="288" y1="792" x2="288" y2="820" stroke="#2a4060" stroke-width="3"/>
+  <line x1="338" y1="792" x2="338" y2="820" stroke="#2a4060" stroke-width="3"/>
+  <line x1="388" y1="792" x2="388" y2="820" stroke="#2a4060" stroke-width="3"/>
+  <!-- Bottom rail -->
+  <rect x="188" y="816" width="244" height="8" rx="2" fill="#1a2840" stroke="#1e3158" stroke-width="1"/>
+  <!-- Mounting feet -->
+  <rect x="188" y="820" width="40" height="12" rx="2" fill="#1e3158" stroke="#2a4470" stroke-width="1"/>
+  <rect x="392" y="820" width="40" height="12" rx="2" fill="#1e3158" stroke="#2a4470" stroke-width="1"/>
+  <!-- Drain/transfer pipe at base -->
+  <rect x="302" y="786" width="16" height="18" rx="2" fill="url(#portGrad)" stroke="#2a4470" stroke-width="1"/>
+  <rect x="298" y="820" width="24" height="16" rx="3" fill="#3a5878" stroke="#2a4470" stroke-width="1"/>
+  <circle cx="310" cy="828" r="5" fill="#1e3050" stroke="#5a7898" stroke-width="1.2"/>
+
+  <!-- ══════════════════════════════════════════════════
+       CALLOUT LINES & LABELS
+       ══════════════════════════════════════════════════ -->
+
+  <!-- Shared label style: monospace, dim color, small caps -->
+  <!-- Callout line color: #5a8ab0 -->
+
+  <!-- === WATER PORT LABEL === -->
+  <!-- Line from port fitting to label -->
+  <line x1="382" y1="52" x2="480" y2="52" stroke="#5a8ab0" stroke-width="1" stroke-dasharray="4,2"/>
+  <circle cx="383" cy="52" r="2.5" fill="#5a8ab0"/>
+  <!-- Label -->
+  <text x="485" y="48" font-family="'Share Tech Mono', 'Courier New', monospace" font-size="13" fill="#a8cce8" letter-spacing="0.08em">WATER PORT</text>
+  <text x="485" y="63" font-family="'Share Tech Mono', 'Courier New', monospace" font-size="10" fill="#5a8ab0" letter-spacing="0.06em">Fill / discharge</text>
+
+  <!-- === GAS PORT LABEL === -->
+  <line x1="382" y1="77" x2="480" y2="105" stroke="#5a8ab0" stroke-width="1" stroke-dasharray="4,2"/>
+  <circle cx="383" cy="77" r="2.5" fill="#5a8ab0"/>
+  <text x="485" y="101" font-family="'Share Tech Mono', 'Courier New', monospace" font-size="13" fill="#a8cce8" letter-spacing="0.08em">GAS PORT</text>
+  <text x="485" y="116" font-family="'Share Tech Mono', 'Courier New', monospace" font-size="10" fill="#5a8ab0" letter-spacing="0.06em">N₂ / He pressurisation</text>
+
+  <!-- === FLEXIBLE BLADDER LABEL === -->
+  <!-- Line pointing to centre of bladder on cut face -->
+  <line x1="266" y1="380" x2="480" y2="300" stroke="#5a8ab0" stroke-width="1" stroke-dasharray="4,2"/>
+  <circle cx="266" cy="380" r="2.5" fill="#5a8ab0"/>
+  <text x="485" y="296" font-family="'Share Tech Mono', 'Courier New', monospace" font-size="13" fill="#a8cce8" letter-spacing="0.08em">FLEXIBLE BLADDER</text>
+  <text x="485" y="311" font-family="'Share Tech Mono', 'Courier New', monospace" font-size="10" fill="#5a8ab0" letter-spacing="0.06em">Water containment</text>
+
+  <!-- === INERT GAS ANNULUS LABEL === -->
+  <!-- Line pointing to the annular gap on the cut face — between shell inner wall and bladder -->
+  <line x1="197" y1="500" x2="480" y2="420" stroke="#5a8ab0" stroke-width="1" stroke-dasharray="4,2"/>
+  <circle cx="197" cy="500" r="2.5" fill="#5a8ab0"/>
+  <text x="485" y="416" font-family="'Share Tech Mono', 'Courier New', monospace" font-size="13" fill="#a8cce8" letter-spacing="0.08em">INERT GAS ANNULUS</text>
+  <text x="485" y="431" font-family="'Share Tech Mono', 'Courier New', monospace" font-size="10" fill="#5a8ab0" letter-spacing="0.06em">Displacement medium</text>
+
+  <!-- === OUTER SHELL LABEL === -->
+  <line x1="430" y1="620" x2="480" y2="560" stroke="#5a8ab0" stroke-width="1" stroke-dasharray="4,2"/>
+  <circle cx="430" cy="620" r="2.5" fill="#5a8ab0"/>
+  <text x="485" y="556" font-family="'Share Tech Mono', 'Courier New', monospace" font-size="13" fill="#a8cce8" letter-spacing="0.08em">OUTER SHELL</text>
+  <text x="485" y="571" font-family="'Share Tech Mono', 'Courier New', monospace" font-size="10" fill="#5a8ab0" letter-spacing="0.06em">Structural cylinder</text>
+
+  <!-- === STRUCTURAL SKID LABEL === -->
+  <line x1="310" y1="828" x2="480" y2="760" stroke="#5a8ab0" stroke-width="1" stroke-dasharray="4,2"/>
+  <circle cx="310" cy="828" r="2.5" fill="#5a8ab0"/>
+  <text x="485" y="756" font-family="'Share Tech Mono', 'Courier New', monospace" font-size="13" fill="#a8cce8" letter-spacing="0.08em">INTERFACE SKID</text>
+  <text x="485" y="771" font-family="'Share Tech Mono', 'Courier New', monospace" font-size="10" fill="#5a8ab0" letter-spacing="0.06em">Handling / transfer base</text>
+
+  <!-- ══════════════════════════════════════════════════
+       DIMENSION LINES
+       ══════════════════════════════════════════════════ -->
+
+  <!-- Width dimension (top) — 2.5 m -->
+  <line x1="175" y1="68" x2="445" y2="68" stroke="#6a8aaa" stroke-width="1"
+        marker-start="url(#arrowBL)" marker-end="url(#arrowB)"/>
+  <!-- Tick marks -->
+  <line x1="175" y1="60" x2="175" y2="80" stroke="#6a8aaa" stroke-width="1"/>
+  <line x1="445" y1="60" x2="445" y2="80" stroke="#6a8aaa" stroke-width="1"/>
+  <text x="310" y="62" text-anchor="middle"
+        font-family="'Share Tech Mono', 'Courier New', monospace" font-size="14" fill="#a8cce8" letter-spacing="0.1em">2.5 m</text>
+
+  <!-- Height dimension (left) — 10 m -->
+  <line x1="142" y1="110" x2="142" y2="790" stroke="#6a8aaa" stroke-width="1"
+        marker-start="url(#arrowBL)" marker-end="url(#arrowB)"/>
+  <line x1="134" y1="110" x2="152" y2="110" stroke="#6a8aaa" stroke-width="1"/>
+  <line x1="134" y1="790" x2="152" y2="790" stroke="#6a8aaa" stroke-width="1"/>
+  <!-- Rotated height label -->
+  <text x="131" y="450" text-anchor="middle" transform="rotate(-90, 131, 450)"
+        font-family="'Share Tech Mono', 'Courier New', monospace" font-size="14" fill="#a8cce8" letter-spacing="0.1em">10 m</text>
+
+  <!-- Width dimension (bottom) — 2.5 m -->
+  <line x1="188" y1="852" x2="432" y2="852" stroke="#6a8aaa" stroke-width="1"
+        marker-start="url(#arrowBL)" marker-end="url(#arrowB)"/>
+  <line x1="188" y1="844" x2="188" y2="862" stroke="#6a8aaa" stroke-width="1"/>
+  <line x1="432" y1="844" x2="432" y2="862" stroke="#6a8aaa" stroke-width="1"/>
+  <text x="310" y="872" text-anchor="middle"
+        font-family="'Share Tech Mono', 'Courier New', monospace" font-size="14" fill="#a8cce8" letter-spacing="0.1em">2.5 m</text>
+
+  <!-- ══════════════════════════════════════════════════
+       TITLE BLOCK
+       ══════════════════════════════════════════════════ -->
+
+  <!-- Title block background -->
+  <rect x="30" y="880" width="660" height="60" rx="3" fill="#0d1528" stroke="#1e3158" stroke-width="1"/>
+  <line x1="30" y1="880" x2="690" y2="880" stroke="#e8a825" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Left: title -->
+  <text x="44" y="902" font-family="'Share Tech Mono', 'Courier New', monospace"
+        font-size="9" fill="#5a8ab0" letter-spacing="0.2em">AEGIS STATION / LTF PROGRAM</text>
+  <text x="44" y="922" font-family="'Share Tech Mono', 'Courier New', monospace"
+        font-size="15" fill="#eef4fa" letter-spacing="0.12em" font-weight="bold">MODULAR TANK CARTRIDGE — CUTAWAY</text>
+
+  <!-- Divider -->
+  <line x1="380" y1="888" x2="380" y2="932" stroke="#1e3158" stroke-width="1"/>
+
+  <!-- Right: ref -->
+  <text x="392" y="902" font-family="'Share Tech Mono', 'Courier New', monospace"
+        font-size="9" fill="#5a8ab0" letter-spacing="0.2em">REF: LTF-MTC-001</text>
+  <text x="392" y="918" font-family="'Share Tech Mono', 'Courier New', monospace"
+        font-size="9" fill="#5a8ab0" letter-spacing="0.2em">FIG. 02 — FILLED CONFIGURATION</text>
+  <text x="392" y="934" font-family="'Share Tech Mono', 'Courier New', monospace"
+        font-size="9" fill="#5a8ab0" letter-spacing="0.12em">CAPACITY: ~45,000 kg  |  VOL: ~49 m³</text>
+
+</svg>
