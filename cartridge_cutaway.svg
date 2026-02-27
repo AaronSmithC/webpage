@@ -336,7 +336,7 @@
   <circle cx="383" cy="52" r="2.5" fill="#5a8ab0"/>
   <!-- Label -->
   <text x="485" y="48" font-family="'Share Tech Mono', 'Courier New', monospace" font-size="13" fill="#a8cce8" letter-spacing="0.08em">WATER PORT</text>
-  <text x="485" y="63" font-family="'Share Tech Mono', 'Courier New', monospace" font-size="10" fill="#5a8ab0" letter-spacing="0.06em">Fill / discharge</text>
+  <text x="485" y="63" font-family="'Share Tech Mono', 'Courier New', monospace" font-size="10" fill="#5a8ab0" letter-spacing="0.06em">Fill / Pressurant recovery / recharge</text>
 
   <!-- === GAS PORT LABEL === -->
   <line x1="382" y1="77" x2="480" y2="105" stroke="#5a8ab0" stroke-width="1" stroke-dasharray="4,2"/>
