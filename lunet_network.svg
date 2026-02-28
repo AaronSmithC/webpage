@@ -1,0 +1,224 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8e6e2"/>
+      <stop offset="100%" stop-color="#d5d2cc"/>
+    </linearGradient>
+    <!-- Surface gradient -->
+    <linearGradient id="surfGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c8c4bc"/>
+      <stop offset="100%" stop-color="#b8b4ac"/>
+    </linearGradient>
+    <!-- Node glow -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Soft shadow -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00000022"/>
+    </filter>
+    <!-- Water flow dash pattern -->
+    <marker id="waterArrow" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4a90c4"/>
+    </marker>
+    <!-- Data dash arrow -->
+    <marker id="dataArrow" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="7" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#888"/>
+    </marker>
+    <!-- Moon gradient -->
+    <radialGradient id="moonGrad" cx="45%" cy="40%">
+      <stop offset="0%" stop-color="#f0eeea"/>
+      <stop offset="80%" stop-color="#d8d5cf"/>
+      <stop offset="100%" stop-color="#c0bcb4"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="850" fill="url(#bgGrad)"/>
+
+  <!-- Moon body -->
+  <circle cx="600" cy="120" r="110" fill="url(#moonGrad)" opacity="0.5"/>
+
+  <!-- Lunar surface line -->
+  <path d="M0,580 Q200,560 400,570 Q600,582 800,565 Q1000,555 1200,575" fill="url(#surfGrad)" stroke="#aaa8a0" stroke-width="0.5"/>
+  <rect x="0" y="575" width="1200" height="275" fill="url(#surfGrad)"/>
+
+  <!-- ===== WATER FLOW LINES (the network commodity) ===== -->
+  <!-- Polar ISRU to Mid-Latitude -->
+  <path d="M250,440 Q350,400 480,460" fill="none" stroke="#4a90c4" stroke-width="2.5" stroke-dasharray="8,5" marker-end="url(#waterArrow)" opacity="0.8"/>
+  <!-- Polar ISRU to Polar Node (short) -->
+  <path d="M200,400 Q230,340 300,310" fill="none" stroke="#4a90c4" stroke-width="2.5" stroke-dasharray="8,5" marker-end="url(#waterArrow)" opacity="0.8"/>
+  <!-- Mid-Latitude to Equatorial -->
+  <path d="M590,480 Q720,460 810,490" fill="none" stroke="#4a90c4" stroke-width="2.5" stroke-dasharray="8,5" marker-end="url(#waterArrow)" opacity="0.8"/>
+  <!-- Label on a water line -->
+  <rect x="330" y="390" width="85" height="20" rx="3" fill="#4a90c4" opacity="0.15"/>
+  <text x="372" y="404" text-anchor="middle" font-size="11" fill="#3a7aaa" font-weight="600">H₂O delivery</text>
+
+  <!-- ===== DATA/TELEMETRY LINES ===== -->
+  <!-- Mid-Lat to Orbital -->
+  <path d="M560,420 Q700,280 920,220" fill="none" stroke="#888" stroke-width="1" stroke-dasharray="3,4" marker-end="url(#dataArrow)" opacity="0.5"/>
+
+  <!-- Polar to Orbital -->
+  <path d="M340,280 Q550,180 900,210" fill="none" stroke="#888" stroke-width="1" stroke-dasharray="3,4" marker-end="url(#dataArrow)" opacity="0.5"/>
+
+  <!-- ===== NODES ===== -->
+
+  <!-- POLAR ISRU PRODUCTION NODE (water extraction origin) -->
+  <g filter="url(#shadow)">
+    <!-- Base platform -->
+    <rect x="80" y="420" width="180" height="70" rx="4" fill="#e8e5e0" stroke="#999" stroke-width="1"/>
+    <!-- Structures -->
+    <rect x="95" y="390" width="30" height="30" rx="2" fill="#c0bcb4" stroke="#999" stroke-width="0.8"/>
+    <rect x="130" y="380" width="25" height="40" rx="2" fill="#d0ccc6" stroke="#999" stroke-width="0.8"/>
+    <rect x="160" y="395" width="40" height="25" rx="2" fill="#c8c4be" stroke="#999" stroke-width="0.8"/>
+    <rect x="205" y="400" width="20" height="20" rx="1" fill="#d5d1cb" stroke="#999" stroke-width="0.8"/>
+    <!-- Antenna -->
+    <line x1="145" y1="380" x2="145" y2="355" stroke="#888" stroke-width="1.5"/>
+    <circle cx="145" cy="353" r="3" fill="#888"/>
+    <!-- Water tank icon -->
+    <ellipse cx="115" cy="445" rx="18" ry="12" fill="#4a90c4" opacity="0.2" stroke="#4a90c4" stroke-width="1"/>
+    <text x="115" y="449" text-anchor="middle" font-size="9" fill="#3a7aaa" font-weight="600">H₂O</text>
+  </g>
+  <!-- Label -->
+  <text x="170" y="510" text-anchor="middle" font-size="14" font-weight="700" fill="#222">Polar ISRU Node</text>
+  <text x="170" y="527" text-anchor="middle" font-size="11" fill="#555">Water Extraction &amp; Storage</text>
+  <text x="170" y="542" text-anchor="middle" font-size="11" fill="#555">Network Water Supply Origin</text>
+
+  <!-- POLAR SURFACE NODE -->
+  <g filter="url(#shadow)">
+    <rect x="270" y="290" width="130" height="55" rx="4" fill="#e8e5e0" stroke="#999" stroke-width="1"/>
+    <!-- Small structures -->
+    <rect x="285" y="270" width="22" height="20" rx="2" fill="#d0ccc6" stroke="#999" stroke-width="0.8"/>
+    <rect x="312" y="275" width="18" height="15" rx="2" fill="#c8c4be" stroke="#999" stroke-width="0.8"/>
+    <!-- Solar panels -->
+    <rect x="340" y="265" width="35" height="8" rx="1" fill="#a8b8c8" stroke="#889" stroke-width="0.5" transform="rotate(-5,357,269)"/>
+    <!-- Antenna -->
+    <line x1="300" y1="270" x2="300" y2="252" stroke="#888" stroke-width="1.2"/>
+    <circle cx="300" cy="250" r="2.5" fill="#888"/>
+    <!-- Electrolysis icon -->
+    <rect x="278" y="302" width="36" height="14" rx="2" fill="#6aaa6a" opacity="0.25" stroke="#5a9a5a" stroke-width="0.8"/>
+    <text x="296" y="312" text-anchor="middle" font-size="7.5" fill="#4a8a4a" font-weight="600">ELEC</text>
+    <!-- LH2 icon -->
+    <rect x="320" y="302" width="28" height="14" rx="2" fill="#c47a4a" opacity="0.2" stroke="#b06a3a" stroke-width="0.8"/>
+    <text x="334" y="312" text-anchor="middle" font-size="7.5" fill="#a05a2a" font-weight="600">LH₂</text>
+  </g>
+  <text x="335" y="362" text-anchor="middle" font-size="13" font-weight="700" fill="#222">Polar Node</text>
+  <text x="335" y="377" text-anchor="middle" font-size="10.5" fill="#555">Local Electrolysis &amp; Liquefaction</text>
+
+  <!-- MID-LATITUDE NODE -->
+  <g filter="url(#shadow)">
+    <rect x="470" y="440" width="150" height="60" rx="4" fill="#e8e5e0" stroke="#999" stroke-width="1"/>
+    <!-- Structures -->
+    <rect x="490" y="415" width="28" height="25" rx="2" fill="#c8c4be" stroke="#999" stroke-width="0.8"/>
+    <rect x="523" y="420" width="22" height="20" rx="2" fill="#d0ccc6" stroke="#999" stroke-width="0.8"/>
+    <rect x="550" y="418" width="35" height="22" rx="2" fill="#c0bcb4" stroke="#999" stroke-width="0.8"/>
+    <!-- Solar panels -->
+    <rect x="590" y="408" width="40" height="9" rx="1" fill="#a8b8c8" stroke="#889" stroke-width="0.5" transform="rotate(3,610,412)"/>
+    <!-- Antenna -->
+    <line x1="540" y1="418" x2="540" y2="395" stroke="#888" stroke-width="1.5"/>
+    <circle cx="540" cy="393" r="3" fill="#888"/>
+    <!-- Water tank -->
+    <ellipse cx="498" cy="465" rx="16" ry="10" fill="#4a90c4" opacity="0.2" stroke="#4a90c4" stroke-width="0.8"/>
+    <text x="498" y="469" text-anchor="middle" font-size="7.5" fill="#3a7aaa" font-weight="600">H₂O</text>
+    <!-- Electrolysis icon -->
+    <rect x="520" y="455" width="36" height="14" rx="2" fill="#6aaa6a" opacity="0.25" stroke="#5a9a5a" stroke-width="0.8"/>
+    <text x="538" y="465" text-anchor="middle" font-size="7.5" fill="#4a8a4a" font-weight="600">ELEC</text>
+    <!-- LH2 icon -->
+    <rect x="562" y="455" width="28" height="14" rx="2" fill="#c47a4a" opacity="0.2" stroke="#b06a3a" stroke-width="0.8"/>
+    <text x="576" y="465" text-anchor="middle" font-size="7.5" fill="#a05a2a" font-weight="600">LH₂</text>
+  </g>
+  <text x="545" y="520" text-anchor="middle" font-size="13" font-weight="700" fill="#222">Mid-Latitude Node</text>
+  <text x="545" y="535" text-anchor="middle" font-size="10.5" fill="#555">Local Electrolysis &amp; Liquefaction</text>
+
+  <!-- EQUATORIAL NODE -->
+  <g filter="url(#shadow)">
+    <rect x="790" y="470" width="140" height="55" rx="4" fill="#e8e5e0" stroke="#999" stroke-width="1"/>
+    <!-- Structures -->
+    <rect x="805" y="450" width="24" height="20" rx="2" fill="#d0ccc6" stroke="#999" stroke-width="0.8"/>
+    <rect x="834" y="445" width="30" height="25" rx="2" fill="#c8c4be" stroke="#999" stroke-width="0.8"/>
+    <rect x="870" y="452" width="22" height="18" rx="2" fill="#c0bcb4" stroke="#999" stroke-width="0.8"/>
+    <!-- Solar panels -->
+    <rect x="895" y="440" width="38" height="9" rx="1" fill="#a8b8c8" stroke="#889" stroke-width="0.5"/>
+    <!-- Antenna -->
+    <line x1="850" y1="445" x2="850" y2="425" stroke="#888" stroke-width="1.5"/>
+    <circle cx="850" cy="423" r="3" fill="#888"/>
+    <!-- Water tank -->
+    <ellipse cx="815" cy="492" rx="14" ry="9" fill="#4a90c4" opacity="0.2" stroke="#4a90c4" stroke-width="0.8"/>
+    <text x="815" y="496" text-anchor="middle" font-size="7" fill="#3a7aaa" font-weight="600">H₂O</text>
+    <!-- Electrolysis icon -->
+    <rect x="835" y="483" width="34" height="13" rx="2" fill="#6aaa6a" opacity="0.25" stroke="#5a9a5a" stroke-width="0.8"/>
+    <text x="852" y="493" text-anchor="middle" font-size="7.5" fill="#4a8a4a" font-weight="600">ELEC</text>
+    <!-- LH2 icon -->
+    <rect x="874" y="483" width="26" height="13" rx="2" fill="#c47a4a" opacity="0.2" stroke="#b06a3a" stroke-width="0.8"/>
+    <text x="887" y="493" text-anchor="middle" font-size="7.5" fill="#a05a2a" font-weight="600">LH₂</text>
+  </g>
+  <text x="860" y="543" text-anchor="middle" font-size="13" font-weight="700" fill="#222">Equatorial Node</text>
+  <text x="860" y="558" text-anchor="middle" font-size="10.5" fill="#555">Local Electrolysis &amp; Liquefaction</text>
+
+  <!-- ORBITAL NODE -->
+  <g filter="url(#shadow)">
+    <!-- Satellite body -->
+    <rect x="930" y="195" width="50" height="30" rx="4" fill="#d8d5cf" stroke="#999" stroke-width="1"/>
+    <!-- Solar panels -->
+    <rect x="880" y="203" width="48" height="14" rx="2" fill="#a8b8c8" stroke="#889" stroke-width="0.8"/>
+    <rect x="982" y="203" width="48" height="14" rx="2" fill="#a8b8c8" stroke="#889" stroke-width="0.8"/>
+    <!-- Panel details -->
+    <line x1="896" y1="203" x2="896" y2="217" stroke="#99a9b9" stroke-width="0.5"/>
+    <line x1="912" y1="203" x2="912" y2="217" stroke="#99a9b9" stroke-width="0.5"/>
+    <line x1="998" y1="203" x2="998" y2="217" stroke="#99a9b9" stroke-width="0.5"/>
+    <line x1="1014" y1="203" x2="1014" y2="217" stroke="#99a9b9" stroke-width="0.5"/>
+    <!-- Dish -->
+    <ellipse cx="955" cy="193" rx="8" ry="5" fill="none" stroke="#888" stroke-width="1"/>
+    <line x1="955" y1="193" x2="955" y2="200" stroke="#888" stroke-width="1"/>
+  </g>
+  <text x="955" y="245" text-anchor="middle" font-size="13" font-weight="700" fill="#222">Orbital Node</text>
+  <text x="955" y="260" text-anchor="middle" font-size="10.5" fill="#555">Gateway or Geostationary</text>
+
+  <!-- ===== TITLE AND LEGEND ===== -->
+  <text x="600" y="660" text-anchor="middle" font-size="22" font-weight="800" fill="#222" letter-spacing="3">LUNET NETWORK</text>
+  <text x="600" y="682" text-anchor="middle" font-size="12" fill="#666" letter-spacing="1">DISTRIBUTED ELECTROLYSIS ARCHITECTURE</text>
+  <line x1="200" y1="695" x2="1000" y2="695" stroke="#bbb" stroke-width="0.8"/>
+
+  <!-- Legend -->
+  <g transform="translate(250, 720)">
+    <!-- Water delivery -->
+    <line x1="0" y1="8" x2="40" y2="8" stroke="#4a90c4" stroke-width="2.5" stroke-dasharray="8,5"/>
+    <polygon points="42,4 50,8 42,12" fill="#4a90c4"/>
+    <text x="60" y="12" font-size="12" fill="#3a7aaa" font-weight="600">Water Delivery</text>
+    <text x="60" y="26" font-size="10" fill="#666">(Network commodity — no cryogenics required)</text>
+
+    <!-- Data/telemetry -->
+    <line x1="430" y1="8" x2="470" y2="8" stroke="#888" stroke-width="1" stroke-dasharray="3,4"/>
+    <polygon points="472,5 478,8 472,11" fill="#888"/>
+    <text x="488" y="12" font-size="12" fill="#666" font-weight="600">Data / Telemetry</text>
+
+    <!-- Electrolysis -->
+    <rect x="0" y="45" width="36" height="14" rx="2" fill="#6aaa6a" opacity="0.3" stroke="#5a9a5a" stroke-width="0.8"/>
+    <text x="18" y="55" text-anchor="middle" font-size="7.5" fill="#4a8a4a" font-weight="600">ELEC</text>
+    <text x="46" y="56" font-size="11" fill="#555">Node-local electrolysis</text>
+
+    <!-- LH2 -->
+    <rect x="250" y="45" width="28" height="14" rx="2" fill="#c47a4a" opacity="0.25" stroke="#b06a3a" stroke-width="0.8"/>
+    <text x="264" y="55" text-anchor="middle" font-size="7.5" fill="#a05a2a" font-weight="600">LH₂</text>
+    <text x="288" y="56" font-size="11" fill="#555">Node-local liquefaction (short-dwell)</text>
+
+    <!-- Solar -->
+    <rect x="540" y="47" width="30" height="8" rx="1" fill="#a8b8c8" stroke="#889" stroke-width="0.5"/>
+    <text x="580" y="56" font-size="11" fill="#555">Solar array (~115 m² per low-cadence node)</text>
+  </g>
+
+  <!-- Annotation callout -->
+  <g transform="translate(700, 620)">
+    <rect x="0" y="0" width="320" height="36" rx="4" fill="#fff" opacity="0.7" stroke="#ccc" stroke-width="0.5"/>
+    <text x="160" y="15" text-anchor="middle" font-size="10" fill="#444" font-weight="600">No LH₂ moves between nodes.</text>
+    <text x="160" y="29" text-anchor="middle" font-size="10" fill="#444">Each node produces and consumes hydrogen locally.</text>
+  </g>
+
+  <!-- Copyright -->
+  <text x="600" y="820" text-anchor="middle" font-size="9" fill="#999">© 2026 Aegis Station Infrastructure</text>
+</svg>
