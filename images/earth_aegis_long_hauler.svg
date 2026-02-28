@@ -1,0 +1,652 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" width="1400" height="900">
+  <defs>
+    <!-- Space background gradient -->
+    <radialGradient id="spaceGrad" cx="30%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#0a0e1a"/>
+      <stop offset="100%" stop-color="#000308"/>
+    </radialGradient>
+
+    <!-- Hull panel gradient (top-lit) -->
+    <linearGradient id="hullTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c8bfa0"/>
+      <stop offset="40%" stop-color="#a89f82"/>
+      <stop offset="100%" stop-color="#5a5240"/>
+    </linearGradient>
+    <linearGradient id="hullSide" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9a9278"/>
+      <stop offset="100%" stop-color="#3d3828"/>
+    </linearGradient>
+    <linearGradient id="hullDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6a6350"/>
+      <stop offset="100%" stop-color="#2a2518"/>
+    </linearGradient>
+
+    <!-- Solar panel -->
+    <linearGradient id="solarPanel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2a3a"/>
+      <stop offset="50%" stop-color="#152035"/>
+      <stop offset="100%" stop-color="#0d1825"/>
+    </linearGradient>
+    <linearGradient id="solarFrame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7a8a6a"/>
+      <stop offset="100%" stop-color="#4a5a4a"/>
+    </linearGradient>
+
+    <!-- Ion thruster glow -->
+    <radialGradient id="ionGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#80e0ff" stop-opacity="0.9"/>
+      <stop offset="40%" stop-color="#40aaee" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#2060cc" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ionCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#a0e8ff" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#60c0ff" stop-opacity="0.3"/>
+    </radialGradient>
+
+    <!-- Engine plume -->
+    <linearGradient id="plume" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a0e8ff" stop-opacity="0.7"/>
+      <stop offset="50%" stop-color="#60c0ff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#2080cc" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Rim light for command module -->
+    <radialGradient id="cmdGrad" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#d0c8a8"/>
+      <stop offset="60%" stop-color="#8a8268"/>
+      <stop offset="100%" stop-color="#3a3228"/>
+    </radialGradient>
+
+    <!-- Window glow -->
+    <radialGradient id="windowGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c8e8ff"/>
+      <stop offset="100%" stop-color="#608ab8"/>
+    </radialGradient>
+
+    <!-- Kick stage nozzle -->
+    <linearGradient id="nozzleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6a6050"/>
+      <stop offset="100%" stop-color="#2a2018"/>
+    </linearGradient>
+
+    <!-- Star filter -->
+    <filter id="starGlow">
+      <feGaussianBlur stdDeviation="1" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="thrusterGlow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Rivet pattern -->
+    <pattern id="rivets" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="5" r="1.5" fill="#7a7260" opacity="0.6"/>
+      <circle cx="35" cy="5" r="1.5" fill="#7a7260" opacity="0.6"/>
+      <circle cx="5" cy="35" r="1.5" fill="#7a7260" opacity="0.6"/>
+      <circle cx="35" cy="35" r="1.5" fill="#7a7260" opacity="0.6"/>
+    </pattern>
+
+    <!-- Panel lines -->
+    <pattern id="panelLines" x="0" y="0" width="80" height="60" patternUnits="userSpaceOnUse">
+      <rect width="80" height="60" fill="none" stroke="#6a6252" stroke-width="0.5" opacity="0.4"/>
+    </pattern>
+  </defs>
+
+  <!-- ============================================================ -->
+  <!-- BACKGROUND: Deep Space                                        -->
+  <!-- ============================================================ -->
+  <rect width="1400" height="900" fill="url(#spaceGrad)"/>
+
+  <!-- Stars -->
+  <g filter="url(#starGlow)" opacity="0.9">
+    <!-- Scattered stars of varying sizes -->
+    <circle cx="45" cy="30" r="0.8" fill="#ffffff"/>
+    <circle cx="120" cy="80" r="0.5" fill="#ddeeff"/>
+    <circle cx="200" cy="20" r="1" fill="#ffffff"/>
+    <circle cx="300" cy="65" r="0.6" fill="#eeeeff"/>
+    <circle cx="450" cy="15" r="0.7" fill="#ffffff"/>
+    <circle cx="550" cy="45" r="0.5" fill="#ddeeff"/>
+    <circle cx="680" cy="25" r="0.9" fill="#ffffff"/>
+    <circle cx="780" cy="55" r="0.5" fill="#eeeeff"/>
+    <circle cx="900" cy="10" r="0.8" fill="#ffffff"/>
+    <circle cx="1020" cy="40" r="0.6" fill="#ddeeff"/>
+    <circle cx="1150" cy="20" r="0.7" fill="#ffffff"/>
+    <circle cx="1280" cy="70" r="0.5" fill="#eeeeff"/>
+    <circle cx="1350" cy="30" r="1" fill="#ffffff"/>
+    <circle cx="80" cy="150" r="0.6" fill="#ffffff"/>
+    <circle cx="170" cy="200" r="0.5" fill="#ddeeff"/>
+    <circle cx="350" cy="160" r="0.8" fill="#ffffff"/>
+    <circle cx="500" cy="180" r="0.5" fill="#eeeeff"/>
+    <circle cx="650" cy="130" r="0.6" fill="#ffffff"/>
+    <circle cx="820" cy="170" r="0.7" fill="#ddeeff"/>
+    <circle cx="980" cy="120" r="0.5" fill="#ffffff"/>
+    <circle cx="1100" cy="155" r="0.8" fill="#eeeeff"/>
+    <circle cx="1320" cy="140" r="0.6" fill="#ffffff"/>
+    <circle cx="60" cy="750" r="0.7" fill="#ffffff"/>
+    <circle cx="180" cy="800" r="0.5" fill="#ddeeff"/>
+    <circle cx="320" cy="760" r="0.8" fill="#ffffff"/>
+    <circle cx="490" cy="820" r="0.5" fill="#eeeeff"/>
+    <circle cx="700" cy="780" r="0.6" fill="#ffffff"/>
+    <circle cx="860" cy="840" r="0.7" fill="#ddeeff"/>
+    <circle cx="1050" cy="770" r="0.5" fill="#ffffff"/>
+    <circle cx="1200" cy="820" r="0.8" fill="#eeeeff"/>
+    <circle cx="1370" cy="760" r="0.6" fill="#ffffff"/>
+    <!-- Brighter hero stars -->
+    <circle cx="150" cy="120" r="1.5" fill="#ffffff"/>
+    <circle cx="1250" cy="200" r="1.2" fill="#ffffee"/>
+    <circle cx="80" cy="680" r="1.4" fill="#ffffff"/>
+    <circle cx="1340" cy="650" r="1.1" fill="#eeeeff"/>
+    <!-- More scattered -->
+    <circle cx="240" cy="350" r="0.5" fill="#ffffff" opacity="0.7"/>
+    <circle cx="390" cy="420" r="0.6" fill="#ddeeff" opacity="0.8"/>
+    <circle cx="580" cy="380" r="0.4" fill="#ffffff" opacity="0.7"/>
+    <circle cx="750" cy="450" r="0.5" fill="#eeeeff" opacity="0.9"/>
+    <circle cx="950" cy="380" r="0.6" fill="#ffffff" opacity="0.7"/>
+    <circle cx="1110" cy="420" r="0.4" fill="#ddeeff" opacity="0.8"/>
+    <circle cx="1280" cy="370" r="0.5" fill="#ffffff" opacity="0.7"/>
+    <circle cx="30" cy="500" r="0.6" fill="#eeeeff" opacity="0.8"/>
+    <circle cx="200" cy="560" r="0.4" fill="#ffffff" opacity="0.7"/>
+    <circle cx="420" cy="530" r="0.5" fill="#ddeeff" opacity="0.8"/>
+    <circle cx="620" cy="580" r="0.6" fill="#ffffff" opacity="0.7"/>
+    <circle cx="850" cy="520" r="0.4" fill="#eeeeff" opacity="0.9"/>
+    <circle cx="1050" cy="570" r="0.5" fill="#ffffff" opacity="0.7"/>
+    <circle cx="1230" cy="510" r="0.6" fill="#ddeeff" opacity="0.8"/>
+    <circle cx="1380" cy="560" r="0.4" fill="#ffffff" opacity="0.7"/>
+  </g>
+
+  <!-- Distant nebula hint -->
+  <ellipse cx="1100" cy="200" rx="300" ry="150" fill="#1a0a2a" opacity="0.3"/>
+  <ellipse cx="1050" cy="190" rx="200" ry="100" fill="#200a30" opacity="0.2"/>
+
+  <!-- ============================================================ -->
+  <!-- VEHICLE: Earth-Aegis Long-Hauler                             -->
+  <!-- Isometric-style 3/4 view, tilted ~15° nose-up               -->
+  <!-- Origin: vehicle center ~(700, 450)                           -->
+  <!-- ============================================================ -->
+
+  <!-- 
+    Layout (left=fore, right=aft):
+    Command Module:     x 160–260
+    Adapter Ring:       x 260–290
+    Passenger Mod 1:    x 290–430
+    Cargo Mod 1:        x 430–570
+    Cargo Mod 2:        x 570–700 (power block integrated)
+    Mid Truss:          x 700–760
+    Propulsion Stack:   x 760–960
+    Kick Stage:         x 960–1100
+    Nozzle bell:        x 1100–1150
+    
+    Vertical center Y  ≈ 460
+    Module height (top face) ≈ 80
+    Isometric offset ≈ 20px per 80px height
+  -->
+
+  <!-- === ION THRUSTER PLUMES (drawn first, behind everything) === -->
+  <!-- Four ion thrusters arranged 2×2 at aft of propulsion stack -->
+  <!-- Plumes extend rightward -->
+  <g filter="url(#thrusterGlow)">
+    <ellipse cx="1180" cy="425" rx="220" ry="18" fill="url(#plume)" opacity="0.6"/>
+    <ellipse cx="1180" cy="448" rx="200" ry="14" fill="url(#plume)" opacity="0.5"/>
+    <ellipse cx="1180" cy="470" rx="220" ry="18" fill="url(#plume)" opacity="0.6"/>
+    <ellipse cx="1180" cy="493" rx="200" ry="14" fill="url(#plume)" opacity="0.5"/>
+  </g>
+
+  <!-- === KICK STAGE (aft-most) === -->
+  <!-- Main body -->
+  <g id="kickStage">
+    <!-- Top face -->
+    <polygon points="960,400 1100,400 1110,415 970,415" fill="#7a7260" stroke="#5a5248" stroke-width="1"/>
+    <!-- Front face -->
+    <polygon points="960,400 970,415 970,510 960,495" fill="url(#hullDark)" stroke="#4a4238" stroke-width="1"/>
+    <!-- Bottom face -->
+    <polygon points="970,510 1110,510 1120,495 980,495" fill="#3a3228" stroke="#2a2218" stroke-width="0.5"/>
+    <!-- Side face (main visible) -->
+    <polygon points="1100,400 1110,415 1120,495 1110,510 970,510 960,495 960,400" fill="url(#hullSide)" stroke="#5a5248" stroke-width="1"/>
+    <!-- Panel lines on kick stage -->
+    <line x1="1010" y1="400" x2="1020" y2="510" stroke="#5a5248" stroke-width="0.8" opacity="0.5"/>
+    <line x1="1060" y1="400" x2="1070" y2="510" stroke="#5a5248" stroke-width="0.8" opacity="0.5"/>
+    <!-- Nozzle bell -->
+    <ellipse cx="1125" cy="455" rx="15" ry="40" fill="url(#nozzleGrad)" stroke="#3a3028" stroke-width="1"/>
+    <ellipse cx="1140" cy="455" rx="8" ry="30" fill="#1a1208" stroke="#2a2018" stroke-width="0.5"/>
+    <!-- Kick stage straps / attachment rings -->
+    <rect x="960" y="440" width="12" height="20" rx="2" fill="#5a5240" stroke="#3a3228" stroke-width="0.5"/>
+    <rect x="970" y="438" width="12" height="24" rx="2" fill="#5a5240" stroke="#3a3228" stroke-width="0.5"/>
+    <!-- Label area detail -->
+    <rect x="990" y="430" width="80" height="35" rx="3" fill="#6a6252" stroke="#4a4240" stroke-width="0.5" opacity="0.5"/>
+    <line x1="1000" y1="440" x2="1060" y2="440" stroke="#8a8270" stroke-width="0.5" opacity="0.4"/>
+    <line x1="1000" y1="450" x2="1060" y2="450" stroke="#8a8270" stroke-width="0.5" opacity="0.4"/>
+    <line x1="1000" y1="460" x2="1060" y2="460" stroke="#8a8270" stroke-width="0.5" opacity="0.4"/>
+  </g>
+
+  <!-- === PROPULSION STACK === -->
+  <g id="propulsionStack">
+    <!-- Top face -->
+    <polygon points="760,390 960,390 970,405 770,405" fill="#8a8268" stroke="#6a6250" stroke-width="1"/>
+    <!-- Front face (left edge) -->
+    <polygon points="760,390 770,405 770,505 760,490" fill="url(#hullDark)" stroke="#4a4238" stroke-width="1"/>
+    <!-- Bottom face -->
+    <polygon points="770,505 970,505 980,490 780,490" fill="#3a3228" stroke="#2a2218" stroke-width="0.5"/>
+    <!-- Main side face -->
+    <polygon points="960,390 970,405 980,490 970,505 770,505 760,490 760,390" fill="url(#hullSide)" stroke="#5a5248" stroke-width="1"/>
+
+    <!-- RCS pods (4 corners) -->
+    <!-- Upper-fore -->
+    <rect x="762" y="392" width="22" height="14" rx="2" fill="#7a7260" stroke="#5a5248" stroke-width="0.8"/>
+    <rect x="764" y="394" width="8" height="10" rx="1" fill="#5a5040" stroke="#3a3028" stroke-width="0.5"/>
+    <!-- Upper-aft -->
+    <rect x="942" y="392" width="22" height="14" rx="2" fill="#7a7260" stroke="#5a5248" stroke-width="0.8"/>
+    <rect x="944" y="394" width="8" height="10" rx="1" fill="#5a5040" stroke="#3a3028" stroke-width="0.5"/>
+    <!-- Lower-fore -->
+    <rect x="762" y="488" width="22" height="14" rx="2" fill="#6a6250" stroke="#4a4238" stroke-width="0.8"/>
+    <!-- Lower-aft -->
+    <rect x="942" y="488" width="22" height="14" rx="2" fill="#6a6250" stroke="#4a4238" stroke-width="0.8"/>
+
+    <!-- Ion thruster array (2x2 cluster, visible on aft face) -->
+    <!-- Upper left thruster -->
+    <ellipse cx="962" cy="430" rx="10" ry="10" fill="#1a1820" stroke="#4a4850" stroke-width="1.5"/>
+    <ellipse cx="962" cy="430" rx="6" ry="6" fill="url(#ionCore)" filter="url(#softGlow)"/>
+    <!-- Upper right thruster -->
+    <ellipse cx="962" cy="455" rx="10" ry="10" fill="#1a1820" stroke="#4a4850" stroke-width="1.5"/>
+    <ellipse cx="962" cy="455" rx="6" ry="6" fill="url(#ionCore)" filter="url(#softGlow)"/>
+    <!-- Lower left thruster -->
+    <ellipse cx="962" cy="472" rx="10" ry="10" fill="#1a1820" stroke="#4a4850" stroke-width="1.5"/>
+    <ellipse cx="962" cy="472" rx="6" ry="6" fill="url(#ionCore)" filter="url(#softGlow)"/>
+    <!-- Lower right thruster -->
+    <ellipse cx="962" cy="490" rx="8" ry="8" fill="#1a1820" stroke="#4a4850" stroke-width="1.5"/>
+    <ellipse cx="962" cy="490" rx="5" ry="5" fill="url(#ionCore)" filter="url(#softGlow)"/>
+
+    <!-- Panel seam lines -->
+    <line x1="840" y1="390" x2="850" y2="505" stroke="#6a6252" stroke-width="0.8" opacity="0.5"/>
+    <line x1="880" y1="390" x2="890" y2="505" stroke="#6a6252" stroke-width="0.8" opacity="0.5"/>
+    <line x1="920" y1="390" x2="930" y2="505" stroke="#6a6252" stroke-width="0.8" opacity="0.5"/>
+    <!-- Horizontal banding -->
+    <line x1="762" y1="440" x2="962" y2="440" stroke="#6a6252" stroke-width="0.6" opacity="0.4"/>
+    <line x1="762" y1="470" x2="962" y2="470" stroke="#6a6252" stroke-width="0.6" opacity="0.4"/>
+  </g>
+
+  <!-- Ion glow halos (large, atmospheric) -->
+  <g filter="url(#thrusterGlow)" opacity="0.7">
+    <ellipse cx="962" cy="430" rx="25" ry="25" fill="url(#ionGlow)"/>
+    <ellipse cx="962" cy="455" rx="25" ry="25" fill="url(#ionGlow)"/>
+    <ellipse cx="962" cy="472" rx="22" ry="22" fill="url(#ionGlow)"/>
+    <ellipse cx="962" cy="490" rx="20" ry="20" fill="url(#ionGlow)"/>
+  </g>
+
+  <!-- === POWER & RADIATOR BLOCK (Cargo Mod 2 area, with solar wings) === -->
+  <g id="powerBlock">
+    <!-- Top face -->
+    <polygon points="570,385 710,385 720,400 580,400" fill="#9a9278" stroke="#7a7260" stroke-width="1"/>
+    <!-- Front face -->
+    <polygon points="570,385 580,400 580,505 570,490" fill="url(#hullDark)" stroke="#4a4238" stroke-width="1"/>
+    <!-- Bottom face -->
+    <polygon points="580,505 720,505 730,490 590,490" fill="#3a3228" stroke="#2a2218" stroke-width="0.5"/>
+    <!-- Main face -->
+    <polygon points="710,385 720,400 730,490 720,505 580,505 570,490 570,385" fill="url(#hullTop)" stroke="#7a7260" stroke-width="1"/>
+    <!-- Panel detailing -->
+    <rect x="590" y="410" width="110" height="70" rx="2" fill="none" stroke="#8a8270" stroke-width="0.8" opacity="0.5"/>
+    <rect x="600" y="420" width="40" height="50" rx="1" fill="#5a5440" stroke="#4a4430" stroke-width="0.5" opacity="0.6"/>
+    <rect x="650" y="420" width="40" height="50" rx="1" fill="#5a5440" stroke="#4a4430" stroke-width="0.5" opacity="0.6"/>
+    <!-- Thermal radiator strip -->
+    <rect x="570" y="460" width="155" height="8" rx="1" fill="#8a9080" stroke="#6a7060" stroke-width="0.5"/>
+    <line x1="590" y1="460" x2="590" y2="468" stroke="#6a7060" stroke-width="0.5"/>
+    <line x1="620" y1="460" x2="620" y2="468" stroke="#6a7060" stroke-width="0.5"/>
+    <line x1="650" y1="460" x2="650" y2="468" stroke="#6a7060" stroke-width="0.5"/>
+    <line x1="680" y1="460" x2="680" y2="468" stroke="#6a7060" stroke-width="0.5"/>
+    <line x1="710" y1="460" x2="710" y2="468" stroke="#6a7060" stroke-width="0.5"/>
+  </g>
+
+  <!-- === SOLAR PANEL ARRAY (mounted top of power block, angled) === -->
+  <g id="solarArray">
+    <!-- Mast -->
+    <line x1="640" y1="386" x2="620" y2="230" stroke="#8a8a7a" stroke-width="4"/>
+    <line x1="642" y1="386" x2="622" y2="230" stroke="#6a6a5a" stroke-width="2"/>
+    <!-- Mast gimbal -->
+    <circle cx="640" cy="386" r="7" fill="#9a9282" stroke="#6a6252" stroke-width="1.5"/>
+    <circle cx="622" cy="232" r="5" fill="#8a8272" stroke="#5a5242" stroke-width="1"/>
+    <!-- Horizontal boom -->
+    <line x1="480" y1="225" x2="780" y2="225" stroke="#7a7a6a" stroke-width="3"/>
+
+    <!-- Panel 1 (left) -->
+    <g transform="translate(480,180)">
+      <rect x="0" y="0" width="140" height="95" rx="2" fill="url(#solarPanel)" stroke="#3a4a5a" stroke-width="1.5"/>
+      <!-- Grid lines -->
+      <line x1="0" y1="0" x2="140" y2="0" stroke="#2a3a4a" stroke-width="0.8"/>
+      <line x1="0" y1="19" x2="140" y2="19" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="0" y1="38" x2="140" y2="38" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="0" y1="57" x2="140" y2="57" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="0" y1="76" x2="140" y2="76" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="0" y1="95" x2="140" y2="95" stroke="#2a3a4a" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="0" y2="95" stroke="#2a3a4a" stroke-width="0.8"/>
+      <line x1="28" y1="0" x2="28" y2="95" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="56" y1="0" x2="56" y2="95" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="84" y1="0" x2="84" y2="95" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="112" y1="0" x2="112" y2="95" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="140" y1="0" x2="140" y2="95" stroke="#2a3a4a" stroke-width="0.8"/>
+      <!-- Cell highlights -->
+      <rect x="2" y="2" width="24" height="15" rx="0.5" fill="#1e3a52" opacity="0.5"/>
+      <rect x="30" y="20" width="24" height="15" rx="0.5" fill="#1e3a52" opacity="0.5"/>
+      <rect x="58" y="2" width="24" height="15" rx="0.5" fill="#1e3a52" opacity="0.5"/>
+      <rect x="2" y="58" width="24" height="15" rx="0.5" fill="#1e3a52" opacity="0.5"/>
+      <!-- Frame -->
+      <rect x="0" y="0" width="140" height="95" rx="2" fill="none" stroke="url(#solarFrame)" stroke-width="2"/>
+    </g>
+
+    <!-- Panel 2 (right) -->
+    <g transform="translate(640,180)">
+      <rect x="0" y="0" width="140" height="95" rx="2" fill="url(#solarPanel)" stroke="#3a4a5a" stroke-width="1.5"/>
+      <line x1="0" y1="0" x2="140" y2="0" stroke="#2a3a4a" stroke-width="0.8"/>
+      <line x1="0" y1="19" x2="140" y2="19" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="0" y1="38" x2="140" y2="38" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="0" y1="57" x2="140" y2="57" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="0" y1="76" x2="140" y2="76" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="0" y1="95" x2="140" y2="95" stroke="#2a3a4a" stroke-width="0.8"/>
+      <line x1="0" y1="0" x2="0" y2="95" stroke="#2a3a4a" stroke-width="0.8"/>
+      <line x1="28" y1="0" x2="28" y2="95" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="56" y1="0" x2="56" y2="95" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="84" y1="0" x2="84" y2="95" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="112" y1="0" x2="112" y2="95" stroke="#2a3a4a" stroke-width="0.5"/>
+      <line x1="140" y1="0" x2="140" y2="95" stroke="#2a3a4a" stroke-width="0.8"/>
+      <rect x="2" y="2" width="24" height="15" rx="0.5" fill="#1e3a52" opacity="0.5"/>
+      <rect x="58" y="39" width="24" height="15" rx="0.5" fill="#1e3a52" opacity="0.5"/>
+      <rect x="114" y="2" width="24" height="15" rx="0.5" fill="#1e3a52" opacity="0.5"/>
+      <rect x="2" y="77" width="24" height="15" rx="0.5" fill="#1e3a52" opacity="0.5"/>
+      <rect x="0" y="0" width="140" height="95" rx="2" fill="none" stroke="url(#solarFrame)" stroke-width="2"/>
+    </g>
+
+    <!-- Boom attachment brackets -->
+    <rect x="608" y="222" width="28" height="6" rx="1" fill="#8a8a7a" stroke="#6a6a5a" stroke-width="0.5"/>
+    <rect x="764" y="222" width="18" height="6" rx="1" fill="#8a8a7a" stroke="#6a6a5a" stroke-width="0.5"/>
+  </g>
+
+  <!-- === CARGO MODULE 1 === -->
+  <g id="cargoMod1">
+    <!-- Top face -->
+    <polygon points="430,382 570,382 580,397 440,397" fill="#a09880" stroke="#7a7260" stroke-width="1"/>
+    <!-- Front face -->
+    <polygon points="430,382 440,397 440,507 430,492" fill="url(#hullDark)" stroke="#4a4238" stroke-width="1"/>
+    <!-- Bottom face -->
+    <polygon points="440,507 580,507 590,492 450,492" fill="#3a3228" stroke="#2a2218" stroke-width="0.5"/>
+    <!-- Main face -->
+    <polygon points="570,382 580,397 590,492 580,507 440,507 430,492 430,382" fill="url(#hullTop)" stroke="#7a7260" stroke-width="1"/>
+    <!-- Panel detail -->
+    <rect x="444" y="408" width="120" height="72" rx="3" fill="none" stroke="#8a8270" stroke-width="1" opacity="0.6"/>
+    <!-- Cargo access doors -->
+    <rect x="456" y="415" width="44" height="55" rx="2" fill="#7a7260" stroke="#5a5248" stroke-width="0.8"/>
+    <rect x="460" y="419" width="36" height="47" rx="1" fill="#6a6250" stroke="#4a4238" stroke-width="0.5"/>
+    <line x1="478" y1="419" x2="478" y2="466" stroke="#8a8270" stroke-width="0.8"/>
+    <circle cx="472" cy="443" r="2" fill="#a09880" stroke="#7a7260" stroke-width="0.5"/>
+    <rect x="510" y="415" width="44" height="55" rx="2" fill="#7a7260" stroke="#5a5248" stroke-width="0.8"/>
+    <rect x="514" y="419" width="36" height="47" rx="1" fill="#6a6250" stroke="#4a4238" stroke-width="0.5"/>
+    <line x1="532" y1="419" x2="532" y2="466" stroke="#8a8270" stroke-width="0.8"/>
+    <circle cx="526" cy="443" r="2" fill="#a09880" stroke="#7a7260" stroke-width="0.5"/>
+    <!-- Rivet row -->
+    <circle cx="446" cy="412" r="1.5" fill="#8a8270" opacity="0.7"/>
+    <circle cx="460" cy="412" r="1.5" fill="#8a8270" opacity="0.7"/>
+    <circle cx="474" cy="412" r="1.5" fill="#8a8270" opacity="0.7"/>
+    <circle cx="488" cy="412" r="1.5" fill="#8a8270" opacity="0.7"/>
+    <circle cx="502" cy="412" r="1.5" fill="#8a8270" opacity="0.7"/>
+    <circle cx="516" cy="412" r="1.5" fill="#8a8270" opacity="0.7"/>
+    <circle cx="530" cy="412" r="1.5" fill="#8a8270" opacity="0.7"/>
+    <circle cx="544" cy="412" r="1.5" fill="#8a8270" opacity="0.7"/>
+    <circle cx="558" cy="412" r="1.5" fill="#8a8270" opacity="0.7"/>
+  </g>
+
+  <!-- === PASSENGER MODULE === -->
+  <g id="passengerMod">
+    <!-- Top face -->
+    <polygon points="290,378 430,378 440,393 300,393" fill="#b0a888" stroke="#8a8270" stroke-width="1"/>
+    <!-- Front face -->
+    <polygon points="290,378 300,393 300,512 290,497" fill="url(#hullDark)" stroke="#4a4238" stroke-width="1"/>
+    <!-- Bottom face -->
+    <polygon points="300,512 440,512 450,497 310,497" fill="#3a3228" stroke="#2a2218" stroke-width="0.5"/>
+    <!-- Main face -->
+    <polygon points="430,378 440,393 450,497 440,512 300,512 290,497 290,378" fill="url(#hullTop)" stroke="#8a8270" stroke-width="1.2"/>
+    <!-- Windows row 1 -->
+    <rect x="310" y="405" width="18" height="12" rx="2" fill="url(#windowGlow)" stroke="#7a9ab8" stroke-width="1"/>
+    <rect x="340" y="405" width="18" height="12" rx="2" fill="url(#windowGlow)" stroke="#7a9ab8" stroke-width="1"/>
+    <rect x="370" y="405" width="18" height="12" rx="2" fill="url(#windowGlow)" stroke="#7a9ab8" stroke-width="1"/>
+    <rect x="400" y="405" width="18" height="12" rx="2" fill="url(#windowGlow)" stroke="#7a9ab8" stroke-width="1"/>
+    <!-- Windows row 2 -->
+    <rect x="310" y="435" width="18" height="12" rx="2" fill="url(#windowGlow)" stroke="#7a9ab8" stroke-width="1"/>
+    <rect x="340" y="435" width="18" height="12" rx="2" fill="url(#windowGlow)" stroke="#7a9ab8" stroke-width="1"/>
+    <rect x="370" y="435" width="18" height="12" rx="2" fill="url(#windowGlow)" stroke="#7a9ab8" stroke-width="1"/>
+    <rect x="400" y="435" width="18" height="12" rx="2" fill="url(#windowGlow)" stroke="#7a9ab8" stroke-width="1"/>
+    <!-- Structural rib lines -->
+    <line x1="300" y1="393" x2="300" y2="512" stroke="#8a8270" stroke-width="1" opacity="0.4"/>
+    <line x1="366" y1="378" x2="376" y2="512" stroke="#8a8270" stroke-width="0.8" opacity="0.4"/>
+    <!-- Module designation band -->
+    <rect x="302" y="395" width="125" height="6" rx="1" fill="#9a9280" opacity="0.4" stroke="#7a7260" stroke-width="0.5"/>
+  </g>
+
+  <!-- === ADAPTER RING (command mod to passenger mod) === -->
+  <g id="adapterRing">
+    <!-- Slightly narrowed adapter -->
+    <polygon points="260,390 290,384 300,399 270,405" fill="#b0a888" stroke="#8a8270" stroke-width="1"/>
+    <polygon points="260,390 270,405 270,505 260,490" fill="url(#hullDark)" stroke="#4a4238" stroke-width="1"/>
+    <polygon points="270,505 300,499 300,514 270,520" fill="#3a3228" stroke="#2a2218" stroke-width="0.5"/>
+    <polygon points="290,384 300,399 300,514 290,499 270,520 260,490 260,390" fill="url(#hullSide)" stroke="#8a8270" stroke-width="1"/>
+    <!-- Docking collar ring details -->
+    <ellipse cx="270" cy="447" rx="8" ry="55" fill="none" stroke="#9a9280" stroke-width="2" opacity="0.5"/>
+    <circle cx="265" cy="415" r="3" fill="#8a8270" stroke="#5a5248" stroke-width="0.5"/>
+    <circle cx="265" cy="447" r="3" fill="#8a8270" stroke="#5a5248" stroke-width="0.5"/>
+    <circle cx="265" cy="479" r="3" fill="#8a8270" stroke="#5a5248" stroke-width="0.5"/>
+  </g>
+
+  <!-- === COMMAND MODULE (forward) === -->
+  <g id="commandModule">
+    <!-- Dome/forward hull -->
+    <!-- Body - slightly rounded forward section -->
+    <!-- Top face -->
+    <polygon points="175,405 260,390 270,405 185,420" fill="#c0b898" stroke="#9a9280" stroke-width="1.2"/>
+    <!-- Bottom face (underside) -->
+    <polygon points="185,495 270,480 270,495 185,510" fill="#2a2218" stroke="#1a1208" stroke-width="0.5"/>
+    <!-- Left (forward) face - the nose -->
+    <!-- Rounded nose approximation with bezier-like polygons -->
+    <polygon points="175,405 160,415 160,485 175,495 185,495 185,420" fill="url(#cmdGrad)" stroke="#9a9280" stroke-width="1.2"/>
+    <!-- Right/main face -->
+    <polygon points="260,390 270,405 270,480 260,495 185,495 175,495 175,405 185,420" fill="url(#hullTop)" stroke="#9a9280" stroke-width="1.2"/>
+
+    <!-- Forward nose curve -->
+    <path d="M 160,415 Q 135,440 160,485" stroke="#c0b898" stroke-width="2" fill="none"/>
+    <path d="M 162,418 Q 140,445 162,482" stroke="#a09880" stroke-width="1" fill="none" opacity="0.5"/>
+    <!-- Nose cap -->
+    <ellipse cx="148" cy="450" rx="14" ry="38" fill="#c8c0a0" stroke="#a09880" stroke-width="1.5"/>
+    <ellipse cx="143" cy="450" rx="8" ry="25" fill="#d0c8a8" stroke="#b0a888" stroke-width="1"/>
+
+    <!-- Cockpit windows - forward-facing -->
+    <rect x="155" y="430" width="22" height="14" rx="3" fill="url(#windowGlow)" stroke="#8ab0d0" stroke-width="1.5"/>
+    <rect x="155" y="452" width="14" height="10" rx="2" fill="url(#windowGlow)" stroke="#8ab0d0" stroke-width="1"/>
+    <rect x="173" y="452" width="14" height="10" rx="2" fill="url(#windowGlow)" stroke="#8ab0d0" stroke-width="1"/>
+
+    <!-- Side windows on command module -->
+    <rect x="200" y="415" width="20" height="12" rx="2" fill="url(#windowGlow)" stroke="#8ab0d0" stroke-width="1"/>
+    <rect x="228" y="415" width="20" height="12" rx="2" fill="url(#windowGlow)" stroke="#8ab0d0" stroke-width="1"/>
+
+    <!-- Forward docking port (nose) -->
+    <ellipse cx="138" cy="450" rx="5" ry="12" fill="#6a6a5a" stroke="#4a4a3a" stroke-width="1"/>
+    <ellipse cx="135" cy="450" rx="3" ry="8" fill="#3a3a2a" stroke="#2a2a1a" stroke-width="0.5"/>
+
+    <!-- RCS clusters on command module -->
+    <rect x="158" y="408" width="14" height="8" rx="1.5" fill="#8a8270" stroke="#5a5248" stroke-width="0.8"/>
+    <rect x="158" y="485" width="14" height="8" rx="1.5" fill="#7a7260" stroke="#4a4238" stroke-width="0.8"/>
+
+    <!-- Comm antenna -->
+    <line x1="200" y1="390" x2="195" y2="360" stroke="#9a9280" stroke-width="1.5"/>
+    <circle cx="194" cy="358" r="4" fill="#8a8270" stroke="#6a6252" stroke-width="0.8"/>
+    <line x1="194" y1="358" x2="184" y2="348" stroke="#9a9280" stroke-width="1"/>
+    <line x1="194" y1="358" x2="204" y2="348" stroke="#9a9280" stroke-width="1"/>
+    <!-- LIDAR/sensor dome -->
+    <ellipse cx="163" cy="413" rx="6" ry="4" fill="#9a9880" stroke="#7a7870" stroke-width="0.8"/>
+
+    <!-- Handrails -->
+    <line x1="185" y1="422" x2="258" y2="408" stroke="#a0a090" stroke-width="0.8" opacity="0.6"/>
+    <line x1="185" y1="430" x2="258" y2="416" stroke="#a0a090" stroke-width="0.8" opacity="0.6"/>
+  </g>
+
+  <!-- === CONNECTING TRUSS (between cargo mod 2 and propulsion stack) === -->
+  <g id="connectingTruss">
+    <!-- Top chord -->
+    <line x1="710" y1="393" x2="760" y2="390" stroke="#9a9280" stroke-width="3"/>
+    <!-- Bottom chord -->
+    <line x1="720" y1="498" x2="770" y2="495" stroke="#8a8270" stroke-width="3"/>
+    <!-- Diagonals -->
+    <line x1="710" y1="393" x2="730" y2="498" stroke="#7a7260" stroke-width="1.5" opacity="0.8"/>
+    <line x1="730" y1="393" x2="750" y2="498" stroke="#7a7260" stroke-width="1.5" opacity="0.8"/>
+    <line x1="750" y1="393" x2="770" y2="498" stroke="#7a7260" stroke-width="1.5" opacity="0.8"/>
+    <line x1="720" y1="393" x2="710" y2="498" stroke="#7a7260" stroke-width="1.5" opacity="0.8"/>
+    <line x1="740" y1="393" x2="730" y2="498" stroke="#7a7260" stroke-width="1.5" opacity="0.8"/>
+    <line x1="760" y1="393" x2="750" y2="498" stroke="#7a7260" stroke-width="1.5" opacity="0.8"/>
+    <!-- Node connectors -->
+    <circle cx="710" cy="393" r="4" fill="#a0a090" stroke="#7a7260" stroke-width="1"/>
+    <circle cx="735" cy="391" r="4" fill="#a0a090" stroke="#7a7260" stroke-width="1"/>
+    <circle cx="760" cy="390" r="4" fill="#a0a090" stroke="#7a7260" stroke-width="1"/>
+    <circle cx="720" cy="498" r="4" fill="#909080" stroke="#6a6250" stroke-width="1"/>
+    <circle cx="745" cy="496" r="4" fill="#909080" stroke="#6a6250" stroke-width="1"/>
+    <circle cx="770" cy="495" r="4" fill="#909080" stroke="#6a6250" stroke-width="1"/>
+  </g>
+
+  <!-- === MODULE JUNCTION RINGS === -->
+  <!-- Between passenger and cargo mod -->
+  <g opacity="0.8">
+    <polygon points="428,382 440,382 450,397 438,397" fill="#8a8270" stroke="#6a6258" stroke-width="0.8"/>
+    <polygon points="438,397 450,397 460,497 448,497" fill="#7a7260" stroke="#5a5248" stroke-width="0.8"/>
+    <polygon points="428,497 440,497 450,512 438,512" fill="#5a5240" stroke="#3a3228" stroke-width="0.5"/>
+  </g>
+  <!-- Between cargo mod 1 and power block -->
+  <g opacity="0.8">
+    <polygon points="568,382 580,382 590,397 578,397" fill="#8a8270" stroke="#6a6258" stroke-width="0.8"/>
+    <polygon points="578,397 590,397 600,497 588,497" fill="#7a7260" stroke="#5a5248" stroke-width="0.8"/>
+    <polygon points="568,497 580,497 590,512 578,512" fill="#5a5240" stroke="#3a3228" stroke-width="0.5"/>
+  </g>
+  <!-- Between power block and propulsion -->
+  <g opacity="0.8">
+    <polygon points="708,385 720,385 730,400 718,400" fill="#8a8270" stroke="#6a6258" stroke-width="0.8"/>
+    <polygon points="718,400 730,400 740,495 728,495" fill="#7a7260" stroke="#5a5248" stroke-width="0.8"/>
+    <polygon points="708,495 720,495 730,510 718,510" fill="#5a5240" stroke="#3a3228" stroke-width="0.5"/>
+  </g>
+  <!-- Between propulsion and kick stage -->
+  <g opacity="0.8">
+    <polygon points="957,390 969,390 979,405 967,405" fill="#8a8270" stroke="#6a6258" stroke-width="0.8"/>
+    <polygon points="967,405 979,405 989,500 977,500" fill="#7a7260" stroke="#5a5248" stroke-width="0.8"/>
+    <polygon points="957,500 969,500 979,515 967,515" fill="#5a5240" stroke="#3a3228" stroke-width="0.5"/>
+  </g>
+
+  <!-- === SECONDARY RADIATOR PANELS (deployed from propulsion block sides) === -->
+  <g id="radiators" opacity="0.85">
+    <!-- Upper radiator fin -->
+    <polygon points="820,390 900,387 900,370 820,373" fill="#8a9a88" stroke="#6a7a68" stroke-width="1"/>
+    <line x1="840" y1="370" x2="840" y2="390" stroke="#6a7a68" stroke-width="0.6" opacity="0.6"/>
+    <line x1="860" y1="370" x2="860" y2="390" stroke="#6a7a68" stroke-width="0.6" opacity="0.6"/>
+    <line x1="880" y1="370" x2="880" y2="390" stroke="#6a7a68" stroke-width="0.6" opacity="0.6"/>
+    <!-- Lower radiator fin -->
+    <polygon points="820,500 900,497 900,516 820,519" fill="#7a8a78" stroke="#5a6a58" stroke-width="1"/>
+    <line x1="840" y1="497" x2="840" y2="516" stroke="#5a6a58" stroke-width="0.6" opacity="0.6"/>
+    <line x1="860" y1="497" x2="860" y2="516" stroke="#5a6a58" stroke-width="0.6" opacity="0.6"/>
+    <line x1="880" y1="497" x2="880" y2="516" stroke="#5a6a58" stroke-width="0.6" opacity="0.6"/>
+  </g>
+
+  <!-- === LABELS / CALLOUTS === -->
+  <g id="labels" font-family="'Courier New', Courier, monospace" fill="#c8c0a0">
+
+    <!-- Title callout -->
+    <text x="140" y="600" font-size="22" font-weight="bold" fill="#d8d0b0" letter-spacing="2">EARTH–AEGIS LONG-HAULER</text>
+    <text x="140" y="622" font-size="12" fill="#a09880" letter-spacing="3">INTERORBITAL FREIGHT &amp; CREW TRANSPORT</text>
+    <line x1="140" y1="630" x2="680" y2="630" stroke="#6a6252" stroke-width="0.8" opacity="0.6"/>
+
+    <!-- Spec annotations -->
+    <text x="140" y="655" font-size="11" fill="#907860">LENGTH: ~55–65 m  |  MASS: 50–90 t (loaded)  |  ΔV: ~2.5 km/s ion cruise</text>
+    <text x="140" y="672" font-size="11" fill="#907860">PROPULSION: Hall-effect ion array + methalox kick stage</text>
+    <text x="140" y="689" font-size="11" fill="#907860">POWER: Solar array 300 m²  |  CREW: 0 (auto) / 48 (crew config)</text>
+
+    <!-- Component callout lines and labels -->
+    <!-- Command Module -->
+    <line x1="163" y1="412" x2="140" y2="370" stroke="#7a7260" stroke-width="0.8" stroke-dasharray="4,3"/>
+    <text x="100" y="365" font-size="10" fill="#b0a888" text-anchor="middle">COMMAND</text>
+    <text x="100" y="377" font-size="10" fill="#b0a888" text-anchor="middle">MODULE</text>
+
+    <!-- Passenger Module -->
+    <line x1="360" y1="378" x2="360" y2="350" stroke="#7a7260" stroke-width="0.8" stroke-dasharray="4,3"/>
+    <text x="360" y="343" font-size="10" fill="#b0a888" text-anchor="middle">PASSENGER</text>
+    <text x="360" y="355" font-size="10" fill="#b0a888" text-anchor="middle">MODULE</text>
+
+    <!-- Cargo Module -->
+    <line x1="500" y1="382" x2="500" y2="350" stroke="#7a7260" stroke-width="0.8" stroke-dasharray="4,3"/>
+    <text x="500" y="343" font-size="10" fill="#b0a888" text-anchor="middle">CARGO</text>
+    <text x="500" y="355" font-size="10" fill="#b0a888" text-anchor="middle">MODULE</text>
+
+    <!-- Power Block -->
+    <line x1="640" y1="385" x2="640" y2="160" stroke="#7a7260" stroke-width="0.8" stroke-dasharray="4,3"/>
+    <text x="640" y="153" font-size="10" fill="#b0a888" text-anchor="middle">SOLAR ARRAY</text>
+    <text x="640" y="165" font-size="10" fill="#b0a888" text-anchor="middle">300 m²</text>
+
+    <!-- Propulsion Stack -->
+    <line x1="860" y1="390" x2="860" y2="355" stroke="#7a7260" stroke-width="0.8" stroke-dasharray="4,3"/>
+    <text x="860" y="348" font-size="10" fill="#b0a888" text-anchor="middle">ION PROPULSION</text>
+    <text x="860" y="360" font-size="10" fill="#b0a888" text-anchor="middle">STACK</text>
+
+    <!-- Ion thrusters -->
+    <line x1="962" y1="455" x2="1000" y2="380" stroke="#7a7260" stroke-width="0.8" stroke-dasharray="4,3"/>
+    <text x="1020" y="373" font-size="10" fill="#80e0ff" text-anchor="middle">HALL-EFFECT</text>
+    <text x="1020" y="385" font-size="10" fill="#80e0ff" text-anchor="middle">ION ARRAY</text>
+
+    <!-- Kick Stage -->
+    <line x1="1035" y1="400" x2="1060" y2="360" stroke="#7a7260" stroke-width="0.8" stroke-dasharray="4,3"/>
+    <text x="1090" y="353" font-size="10" fill="#b0a888" text-anchor="middle">METHALOX</text>
+    <text x="1090" y="365" font-size="10" fill="#b0a888" text-anchor="middle">KICK STAGE</text>
+
+    <!-- Nozzle -->
+    <line x1="1140" y1="455" x2="1180" y2="395" stroke="#7a7260" stroke-width="0.8" stroke-dasharray="4,3"/>
+    <text x="1220" y="388" font-size="10" fill="#b0a888" text-anchor="middle">NOZZLE BELL</text>
+    <text x="1220" y="400" font-size="10" fill="#b0a888" text-anchor="middle">/ RCS CLUSTER</text>
+  </g>
+
+  <!-- === SUBTLE VEHICLE SHADOW / DEPTH === -->
+  <ellipse cx="640" cy="560" rx="480" ry="18" fill="#000000" opacity="0.15"/>
+
+  <!-- === EARTH HINT (distant, lower left) === -->
+  <g id="earth" opacity="0.7">
+    <defs>
+      <radialGradient id="earthGrad" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#4488cc"/>
+        <stop offset="40%" stop-color="#2255aa"/>
+        <stop offset="80%" stop-color="#113377"/>
+        <stop offset="100%" stop-color="#091a44"/>
+      </radialGradient>
+      <clipPath id="earthClip">
+        <circle cx="120" cy="820" r="130"/>
+      </clipPath>
+    </defs>
+    <circle cx="120" cy="820" r="130" fill="url(#earthGrad)"/>
+    <!-- Cloud/continent shapes -->
+    <ellipse cx="80" cy="780" rx="40" ry="15" fill="#55aa88" opacity="0.5" clip-path="url(#earthClip)"/>
+    <ellipse cx="140" cy="810" rx="30" ry="20" fill="#4499aa" opacity="0.4" clip-path="url(#earthClip)"/>
+    <ellipse cx="80" cy="840" rx="50" ry="12" fill="#ffffff" opacity="0.3" clip-path="url(#earthClip)"/>
+    <ellipse cx="160" cy="850" rx="35" ry="10" fill="#ffffff" opacity="0.25" clip-path="url(#earthClip)"/>
+    <!-- Atmosphere glow -->
+    <circle cx="120" cy="820" r="136" fill="none" stroke="#88bbff" stroke-width="5" opacity="0.3"/>
+    <circle cx="120" cy="820" r="142" fill="none" stroke="#88aaee" stroke-width="3" opacity="0.15"/>
+  </g>
+
+  <!-- === BORDER / FRAME === -->
+  <rect x="8" y="8" width="1384" height="884" fill="none" stroke="#4a4238" stroke-width="1" opacity="0.5"/>
+  <rect x="12" y="12" width="1376" height="876" fill="none" stroke="#3a3228" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- Corner marks -->
+  <g stroke="#6a6252" stroke-width="1" fill="none" opacity="0.6">
+    <path d="M 20,20 L 20,50 M 20,20 L 50,20"/>
+    <path d="M 1380,20 L 1380,50 M 1380,20 L 1350,20"/>
+    <path d="M 20,880 L 20,850 M 20,880 L 50,880"/>
+    <path d="M 1380,880 L 1380,850 M 1380,880 L 1350,880"/>
+  </g>
+
+  <!-- Classification stamp -->
+  <text x="1370" y="880" font-family="'Courier New', Courier, monospace" font-size="9" fill="#6a6252" text-anchor="end" opacity="0.6">EA-LH-001 // TECHNICAL ILLUSTRATION // AEGIS INFRASTRUCTURE DIVISION</text>
+  <text x="30" y="880" font-family="'Courier New', Courier, monospace" font-size="9" fill="#6a6252" opacity="0.6">REV A // NOT TO SCALE</text>
+
+</svg>
