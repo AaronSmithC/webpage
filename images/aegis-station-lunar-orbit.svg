@@ -1,0 +1,499 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1012" width="1800" height="1012">
+  <defs>
+
+    <!-- Deep space background -->
+    <radialGradient id="bgGrad" cx="62%" cy="48%" r="65%">
+      <stop offset="0%" stop-color="#09090f"/>
+      <stop offset="100%" stop-color="#020204"/>
+    </radialGradient>
+
+    <!-- Moon surface gradient — warm grey, lit from right -->
+    <radialGradient id="moonSurface" cx="38%" cy="38%" r="55%">
+      <stop offset="0%"   stop-color="#d8d0c4"/>
+      <stop offset="35%"  stop-color="#b0a898"/>
+      <stop offset="70%"  stop-color="#787068"/>
+      <stop offset="100%" stop-color="#383430"/>
+    </radialGradient>
+
+    <!-- Moon atmosphere rim -->
+    <radialGradient id="moonRim" cx="50%" cy="50%" r="50%">
+      <stop offset="82%"  stop-color="transparent"/>
+      <stop offset="95%"  stop-color="#c8c0b0" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#e0d8c8" stop-opacity="0.0"/>
+    </radialGradient>
+
+    <!-- Ring tube gradient — warm sand/stone, lit top-left -->
+    <linearGradient id="ringTube" x1="0%" y1="0%" x2="60%" y2="100%">
+      <stop offset="0%"   stop-color="#c8c0ae"/>
+      <stop offset="30%"  stop-color="#9a9284"/>
+      <stop offset="70%"  stop-color="#5a5448"/>
+      <stop offset="100%" stop-color="#2a2820"/>
+    </linearGradient>
+
+    <!-- Ring inner shadow -->
+    <radialGradient id="ringInner" cx="50%" cy="50%" r="50%">
+      <stop offset="60%"  stop-color="transparent"/>
+      <stop offset="85%"  stop-color="#1a1810" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#0a0806" stop-opacity="0.9"/>
+    </radialGradient>
+
+    <!-- Hub body gradient -->
+    <radialGradient id="hubGrad" cx="35%" cy="30%" r="65%">
+      <stop offset="0%"   stop-color="#c0b8a8"/>
+      <stop offset="50%"  stop-color="#706860"/>
+      <stop offset="100%" stop-color="#282420"/>
+    </radialGradient>
+
+    <!-- Hub connector cylinder -->
+    <linearGradient id="connGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#b0a898"/>
+      <stop offset="40%"  stop-color="#7a7268"/>
+      <stop offset="100%" stop-color="#2a2820"/>
+    </linearGradient>
+
+    <!-- Spoke gradient -->
+    <linearGradient id="spokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#908880"/>
+      <stop offset="50%"  stop-color="#504840"/>
+      <stop offset="100%" stop-color="#201e18"/>
+    </linearGradient>
+
+    <!-- Solar panel dark blue -->
+    <linearGradient id="solarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#1c2a3c"/>
+      <stop offset="100%" stop-color="#080e18"/>
+    </linearGradient>
+
+    <!-- Spine/boom gradient -->
+    <linearGradient id="spineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#a09888"/>
+      <stop offset="50%"  stop-color="#605850"/>
+      <stop offset="100%" stop-color="#201e18"/>
+    </linearGradient>
+
+    <!-- Subtle station glow -->
+    <filter id="stationGlow" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Moon crater shadow filter -->
+    <filter id="craterShadow">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Soft glow for hub lights -->
+    <filter id="hubGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+
+    <!-- Moon clip -->
+    <clipPath id="moonClip">
+      <circle cx="1420" cy="460" r="218"/>
+    </clipPath>
+
+  </defs>
+
+  <!-- ═══════════════════════ BACKGROUND ═══════════════════════ -->
+  <rect width="1800" height="1012" fill="url(#bgGrad)"/>
+
+  <!-- Stars — sparse, like the render -->
+  <g fill="white">
+    <circle cx="42"   cy="68"   r="0.7" opacity="0.6"/>
+    <circle cx="118"  cy="32"   r="0.5" opacity="0.5"/>
+    <circle cx="195"  cy="145"  r="0.8" opacity="0.7"/>
+    <circle cx="278"  cy="58"   r="0.5" opacity="0.4"/>
+    <circle cx="356"  cy="205"  r="0.6" opacity="0.6"/>
+    <circle cx="430"  cy="88"   r="0.8" opacity="0.5"/>
+    <circle cx="498"  cy="22"   r="0.5" opacity="0.7"/>
+    <circle cx="575"  cy="168"  r="0.6" opacity="0.4"/>
+    <circle cx="640"  cy="42"   r="0.9" opacity="0.6"/>
+    <circle cx="720"  cy="118"  r="0.5" opacity="0.5"/>
+    <circle cx="810"  cy="35"   r="0.7" opacity="0.7"/>
+    <circle cx="892"  cy="195"  r="0.5" opacity="0.4"/>
+    <circle cx="968"  cy="78"   r="0.6" opacity="0.6"/>
+    <circle cx="1048" cy="28"   r="0.8" opacity="0.5"/>
+    <circle cx="1138" cy="155"  r="0.5" opacity="0.7"/>
+    <circle cx="1218" cy="48"   r="0.7" opacity="0.4"/>
+    <circle cx="1298" cy="112"  r="0.5" opacity="0.6"/>
+    <circle cx="1588" cy="68"   r="0.6" opacity="0.5"/>
+    <circle cx="1668" cy="195"  r="0.5" opacity="0.7"/>
+    <circle cx="1748" cy="38"   r="0.8" opacity="0.4"/>
+    <circle cx="62"   cy="380"  r="0.5" opacity="0.5"/>
+    <circle cx="155"  cy="540"  r="0.7" opacity="0.4"/>
+    <circle cx="38"   cy="720"  r="0.6" opacity="0.6"/>
+    <circle cx="125"  cy="890"  r="0.5" opacity="0.5"/>
+    <circle cx="290"  cy="825"  r="0.7" opacity="0.4"/>
+    <circle cx="1720" cy="680"  r="0.5" opacity="0.5"/>
+    <circle cx="1768" cy="820"  r="0.7" opacity="0.4"/>
+    <circle cx="1640" cy="940"  r="0.5" opacity="0.6"/>
+    <circle cx="1558" cy="310"  r="0.6" opacity="0.5"/>
+  </g>
+
+  <!-- ═══════════════════════ MOON ═══════════════════════ -->
+  <!-- Moon soft glow halo -->
+  <circle cx="1420" cy="460" r="260" fill="#c8c0b0" opacity="0.04"/>
+  <circle cx="1420" cy="460" r="240" fill="#d0c8b8" opacity="0.05"/>
+
+  <!-- Moon body -->
+  <circle cx="1420" cy="460" r="218" fill="url(#moonSurface)"/>
+
+  <!-- Moon craters — placed to match the render -->
+  <g clip-path="url(#moonClip)" filter="url(#craterShadow)">
+    <!-- Large crater upper-right area -->
+    <circle cx="1490" cy="370" r="38" fill="none" stroke="#606058" stroke-width="3" opacity="0.5"/>
+    <circle cx="1490" cy="370" r="36" fill="#888078" opacity="0.25"/>
+    <circle cx="1488" cy="368" r="14" fill="#6a6258" opacity="0.4"/>
+
+    <!-- Medium crater left-center -->
+    <circle cx="1360" cy="445" r="24" fill="none" stroke="#585050" stroke-width="2" opacity="0.45"/>
+    <circle cx="1360" cy="445" r="22" fill="#787068" opacity="0.2"/>
+
+    <!-- Small craters scattered -->
+    <circle cx="1440" cy="510" r="14" fill="none" stroke="#606058" stroke-width="1.5" opacity="0.4"/>
+    <circle cx="1440" cy="510" r="12" fill="#706860" opacity="0.18"/>
+
+    <circle cx="1380" cy="390" r="10" fill="#686058" opacity="0.22"/>
+    <circle cx="1380" cy="390" r="9"  fill="none" stroke="#585050" stroke-width="1" opacity="0.3"/>
+
+    <circle cx="1470" cy="430" r="7"  fill="#787068" opacity="0.3"/>
+    <circle cx="1415" cy="360" r="9"  fill="#686058" opacity="0.25"/>
+    <circle cx="1355" cy="488" r="6"  fill="#686058" opacity="0.2"/>
+    <circle cx="1500" cy="470" r="8"  fill="#787068" opacity="0.2"/>
+    <circle cx="1310" cy="420" r="12" fill="#646054" opacity="0.3"/>
+    <circle cx="1420" cy="550" r="11" fill="#686058" opacity="0.22"/>
+    <circle cx="1464" cy="560" r="5"  fill="#787068" opacity="0.2"/>
+    <circle cx="1330" cy="360" r="7"  fill="#686058" opacity="0.2"/>
+
+    <!-- Terminator shadow -->
+    <path d="M 1202 348 Q 1240 460 1205 572" fill="none" stroke="#0a0808" stroke-width="0" opacity="0"/>
+    <!-- Dark limb shading (right-lit, so left of moon is dark) -->
+    <ellipse cx="1320" cy="460" rx="120" ry="218" fill="#0c0a08" opacity="0.35"/>
+  </g>
+
+  <!-- Moon rim highlight -->
+  <circle cx="1420" cy="460" r="218" fill="url(#moonRim)"/>
+  <circle cx="1420" cy="460" r="218" fill="none" stroke="#e0d8c8" stroke-width="1" opacity="0.15"/>
+
+  <!-- Moon label -->
+  <text x="1420" y="710" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#605850" letter-spacing="3" opacity="0.6">LUNAR ORBIT</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       AEGIS STATION
+       Three co-axial rings on a shared spine, 3/4 perspective view.
+       Viewed slightly from the left, rings receding into depth.
+       
+       Ring positions (Z-depth, left-to-right in image):
+         Ring A (rear-left):   cx=540,  perspective-compressed
+         Ring B (middle):      cx=720,  medium depth
+         Ring C (front-right): cx=940,  closest, largest apparent
+       
+       Ring outer radii (apparent, perspective):
+         A: rx=145 ry=175   (most compressed, furthest)
+         B: rx=162 ry=192
+         C: rx=182 ry=212   (least compressed, closest)
+       
+       Ring tube thickness: ~38px
+       Hub cy=506 for all (shared spin axis)
+  ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- ── CENTRAL SPINE / BOOM ── -->
+  <!-- Main horizontal spine running through all three hubs -->
+  <rect x="265" y="500" width="840" height="12" rx="4" fill="url(#spineGrad)"/>
+  <rect x="265" y="500" width="840" height="3"  rx="2" fill="#c0b8a8" opacity="0.4"/>
+
+  <!-- ══════════════════════════
+       RING A — rearmost, leftmost, most compressed by perspective
+       cx=540, cy=506, outer_rx=148, outer_ry=178, tube=36
+  ══════════════════════════ -->
+
+  <!-- Ring A shadow/depth behind -->
+  <ellipse cx="540" cy="510" rx="152" ry="182" fill="#0c0a08" opacity="0.5"/>
+
+  <!-- Ring A outer (tube cross-section rendered as thick ellipse stroke) -->
+  <!-- We draw the ring as: outer ellipse filled dark, then inner cutout, then top-lit rim -->
+
+  <!-- Ring A body -->
+  <ellipse cx="540" cy="506" rx="148" ry="178" fill="none" stroke="url(#ringTube)" stroke-width="36"/>
+  <!-- Ring A inner shadow -->
+  <ellipse cx="540" cy="506" rx="130" ry="160" fill="none" stroke="#1a1810" stroke-width="8" opacity="0.7"/>
+  <!-- Ring A outer highlight (top lit) -->
+  <ellipse cx="540" cy="506" rx="148" ry="178" fill="none" stroke="#d8d0be" stroke-width="1.5" opacity="0.45"/>
+  <!-- Ring A inner edge subtle -->
+  <ellipse cx="540" cy="506" rx="112" ry="142" fill="none" stroke="#3a3830" stroke-width="1" opacity="0.5"/>
+
+  <!-- Ring A tile/panel lines (longitudinal seams around the torus) -->
+  <g stroke="#6a6258" stroke-width="0.8" opacity="0.4">
+    <!-- Horizontal band lines (latitude seams) -->
+    <ellipse cx="540" cy="506" rx="148" ry="178" fill="none" stroke-dasharray="0"/>
+    <!-- Simulate segmentation with short arcs - use approximate vertical divisions -->
+    <ellipse cx="540" cy="506" rx="134" ry="165" fill="none" stroke="#5a5248" stroke-width="0.6"/>
+    <ellipse cx="540" cy="506" rx="122" ry="152" fill="none" stroke="#5a5248" stroke-width="0.6"/>
+    <ellipse cx="540" cy="506" rx="143" ry="173" fill="none" stroke="#787068" stroke-width="0.5"/>
+  </g>
+
+  <!-- Ring A SPOKES — 5 spokes like the render -->
+  <!-- Spoke = tapered trapezoid from hub to ring inner edge -->
+  <!-- Hub center A: cx=540, cy=506; ring inner radius ~130/160 -->
+  <g fill="url(#spokeGrad)" opacity="0.9">
+    <!-- Top spoke (12 o'clock) -->
+    <path d="M 534 494 L 546 494 L 548 342 L 532 342 Z"/>
+    <!-- Upper-right spoke (~2 o'clock) -->
+    <path d="M 546 498 L 554 506 L 648 398 L 638 386 Z"/>
+    <!-- Lower-right spoke (~4 o'clock) -->
+    <path d="M 546 514 L 554 506 L 650 618 L 638 628 Z"/>
+    <!-- Lower-left spoke (~8 o'clock) -->
+    <path d="M 534 514 L 526 506 L 430 618 L 442 628 Z"/>
+    <!-- Upper-left spoke (~10 o'clock) -->
+    <path d="M 534 498 L 526 506 L 432 398 L 442 386 Z"/>
+  </g>
+  <!-- Spoke highlight edges -->
+  <g stroke="#a09888" stroke-width="0.6" opacity="0.4" fill="none">
+    <path d="M 534 494 L 532 342"/>
+    <path d="M 546 498 L 648 398"/>
+    <path d="M 546 514 L 650 618"/>
+    <path d="M 534 514 L 430 618"/>
+    <path d="M 534 498 L 432 398"/>
+  </g>
+
+  <!-- Hub A — central cylinder node -->
+  <ellipse cx="540" cy="514" rx="22" ry="10" fill="#282420" opacity="0.7"/>
+  <circle cx="540" cy="506" r="26" fill="url(#hubGrad)"/>
+  <circle cx="540" cy="506" r="26" fill="none" stroke="#c0b8a8" stroke-width="1" opacity="0.4"/>
+  <ellipse cx="534" cy="500" rx="9" ry="6" fill="white" opacity="0.08"/>
+  <!-- Hub A axial collar -->
+  <rect x="512" y="502" width="56" height="8" rx="3" fill="url(#connGrad)" opacity="0.9"/>
+  <rect x="512" y="502" width="56" height="2" rx="1" fill="#d0c8b8" opacity="0.35"/>
+
+  <!-- ══════════════════════════
+       RING B — middle ring
+       cx=720, cy=506, outer_rx=164, outer_ry=194, tube=40
+  ══════════════════════════ -->
+
+  <!-- Ring B shadow -->
+  <ellipse cx="720" cy="511" rx="168" ry="198" fill="#0c0a08" opacity="0.45"/>
+
+  <!-- Ring B body -->
+  <ellipse cx="720" cy="506" rx="164" ry="194" fill="none" stroke="url(#ringTube)" stroke-width="40"/>
+  <ellipse cx="720" cy="506" rx="144" ry="174" fill="none" stroke="#1a1810" stroke-width="9" opacity="0.65"/>
+  <ellipse cx="720" cy="506" rx="164" ry="194" fill="none" stroke="#d8d0be" stroke-width="1.8" opacity="0.5"/>
+  <ellipse cx="720" cy="506" rx="124" ry="154" fill="none" stroke="#3a3830" stroke-width="1.2" opacity="0.45"/>
+
+  <!-- Ring B panel seams -->
+  <g stroke="#6a6258" stroke-width="0.6" opacity="0.38">
+    <ellipse cx="720" cy="506" rx="150" ry="180" fill="none" stroke="#5a5248"/>
+    <ellipse cx="720" cy="506" rx="138" ry="168" fill="none" stroke="#5a5248"/>
+    <ellipse cx="720" cy="506" rx="158" ry="188" fill="none" stroke="#787068" stroke-width="0.5"/>
+  </g>
+
+  <!-- Ring B SPOKES — 5 spokes -->
+  <g fill="url(#spokeGrad)" opacity="0.9">
+    <path d="M 714 492 L 726 492 L 728 308 L 712 308 Z"/>
+    <path d="M 726 498 L 734 506 L 852 376 L 840 362 Z"/>
+    <path d="M 726 514 L 734 506 L 856 640 L 842 652 Z"/>
+    <path d="M 714 514 L 706 506 L 586 638 L 600 652 Z"/>
+    <path d="M 714 498 L 706 506 L 588 374 L 602 362 Z"/>
+  </g>
+  <g stroke="#a09888" stroke-width="0.7" opacity="0.38" fill="none">
+    <path d="M 714 492 L 712 308"/>
+    <path d="M 726 498 L 852 376"/>
+    <path d="M 726 514 L 856 640"/>
+    <path d="M 714 514 L 586 638"/>
+    <path d="M 714 498 L 588 374"/>
+  </g>
+
+  <!-- Hub B -->
+  <ellipse cx="720" cy="516" rx="24" ry="11" fill="#282420" opacity="0.65"/>
+  <circle cx="720" cy="506" r="28" fill="url(#hubGrad)"/>
+  <circle cx="720" cy="506" r="28" fill="none" stroke="#c0b8a8" stroke-width="1.2" opacity="0.45"/>
+  <ellipse cx="714" cy="499" rx="10" ry="7" fill="white" opacity="0.09"/>
+  <!-- Hub B axial connectors -->
+  <rect x="688" y="502" width="64" height="9" rx="3" fill="url(#connGrad)"/>
+  <rect x="688" y="502" width="64" height="2.5" rx="1" fill="#d0c8b8" opacity="0.35"/>
+  <!-- Small detail rings on hub B -->
+  <circle cx="720" cy="506" r="14" fill="none" stroke="#908880" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="720" cy="506" r="7"  fill="#202018" opacity="0.8"/>
+  <circle cx="720" cy="506" r="5"  fill="#181610"/>
+
+  <!-- ══════════════════════════
+       RING C — front ring, closest, largest apparent size
+       cx=940, cy=506, outer_rx=184, outer_ry=214, tube=44
+  ══════════════════════════ -->
+
+  <!-- Ring C shadow -->
+  <ellipse cx="940" cy="512" rx="188" ry="218" fill="#0c0a08" opacity="0.4"/>
+
+  <!-- Ring C body -->
+  <ellipse cx="940" cy="506" rx="184" ry="214" fill="none" stroke="url(#ringTube)" stroke-width="44"/>
+  <ellipse cx="940" cy="506" rx="162" ry="192" fill="none" stroke="#181610" stroke-width="10" opacity="0.6"/>
+  <ellipse cx="940" cy="506" rx="184" ry="214" fill="none" stroke="#dcd4c2" stroke-width="2" opacity="0.55"/>
+  <ellipse cx="940" cy="506" rx="140" ry="170" fill="none" stroke="#3a3830" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Ring C panel seams — more visible being closest -->
+  <g fill="none" opacity="0.42">
+    <ellipse cx="940" cy="506" rx="168" ry="198" stroke="#5a5248" stroke-width="0.7"/>
+    <ellipse cx="940" cy="506" rx="154" ry="184" stroke="#5a5248" stroke-width="0.7"/>
+    <ellipse cx="940" cy="506" rx="178" ry="208" stroke="#787068" stroke-width="0.6"/>
+    <!-- Vertical panel division lines approximated as near-straight paths -->
+    <path d="M 940 292 L 938 718" stroke="#686058" stroke-width="0.6"/>
+    <path d="M 1018 320 L 1068 696" stroke="#686058" stroke-width="0.5"/>
+    <path d="M 862 320 L 812 696" stroke="#686058" stroke-width="0.5"/>
+    <path d="M 1094 388 L 1118 626" stroke="#686058" stroke-width="0.5"/>
+    <path d="M 786 388 L 762 626" stroke="#686058" stroke-width="0.5"/>
+    <path d="M 1120 462 L 1124 550" stroke="#686058" stroke-width="0.5"/>
+    <path d="M 756 462 L 752 550" stroke="#686058" stroke-width="0.5"/>
+  </g>
+
+  <!-- Ring C SPOKES — 5 spokes, most visible -->
+  <g fill="url(#spokeGrad)" opacity="0.92">
+    <!-- Top (12 o'clock) -->
+    <path d="M 934 490 L 946 490 L 948 292 L 932 292 Z"/>
+    <!-- Upper-right (~2) -->
+    <path d="M 946 498 L 956 506 L 1086 356 L 1072 340 Z"/>
+    <!-- Lower-right (~4) -->
+    <path d="M 946 514 L 956 506 L 1090 658 L 1074 674 Z"/>
+    <!-- Lower-left (~8) -->
+    <path d="M 934 514 L 924 506 L 790 656 L 806 674 Z"/>
+    <!-- Upper-left (~10) -->
+    <path d="M 934 498 L 924 506 L 792 356 L 808 340 Z"/>
+  </g>
+  <!-- Spoke highlight edges -->
+  <g stroke="#b0a898" stroke-width="0.8" opacity="0.45" fill="none">
+    <path d="M 934 490 L 932 292"/>
+    <path d="M 946 498 L 1086 356"/>
+    <path d="M 946 514 L 1090 658"/>
+    <path d="M 934 514 L 790 656"/>
+    <path d="M 934 498 L 792 356"/>
+  </g>
+  <!-- Spoke structural truss detail on nearest spoke -->
+  <g stroke="#585048" stroke-width="0.7" opacity="0.5">
+    <line x1="937" y1="440" x2="935" y2="420"/>
+    <line x1="943" y1="440" x2="945" y2="420"/>
+    <line x1="937" y1="390" x2="940" y2="370"/>
+    <line x1="943" y1="390" x2="940" y2="370"/>
+  </g>
+
+  <!-- Hub C — largest, most detail -->
+  <ellipse cx="940" cy="518" rx="28" ry="13" fill="#282420" opacity="0.6"/>
+  <circle cx="940" cy="506" r="32" fill="url(#hubGrad)"/>
+  <circle cx="940" cy="506" r="32" fill="none" stroke="#c8c0ae" stroke-width="1.5" opacity="0.5"/>
+  <ellipse cx="933" cy="498" rx="12" ry="8" fill="white" opacity="0.10"/>
+
+  <!-- Hub C axial connector — prominent -->
+  <rect x="904" y="501" width="72" height="10" rx="4" fill="url(#connGrad)"/>
+  <rect x="904" y="501" width="72" height="3"  rx="1.5" fill="#d8d0be" opacity="0.4"/>
+  <rect x="904" y="509" width="72" height="2"  rx="1" fill="#181610" opacity="0.5"/>
+
+  <!-- Hub C center detail -->
+  <circle cx="940" cy="506" r="16" fill="none" stroke="#a09888" stroke-width="1.8" opacity="0.55"/>
+  <circle cx="940" cy="506" r="9"  fill="#201e18"/>
+  <circle cx="940" cy="506" r="6"  fill="#282420"/>
+  <!-- Docking port glow hint -->
+  <circle cx="940" cy="506" r="5"  fill="#3a3028" opacity="0.8"/>
+
+  <!-- ══════════════════════════
+       FAR-END DOCKING / NOSE CONE beyond Ring C
+  ══════════════════════════ -->
+  <ellipse cx="1105" cy="506" rx="18" ry="10" fill="url(#hubGrad)" stroke="#908880" stroke-width="1" opacity="0.8"/>
+  <ellipse cx="1105" cy="506" rx="8"  ry="5"  fill="#181610"/>
+  <!-- nose taper -->
+  <path d="M 1105 496 L 1124 504 L 1124 508 L 1105 516 Z" fill="url(#connGrad)" opacity="0.8"/>
+  <path d="M 1124 504 L 1142 506 L 1124 508 Z" fill="#807870"/>
+
+  <!-- ══════════════════════════
+       LEFT END — Solar panel array + nose
+  ══════════════════════════ -->
+
+  <!-- Left spine end / nose -->
+  <ellipse cx="268" cy="506" rx="16" ry="9" fill="url(#hubGrad)" stroke="#908880" stroke-width="1" opacity="0.7"/>
+  <path d="M 252 504 L 268 497 L 268 515 Z" fill="#807870" opacity="0.8"/>
+
+  <!-- Solar panel boom (angled slightly, matching render — panel is above-left of spine) -->
+  <!-- Boom from spine to panel -->
+  <rect x="255" y="492" width="88" height="6" rx="2" fill="url(#spineGrad)" opacity="0.9"
+        transform="rotate(-18, 255, 495)"/>
+
+  <!-- Solar panel body — 3 cells visible, slightly angled -->
+  <g transform="translate(185, 412) rotate(-12)">
+    <!-- Panel frame -->
+    <rect x="0" y="0" width="148" height="72" rx="4" fill="url(#solarGrad)" stroke="#2a3a50" stroke-width="1.5"/>
+    <!-- Cell grid lines -->
+    <g stroke="#1c2c40" stroke-width="0.8" opacity="0.9">
+      <!-- Vertical dividers -->
+      <line x1="50"  y1="2" x2="50"  y2="70"/>
+      <line x1="100" y1="2" x2="100" y2="70"/>
+      <!-- Horizontal dividers -->
+      <line x1="2" y1="18" x2="146" y2="18"/>
+      <line x1="2" y1="36" x2="146" y2="36"/>
+      <line x1="2" y1="54" x2="146" y2="54"/>
+    </g>
+    <!-- Panel sheen / highlight -->
+    <rect x="2" y="2" width="144" height="12" rx="2" fill="#304060" opacity="0.3"/>
+    <!-- Panel reflection -->
+    <rect x="2" y="2" width="40" height="68" rx="2" fill="#2a3a52" opacity="0.25"/>
+    <!-- Panel outer glow hint -->
+    <rect x="0" y="0" width="148" height="72" rx="4" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.5"/>
+  </g>
+
+  <!-- Solar panel connecting strut back to hub area -->
+  <line x1="258" y1="504" x2="248" y2="465" stroke="#707068" stroke-width="3" opacity="0.7"/>
+  <line x1="258" y1="504" x2="248" y2="465" stroke="#a09888" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- ══════════════════════════
+       DEPTH — paint the "behind" portions of the ring slightly darker
+       by overlaying a dark arc on the lower half of each ring
+  ══════════════════════════ -->
+
+  <!-- Ring A lower-half shadow pass (things going behind the perspective) -->
+  <ellipse cx="540" cy="506" rx="148" ry="178" fill="none" stroke="#080806" stroke-width="36" stroke-dasharray="465 465" stroke-dashoffset="232" opacity="0.55"/>
+
+  <!-- Ring B lower-half shadow pass -->
+  <ellipse cx="720" cy="506" rx="164" ry="194" fill="none" stroke="#080806" stroke-width="40" stroke-dasharray="515 515" stroke-dashoffset="257" opacity="0.5"/>
+
+  <!-- Ring C lower-half shadow pass -->
+  <ellipse cx="940" cy="506" rx="184" ry="214" fill="none" stroke="#080806" stroke-width="44" stroke-dasharray="578 578" stroke-dashoffset="289" opacity="0.45"/>
+
+  <!-- ══════════════════════════
+       STATION GLOW — subtle ambient lit by moon/sun
+  ══════════════════════════ -->
+  <!-- Very faint warm light catching the top of the structure -->
+  <ellipse cx="720" cy="310" rx="380" ry="30" fill="#c8c0a0" opacity="0.04"/>
+
+  <!-- ══════════════════════════
+       TITLE TYPOGRAPHY
+  ══════════════════════════ -->
+  <text x="900" y="88" text-anchor="middle"
+        font-family="'Courier New',monospace"
+        font-weight="700"
+        font-size="13"
+        fill="#908880"
+        letter-spacing="6"
+        opacity="0.8">AEGIS STATION</text>
+  <text x="900" y="108" text-anchor="middle"
+        font-family="'Courier New',monospace"
+        font-size="9"
+        fill="#605850"
+        letter-spacing="4"
+        opacity="0.6">LUNAR ORBIT  ·  THREE-RING ROTATING HABITAT</text>
+
+  <!-- ══════════════════════════
+       FRAME
+  ══════════════════════════ -->
+  <rect x="8" y="8" width="1784" height="996" rx="4" fill="none" stroke="#282420" stroke-width="1.2" opacity="0.6"/>
+  <g stroke="#383028" stroke-width="1" opacity="0.5">
+    <path d="M 8 30 L 8 8 L 30 8"/>
+    <path d="M 1770 8 L 1792 8 L 1792 30"/>
+    <path d="M 8 982 L 8 1004 L 30 1004"/>
+    <path d="M 1770 1004 L 1792 1004 L 1792 982"/>
+  </g>
+
+  <!-- Footer -->
+  <text x="22" y="1000"
+        font-family="'Courier New',monospace"
+        font-size="8"
+        fill="#383028"
+        letter-spacing="2"
+        opacity="0.7">AEGIS STATION INFRASTRUCTURE LLC  ·  CONCEPT ILLUSTRATION  ·  NOT TO SCALE</text>
+
+</svg>
