@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1400 900"
+     width="1400" height="900"
+     font-family="'Courier New', monospace">
+
+  <defs>
+    <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#000005"/>
+      <stop offset="55%"  stop-color="#06060f"/>
+      <stop offset="100%" stop-color="#0e0e20"/>
+    </linearGradient>
+    <linearGradient id="gGround" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#b0a08e"/>
+      <stop offset="40%"  stop-color="#9a8a78"/>
+      <stop offset="100%" stop-color="#6a5e4a"/>
+    </linearGradient>
+    <linearGradient id="gCmdBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#2e3648"/>
+      <stop offset="50%"  stop-color="#1e2838"/>
+      <stop offset="100%" stop-color="#111820"/>
+    </linearGradient>
+    <linearGradient id="gPaxBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#272f3e"/>
+      <stop offset="50%"  stop-color="#1a2232"/>
+      <stop offset="100%" stop-color="#0f1520"/>
+    </linearGradient>
+    <linearGradient id="gTread" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#383838"/>
+      <stop offset="100%" stop-color="#181818"/>
+    </linearGradient>
+    <radialGradient id="gWheel" cx="38%" cy="38%" r="62%">
+      <stop offset="0%"   stop-color="#50586a"/>
+      <stop offset="100%" stop-color="#1a1e28"/>
+    </radialGradient>
+    <radialGradient id="gViewport" cx="45%" cy="40%" r="60%">
+      <stop offset="0%"   stop-color="#b8eaff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#1060a0" stop-opacity="0.4"/>
+    </radialGradient>
+    <linearGradient id="gRadiator" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#d0dde8"/>
+      <stop offset="100%" stop-color="#8ea8c0"/>
+    </linearGradient>
+    <linearGradient id="gHopperBody" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#9aa2b2"/>
+      <stop offset="35%"  stop-color="#d0d8e8"/>
+      <stop offset="65%"  stop-color="#b8c0d0"/>
+      <stop offset="100%" stop-color="#7a8290"/>
+    </linearGradient>
+    <linearGradient id="gHopperTank" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#585e6a"/>
+      <stop offset="50%"  stop-color="#88909e"/>
+      <stop offset="100%" stop-color="#484e5a"/>
+    </linearGradient>
+    <linearGradient id="gEngine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#686870"/>
+      <stop offset="100%" stop-color="#282830"/>
+    </linearGradient>
+    <linearGradient id="gTunnel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#3a4a5a"/>
+      <stop offset="50%"  stop-color="#2a3848"/>
+      <stop offset="100%" stop-color="#1a2838"/>
+    </linearGradient>
+    <radialGradient id="gSunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#fff8dc" stop-opacity="1"/>
+      <stop offset="50%"  stop-color="#ffe066" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ffe066" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="pSolar" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+      <rect width="14" height="14" fill="#0d2050"/>
+      <rect x="1" y="1" width="12" height="12" fill="#183878" opacity="0.85"/>
+      <line x1="0" y1="0" x2="14" y2="0" stroke="#091430" stroke-width="1"/>
+      <line x1="0" y1="0" x2="0" y2="14" stroke="#091430" stroke-width="1"/>
+    </pattern>
+    <pattern id="pTread" x="0" y="0" width="20" height="120" patternUnits="userSpaceOnUse">
+      <rect width="20" height="120" fill="#222"/>
+      <rect x="2" y="0" width="16" height="120" fill="#2c2c2c"/>
+      <rect x="0" y="0"   width="20" height="2" fill="#111"/>
+      <rect x="0" y="20"  width="20" height="2" fill="#111"/>
+      <rect x="0" y="40"  width="20" height="2" fill="#111"/>
+      <rect x="0" y="60"  width="20" height="2" fill="#111"/>
+      <rect x="0" y="80"  width="20" height="2" fill="#111"/>
+      <rect x="0" y="100" width="20" height="2" fill="#111"/>
+    </pattern>
+    <pattern id="pRadFins" width="14" height="4" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="2" x2="14" y2="2" stroke="#9ab0c4" stroke-width="0.8" opacity="0.9"/>
+    </pattern>
+    <pattern id="pHopperPV" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="#1e3a9e"/>
+      <rect x="1" y="1" width="8" height="8" fill="#182e88" opacity="0.8"/>
+      <rect x="11" y="1" width="8" height="8" fill="#182e88" opacity="0.8"/>
+      <rect x="1" y="11" width="8" height="8" fill="#182e88" opacity="0.8"/>
+      <rect x="11" y="11" width="8" height="8" fill="#182e88" opacity="0.8"/>
+      <line x1="0" y1="10" x2="20" y2="10" stroke="#3a5acc" stroke-width="0.8"/>
+      <line x1="10" y1="0" x2="10" y2="20" stroke="#3a5acc" stroke-width="0.8"/>
+    </pattern>
+    <filter id="fShadow">
+      <feDropShadow dx="2" dy="5" stdDeviation="5" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <filter id="fGlow">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="fSoftShadow">
+      <feDropShadow dx="1" dy="3" stdDeviation="4" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- ======================================================= -->
+  <!--  BACKGROUND                                              -->
+  <!-- ======================================================= -->
+  <rect width="1400" height="900" fill="url(#gSky)"/>
+
+  <!-- Stars -->
+  <g fill="white">
+    <circle cx="28"   cy="20"  r="0.8"/><circle cx="90"   cy="42"  r="1.0"/>
+    <circle cx="170"  cy="12"  r="0.7"/><circle cx="265"  cy="34"  r="1.1"/>
+    <circle cx="370"  cy="10"  r="0.9"/><circle cx="465"  cy="26"  r="0.6"/>
+    <circle cx="560"  cy="16"  r="1.2"/><circle cx="650"  cy="42"  r="0.8"/>
+    <circle cx="755"  cy="7"   r="1.0"/><circle cx="845"  cy="30"  r="0.7"/>
+    <circle cx="935"  cy="16"  r="0.9"/><circle cx="1025" cy="44"  r="1.0"/>
+    <circle cx="1115" cy="22"  r="0.8"/><circle cx="1210" cy="12"  r="1.1"/>
+    <circle cx="1305" cy="36"  r="0.7"/><circle cx="1375" cy="18"  r="0.9"/>
+    <circle cx="50"   cy="85"  r="0.7"/><circle cx="145"  cy="70"  r="0.9"/>
+    <circle cx="248"  cy="92"  r="1.0"/><circle cx="365"  cy="74"  r="0.7"/>
+    <circle cx="515"  cy="62"  r="1.1"/><circle cx="630"  cy="82"  r="0.8"/>
+    <circle cx="730"  cy="58"  r="0.6"/><circle cx="838"  cy="78"  r="1.0"/>
+    <circle cx="955"  cy="66"  r="0.8"/><circle cx="1050" cy="88"  r="0.7"/>
+    <circle cx="1160" cy="64"  r="0.9"/><circle cx="1280" cy="80"  r="1.1"/>
+    <circle cx="18"   cy="128" r="0.7"/><circle cx="132"  cy="116" r="0.5"/>
+    <circle cx="308"  cy="136" r="0.9"/><circle cx="450"  cy="108" r="0.8"/>
+    <circle cx="672"  cy="122" r="1.0"/><circle cx="912"  cy="110" r="0.7"/>
+    <circle cx="1100" cy="128" r="0.9"/><circle cx="1340" cy="113" r="0.8"/>
+  </g>
+
+  <!-- Sun — low angle upper right -->
+  <ellipse cx="1310" cy="170" rx="80" ry="80" fill="url(#gSunGlow)" opacity="0.3"/>
+  <circle  cx="1310" cy="170" r="20"  fill="#fff8dc"/>
+  <circle  cx="1310" cy="170" r="15"  fill="#ffee88"/>
+  <g stroke="#fff8dc" stroke-width="1.4" opacity="0.28">
+    <line x1="1310" y1="143" x2="1310" y2="130"/>
+    <line x1="1329" y1="151" x2="1340" y2="140"/>
+    <line x1="1337" y1="170" x2="1350" y2="170"/>
+    <line x1="1329" y1="189" x2="1340" y2="200"/>
+    <line x1="1291" y1="151" x2="1280" y2="140"/>
+  </g>
+
+  <!-- Terrain horizon -->
+  <path d="M0,430 Q120,408 240,420 Q360,432 480,410 Q600,388 720,405
+           Q840,422 960,398 Q1080,374 1200,395 Q1300,412 1400,400
+           L1400,488 L0,488 Z"
+        fill="#565040" opacity="0.6"/>
+  <path d="M0,446 Q130,428 260,440 Q390,452 520,432 Q650,412 780,430
+           Q910,448 1040,425 Q1170,402 1300,422 Q1380,435 1400,430
+           L1400,496 L0,496 Z"
+        fill="#686050" opacity="0.65"/>
+
+  <!-- Ground -->
+  <rect x="0" y="490" width="1400" height="410" fill="url(#gGround)"/>
+
+  <!-- Rover approach tracks from right -->
+  <path d="M1400,508 Q1250,505 1100,507 Q950,509 820,510"
+        fill="none" stroke="#7a6e58" stroke-width="18" opacity="0.42"/>
+  <path d="M1400,508 Q1250,505 1100,507 Q950,509 820,510"
+        fill="none" stroke="#c4b49a" stroke-width="4" stroke-dasharray="18,10" opacity="0.3"/>
+  <path d="M1400,524 Q1250,521 1100,523 Q950,525 820,526"
+        fill="none" stroke="#7a6e58" stroke-width="18" opacity="0.42"/>
+  <path d="M1400,524 Q1250,521 1100,523 Q950,525 820,526"
+        fill="none" stroke="#c4b49a" stroke-width="4" stroke-dasharray="18,10" opacity="0.3"/>
+
+  <!-- Craters -->
+  <ellipse cx="75"   cy="525" rx="40"  ry="11" fill="none" stroke="#9a8e78" stroke-width="1.5" opacity="0.32"/>
+  <ellipse cx="1300" cy="520" rx="48"  ry="13" fill="none" stroke="#9a8e78" stroke-width="1.5" opacity="0.28"/>
+  <ellipse cx="175"  cy="558" rx="20"  ry="5"  fill="none" stroke="#9a8e78" stroke-width="1"   opacity="0.22"/>
+
+  <!-- Surface rocks -->
+  <ellipse cx="50"   cy="508" rx="13" ry="5" fill="#8a7e6e" opacity="0.65"/>
+  <ellipse cx="148"  cy="516" rx="9"  ry="4" fill="#9a8e7e" opacity="0.55"/>
+  <ellipse cx="1320" cy="510" rx="15" ry="5" fill="#8a7e6e" opacity="0.6"/>
+  <ellipse cx="1375" cy="526" rx="10" ry="4" fill="#9a8e7e" opacity="0.55"/>
+
+  <!-- Hopper ground shadow -->
+  <ellipse cx="340" cy="503" rx="100" ry="14" fill="#000" opacity="0.26"/>
+
+  <!-- ======================================================= -->
+  <!--  SHORT HOPPER  (left, grounded)                         -->
+  <!--  Body x=250–430, airlock right face x=434              -->
+  <!--  Ground y≈502                                           -->
+  <!-- ======================================================= -->
+
+  <!-- Rear legs -->
+  <line x1="292" y1="454" x2="200" y2="498" stroke="#484e58" stroke-width="3.5"/>
+  <line x1="302" y1="454" x2="210" y2="498" stroke="#7a8090" stroke-width="1.5"/>
+  <line x1="312" y1="472" x2="215" y2="494" stroke="#484e58" stroke-width="1.5"/>
+  <ellipse cx="207" cy="500" rx="20" ry="6" fill="#484e58" stroke="#7a8090" stroke-width="1.5"/>
+
+  <line x1="388" y1="454" x2="468" y2="498" stroke="#484e58" stroke-width="3.5"/>
+  <line x1="378" y1="454" x2="458" y2="498" stroke="#7a8090" stroke-width="1.5"/>
+  <line x1="368" y1="472" x2="452" y2="494" stroke="#484e58" stroke-width="1.5"/>
+  <ellipse cx="461" cy="500" rx="20" ry="6" fill="#484e58" stroke="#7a8090" stroke-width="1.5"/>
+
+  <!-- Front legs -->
+  <line x1="284" y1="462" x2="182" y2="502" stroke="#585e6a" stroke-width="5"/>
+  <line x1="294" y1="462" x2="192" y2="502" stroke="#8898a8" stroke-width="2"/>
+  <line x1="304" y1="478" x2="193" y2="498" stroke="#585e6a" stroke-width="2"/>
+  <ellipse cx="188" cy="504" rx="23" ry="7" fill="#484e58" stroke="#7888a0" stroke-width="2"/>
+
+  <line x1="396" y1="462" x2="492" y2="502" stroke="#585e6a" stroke-width="5"/>
+  <line x1="386" y1="462" x2="482" y2="502" stroke="#8898a8" stroke-width="2"/>
+  <line x1="376" y1="478" x2="478" y2="498" stroke="#585e6a" stroke-width="2"/>
+  <ellipse cx="485" cy="504" rx="23" ry="7" fill="#484e58" stroke="#7888a0" stroke-width="2"/>
+
+  <!-- Center strut -->
+  <line x1="340" y1="464" x2="340" y2="503" stroke="#585e6a" stroke-width="6"/>
+  <line x1="343" y1="464" x2="343" y2="503" stroke="#9aaaba" stroke-width="2"/>
+  <ellipse cx="340" cy="505" rx="25" ry="7" fill="#484e58" stroke="#7888a0" stroke-width="2"/>
+
+  <!-- Engine nozzle -->
+  <path d="M310,462 Q306,478 298,494 L382,494 Q374,478 370,462 Z" fill="url(#gEngine)" stroke="#282830" stroke-width="1.5"/>
+  <ellipse cx="340" cy="494" rx="42" ry="9" fill="#1e2028"/>
+  <path d="M313,470 Q340,467 367,470" fill="none" stroke="#707078" stroke-width="1" opacity="0.6"/>
+  <path d="M308,480 Q340,477 372,480" fill="none" stroke="#707078" stroke-width="1" opacity="0.6"/>
+  <path d="M304,490 Q340,487 376,490" fill="none" stroke="#707078" stroke-width="1" opacity="0.6"/>
+
+  <!-- Cryo propellant tank -->
+  <path d="M258,440 Q253,458 258,462 L422,462 Q427,458 422,440 Z"
+        fill="url(#gHopperTank)" stroke="#484e58" stroke-width="1.5"/>
+  <line x1="260" y1="446" x2="420" y2="446" stroke="#7a8090" stroke-width="1.5" opacity="0.7"/>
+  <line x1="258" y1="453" x2="422" y2="453" stroke="#7a8090" stroke-width="1.5" opacity="0.7"/>
+  <line x1="258" y1="460" x2="422" y2="460" stroke="#7a8090" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Separation ring -->
+  <rect x="256" y="434" width="168" height="9" rx="2" fill="#484e58" stroke="#303038" stroke-width="1.5"/>
+
+  <!-- Main cabin body -->
+  <rect x="250" y="298" width="180" height="138" rx="7" fill="url(#gHopperBody)" stroke="#606878" stroke-width="2" filter="url(#fSoftShadow)"/>
+  <line x1="252" y1="325" x2="428" y2="325" stroke="#707888" stroke-width="0.8" opacity="0.5"/>
+  <line x1="252" y1="352" x2="428" y2="352" stroke="#707888" stroke-width="0.8" opacity="0.5"/>
+  <line x1="252" y1="380" x2="428" y2="380" stroke="#707888" stroke-width="0.8" opacity="0.5"/>
+  <line x1="252" y1="408" x2="428" y2="408" stroke="#707888" stroke-width="0.8" opacity="0.5"/>
+  <line x1="285" y1="300" x2="285" y2="434" stroke="#707888" stroke-width="0.6" opacity="0.35"/>
+  <line x1="340" y1="300" x2="340" y2="434" stroke="#707888" stroke-width="0.6" opacity="0.35"/>
+  <line x1="395" y1="300" x2="395" y2="434" stroke="#707888" stroke-width="0.6" opacity="0.35"/>
+
+  <!-- Transition collar -->
+  <rect x="248" y="290" width="184" height="11" rx="3" fill="#505868" stroke="#383840" stroke-width="1.5"/>
+
+  <!-- Flat roof plate -->
+  <rect x="246" y="265" width="188" height="27" rx="3" fill="#7888a0" stroke="#484e58" stroke-width="2"/>
+  <line x1="248" y1="274" x2="432" y2="274" stroke="#566078" stroke-width="1" opacity="0.6"/>
+  <line x1="248" y1="283" x2="432" y2="283" stroke="#566078" stroke-width="1" opacity="0.6"/>
+  <circle cx="262" cy="269" r="2" fill="#484e58"/><circle cx="298" cy="269" r="2" fill="#484e58"/>
+  <circle cx="334" cy="269" r="2" fill="#484e58"/><circle cx="370" cy="269" r="2" fill="#484e58"/>
+  <circle cx="406" cy="269" r="2" fill="#484e58"/><circle cx="430" cy="269" r="2" fill="#484e58"/>
+  <rect x="246" y="262" width="188" height="5" rx="1" fill="#484e58" stroke="#2c3038" stroke-width="1"/>
+
+  <!-- SSSRA: Radiator plate -->
+  <rect x="250" y="238" width="180" height="25" rx="2" fill="url(#gRadiator)" stroke="#6090a8" stroke-width="1.5"/>
+  <rect x="252" y="240" width="176" height="21" fill="url(#pRadFins)" opacity="1"/>
+  <line x1="268" y1="240" x2="268" y2="262" stroke="#88a8be" stroke-width="1" opacity="0.5"/>
+  <line x1="286" y1="240" x2="286" y2="262" stroke="#88a8be" stroke-width="1" opacity="0.5"/>
+  <line x1="304" y1="240" x2="304" y2="262" stroke="#88a8be" stroke-width="1" opacity="0.5"/>
+  <line x1="322" y1="240" x2="322" y2="262" stroke="#88a8be" stroke-width="1" opacity="0.5"/>
+  <line x1="340" y1="240" x2="340" y2="262" stroke="#88a8be" stroke-width="1" opacity="0.5"/>
+  <line x1="358" y1="240" x2="358" y2="262" stroke="#88a8be" stroke-width="1" opacity="0.5"/>
+  <line x1="376" y1="240" x2="376" y2="262" stroke="#88a8be" stroke-width="1" opacity="0.5"/>
+  <line x1="394" y1="240" x2="394" y2="262" stroke="#88a8be" stroke-width="1" opacity="0.5"/>
+  <line x1="412" y1="240" x2="412" y2="262" stroke="#88a8be" stroke-width="1" opacity="0.5"/>
+  <line x1="252" y1="241" x2="428" y2="241" stroke="#80a0b8" stroke-width="2" opacity="0.8"/>
+  <line x1="252" y1="261" x2="428" y2="261" stroke="#80a0b8" stroke-width="2" opacity="0.8"/>
+  <text x="340" y="254" text-anchor="middle" font-size="6.5" fill="#305060" font-weight="bold" letter-spacing="1">RADIATOR</text>
+
+  <!-- SSSRA: Standoffs -->
+  <rect x="258" y="212" width="7" height="27" rx="1" fill="#5a6878" stroke="#3a4858" stroke-width="1"/>
+  <rect x="255" y="208" width="13" height="6" rx="1" fill="#4a5868" stroke="#2a3848" stroke-width="1"/>
+  <rect x="414" y="212" width="7" height="27" rx="1" fill="#5a6878" stroke="#3a4858" stroke-width="1"/>
+  <rect x="411" y="208" width="13" height="6" rx="1" fill="#4a5868" stroke="#2a3848" stroke-width="1"/>
+  <line x1="304" y1="212" x2="304" y2="238" stroke="#4a5868" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+  <line x1="376" y1="212" x2="376" y2="238" stroke="#4a5868" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- SSSRA: PV array shadow on radiator -->
+  <rect x="253" y="239" width="174" height="20" fill="#283040" opacity="0.18" rx="1"/>
+
+  <!-- SSSRA: Solar array -->
+  <rect x="252" y="188" width="176" height="24" rx="2" fill="#182050" stroke="#2a4090" stroke-width="1.5"/>
+  <rect x="254" y="190" width="172" height="20" fill="url(#pHopperPV)"/>
+  <line x1="312" y1="188" x2="312" y2="212" stroke="#1a3080" stroke-width="2"/>
+  <line x1="372" y1="188" x2="372" y2="212" stroke="#1a3080" stroke-width="2"/>
+  <text x="340" y="202" text-anchor="middle" font-size="6.5" fill="#8aabff" font-weight="bold" letter-spacing="1">SOLAR ARRAY</text>
+
+  <!-- Comms stub -->
+  <line x1="416" y1="188" x2="416" y2="172" stroke="#7888a0" stroke-width="2"/>
+  <line x1="409" y1="178" x2="423" y2="178" stroke="#7888a0" stroke-width="1.5"/>
+  <line x1="411" y1="174" x2="421" y2="174" stroke="#7888a0" stroke-width="1"/>
+
+  <!-- Hopper: windows -->
+  <rect x="256" y="308" width="64" height="48" rx="5" fill="#101c2a" stroke="#80a0b0" stroke-width="2"/>
+  <rect x="258" y="310" width="60" height="44" rx="4" fill="#081420" stroke="#506070" stroke-width="1"/>
+  <path d="M260,314 L272,314 L264,350 L254,350 Z" fill="white" opacity="0.07"/>
+  <line x1="256" y1="334" x2="320" y2="334" stroke="#6a7888" stroke-width="1.5"/>
+  <line x1="289" y1="308" x2="289" y2="356" stroke="#6a7888" stroke-width="1.5"/>
+
+  <!-- Hopper: status panel -->
+  <rect x="258" y="370" width="44" height="38" rx="3" fill="#9098a8" stroke="#566070" stroke-width="1.5"/>
+  <circle cx="267" cy="380" r="2.5" fill="#00ff44" opacity="0.85" filter="url(#fGlow)"/>
+  <circle cx="277" cy="380" r="2.5" fill="#ff8800" opacity="0.85"/>
+  <circle cx="287" cy="380" r="2.5" fill="#00aaff" opacity="0.85"/>
+
+  <!-- Hopper: RIGHT-SIDE AIRLOCK (docking face, right side of cabin) -->
+  <rect x="404" y="346" width="30" height="64" rx="4" fill="#909aaa" stroke="#484e58" stroke-width="2"/>
+  <rect x="407" y="349" width="24" height="58" rx="3" fill="#a8b0c0" stroke="#606878" stroke-width="1"/>
+  <circle cx="424" cy="378" r="3.5" fill="#484e58" stroke="#303038" stroke-width="1.5"/>
+  <line x1="407" y1="364" x2="431" y2="364" stroke="#606878" stroke-width="1" opacity="0.6"/>
+  <line x1="407" y1="382" x2="431" y2="382" stroke="#606878" stroke-width="1" opacity="0.6"/>
+  <!-- Docked / sealed indicator -->
+  <circle cx="410" cy="352" r="3" fill="#44ff88" opacity="0.9" filter="url(#fGlow)"/>
+
+  <!-- ======================================================= -->
+  <!--  PRESSURIZED DOCKING TUNNEL                             -->
+  <!--  Hopper airlock right flange x=434                      -->
+  <!--  Rover CMD nose x=538  =>  tunnel x=434 to x=538        -->
+  <!-- ======================================================= -->
+  <!-- Tunnel body -->
+  <rect x="434" y="351" width="104" height="52" rx="4" fill="url(#gTunnel)" stroke="#2a3a4a" stroke-width="2"/>
+  <!-- Bellows accordion folds -->
+  <line x1="452" y1="351" x2="452" y2="403" stroke="#3a4a5a" stroke-width="2.5"/>
+  <line x1="468" y1="351" x2="468" y2="403" stroke="#3a4a5a" stroke-width="2.5"/>
+  <line x1="484" y1="351" x2="484" y2="403" stroke="#3a4a5a" stroke-width="2.5"/>
+  <line x1="500" y1="351" x2="500" y2="403" stroke="#3a4a5a" stroke-width="2.5"/>
+  <line x1="516" y1="351" x2="516" y2="403" stroke="#3a4a5a" stroke-width="2.5"/>
+  <!-- Seam highlights -->
+  <line x1="434" y1="353" x2="538" y2="353" stroke="#4a6070" stroke-width="1.5" opacity="0.8"/>
+  <line x1="434" y1="401" x2="538" y2="401" stroke="#1a2a38" stroke-width="1.5" opacity="0.7"/>
+  <!-- Pressurized interior tint -->
+  <rect x="436" y="355" width="100" height="44" fill="#1a3020" opacity="0.16" rx="2"/>
+  <!-- End flanges / collars -->
+  <rect x="428" y="348" width="8"  height="58" rx="2" fill="#2a3848" stroke="#4a6080" stroke-width="1.5"/>
+  <rect x="532" y="348" width="8"  height="58" rx="2" fill="#2a3848" stroke="#4a6080" stroke-width="1.5"/>
+
+  <!-- ======================================================= -->
+  <!--  AEGIS-CLASS ROVER  (same scale as hopper)              -->
+  <!--  Translate so CMD nose x=536 lands at screen x=538      -->
+  <!--  transform="translate(2, 0)"                            -->
+  <!--  Rover ground y=490, hopper ground y≈502 — nudge +12    -->
+  <!-- ======================================================= -->
+  <g transform="translate(2, 0)">
+
+    <!-- Ground shadow -->
+    <ellipse cx="900" cy="494" rx="440" ry="12" fill="#000000" opacity="0.32"/>
+
+    <!-- TREAD HOUSINGS CMD -->
+    <rect x="578" y="430" width="368" height="44" rx="7" fill="url(#gTread)" filter="url(#fShadow)"/>
+    <rect x="578" y="430" width="368" height="44" rx="7" fill="url(#pTread)" opacity="0.85"/>
+    <rect x="578" y="430" width="368" height="4"  rx="2" fill="#444" opacity="0.7"/>
+    <rect x="578" y="470" width="368" height="4"  rx="2" fill="#111" opacity="0.9"/>
+
+    <!-- TREAD HOUSINGS PAX -->
+    <rect x="946" y="430" width="408" height="44" rx="7" fill="url(#gTread)" filter="url(#fShadow)"/>
+    <rect x="946" y="430" width="408" height="44" rx="7" fill="url(#pTread)" opacity="0.85"/>
+    <rect x="946" y="430" width="408" height="4"  rx="2" fill="#444" opacity="0.7"/>
+    <rect x="946" y="470" width="408" height="4"  rx="2" fill="#111" opacity="0.9"/>
+
+    <!-- CMD SUSPENSION STRUTS -->
+    <g stroke="#1c2430" stroke-width="6" stroke-linecap="round">
+      <line x1="632" y1="428" x2="632" y2="448"/>
+      <line x1="746" y1="428" x2="746" y2="448"/>
+      <line x1="860" y1="428" x2="860" y2="448"/>
+    </g>
+
+    <!-- Wheels CMD -->
+    <circle cx="632" cy="448" r="42" fill="url(#gWheel)" stroke="#111" stroke-width="2.5" filter="url(#fShadow)"/>
+    <circle cx="632" cy="448" r="42" fill="none" stroke="#2a2a2a" stroke-width="8"/>
+    <circle cx="632" cy="448" r="26" fill="#252a34"/>
+    <circle cx="632" cy="448" r="11" fill="#181c24"/>
+    <g fill="#505868">
+      <circle cx="632" cy="428" r="3.5"/><circle cx="632" cy="468" r="3.5"/>
+      <circle cx="613" cy="437" r="3.5"/><circle cx="651" cy="437" r="3.5"/>
+      <circle cx="613" cy="459" r="3.5"/><circle cx="651" cy="459" r="3.5"/>
+    </g>
+
+    <circle cx="746" cy="448" r="42" fill="url(#gWheel)" stroke="#111" stroke-width="2.5" filter="url(#fShadow)"/>
+    <circle cx="746" cy="448" r="42" fill="none" stroke="#2a2a2a" stroke-width="8"/>
+    <circle cx="746" cy="448" r="26" fill="#252a34"/>
+    <circle cx="746" cy="448" r="11" fill="#181c24"/>
+    <g fill="#505868">
+      <circle cx="746" cy="428" r="3.5"/><circle cx="746" cy="468" r="3.5"/>
+      <circle cx="727" cy="437" r="3.5"/><circle cx="765" cy="437" r="3.5"/>
+      <circle cx="727" cy="459" r="3.5"/><circle cx="765" cy="459" r="3.5"/>
+    </g>
+
+    <circle cx="860" cy="448" r="42" fill="url(#gWheel)" stroke="#111" stroke-width="2.5" filter="url(#fShadow)"/>
+    <circle cx="860" cy="448" r="42" fill="none" stroke="#2a2a2a" stroke-width="8"/>
+    <circle cx="860" cy="448" r="26" fill="#252a34"/>
+    <circle cx="860" cy="448" r="11" fill="#181c24"/>
+    <g fill="#505868">
+      <circle cx="860" cy="428" r="3.5"/><circle cx="860" cy="468" r="3.5"/>
+      <circle cx="841" cy="437" r="3.5"/><circle cx="879" cy="437" r="3.5"/>
+      <circle cx="841" cy="459" r="3.5"/><circle cx="879" cy="459" r="3.5"/>
+    </g>
+
+    <!-- PAX SUSPENSION STRUTS -->
+    <g stroke="#1c2430" stroke-width="6" stroke-linecap="round">
+      <line x1="1050" y1="428" x2="1050" y2="448"/>
+      <line x1="1240" y1="428" x2="1240" y2="448"/>
+    </g>
+
+    <!-- Wheels PAX -->
+    <circle cx="1050" cy="448" r="42" fill="url(#gWheel)" stroke="#111" stroke-width="2.5" filter="url(#fShadow)"/>
+    <circle cx="1050" cy="448" r="42" fill="none" stroke="#2a2a2a" stroke-width="8"/>
+    <circle cx="1050" cy="448" r="26" fill="#252a34"/>
+    <circle cx="1050" cy="448" r="11" fill="#181c24"/>
+    <g fill="#505868">
+      <circle cx="1050" cy="428" r="3.5"/><circle cx="1050" cy="468" r="3.5"/>
+      <circle cx="1031" cy="437" r="3.5"/><circle cx="1069" cy="437" r="3.5"/>
+      <circle cx="1031" cy="459" r="3.5"/><circle cx="1069" cy="459" r="3.5"/>
+    </g>
+
+    <circle cx="1240" cy="448" r="42" fill="url(#gWheel)" stroke="#111" stroke-width="2.5" filter="url(#fShadow)"/>
+    <circle cx="1240" cy="448" r="42" fill="none" stroke="#2a2a2a" stroke-width="8"/>
+    <circle cx="1240" cy="448" r="26" fill="#252a34"/>
+    <circle cx="1240" cy="448" r="11" fill="#181c24"/>
+    <g fill="#505868">
+      <circle cx="1240" cy="428" r="3.5"/><circle cx="1240" cy="468" r="3.5"/>
+      <circle cx="1221" cy="437" r="3.5"/><circle cx="1259" cy="437" r="3.5"/>
+      <circle cx="1221" cy="459" r="3.5"/><circle cx="1259" cy="459" r="3.5"/>
+    </g>
+
+    <!-- CMD nose wedge -->
+    <path d="M580,315 L580,428 L554,422 L536,402 L536,336 L557,316 Z"
+          fill="url(#gCmdBody)" filter="url(#fShadow)"/>
+    <path d="M580,315 L557,316 L536,336 L536,402 L554,422 L580,428"
+          fill="none" stroke="#283040" stroke-width="1.5"/>
+
+    <!-- CMD MODULE BODY -->
+    <rect x="580" y="308" width="360" height="122" rx="7" fill="url(#gCmdBody)" filter="url(#fShadow)"/>
+    <rect x="580" y="308" width="360" height="6"   rx="4" fill="#3a4a60" opacity="0.65"/>
+    <rect x="580" y="426" width="360" height="4"   rx="2" fill="#0a0e14"/>
+    <!-- Panel seams -->
+    <g stroke="#222e3e" stroke-width="1" opacity="0.55">
+      <line x1="650" y1="308" x2="650" y2="430"/>
+      <line x1="730" y1="308" x2="730" y2="430"/>
+      <line x1="810" y1="308" x2="810" y2="430"/>
+      <line x1="875" y1="308" x2="875" y2="430"/>
+      <line x1="580" y1="352" x2="940" y2="352"/>
+      <line x1="580" y1="390" x2="940" y2="390"/>
+    </g>
+
+    <!-- Pilot viewport (nose) — this is the docking face -->
+    <ellipse cx="548" cy="366" rx="14" ry="22" fill="url(#gViewport)" stroke="#1e3858" stroke-width="2"/>
+    <ellipse cx="546" cy="360" rx="5"  ry="9"  fill="white" opacity="0.12" transform="rotate(-15,546,360)"/>
+
+    <!-- CMD docking port on nose (left face) — aligned with tunnel right end -->
+    <rect x="536" y="344" width="10" height="58" rx="3" fill="#101820" stroke="#2a4060" stroke-width="2"/>
+    <rect x="538" y="350" width="6"  height="46" rx="2" fill="#0a1018" stroke="#1e3050" stroke-width="1"/>
+    <!-- Docked green light -->
+    <circle cx="540" cy="354" r="3" fill="#44ff88" opacity="0.9" filter="url(#fGlow)"/>
+    <!-- Docking ring around port -->
+    <rect x="534" y="342" width="14" height="62" rx="4" fill="none" stroke="#4a6888" stroke-width="1.5" opacity="0.7"/>
+
+    <!-- Side viewports CMD -->
+    <rect x="598" y="320" width="58" height="38" rx="5" fill="url(#gViewport)" stroke="#1e3858" stroke-width="1.5"/>
+    <rect x="601" y="323" width="20" height="24" fill="white" opacity="0.07" rx="2"/>
+    <rect x="672" y="320" width="58" height="38" rx="5" fill="url(#gViewport)" stroke="#1e3858" stroke-width="1.5"/>
+    <rect x="675" y="323" width="20" height="24" fill="white" opacity="0.07" rx="2"/>
+    <rect x="748" y="320" width="58" height="38" rx="5" fill="url(#gViewport)" stroke="#1e3858" stroke-width="1.5"/>
+    <rect x="751" y="323" width="20" height="24" fill="white" opacity="0.07" rx="2"/>
+
+    <!-- CMD airlock (right side / rear) -->
+    <rect x="854" y="338" width="42" height="58" rx="5" fill="#141c28" stroke="#2a4060" stroke-width="2"/>
+    <rect x="860" y="345" width="30" height="44" rx="3" fill="#0c1420" stroke="#1e3050" stroke-width="1"/>
+    <rect x="868" y="364" width="16" height="4" rx="2" fill="#3a5878"/>
+    <circle cx="876" cy="366" r="3" fill="#2a4868"/>
+    <circle cx="862" cy="351" r="3" fill="#44ff88" opacity="0.85" filter="url(#fGlow)"/>
+
+    <!-- Antenna mast CMD -->
+    <line x1="700" y1="308" x2="700" y2="258" stroke="#283848" stroke-width="3"/>
+    <line x1="700" y1="258" x2="672" y2="274" stroke="#283848" stroke-width="2"/>
+    <line x1="700" y1="258" x2="728" y2="274" stroke="#283848" stroke-width="2"/>
+    <path d="M678,270 Q700,256 722,270" fill="none" stroke="#3a5878" stroke-width="3"/>
+    <circle cx="700" cy="270" r="3.5" fill="#4a88cc"/>
+
+    <!-- Nav lights -->
+    <circle cx="536" cy="323" r="5"   fill="#ff4040" opacity="0.9" filter="url(#fGlow)"/>
+    <circle cx="592" cy="314" r="2.5" fill="#44aaff" opacity="0.9" filter="url(#fGlow)"/>
+
+    <!-- CMD label -->
+    <text x="806" y="420" font-size="9" fill="#3a6898" letter-spacing="2.5"
+          font-family="Courier New, monospace" opacity="0.75">CMD</text>
+
+    <!-- PAX MODULE BODY -->
+    <rect x="942" y="300" width="400" height="130" rx="6" fill="url(#gPaxBody)" filter="url(#fShadow)"/>
+    <rect x="942" y="300" width="400" height="5"   rx="3" fill="#3a4a60" opacity="0.6"/>
+    <rect x="942" y="426" width="400" height="4"   rx="2" fill="#0a0e14"/>
+    <!-- Panel seams PAX -->
+    <g stroke="#1e2a3c" stroke-width="1" opacity="0.5">
+      <line x1="1010" y1="300" x2="1010" y2="430"/>
+      <line x1="1090" y1="300" x2="1090" y2="430"/>
+      <line x1="1170" y1="300" x2="1170" y2="430"/>
+      <line x1="1250" y1="300" x2="1250" y2="430"/>
+      <line x1="1330" y1="300" x2="1330" y2="430"/>
+      <line x1="942"  y1="344" x2="1342" y2="344"/>
+      <line x1="942"  y1="386" x2="1342" y2="386"/>
+    </g>
+
+    <!-- PAX viewports -->
+    <rect x="956"  y="312" width="58" height="42" rx="5" fill="url(#gViewport)" stroke="#1e3858" stroke-width="1.5"/>
+    <rect x="959"  y="315" width="18" height="26" fill="white" opacity="0.07" rx="2"/>
+    <rect x="1028" y="312" width="58" height="42" rx="5" fill="url(#gViewport)" stroke="#1e3858" stroke-width="1.5"/>
+    <rect x="1031" y="315" width="18" height="26" fill="white" opacity="0.07" rx="2"/>
+    <rect x="1100" y="312" width="58" height="42" rx="5" fill="url(#gViewport)" stroke="#1e3858" stroke-width="1.5"/>
+    <rect x="1103" y="315" width="18" height="26" fill="white" opacity="0.07" rx="2"/>
+    <rect x="1172" y="312" width="58" height="42" rx="5" fill="url(#gViewport)" stroke="#1e3858" stroke-width="1.5"/>
+    <rect x="1175" y="315" width="18" height="26" fill="white" opacity="0.07" rx="2"/>
+    <rect x="1244" y="312" width="58" height="42" rx="5" fill="url(#gViewport)" stroke="#1e3858" stroke-width="1.5"/>
+    <rect x="1247" y="315" width="18" height="26" fill="white" opacity="0.07" rx="2"/>
+
+    <!-- PAX crew airlock -->
+    <rect x="1120" y="360" width="44" height="66" rx="5" fill="#141c28" stroke="#2a4060" stroke-width="2"/>
+    <rect x="1126" y="366" width="30" height="52" rx="3" fill="#0c1420" stroke="#1e3050" stroke-width="1"/>
+    <rect x="1133" y="387" width="18" height="4" rx="2" fill="#3a5878"/>
+    <circle cx="1143" cy="389" r="3" fill="#2a4868"/>
+    <circle cx="1128" cy="373" r="3" fill="#44ff88" opacity="0.85" filter="url(#fGlow)"/>
+
+    <!-- Module coupler CMD→PAX -->
+    <rect x="938" y="314" width="12" height="118" rx="3" fill="#0e1520" stroke="#2a3858" stroke-width="2"/>
+    <rect x="941" y="328" width="6"  height="14" rx="2" fill="#1e3050"/>
+    <rect x="941" y="366" width="6"  height="14" rx="2" fill="#1e3050"/>
+    <rect x="941" y="402" width="6"  height="14" rx="2" fill="#1e3050"/>
+
+    <!-- AEGIS wordmark -->
+    <text x="1130" y="384" font-size="22" fill="#18304e" font-weight="bold" letter-spacing="6"
+          text-anchor="middle" opacity="0.52" font-family="Courier New, monospace">AEGIS</text>
+    <text x="1130" y="399" font-size="9" fill="#1e4068" letter-spacing="4"
+          text-anchor="middle" opacity="0.65" font-family="Courier New, monospace">CLASS ROVER</text>
+
+    <!-- Running lights -->
+    <g filter="url(#fGlow)">
+      <circle cx="756"  cy="428" r="3"   fill="#ffaa00" opacity="0.8"/>
+      <circle cx="942"  cy="428" r="3"   fill="#ffaa00" opacity="0.8"/>
+      <circle cx="1175" cy="428" r="3"   fill="#ffaa00" opacity="0.8"/>
+      <circle cx="946"  cy="306" r="2.5" fill="#44aaff" opacity="0.85"/>
+    </g>
+
+    <!-- PAX label -->
+    <text x="1290" y="420" font-size="9" fill="#3a6898" letter-spacing="2.5"
+          font-family="Courier New, monospace" opacity="0.75">PAX</text>
+
+    <!-- ===== ROVER SSSRA ===== -->
+    <!-- Radiator CMD -->
+    <rect x="586" y="294" width="348" height="15" rx="3" fill="url(#gRadiator)" stroke="#aabccc" stroke-width="1"/>
+    <g stroke="#9aaec0" stroke-width="0.7" opacity="0.7">
+      <line x1="635" y1="294" x2="635" y2="309"/>
+      <line x1="684" y1="294" x2="684" y2="309"/>
+      <line x1="733" y1="294" x2="733" y2="309"/>
+      <line x1="782" y1="294" x2="782" y2="309"/>
+      <line x1="831" y1="294" x2="831" y2="309"/>
+      <line x1="880" y1="294" x2="880" y2="309"/>
+    </g>
+    <rect x="582" y="296" width="6" height="11" rx="2" fill="#6080a0"/>
+    <rect x="932" y="296" width="6" height="11" rx="2" fill="#6080a0"/>
+
+    <!-- Radiator PAX -->
+    <rect x="944" y="286" width="398" height="15" rx="3" fill="url(#gRadiator)" stroke="#aabccc" stroke-width="1"/>
+    <g stroke="#9aaec0" stroke-width="0.7" opacity="0.7">
+      <line x1="995"  y1="286" x2="995"  y2="301"/>
+      <line x1="1050" y1="286" x2="1050" y2="301"/>
+      <line x1="1105" y1="286" x2="1105" y2="301"/>
+      <line x1="1160" y1="286" x2="1160" y2="301"/>
+      <line x1="1215" y1="286" x2="1215" y2="301"/>
+      <line x1="1270" y1="286" x2="1270" y2="301"/>
+      <line x1="1315" y1="286" x2="1315" y2="301"/>
+    </g>
+    <rect x="940"  y="288" width="6" height="11" rx="2" fill="#6080a0"/>
+    <rect x="1340" y="288" width="6" height="11" rx="2" fill="#6080a0"/>
+
+    <!-- Truss CMD -->
+    <g stroke="#243448" stroke-width="3" stroke-linecap="round">
+      <line x1="604" y1="294" x2="596" y2="268"/>
+      <line x1="672" y1="294" x2="665" y2="268"/>
+      <line x1="744" y1="294" x2="737" y2="268"/>
+      <line x1="816" y1="294" x2="809" y2="268"/>
+      <line x1="888" y1="294" x2="881" y2="268"/>
+      <line x1="930" y1="294" x2="924" y2="268"/>
+    </g>
+    <g stroke="#1a2838" stroke-width="1.5" opacity="0.55">
+      <line x1="604" y1="282" x2="672" y2="275"/>
+      <line x1="672" y1="282" x2="744" y2="276"/>
+      <line x1="744" y1="282" x2="816" y2="275"/>
+      <line x1="816" y1="282" x2="888" y2="276"/>
+      <line x1="888" y1="282" x2="930" y2="280"/>
+    </g>
+
+    <!-- Truss PAX -->
+    <g stroke="#243448" stroke-width="3" stroke-linecap="round">
+      <line x1="964"  y1="286" x2="956"  y2="258"/>
+      <line x1="1044" y1="286" x2="1037" y2="258"/>
+      <line x1="1124" y1="286" x2="1117" y2="258"/>
+      <line x1="1204" y1="286" x2="1197" y2="258"/>
+      <line x1="1284" y1="286" x2="1277" y2="258"/>
+      <line x1="1338" y1="286" x2="1332" y2="258"/>
+    </g>
+    <g stroke="#1a2838" stroke-width="1.5" opacity="0.55">
+      <line x1="964"  y1="274" x2="1044" y2="266"/>
+      <line x1="1044" y1="274" x2="1124" y2="268"/>
+      <line x1="1124" y1="274" x2="1204" y2="266"/>
+      <line x1="1204" y1="274" x2="1284" y2="268"/>
+      <line x1="1284" y1="274" x2="1338" y2="272"/>
+    </g>
+
+    <!-- Solar array CMD -->
+    <rect x="590" y="254" width="338" height="14" rx="3" fill="url(#pSolar)" stroke="#091428" stroke-width="1.5"/>
+    <rect x="590" y="254" width="338" height="4"  rx="2" fill="white" opacity="0.05"/>
+    <g stroke="#091428" stroke-width="0.7" opacity="0.9">
+      <line x1="638" y1="254" x2="638" y2="268"/>
+      <line x1="686" y1="254" x2="686" y2="268"/>
+      <line x1="734" y1="254" x2="734" y2="268"/>
+      <line x1="782" y1="254" x2="782" y2="268"/>
+      <line x1="830" y1="254" x2="830" y2="268"/>
+      <line x1="878" y1="254" x2="878" y2="268"/>
+    </g>
+
+    <!-- Solar array PAX -->
+    <rect x="946" y="244" width="396" height="14" rx="3" fill="url(#pSolar)" stroke="#091428" stroke-width="1.5"/>
+    <rect x="946" y="244" width="396" height="4"  rx="2" fill="white" opacity="0.05"/>
+    <g stroke="#091428" stroke-width="0.7" opacity="0.9">
+      <line x1="998"  y1="244" x2="998"  y2="258"/>
+      <line x1="1050" y1="244" x2="1050" y2="258"/>
+      <line x1="1102" y1="244" x2="1102" y2="258"/>
+      <line x1="1154" y1="244" x2="1154" y2="258"/>
+      <line x1="1206" y1="244" x2="1206" y2="258"/>
+      <line x1="1258" y1="244" x2="1258" y2="258"/>
+      <line x1="1310" y1="244" x2="1310" y2="258"/>
+    </g>
+
+    <!-- SSSRA shadow on radiators -->
+    <rect x="597" y="293" width="324" height="4" fill="#000" opacity="0.18" rx="2"/>
+    <rect x="952" y="285" width="386" height="4" fill="#000" opacity="0.18" rx="2"/>
+
+  </g>
+  <!-- end rover group -->
+
+  <!-- ======================================================= -->
+  <!--  ANNOTATIONS                                             -->
+  <!-- ======================================================= -->
+  <g font-family="'Courier New', monospace">
+
+    <!-- Short Hopper -->
+    <line x1="250" y1="238" x2="148" y2="180" stroke="#00ddff" stroke-width="1.2" stroke-dasharray="5,3" opacity="0.7"/>
+    <text x="18"  y="168" font-size="11" font-weight="bold" fill="#00ddff">SHORT HOPPER</text>
+    <text x="18"  y="181" font-size="8"  fill="#88ddff">Luna-Aegis Shuttle</text>
+    <text x="18"  y="192" font-size="8"  fill="#88ddff">~8,000 kg | 25–30 kN thrust</text>
+
+    <!-- Hopper SSSRA -->
+    <line x1="430" y1="200" x2="500" y2="162" stroke="#00ddff" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+    <text x="504" y="154" font-size="9"  font-weight="bold" fill="#00ddff">SSSRA</text>
+    <text x="504" y="165" font-size="7.5" fill="#88ddff">PV shading radiator</text>
+
+    <!-- Docking tunnel -->
+    <line x1="486" y1="351" x2="486" y2="312" stroke="#00ddff" stroke-width="1" stroke-dasharray="4,3" opacity="0.65"/>
+    <text x="390" y="304" font-size="9.5" font-weight="bold" fill="#00ddff">PRESSURIZED TUNNEL</text>
+    <text x="390" y="316" font-size="8"   fill="#88ddff">Soft-seal mate · no EVA required</text>
+
+    <!-- Dock sealed indicator -->
+    <line x1="434" y1="352" x2="390" y2="335" stroke="#44ff88" stroke-width="1" stroke-dasharray="3,3" opacity="0.7"/>
+    <text x="294" y="330" font-size="8" fill="#44ff88">● DOCK SEALED</text>
+
+    <!-- Rover label -->
+    <line x1="760" y1="268" x2="760" y2="220" stroke="#00ddff" stroke-width="1.2" stroke-dasharray="5,3" opacity="0.7"/>
+    <text x="620" y="212" font-size="11" font-weight="bold" fill="#00ddff">AEGIS-CLASS ROVER</text>
+    <text x="620" y="224" font-size="8"  fill="#88ddff">CMD + PAX modules · 2–24 crew · 30–60 day endurance</text>
+
+    <!-- Rover SSSRA label -->
+    <line x1="1100" y1="258" x2="1160" y2="222" stroke="#00ddff" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+    <text x="1164" y="214" font-size="9"  font-weight="bold" fill="#00ddff">SSSRA</text>
+    <text x="1164" y="225" font-size="7.5" fill="#88ddff">Matching thermal arch.</text>
+
+  </g>
+
+  <!-- ======================================================= -->
+  <!--  TITLE / CAPTION BLOCK                                   -->
+  <!-- ======================================================= -->
+  <rect x="0" y="808" width="1400" height="92" fill="#000000" opacity="0.75"/>
+  <line x1="0" y1="808" x2="1400" y2="808" stroke="#00ddff" stroke-width="1" opacity="0.4"/>
+
+  <text x="700" y="838" text-anchor="middle" font-size="19" font-weight="bold" fill="#cce0f5"
+        letter-spacing="5">LUNA–AEGIS SHORT HOPPER  —  SURFACE DOCKING OPERATION</text>
+  <text x="700" y="860" text-anchor="middle" font-size="12" fill="#7aaac8" letter-spacing="3">
+    PRESSURIZED TUNNEL MATE  ·  HOPPER AIRLOCK → ROVER CMD NOSE PORT  ·  NO EVA REQUIRED
+  </text>
+  <text x="700" y="878" text-anchor="middle" font-size="10" fill="#4a6a88" letter-spacing="2">
+    AEGIS STATION INFRASTRUCTURE LLC  ·  aegisstation.com  ·  CONCEPT DESIGN  REV A  2025
+  </text>
+
+  <!-- Corner marks -->
+  <g stroke="#1a3050" stroke-width="1" opacity="0.5">
+    <line x1="0"    y1="16" x2="16"   y2="16"/><line x1="16"  y1="0"  x2="16"   y2="16"/>
+    <line x1="1384" y1="16" x2="1400" y2="16"/><line x1="1384" y1="0" x2="1384" y2="16"/>
+  </g>
+  <text x="22"   y="14" font-size="9" fill="#1a3050" opacity="0.6">AEG-HOP-DOCK-001  REV B</text>
+  <text x="1378" y="14" font-size="9" fill="#1a3050" opacity="0.6" text-anchor="end">AEGIS SYSTEMS 2025</text>
+
+</svg>
