@@ -1,0 +1,443 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520">
+  <defs>
+
+    <!-- Sky / void gradient -->
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#010306"/>
+      <stop offset="55%" stop-color="#040a14"/>
+      <stop offset="100%" stop-color="#0a1520"/>
+    </linearGradient>
+
+    <!-- Lunar ground -->
+    <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8a7d6a"/>
+      <stop offset="40%" stop-color="#6e6255"/>
+      <stop offset="100%" stop-color="#4a4038"/>
+    </linearGradient>
+
+    <!-- Ground shadow under vehicle -->
+    <radialGradient id="groundShadow" cx="50%" cy="0%" r="50%">
+      <stop offset="0%" stop-color="#2a2218" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#2a2218" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Water cartridge (dark cylinder on top) -->
+    <linearGradient id="cartridgeGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1a1c1e"/>
+      <stop offset="35%" stop-color="#2e3236"/>
+      <stop offset="60%" stop-color="#3a3e42"/>
+      <stop offset="80%" stop-color="#282c30"/>
+      <stop offset="100%" stop-color="#1c1f22"/>
+    </linearGradient>
+    <linearGradient id="cartridgeTopGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3a3e42"/>
+      <stop offset="100%" stop-color="#1e2124"/>
+    </linearGradient>
+
+    <!-- Collar / docking ring -->
+    <linearGradient id="collarGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1a1c1f"/>
+      <stop offset="30%" stop-color="#2c3035"/>
+      <stop offset="65%" stop-color="#343a40"/>
+      <stop offset="100%" stop-color="#1e2125"/>
+    </linearGradient>
+
+    <!-- Systems pod (white body) -->
+    <linearGradient id="podGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b8b0a0"/>
+      <stop offset="20%" stop-color="#d8d0c0"/>
+      <stop offset="50%" stop-color="#e8e0d0"/>
+      <stop offset="75%" stop-color="#ccc4b4"/>
+      <stop offset="100%" stop-color="#a89880"/>
+    </linearGradient>
+    <linearGradient id="podTopGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ddd5c5"/>
+      <stop offset="100%" stop-color="#b8b0a0"/>
+    </linearGradient>
+
+    <!-- Leg struts (dark metal) -->
+    <linearGradient id="strutGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1a1c1f"/>
+      <stop offset="50%" stop-color="#2e3238"/>
+      <stop offset="100%" stop-color="#181a1d"/>
+    </linearGradient>
+
+    <!-- Engine bells -->
+    <linearGradient id="engineGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c0b8a8"/>
+      <stop offset="40%" stop-color="#ddd5c5"/>
+      <stop offset="100%" stop-color="#988878"/>
+    </linearGradient>
+    <linearGradient id="engineInner" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#28242e"/>
+      <stop offset="100%" stop-color="#0e0c12"/>
+    </linearGradient>
+    <linearGradient id="engineDark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#888078"/>
+      <stop offset="100%" stop-color="#585050"/>
+    </linearGradient>
+
+    <!-- Landing frame -->
+    <linearGradient id="frameGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1a1c1f"/>
+      <stop offset="50%" stop-color="#28292c"/>
+      <stop offset="100%" stop-color="#1a1c1f"/>
+    </linearGradient>
+
+    <!-- Ambient glow under engines -->
+    <radialGradient id="exhaustGlow" cx="50%" cy="100%" r="60%">
+      <stop offset="0%" stop-color="#e8a825" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#e8a825" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Star field filter -->
+    <filter id="starGlow">
+      <feGaussianBlur stdDeviation="0.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Subtle body shadow filter -->
+    <filter id="bodyShadow" x="-20%" y="-10%" width="140%" height="130%">
+      <feDropShadow dx="8" dy="12" stdDeviation="10" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+
+    <!-- Panel detail clip -->
+    <clipPath id="podClip">
+      <ellipse cx="600" cy="310" rx="92" ry="105"/>
+    </clipPath>
+    <clipPath id="cartClip">
+      <rect x="540" y="80" width="120" height="175"/>
+    </clipPath>
+
+  </defs>
+
+  <!-- ═══════════════════════════════════════════
+       BACKGROUND — VOID / SKY
+  ═══════════════════════════════════════════ -->
+  <rect width="1200" height="520" fill="url(#skyGrad)"/>
+
+  <!-- Stars -->
+  <g filter="url(#starGlow)" opacity="0.8">
+    <circle cx="45"  cy="28"  r="0.8" fill="white" opacity="0.7"/>
+    <circle cx="132" cy="55"  r="0.6" fill="white" opacity="0.5"/>
+    <circle cx="210" cy="18"  r="1.0" fill="white" opacity="0.8"/>
+    <circle cx="310" cy="42"  r="0.7" fill="white" opacity="0.6"/>
+    <circle cx="388" cy="12"  r="0.8" fill="white" opacity="0.7"/>
+    <circle cx="478" cy="35"  r="0.5" fill="white" opacity="0.5"/>
+    <circle cx="555" cy="22"  r="0.9" fill="white" opacity="0.6"/>
+    <circle cx="648" cy="48"  r="0.6" fill="white" opacity="0.5"/>
+    <circle cx="730" cy="15"  r="1.0" fill="white" opacity="0.8"/>
+    <circle cx="820" cy="38"  r="0.7" fill="white" opacity="0.6"/>
+    <circle cx="912" cy="20"  r="0.8" fill="white" opacity="0.7"/>
+    <circle cx="988" cy="50"  r="0.5" fill="white" opacity="0.5"/>
+    <circle cx="1065" cy="28" r="0.9" fill="white" opacity="0.7"/>
+    <circle cx="1148" cy="42" r="0.6" fill="white" opacity="0.5"/>
+    <circle cx="80"  cy="72"  r="0.5" fill="#a8cce8" opacity="0.6"/>
+    <circle cx="175" cy="90"  r="0.6" fill="white" opacity="0.4"/>
+    <circle cx="265" cy="68"  r="0.5" fill="white" opacity="0.5"/>
+    <circle cx="445" cy="78"  r="0.7" fill="#a8cce8" opacity="0.5"/>
+    <circle cx="680" cy="62"  r="0.5" fill="white" opacity="0.4"/>
+    <circle cx="870" cy="75"  r="0.6" fill="white" opacity="0.5"/>
+    <circle cx="1020" cy="68" r="0.5" fill="white" opacity="0.4"/>
+    <circle cx="1120" cy="80" r="0.7" fill="#a8cce8" opacity="0.5"/>
+  </g>
+
+  <!-- Horizon glow (moon surface ambient) -->
+  <ellipse cx="600" cy="340" rx="700" ry="120" fill="#6a5d4a" opacity="0.18"/>
+
+  <!-- ═══════════════════════════════════════════
+       LUNAR GROUND
+  ═══════════════════════════════════════════ -->
+  <!-- Ground base -->
+  <path d="M0,360 Q200,345 450,350 Q600,352 750,348 Q950,343 1200,355 L1200,520 L0,520 Z" fill="url(#groundGrad)"/>
+
+  <!-- Ground texture / subtle craters -->
+  <ellipse cx="180" cy="400" rx="55" ry="8" fill="#6a5e50" opacity="0.3"/>
+  <ellipse cx="180" cy="400" rx="30" ry="4" fill="#7a6e60" opacity="0.2"/>
+  <ellipse cx="950" cy="410" rx="70" ry="10" fill="#6a5e50" opacity="0.25"/>
+  <ellipse cx="950" cy="410" rx="40" ry="5" fill="#7a6e60" opacity="0.15"/>
+  <ellipse cx="1050" cy="390" rx="30" ry="5" fill="#5e5244" opacity="0.3"/>
+  <ellipse cx="300" cy="430" rx="40" ry="6" fill="#5e5244" opacity="0.2"/>
+  <ellipse cx="820" cy="445" rx="50" ry="7" fill="#6a5e50" opacity="0.2"/>
+
+  <!-- Ground shadow under vehicle -->
+  <ellipse cx="600" cy="428" rx="160" ry="28" fill="url(#groundShadow)" opacity="0.85"/>
+
+  <!-- ═══════════════════════════════════════════
+       VEHICLE — assembled bottom-up
+  ═══════════════════════════════════════════ -->
+
+  <!-- ── LANDING FRAME (base cradle) ── -->
+  <!-- Outer frame rectangle shadow -->
+  <rect x="496" y="404" width="208" height="22" rx="2" fill="#0e1012" opacity="0.5"/>
+
+  <!-- Base frame horizontal bars -->
+  <rect x="496" y="396" width="208" height="9" rx="2" fill="url(#frameGrad)"/>
+  <rect x="496" y="408" width="208" height="7" rx="2" fill="url(#frameGrad)"/>
+  <!-- Frame highlight -->
+  <rect x="498" y="397" width="204" height="2" rx="1" fill="#3a3c40" opacity="0.6"/>
+
+  <!-- Frame vertical members -->
+  <rect x="496"  y="362" width="10" height="45" rx="1" fill="url(#strutGrad)"/>
+  <rect x="694"  y="362" width="10" height="45" rx="1" fill="url(#strutGrad)"/>
+  <rect x="536"  y="362" width="8"  height="45" rx="1" fill="url(#strutGrad)"/>
+  <rect x="656"  y="362" width="8"  height="45" rx="1" fill="url(#strutGrad)"/>
+
+  <!-- Cross members on frame floor -->
+  <line x1="496" y1="400" x2="704" y2="400" stroke="#28292c" stroke-width="3"/>
+  <line x1="560" y1="396" x2="560" y2="415" stroke="#28292c" stroke-width="2.5"/>
+  <line x1="600" y1="396" x2="600" y2="415" stroke="#28292c" stroke-width="2"/>
+  <line x1="640" y1="396" x2="640" y2="415" stroke="#28292c" stroke-width="2.5"/>
+
+  <!-- ── ENGINE CLUSTER ── -->
+  <!-- Ambient glow hint -->
+  <ellipse cx="600" cy="408" rx="130" ry="20" fill="url(#exhaustGlow)"/>
+
+  <!-- Center engine (largest, most prominent) -->
+  <g transform="translate(600, 363)">
+    <!-- Bell outer -->
+    <path d="M-18,-4 Q-24,10 -22,32 Q-16,42 0,44 Q16,42 22,32 Q24,10 18,-4 Z" fill="url(#engineDark)"/>
+    <!-- Bell mid highlight -->
+    <path d="M-12,-2 Q-16,8 -14,28 Q-8,38 0,40 Q8,38 14,28 Q16,8 12,-2 Z" fill="url(#engineGrad)"/>
+    <!-- Throat / inner -->
+    <ellipse cx="0" cy="-4" rx="18" ry="5" fill="url(#collarGrad)"/>
+    <ellipse cx="0" cy="-3" rx="14" ry="3.5" fill="#1e2228"/>
+    <!-- Nozzle exit -->
+    <ellipse cx="0" cy="40" rx="22" ry="5" fill="#181a1e"/>
+    <ellipse cx="0" cy="40" rx="16" ry="3" fill="url(#engineInner)"/>
+    <!-- Highlight seam -->
+    <line x1="-6" y1="-2" x2="-6" y2="38" stroke="#e8e0d0" stroke-width="0.6" opacity="0.25"/>
+  </g>
+
+  <!-- Left outer engine -->
+  <g transform="translate(536, 368)">
+    <path d="M-14,-3 Q-18,8 -16,26 Q-11,34 0,36 Q11,34 16,26 Q18,8 14,-3 Z" fill="url(#engineDark)"/>
+    <path d="M-9,-1 Q-12,6 -10,22 Q-6,30 0,32 Q6,30 10,22 Q12,6 9,-1 Z" fill="url(#engineGrad)"/>
+    <ellipse cx="0" cy="-3" rx="14" ry="4" fill="url(#collarGrad)"/>
+    <ellipse cx="0" cy="-2" rx="10" ry="2.8" fill="#1e2228"/>
+    <ellipse cx="0" cy="32" rx="16" ry="4" fill="#181a1e"/>
+    <ellipse cx="0" cy="32" rx="11" ry="2.5" fill="url(#engineInner)"/>
+  </g>
+
+  <!-- Right outer engine -->
+  <g transform="translate(664, 368)">
+    <path d="M-14,-3 Q-18,8 -16,26 Q-11,34 0,36 Q11,34 16,26 Q18,8 14,-3 Z" fill="url(#engineDark)"/>
+    <path d="M-9,-1 Q-12,6 -10,22 Q-6,30 0,32 Q6,30 10,22 Q12,6 9,-1 Z" fill="url(#engineGrad)"/>
+    <ellipse cx="0" cy="-3" rx="14" ry="4" fill="url(#collarGrad)"/>
+    <ellipse cx="0" cy="-2" rx="10" ry="2.8" fill="#1e2228"/>
+    <ellipse cx="0" cy="32" rx="16" ry="4" fill="#181a1e"/>
+    <ellipse cx="0" cy="32" rx="11" ry="2.5" fill="url(#engineInner)"/>
+  </g>
+
+  <!-- Far left small engine -->
+  <g transform="translate(506, 374)">
+    <path d="M-10,-2 Q-13,6 -11,20 Q-7,27 0,28 Q7,27 11,20 Q13,6 10,-2 Z" fill="url(#engineDark)"/>
+    <path d="M-6,-1 Q-8,5 -7,17 Q-4,23 0,24 Q4,23 7,17 Q8,5 6,-1 Z" fill="#b0a898"/>
+    <ellipse cx="0" cy="-2" rx="10" ry="3" fill="url(#collarGrad)"/>
+    <ellipse cx="0" cy="24" rx="11" ry="3" fill="#181a1e"/>
+  </g>
+
+  <!-- Far right small engine -->
+  <g transform="translate(694, 374)">
+    <path d="M-10,-2 Q-13,6 -11,20 Q-7,27 0,28 Q7,27 11,20 Q13,6 10,-2 Z" fill="url(#engineDark)"/>
+    <path d="M-6,-1 Q-8,5 -7,17 Q-4,23 0,24 Q4,23 7,17 Q8,5 6,-1 Z" fill="#b0a898"/>
+    <ellipse cx="0" cy="-2" rx="10" ry="3" fill="url(#collarGrad)"/>
+    <ellipse cx="0" cy="24" rx="11" ry="3" fill="#181a1e"/>
+  </g>
+
+  <!-- ── STRUCTURAL LEGS / STRUTS ── -->
+  <!-- Left diagonal struts -->
+  <line x1="506" y1="368" x2="556" y2="316" stroke="#282c32" stroke-width="7" stroke-linecap="round"/>
+  <line x1="506" y1="368" x2="556" y2="316" stroke="#3a3e44" stroke-width="3" stroke-linecap="round"/>
+  <line x1="536" y1="370" x2="565" y2="318" stroke="#282c32" stroke-width="6" stroke-linecap="round"/>
+  <line x1="536" y1="370" x2="565" y2="318" stroke="#363a40" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Right diagonal struts -->
+  <line x1="694" y1="368" x2="644" y2="316" stroke="#282c32" stroke-width="7" stroke-linecap="round"/>
+  <line x1="694" y1="368" x2="644" y2="316" stroke="#3a3e44" stroke-width="3" stroke-linecap="round"/>
+  <line x1="664" y1="370" x2="635" y2="318" stroke="#282c32" stroke-width="6" stroke-linecap="round"/>
+  <line x1="664" y1="370" x2="635" y2="318" stroke="#363a40" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Horizontal brace crossmembers -->
+  <line x1="510" y1="350" x2="540" y2="348" stroke="#2a2e34" stroke-width="4"/>
+  <line x1="660" y1="348" x2="690" y2="350" stroke="#2a2e34" stroke-width="4"/>
+
+  <!-- ── SYSTEMS POD (main white body) ── -->
+  <!-- Pod body cylinder -->
+  <ellipse cx="600" cy="232" rx="92" ry="18" fill="url(#podTopGrad)"/>
+  <rect x="508" y="232" width="184" height="118" fill="url(#podGrad)" filter="url(#bodyShadow)"/>
+  <!-- Right shadow on pod -->
+  <rect x="660" y="232" width="32" height="118" fill="#8a7a68" opacity="0.4"/>
+  <!-- Left highlight -->
+  <rect x="508" y="232" width="22" height="118" fill="#e8e0d0" opacity="0.12"/>
+
+  <!-- Bottom of pod (taper) -->
+  <path d="M508,350 Q540,370 600,374 Q660,370 692,350 L692,350 L508,350 Z" fill="#c8c0b0"/>
+
+  <!-- Panel seams on pod body -->
+  <line x1="508" y1="268" x2="692" y2="268" stroke="#a8a090" stroke-width="1" opacity="0.5"/>
+  <line x1="508" y1="300" x2="692" y2="300" stroke="#a8a090" stroke-width="1" opacity="0.5"/>
+  <line x1="508" y1="334" x2="692" y2="334" stroke="#a8a090" stroke-width="1" opacity="0.4"/>
+  <!-- Vertical panel seam -->
+  <line x1="552" y1="235" x2="552" y2="350" stroke="#a8a090" stroke-width="0.8" opacity="0.4"/>
+  <line x1="648" y1="235" x2="648" y2="350" stroke="#a8a090" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- Rivet rows -->
+  <g fill="#9a9080" opacity="0.6">
+    <circle cx="520" cy="268" r="1.5"/>
+    <circle cx="535" cy="268" r="1.5"/>
+    <circle cx="550" cy="268" r="1.5"/>
+    <circle cx="565" cy="268" r="1.5"/>
+    <circle cx="635" cy="268" r="1.5"/>
+    <circle cx="650" cy="268" r="1.5"/>
+    <circle cx="665" cy="268" r="1.5"/>
+    <circle cx="680" cy="268" r="1.5"/>
+    <circle cx="520" cy="300" r="1.5"/>
+    <circle cx="535" cy="300" r="1.5"/>
+    <circle cx="635" cy="300" r="1.5"/>
+    <circle cx="650" cy="300" r="1.5"/>
+    <circle cx="665" cy="300" r="1.5"/>
+    <circle cx="680" cy="300" r="1.5"/>
+  </g>
+
+  <!-- Pod top ellipse highlight -->
+  <ellipse cx="600" cy="232" rx="92" ry="18" fill="none" stroke="#d8d0c0" stroke-width="1.5" opacity="0.6"/>
+  <ellipse cx="590" cy="230" rx="55" ry="9" fill="#e8e2d5" opacity="0.15"/>
+
+  <!-- ── COLLAR / DOCKING RING ── -->
+  <!-- Main collar body -->
+  <rect x="530" y="198" width="140" height="40" rx="4" fill="url(#collarGrad)"/>
+  <!-- Collar top -->
+  <ellipse cx="600" cy="198" rx="70" ry="10" fill="#2e3236"/>
+  <ellipse cx="600" cy="198" rx="60" ry="7" fill="#383c42" opacity="0.8"/>
+  <!-- Collar bottom -->
+  <ellipse cx="600" cy="238" rx="70" ry="10" fill="#262a2e"/>
+  <!-- Collar horizontal bands -->
+  <rect x="530" y="208" width="140" height="6"  rx="1" fill="#383c40" opacity="0.7"/>
+  <rect x="530" y="220" width="140" height="4"  rx="1" fill="#2a2e32" opacity="0.8"/>
+  <rect x="530" y="228" width="140" height="5"  rx="1" fill="#1e2226" opacity="0.9"/>
+  <!-- Collar left bracket blocks -->
+  <rect x="530" y="202" width="18" height="34" rx="2" fill="#1e2226"/>
+  <rect x="532" y="204" width="14" height="30" rx="1" fill="#2c3035" opacity="0.8"/>
+  <!-- Collar right bracket blocks -->
+  <rect x="652" y="202" width="18" height="34" rx="2" fill="#1e2226"/>
+  <rect x="654" y="204" width="14" height="30" rx="1" fill="#2c3035" opacity="0.8"/>
+  <!-- Center window/detail on collar -->
+  <rect x="580" y="206" width="40" height="24" rx="3" fill="#181c20"/>
+  <rect x="582" y="208" width="36" height="20" rx="2" fill="#1e2428" opacity="0.9"/>
+  <line x1="580" y1="218" x2="620" y2="218" stroke="#2e3840" stroke-width="1"/>
+
+  <!-- ── WATER CARTRIDGE (dark cylinder, top) ── -->
+  <!-- Cartridge body -->
+  <rect x="540" y="78" width="120" height="124" fill="url(#cartridgeGrad)"/>
+
+  <!-- Cartridge vertical highlight band -->
+  <rect x="556" y="78" width="28" height="124" fill="#3a3e44" opacity="0.4"/>
+  <rect x="558" y="78" width="8"  height="124" fill="#484c52" opacity="0.3"/>
+
+  <!-- Cartridge panel seams horizontal -->
+  <line x1="540" y1="118" x2="660" y2="118" stroke="#484c50" stroke-width="1" opacity="0.6"/>
+  <line x1="540" y1="160" x2="660" y2="160" stroke="#484c50" stroke-width="1" opacity="0.5"/>
+
+  <!-- Cartridge vertical seams -->
+  <line x1="572" y1="78" x2="572" y2="202" stroke="#282c30" stroke-width="1" opacity="0.7"/>
+  <line x1="628" y1="78" x2="628" y2="202" stroke="#282c30" stroke-width="1" opacity="0.5"/>
+
+  <!-- Cartridge rivet dots -->
+  <g fill="#404448" opacity="0.7">
+    <circle cx="550" cy="118" r="1.5"/>
+    <circle cx="563" cy="118" r="1.5"/>
+    <circle cx="637" cy="118" r="1.5"/>
+    <circle cx="650" cy="118" r="1.5"/>
+    <circle cx="550" cy="160" r="1.5"/>
+    <circle cx="563" cy="160" r="1.5"/>
+    <circle cx="637" cy="160" r="1.5"/>
+    <circle cx="650" cy="160" r="1.5"/>
+  </g>
+
+  <!-- Right shadow on cartridge -->
+  <rect x="630" y="78" width="30" height="124" fill="#111316" opacity="0.5"/>
+
+  <!-- Cartridge top cap -->
+  <ellipse cx="600" cy="78"  rx="60" ry="11" fill="url(#cartridgeTopGrad)"/>
+  <ellipse cx="600" cy="78"  rx="50" ry="7.5" fill="#2e3236" opacity="0.8"/>
+  <ellipse cx="596" cy="76"  rx="30" ry="4" fill="#3a3e44" opacity="0.4"/>
+
+  <!-- Cartridge top fitting -->
+  <ellipse cx="600" cy="66" rx="22" ry="6" fill="#222628"/>
+  <ellipse cx="600" cy="63" rx="16" ry="4" fill="#1a1e22"/>
+  <rect x="591" y="52" width="18" height="14" rx="3" fill="#1e2226"/>
+  <ellipse cx="600" cy="52" rx="9"  ry="3.5" fill="#28292c"/>
+
+  <!-- ── CARTRIDGE / BODY JOIN ── -->
+  <ellipse cx="600" cy="202" rx="60" ry="10" fill="#1e2126"/>
+  <ellipse cx="600" cy="202" rx="50" ry="6.5" fill="#262a30" opacity="0.8"/>
+
+  <!-- ═══════════════════════════════════════════
+       LABELS & HUD OVERLAY
+  ═══════════════════════════════════════════ -->
+
+  <!-- Side label strip on cartridge -->
+  <rect x="542" y="130" width="4" height="42" rx="1" fill="#e8a825" opacity="0.7"/>
+
+  <!-- Right edge accent -->
+  <rect x="654" y="100" width="3" height="80" rx="1" fill="#e8a825" opacity="0.3"/>
+
+  <!-- ═══════════════════════════════════════════
+       ANNOTATIONS (HUD / CALLOUT LINES)
+  ═══════════════════════════════════════════ -->
+
+  <!-- Left callout — Water Cartridge -->
+  <line x1="537" y1="135" x2="410" y2="120" stroke="#e8a825" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="410" y1="120" x2="330" y2="120" stroke="#e8a825" stroke-width="1" opacity="0.6"/>
+  <circle cx="410" cy="120" r="2.5" fill="#e8a825" opacity="0.7"/>
+  <text x="325" y="116" font-family="'Share Tech Mono', monospace" font-size="11" fill="#e8a825" text-anchor="end" opacity="0.85">WATER CARTRIDGE</text>
+  <text x="325" y="130" font-family="'Share Tech Mono', monospace" font-size="9.5" fill="#a07020" text-anchor="end" opacity="0.7">49 M³  |  45,000 KG</text>
+
+  <!-- Left callout — Collar -->
+  <line x1="528" y1="218" x2="410" y2="218" stroke="#a8cce8" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="410" y1="218" x2="330" y2="218" stroke="#a8cce8" stroke-width="1" opacity="0.5"/>
+  <circle cx="410" cy="218" r="2.5" fill="#a8cce8" opacity="0.6"/>
+  <text x="325" y="214" font-family="'Share Tech Mono', monospace" font-size="11" fill="#a8cce8" text-anchor="end" opacity="0.8">DOCKING COLLAR</text>
+  <text x="325" y="228" font-family="'Share Tech Mono', monospace" font-size="9.5" fill="#6a8aaa" text-anchor="end" opacity="0.7">AEGIS-COMPATIBLE</text>
+
+  <!-- Left callout — Systems Pod -->
+  <line x1="505" y1="295" x2="410" y2="295" stroke="#a8cce8" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="410" y1="295" x2="330" y2="295" stroke="#a8cce8" stroke-width="1" opacity="0.5"/>
+  <circle cx="410" cy="295" r="2.5" fill="#a8cce8" opacity="0.6"/>
+  <text x="325" y="291" font-family="'Share Tech Mono', monospace" font-size="11" fill="#a8cce8" text-anchor="end" opacity="0.8">SYSTEMS POD</text>
+  <text x="325" y="305" font-family="'Share Tech Mono', monospace" font-size="9.5" fill="#6a8aaa" text-anchor="end" opacity="0.7">AVIONICS  |  SOLAR  |  RCS</text>
+
+  <!-- Right callout — Propulsion -->
+  <line x1="668" y1="380" x2="760" y2="380" stroke="#e8a825" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="760" y1="380" x2="875" y2="380" stroke="#e8a825" stroke-width="1" opacity="0.6"/>
+  <circle cx="760" cy="380" r="2.5" fill="#e8a825" opacity="0.7"/>
+  <text x="880" y="376" font-family="'Share Tech Mono', monospace" font-size="11" fill="#e8a825" opacity="0.85">LOX / CH₄ CLUSTER</text>
+  <text x="880" y="390" font-family="'Share Tech Mono', monospace" font-size="9.5" fill="#a07020" opacity="0.7">3×60 KN  |  Isp 360s</text>
+
+  <!-- Right callout — Landing Frame -->
+  <line x1="705" y1="405" x2="760" y2="405" stroke="#a8cce8" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="760" y1="405" x2="875" y2="405" stroke="#a8cce8" stroke-width="1" opacity="0.5"/>
+  <circle cx="760" cy="405" r="2.5" fill="#a8cce8" opacity="0.6"/>
+  <text x="880" y="401" font-family="'Share Tech Mono', monospace" font-size="11" fill="#a8cce8" opacity="0.8">LANDING FRAME</text>
+  <text x="880" y="415" font-family="'Share Tech Mono', monospace" font-size="9.5" fill="#6a8aaa" opacity="0.7">VTOL  |  ANCHOR LUGS</text>
+
+  <!-- ═══════════════════════════════════════════
+       BOTTOM INFO BAR
+  ═══════════════════════════════════════════ -->
+  <rect x="0" y="490" width="1200" height="30" fill="#050810" opacity="0.85"/>
+  <line x1="0" y1="490" x2="1200" y2="490" stroke="#1e3158" stroke-width="1"/>
+
+  <!-- Status indicator -->
+  <circle cx="28" cy="505" r="4" fill="#2ecc71" opacity="0.9">
+    <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="40" y="509" font-family="'Share Tech Mono', monospace" font-size="10" fill="#4a7060" letter-spacing="1">SYSTEMS NOMINAL</text>
+
+  <!-- Center title -->
+  <text x="600" y="509" font-family="'Share Tech Mono', monospace" font-size="10" fill="#4a6a8a" text-anchor="middle" letter-spacing="2">LTF-MK1  //  LOADED CONFIGURATION  //  LUNAR SURFACE</text>
+
+  <!-- Right — vehicle ID -->
+  <text x="1172" y="509" font-family="'Share Tech Mono', monospace" font-size="10" fill="#4a6a8a" text-anchor="end" letter-spacing="1">LTF-001</text>
+
+</svg>
