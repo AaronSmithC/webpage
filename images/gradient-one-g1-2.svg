@@ -1,0 +1,391 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 900" width="1800" height="900">
+  <defs>
+    <radialGradient id="spaceBg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0a0f1e"/>
+      <stop offset="100%" stop-color="#020408"/>
+    </radialGradient>
+    <radialGradient id="earthGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a4a8a" stop-opacity="0.6"/>
+      <stop offset="70%" stop-color="#0d2d5c" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#060e1f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="earthSurface" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#3a8fd4"/>
+      <stop offset="40%" stop-color="#1a6bbf"/>
+      <stop offset="100%" stop-color="#0d3d7a"/>
+    </radialGradient>
+    <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4fc3f7" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#4fc3f7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="hubBody" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#b0d4ec"/>
+      <stop offset="50%" stop-color="#5a8fb0"/>
+      <stop offset="100%" stop-color="#1a3a52"/>
+    </radialGradient>
+    <linearGradient id="trussSheen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8ab0c8" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#4a7090" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#1a3a52" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="massLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8ab4c8"/>
+      <stop offset="50%" stop-color="#4a7a94"/>
+      <stop offset="100%" stop-color="#1e3d52"/>
+    </linearGradient>
+    <linearGradient id="podLunar" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c0c8d0"/>
+      <stop offset="50%" stop-color="#808898"/>
+      <stop offset="100%" stop-color="#303844"/>
+    </linearGradient>
+    <linearGradient id="podMars" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c88050"/>
+      <stop offset="50%" stop-color="#905030"/>
+      <stop offset="100%" stop-color="#401808"/>
+    </linearGradient>
+    <linearGradient id="podEarth" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#70b8e0"/>
+      <stop offset="50%" stop-color="#3a80b8"/>
+      <stop offset="100%" stop-color="#0d3060"/>
+    </linearGradient>
+    <linearGradient id="solarPanel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a2a4a"/>
+      <stop offset="100%" stop-color="#060d1a"/>
+    </linearGradient>
+    <linearGradient id="gGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4fc3f7" stop-opacity="0.0"/>
+      <stop offset="16%" stop-color="#9ab8cc" stop-opacity="0.4"/>
+      <stop offset="38%" stop-color="#c07840" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#5a9ad8" stop-opacity="0.7"/>
+    </linearGradient>
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="podGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="earthClip">
+      <circle cx="900" cy="1460" r="900"/>
+    </clipPath>
+  </defs>
+
+  <!-- BACKGROUND -->
+  <rect width="1800" height="900" fill="url(#spaceBg)"/>
+
+  <!-- Stars -->
+  <g opacity="0.85">
+    <circle cx="50" cy="40" r="0.9" fill="white" opacity="0.9"/>
+    <circle cx="120" cy="85" r="0.6" fill="white" opacity="0.7"/>
+    <circle cx="210" cy="25" r="1.1" fill="white" opacity="0.8"/>
+    <circle cx="285" cy="155" r="0.7" fill="white" opacity="0.6"/>
+    <circle cx="360" cy="70" r="0.9" fill="white" opacity="0.9"/>
+    <circle cx="445" cy="32" r="0.5" fill="white" opacity="0.7"/>
+    <circle cx="520" cy="118" r="0.8" fill="white" opacity="0.8"/>
+    <circle cx="595" cy="55" r="1.3" fill="#cce8ff" opacity="0.9"/>
+    <circle cx="660" cy="92" r="0.5" fill="white" opacity="0.6"/>
+    <circle cx="740" cy="20" r="0.9" fill="white" opacity="0.8"/>
+    <circle cx="810" cy="145" r="0.7" fill="white" opacity="0.7"/>
+    <circle cx="900" cy="58" r="1.0" fill="white" opacity="0.9"/>
+    <circle cx="980" cy="30" r="0.5" fill="white" opacity="0.6"/>
+    <circle cx="1055" cy="98" r="1.2" fill="#ffe8cc" opacity="0.8"/>
+    <circle cx="1130" cy="42" r="0.7" fill="white" opacity="0.7"/>
+    <circle cx="1205" cy="125" r="0.5" fill="white" opacity="0.9"/>
+    <circle cx="1280" cy="68" r="0.9" fill="white" opacity="0.8"/>
+    <circle cx="1355" cy="22" r="0.6" fill="white" opacity="0.6"/>
+    <circle cx="1430" cy="90" r="1.0" fill="white" opacity="0.9"/>
+    <circle cx="1505" cy="48" r="0.5" fill="white" opacity="0.7"/>
+    <circle cx="1580" cy="135" r="0.8" fill="white" opacity="0.8"/>
+    <circle cx="1660" cy="32" r="1.0" fill="white" opacity="0.9"/>
+    <circle cx="1735" cy="78" r="0.5" fill="white" opacity="0.6"/>
+    <circle cx="85" cy="250" r="0.7" fill="white" opacity="0.7"/>
+    <circle cx="165" cy="320" r="0.5" fill="white" opacity="0.8"/>
+    <circle cx="38" cy="455" r="0.8" fill="white" opacity="0.7"/>
+    <circle cx="1680" cy="365" r="0.9" fill="white" opacity="0.9"/>
+    <circle cx="1750" cy="450" r="0.5" fill="white" opacity="0.7"/>
+  </g>
+
+  <!-- EARTH -->
+  <circle cx="900" cy="1460" r="960" fill="url(#earthGlow)" opacity="0.5"/>
+  <circle cx="900" cy="1460" r="902" fill="none" stroke="#4a9fd4" stroke-width="6" opacity="0.3"/>
+  <circle cx="900" cy="1460" r="896" fill="none" stroke="#70c8f0" stroke-width="2" opacity="0.35"/>
+  <circle cx="900" cy="1460" r="900" fill="url(#earthSurface)" clip-path="url(#earthClip)"/>
+  <g clip-path="url(#earthClip)" opacity="0.45">
+    <ellipse cx="760" cy="610" rx="130" ry="65" fill="#2a8a40" opacity="0.6" transform="rotate(-15 760 610)"/>
+    <ellipse cx="1020" cy="590" rx="100" ry="50" fill="#2a7a35" opacity="0.5"/>
+    <ellipse cx="850" cy="645" rx="75" ry="38" fill="#228830" opacity="0.4"/>
+    <circle cx="900" cy="1460" r="892" fill="none" stroke="#70b0ff" stroke-width="18" opacity="0.12"/>
+  </g>
+  <ellipse cx="900" cy="1460" r="1060" ry="1060" fill="none" stroke="#4a8ab8" stroke-width="1" stroke-dasharray="10,16" opacity="0.18"/>
+
+  <!-- ════════════════════════════════════════════════════════════
+       G1 VEHICLE
+       Hub center: X=900, Y=450
+       Scale: 350m → 560px  (1.6 px/m)
+       
+       RIGHT (habitat side):
+         Lunar pod:   56m  → X = 900 + (56  * 1.6) = 900 + 90  = 990
+         Mars pod:   133m  → X = 900 + (133 * 1.6) = 900 + 213 = 1113
+         Earth pod:  350m  → X = 900 + (350 * 1.6) = 900 + 560 = 1460
+       
+       LEFT (counterweight):
+         Truss end:  350m  → X = 900 - 560 = 340
+         CW body starts at 340, extends to ~255
+  ════════════════════════════════════════════════════════════ -->
+
+  <!-- ── TRUSS: LEFT BOOM 340 to 900 ── -->
+  <rect x="340" y="442" width="560" height="16" fill="url(#trussSheen)" rx="3"/>
+  <rect x="340" y="443" width="560" height="4" fill="#c0d8e8" opacity="0.4" rx="2"/>
+  <rect x="340" y="438" width="560" height="4" fill="#6a9ab8" rx="2" opacity="0.65"/>
+  <rect x="340" y="458" width="560" height="4" fill="#2a5a78" rx="2" opacity="0.65"/>
+  <g stroke="#4a7090" stroke-width="1.1" opacity="0.7">
+    <line x1="340" y1="438" x2="420" y2="462"/><line x1="420" y1="438" x2="340" y2="462"/>
+    <line x1="420" y1="438" x2="500" y2="462"/><line x1="500" y1="438" x2="420" y2="462"/>
+    <line x1="500" y1="438" x2="580" y2="462"/><line x1="580" y1="438" x2="500" y2="462"/>
+    <line x1="580" y1="438" x2="660" y2="462"/><line x1="660" y1="438" x2="580" y2="462"/>
+    <line x1="660" y1="438" x2="740" y2="462"/><line x1="740" y1="438" x2="660" y2="462"/>
+    <line x1="740" y1="438" x2="820" y2="462"/><line x1="820" y1="438" x2="740" y2="462"/>
+    <line x1="820" y1="438" x2="860" y2="462"/><line x1="860" y1="438" x2="820" y2="462"/>
+  </g>
+  <g stroke="#5a8aa8" stroke-width="1.5" opacity="0.5">
+    <line x1="340" y1="438" x2="340" y2="462"/>
+    <line x1="420" y1="438" x2="420" y2="462"/>
+    <line x1="500" y1="438" x2="500" y2="462"/>
+    <line x1="580" y1="438" x2="580" y2="462"/>
+    <line x1="660" y1="438" x2="660" y2="462"/>
+    <line x1="740" y1="438" x2="740" y2="462"/>
+    <line x1="820" y1="438" x2="820" y2="462"/>
+    <line x1="860" y1="438" x2="860" y2="462"/>
+  </g>
+
+  <!-- ── TRUSS: RIGHT BOOM 900 to 1460 ── -->
+  <rect x="900" y="442" width="560" height="16" fill="url(#trussSheen)" rx="3"/>
+  <rect x="900" y="443" width="560" height="4" fill="#c0d8e8" opacity="0.4" rx="2"/>
+  <rect x="900" y="438" width="560" height="4" fill="#6a9ab8" rx="2" opacity="0.65"/>
+  <rect x="900" y="458" width="560" height="4" fill="#2a5a78" rx="2" opacity="0.65"/>
+  <g stroke="#4a7090" stroke-width="1.1" opacity="0.7">
+    <line x1="900" y1="438" x2="980" y2="462"/><line x1="980" y1="438" x2="900" y2="462"/>
+    <line x1="980" y1="438" x2="1060" y2="462"/><line x1="1060" y1="438" x2="980" y2="462"/>
+    <line x1="1060" y1="438" x2="1140" y2="462"/><line x1="1140" y1="438" x2="1060" y2="462"/>
+    <line x1="1140" y1="438" x2="1220" y2="462"/><line x1="1220" y1="438" x2="1140" y2="462"/>
+    <line x1="1220" y1="438" x2="1300" y2="462"/><line x1="1300" y1="438" x2="1220" y2="462"/>
+    <line x1="1300" y1="438" x2="1380" y2="462"/><line x1="1380" y1="438" x2="1300" y2="462"/>
+    <line x1="1380" y1="438" x2="1460" y2="462"/><line x1="1460" y1="438" x2="1380" y2="462"/>
+  </g>
+  <g stroke="#5a8aa8" stroke-width="1.5" opacity="0.5">
+    <line x1="900" y1="438" x2="900" y2="462"/>
+    <line x1="980" y1="438" x2="980" y2="462"/>
+    <line x1="1060" y1="438" x2="1060" y2="462"/>
+    <line x1="1140" y1="438" x2="1140" y2="462"/>
+    <line x1="1220" y1="438" x2="1220" y2="462"/>
+    <line x1="1300" y1="438" x2="1300" y2="462"/>
+    <line x1="1380" y1="438" x2="1380" y2="462"/>
+    <line x1="1460" y1="438" x2="1460" y2="462"/>
+  </g>
+
+  <!-- g-gradient bar below right boom -->
+  <rect x="900" y="468" width="560" height="4" fill="url(#gGradient)" rx="2" opacity="0.65"/>
+
+  <!-- ══════════════════════════════════════════
+       HABITAT PODS at correct radii
+  ══════════════════════════════════════════ -->
+
+  <!-- ── LUNAR POD @ X=990, r=56m, 0.16g ── -->
+  <ellipse cx="990" cy="450" rx="50" ry="72" fill="#9ab8c8" opacity="0.07" filter="url(#podGlow)"/>
+  <rect x="963" y="392" width="54" height="116" rx="11" fill="url(#podLunar)" stroke="#9ab8cc" stroke-width="1.5"/>
+  <rect x="965" y="394" width="50" height="112" rx="10" fill="none" stroke="#d0dce8" stroke-width="0.6" opacity="0.3"/>
+  <rect x="968" y="396" width="18" height="38" rx="5" fill="white" opacity="0.07"/>
+  <circle cx="990" cy="422" r="7" fill="#0d1a2a" stroke="#6a9ab8" stroke-width="1.2"/>
+  <circle cx="990" cy="422" r="4.5" fill="#0a1828"/>
+  <circle cx="990" cy="468" r="7" fill="#0d1a2a" stroke="#6a9ab8" stroke-width="1.2"/>
+  <circle cx="990" cy="468" r="4.5" fill="#0a1828"/>
+  <rect x="983" y="446" width="14" height="8" rx="2" fill="#2a4a60" stroke="#5a8aaa" stroke-width="1"/>
+  <!-- Solar wings -->
+  <rect x="916" y="432" width="47" height="12" rx="3" fill="url(#solarPanel)" stroke="#2a4a7a" stroke-width="1"/>
+  <g stroke="#1a2a4a" stroke-width="0.5" opacity="0.9">
+    <line x1="926" y1="432" x2="926" y2="444"/><line x1="938" y1="432" x2="938" y2="444"/><line x1="950" y1="432" x2="950" y2="444"/>
+    <line x1="916" y1="438" x2="963" y2="438"/>
+  </g>
+  <rect x="1017" y="432" width="47" height="12" rx="3" fill="url(#solarPanel)" stroke="#2a4a7a" stroke-width="1"/>
+  <g stroke="#1a2a4a" stroke-width="0.5" opacity="0.9">
+    <line x1="1027" y1="432" x2="1027" y2="444"/><line x1="1039" y1="432" x2="1039" y2="444"/><line x1="1051" y1="432" x2="1051" y2="444"/>
+    <line x1="1017" y1="438" x2="1064" y2="438"/>
+  </g>
+  <!-- Callout up -->
+  <line x1="990" y1="392" x2="990" y2="344" stroke="#9ab8cc" stroke-width="0.9" stroke-dasharray="4,3" opacity="0.7"/>
+  <line x1="990" y1="344" x2="912" y2="332" stroke="#9ab8cc" stroke-width="0.9" opacity="0.7"/>
+  <text x="908" y="328" text-anchor="end" font-family="'Orbitron','Courier New',monospace" font-weight="700" font-size="10.5" fill="#c0d0dc" letter-spacing="1.5">LUNAR POD</text>
+  <text x="908" y="342" text-anchor="end" font-family="'Courier New',monospace" font-size="9" fill="#8aaabb">0.16g  ·  r = 56 m</text>
+
+  <!-- ── MARS POD @ X=1113, r=133m, 0.38g ── -->
+  <ellipse cx="1113" cy="450" rx="54" ry="78" fill="#c06828" opacity="0.09" filter="url(#podGlow)"/>
+  <rect x="1083" y="384" width="60" height="132" rx="12" fill="url(#podMars)" stroke="#c07840" stroke-width="1.5"/>
+  <rect x="1085" y="386" width="56" height="128" rx="11" fill="none" stroke="#e0a060" stroke-width="0.6" opacity="0.3"/>
+  <rect x="1088" y="388" width="20" height="42" rx="6" fill="white" opacity="0.06"/>
+  <circle cx="1113" cy="418" r="7.5" fill="#1a0a08" stroke="#c06020" stroke-width="1.2"/>
+  <circle cx="1113" cy="418" r="5" fill="#120806"/>
+  <circle cx="1113" cy="466" r="7.5" fill="#1a0a08" stroke="#c06020" stroke-width="1.2"/>
+  <circle cx="1113" cy="466" r="5" fill="#120806"/>
+  <rect x="1106" y="446" width="14" height="8" rx="2" fill="#3a1808" stroke="#c07030" stroke-width="1"/>
+  <!-- Solar wings -->
+  <rect x="1033" y="430" width="50" height="14" rx="3" fill="url(#solarPanel)" stroke="#2a3a6a" stroke-width="1"/>
+  <g stroke="#1a2a4a" stroke-width="0.5" opacity="0.9">
+    <line x1="1043" y1="430" x2="1043" y2="444"/><line x1="1055" y1="430" x2="1055" y2="444"/><line x1="1067" y1="430" x2="1067" y2="444"/>
+    <line x1="1033" y1="437" x2="1083" y2="437"/>
+  </g>
+  <rect x="1143" y="430" width="50" height="14" rx="3" fill="url(#solarPanel)" stroke="#2a3a6a" stroke-width="1"/>
+  <g stroke="#1a2a4a" stroke-width="0.5" opacity="0.9">
+    <line x1="1153" y1="430" x2="1153" y2="444"/><line x1="1165" y1="430" x2="1165" y2="444"/><line x1="1177" y1="430" x2="1177" y2="444"/>
+    <line x1="1143" y1="437" x2="1193" y2="437"/>
+  </g>
+  <!-- Callout up -->
+  <line x1="1113" y1="384" x2="1113" y2="332" stroke="#c07840" stroke-width="0.9" stroke-dasharray="4,3" opacity="0.7"/>
+  <line x1="1113" y1="332" x2="1192" y2="320" stroke="#c07840" stroke-width="0.9" opacity="0.7"/>
+  <text x="1196" y="316" font-family="'Orbitron','Courier New',monospace" font-weight="700" font-size="10.5" fill="#e09050" letter-spacing="1.5">MARS POD</text>
+  <text x="1196" y="330" font-family="'Courier New',monospace" font-size="9" fill="#a06030">0.38g  ·  r = 133 m</text>
+
+  <!-- ── EARTH POD @ X=1460, r=350m, 1.0g ── -->
+  <ellipse cx="1460" cy="450" rx="62" ry="92" fill="#3a80c0" opacity="0.11" filter="url(#podGlow)"/>
+  <rect x="1426" y="374" width="68" height="152" rx="13" fill="url(#podEarth)" stroke="#5a9ad8" stroke-width="1.8"/>
+  <rect x="1428" y="376" width="64" height="148" rx="12" fill="none" stroke="#90c8f0" stroke-width="0.7" opacity="0.3"/>
+  <rect x="1431" y="378" width="22" height="48" rx="7" fill="white" opacity="0.07"/>
+  <circle cx="1460" cy="410" r="8" fill="#060e1a" stroke="#4a90d8" stroke-width="1.3"/>
+  <circle cx="1460" cy="410" r="5.5" fill="#040c18"/>
+  <circle cx="1460" cy="450" r="8" fill="#060e1a" stroke="#4a90d8" stroke-width="1.3"/>
+  <circle cx="1460" cy="450" r="5.5" fill="#040c18"/>
+  <circle cx="1460" cy="490" r="8" fill="#060e1a" stroke="#4a90d8" stroke-width="1.3"/>
+  <circle cx="1460" cy="490" r="5.5" fill="#040c18"/>
+  <rect x="1453" y="446" width="14" height="8" rx="2" fill="#0a2040" stroke="#4a80c0" stroke-width="1"/>
+  <!-- Solar wings — largest -->
+  <rect x="1380" y="428" width="46" height="16" rx="3" fill="url(#solarPanel)" stroke="#2a4a7a" stroke-width="1.2"/>
+  <g stroke="#1a2a4a" stroke-width="0.5" opacity="0.9">
+    <line x1="1390" y1="428" x2="1390" y2="444"/><line x1="1402" y1="428" x2="1402" y2="444"/><line x1="1414" y1="428" x2="1414" y2="444"/>
+    <line x1="1380" y1="436" x2="1426" y2="436"/>
+  </g>
+  <rect x="1494" y="428" width="46" height="16" rx="3" fill="url(#solarPanel)" stroke="#2a4a7a" stroke-width="1.2"/>
+  <g stroke="#1a2a4a" stroke-width="0.5" opacity="0.9">
+    <line x1="1504" y1="428" x2="1504" y2="444"/><line x1="1516" y1="428" x2="1516" y2="444"/><line x1="1528" y1="428" x2="1528" y2="444"/>
+    <line x1="1494" y1="436" x2="1540" y2="436"/>
+  </g>
+  <!-- Callout right -->
+  <line x1="1494" y1="450" x2="1564" y2="450" stroke="#5a9ad8" stroke-width="0.9" opacity="0.7"/>
+  <text x="1568" y="443" font-family="'Orbitron','Courier New',monospace" font-weight="700" font-size="10.5" fill="#90c8f0" letter-spacing="1.5">EARTH POD</text>
+  <text x="1568" y="457" font-family="'Courier New',monospace" font-size="9" fill="#5a9ad8">1.0g  ·  r = 350 m</text>
+
+  <!-- ══════════════════════════════════════════
+       CENTER HUB @ X=900
+  ══════════════════════════════════════════ -->
+  <circle cx="900" cy="450" r="88" fill="url(#hubGlow)" opacity="0.6"/>
+  <circle cx="900" cy="450" r="62" fill="url(#hubBody)" filter="url(#softGlow)"/>
+  <ellipse cx="900" cy="450" rx="62" ry="13" fill="none" stroke="#7ab8d8" stroke-width="2.5" opacity="0.55"/>
+  <!-- Axial docking collars -->
+  <ellipse cx="838" cy="450" rx="13" ry="20" fill="#1a3a52" stroke="#7ab8d8" stroke-width="1.5"/>
+  <ellipse cx="838" cy="450" rx="8" ry="14" fill="#0d2030"/>
+  <ellipse cx="962" cy="450" rx="13" ry="20" fill="#1a3a52" stroke="#7ab8d8" stroke-width="1.5"/>
+  <ellipse cx="962" cy="450" rx="8" ry="14" fill="#0d2030"/>
+  <!-- Radial docking port (top) -->
+  <rect x="890" y="387" width="20" height="16" rx="3" fill="#1a4a6a" stroke="#5a9ab8" stroke-width="1.2"/>
+  <rect x="893" y="390" width="14" height="10" rx="2" fill="#0d2a3a"/>
+  <!-- Hub solar arrays -->
+  <rect x="858" y="346" width="84" height="25" rx="4" fill="url(#solarPanel)" stroke="#3a6a9a" stroke-width="1.2"/>
+  <g stroke="#1a3a5a" stroke-width="0.6" opacity="0.85">
+    <line x1="872" y1="346" x2="872" y2="371"/><line x1="886" y1="346" x2="886" y2="371"/>
+    <line x1="900" y1="346" x2="900" y2="371"/><line x1="914" y1="346" x2="914" y2="371"/>
+    <line x1="928" y1="346" x2="928" y2="371"/>
+    <line x1="858" y1="354" x2="942" y2="354"/><line x1="858" y1="363" x2="942" y2="363"/>
+  </g>
+  <line x1="900" y1="387" x2="900" y2="371" stroke="#4a8aaa" stroke-width="2"/>
+  <ellipse cx="882" cy="432" rx="18" ry="12" fill="white" opacity="0.10"/>
+  <!-- Hub label -->
+  <line x1="900" y1="388" x2="900" y2="312" stroke="#4fc3f7" stroke-width="0.9" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="900" y1="312" x2="820" y2="300" stroke="#4fc3f7" stroke-width="0.9" opacity="0.6"/>
+  <text x="816" y="296" text-anchor="end" font-family="'Orbitron','Courier New',monospace" font-weight="700" font-size="10.5" fill="#4fc3f7" letter-spacing="1.5">CENTER HUB</text>
+  <text x="816" y="310" text-anchor="end" font-family="'Courier New',monospace" font-size="9" fill="#7ab8d8">0g  ·  Docking  ·  Non-rotating</text>
+  <!-- Spin arrows -->
+  <g transform="translate(900,450)" opacity="0.5">
+    <path d="M -95 -28 A 99 99 0 0 1 95 -28" fill="none" stroke="#4fc3f7" stroke-width="1.3" stroke-dasharray="5,4"/>
+    <polygon points="95,-28 84,-18 104,-14" fill="#4fc3f7" opacity="0.8"/>
+    <path d="M 95 28 A 99 99 0 0 1 -95 28" fill="none" stroke="#4fc3f7" stroke-width="1.3" stroke-dasharray="5,4"/>
+    <polygon points="-95,28 -84,18 -104,14" fill="#4fc3f7" opacity="0.8"/>
+  </g>
+  <text x="900" y="572" text-anchor="middle" font-family="'Courier New',monospace" font-size="9.5" fill="#4fc3f7" opacity="0.6">~1.6 RPM</text>
+
+  <!-- ══════════════════════════════════════════
+       COUNTERWEIGHT @ left tip X≈298
+  ══════════════════════════════════════════ -->
+  <ellipse cx="298" cy="450" rx="62" ry="75" fill="#3a6080" opacity="0.1" filter="url(#podGlow)"/>
+  <path d="M 252 398 L 340 382 L 340 518 L 252 502 Z" fill="url(#massLeft)" stroke="#4a7a94" stroke-width="1.5"/>
+  <path d="M 255 400 L 338 384 L 338 516 L 255 500 Z" fill="none" stroke="#8ab8d0" stroke-width="0.7" opacity="0.35"/>
+  <g stroke="#2a5a78" stroke-width="1" opacity="0.5">
+    <line x1="256" y1="416" x2="338" y2="404"/>
+    <line x1="256" y1="435" x2="338" y2="423"/>
+    <line x1="256" y1="454" x2="338" y2="442"/>
+    <line x1="256" y1="473" x2="338" y2="462"/>
+    <line x1="256" y1="492" x2="338" y2="481"/>
+  </g>
+  <path d="M 260 400 L 336 385 L 336 412 L 260 426 Z" fill="white" opacity="0.055"/>
+  <rect x="262" y="445" width="68" height="26" rx="4" fill="#1a5a8a" opacity="0.35" stroke="#3a8aba" stroke-width="0.8"/>
+  <text x="296" y="462" text-anchor="middle" font-family="'Courier New',monospace" font-size="7.5" fill="#70b8e0" opacity="0.8">H₂O ballast</text>
+  <!-- CW label -->
+  <line x1="296" y1="398" x2="296" y2="344" stroke="#7ab8d8" stroke-width="0.9" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="296" y1="344" x2="210" y2="332" stroke="#7ab8d8" stroke-width="0.9" opacity="0.6"/>
+  <text x="206" y="328" text-anchor="end" font-family="'Orbitron','Courier New',monospace" font-weight="700" font-size="10.5" fill="#7ab8d8" letter-spacing="1.5">COUNTERWEIGHT</text>
+  <text x="206" y="342" text-anchor="end" font-family="'Courier New',monospace" font-size="9" fill="#5a8aa8">Active water ballast</text>
+
+  <!-- ══════════════════════════════════════════
+       RADIUS DIMENSION LINES
+  ══════════════════════════════════════════ -->
+  <!-- Tick drops from boom bottom at each pod -->
+  <line x1="990" y1="472" x2="990" y2="496" stroke="#9ab8cc" stroke-width="0.9" stroke-dasharray="3,2" opacity="0.45"/>
+  <line x1="1113" y1="472" x2="1113" y2="496" stroke="#c07840" stroke-width="0.9" stroke-dasharray="3,2" opacity="0.45"/>
+  <line x1="1460" y1="472" x2="1460" y2="496" stroke="#5a9ad8" stroke-width="0.9" stroke-dasharray="3,2" opacity="0.45"/>
+  <line x1="900" y1="472" x2="900" y2="496" stroke="#4fc3f7" stroke-width="0.9" stroke-dasharray="3,2" opacity="0.4"/>
+
+  <!-- Full 350m span bracket -->
+  <line x1="900" y1="490" x2="1460" y2="490" stroke="#2a4a6a" stroke-width="0.8" opacity="0.45"/>
+  <polygon points="900,490 913,486 913,494" fill="#2a4a6a" opacity="0.45"/>
+  <polygon points="1460,490 1447,486 1447,494" fill="#2a4a6a" opacity="0.45"/>
+  <text x="1180" y="503" text-anchor="middle" font-family="'Courier New',monospace" font-size="8.5" fill="#3a6a8a" opacity="0.6">350 m</text>
+
+  <!-- 56m bracket -->
+  <line x1="900" y1="560" x2="990" y2="560" stroke="#9ab8cc" stroke-width="0.7" opacity="0.35"/>
+  <polygon points="900,560 912,557 912,563" fill="#9ab8cc" opacity="0.35"/>
+  <polygon points="990,560 978,557 978,563" fill="#9ab8cc" opacity="0.35"/>
+  <text x="945" y="573" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#8aa8bc" opacity="0.45">56 m</text>
+
+  <!-- 133m bracket -->
+  <line x1="900" y1="545" x2="1113" y2="545" stroke="#c07840" stroke-width="0.7" opacity="0.3"/>
+  <polygon points="900,545 912,542 912,548" fill="#c07840" opacity="0.3"/>
+  <polygon points="1113,545 1101,542 1101,548" fill="#c07840" opacity="0.3"/>
+  <text x="1006" y="534" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#a06030" opacity="0.4">133 m</text>
+
+  <!-- ══════════════════════════════════════════
+       TITLE
+  ══════════════════════════════════════════ -->
+  <text x="900" y="258" text-anchor="middle" font-family="'Orbitron','Courier New',monospace" font-weight="700" font-size="22" fill="#e8f4ff" letter-spacing="5">GRADIENT ONE  ·  G1</text>
+  <text x="900" y="280" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="#7ab8d8" letter-spacing="3">MULTI-GRAVITY RESEARCH PLATFORM  ·  LEO DEMONSTRATOR</text>
+  <text x="900" y="298" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#4a7a9a" letter-spacing="2">350 m RADIUS  ·  ~1.6 RPM  ·  0g / 0.16g / 0.38g / 1.0g  SIMULTANEOUSLY</text>
+
+  <!-- LEO altitude bracket -->
+  <line x1="28" y1="460" x2="28" y2="635" stroke="#1a3a5a" stroke-width="0.8" opacity="0.4"/>
+  <line x1="28" y1="460" x2="44" y2="460" stroke="#1a3a5a" stroke-width="0.8" opacity="0.4"/>
+  <line x1="28" y1="635" x2="44" y2="635" stroke="#1a3a5a" stroke-width="0.8" opacity="0.4"/>
+  <text x="22" y="548" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#2a5a7a" transform="rotate(-90,22,548)">LEO  ~400 km</text>
+
+  <!-- Earth limb reference -->
+  <path d="M 160 668 Q 900 644 1640 668" fill="none" stroke="#3a7ab8" stroke-width="1" stroke-dasharray="8,6" opacity="0.18"/>
+  <text x="900" y="684" text-anchor="middle" font-family="'Courier New',monospace" font-size="8.5" fill="#2a5a8a" opacity="0.35" letter-spacing="1">— EARTH LIMB  (approx) —</text>
+
+  <!-- Frame + corners -->
+  <rect x="8" y="8" width="1784" height="884" rx="6" fill="none" stroke="#1a3a5a" stroke-width="1.5" opacity="0.5"/>
+  <g stroke="#2a5a7a" stroke-width="1.2" opacity="0.45">
+    <path d="M 8 30 L 8 8 L 30 8"/>
+    <path d="M 1770 8 L 1792 8 L 1792 30"/>
+    <path d="M 8 870 L 8 892 L 30 892"/>
+    <path d="M 1770 892 L 1792 892 L 1792 870"/>
+  </g>
+  <text x="22" y="884" font-family="'Courier New',monospace" font-size="8.5" fill="#2a4a6a" letter-spacing="2" opacity="0.8">AEGIS STATION INFRASTRUCTURE LLC  ·  GRADIENT ONE  ·  PRECURSOR TECHNOLOGY  ·  FEB 2026</text>
+  <text x="1778" y="884" text-anchor="end" font-family="'Courier New',monospace" font-size="8.5" fill="#2a4a6a" letter-spacing="1" opacity="0.8">NOT TO SCALE</text>
+
+</svg>
