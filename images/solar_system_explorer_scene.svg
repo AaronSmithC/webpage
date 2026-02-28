@@ -1,0 +1,419 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" width="1400" height="900">
+  <defs>
+
+    <!-- Deep space background gradient -->
+    <radialGradient id="spaceBg" cx="60%" cy="45%" r="70%">
+      <stop offset="0%" stop-color="#0d1520"/>
+      <stop offset="50%" stop-color="#060b10"/>
+      <stop offset="100%" stop-color="#020408"/>
+    </radialGradient>
+
+    <!-- Icy moon surface gradient -->
+    <radialGradient id="icyMoon" cx="38%" cy="32%" r="55%">
+      <stop offset="0%" stop-color="#d8eaf5"/>
+      <stop offset="25%" stop-color="#a8c8e0"/>
+      <stop offset="55%" stop-color="#6a9ab8"/>
+      <stop offset="80%" stop-color="#3a6080"/>
+      <stop offset="100%" stop-color="#1a3550"/>
+    </radialGradient>
+
+    <!-- Moon terminator shadow -->
+    <radialGradient id="moonShadow" cx="78%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000610" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#000610" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#000610" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Moon atmosphere glow -->
+    <radialGradient id="moonAtmo" cx="50%" cy="50%" r="52%">
+      <stop offset="88%" stop-color="#4a9fc8" stop-opacity="0"/>
+      <stop offset="95%" stop-color="#4a9fc8" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#7ac8f0" stop-opacity="0.04"/>
+    </radialGradient>
+
+    <!-- Distant star glow -->
+    <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff8e8" stop-opacity="1"/>
+      <stop offset="30%" stop-color="#ffe090" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ffe090" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Engine glow -->
+    <radialGradient id="engineGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#60c8ff" stop-opacity="0.9"/>
+      <stop offset="40%" stop-color="#2080e0" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#0040a0" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Ion plume gradient -->
+    <linearGradient id="ionPlume" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#80d8ff" stop-opacity="0.7"/>
+      <stop offset="30%" stop-color="#40a8ff" stop-opacity="0.4"/>
+      <stop offset="70%" stop-color="#2060c0" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#1030a0" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Ship hull material -->
+    <linearGradient id="hullMain" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6a7a80"/>
+      <stop offset="40%" stop-color="#4a5860"/>
+      <stop offset="100%" stop-color="#2a3540"/>
+    </linearGradient>
+
+    <!-- Rotating pod material -->
+    <linearGradient id="podGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8a9aa0"/>
+      <stop offset="50%" stop-color="#5a6a70"/>
+      <stop offset="100%" stop-color="#3a4a50"/>
+    </linearGradient>
+
+    <!-- Solar panel blue -->
+    <linearGradient id="solarPanel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a3a6a"/>
+      <stop offset="50%" stop-color="#0d2448"/>
+      <stop offset="100%" stop-color="#081828"/>
+    </linearGradient>
+
+    <!-- Boom gradient -->
+    <linearGradient id="boomGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4a5a60"/>
+      <stop offset="100%" stop-color="#2a3a40"/>
+    </linearGradient>
+
+    <!-- Reactor glow -->
+    <radialGradient id="reactorGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff6020" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#ff4010" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ff2000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Bloom filter for glows -->
+    <filter id="bloom" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <filter id="softBloom" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <filter id="moonBlur" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="0.5"/>
+    </filter>
+
+    <filter id="starFilter">
+      <feGaussianBlur stdDeviation="0.4"/>
+    </filter>
+
+    <!-- Clip for moon -->
+    <clipPath id="moonClip">
+      <circle cx="1050" cy="500" r="318"/>
+    </clipPath>
+
+  </defs>
+
+  <!-- ═══ BACKGROUND ═══ -->
+  <rect width="1400" height="900" fill="url(#spaceBg)"/>
+
+  <!-- ═══ STARS ═══ -->
+  <!-- Bright stars -->
+  <g fill="white">
+    <circle cx="45" cy="28" r="1.2" opacity="0.9"/>
+    <circle cx="112" cy="67" r="0.8" opacity="0.7"/>
+    <circle cx="78" cy="142" r="1.0" opacity="0.8"/>
+    <circle cx="234" cy="35" r="1.4" opacity="0.95"/>
+    <circle cx="189" cy="88" r="0.6" opacity="0.6"/>
+    <circle cx="320" cy="55" r="0.9" opacity="0.75"/>
+    <circle cx="410" cy="22" r="1.1" opacity="0.85"/>
+    <circle cx="388" cy="110" r="0.7" opacity="0.65"/>
+    <circle cx="520" cy="44" r="1.3" opacity="0.9"/>
+    <circle cx="560" cy="130" r="0.8" opacity="0.7"/>
+    <circle cx="640" cy="18" r="1.0" opacity="0.8"/>
+    <circle cx="700" cy="75" r="0.6" opacity="0.6"/>
+    <circle cx="760" cy="35" r="1.2" opacity="0.88"/>
+    <circle cx="820" cy="90" r="0.9" opacity="0.72"/>
+    <circle cx="55" cy="200" r="0.7" opacity="0.65"/>
+    <circle cx="140" cy="280" r="1.1" opacity="0.82"/>
+    <circle cx="210" cy="340" r="0.8" opacity="0.7"/>
+    <circle cx="28" cy="420" r="1.3" opacity="0.9"/>
+    <circle cx="95" cy="490" r="0.6" opacity="0.6"/>
+    <circle cx="175" cy="560" r="1.0" opacity="0.78"/>
+    <circle cx="240" cy="630" r="0.9" opacity="0.73"/>
+    <circle cx="30" cy="700" r="1.2" opacity="0.87"/>
+    <circle cx="110" cy="760" r="0.7" opacity="0.65"/>
+    <circle cx="180" cy="820" r="1.1" opacity="0.82"/>
+    <circle cx="260" cy="875" r="0.8" opacity="0.7"/>
+    <circle cx="340" cy="840" r="1.4" opacity="0.93"/>
+    <circle cx="420" cy="790" r="0.6" opacity="0.58"/>
+    <circle cx="490" cy="850" r="1.0" opacity="0.8"/>
+    <circle cx="570" cy="880" r="0.9" opacity="0.73"/>
+    <circle cx="630" cy="810" r="1.2" opacity="0.87"/>
+    <circle cx="280" cy="160" r="0.8" opacity="0.68"/>
+    <circle cx="350" cy="220" r="1.1" opacity="0.83"/>
+    <circle cx="450" cy="180" r="0.7" opacity="0.63"/>
+    <circle cx="490" cy="260" r="1.3" opacity="0.9"/>
+    <circle cx="550" cy="200" r="0.8" opacity="0.7"/>
+    <circle cx="600" cy="310" r="1.0" opacity="0.78"/>
+    <circle cx="660" cy="240" r="0.6" opacity="0.58"/>
+    <circle cx="720" cy="170" r="1.2" opacity="0.88"/>
+    <circle cx="780" cy="230" r="0.9" opacity="0.74"/>
+    <circle cx="840" cy="150" r="1.1" opacity="0.84"/>
+    <circle cx="880" cy="210" r="0.7" opacity="0.65"/>
+    <!-- dim background stars -->
+    <circle cx="150" cy="50" r="0.5" opacity="0.4"/>
+    <circle cx="290" cy="95" r="0.5" opacity="0.35"/>
+    <circle cx="470" cy="75" r="0.5" opacity="0.42"/>
+    <circle cx="590" cy="165" r="0.5" opacity="0.38"/>
+    <circle cx="730" cy="120" r="0.5" opacity="0.4"/>
+    <circle cx="810" cy="55" r="0.5" opacity="0.36"/>
+    <circle cx="65" cy="325" r="0.5" opacity="0.38"/>
+    <circle cx="195" cy="450" r="0.5" opacity="0.4"/>
+    <circle cx="310" cy="520" r="0.5" opacity="0.35"/>
+    <circle cx="370" cy="680" r="0.5" opacity="0.42"/>
+    <circle cx="445" cy="730" r="0.5" opacity="0.38"/>
+    <circle cx="510" cy="640" r="0.5" opacity="0.4"/>
+    <circle cx="580" cy="760" r="0.5" opacity="0.36"/>
+    <circle cx="660" cy="690" r="0.5" opacity="0.38"/>
+    <circle cx="720" cy="780" r="0.5" opacity="0.4"/>
+  </g>
+
+  <!-- Distant sun (upper left) -->
+  <circle cx="80" cy="80" r="22" fill="url(#starGlow)" filter="url(#softBloom)"/>
+  <circle cx="80" cy="80" r="6" fill="#fffce0" opacity="0.95"/>
+  <circle cx="80" cy="80" r="3" fill="#ffffff"/>
+
+  <!-- Sunlight rays suggestion -->
+  <line x1="80" y1="80" x2="300" y2="200" stroke="#ffe090" stroke-width="0.3" opacity="0.04"/>
+  <line x1="80" y1="80" x2="450" y2="350" stroke="#ffe090" stroke-width="0.3" opacity="0.03"/>
+  <line x1="80" y1="80" x2="600" y2="500" stroke="#ffe090" stroke-width="0.3" opacity="0.02"/>
+
+  <!-- ═══ ICY MOON (Europa-like) ═══ -->
+  <!-- Atmosphere halo -->
+  <circle cx="1050" cy="500" r="345" fill="url(#moonAtmo)"/>
+
+  <!-- Moon body -->
+  <circle cx="1050" cy="500" r="318" fill="url(#icyMoon)"/>
+
+  <!-- Ice surface detail — crack lines -->
+  <g clip-path="url(#moonClip)" opacity="0.55" stroke="#8ab8d0" fill="none">
+    <line x1="800" y1="380" x2="1050" y2="520" stroke-width="1.5"/>
+    <line x1="820" y1="420" x2="1100" y2="350" stroke-width="1.0"/>
+    <line x1="900" y1="300" x2="980" y2="600" stroke-width="1.2"/>
+    <line x1="850" y1="550" x2="1150" y2="480" stroke-width="0.8"/>
+    <line x1="750" y1="500" x2="1000" y2="680" stroke-width="1.3"/>
+    <line x1="920" y1="640" x2="1200" y2="560" stroke-width="0.9"/>
+    <line x1="960" y1="350" x2="1100" y2="700" stroke-width="0.8"/>
+    <line x1="830" y1="460" x2="1050" y2="390" stroke-width="1.1"/>
+    <line x1="1000" y1="280" x2="1150" y2="620" stroke-width="0.7"/>
+    <line x1="880" y1="680" x2="1200" y2="440" stroke-width="1.0"/>
+    <line x1="800" y1="600" x2="980" y2="340" stroke-width="0.8"/>
+    <line x1="1050" y1="700" x2="1300" y2="500" stroke-width="1.2"/>
+  </g>
+
+  <!-- Surface texture patches (darker regions) -->
+  <g clip-path="url(#moonClip)" opacity="0.25">
+    <ellipse cx="920" cy="440" rx="60" ry="35" fill="#2a5070" transform="rotate(-20,920,440)"/>
+    <ellipse cx="1100" cy="380" rx="45" ry="25" fill="#1a4060" transform="rotate(15,1100,380)"/>
+    <ellipse cx="980" cy="620" rx="55" ry="30" fill="#2a5070" transform="rotate(30,980,620)"/>
+    <ellipse cx="1180" cy="540" rx="40" ry="22" fill="#1a4060" transform="rotate(-10,1180,540)"/>
+    <ellipse cx="850" cy="560" rx="35" ry="20" fill="#2a5070" transform="rotate(25,850,560)"/>
+  </g>
+
+  <!-- Terminator (night side shadow) -->
+  <circle cx="1050" cy="500" r="318" fill="url(#moonShadow)"/>
+
+  <!-- Moon rim highlight (lit edge) -->
+  <circle cx="1050" cy="500" r="318" fill="none" stroke="#c0e0f8" stroke-width="1.5" opacity="0.3"/>
+
+  <!-- Polar ice cap highlight -->
+  <ellipse cx="1050" cy="185" rx="80" ry="22" fill="#e8f4ff" opacity="0.18" transform="rotate(-5,1050,185)"/>
+
+  <!-- ═══ SHIP GROUP — Solar System Explorer ═══ -->
+  <!-- Positioned center-left, angled slightly toward moon -->
+  <g transform="translate(420, 340) rotate(-8)">
+
+    <!-- ── ION DRIVE PLUME (behind ship) ── -->
+    <!-- Main plume -->
+    <ellipse cx="-180" cy="55" rx="160" ry="18" fill="url(#ionPlume)" opacity="0.7"/>
+    <ellipse cx="-200" cy="55" rx="130" ry="11" fill="#60c8ff" opacity="0.25"/>
+    <ellipse cx="-160" cy="55" rx="100" ry="7" fill="#a0e0ff" opacity="0.35"/>
+    <!-- Plume shimmer lines -->
+    <line x1="-60" y1="50" x2="-300" y2="47" stroke="#80d0ff" stroke-width="0.8" opacity="0.2"/>
+    <line x1="-60" y1="55" x2="-310" y2="55" stroke="#80d0ff" stroke-width="1.2" opacity="0.3"/>
+    <line x1="-60" y1="60" x2="-300" y2="63" stroke="#80d0ff" stroke-width="0.8" opacity="0.2"/>
+
+    <!-- ── MAIN HULL (central spine) ── -->
+    <!-- Aft section — engine block -->
+    <rect x="-60" y="40" width="80" height="30" rx="4" fill="url(#hullMain)"/>
+    <!-- Engine nozzles (3 bells) -->
+    <ellipse cx="-45" cy="72" rx="10" ry="5" fill="#1a2530"/>
+    <ellipse cx="-28" cy="72" rx="10" ry="5" fill="#1a2530"/>
+    <ellipse cx="-11" cy="72" rx="10" ry="5" fill="#1a2530"/>
+    <ellipse cx="-45" cy="72" rx="8" ry="3" fill="#0a1520" opacity="0.8"/>
+    <ellipse cx="-28" cy="72" rx="8" ry="3" fill="#0a1520" opacity="0.8"/>
+    <ellipse cx="-11" cy="72" rx="8" ry="3" fill="#0a1520" opacity="0.8"/>
+    <!-- Engine glow circles -->
+    <circle cx="-45" cy="73" r="12" fill="url(#reactorGlow)" filter="url(#bloom)"/>
+    <circle cx="-28" cy="73" r="12" fill="url(#reactorGlow)" filter="url(#bloom)"/>
+    <circle cx="-11" cy="73" r="12" fill="url(#reactorGlow)" filter="url(#bloom)"/>
+
+    <!-- Main hull spine -->
+    <rect x="18" y="43" width="220" height="24" rx="5" fill="url(#hullMain)"/>
+    <!-- Hull panel lines -->
+    <line x1="50" y1="43" x2="50" y2="67" stroke="#2a3a45" stroke-width="0.8" opacity="0.6"/>
+    <line x1="80" y1="43" x2="80" y2="67" stroke="#2a3a45" stroke-width="0.8" opacity="0.6"/>
+    <line x1="110" y1="43" x2="110" y2="67" stroke="#2a3a45" stroke-width="0.8" opacity="0.6"/>
+    <line x1="140" y1="43" x2="140" y2="67" stroke="#2a3a45" stroke-width="0.8" opacity="0.6"/>
+    <line x1="170" y1="43" x2="170" y2="67" stroke="#2a3a45" stroke-width="0.8" opacity="0.6"/>
+    <line x1="200" y1="43" x2="200" y2="67" stroke="#2a3a45" stroke-width="0.8" opacity="0.6"/>
+
+    <!-- Hull top ridge -->
+    <rect x="20" y="40" width="216" height="5" rx="2" fill="#7a8a90" opacity="0.5"/>
+
+    <!-- Forward crew module -->
+    <rect x="238" y="38" width="55" height="34" rx="7" fill="#5a6a72"/>
+    <!-- Crew module windows -->
+    <rect x="248" y="44" width="8" height="6" rx="1.5" fill="#a0d8f0" opacity="0.7"/>
+    <rect x="262" y="44" width="8" height="6" rx="1.5" fill="#a0d8f0" opacity="0.7"/>
+    <rect x="276" y="44" width="8" height="6" rx="1.5" fill="#c8eeff" opacity="0.8"/>
+    <!-- Forward docking port -->
+    <ellipse cx="293" cy="55" rx="10" ry="8" fill="#3a4a52"/>
+    <ellipse cx="293" cy="55" rx="7" ry="5" fill="#2a3840"/>
+    <ellipse cx="293" cy="55" rx="4" ry="3" fill="#1a2830"/>
+
+    <!-- ── SOLAR PANELS ── -->
+    <!-- Panel arm upper -->
+    <rect x="80" y="20" width="4" height="22" fill="#3a4a52"/>
+    <!-- Upper panel array (2 panels) -->
+    <rect x="30" y="6" width="55" height="16" rx="2" fill="url(#solarPanel)" stroke="#0a1828" stroke-width="0.5"/>
+    <rect x="90" y="6" width="55" height="16" rx="2" fill="url(#solarPanel)" stroke="#0a1828" stroke-width="0.5"/>
+    <!-- Panel cell lines -->
+    <line x1="43" y1="6" x2="43" y2="22" stroke="#2a4a7a" stroke-width="0.6" opacity="0.7"/>
+    <line x1="56" y1="6" x2="56" y2="22" stroke="#2a4a7a" stroke-width="0.6" opacity="0.7"/>
+    <line x1="69" y1="6" x2="69" y2="22" stroke="#2a4a7a" stroke-width="0.6" opacity="0.7"/>
+    <line x1="103" y1="6" x2="103" y2="22" stroke="#2a4a7a" stroke-width="0.6" opacity="0.7"/>
+    <line x1="116" y1="6" x2="116" y2="22" stroke="#2a4a7a" stroke-width="0.6" opacity="0.7"/>
+    <line x1="129" y1="6" x2="129" y2="22" stroke="#2a4a7a" stroke-width="0.6" opacity="0.7"/>
+
+    <!-- Panel arm lower -->
+    <rect x="80" y="67" width="4" height="22" fill="#3a4a52"/>
+    <!-- Lower panel array -->
+    <rect x="30" y="88" width="55" height="16" rx="2" fill="url(#solarPanel)" stroke="#0a1828" stroke-width="0.5"/>
+    <rect x="90" y="88" width="55" height="16" rx="2" fill="url(#solarPanel)" stroke="#0a1828" stroke-width="0.5"/>
+    <line x1="43" y1="88" x2="43" y2="104" stroke="#2a4a7a" stroke-width="0.6" opacity="0.7"/>
+    <line x1="56" y1="88" x2="56" y2="104" stroke="#2a4a7a" stroke-width="0.6" opacity="0.7"/>
+    <line x1="69" y1="88" x2="69" y2="104" stroke="#2a4a7a" stroke-width="0.6" opacity="0.7"/>
+    <line x1="103" y1="88" x2="103" y2="104" stroke="#2a4a7a" stroke-width="0.6" opacity="0.7"/>
+    <line x1="116" y1="88" x2="116" y2="104" stroke="#2a4a7a" stroke-width="0.6" opacity="0.7"/>
+    <line x1="129" y1="88" x2="129" y2="104" stroke="#2a4a7a" stroke-width="0.6" opacity="0.7"/>
+
+    <!-- ── ROTATING HABITAT PODS (4 × booms) ── -->
+    <!-- Hub at center of booms -->
+    <circle cx="178" cy="55" r="10" fill="#4a5a62" stroke="#5a6a72" stroke-width="1"/>
+    <circle cx="178" cy="55" r="6" fill="#3a4a52"/>
+    <circle cx="178" cy="55" r="3" fill="#2a3a42"/>
+
+    <!-- Boom 1 — upper left -->
+    <line x1="178" y1="55" x2="118" y2="-20" stroke="#3a4a52" stroke-width="3.5"/>
+    <!-- Pod 1 -->
+    <rect x="95" y="-42" width="46" height="22" rx="8" fill="url(#podGrad)" stroke="#6a7a82" stroke-width="0.8"/>
+    <rect x="100" y="-36" width="8" height="5" rx="1.5" fill="#a0d0e8" opacity="0.6"/>
+    <rect x="114" y="-36" width="8" height="5" rx="1.5" fill="#a0d0e8" opacity="0.6"/>
+    <rect x="128" y="-36" width="8" height="5" rx="1.5" fill="#a0d0e8" opacity="0.6"/>
+
+    <!-- Boom 2 — upper right -->
+    <line x1="178" y1="55" x2="238" y2="-20" stroke="#3a4a52" stroke-width="3.5"/>
+    <!-- Pod 2 -->
+    <rect x="218" y="-42" width="46" height="22" rx="8" fill="url(#podGrad)" stroke="#6a7a82" stroke-width="0.8"/>
+    <rect x="223" y="-36" width="8" height="5" rx="1.5" fill="#a0d0e8" opacity="0.6"/>
+    <rect x="237" y="-36" width="8" height="5" rx="1.5" fill="#a0d0e8" opacity="0.6"/>
+    <rect x="251" y="-36" width="8" height="5" rx="1.5" fill="#a0d0e8" opacity="0.6"/>
+
+    <!-- Boom 3 — lower left -->
+    <line x1="178" y1="55" x2="118" y2="130" stroke="#3a4a52" stroke-width="3.5"/>
+    <!-- Pod 3 -->
+    <rect x="95" y="130" width="46" height="22" rx="8" fill="url(#podGrad)" stroke="#6a7a82" stroke-width="0.8"/>
+    <rect x="100" y="136" width="8" height="5" rx="1.5" fill="#a0d0e8" opacity="0.5"/>
+    <rect x="114" y="136" width="8" height="5" rx="1.5" fill="#a0d0e8" opacity="0.5"/>
+    <rect x="128" y="136" width="8" height="5" rx="1.5" fill="#a0d0e8" opacity="0.5"/>
+
+    <!-- Boom 4 — lower right -->
+    <line x1="178" y1="55" x2="238" y2="130" stroke="#3a4a52" stroke-width="3.5"/>
+    <!-- Pod 4 -->
+    <rect x="218" y="130" width="46" height="22" rx="8" fill="url(#podGrad)" stroke="#6a7a82" stroke-width="0.8"/>
+    <rect x="223" y="136" width="8" height="5" rx="1.5" fill="#a0d0e8" opacity="0.5"/>
+    <rect x="237" y="136" width="8" height="5" rx="1.5" fill="#a0d0e8" opacity="0.5"/>
+    <rect x="251" y="136" width="8" height="5" rx="1.5" fill="#a0d0e8" opacity="0.5"/>
+
+    <!-- ── COMMUNICATION DISH ── -->
+    <line x1="200" y1="43" x2="210" y2="28" stroke="#3a4a52" stroke-width="1.5"/>
+    <ellipse cx="210" cy="25" rx="10" ry="6" fill="none" stroke="#5a6a72" stroke-width="1.2" transform="rotate(-15,210,25)"/>
+    <line x1="210" y1="25" x2="214" y2="22" stroke="#4a5a62" stroke-width="1"/>
+
+    <!-- ── RADIATOR PANELS ── -->
+    <rect x="150" y="68" width="30" height="38" rx="2" fill="#2a4050" stroke="#3a5060" stroke-width="0.8" opacity="0.8"/>
+    <line x1="155" y1="68" x2="155" y2="106" stroke="#3a5060" stroke-width="0.5" opacity="0.6"/>
+    <line x1="162" y1="68" x2="162" y2="106" stroke="#3a5060" stroke-width="0.5" opacity="0.6"/>
+    <line x1="169" y1="68" x2="169" y2="106" stroke="#3a5060" stroke-width="0.5" opacity="0.6"/>
+    <line x1="176" y1="68" x2="176" y2="106" stroke="#3a5060" stroke-width="0.5" opacity="0.6"/>
+
+    <!-- ── SUNLIGHT HIGHLIGHTS on ship ── -->
+    <rect x="20" y="43" width="218" height="3" rx="1" fill="#9ab0b8" opacity="0.25"/>
+    <rect x="238" y="38" width="55" height="3" rx="1" fill="#9ab0b8" opacity="0.3"/>
+
+    <!-- ── ENGINE GLOW (forward ion drives) ── -->
+    <circle cx="-55" cy="73" r="18" fill="url(#engineGlow)" filter="url(#softBloom)" opacity="0.7"/>
+
+  </g>
+
+  <!-- ═══ SMALL DOCKED LANDER (near forward docking port) ═══ -->
+  <g transform="translate(718, 338) rotate(-8)">
+    <rect x="0" y="-8" width="24" height="14" rx="4" fill="#4a5560"/>
+    <line x1="6" y1="6" x2="2" y2="18" stroke="#3a4550" stroke-width="2"/>
+    <line x1="18" y1="6" x2="22" y2="18" stroke="#3a4550" stroke-width="2"/>
+    <line x1="2" y1="18" x2="6" y2="18" stroke="#3a4550" stroke-width="2"/>
+    <line x1="18" y1="18" x2="22" y2="18" stroke="#3a4550" stroke-width="2"/>
+  </g>
+
+  <!-- ═══ FLOATING ICE DEBRIS (small chunks) ═══ -->
+  <g opacity="0.7">
+    <!-- chunk 1 -->
+    <polygon points="310,580 322,572 330,582 318,592" fill="#8ab8d0" opacity="0.5"/>
+    <polygon points="310,580 322,572 316,578" fill="#c0dff0" opacity="0.4"/>
+    <!-- chunk 2 -->
+    <polygon points="355,610 364,603 370,613 360,620" fill="#7aaac0" opacity="0.45"/>
+    <!-- chunk 3 -->
+    <polygon points="280,640 290,634 296,645 284,650" fill="#9ac8da" opacity="0.4"/>
+    <!-- chunk 4 -->
+    <polygon points="380,560 388,554 395,563 386,570" fill="#8ab8d0" opacity="0.35"/>
+    <!-- chunk 5 — smaller -->
+    <polygon points="330,650 336,646 340,653 334,657" fill="#a0c8d8" opacity="0.4"/>
+    <!-- chunk 6 -->
+    <polygon points="250,600 258,595 263,604 255,609" fill="#8ab8d0" opacity="0.35"/>
+  </g>
+
+  <!-- ═══ LABELS ═══ -->
+  <g font-family="'Courier New', monospace" fill="#8ab8c0" opacity="0.75">
+
+    <!-- Ship label -->
+    <text x="390" y="540" font-size="10" letter-spacing="2" text-anchor="middle">SOLAR SYSTEM EXPLORER</text>
+    <line x1="340" y1="533" x2="440" y2="533" stroke="#8ab8c0" stroke-width="0.5" opacity="0.4"/>
+    <text x="390" y="552" font-size="7.5" letter-spacing="1.5" text-anchor="middle" opacity="0.55">SSE-01 · AEGIS PROGRAM</text>
+
+    <!-- Moon label -->
+    <text x="870" y="218" font-size="9.5" letter-spacing="2" opacity="0.6">EUROPA-CLASS ICY BODY</text>
+    <text x="870" y="231" font-size="7.5" letter-spacing="1.5" opacity="0.4">OUTER SOLAR SYSTEM · SURVEY APPROACH</text>
+
+    <!-- Distance marker -->
+    <text x="600" y="420" font-size="8" letter-spacing="1.5" opacity="0.35">APPROACH VECTOR</text>
+    <line x1="560" y1="415" x2="720" y2="415" stroke="#8ab8c0" stroke-width="0.4" opacity="0.2" stroke-dasharray="4,4"/>
+
+  </g>
+
+  <!-- ═══ AEGIS WORDMARK (corner) ═══ -->
+  <g transform="translate(38, 850)">
+    <text font-family="'Courier New', monospace" font-size="9" fill="#4a6870" letter-spacing="3" opacity="0.6">AEGIS STATION PROGRAM</text>
+  </g>
+
+</svg>
