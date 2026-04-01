@@ -13,6 +13,8 @@
       --accent: #0d6efd;
       --accent-soft: rgba(13,110,253,0.08);
       --accent-dark: #001F3F;
+      --accent-green: #16a34a;
+      --accent-green-soft: rgba(22,163,74,0.08);
       --card-bg: #ffffff;
       --card-border: #e1e5ea;
     }
@@ -47,7 +49,7 @@
     header p.subtitle {
       margin: 0.9rem auto 1.4rem;
       font-size: 1.05rem;
-      max-width: 680px;
+      max-width: 720px;
       line-height: 1.6;
       opacity: 0.95;
     }
@@ -146,6 +148,26 @@
       border: 1px solid rgba(13,110,253,0.18);
     }
 
+    .tag-new {
+      background: var(--accent-green-soft);
+      color: #064e1f;
+      border-color: rgba(22,163,74,0.25);
+    }
+
+    .new-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: var(--accent-green);
+      color: #fff;
+      padding: 1px 6px;
+      border-radius: 4px;
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+
     .pill-inline {
       font-size: 0.75rem;
       text-transform: uppercase;
@@ -192,6 +214,61 @@
     }
     .callout strong { color: var(--text-main); }
 
+    /* Metadata highlight section */
+    .metadata-highlight {
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f0f9ff 100%);
+      border: 1px solid rgba(22,163,74,0.2);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .metadata-highlight h2 {
+      font-size: 1.4rem;
+      margin: 0 0 0.6rem;
+    }
+    .metadata-highlight .lead {
+      margin: 0 0 1.2rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+    .metadata-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      align-items: start;
+    }
+    .metadata-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .metadata-list li {
+      padding: 10px 14px;
+      background: #fff;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .metadata-list li strong { color: var(--text-main); }
+    .json-preview {
+      background: #0b1020;
+      border: 1px solid #151b2f;
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-family: "SF Mono", Menlo, monospace;
+      font-size: 0.8rem;
+      color: #94e2d5;
+      overflow-x: auto;
+      line-height: 1.6;
+    }
+    .json-preview .key { color: #89b4fa; }
+    .json-preview .str { color: #a6e3a1; }
+    .json-preview .num { color: #fab387; }
+
     .faq-item {
       margin-bottom: 1rem;
       padding-bottom: 0.8rem;
@@ -213,6 +290,7 @@
       header h1 { font-size: 2.2rem; }
       main { margin-top: -0.75rem; }
       .two-col { grid-template-columns: minmax(0, 1fr); }
+      .metadata-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -224,7 +302,7 @@
     <h1>Turn Everyday Video into<br> Stick-Figures and Motion Data</h1>
     <p class="subtitle">
       MovementModeler is a small, practical iOS app for getting motion data out of real-world video.
-      Any short clip — staged or in the wild — can become a stick-figure visualization and BODY-25 style pose data, straight from an iPhone.
+      Any short clip — staged or in the wild — can become a stick-figure visualization and BODY-25 style pose data with embedded metadata, straight from an iPhone.
     </p>
 
     <div class="cta-row">
@@ -264,13 +342,14 @@
       <div class="card">
         <h3>Stick-Figure Visualizations</h3>
         <p>
-          Generate stick-figure videos that make movement easier to see and discuss.
+          Generate stick-figure, capsule, or sprite-based motion videos that make movement easier to see and discuss.
           Students can scrub and replay clips for quick visual QC before doing any analysis.
         </p>
         <div class="taglist">
           <span class="tag">In-class demos</span>
           <span class="tag">Visual QC</span>
           <span class="tag">MP4 export</span>
+          <span class="tag">Multiple rig styles</span>
         </div>
       </div>
 
@@ -289,6 +368,39 @@
     </div>
   </section>
 
+  <!-- NEW: Metadata feature section -->
+  <section class="metadata-highlight">
+    <h2>Tag your data before you export <span class="new-badge">New</span></h2>
+    <p class="lead">
+      Label clips with activity type, camera angle, and target subject right in the app. Your JSON arrives downstream with structured metadata — no separate labeling step, no spreadsheet of filenames. Students spend time on analysis, not bookkeeping.
+    </p>
+
+    <div class="metadata-grid">
+      <ul class="metadata-list">
+        <li><strong>Activity label</strong> — Pick from a built-in vocabulary (Gait, Sit → Stand, Balance, Dance, Upper Limb, Stairs, etc.) or type a custom label for your specific domain.</li>
+        <li><strong>Camera angle</strong> — Tag as frontal, sagittal, or other. Downstream scripts can handle perspective-specific analysis automatically.</li>
+        <li><strong>Subject selection</strong> — In multi-person scenes, mark which tracked person is the primary subject. The index embeds directly in the export.</li>
+      </ul>
+
+      <div>
+        <div class="json-preview">
+{<br>
+&nbsp;&nbsp;<span class="key">"fps"</span>: <span class="num">15.0</span>,<br>
+&nbsp;&nbsp;<span class="key">"lmm"</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"activity"</span>: <span class="str">"sit_to_stand"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"subject_index"</span>: <span class="num">0</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"camera_angle"</span>: <span class="str">"sagittal"</span><br>
+&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;<span class="key">"frames"</span>: [ ... ]<br>
+}
+        </div>
+        <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.7rem;">
+          The <code style="background:#edf2f7;padding:1px 5px;border-radius:4px;">lmm</code> block embeds alongside your pose data, so every export is self-describing.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <h2>Where It Might Fit</h2>
     <p class="lead">
@@ -303,6 +415,7 @@
           <li>Intro labs on keypoints, occlusion, and tracking.</li>
           <li>Small projects on action recognition or gesture classification.</li>
           <li>Capstones that start from students&rsquo; own recordings instead of static datasets.</li>
+          <li>Metadata labels make it easy to organize and batch-process student-collected data.</li>
         </ul>
       </div>
 
@@ -313,6 +426,7 @@
           <li>Comparing joint trajectories between conditions or techniques.</li>
           <li>Teaching kinematics with simple stick-figures and time series.</li>
           <li>Linking qualitative observation to basic quantitative measures.</li>
+          <li>Activity and camera-angle tags keep clinical data organized.</li>
         </ul>
       </div>
 
@@ -329,7 +443,7 @@
   </section>
 
   <section class="section">
-    <h2>From Video to Data, Briefly</h2>
+    <h2>From Video to Labeled Data, Briefly</h2>
     <div class="two-col">
       <div>
         <p class="lead">
@@ -337,8 +451,9 @@
         </p>
         <ul class="list">
           <li><strong>1. Capture or import.</strong> Film on an iPhone or use an existing clip.</li>
-          <li><strong>2. Check the stick-figure.</strong> Quick visual QC and light cleanup for obvious spikes/noise.</li>
-          <li><strong>3. Export for analysis.</strong> Use the JSON in notebooks and the MP4 in reports/presentations.</li>
+          <li><strong>2. Check the visualization.</strong> Quick visual QC with sticks, capsules, or sprites. Adjust confidence and smoothing for obvious spikes/noise.</li>
+          <li><strong>3. Tag metadata.</strong> Label the activity, camera angle, and target subject before export.</li>
+          <li><strong>4. Export for analysis.</strong> Use the metadata-enriched JSON in notebooks and the MP4 in reports/presentations.</li>
         </ul>
       </div>
 
@@ -370,7 +485,7 @@ python scripts/mm_json_dir_to_stickmp4.py frames_json/</code></pre>
     <div class="two-col">
       <div>
         <p class="lead">
-          A short screen capture showing the basic flow: import a clip, inspect the stick-figure, clean up obvious spikes, and export MP4 + JSON.
+          A short screen capture showing the basic flow: import a clip, inspect the visualization, tag with metadata, and export MP4 + JSON.
         </p>
 
         <div class="card">
@@ -444,9 +559,8 @@ python scripts/mm_json_dir_to_stickmp4.py frames_json/</code></pre>
   </div>
 </div>
 
-          <div style="font-size:0.85rem; margin-top:0.5rem;">
-            Tap to play fullscreen.
-          </div>
+        <div style="font-size:0.85rem; margin-top:0.5rem;">
+          Tap to play fullscreen.
         </div>
       </div>
     </div>
@@ -472,7 +586,14 @@ python scripts/mm_json_dir_to_stickmp4.py frames_json/</code></pre>
     <div class="faq-item">
       <h3>What does the export look like?</h3>
       <p>
-        Exports include stick-figure MP4s and BODY-25 style pose data with coordinates and confidence values per joint, per frame, per person.
+        Exports include stick-figure MP4s and BODY-25 style pose data with coordinates and confidence values per joint, per frame, per person. The JSON also includes an <code>lmm</code> metadata block with the activity label, camera angle, and target subject index you set before exporting.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What&rsquo;s the metadata for?</h3>
+      <p>
+        It makes your data self-describing. Instead of tracking which file is which in a spreadsheet, every export carries its own activity label, camera angle, and subject index. This is especially useful when students collect multiple clips across conditions or sessions.
       </p>
     </div>
 
@@ -487,8 +608,8 @@ python scripts/mm_json_dir_to_stickmp4.py frames_json/</code></pre>
 </main>
 
 <footer>
-  MovementModeler &mdash; a small tool from Aegis Station Infrastructure LLC · Questions:
-  <a href="mailto:engage@aegisstation.com">engage@aegisstation.com</a>.
+  MovementModeler &mdash; a small tool from Aegis Station Infrastructure LLC &middot; Questions:
+  <a href="mailto:support@aegisstation.com">support@aegisstation.com</a>.
 </footer>
 
 <!-- Fullscreen Video Modal -->
@@ -527,15 +648,12 @@ python scripts/mm_json_dir_to_stickmp4.py frames_json/</code></pre>
     });
   }
 
-  if (videoModal) {
-    videoModal.addEventListener('click', (e) => {
-      if (e.target === videoModal) {
-        demoVideo.pause();
-        videoModal.style.display = 'none';
-      }
-    });
-  }
+  videoModal.addEventListener('click', (e) => {
+    if (e.target === videoModal) {
+      demoVideo.pause();
+      videoModal.style.display = 'none';
+    }
+  });
 </script>
-
 </body>
 </html>

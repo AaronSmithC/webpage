@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <title>MovementModeler – Video in. Motion data out.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Turn any video into stick‑figure motion and export BODY‑25 JSON — all on‑device." />
+<meta name="description" content="Turn any video into stick‑figure motion with embedded metadata and export BODY‑25 JSON — all on‑device." />
 <style>
   :root{
     --bg:#0a0b10;
@@ -38,7 +38,7 @@
     border:1px solid var(--stroke);color:var(--text);padding:12px 18px;border-radius:10px;background:transparent
   }
   .pill{
-    display:inline-flex;gap:8px;align-items:center;
+    display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap;
     font-size:0.95rem;color:#cfe3ff;background:#0d1a2f;border:1px solid #17335b;
     border-radius:999px;padding:8px 12px;margin:12px 0 0
   }
@@ -46,6 +46,19 @@
   .tile{background:var(--card);border:1px solid var(--stroke);border-radius:14px;padding:18px}
   .tile h3{font-size:1.05rem;margin:0 0 8px}
   .tile p{margin:0;color:var(--muted);line-height:1.55}
+  .tile .new-badge{
+    display:inline-block;
+    font-size:0.7rem;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    background:var(--accent-2);
+    color:#0a0b10;
+    padding:2px 7px;
+    border-radius:4px;
+    margin-left:6px;
+    vertical-align:middle;
+  }
   .flow{
     background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:22px;margin-top:28px
   }
@@ -57,11 +70,47 @@
   .aud-card{background:var(--card);border:1px solid var(--stroke);border-radius:14px;padding:18px}
   .aud-card h4{margin:0 0 8px;font-size:1.02rem}
   .aud-card p{margin:0;color:var(--muted)}
+
+  /* Metadata feature section */
+  .metadata-section{
+    background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:26px;margin-top:28px
+  }
+  .metadata-section h2{font-size:1.3rem;margin:0 0 8px}
+  .metadata-section .lead{color:var(--muted);margin:0 0 18px;line-height:1.55}
+  .metadata-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+  .metadata-list{list-style:none;padding:0;margin:0}
+  .metadata-list li{
+    padding:10px 14px;
+    background:#0d1a2f;
+    border:1px solid #17335b;
+    border-radius:10px;
+    margin-bottom:8px;
+    font-size:0.95rem;
+    color:var(--text);
+    line-height:1.5;
+  }
+  .metadata-list li strong{color:var(--accent-2)}
+  .json-preview{
+    background:#0b1020;
+    border:1px solid #151b2f;
+    border-radius:12px;
+    padding:16px 18px;
+    font-family:"SF Mono",Menlo,monospace;
+    font-size:0.82rem;
+    color:#94e2d5;
+    overflow-x:auto;
+    line-height:1.6;
+  }
+  .json-preview .key{color:#89b4fa}
+  .json-preview .str{color:#a6e3a1}
+  .json-preview .num{color:#fab387}
+
   .footer{margin:36px 0 16px;text-align:center;color:var(--muted);font-size:0.9rem}
   @media (max-width:900px){
     .hero{grid-template-columns:1fr}
     .grid{grid-template-columns:1fr 1fr}
     .audiences{grid-template-columns:1fr 1fr}
+    .metadata-grid{grid-template-columns:1fr}
   }
   @media (max-width:640px){
     .grid,.audiences{grid-template-columns:1fr}
@@ -78,15 +127,16 @@
   <!-- Left hero card -->
   <div class="hero-card">
     <h1>Video in. Motion data out.</h1>
-    <p class="sub">MovementModeler transforms any video into clean, accurate stick-figure motion and exportable BODY-25 JSON — all on-device.</p>
+    <p class="sub">MovementModeler transforms any video into clean, accurate stick-figure motion and exportable BODY-25 JSON with embedded metadata — all on-device.</p>
 
     <div class="pill">
       <span>🔒 On-device processing</span>
       <span>🧍 Multi-person tracking</span>
-      <span>🪄 Smoothing & gap filling</span>
+      <span>🪄 Smoothing &amp; gap filling</span>
+      <span>🏷️ Activity metadata</span>
     </div>
 
-    <!-- ⭐ PERFECT VIDEO PLACEMENT -->
+    <!-- Video preview -->
     <video 
       src="images/export_preview.mp4"
       autoplay
@@ -114,20 +164,33 @@
     <div class="grid">
       <div class="tile">
         <h3>Stick-figure visualization</h3>
-        <p>Turn raw footage into clear motion clips that reveal posture, timing, and form.</p>
+        <p>Turn raw footage into clear motion clips with sticks, capsules, or sprite rigs that reveal posture, timing, and form.</p>
       </div>
       <div class="tile">
         <h3>Export BODY-25 JSON</h3>
-        <p>Send structured pose data into CV/ML pipelines with zero server setup.</p>
+        <p>Send structured pose data with embedded metadata into CV/ML pipelines with zero server setup.</p>
+      </div>
+      <div class="tile">
+        <h3>Tag before you export <span class="new-badge">New</span></h3>
+        <p>Label activity, camera angle, and target subject right in the app. Your data arrives downstream ready to process.</p>
       </div>
       <div class="tile">
         <h3>MP4 export</h3>
-        <p>Share clean visualizations for reviews, social, or teaching materials.</p>
+        <p>Share clean stick-figure, capsule, or sprite visualizations for reviews, social, or teaching materials.</p>
+      </div>
+      <div class="tile">
+        <h3>Multi-rig rendering</h3>
+        <p>Switch between stick figures, capsules, and sprite packs to find the visualization that fits your use case.</p>
+      </div>
+      <div class="tile">
+        <h3>On-device &amp; private</h3>
+        <p>No uploads, no accounts, no cloud. All processing stays on your iPhone.</p>
       </div>
     </div>
   </div>
 
 </section>
+
 <!-- Screenshot Preview Section -->
 <section class="preview" style="margin-top:44px;">
   <div class="preview-grid" 
@@ -138,55 +201,54 @@
          align-items:center;
        ">
 
-<!-- Left: Demo thumbnail (click → fullscreen video) -->
-<!-- Left: Demo thumbnail (tap to play demo) -->
-<div class="preview-img"
-     style="
-       background:var(--card);
-       border:1px solid var(--stroke);
-       border-radius:16px;
-       padding:18px;
-       display:flex;
-       justify-content:center;
-     ">
-
-  <div id="demoThumb"
-       style="
-         position:relative;
-         width:100%;
-         max-width:420px;
-         cursor:pointer;
-       ">
-
-    <img src="images/thumb.png"
-         alt="MovementModeler demo"
+    <!-- Left: Demo thumbnail (click → fullscreen video) -->
+    <div class="preview-img"
          style="
-           width:50%;
-           border-radius:14px;
-           display:block;
+           background:var(--card);
+           border:1px solid var(--stroke);
+           border-radius:16px;
+           padding:18px;
+           display:flex;
+           justify-content:center;
          ">
 
-    <!-- Play icon -->
-    <div style="
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      background:rgba(0,0,0,0.55);
-      width:56px;
-      height:56px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    ">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff">
-        <path d="M8 5v14l11-7z"/>
-      </svg>
-    </div>
+      <div id="demoThumb"
+           style="
+             position:relative;
+             width:100%;
+             max-width:420px;
+             cursor:pointer;
+           ">
 
-  </div>
-</div>
+        <img src="images/thumb.png"
+             alt="MovementModeler demo"
+             style="
+               width:50%;
+               border-radius:14px;
+               display:block;
+             ">
+
+        <!-- Play icon -->
+        <div style="
+          position:absolute;
+          top:50%;
+          left:50%;
+          transform:translate(-50%,-50%);
+          background:rgba(0,0,0,0.55);
+          width:56px;
+          height:56px;
+          border-radius:50%;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+        ">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+
+      </div>
+    </div>
 
     <!-- Right: Text -->
     <div class="preview-text">
@@ -196,7 +258,7 @@
       <p style="color:var(--muted); line-height:1.55; margin:0 0 16px;">
         MovementModeler gives you instant visual feedback with clean, 
         stabilized stick-figure motion. Adjust smoothing, track IDs, 
-        and confidence thresholds to reveal posture, timing, and form—
+        and confidence thresholds to reveal posture, timing, and form —
         all without leaving your iPhone.
       </p>
       <p style="color:var(--muted); line-height:1.55; margin:0;">
@@ -208,7 +270,7 @@
   </div>
 </section>
 
-<!-- Responsive tweak -->
+<!-- Responsive tweak for preview -->
 <style>
 @media (max-width:900px){
   .preview-grid{
@@ -220,9 +282,35 @@
 }
 </style>
 
+  <!-- Metadata Feature Section (NEW) -->
+  <section class="metadata-section" id="metadata">
+    <h2>Pipeline-ready metadata, built in <span style="color:var(--accent-2);font-size:0.8rem;font-weight:600;vertical-align:middle;margin-left:6px;">NEW</span></h2>
+    <p class="lead">Tag your motion captures with structured metadata before you export. No more separate labeling steps — your JSON arrives downstream ready to sort, filter, and process.</p>
+
+    <div class="metadata-grid">
+      <ul class="metadata-list">
+        <li><strong>Activity label</strong> — Pick from a built-in vocabulary: Gait, Sit → Stand, Balance, Dance, Upper Limb, Stairs, and more. Or type a custom label.</li>
+        <li><strong>Camera angle</strong> — Tag as frontal, sagittal, or other so downstream scripts can handle perspective-specific analysis automatically.</li>
+        <li><strong>Subject selection</strong> — In multi-person scenes, mark which tracked person is the primary subject. The index embeds directly in the export.</li>
+      </ul>
+
+      <div class="json-preview">
+{<br>
+&nbsp;&nbsp;<span class="key">"fps"</span>: <span class="num">15.0</span>,<br>
+&nbsp;&nbsp;<span class="key">"lmm"</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"activity"</span>: <span class="str">"sit_to_stand"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"subject_index"</span>: <span class="num">0</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"camera_angle"</span>: <span class="str">"sagittal"</span><br>
+&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;<span class="key">"frames"</span>: [ ... ]<br>
+}
+      </div>
+    </div>
+  </section>
+
   <!-- Flow diagram -->
   <section id="flow" class="flow">
-    <h2>Simple pipeline from video to data</h2>
+    <h2>Simple pipeline from video to labeled data</h2>
     <div class="svg-wrap">
       <svg viewBox="0 0 1024 240" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -232,44 +320,47 @@
           </linearGradient>
           <style>
             .box{fill:#131622;stroke:#263041;stroke-width:1.2;rx:14}
-            .label{fill:#e9eefb;font:600 16px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial}
-            .muted{fill:#a9b3c9;font:400 13px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial}
+            .label{fill:#e9eefb;font:600 15px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial}
+            .muted{fill:#a9b3c9;font:400 12.5px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial}
           </style>
         </defs>
 
         <!-- Boxes -->
-        <rect class="box" x="40" y="40" width="200" height="120"/>
-        <text class="label" x="140" y="85" text-anchor="middle">Video input</text>
-        <text class="muted" x="140" y="108" text-anchor="middle">iPhone Camera • .mp4 • .mov</text>
+        <rect class="box" x="20" y="40" width="170" height="120"/>
+        <text class="label" x="105" y="85" text-anchor="middle">Video input</text>
+        <text class="muted" x="105" y="108" text-anchor="middle">Camera • .mp4 • .mov</text>
 
-        <rect class="box" x="300" y="40" width="220" height="120"/>
-        <text class="label" x="410" y="80" text-anchor="middle">Motion extraction</text>
-        <text class="muted" x="410" y="103" text-anchor="middle">Pose tracking • smoothing</text>
+        <rect class="box" x="230" y="40" width="190" height="120"/>
+        <text class="label" x="325" y="80" text-anchor="middle">Motion extraction</text>
+        <text class="muted" x="325" y="103" text-anchor="middle">Pose tracking • smoothing</text>
 
-        <rect class="box" x="580" y="40" width="200" height="120"/>
-        <text class="label" x="680" y="80" text-anchor="middle">Stick‑figure view</text>
-        <text class="muted" x="680" y="103" text-anchor="middle">Multi‑person • ID stability</text>
+        <rect class="box" x="460" y="40" width="170" height="120"/>
+        <text class="label" x="545" y="80" text-anchor="middle">Visualize</text>
+        <text class="muted" x="545" y="103" text-anchor="middle">Sticks • capsules • sprites</text>
 
-        <rect class="box" x="830" y="40" width="154" height="120"/>
-        <text class="label" x="907" y="80" text-anchor="middle">Export</text>
-        <text class="muted" x="907" y="103" text-anchor="middle">BODY‑25 JSON • MP4</text>
+        <rect class="box" x="670" y="40" width="150" height="120"/>
+        <text class="label" x="745" y="80" text-anchor="middle">Tag metadata</text>
+        <text class="muted" x="745" y="103" text-anchor="middle">Activity • angle • subject</text>
 
-<!-- Arrows -->
-<!-- From Video input to Motion extraction -->
-<path d="M240 100 C270 100 270 100 300 100" stroke="url(#g)" stroke-width="3" fill="none"/>
-<polygon points="300,100 292,94 292,106" fill="url(#g)"/>
+        <rect class="box" x="860" y="40" width="144" height="120"/>
+        <text class="label" x="932" y="80" text-anchor="middle">Export</text>
+        <text class="muted" x="932" y="103" text-anchor="middle">JSON • MP4</text>
 
-<!-- From Motion extraction to Stick‑figure view -->
-<path d="M520 100 C550 100 550 100 580 100" stroke="url(#g)" stroke-width="3" fill="none"/>
-<polygon points="580,100 572,94 572,106" fill="url(#g)"/>
-<path d="M520 100 C550 100 550 100 580 100" stroke="url(#g)" stroke-width="3" fill="none"/>
-        <polygon points="580,100 572,94 572,106" fill="url(#g)"/>
+        <!-- Arrows -->
+        <path d="M190 100 C210 100 210 100 230 100" stroke="url(#g)" stroke-width="3" fill="none"/>
+        <polygon points="230,100 222,94 222,106" fill="url(#g)"/>
 
-        <path d="M780 100 C805 100 805 100 830 100" stroke="url(#g)" stroke-width="3" fill="none"/>
-        <polygon points="830,100 822,94 822,106" fill="url(#g)"/>
+        <path d="M420 100 C440 100 440 100 460 100" stroke="url(#g)" stroke-width="3" fill="none"/>
+        <polygon points="460,100 452,94 452,106" fill="url(#g)"/>
+
+        <path d="M630 100 C650 100 650 100 670 100" stroke="url(#g)" stroke-width="3" fill="none"/>
+        <polygon points="670,100 662,94 662,106" fill="url(#g)"/>
+
+        <path d="M820 100 C840 100 840 100 860 100" stroke="url(#g)" stroke-width="3" fill="none"/>
+        <polygon points="860,100 852,94 852,106" fill="url(#g)"/>
 
         <!-- Bottom caption -->
-        <text class="muted" x="512" y="190" text-anchor="middle">
+        <text class="muted" x="512" y="195" text-anchor="middle">
           All processing on‑device — no uploads, no accounts.
         </text>
       </svg>
@@ -280,30 +371,31 @@
   <section class="audiences">
     <div class="aud-card">
       <h4>For coaches</h4>
-      <p>Make movement measurable. Review form with stick‑figure clips and share MP4 summaries.</p>
+      <p>Make movement measurable. Review form with stick‑figure clips, tag the activity, and share MP4 summaries.</p>
     </div>
     <div class="aud-card">
       <h4>For researchers</h4>
-      <p>Export BODY‑25 JSON for CV/ML workflows. Keep data local for reproducibility and privacy.</p>
+      <p>Export BODY‑25 JSON with embedded metadata for CV/ML workflows. Keep data local for reproducibility and privacy.</p>
     </div>
     <div class="aud-card">
-      <h4>For creators & educators</h4>
+      <h4>For creators &amp; educators</h4>
       <p>Turn choreography and demos into clear visualizations for lessons, posts, and feedback.</p>
     </div>
   </section>
 
-<!-- Footer -->
-<p class="footer">
-  © 2025 LMM Technologies Inc. • MovementModeler
-  <br>
-  <a href="https://aegisstation.com/movementmodeler-education"
-     target="_blank"
-     rel="noopener noreferrer"
-     style="color:var(--accent);">
-    MovementModeler for Education →
-  </a>
-</p>
+  <!-- Footer -->
+  <p class="footer">
+    © 2025 LMM Technologies Inc. • MovementModeler
+    <br>
+    <a href="https://aegisstation.com/movementmodeler-education"
+       target="_blank"
+       rel="noopener noreferrer"
+       style="color:var(--accent);">
+      MovementModeler for Education →
+    </a>
+  </p>
 </div>
+
 <!-- Demo video modal -->
 <div id="demoModal"
      style="
