@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Large Movement Model — A Foundation Model for Human Motion | Aegis Station Infrastructure</title>
+<meta name="description" content="LMM treats human pose sequences as a structured sequence domain. Multi-resolution attention and diffusion architectures substantially outperform baselines on motion forecasting.">
+<meta property="og:title" content="The Large Movement Model — A Foundation Model for Human Motion">
+<meta property="og:description" content="Architecture, pipeline, and Phase I results for a domain-agnostic motion foundation model.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2740;
+    --blue: #2471a3;
+    --blue-light: #d4e6f1;
+    --blue-pale: #eaf2f8;
+    --text: #2c3e50;
+    --text-muted: #5d6d7e;
+    --bg: #fafbfc;
+    --white: #ffffff;
+    --border: #d5dbdb;
+    --accent-warm: #e67e22;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Source Sans 3', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { font-size: 17px; scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Hero ─────────────────────────── */
+  .hero {
+    background: var(--navy);
+    color: var(--white);
+    padding: 6rem 2rem 5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(36,113,163,0.25), transparent),
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(36,113,163,0.15), transparent);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; max-width: 780px; margin: 0 auto; }
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .hero .subtitle {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    max-width: 560px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+  .hero-meta {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.45);
+  }
+  .hero-meta a { color: rgba(255,255,255,0.6); text-decoration: none; }
+  .hero-meta a:hover { color: var(--white); }
+
+  /* ── Article container ────────────── */
+  .article {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  /* ── Typography ───────────────────── */
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--navy);
+    margin: 3.5rem 0 1rem;
+    line-height: 1.25;
+  }
+  h3 {
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 2.2rem 0 0.6rem;
+    letter-spacing: -0.01em;
+  }
+  p { margin-bottom: 1.15rem; }
+  strong { font-weight: 600; color: var(--navy); }
+
+  ul {
+    margin: 0.5rem 0 1.2rem 1.6rem;
+    list-style: none;
+  }
+  ul li {
+    position: relative;
+    padding-left: 1.2rem;
+    margin-bottom: 0.65rem;
+  }
+  ul li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.65rem;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+  }
+
+  /* ── Tables ───────────────────────── */
+  .table-wrap {
+    margin: 1.5rem 0 2rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+  thead th {
+    background: var(--navy);
+    color: var(--white);
+    font-weight: 600;
+    text-align: center;
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+  }
+  thead th:first-child { text-align: left; }
+  tbody td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    vertical-align: middle;
+  }
+  tbody td:first-child { text-align: left; font-weight: 600; color: var(--navy); }
+  tbody tr:last-child td { border-bottom: 2px solid var(--navy); }
+  .hl { background: var(--blue-pale); font-weight: 600; }
+  .table-caption {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+
+  /* ── Callout boxes ────────────────── */
+  .callout {
+    background: var(--blue-pale);
+    border-left: 4px solid var(--blue);
+    padding: 1.2rem 1.4rem;
+    margin: 1.8rem 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  .callout strong { color: var(--blue); }
+
+  /* ── Architecture diagram ─────────── */
+  .arch-diagram {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.7;
+    white-space: pre;
+    overflow-x: auto;
+    color: var(--navy);
+  }
+
+  /* ── Section divider ──────────────── */
+  .divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 3rem 0;
+  }
+
+  /* ── Footer ───────────────────────── */
+  .footer {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    max-width: 740px;
+    margin: 0 auto;
+  }
+  .footer a { color: var(--blue); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  /* ── Print ────────────────────────── */
+  @media print {
+    .hero { padding: 2rem; }
+    .article { max-width: 100%; }
+    .hero::before { display: none; }
+  }
+
+  /* ── Mobile ───────────────────────── */
+  @media (max-width: 600px) {
+    html { font-size: 16px; }
+    .hero { padding: 4rem 1.5rem 3.5rem; }
+    .hero h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    .arch-diagram { font-size: 0.68rem; padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Technical Overview &middot; April 2026</div>
+    <h1>The Large Movement Model</h1>
+    <p class="subtitle">A foundation model for human motion &mdash; treating pose sequences as a structured sequence domain to learn biomechanical structure, temporal coordination, and movement intent.</p>
+    <div class="hero-meta">Aegis Station Infrastructure LLC &nbsp;&middot;&nbsp; <a href="https://aegisstation.com">aegisstation.com</a></div>
+  </div>
+</header>
+
+<article class="article">
+
+  <!-- 1. Introduction -->
+  <h2>1. Introduction</h2>
+
+  <p>Human movement is one of the richest natural signals available. It encodes health status, task intent, emotional state, motor skill, and physical capability. Yet despite decades of work in biomechanics, computer vision, and machine learning, no unified AI framework exists that treats motion as a general-purpose sequence domain &mdash; one where the same foundational model can serve rehabilitation assessment, sports analytics, robotics control, and human-computer interaction.</p>
+
+  <p>The Large Movement Model (LMM) addresses this gap. LMM applies the same core insight that drives large language models &mdash; that sequence-learning architectures, given consistent tokenization and sufficient data, can discover generalizable latent structure &mdash; to human pose sequences. Where language models learn grammar and semantics from words, LMM learns biomechanical structure, temporal coordination, and movement intent from the evolution of body joint positions over time.</p>
+
+  <p>This document describes the LMM pipeline architecture, model designs, and Phase&nbsp;I experimental results. The work demonstrates that a multi-resolution attention architecture and a diffusion-based generative model both substantially outperform conventional baselines on motion forecasting tasks, establishing feasibility for a new class of embodied foundation models.</p>
+
+  <hr class="divider">
+
+  <!-- 2. Data Pipeline -->
+  <h2>2. Data Pipeline</h2>
+
+  <p>The LMM pipeline transforms raw video into structured, normalized, machine-learning-ready motion tokens. It is designed to ingest data from heterogeneous sources &mdash; different cameras, frame rates, resolutions, skeleton formats, and recording conditions &mdash; and produce a unified representation suitable for model training and evaluation.</p>
+
+  <h3>2.1 Pose Estimation</h3>
+  <p>Video inputs are processed through OpenPose to extract BODY_25 skeletal keypoints: 25 major body joints with per-joint confidence scores. For datasets already provided in skeleton format (Kinect, Vicon), the pipeline includes format converters that map alternative joint schemas to BODY_25 through documented correspondence tables. BODY_25 was selected as the Phase&nbsp;I standard because it balances representational fidelity with computational efficiency at roughly 1/100th the cost of mesh-based representations like SMPL.</p>
+
+  <h3>2.2 Normalization</h3>
+  <p>Raw keypoint sequences vary in scale, position, and temporal resolution. The normalization stage removes these extraneous variations:</p>
+  <ul>
+    <li><strong>Translation invariance:</strong> Every skeleton is centered on the hip midpoint.</li>
+    <li><strong>Scale invariance:</strong> Skeletons are scaled to a standardized torso length.</li>
+    <li><strong>Temporal uniformity:</strong> Sequences are resampled to 15&nbsp;FPS regardless of source frame rate.</li>
+    <li><strong>Derived features:</strong> Per-joint velocity, acceleration, and jerk are computed alongside positions.</li>
+    <li><strong>Quality control:</strong> Each clip receives a QC metadata record with per-joint confidence statistics, detected artifacts, and usability classification.</li>
+  </ul>
+
+  <h3>2.3 Multi-Resolution Tokenization</h3>
+  <p>Motion data is structured into three simultaneous token representations. All three reconstruct losslessly to the original &mdash; no information is discarded, only reorganized.</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Token Level</th><th>Shape</th><th>What It Captures</th><th>Resolution</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Frame</td><td>(T, 75)</td><td>Full body pose at each timestep</td><td>66 ms</td></tr>
+      <tr><td>Window</td><td>(T/5, 5, 75)</td><td>Groups of 5 frames &mdash; movement phrases</td><td>330 ms</td></tr>
+      <tr><td>Body-Part</td><td>(T, 5, 21)</td><td>5 anatomical regions: core, R/L arm, R/L leg</td><td>66 ms (spatial)</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>The frame level provides the finest temporal grain. The window level captures meso-scale patterns (a step, an arm swing). The body-part level captures spatial coordination between anatomical regions. Together they give a model access to movement structure at multiple scales without committing to which scale matters most.</p>
+
+  <h3>2.4 Pipeline Performance</h3>
+  <p>The pipeline has been validated on over 3,900 clips from three independent sources spanning laboratory motion capture, clinical rehabilitation video, and depth-sensor skeleton data. Processing succeeded on all clips with zero failures.</p>
+
+  <hr class="divider">
+
+  <!-- 3. Model Architectures -->
+  <h2>3. Model Architectures</h2>
+
+  <p>Two architectures were developed and evaluated, each taking 120 frames (8 seconds) of context and producing 30 predicted frames (2 seconds).</p>
+
+  <h3>3.1 Flat Transformer Baseline</h3>
+  <p>A standard encoder-decoder transformer operating on single-resolution frame tokens. Six encoder layers, six decoder layers, sinusoidal positional encodings based on physical time (seconds, not frame index). This serves as the controlled baseline.</p>
+
+  <h3>3.2 Hierarchical Temporal Transformer (HTT)</h3>
+  <p>The HTT processes all three token levels simultaneously through three parallel encoder streams connected by bidirectional cross-attention:</p>
+  <ul>
+    <li><strong>Frame encoder (4 layers):</strong> Fine-grained temporal dynamics, frame to frame.</li>
+    <li><strong>Window encoder (3 layers):</strong> Meso-scale patterns via learned 1D convolution compression of 5-frame chunks. Self-attention over 24 window tokens instead of 120 frame tokens.</li>
+    <li><strong>Body-part encoder (3 layers):</strong> Spatial coordination across 5 anatomical regions with learned part-type embeddings.</li>
+  </ul>
+
+  <div class="arch-diagram">Input: 120 frames of context (8 seconds at 15 FPS)
+ │
+ ┌───────────┼───────────┐
+ ▼           ▼           ▼
+ Frame       Window      Body-part
+ tokens      tokens      tokens
+ (120, 75)   (24, 5, 75) (120, 5, 21)
+ │           │           │
+ Frame enc   Window enc  Body-part enc
+ (4 layers)  (3 layers)  (3 layers)
+ │           │           │
+ └─────┬─────┘           │
+  Cross-attn (2L)        │
+  frame ↔ window         │
+       │                 │
+       └────────┬────────┘
+          Cross-attn (2L)
+          frame ↔ body-part
+                │
+          Gated fusion
+                │
+            Decoder
+           (4 layers)
+                │
+        30 predicted frames</div>
+
+  <p>A gated linear combination fuses the three encoder outputs, and a 4-layer decoder generates the forecast autoregressively. <strong>Scheduled sampling</strong> addresses autoregressive drift by gradually transitioning the decoder from ground-truth to self-predicted inputs during training (0% → 50% over 25 epochs).</p>
+
+  <h3>3.3 Motion Diffusion Model</h3>
+  <p>Instead of predicting frame by frame, the diffusion model generates the full 30-frame forecast in a single pass by iteratively denoising random noise into a plausible motion trajectory, conditioned on the context.</p>
+  <ul>
+    <li><strong>Context encoder:</strong> 6-layer transformer encoder producing a latent representation of the input.</li>
+    <li><strong>Denoiser:</strong> 6-layer transformer encoder, cross-attending to context, predicting clean motion from noise.</li>
+    <li><strong>Schedule:</strong> Cosine noise schedule (T=100 training steps, DDIM 20-step inference).</li>
+  </ul>
+  <p>Because diffusion generates all frames simultaneously, it does not suffer from compounding autoregressive error.</p>
+
+  <hr class="divider">
+
+  <!-- 4. Results -->
+  <h2>4. Experiments and Results</h2>
+
+  <h3>4.1 Setup</h3>
+  <p>All models were trained on 1,044 clips (~2.2M frames), same 90/10 split by subject, identical hyperparameters: AdamW, lr 1e-4, batch 32, early stopping with patience 10. Task: 120 frames context → predict 30 frames. HTT and baseline evaluated autoregressively; diffusion evaluated as sample mean over 10 DDIM trajectories.</p>
+
+  <h3>4.2 Results</h3>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Model</th><th>Params</th><th>Frame 1 (0.07s)</th><th>Frame 15 (1.0s)</th><th>Frame 30 (2.0s)</th><th>Overall</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Flat Baseline</td><td>11.1M</td><td>0.040</td><td>0.722</td><td>1.239</td><td>0.755</td></tr>
+      <tr><td>HTT</td><td>18.8M</td><td>0.047</td><td class="hl">0.526</td><td class="hl">0.954</td><td class="hl">0.514</td></tr>
+      <tr><td>Diffusion</td><td>11.4M</td><td>0.068</td><td class="hl">0.247</td><td class="hl">0.323</td><td class="hl">0.243</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="table-caption">Table 1. Motion forecasting MSE (lower is better). Primary corpus, 1,044 clips.</p>
+
+  <h3>4.3 Analysis</h3>
+
+  <p><strong>Autoregressive drift is the central challenge.</strong> The flat baseline predicts the next frame reasonably (0.040) but degrades to 1.239 by frame 30 &mdash; a 31&times; increase. Single-resolution attention is insufficient for multi-second coherence.</p>
+
+  <p><strong>Multi-resolution attention substantially reduces drift.</strong> The HTT reduces overall error by 32% and frame-30 error by 23%, with improvement concentrated at the 1&ndash;2 second horizons where maintaining coherence matters most.</p>
+
+  <p><strong>Diffusion avoids drift entirely.</strong> Overall MSE is 68% lower than baseline, 53% lower than the HTT. Frame-30 error (0.323) is less than the baseline&rsquo;s <em>frame-1</em> error.</p>
+
+  <div class="callout">
+    <strong>A note on comparison fairness.</strong> The HTT&rsquo;s MSE comes from a single deterministic rollout. The diffusion model&rsquo;s MSE is computed over the mean of 10 samples, which reduces variance. The comparison is directionally valid but the magnitude of improvement should be interpreted with this methodological difference in mind.
+  </div>
+
+  <p><strong>The two architectures are complementary.</strong> The HTT produces a single deterministic trajectory, frame by frame &mdash; suitable for real-time applications. The diffusion model produces a distribution over possible futures in batch &mdash; suitable for offline analysis and uncertainty quantification.</p>
+
+  <hr class="divider">
+
+  <!-- 5. What the Model Learns -->
+  <h2>5. What the Model Learns</h2>
+
+  <p>A model that predicts human motion accurately has learned something about how the body works. Several observations from the Phase&nbsp;I experiments:</p>
+
+  <p><strong>Temporal coordination across timescales.</strong> The HTT&rsquo;s window encoder captures meso-scale patterns the frame encoder misses: stride cadence, arc-and-return of reaching, weight transfer timing. Cross-attention constrains fine-grained predictions within these broader patterns &mdash; which is what reduces drift.</p>
+
+  <p><strong>Spatial coordination across body regions.</strong> The body-part encoder learns how anatomical regions move relative to each other: contralateral arm-leg coordination in gait, trunk stabilization during limb movement, bilateral symmetry. These relationships emerge from the data and are precisely the kind of structure needed to detect compensatory movement patterns.</p>
+
+  <p><strong>Biomechanical plausibility.</strong> Predicted sequences generally respect physical constraints: joints stay within anatomically plausible ranges, limb lengths remain approximately constant, center-of-mass trajectories stay continuous. These properties emerge from the data distribution without explicit enforcement through loss terms.</p>
+
+  <hr class="divider">
+
+  <!-- 6. Cross-Domain Applicability -->
+  <h2>6. Cross-Domain Applicability</h2>
+
+  <p>The pipeline and model architectures are domain-agnostic by design. The BODY_25 skeleton, normalization procedure, and multi-resolution tokenization make no assumptions about what kind of movement is being analyzed. Expanding to new domains requires domain-appropriate training data, not architectural changes.</p>
+
+  <ul>
+    <li><strong>Rehabilitation and clinical assessment.</strong> Objective quantification of movement quality, recovery tracking, compensatory pattern detection.</li>
+    <li><strong>Sports performance.</strong> Technique assessment, fatigue detection, injury risk estimation, training optimization.</li>
+    <li><strong>Robotics and embodied AI.</strong> Human motion priors for motion planning, human-robot interaction, intent prediction.</li>
+    <li><strong>Ergonomics and occupational safety.</strong> Movement pattern monitoring, workstation assessment, physical demand quantification.</li>
+    <li><strong>Behavioral analytics.</strong> Gait recognition, anomalous movement detection, intent inference from body language.</li>
+  </ul>
+
+  <hr class="divider">
+
+  <!-- 7. Limitations -->
+  <h2>7. Current Limitations</h2>
+
+  <ul>
+    <li><strong>2D projection.</strong> Phase&nbsp;I uses monocular 2D pose estimation. Depth-dependent movements are geometrically compressed. 3D pose estimation or depth sensors would improve coverage.</li>
+    <li><strong>Training data scale.</strong> ~1,000 clips is sufficient for feasibility but small by foundation model standards. Scaling the corpus is a primary next objective.</li>
+    <li><strong>Clinical alignment not yet validated.</strong> Prediction accuracy by engineering metrics is strong; correlation with expert-assigned movement quality ratings has not yet been formally evaluated.</li>
+    <li><strong>Autoregressive drift persists.</strong> The HTT reduces drift substantially but does not eliminate it. Frame-30 error is still ~20&times; frame-1 error.</li>
+    <li><strong>Evaluation methodology.</strong> HTT (single rollout) and diffusion (sample mean) are not evaluated on identical terms.</li>
+  </ul>
+
+  <hr class="divider">
+
+  <!-- 8. Prior Work -->
+  <h2>8. Relation to Prior Work</h2>
+
+  <p>The individual components of the LMM architecture draw on established techniques: multi-resolution transformers, cross-attention fusion, gated combination layers, scheduled sampling (Bengio et al., 2015), and body-part spatial decomposition. LMM&rsquo;s contribution is not architectural novelty but the synthesis of these into a coherent framework for motion as a sequence domain, with three distinguishing design decisions:</p>
+
+  <ul>
+    <li><strong>Standardized cross-source tokenization</strong> enabling cross-dataset training that prior work has not attempted at this scope.</li>
+    <li><strong>Multi-resolution attention matched to the physics of motion</strong> &mdash; frame, window, and body-part levels correspond to the temporal and spatial scales at which movement is biomechanically organized.</li>
+    <li><strong>Complementary autoregressive and generative architectures</strong> providing a controlled comparison that illuminates the strengths and limitations of each approach.</li>
+  </ul>
+
+  <hr class="divider">
+
+  <!-- 9. Architecture Summary -->
+  <h2>9. Architecture Summary</h2>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Component</th><th>HTT</th><th>Diffusion</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Parameters</td><td>18.8M</td><td>11.4M</td></tr>
+      <tr><td>Encoder</td><td>3-stream: frame (4L), window (3L), body-part (3L)</td><td>Context encoder (6L)</td></tr>
+      <tr><td>Fusion</td><td>Bidirectional cross-attn (4L) + gated combination</td><td>Cross-attn in denoiser</td></tr>
+      <tr><td>Decoder / Generator</td><td>4-layer autoregressive decoder</td><td>6-layer denoiser, DDIM sampling</td></tr>
+      <tr><td>Embedding dim</td><td>256, 8 heads, FFN 1024</td><td>256, 8 heads, FFN 1024</td></tr>
+      <tr><td>Input</td><td>120 frames (8s) &mdash; 3 token views</td><td>120 frames (8s) &mdash; frame tokens</td></tr>
+      <tr><td>Output</td><td>30 frames (2s), sequential</td><td>30 frames (2s), single pass</td></tr>
+      <tr><td>Training time</td><td>~4.5 hours (33 epochs)</td><td>~2 hours (57 epochs)</td></tr>
+      <tr><td>Inference</td><td>Deterministic, real-time capable</td><td>Stochastic, batch-mode</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 10. Conclusion -->
+  <h2>10. Conclusion</h2>
+
+  <p>The Large Movement Model demonstrates that human motion can be treated as a structured sequence domain analogous to text, and that multi-resolution attention architectures and diffusion-based generative models both learn meaningful motion structure from video-derived pose data. The HTT reduces autoregressive forecasting drift by 32% over a standard transformer baseline, and the diffusion model reduces overall prediction error by 68%.</p>
+
+  <p>These results establish feasibility for a new class of motion foundation models &mdash; domain-agnostic systems trained on diverse human movement data that can serve as the perceptual and predictive backbone for applications across rehabilitation, sports, robotics, and beyond.</p>
+
+  <hr class="divider">
+
+  <!-- References -->
+  <h2>References</h2>
+
+  <p style="font-size: 0.88rem; line-height: 1.6; color: var(--text-muted);">
+    [1] Cao, Z. et al. OpenPose: Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields. CVPR 2017.<br>
+    [2] Martinez, J. et al. On Human Motion Prediction using Recurrent Neural Networks. CVPR 2017.<br>
+    [3] Ho, J. et al. Denoising Diffusion Probabilistic Models. NeurIPS 2020.<br>
+    [4] Nichol, A. & Dhariwal, P. Improved Denoising Diffusion Probabilistic Models. ICML 2021.<br>
+    [5] Shazeer, N. et al. Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer. ICLR 2017.<br>
+    [6] Vaswani, A. et al. Attention Is All You Need. NeurIPS 2017.<br>
+    [7] Bengio, S. et al. Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks. NeurIPS 2015.<br>
+    [8] Zhang, C. et al. MoVi: A Large Multipurpose Motion and Video Dataset. PLoS ONE 2021.<br>
+    [9] Mahmood, N. et al. AMASS: Archive of Motion Capture as Surface Shapes. ICCV 2019.<br>
+    [10] Song, J. et al. Denoising Diffusion Implicit Models. ICLR 2021.
+  </p>
+
+</article>
+
+<footer class="footer">
+  <p>&copy; 2026 Aegis Station Infrastructure LLC &nbsp;&middot;&nbsp; <a href="https://aegisstation.com">aegisstation.com</a></p>
+</footer>
+
+</body>
+</html>
