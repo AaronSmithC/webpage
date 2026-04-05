@@ -3,83 +3,345 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Preventing a Deep Space Debris Crisis</title>
+  <title>Aegis Station — Designing for Stewardship: Preventing a Deep Space Debris Crisis</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Policy brief from Aegis Station Infrastructure on orbital debris stewardship beyond LEO. Design principles, mitigation strategies, and a call for cislunar governance frameworks.">
+  <meta name="keywords" content="Aegis Station, space debris, orbital stewardship, cislunar, debris mitigation, Artemis Accords, space sustainability, ISRU, deep space governance">
+  <meta name="author" content="Aegis Station Infrastructure LLC">
+
+  <!-- Social -->
+  <meta property="og:title" content="Designing for Stewardship: Preventing a Deep Space Debris Crisis">
+  <meta property="og:description" content="A policy brief on extending debris accountability beyond LEO — from Aegis Station Infrastructure.">
+  <meta property="og:type" content="article">
+
+  <!-- Fonts & Site CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
   <style>
     body {
-      font-family: Arial, sans-serif;
+      background: #0b0b0b;
+      color: #e8e8e8;
+      font-family: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4;
-      color: #333;
     }
-    .container {
+    .wrap {
       max-width: 900px;
-      margin: 40px auto;
-      background: #fff;
-      padding: 40px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem;
+    }
+    .kicker {
+      color: #bdbdbd;
+      margin: 0 0 0.75rem;
+      font-size: 0.95rem;
+    }
+    h1, h2, h3 {
+      font-family: "Orbitron", system-ui, sans-serif;
+      letter-spacing: 0.5px;
     }
     h1 {
-      font-size: 28px;
-      margin-bottom: 10px;
+      font-size: 2.0rem;
+      margin: 0.25rem 0 0.5rem;
+      color: #ffffff;
     }
     h2 {
-      font-size: 22px;
-      margin-top: 30px;
+      font-size: 1.3rem;
+      margin: 2.0rem 0 0.75rem;
+      color: #ffffff;
+    }
+    h3 {
+      font-size: 1.05rem;
+      margin: 1.25rem 0 0.5rem;
+      color: #f0f0f0;
     }
     p {
-      line-height: 1.6;
+      line-height: 1.7;
+      color: #d7d7d7;
+    }
+    .subtitle {
+      font-size: 1.1rem;
+      color: #cfcfcf;
+      margin-bottom: 0.5rem;
+    }
+    .doc-meta {
+      font-size: 0.85rem;
+      color: #999;
+      margin-bottom: 2rem;
+    }
+    a {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+    .rule {
+      border: 0;
+      border-top: 1px solid #2d2d2d;
+      margin: 1.75rem 0;
+    }
+    .note {
+      color: #b9b9b9;
+      font-size: 0.95rem;
     }
     ul {
-      padding-left: 20px;
+      padding-left: 1.25rem;
+      color: #d7d7d7;
+      line-height: 1.7;
     }
-    .highlight {
-      font-weight: bold;
-      background: #fffae6;
-      padding: 4px 6px;
+    li {
+      margin: 0.4rem 0;
     }
-    footer {
-      margin-top: 40px;
-      font-size: 14px;
-      color: #666;
+    .callout {
+      border: 1px solid #2b2b2b;
+      border-left: 4px solid #00bcd4;
+      background: #101010;
+      border-radius: 10px;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+    }
+    .callout p {
+      margin: 0.4rem 0;
+    }
+    .callout strong {
+      color: #ffffff;
+    }
+    .principle-block {
+      border: 1px solid #2b2b2b;
+      background: #101010;
+      border-radius: 14px;
+      padding: 1.25rem 1.25rem;
+      margin: 1rem 0;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    }
+    .principle-block h3 {
+      margin-top: 0;
+      color: #ffffff;
+    }
+    .principle-block p {
+      margin: 0.4rem 0;
+      color: #cfcfcf;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    @media (min-width: 760px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+    .card {
+      border: 1px solid #2b2b2b;
+      background: #101010;
+      border-radius: 14px;
+      padding: 1.1rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    }
+    .card h3 {
+      margin-top: 0;
+    }
+    .card p {
+      margin: 0.4rem 0;
+      font-size: 0.95rem;
+    }
+    blockquote {
+      border-left: 3px solid #444;
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #cfcfcf;
+    }
+    .back {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.7rem 1.0rem;
+      border-radius: 10px;
+      border: 1px solid #2b2b2b;
+      background: #141414;
+      text-decoration: none;
+    }
+    .back:hover {
+      background: #1a1a1a;
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>🛰️ Designing for Stewardship: Preventing a Deep Space Debris Crisis</h1>
-    <p><strong>Aegis Station Infrastructure LLC | Policy Brief | July 2025</strong></p>
+  <div class="wrap">
 
-    <h2>🚨 The Problem We Must Not Repeat</h2>
-    <p>Earth orbit is congested with over 1 million debris fragments — the result of decades of launch activity with little accountability. As humanity pushes into cislunar space and beyond, we must not export the same habits to the Moon, Mars, or deep space.</p>
-    <p>Without clear frameworks and mission standards, future infrastructure may be surrounded by the very detritus we failed to manage on Earth.</p>
+    <p class="kicker">Aegis Station</p>
+    <h1>Designing for Stewardship</h1>
+    <p class="subtitle">Preventing a Deep Space Debris Crisis</p>
+    <p class="doc-meta">
+      Aegis Station Infrastructure LLC&nbsp;&nbsp;|&nbsp;&nbsp;Policy Brief&nbsp;&nbsp;|&nbsp;&nbsp;2025
+    </p>
 
-    <h2>🧭 Our Principle: Design So You Don’t Have to Clean Up</h2>
-    <p><span class="highlight">Aegis Station Infrastructure (ASI)</span> is committed to a new ethic for deep space operations: <em>All systems — from satellites to shuttles to surface landers — must be designed for graceful end-of-life, maximum reusability, and minimal footprint.</em></p>
+    <hr class="rule">
 
-    <h2>🔧 Mitigation Strategies for Lunar and Martian Missions</h2>
+    <!-- SECTION 1 -->
+    <h2>The Problem We Must Not Repeat</h2>
+
+    <p>
+      Earth orbit is congested. Over 1 million trackable debris fragments circle the planet — the accumulated result of decades of launch activity conducted with minimal end-of-life accountability. Operational satellites now share crowded orbital shells with spent stages, dead spacecraft, fragmentation debris, and collision byproducts, creating a compounding risk environment that existing mitigation guidelines have not reversed.
+    </p>
+    <p>
+      The consequences are well documented: cascading collision probabilities, rising insurance costs, constrained launch windows, and the growing threat of Kessler-type feedback loops in the most commercially valuable orbits. LEO debris management is no longer a future problem — it is a current operational burden borne by every spacefaring entity.
+    </p>
+    <p>
+      As humanity pushes infrastructure into cislunar space and beyond — to lunar orbit, the lunar surface, Mars, and eventually the outer solar system — we face a choice. We can export the same habits that produced the LEO debris environment, or we can establish stewardship as a first-order design constraint before the problem exists.
+    </p>
+
+    <div class="callout">
+      <p><strong>The debris problem in LEO was not caused by negligence in any single mission. It was caused by the absence of a shared expectation that missions should account for their own end-of-life.</strong></p>
+      <p>Deep space operations have the opportunity to set that expectation from the start.</p>
+    </div>
+
+    <hr class="rule">
+
+    <!-- SECTION 2 -->
+    <h2>Why Deep Space Is Different — and Why That Matters Now</h2>
+
+    <p>
+      The debris risk profile beyond LEO is not identical to the near-Earth environment, but it is not benign. Several characteristics of cislunar and deep space operations create distinct stewardship challenges:
+    </p>
+
     <ul>
-      <li><strong>End-of-Life Disposal Standards:</strong> Commit to controlled impact, solar escape, or graveyard orbits.</li>
-      <li><strong>Design for Reuse, Not Abandonment:</strong> Encourage modular systems that can be repurposed or safely decommissioned.</li>
-      <li><strong>Shared Infrastructure:</strong> Use relays, refueling depots, and docking standards to reduce excess hardware.</li>
-      <li><strong>On-Site Recycling:</strong> Convert spent stages and scrap parts into usable assets with ISRU and robotic assembly.</li>
+      <li><strong>Orbital mechanics favor persistence.</strong> Objects in lunar orbit, at libration points, or in heliocentric trajectories do not re-enter and burn up. What is left in these regimes stays — effectively indefinitely on human timescales.</li>
+      <li><strong>Tracking infrastructure does not exist.</strong> The ground-based radar and optical networks that track LEO debris do not cover cislunar space. Objects placed beyond GEO are, for practical purposes, untracked unless actively transmitting.</li>
+      <li><strong>Traffic density is low now but concentrated later.</strong> Current cislunar traffic is sparse, but planned lunar surface operations — Artemis, commercial landers, ISRU programs — will concentrate activity in a small number of orbital corridors and surface regions. Congestion in those corridors can emerge quickly.</li>
+      <li><strong>Remediation is orders of magnitude harder.</strong> Active debris removal in LEO is already expensive and technically challenging. Retrieving or deorbiting objects in lunar orbit or at libration points is not currently feasible at any reasonable cost.</li>
+      <li><strong>The governance gap is real.</strong> The Outer Space Treaty establishes broad principles but does not prescribe operational debris standards for cislunar space. The Artemis Accords reference sustainability but leave implementation to bilateral agreements. No binding framework exists for cislunar traffic management or end-of-life compliance.</li>
     </ul>
 
-    <h2>🌍 Call to Action: Build It Into the Rules</h2>
-    <p>We urge NASA, Artemis Accords partners, and space agencies worldwide to:</p>
+    <p>
+      The window for establishing norms is now — while traffic is low, while architectures are being defined, and while the cost of building stewardship into designs is marginal rather than retrofit-expensive.
+    </p>
+
+    <hr class="rule">
+
+    <!-- SECTION 3 -->
+    <h2>Design Principles for Deep Space Stewardship</h2>
+
+    <p class="note">
+      The following principles guide Aegis Station Infrastructure's approach to every system in the program — from the station itself to tankers, shuttles, rovers, and support infrastructure. They are offered here as a framework applicable to any cislunar or deep space program.
+    </p>
+
+    <div class="grid" style="margin-top: 1rem;">
+      <div class="card">
+        <h3>Design for End-of-Life</h3>
+        <p>Every system placed in orbit or on a surface should have a defined, achievable disposal pathway before it launches. Controlled deorbit, graveyard orbit transfer, or surface impact — the method matters less than the commitment to having one.</p>
+      </div>
+
+      <div class="card">
+        <h3>Reuse Before Disposal</h3>
+        <p>Systems should be designed for modular reuse, repurposing, or material recovery wherever possible. A spent stage that can be refueled, a structural element that can be recycled by ISRU, or a module that can be repurposed into a new role is better than one that becomes debris.</p>
+      </div>
+
+      <div class="card">
+        <h3>Minimize Abandonment Mass</h3>
+        <p>Every kilogram placed in a persistent orbit or on a surface that cannot be recovered, reused, or disposed of is a long-term liability. Architectures should minimize the mass they leave behind in uncontrolled states.</p>
+      </div>
+
+      <div class="card">
+        <h3>Share Infrastructure</h3>
+        <p>Standardized docking, refueling, and communications interfaces reduce the total number of independent systems required in any operational theater. Shared infrastructure means fewer objects, fewer failure modes, and fewer disposal problems.</p>
+      </div>
+
+      <div class="card">
+        <h3>Track What You Fly</h3>
+        <p>Every object placed beyond LEO should carry a persistent identification transponder or be registered in a shared catalog with sufficient orbital data for conjunction assessment. If it cannot be tracked, it should not be flown.</p>
+      </div>
+
+      <div class="card">
+        <h3>Build Accountability Into Contracts</h3>
+        <p>Procurement and partnership agreements should include end-of-life provisions, disposal compliance milestones, and clear liability for abandonment. Stewardship is not voluntary if it is contractual.</p>
+      </div>
+    </div>
+
+    <hr class="rule">
+
+    <!-- SECTION 4 -->
+    <h2>Mitigation Strategies for Cislunar and Deep Space Operations</h2>
+
+    <p>
+      Beyond design principles, specific operational strategies can reduce debris generation and long-term risk:
+    </p>
+
+    <div class="principle-block">
+      <h3>End-of-Life Disposal Standards</h3>
+      <p>Commit to controlled impact, solar escape, or designated graveyard orbits for every object that reaches end of operational life. Define disposal budgets (propellant reserves, power margins) at the mission design phase, not as an afterthought.</p>
+    </div>
+
+    <div class="principle-block">
+      <h3>Passivation at End of Mission</h3>
+      <p>Deplete residual propellants, discharge batteries, and vent pressure vessels at end of life to eliminate the most common causes of post-mission fragmentation events. Passivation should be autonomous where possible and verifiable by ground operators.</p>
+    </div>
+
+    <div class="principle-block">
+      <h3>On-Site Recycling and ISRU Recovery</h3>
+      <p>Convert spent stages, decommissioned modules, and structural scrap into usable feedstock through ISRU processing and robotic disassembly. Aluminum, steel, and water are all recoverable from space hardware — and all are valuable in cislunar operations.</p>
+    </div>
+
+    <div class="principle-block">
+      <h3>Corridor and Zone Management</h3>
+      <p>Establish defined approach corridors, parking orbits, and operational zones around high-traffic nodes (stations, depots, surface bases) to reduce conjunction risk and simplify traffic coordination. This is easier to implement before congestion exists than after.</p>
+    </div>
+
+    <div class="principle-block">
+      <h3>Conjunction Assessment Beyond LEO</h3>
+      <p>Develop shared catalogs and conjunction screening capabilities for cislunar space. This requires investment in tracking infrastructure (ground-based and space-based) and data-sharing agreements between operators — neither of which exist today at operational scale.</p>
+    </div>
+
+    <hr class="rule">
+
+    <!-- SECTION 5 -->
+    <h2>Call to Action</h2>
+
+    <p>
+      The institutions shaping cislunar policy — NASA, ESA, JAXA, Artemis Accords signatories, COPUOS, and national regulatory bodies — have the opportunity to establish debris stewardship norms before the operational environment demands them. We urge these bodies to:
+    </p>
+
     <ul>
-      <li>Extend debris mitigation rules beyond Earth orbit.</li>
-      <li>Create traffic coordination authorities for cislunar and Mars operations.</li>
-      <li>Incentivize sustainable designs in procurement and funding.</li>
+      <li><strong>Extend debris mitigation guidelines beyond Earth orbit.</strong> Current frameworks (NASA-STD-8719.14, ESA Space Debris Mitigation Requirements) address LEO and GEO but do not prescribe standards for cislunar or deep space operations. This gap should be closed.</li>
+      <li><strong>Establish cislunar traffic coordination mechanisms.</strong> At minimum, a shared catalog and conjunction screening service for lunar orbit should be operational before sustained surface operations begin.</li>
+      <li><strong>Require end-of-life plans as a licensing condition.</strong> No object should receive launch authorization for cislunar deployment without a defined, funded disposal pathway.</li>
+      <li><strong>Incentivize stewardship in procurement.</strong> Government contracts and commercial partnerships should weight proposals that demonstrate reusability, disposal compliance, and infrastructure sharing — not just mission performance and cost.</li>
+      <li><strong>Invest in cislunar tracking infrastructure.</strong> Ground-based and space-based sensors capable of cataloging objects in lunar orbit and at libration points are a prerequisite for any credible traffic management regime.</li>
     </ul>
 
-    <h2>🏗️ Aegis Station: Built for the Long Game</h2>
-    <p>Aegis Station is a self-contained orbital platform designed for permanence. With modular construction, integrated logistics, and human-in-the-loop servicing, it offers a testbed for orbital sustainability—wherever we go next.</p>
+    <hr class="rule">
 
-    <footer>
-      <p>Contact: <a href="mailto:engage@aegisstation.com">engage@aegisstation.com</a><br>
-      Website: <a href="https://www.aegisstation.com">www.aegisstation.com</a></p>
-    </footer>
+    <!-- SECTION 6 -->
+    <h2>How Aegis Station Is Built for This</h2>
+
+    <p>
+      Aegis Station is designed from the outset around the principles described in this brief. The program's architecture reflects a commitment to operational permanence, not disposability:
+    </p>
+
+    <ul>
+      <li><strong>Modular, serviceable construction.</strong> Every major subsystem — structural segments, ECLSS modules, power systems, shielding reservoirs — is designed for on-orbit replacement and upgrade, extending operational life indefinitely and eliminating the need for wholesale decommissioning.</li>
+      <li><strong>Reusable fleet architecture.</strong> The Lunar Tanker Fleet, Long-Hauler, and Luna–Aegis Shuttle are all designed for high-cycle reuse with proactive maintenance, not single-use disposal.</li>
+      <li><strong>ISRU-integrated logistics.</strong> Lunar-sourced water and propellant reduce Earth-launch mass and enable closed-loop material cycling, minimizing the volume of hardware that enters cislunar space from outside the system.</li>
+      <li><strong>Standardized interfaces.</strong> Docking, refueling, cartridge handling, and communications interfaces are standardized across the program, reducing the need for bespoke adapter hardware and enabling interoperability with partner systems.</li>
+      <li><strong>Inspection and maintenance as built-in capabilities.</strong> ESIC (Extravehicular Structural Inspection Capability) and robotic assembly systems provide the tools to maintain, repair, and eventually decommission infrastructure responsibly.</li>
+    </ul>
+
+    <blockquote>
+      The question is not whether deep space will accumulate debris. It will — unless the systems we build are designed from the start to avoid it. Aegis Station is designed from the start to avoid it.
+    </blockquote>
+
+    <hr class="rule">
+
+    <p class="note">
+      This document reflects the position of Aegis Station Infrastructure LLC and is offered as a contribution to the ongoing policy discussion on cislunar sustainability. It does not constitute legal advice or regulatory guidance.
+    </p>
+
+    <p style="margin-top: 1.5rem;">
+      Contact: <a href="mailto:contact@aegisstation.com">contact@aegisstation.com</a><br>
+      Website: <a href="https://aegisstation.com">aegisstation.com</a>
+    </p>
+
+    <a class="back" href="index.html">← Back to Home</a>
+
   </div>
 </body>
 </html>
