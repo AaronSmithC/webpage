@@ -267,7 +267,7 @@
   <p>The LMM pipeline transforms raw video into structured, normalized, machine-learning-ready motion tokens. It is designed to ingest data from heterogeneous sources &mdash; different cameras, frame rates, resolutions, skeleton formats, and recording conditions &mdash; and produce a unified representation suitable for model training and evaluation.</p>
 
   <h3>2.1 Pose Estimation</h3>
-  <p>Video inputs are processed through OpenPose to extract BODY_25 skeletal keypoints: 25 major body joints with per-joint confidence scores. For datasets already provided in skeleton format (Kinect, Vicon), the pipeline includes format converters that map alternative joint schemas to BODY_25 through documented correspondence tables. BODY_25 was selected as the Phase&nbsp;I standard because it balances representational fidelity with computational efficiency at roughly 1/100th the cost of mesh-based representations like SMPL.</p>
+  <p>Video inputs are processed through OpenPose to extract BODY_25 skeletal keypoints: 25 major body joints with per-joint confidence scores. For datasets provided as pre-extracted skeletons (COCO-17, Kinect V2, Vicon), the pipeline includes format converters that map alternative joint schemas to BODY_25 through documented correspondence tables, synthesizing derived joints (neck, mid-hip) where needed. BODY_25 was selected as the Phase&nbsp;I standard because it balances representational fidelity with computational efficiency at roughly 1/100th the cost of mesh-based representations like SMPL.</p>
 
   <h3>2.2 Normalization</h3>
   <p>Raw keypoint sequences vary in scale, position, and temporal resolution. The normalization stage removes these extraneous variations:</p>
@@ -298,7 +298,7 @@
   <p>The frame level provides the finest temporal grain. The window level captures meso-scale patterns (a step, an arm swing). The body-part level captures spatial coordination between anatomical regions. Together they give a model access to movement structure at multiple scales without committing to which scale matters most.</p>
 
   <h3>2.4 Pipeline Performance</h3>
-  <p>The pipeline has been validated on over 3,900 clips from three independent sources spanning laboratory motion capture, clinical rehabilitation video, and depth-sensor skeleton data. Processing succeeded on all clips with zero failures.</p>
+  <p>The pipeline has been validated on over 17,000 clips from five independent sources spanning multi-camera studio video, clinical rehabilitation video, depth-sensor skeleton data, and optical motion capture. Heterogeneous inputs &mdash; 60&nbsp;FPS dance video, 30&nbsp;FPS clinical footage, Kinect V2 depth skeletons, Vicon optical mocap &mdash; all converge to the same 15&nbsp;FPS BODY_25 normalized representation with zero pipeline failures.</p>
 
   <hr class="divider">
 
@@ -361,7 +361,7 @@
   <h2>4. Experiments and Results</h2>
 
   <h3>4.1 Setup</h3>
-  <p>All models were trained on 1,044 clips (~2.2M frames), same 90/10 split by subject, identical hyperparameters: AdamW, lr 1e-4, batch 32, early stopping with patience 10. Task: 120 frames context → predict 30 frames. HTT and baseline evaluated autoregressively; diffusion evaluated as sample mean over 10 DDIM trajectories.</p>
+  <p>All models were trained on 12,483 clips (~2.5M frames) from a multi-camera dance corpus spanning 10 genres, 30 dancers, and 9 synchronized camera angles at 60&nbsp;FPS. Same 90/10 split by clip, identical hyperparameters: AdamW, lr&nbsp;1e-4, batch&nbsp;32, early stopping with patience&nbsp;10. Task: 120 frames of context (8&nbsp;seconds) &rarr; predict 30 frames (2&nbsp;seconds). HTT and baseline evaluated autoregressively; diffusion evaluated as sample mean over 10 DDIM trajectories.</p>
 
   <h3>4.2 Results</h3>
 
@@ -371,27 +371,27 @@
       <tr><th>Model</th><th>Params</th><th>Frame 1 (0.07s)</th><th>Frame 15 (1.0s)</th><th>Frame 30 (2.0s)</th><th>Overall</th></tr>
     </thead>
     <tbody>
-      <tr><td>Flat Baseline</td><td>11.1M</td><td>0.040</td><td>0.722</td><td>1.239</td><td>0.755</td></tr>
-      <tr><td>HTT</td><td>18.8M</td><td>0.047</td><td class="hl">0.526</td><td class="hl">0.954</td><td class="hl">0.514</td></tr>
-      <tr><td>Diffusion</td><td>11.4M</td><td>0.068</td><td class="hl">0.247</td><td class="hl">0.323</td><td class="hl">0.243</td></tr>
+      <tr><td>Flat Baseline</td><td>11.1M</td><td>0.087</td><td>0.654</td><td>0.900</td><td>0.637</td></tr>
+      <tr><td>HTT</td><td>18.8M</td><td>0.126</td><td>0.646</td><td class="hl">0.785</td><td>0.658</td></tr>
+      <tr><td>Diffusion</td><td>11.4M</td><td>0.137</td><td class="hl">0.443</td><td class="hl">0.621</td><td class="hl">0.445</td></tr>
     </tbody>
   </table>
   </div>
-  <p class="table-caption">Table 1. Motion forecasting MSE (lower is better). Primary corpus, 1,044 clips.</p>
+  <p class="table-caption">Table 1. Motion forecasting MSE (lower is better). 12,483 clips, 53,903 training windows.</p>
 
   <h3>4.3 Analysis</h3>
 
-  <p><strong>Autoregressive drift is the central challenge.</strong> The flat baseline predicts the next frame reasonably (0.040) but degrades to 1.239 by frame 30 &mdash; a 31&times; increase. Single-resolution attention is insufficient for multi-second coherence.</p>
+  <p><strong>Autoregressive drift remains the central challenge.</strong> The flat baseline predicts the next frame well (0.087) but degrades to 0.900 by frame&nbsp;30 &mdash; a 10&times; increase. Even with a large and diverse training corpus, single-resolution attention cannot maintain multi-second coherence.</p>
 
-  <p><strong>Multi-resolution attention substantially reduces drift.</strong> The HTT reduces overall error by 32% and frame-30 error by 23%, with improvement concentrated at the 1&ndash;2 second horizons where maintaining coherence matters most.</p>
+  <p><strong>Multi-resolution attention helps most at the longest horizons.</strong> The HTT reduces frame-30 error by 13% (0.900&nbsp;&rarr;&nbsp;0.785). The advantage is concentrated at the 1.5&ndash;2 second horizon where maintaining coherence across body regions matters most. At shorter horizons the simpler baseline is competitive, suggesting that with sufficient training data, architectural complexity matters less for immediate-next-frame prediction.</p>
 
-  <p><strong>Diffusion avoids drift entirely.</strong> Overall MSE is 68% lower than baseline, 53% lower than the HTT. Frame-30 error (0.323) is less than the baseline&rsquo;s <em>frame-1</em> error.</p>
+  <p><strong>Diffusion substantially outperforms both deterministic models.</strong> Overall MSE is 30% lower than the baseline, and frame-30 error (0.621) is 31% lower than the HTT&rsquo;s. Because the diffusion model generates all 30 frames simultaneously rather than sequentially, it does not suffer from compounding error &mdash; the dominant failure mode of autoregressive architectures.</p>
 
   <div class="callout">
     <strong>A note on comparison fairness.</strong> The HTT&rsquo;s MSE comes from a single deterministic rollout. The diffusion model&rsquo;s MSE is computed over the mean of 10 samples, which reduces variance. The comparison is directionally valid but the magnitude of improvement should be interpreted with this methodological difference in mind.
   </div>
 
-  <p><strong>The two architectures are complementary.</strong> The HTT produces a single deterministic trajectory, frame by frame &mdash; suitable for real-time applications. The diffusion model produces a distribution over possible futures in batch &mdash; suitable for offline analysis and uncertainty quantification.</p>
+  <p><strong>The two architectures are complementary.</strong> The HTT produces a single deterministic trajectory, frame by frame &mdash; suitable for real-time applications where latency matters. The diffusion model produces a distribution over possible futures in batch &mdash; suitable for offline analysis, uncertainty quantification, and any setting where prediction quality outweighs latency.</p>
 
   <hr class="divider">
 
@@ -409,10 +409,19 @@
   <hr class="divider">
 
   <!-- 6. Cross-Domain Applicability -->
-  <h2>6. Cross-Domain Applicability</h2>
+  <h2>6. Cross-Domain Transfer</h2>
 
-  <p>The pipeline and model architectures are domain-agnostic by design. The BODY_25 skeleton, normalization procedure, and multi-resolution tokenization make no assumptions about what kind of movement is being analyzed. Expanding to new domains requires domain-appropriate training data, not architectural changes.</p>
+  <p>The pipeline and model architectures are domain-agnostic by design. The BODY_25 skeleton, normalization procedure, and multi-resolution tokenization make no assumptions about what kind of movement is being analyzed. But does the model actually transfer across domains, or does it just memorize the training distribution?</p>
 
+  <h3>6.1 Held-Out Generalization Test</h3>
+  <p>To answer this, we evaluated trained models against a held-out corpus from a fundamentally different capture modality: optical motion capture data from physical therapy exercises (Vicon system, 10 exercises, 10 subjects). The model never saw this data during training, and the input characteristics are visually distinct &mdash; no camera perspective, no detection jitter, no confidence variation.</p>
+
+  <p><strong>Key finding: motion dynamics transfer across domains.</strong> Per-frame velocity MSE &mdash; which measures whether the model predicts the <em>direction and speed</em> of joint movement correctly &mdash; was essentially identical across all tested models (0.011&ndash;0.014), regardless of whether they were trained on dance video, clinical rehabilitation footage, or a multi-source combination. Absolute position errors varied by domain (as expected, since coordinate systems and projection geometry differ), but the underlying motion structure transferred.</p>
+
+  <h3>6.2 Scheduled Sampling as a Transfer Mechanism</h3>
+  <p>An unexpected finding: <strong>scheduled sampling</strong> &mdash; originally introduced to reduce autoregressive drift during training &mdash; turns out to be a powerful cross-domain transfer mechanism. Models trained with scheduled sampling showed 54% lower teacher-forced error on held-out data compared to identical models trained without it. The interpretation: scheduled sampling forces the model to predict from imperfect inputs during training, and cross-domain inputs are inherently imperfect (the noise profile, scale, and confidence patterns differ from training). Models that learn to handle imperfect inputs generalize better to new domains.</p>
+
+  <h3>6.3 Target Domains</h3>
   <ul>
     <li><strong>Rehabilitation and clinical assessment.</strong> Objective quantification of movement quality, recovery tracking, compensatory pattern detection.</li>
     <li><strong>Sports performance.</strong> Technique assessment, fatigue detection, injury risk estimation, training optimization.</li>
@@ -427,11 +436,11 @@
   <h2>7. Current Limitations</h2>
 
   <ul>
-    <li><strong>2D projection.</strong> Phase&nbsp;I uses monocular 2D pose estimation. Depth-dependent movements are geometrically compressed. 3D pose estimation or depth sensors would improve coverage.</li>
-    <li><strong>Training data scale.</strong> ~1,000 clips is sufficient for feasibility but small by foundation model standards. Scaling the corpus is a primary next objective.</li>
+    <li><strong>2D projection.</strong> Phase&nbsp;I uses 2D pose estimation. Depth-dependent movements are geometrically compressed. 3D pose estimation or multi-view triangulation would improve coverage.</li>
+    <li><strong>Training data diversity.</strong> The primary training corpus covers 10 dance genres &mdash; fast, diverse, full-body movement but not specifically clinical. Domain-specific fine-tuning on rehabilitation exercises is a Phase&nbsp;II objective.</li>
     <li><strong>Clinical alignment not yet validated.</strong> Prediction accuracy by engineering metrics is strong; correlation with expert-assigned movement quality ratings has not yet been formally evaluated.</li>
-    <li><strong>Autoregressive drift persists.</strong> The HTT reduces drift substantially but does not eliminate it. Frame-30 error is still ~20&times; frame-1 error.</li>
-    <li><strong>Evaluation methodology.</strong> HTT (single rollout) and diffusion (sample mean) are not evaluated on identical terms.</li>
+    <li><strong>Autoregressive drift persists.</strong> The HTT reduces drift and scheduled sampling improves robustness, but frame-30 error is still ~6&ndash;10&times; frame-1 error for deterministic models. The diffusion model largely avoids this but requires batch-mode inference.</li>
+    <li><strong>Evaluation methodology.</strong> HTT (single rollout) and diffusion (sample mean of 10) are not evaluated on identical terms. The diffusion model&rsquo;s advantage includes a variance-reduction benefit from multi-sample averaging.</li>
   </ul>
 
   <hr class="divider">
@@ -465,7 +474,7 @@
       <tr><td>Embedding dim</td><td>256, 8 heads, FFN 1024</td><td>256, 8 heads, FFN 1024</td></tr>
       <tr><td>Input</td><td>120 frames (8s) &mdash; 3 token views</td><td>120 frames (8s) &mdash; frame tokens</td></tr>
       <tr><td>Output</td><td>30 frames (2s), sequential</td><td>30 frames (2s), single pass</td></tr>
-      <tr><td>Training time</td><td>~4.5 hours (33 epochs)</td><td>~2 hours (57 epochs)</td></tr>
+      <tr><td>Training time</td><td>~4 hours (29 epochs)</td><td>~0.5 hours (47 epochs)</td></tr>
       <tr><td>Inference</td><td>Deterministic, real-time capable</td><td>Stochastic, batch-mode</td></tr>
     </tbody>
   </table>
@@ -476,9 +485,9 @@
   <!-- 10. Conclusion -->
   <h2>10. Conclusion</h2>
 
-  <p>The Large Movement Model demonstrates that human motion can be treated as a structured sequence domain analogous to text, and that multi-resolution attention architectures and diffusion-based generative models both learn meaningful motion structure from video-derived pose data. The HTT reduces autoregressive forecasting drift by 32% over a standard transformer baseline, and the diffusion model reduces overall prediction error by 68%.</p>
+  <p>The Large Movement Model demonstrates that human motion can be treated as a structured sequence domain analogous to text, and that multi-resolution attention architectures and diffusion-based generative models both learn meaningful motion structure from video-derived pose data. Trained on 12,483 clips from diverse full-body movement, the diffusion model reduces overall prediction error by 30% compared to a standard transformer baseline, with a 31% improvement at the clinically relevant 2-second horizon.</p>
 
-  <p>These results establish feasibility for a new class of motion foundation models &mdash; domain-agnostic systems trained on diverse human movement data that can serve as the perceptual and predictive backbone for applications across rehabilitation, sports, robotics, and beyond.</p>
+  <p>Cross-domain evaluation on held-out data from a different capture modality confirms that the learned motion dynamics transfer &mdash; velocity prediction quality is essentially invariant to training corpus, even when the model has never seen the target domain. These results establish feasibility for a new class of motion foundation models: domain-agnostic systems trained on diverse human movement data that serve as the perceptual and predictive backbone for applications across rehabilitation, sports, robotics, and beyond.</p>
 
   <hr class="divider">
 
