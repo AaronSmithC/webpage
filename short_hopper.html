@@ -447,57 +447,6 @@
     font-weight: 700;
   }
 
-  /* ─── MILESTONES ─── */
-  .timeline {
-    display: flex;
-    gap: 0;
-    position: relative;
-  }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    top: 22px;
-    left: 20px;
-    right: 20px;
-    height: 1px;
-    background: var(--line);
-  }
-
-  .milestone {
-    flex: 1;
-    text-align: center;
-    position: relative;
-    padding-top: 0;
-  }
-
-  .milestone-dot {
-    width: 12px;
-    height: 12px;
-    border: 2px solid var(--cyan);
-    background: var(--paper);
-    margin: 16px auto 10px;
-    position: relative;
-    z-index: 1;
-    transform: rotate(45deg);
-  }
-
-  .milestone-year {
-    font-family: 'Orbitron', monospace;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--cyan-bright);
-    margin-bottom: 4px;
-  }
-
-  .milestone-label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    color: var(--white-dim);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    line-height: 1.4;
-  }
 
   /* ─── SCHEMATIC DIAGRAM ─── */
   .schematic-wrap {
@@ -917,42 +866,33 @@
     </div>
   </div>
 
-  <!-- 06 DEVELOPMENT ROADMAP -->
+  <!-- 06 ROLE IN THE LUNAR STACK -->
   <div class="section">
     <div class="section-header">
       <span class="section-num">06</span>
-      <span class="section-title">Development Roadmap</span>
+      <span class="section-title">Role in the Lunar Stack</span>
       <div class="section-line"></div>
     </div>
 
-    <div class="timeline">
-      <div class="milestone">
-        <div class="milestone-dot"></div>
-        <div class="milestone-year">Year One</div>
-        <div class="milestone-label">PDR<br>Preliminary<br>Design Review</div>
-      </div>
-      <div class="milestone">
-        <div class="milestone-dot"></div>
-        <div class="milestone-year">Year Two</div>
-        <div class="milestone-label">Subsystem<br>Demos &amp;<br>CDR</div>
-      </div>
-      <div class="milestone">
-        <div class="milestone-dot"></div>
-        <div class="milestone-year">Year Three</div>
-        <div class="milestone-label">Flight<br>Prototype<br>Build</div>
-      </div>
-      <div class="milestone">
-        <div class="milestone-dot" style="border-color:rgba(77,184,212,0.35)"></div>
-        <div class="milestone-year" style="color:var(--white-dim)">Year 4+</div>
-        <div class="milestone-label">Qualification<br>Flight &amp;<br>Operations</div>
-      </div>
-    </div>
+    <p class="overview-text">
+      Artemis puts boots on the surface. CLPS puts instruments on the ground. ISRU demonstration missions prove you can make propellant.
+      What's missing is the vehicle that ties all of it together — a reusable, refuelable shuttle that can move crew and cargo between any two points on the Moon
+      and back to orbit, on a schedule, without a new launch from Earth every time.
+    </p>
+    <p class="overview-text" style="margin-top:20px;">
+      The Short Hopper is designed to fill that gap. It turns surface sites into connected nodes rather than isolated flags-and-footprints destinations.
+      It converts ISRU propellant into operational reach. And it gives a lunar orbital station — Aegis or otherwise — a reason to exist as a logistics hub
+      rather than an end unto itself.
+    </p>
+    <p class="overview-text" style="margin-top:20px;">
+      A vehicle like this doesn't get built by one company. It requires the kind of sustained investment and technical depth that comes from
+      NASA program involvement and major aerospace partners working toward a shared architecture.
+      Aegis Station Infrastructure has done the design work to show it closes — the mass budgets, the propulsion trades, the ops concept, the interface definitions.
+      That's the part we bring to the table.
+    </p>
 
-    <div class="info-box" style="margin-top:24px;">
-      <strong>WORK PACKAGES (ALL TBD — OPEN FOR PARTNERSHIP)</strong><br>
-      Cryo Propulsion System &nbsp;·&nbsp; Avionics &amp; GN&amp;C &nbsp;·&nbsp; Cabin &amp; Life Support Systems &nbsp;·&nbsp; Landing Gear &amp; Tank Modules<br><br>
-      The Short Hopper is available for feasibility study, licensing, and development partnership.
-      Contact: <strong>engage@aegisstation.com · aegisstation.com</strong>
+    <div class="info-box" style="margin-top:28px;">
+      For partnership and technical inquiries: <strong>engage@aegisstation.com</strong>
     </div>
   </div>
 
