@@ -978,6 +978,7 @@
     <ul class="nav-links">
       <li><a href="#mission">Mission</a></li>
       <li><a href="#specs">Specs</a></li>
+      <li><a href="#status">Status</a></li>
       <li><a href="#s2s">S2S Ops</a></li>
       <li><a href="#cartridge">Cartridge</a></li>
       <li><a href="#propellant">Propellant</a></li>
@@ -1266,6 +1267,52 @@
             <div class="cartridge-feature-label">Standardized Interface</div>
             <div class="cartridge-feature-desc">Single-standard water and gas ports enable identical handling at ISRU nodes, tanker mounts, orbital transfer points, and station shield reservoirs — no adapters, no bespoke ground support.</div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGINEERING STATUS -->
+<section class="specs-section" id="status" style="border-top: 1px solid var(--border);">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 03.7</span>
+      <span class="section-title">Engineering Status</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="mission-grid reveal" style="grid-template-columns: 1fr 1fr;">
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">FLIGHT SOFTWARE</div>
+        <h3>Vehicle Autonomy Stack</h3>
+        <p>Per-vehicle flight software implementing the full mode FSM, propulsion feed control, autonomous safing, and CCSDS command/telemetry. Multi-vehicle simulation exercising 45 concurrent instances through complete sortie cycles — ascent, orbital insertion, station capture, cargo swap, deorbit, and surface return.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">FLEET OPERATIONS</div>
+        <h3>Ground Coordination</h3>
+        <p>Fleet-level dispatch scheduling, pad deconfliction, station berth queuing, and telemetry-gated ground operations across the full vehicle complement. The sortie cycle runs autonomously with real-time cargo and propellant state verification at every transition — no operator in the loop for nominal operations.</p>
+      </div>
+    </div>
+    <div class="prop-tech-bar reveal" style="margin-top: 24px; margin-bottom: 0;">
+      <div class="tech-bar-label">Validated In Simulation</div>
+      <div class="tech-bar-items">
+        <div class="tech-item">
+          <div class="tech-dot" style="background: var(--amber);"></div>
+          <span class="tech-item-text">45-Vehicle Concurrent Sortie Cycling</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot" style="background: var(--ice);"></div>
+          <span class="tech-item-text">TLM-Gated Cargo &amp; Prop Sequencing</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot" style="background: var(--text-dim);"></div>
+          <span class="tech-item-text">Autonomous Anomaly Recovery</span>
+        </div>
+        <div class="tech-item">
+          <div class="tech-dot" style="background: var(--muted);"></div>
+          <span class="tech-item-text">Pad &amp; Berth Resource Management</span>
         </div>
       </div>
     </div>
