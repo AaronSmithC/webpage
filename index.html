@@ -810,18 +810,28 @@ footer a:hover { color: var(--accent); }
 <section id="lopd">
   <div class="container">
     <h2>Lunar Orbital Propellant Depot</h2>
-    <p><em>Pre-Station Infrastructure — Fueling the Fleet Before the Station Exists</em></p>
+    <p><em>First Cislunar Infrastructure Node — Downstream of ISRU, Upstream of Everything Else</em></p>
     <p>
-      The Lunar Orbital Propellant Depot (LOPD) is the enabling node that makes the rest of the logistics chain possible.
-      Operational before Aegis Station is assembled, it produces and stores methalox propellant in lunar orbit—
-      accepting water deliveries from the Lunar Tanker Fleet, electrolyzing them into LOX on-orbit,
-      and storing imported LCH₄ for dispensing to the Long-Hauler and Tanker fleet on demand.
+      The Lunar Orbital Propellant Depot (LOPD) is the first useful thing to build in lunar orbit —
+      and the first operational consumer of ISRU-produced water. It is a <em>downstream</em> node
+      in the water supply chain: it never receives Earth-launched water, only surface-sourced
+      cartridges delivered by the Lunar Tanker. The entire Aegis Station program has always been
+      gated on ISRU, and the depot inherits that gate directly. Its commissioning date is set by
+      ISRU and LT readiness, not by depot hardware delivery.
+    </p>
+    <p>
+      That makes the depot a forcing function, not a waiting room. By providing a concrete orbital
+      demand signal and a near-term target for first surface water, the depot pulls ISRU forward —
+      helping bring it online faster is a primary program objective, not a precondition the program
+      waits passively for.
     </p>
 
     <ul class="specs">
       <li><strong>Propellant standard:</strong> Methalox (LCH₄ / LOX) — common across Hauler and Lunar Tanker fleet</li>
-      <li><strong>LOX source:</strong> On-orbit water electrolysis fed by LT deliveries</li>
+      <li><strong>LOX source:</strong> On-orbit electrolysis of lunar-sourced water delivered by LT — never Earth water, in any phase</li>
       <li><strong>LCH₄ source:</strong> Earth-import via Hauler manifest; cryo-conditioned and stored on-depot</li>
+      <li><strong>Commissioning gate:</strong> ISRU first water → LT first delivery → depot first light — hardware can stand dormant until ISRU is ready</li>
+      <li><strong>LT capability for first light:</strong> Single vehicle at low cadence — full fleet is sized for the downstream station shield-fill campaign, not for depot operations</li>
       <li><strong>Crew access:</strong> Short-stay pressurized node — days-duration maintenance visits, not long-duration habitation</li>
       <li><strong>Ops baseline:</strong> Fully autonomous — electrolysis, storage, and fueling operate without crew present</li>
       <li><strong>Lifecycle:</strong> Modular architecture supports future incorporation into Aegis Station or continued standalone operation</li>

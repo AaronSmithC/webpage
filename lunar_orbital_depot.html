@@ -330,16 +330,27 @@
   <div class="container">
     <h2>Why This Comes First</h2>
     <p>
-      Every other element of the Aegis logistics chain — the Long-Hauler, the Lunar Tanker Fleet,
-      eventually the station itself — depends on propellant being available in lunar orbit.
-      Without a depot, each Hauler mission must carry enough propellant for a complete round trip from Earth,
-      and each Tanker cycle is constrained by whatever propellant it can produce and carry from the surface alone.
+      The Aegis Station program is gated on ISRU. That has always been the foundational
+      assumption: no lunar water production, no program. Everything cislunar — the station,
+      the Lunar Tanker Fleet, the Long-Hauler's economics — flows from surface water being
+      available at the right cadence and quality. The depot does not change that. It sits
+      <em>downstream</em> of ISRU in the water supply chain, and its commissioning date is
+      gated by ISRU and LT readiness, not by depot hardware delivery.
     </p>
     <p>
-      The LOPD breaks both constraints. Once operational, the Hauler arrives at the depot, offloads LCH₄,
-      refuels its return burn from depot-produced LOX, and departs. The Tanker fleet tops off
-      between cycles rather than carrying full reserves on every ascent. The depot absorbs
-      production variability from the surface and smooths it into a stable supply available on demand.
+      What the depot does do is come first among <em>cislunar infrastructure nodes</em>.
+      Of everything that lives in lunar orbit, the depot is the earliest useful thing to build.
+      It is the first consumer of ISRU water, the first demand signal that justifies
+      scaling surface production, and the first operational target that gives ISRU a
+      near-term reason to exist. Bringing the depot online is how the program pulls ISRU
+      forward — not how it waits for ISRU.
+    </p>
+    <p>
+      Once operational, the depot breaks two standing constraints. The Hauler arrives,
+      offloads LCH₄, refuels its return burn from depot-produced LOX, and departs.
+      The Tanker fleet tops off between cycles rather than carrying full reserves on every
+      ascent. The depot absorbs production variability from the surface and smooths it into
+      a stable supply available on demand.
     </p>
 
     <div class="callout">
@@ -480,7 +491,7 @@
       <li>On the surface, ISRU operations fill cartridges with processed water; filled cartridges are loaded onto Lunar Tankers for ascent</li>
       <li>At the depot, cartridges are offloaded, water is drawn into the electrolysis queue, and empty cartridges are staged for return to the surface</li>
       <li>The cartridge fleet size sets a hard upper bound on water throughput — fleet sizing is a program-level logistics trade, not a per-vehicle decision</li>
-      <li>In the early program phase, Earth-water-filled cartridges can ride the Hauler to prime the depot before ISRU is operational</li>
+      <li>Cartridges always arrive at the depot full of <strong>lunar-sourced</strong> water via Lunar Tanker — the depot never receives Earth-launched water, in early program or any other phase</li>
     </ul>
 
     <div class="callout">
@@ -499,101 +510,94 @@
   <div class="container">
     <h2>Early Program Economics</h2>
     <p>
-      The first water to reach the depot comes from Earth. This is the most expensive water
-      in the program — and everyone involved knows it. The economic case for Aegis Station
-      does not depend on Earth-sourced water being cheap. It depends on Earth-sourced water
-      being <em>finite</em>: a necessary cost to establish the infrastructure that makes
-      lunar-sourced water viable at scale.
+      The depot is a downstream consumer in the lunar water supply chain.
+      It does not operate on Earth-sourced water — ever. The first drop of water to
+      reach depot electrolysis arrives from the lunar surface via Lunar Tanker,
+      filled from ISRU production. There is no transitional Earth-water phase,
+      no commissioning run of launched water, no primer load. The depot's
+      operational clock starts when ISRU and LT are ready to feed it.
     </p>
-
-    <h3>The Cost of Earth-Launched Water</h3>
-    <p class="subdued">
-      A 45 t full cartridge is close to the maximum payload capacity of the vehicles that can lift it.
-      Falcon Heavy (expendable) delivers ~64 t to LEO; New Glenn delivers ~45 t to LEO.
-      A single loaded cartridge consumes the majority of one heavy-lift mission —
-      before accounting for the transfer stage cost to get from LEO to lunar orbit.
+    <p>
+      This puts depot commissioning behind an ISRU gate. Depot hardware can be delivered,
+      assembled, and powered up on its own schedule — but it will stand dormant until
+      surface water production is online. Rather than a liability, this is the point.
+      The depot exists in part <em>to pull ISRU forward</em>: it provides a clear,
+      near-term demand signal and a concrete operational target for first surface water.
+      The faster ISRU comes up, the faster the depot comes to first light.
     </p>
-    <ul class="specs">
-      <li><strong>Falcon Heavy expendable:</strong> ~64 t to LEO — fits one loaded cartridge with margin; est. $150–200M per launch at current pricing</li>
-      <li><strong>New Glenn:</strong> ~45 t to LEO — one cartridge fills the manifest; pricing not fully public but in a comparable range</li>
-      <li><strong>LEO-to-lunar-orbit transfer:</strong> additional ΔV cost via dedicated tug or Hauler delivery adds further mass and cost overhead</li>
-      <li>Result: <strong>Earth-launched water arrives at the depot at very high cost per kilogram</strong> — precise figures depend on dry mass, transfer efficiency, and launch pricing at time of execution</li>
-    </ul>
 
     <div class="callout">
       <p>
-        This is not a problem to be solved — it is a phase to be survived. The early program
-        accepts high water costs as the price of establishing the depot, proving the end-to-end
-        system, and reaching the crossover point where lunar ISRU becomes the cheaper source.
+        The entire Aegis Station program has always been gated on ISRU. The depot does
+        not introduce this constraint — it inherits it, and accelerates resolution of it
+        by giving first water an immediate orbital consumer.
       </p>
     </div>
 
-    <h3>Program Phase Transitions</h3>
+    <h3>Commissioning Phase Progression</h3>
     <div class="card-grid">
       <div class="info-card">
-        <h4>Phase 1 — Infrastructure Delivery</h4>
+        <h4>Hardware Delivery & Dormant Standing</h4>
         <p>
-          Hauler delivers empty cartridges, depot hardware, and LCH₄ to lunar orbit.
-          No water production yet. Depot is assembled and commissioned.
-          Cartridges are staged on the surface, ready for ISRU fill.
-          Cost per kilogram of water: not yet relevant — there is no water.
+          Hauler delivers depot modules, empty cartridges, and initial LCH₄ to lunar orbit.
+          Depot is assembled, powered, thermally conditioned, and commissioned in the dry —
+          electrolysis plant cold, cryo tanks empty, dispensing interfaces proven against
+          inert stand-ins. The depot stands ready and waits.
         </p>
       </div>
       <div class="info-card">
-        <h4>Phase 2 — Depot Priming</h4>
+        <h4>ISRU First Water</h4>
         <p>
-          A small number of Earth-water-filled cartridges ride the Hauler to prime the
-          electrolysis plant and commission end-to-end propellant production.
-          Expensive but finite — this is a one-time commissioning cost, not a sustained supply model.
-          ISRU operations beginning on the surface in parallel.
+          Surface ISRU produces its first cartridge of processed lunar water.
+          This is the foundational program milestone — not a depot milestone,
+          but the gate that unblocks everything downstream of it.
+          Until this happens, nothing else in lunar orbit moves.
         </p>
       </div>
       <div class="info-card">
-        <h4>Phase 3 — ISRU Transition</h4>
+        <h4>LT Delivers First Cartridges</h4>
         <p>
-          Lunar Tanker Fleet begins delivering surface-produced water.
-          Earth water imports taper and stop as LT cadence ramps.
-          Cost per kilogram of depot water begins its long decline.
-          The crossover point — where lunar water is cheaper than Earth water delivered —
-          is the program's most important economic threshold.
+          A minimal Lunar Tanker capability — a single vehicle, low cadence — lifts
+          the first filled cartridges from the ISRU node to the depot. Full LT fleet
+          deployment is not required for this step. Depot first-light is a low-throughput
+          event; the fleet scales later for a different mission.
         </p>
       </div>
       <div class="info-card">
-        <h4>Phase 4 — Sustained Operations</h4>
+        <h4>Depot First Light</h4>
         <p>
-          Depot runs on lunar water exclusively. Earth imports limited to LCH₄
-          and non-water consumables. Propellant production cost is dominated
-          by LT operations and electrolysis power, not launch costs.
-          Economic model is viable at scale.
+          First cartridge offload into depot inventory. Electrolysis plant starts.
+          First LOX produced from lunar water. End-to-end propellant chain
+          validated: surface ice → ISRU water → cartridge → LT → depot → LOX →
+          dispensed to vehicle. This is the cislunar economy's first light.
+        </p>
+      </div>
+      <div class="info-card">
+        <h4>Ramp to Sustained Operations</h4>
+        <p>
+          LT cadence and ISRU throughput climb in lockstep with depot electrolysis capacity.
+          Depot begins smoothing production variability and dispensing steadily to
+          Hauler return burns and LT top-offs. Propellant production cost is dominated by
+          LT operations and electrolysis power — launch costs drop out of the water equation
+          entirely because Earth never enters it.
         </p>
       </div>
     </div>
 
     <h3>The Starship Variable</h3>
     <p>
-      Starship changes the calculus significantly — and in a non-obvious direction.
-      At projected full-reuse economics, Starship could potentially deliver
-      2–3 loaded cartridges per mission to LEO, dramatically reducing the per-kilogram
-      cost of Earth-launched water. This does not make Earth water cheap enough to
-      sustain the depot indefinitely, but it does move the crossover point —
-      potentially making it economically rational to run on Earth water longer
-      than the current heavy-lift cost structure would suggest.
+      Starship affects the depot through hardware delivery economics, not through water supply.
+      Cheaper, higher-cadence Earth launch reduces the cost of shipping depot modules,
+      empty cartridges, LCH₄ freight, and other Hauler manifest cargo to lunar orbit.
+      It does not — and cannot — feed water into the depot, because the depot does not
+      accept Earth water as a matter of architecture.
     </p>
     <p class="subdued">
-      The program should not plan around Starship economics, but should
-      track them. If launch costs fall far enough fast enough, the ISRU
-      investment timeline and urgency changes. Architecture decisions that
-      assume expensive Earth water baked in as a permanent condition
-      may need revisiting as the launch market evolves.
-    </p>
-
-    <h3>Open Trade: Initial Water Quantity</h3>
-    <p class="subdued">
-      The total volume of Earth-sourced water required to prime the depot and commission
-      the electrolysis plant has not yet been calculated. This is a program-level open item.
-      It drives the number of Hauler missions in Phase 2, the commissioning timeline,
-      and the initial capital cost of reaching operational status.
-      Resolving this trade is a prerequisite for program-level cost estimation.
+      Where Starship does matter is in compressing the hardware-delivery and dormant-standing
+      phase. A program that can ship the depot cheaply and quickly buys margin to stand up
+      ISRU without the depot becoming a schedule bottleneck in the other direction.
+      The program should track Starship economics as a hardware-logistics variable,
+      not as an input to the water supply chain.
     </p>
   </div>
 </section>
@@ -685,9 +689,11 @@
 
     <h3>Lunar Tanker Fleet</h3>
     <ul class="specs">
-      <li>Primary water delivery vehicles — LT cartridge offload feeds depot water inventory and electrolysis queue</li>
-      <li>LTs top off LCH₄/LOX at the depot between descent cycles — depot acts as a propellant buffer smoothing surface production variability</li>
-      <li>High call rate: LT docking and transfer operations are the depot's most frequent interaction, driving reliability and throughput requirements</li>
+      <li>Sole water delivery path — LT cartridge offload is the only way water ever enters the depot; there is no Earth-sourced alternative</li>
+      <li><strong>Depot first-light requires only minimal LT capability</strong> — a single vehicle flying at low cadence is sufficient to deliver initial cartridges and commission end-to-end propellant production</li>
+      <li>The full ~45-vehicle LT fleet is sized for the downstream <strong>station shield-layer fill</strong> campaign, which is a much higher-throughput requirement — fleet completion is not a prerequisite for depot operations</li>
+      <li>LTs top off LCH₄/LOX at the depot between descent cycles once the depot is operational — depot acts as a propellant buffer smoothing surface production variability</li>
+      <li>High call rate in steady state: LT docking and transfer operations become the depot's most frequent interaction during the shield-fill campaign, driving reliability and throughput requirements</li>
     </ul>
 
     <h3>Luna–Aegis Shuttle (Hopper)</h3>

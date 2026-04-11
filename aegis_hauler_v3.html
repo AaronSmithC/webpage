@@ -768,12 +768,12 @@
     <div class="ph">
       <div class="ph-n">PHASE 0</div>
       <div class="ph-t">Precursor Delivery</div>
-      <p>Cargo-only runs. First station hull segments, node modules, and structural hardware. Builds route operations and refueling depot dependency before station exists. No crew modules fitted.</p>
+      <p>Cargo-only runs before the depot is operational. First station hull segments, depot modules, empty cartridges, and structural hardware. Kick stage flies expendable or with reserved return tankage — no depot LOX available yet, and the higher per-mission propellant cost is accepted as a known early-phase expense. Route operations and interface verification mature in this window. No crew modules fitted.</p>
     </div>
     <div class="ph">
       <div class="ph-n">PHASE 1</div>
       <div class="ph-t">Construction Logistics</div>
-      <p>Primary build-out phase. Repeated runs of tank cartridges, power system hardware, shielding panels, and assembly equipment. Return runs carry waste and empty hardware. Tandem cartridge runs if depot refueling is operational.</p>
+      <p>Primary build-out phase. Repeated runs of tank cartridges, power system hardware, shielding panels, and assembly equipment. Return runs carry waste and empty hardware. Depot refueling becomes available when ISRU and LT deliver first water to the depot — not as a function of Hauler cadence. Tandem cartridge runs unlock once that gate opens.</p>
     </div>
     <div class="ph">
       <div class="ph-n">PHASE 2</div>
@@ -852,8 +852,8 @@
     </div>
     <div class="prop-item">
       <div class="prop-l">Kick Stage</div>
-      <div class="prop-v">Methalox — Retained & Refuelable</div>
-      <div class="prop-note">Required for TLI and lunar orbit capture. Sized for 50 T baseline cargo. Stays attached for return burns. Refueled at LEO depot or Aegis Station. Tandem runs require enlarged or staged booster — flagged as variant.</div>
+      <div class="prop-v">Methalox — Retained & Asymmetrically Refueled</div>
+      <div class="prop-note">Required for TLI and lunar orbit capture. Sized for 50 T baseline cargo. Stays attached for return burns. Refueled at the Lunar Orbital Propellant Depot using an asymmetric split: <strong>LCH₄ delivered as freight manifest cargo</strong> on the same Hauler that will burn it, <strong>LOX drawn from depot electrolysis</strong> of lunar-sourced water. The fuel side rides Earth-to-orbit with the vehicle; the oxidizer side is produced on-site from ISRU water. Tandem runs require enlarged or staged booster — flagged as variant.</div>
     </div>
     <div class="prop-item">
       <div class="prop-l">Attitude Control</div>
@@ -879,7 +879,7 @@
 
   <div class="callout warn">
     <strong>Critical Dependency</strong>
-    The retained kick stage strategy requires methalox refueling capability at either a LEO depot or Aegis Station. This is not a background assumption — it is a hard infrastructure dependency that must be resolved in parallel with vehicle development. Without it, the vehicle reverts to expendable kick stages per run, significantly increasing operating cost.
+    The retained kick stage strategy depends on the Lunar Orbital Propellant Depot reaching operational status — specifically, on the depot's LOX side being fed by ISRU and Lunar Tanker deliveries. LCH₄ is always a manifest item the Hauler brings with it; LOX is the piece the depot provides. Until the depot is operational, early-program Hauler missions fly <strong>without depot refueling</strong> and accept the higher per-mission propellant cost as a known early-phase expense — expendable or reserved-for-return tankage rather than depot top-off. Resolving depot readiness in parallel with vehicle development shortens this expensive window.
   </div>
 </section>
 
@@ -953,7 +953,7 @@
       <div class="mod-n">05</div>
       <div>
         <div class="mod-title">Propulsion Stack</div>
-        <p class="mod-desc">Ion/Hall thruster array (primary cruise). Methalox kick stage (retained, refuelable) for TLI and capture burns. RCS aft cluster. Aft docking interface. Propellant tanks and feed lines. Sized for 50 T baseline cargo; tandem variant requires enlarged booster.</p>
+        <p class="mod-desc">Ion/Hall thruster array (primary cruise). Methalox kick stage (retained, asymmetrically refueled at the Lunar Orbital Propellant Depot — LCH₄ from manifest, LOX from depot electrolysis) for TLI and capture burns. RCS aft cluster. Aft docking interface. Propellant tanks and feed lines. Sized for 50 T baseline cargo; tandem variant requires enlarged booster.</p>
       </div>
       <div class="mod-tag core">PERMANENT</div>
     </div>
@@ -967,7 +967,7 @@
   <div class="open-items">
     <div class="oi">
       <div class="oi-num">01</div>
-      <div class="oi-text">Refueling infrastructure: methalox availability at LEO depot or Aegis Station is a hard dependency for the retained kick stage strategy. Without it, operating economics revert to expendable kick stages. Must be resolved in parallel with vehicle development.</div>
+      <div class="oi-text">Refueling infrastructure: the Lunar Orbital Propellant Depot must reach operational status (ISRU-fed, LT-supplied) for the asymmetric refueling model to close. LCH₄ is always manifest cargo; the open dependency is on depot LOX availability. Early-program missions before depot readiness accept expendable kick-stage economics as a known cost. Must be resolved in parallel with vehicle development.</div>
       <div class="oi-status open">OPEN</div>
     </div>
     <div class="oi">
