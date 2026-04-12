@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+  <title>Aegis Station — Hub/Ring Boundary</title>
+
+  <meta name="description" content="How people, cargo, power, data, and thermal flows cross the rotational boundary between Aegis Station's despun hub and its rotating habitat rings. No slip rings. No continuous rotary seals."/>
+  <meta name="keywords" content="Aegis Station, hub ring boundary, despun magazine, transfer pod, rotary transformer, free-space optical, contactless power, rotating habitat"/>
+  <meta name="author" content="Aegis Station"/>
+
+  <meta property="og:title" content="Aegis Station — Hub/Ring Boundary"/>
+  <meta property="og:description" content="Crossing the rotational boundary without slip rings or continuous rotary seals."/>
+  <meta property="og:type" content="website"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+
+  <style>
+    body { background:#0b0b0b; color:#e8e8e8; font-family:"Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem; }
+    .kicker { color:#bdbdbd; margin: 0 0 0.75rem; }
+    h1, h2, h3 { font-family:"Orbitron", system-ui, sans-serif; letter-spacing: 0.5px; }
+    h1 { font-size: 2.1rem; margin: 0.25rem 0 0.75rem; }
+    h2 { font-size: 1.35rem; margin: 2.0rem 0 0.75rem; }
+    h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color:#f0f0f0; }
+    p { line-height: 1.65; color:#d7d7d7; }
+    a { color:#ffffff; text-decoration: underline; }
+    .rule { border:0; border-top:1px solid #2d2d2d; margin: 1.75rem 0; }
+    .note { color:#b9b9b9; font-size: 0.95rem; }
+    .grid { display:grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 760px) { .grid { grid-template-columns: 1fr 1fr; } }
+    .card { border: 1px solid #2b2b2b; background: #101010; border-radius: 14px; padding: 1.1rem 1.1rem; box-shadow: 0 4px 14px rgba(0,0,0,0.35); }
+    .card ul { margin: 0.6rem 0 0; padding-left: 1.1rem; color:#d7d7d7; }
+    .card li { margin: 0.35rem 0; }
+    .toc { border: 1px solid #2b2b2b; background: #0f0f0f; border-radius: 14px; padding: 1rem 1rem; margin-top: 1.25rem; }
+    .toc a { text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    .toc ul { list-style:none; padding:0; margin:0; line-height:1.75; }
+    .pill { display:inline-block; padding: 0.25rem 0.55rem; border-radius: 999px; border:1px solid #2b2b2b; background:#141414; font-size: 0.85rem; color:#cfcfcf; margin-right: 0.4rem; margin-top: 0.35rem; }
+    .back { display:inline-block; margin-top: 1rem; padding: 0.7rem 1.0rem; border-radius: 10px; border:1px solid #2b2b2b; background:#141414; text-decoration:none; }
+    .back:hover { background:#1a1a1a; }
+    .section-lead { color:#cfcfcf; }
+    table { width:100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 0.95rem; }
+    th, td { text-align:left; padding: 0.55rem 0.7rem; border-bottom: 1px solid #2b2b2b; vertical-align: top; }
+    th { color:#f0f0f0; font-family:"Orbitron", system-ui, sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.5px; }
+    tbody tr:nth-child(even) { background:#0e0e0e; }
+    tbody tr:nth-child(odd) { background:#121212; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <p class="kicker">Aegis Station</p>
+    <h1>Hub/Ring Boundary</h1>
+
+    <p class="section-lead">
+      The hub/ring boundary is the interface between Aegis Station's despun central hub and its three
+      co-rotating habitat rings. Everything the station needs to move — crew, cargo, water, power, data,
+      heat — crosses this boundary. The architectural principle is singular: <strong>no continuous
+      rotary mechanical interface carries a life-critical flow.</strong> No slip rings. No continuous
+      rotary fluid seals. Every crossing is either contactless, cyclic, or eliminated entirely by
+      distributing the function across both sides.
+    </p>
+
+    <div class="toc">
+      <strong style="font-family: Orbitron, system-ui, sans-serif;">On this page</strong>
+      <ul>
+        <li><a href="#principle">1. Design Principle</a></li>
+        <li><a href="#people">2. Crew Crossings</a></li>
+        <li><a href="#cargo">3. Cargo & Bulk Fluids</a></li>
+        <li><a href="#power">4. Power Crossings</a></li>
+        <li><a href="#data">5. Data Crossings</a></li>
+        <li><a href="#thermal">6. Thermal Crossings</a></li>
+        <li><a href="#summary">7. Boundary Summary</a></li>
+      </ul>
+    </div>
+
+    <hr class="rule"/>
+
+    <section id="principle">
+      <h2>1. Design Principle</h2>
+      <p>
+        Continuous rotary mechanical interfaces — slip rings, brush assemblies, rotary fluid unions —
+        are the historically failure-prone elements of rotating space systems. Wear, contamination,
+        seal degradation, and single-point failure modes have driven substantial operational problems
+        on existing platforms. Aegis Station eliminates them at the hub/ring boundary.
+      </p>
+      <p>Each flow across the boundary is handled by the mechanism best matched to its duty cycle:</p>
+      <div class="card">
+        <ul>
+          <li><strong>Cyclic mechanical transfer</strong> for crew, cargo, and bulk fluids — carried by standardized pods through despun magazines and ring-face vestibules.</li>
+          <li><strong>Contactless coupling</strong> for power and data — rotary transformers for power, free-space optical links for data.</li>
+          <li><strong>Function distribution</strong> for thermal and selected utilities — heat is rejected on the ring directly; the ring carries its own independent services where doing so is cheaper than crossing the boundary.</li>
+        </ul>
+      </div>
+      <p>
+        The hub becomes an interface bus, not a utility umbilical. The rings are substantially autonomous
+        systems connected to the hub through a small number of well-characterized, well-behaved crossings.
+      </p>
+    </section>
+
+    <hr class="rule"/>
+
+    <section id="people">
+      <h2>2. Crew Crossings</h2>
+      <p>
+        Crew cross the boundary inside <strong>transit pods</strong> — pressurized, seat-equipped
+        vessels with independent life support, moved through a cyclic transfer mechanism that never
+        requires continuous relative motion between a sealed pressurized volume and a rotating structure.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Transit Pod</h3>
+          <ul>
+            <li>Common ~3.5 m external envelope; 4 crew nominal, 6 crew contingency evac load</li>
+            <li>Independent ECLSS with ~24-hour endurance at nominal load</li>
+            <li>Per-seat LEA-class pressure suits with umbilical-compatible interfaces</li>
+            <li>Manual hatch operation — no power, no comms, no software in the safety path</li>
+            <li>Pod long axis aligns with station spin axis; "floor" points outward from hub centerline</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Despun Magazine</h3>
+          <ul>
+            <li>Disc carousel co-located with each ring face; diameter just exceeds hub outer wall</li>
+            <li>Five pod berths arrayed around rim, rotation axis parallel to station spin axis</li>
+            <li>Loads despun from hub-internal corridor; spins up to ring rate for transfer</li>
+            <li>Reaction wheels absorb spin-up/down torque; water ballast compensates partial-load asymmetry</li>
+            <li>Contactless relationship with ring during spin-up; no seal is slipping under pressure at any phase</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Axial Transfer</h3>
+          <ul>
+            <li>At co-rotation, pod is pushed <strong>axially</strong> forward into a ring-face receptacle</li>
+            <li>Both sides are at the same radius and angular rate — the transfer is a simple linear motion in the rotating frame</li>
+            <li>No rotary fluid or gas seal is traversed; pressure mate occurs between two co-rotating surfaces</li>
+            <li>Mechanism is bidirectional for pod retrieval</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Ring-Face Vestibule</h3>
+          <ul>
+            <li>Pressurized volume on the ring's inner (hub-facing) surface where pods mate</li>
+            <li>Crew disembark in low-g; take ring-internal lifts outward to the rim habitat level</li>
+            <li>Pod stays at the boundary; no pod traverses the ring's radial depth</li>
+            <li>Four vestibules per ring, distributed around the ring face for redundancy and walking-distance coverage</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="margin-top:1.25rem;">Sizing & Cadence</h3>
+      <p>
+        With a design complement of roughly 3,000–5,000 permanent crew distributed across three identical
+        rings, per-vestibule peak load is well within the capacity of 5-chamber magazines operating on a
+        scheduled ~15–20 minute cycle. Surge mode (~10 minute cycles) supports full-ring evacuation in
+        under two hours without relying on any single vestibule.
+      </p>
+
+      <h3 style="margin-top:1.25rem;">Crew Safety Layers</h3>
+      <table>
+        <thead><tr><th>Layer</th><th>Function</th></tr></thead>
+        <tbody>
+          <tr><td>Pressurized hub corridor &amp; vestibule</td><td>Nominal shirtsleeve environment on both sides of the crossing</td></tr>
+          <tr><td>Pod hull &amp; independent ECLSS</td><td>Sealed volume, hours of independent life support</td></tr>
+          <tr><td>LEA pressure suits, per seat</td><td>Pressure containment if both pressurized volumes fail</td></tr>
+          <tr><td>Manual egress &amp; mechanical hatches</td><td>Power-independent exit to a pressurized refuge</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="rule"/>
+
+    <section id="cargo">
+      <h2>3. Cargo & Bulk Fluids</h2>
+      <p>
+        Cargo crosses the boundary by the <strong>same pod form factor</strong> as crew, in a parallel
+        cargo-variant magazine at each ring. This eliminates continuous rotary fluid unions entirely —
+        bulk water, pressurant gas, and other fluids cross as sealed cartridges, not as flowing streams
+        through rotating plumbing.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Cargo Pod</h3>
+          <ul>
+            <li>Shared external envelope and transfer interface with passenger pod</li>
+            <li>Internal cradle accepts a single 45-tonne MTC, standard cargo modules, or outsize hardware</li>
+            <li>Pressurized or unpressurized per mission; active thermal for sensitive payloads</li>
+            <li>No life support; full internal envelope available for payload mass</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Cargo Magazine</h3>
+          <ul>
+            <li>Mechanically identical to passenger magazine; parallel hardware per ring face</li>
+            <li>Scheduled independently of passenger cadence to avoid interference</li>
+            <li>Can carry a passenger pod in contingency if a passenger magazine is out of service</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Bulk Fluid Transfer</h3>
+          <ul>
+            <li>Water for ring shielding arrives as sealed MTCs carried on cargo pods</li>
+            <li>Cartridges discharge inside the ring at pressure-equalized dry transfer interfaces</li>
+            <li>Empty cartridges return the same way for surface refill</li>
+            <li>Pressurant gas uses dedicated gas cartridges on the same transit path — no rotary gas union</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>What This Eliminates</h3>
+          <ul>
+            <li>No continuous rotary water line crossing the boundary</li>
+            <li>No pressurant gas rotary seal</li>
+            <li>No shared failure mode between fluid transfer and structural rotation</li>
+            <li>Fluid seal life is no longer a station-level reliability driver</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule"/>
+
+    <section id="power">
+      <h2>4. Power Crossings</h2>
+      <p>
+        Power crosses the boundary via <strong>contactless inductive coupling</strong> — a rotary
+        transformer whose primary and secondary windings rotate relative to each other across a small
+        air gap. No brushes. No sliding contact. No wear item on the power path.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Primary Power Path</h3>
+          <ul>
+            <li>Rotary transformer at each ring interface; primary on hub, secondary on ring</li>
+            <li>High-frequency AC link; efficiency in the high 90s is achievable at scale</li>
+            <li>No contact means no contamination, no brush dust, no wear-limited service life</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Ring-Mounted Generation</h3>
+          <ul>
+            <li>Each ring carries independent PV and storage sufficient for core life support and essential loads</li>
+            <li>Rotary-transformer path is primary; ring-mounted power is backup and peaking</li>
+            <li>Ring can survive a complete hub-power outage indefinitely on its own generation and storage</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>No Slip Rings</h3>
+          <ul>
+            <li>Slip rings and brush assemblies are excluded from the boundary architecture</li>
+            <li>Historic rotating-power problems (brush wear, contamination, arcing) do not exist here</li>
+            <li>Maintenance on the boundary power path is scheduled, not reactive</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Fault Isolation</h3>
+          <ul>
+            <li>Primary and ring-local power are independent circuits with no shared fault domain</li>
+            <li>Transformer isolation inherently blocks common-mode faults between hub and ring buses</li>
+            <li>Loss of any single ring does not propagate to the hub or to other rings</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule"/>
+
+    <section id="data">
+      <h2>5. Data Crossings</h2>
+      <p>
+        Data crosses the boundary via <strong>free-space optical links on the station spin axis</strong>.
+        The geometry is naturally favorable: an on-axis point is stationary in both the hub and ring
+        reference frames, so no mechanical rotation of the link itself is required.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>On-Axis Optical</h3>
+          <ul>
+            <li>Redundant transceivers at the hub/ring interface, aligned along the station spin axis</li>
+            <li>Bandwidth and latency sufficient for all station operational and crew traffic</li>
+            <li>No EMI, no contact wear, no continuous rotary mechanical interface</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Redundant Paths</h3>
+          <ul>
+            <li>Each ring carries multiple independent optical transceivers for fault tolerance</li>
+            <li>Low-rate RF backup for safing and initial reacquisition after outage</li>
+            <li>Optical fiber paralleling the crew transit path provides a wired redundant route</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule"/>
+
+    <section id="thermal">
+      <h2>6. Thermal Crossings</h2>
+      <p>
+        Most station waste heat <strong>does not cross the boundary</strong>. Ring-generated heat is
+        rejected by ring-mounted radiators on the rotating structure. This eliminates the need for a
+        continuous rotary fluid coupling on a working thermal loop, which would otherwise be one of the
+        highest-duty-cycle and highest-consequence wear items on the station.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Ring-Side Rejection</h3>
+          <ul>
+            <li>Habitat thermal loads are handled entirely on the ring by ring-mounted radiators</li>
+            <li>Rotation geometry is compatible with radiator view factor management</li>
+            <li>No thermal working fluid crosses the boundary in the primary path</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Hub-Side Rejection</h3>
+          <ul>
+            <li>Hub equipment heat is rejected on hub-mounted radiators, also without boundary crossing</li>
+            <li>Small hub/ring coupling only via air exchange through pressurized transit corridors — a known, benign path</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule"/>
+
+    <section id="summary">
+      <h2>7. Boundary Summary</h2>
+      <table>
+        <thead>
+          <tr><th>Flow</th><th>Crossing Mechanism</th><th>Continuous Rotary Seal?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Crew</td><td>Cyclic pod transfer via despun magazine and ring-face vestibule</td><td>No</td></tr>
+          <tr><td>Cargo</td><td>Cyclic pod transfer via cargo magazine</td><td>No</td></tr>
+          <tr><td>Bulk water</td><td>Sealed MTCs carried as cargo pod payload</td><td>No</td></tr>
+          <tr><td>Pressurant gas</td><td>Sealed gas cartridges carried as cargo pod payload</td><td>No</td></tr>
+          <tr><td>Power</td><td>Rotary transformer (contactless inductive)</td><td>No</td></tr>
+          <tr><td>Data</td><td>On-axis free-space optical</td><td>No</td></tr>
+          <tr><td>Thermal</td><td>Rejected on each side independently</td><td>No</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:1.25rem;">
+        The hub/ring boundary carries every flow the station needs without a single continuous rotary
+        mechanical seal in any life-critical path. Cyclic transfers are bounded, well-characterized,
+        and maintainable. Contactless couplings have no wear items. Functions that can be distributed
+        across both sides are, removing the crossing entirely.
+      </p>
+    </section>
+
+    <hr class="rule"/>
+
+    <p class="note">
+      This page describes the boundary only. Ring-internal architecture, hub infrastructure, and
+      overall station design are addressed elsewhere in the program documentation.
+    </p>
+
+    <a class="back" href="index.html">← Back to Home</a>
+
+  </div>
+</body>
+</html>
