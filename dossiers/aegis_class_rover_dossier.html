@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aegis-Class Rover — Architecture Reference Document</title>
+<style>
+  @page { size: Letter; margin: 0; }
+
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    margin: 0;
+    background: #0d0d0d;
+    color: #b9b9bf;
+    font-family: 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+
+  .doc { padding: 0.85in 0.9in 0.9in; }
+
+  /* ── Header block ── */
+  .kicker {
+    font-size: 10.5pt;
+    color: #8a8a90;
+    margin-bottom: 6pt;
+  }
+  h1 {
+    font-size: 30pt;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 4pt;
+    letter-spacing: -0.5pt;
+  }
+  .subtitle {
+    font-size: 13pt;
+    color: #c4c4c8;
+    margin-bottom: 8pt;
+  }
+  .meta {
+    font-size: 9pt;
+    color: #7a7a80;
+    letter-spacing: 0.2pt;
+  }
+
+  /* ── Section rules & headings ── */
+  hr {
+    border: 0;
+    border-top: 0.75pt solid #303034;
+    margin: 24pt 0 0;
+  }
+  h2 {
+    font-size: 17pt;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 24pt 0 12pt;
+    break-after: avoid;
+  }
+  h3 {
+    font-size: 11.5pt;
+    font-weight: 700;
+    color: #f0f0f2;
+    margin: 16pt 0 6pt;
+    break-after: avoid;
+  }
+  p { margin: 0 0 10pt; }
+
+  /* ── Lists ── */
+  ul { margin: 0 0 10pt; padding-left: 18pt; }
+  li { margin-bottom: 4pt; }
+  ul.numbered { list-style: none; padding-left: 0; }
+  ul.numbered li {
+    display: flex;
+    gap: 18pt;
+    margin-bottom: 6pt;
+  }
+  ul.numbered .n { color: #7a7a80; width: 16pt; flex: none; }
+  li strong { color: #e8e8ea; }
+
+  /* ── Tables ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6pt 0 6pt;
+    font-size: 9.5pt;
+    break-inside: avoid;
+  }
+  th {
+    text-align: left;
+    background: #1f1f23;
+    color: #ededf0;
+    font-weight: 700;
+    padding: 6pt 9pt;
+    border: 0.75pt solid #2c2c30;
+  }
+  td {
+    padding: 6pt 9pt;
+    border: 0.75pt solid #242428;
+    color: #b9b9bf;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #141416; }
+  tr:nth-child(odd) td { background: #101012; }
+  td strong { color: #e8e8ea; }
+
+  .note {
+    font-size: 9pt;
+    color: #76767c;
+    margin: 4pt 0 10pt;
+  }
+
+  /* ── Status callout ── */
+  .callout {
+    border: 0.75pt solid #34342c;
+    border-left: 2.5pt solid #8f8f96;
+    background: #151513;
+    padding: 11pt 14pt;
+    margin: 12pt 0;
+    font-size: 9.8pt;
+    break-inside: avoid;
+  }
+  .callout strong { color: #ffffff; }
+  .callout em { color: #95959b; font-style: italic; }
+
+  /* ── Footer ── */
+  .end-footer {
+    margin-top: 34pt;
+    padding-top: 14pt;
+    border-top: 0.75pt solid #303034;
+    text-align: center;
+    font-size: 8.5pt;
+    color: #6c6c72;
+    line-height: 1.7;
+  }
+
+  .section { break-inside: auto; }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- ── HEADER ── -->
+  <div class="kicker">Aegis Station</div>
+  <h1>Aegis-Class Rover</h1>
+  <div class="subtitle">Lunar Surface Mobility Platform</div>
+  <div class="meta">Architecture Reference Document &nbsp;|&nbsp; May 2026 &nbsp;|&nbsp; Not for Hardware Commitment</div>
+
+  <hr>
+
+  <!-- ── 1 ── -->
+  <section class="section">
+    <h2>1. Executive Summary</h2>
+    <p>
+      The Aegis-Class Rover is a pressurized, long-duration lunar surface mobility platform designed to
+      support sustained operations at the lunar south pole and other high-value exploration sites. It
+      combines extended-duration crew habitation (30–60 days), integrated power and thermal architecture
+      optimized for low solar elevation, suitport-based dust boundary control, radiation storm shelter
+      capability, and a NASA cFS-based flight software and crew operations console.
+    </p>
+    <p>
+      ASI develops the vehicle-defining systems: the pressurized crew module, the integrated power and
+      thermal architecture (SSSRA), and the flight software and operations console. The mobility chassis is
+      sourced rather than rebuilt — drawn from the maturing open-architecture lunar rover market — with ASI
+      specifying the interface and integrating the platform.
+    </p>
+    <p>
+      The vehicle is architected as a surface infrastructure element, not a short-sortie exploration rover.
+      It is intended to operate as part of a distributed logistics network including orbital habitats,
+      surface outposts, LUNET utility nodes, and ISRU systems.
+    </p>
+  </section>
+
+  <hr>
+
+  <!-- ── 2 ── -->
+  <section class="section">
+    <h2>2. Mission Architecture &amp; Operational Concept</h2>
+
+    <h3>Primary Mission Roles</h3>
+    <ul>
+      <li>Polar water prospecting support</li>
+      <li>Surface logistics transport</li>
+      <li>Mobile command for construction and field operations</li>
+      <li>ISRU equipment towing and servicing</li>
+      <li>Emergency shelter and crew lifeboat</li>
+    </ul>
+
+    <h3>Operational Regime</h3>
+    <table>
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>Nominal crew</td><td>2–4</td></tr>
+      <tr><td>Emergency crew</td><td>Up to 6 (short-duration)</td></tr>
+      <tr><td>Mission duration</td><td>30–60 days</td></tr>
+      <tr><td>Range</td><td>~100 km nominal; extended via LUNET recharge (energetic, not geometric)</td></tr>
+      <tr><td>Cruise speed</td><td>10–15 km/h</td></tr>
+      <tr><td>Maximum speed</td><td>25 km/h (terrain limited)</td></tr>
+    </table>
+  </section>
+
+  <hr>
+
+  <!-- ── 3 ── -->
+  <section class="section">
+    <h2>3. Design Philosophy — Constraint Hierarchy</h2>
+    <p>
+      The rover geometry is derived from a strict constraint chain, ensuring traceability from crew
+      habitability to vehicle mass and stability:
+    </p>
+    <ul class="numbered">
+      <li><span class="n">1</span><span>Interior standing height (2.1 m clear)</span></li>
+      <li><span class="n">2</span><span>Exterior hull dimensions</span></li>
+      <li><span class="n">3</span><span>Center of gravity (CG) height</span></li>
+      <li><span class="n">4</span><span>Track width and static stability requirement</span></li>
+      <li><span class="n">5</span><span>Roof footprint for power/thermal systems</span></li>
+      <li><span class="n">6</span><span>Radiator and solar array sizing</span></li>
+      <li><span class="n">7</span><span>Electrical and thermal system capacity</span></li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <!-- ── 4 ── -->
+  <section class="section">
+    <h2>4. Dimensional &amp; Stability Parameters</h2>
+
+    <h3>Exterior Geometry</h3>
+    <table>
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>Overall length</td><td>~10.0 m</td></tr>
+      <tr><td>Overall width (with treads)</td><td>4.6–4.8 m</td></tr>
+      <tr><td>Track width (center-to-center)</td><td>4.0 m</td></tr>
+      <tr><td>Wheelbase</td><td>6.5 m</td></tr>
+      <tr><td>Height to cabin roof</td><td>3.45 m</td></tr>
+      <tr><td>Height to array top</td><td>3.90 m</td></tr>
+      <tr><td>Ground clearance</td><td>~0.50 m</td></tr>
+    </table>
+
+    <h3>Stability Metrics</h3>
+    <table>
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>CG height</td><td>~1.54 m above ground</td></tr>
+      <tr><td>Static Stability Factor (SSF)</td><td>1.30</td></tr>
+      <tr><td>NASA target (crewed)</td><td>≥ 1.2</td></tr>
+    </table>
+    <p class="note">The 4.0 m track width provides margin for dynamic loads, slope traversal, and cargo asymmetry.</p>
+  </section>
+
+  <hr>
+
+  <!-- ── 5 ── -->
+  <section class="section">
+    <h2>5. Mass Budget (Baseline Configuration)</h2>
+    <table>
+      <tr><th>Subsystem</th><th>Mass (kg)</th></tr>
+      <tr><td>Chassis, suspension, drivetrain</td><td>1,200</td></tr>
+      <tr><td>Pressure hull &amp; structure</td><td>1,000</td></tr>
+      <tr><td>Underfloor systems (batteries, tanks)</td><td>800</td></tr>
+      <tr><td>ECLSS + interior equipment</td><td>600</td></tr>
+      <tr><td>Radiator assembly (6 m²)</td><td>60</td></tr>
+      <tr><td>Roof solar array (20 m²)</td><td>110</td></tr>
+      <tr><td>Deployable wing arrays (10 m²)</td><td>75</td></tr>
+      <tr><td>Fuel cell + reactants</td><td>180</td></tr>
+      <tr><td>Crew (3 × 80 kg)</td><td>240</td></tr>
+      <tr><td>Remaining systems + margin</td><td>~1,135</td></tr>
+      <tr><td><strong>Gross vehicle mass</strong></td><td><strong>~5,400</strong></td></tr>
+    </table>
+    <p class="note">Chassis, suspension, and drivetrain mass is the platform partner's allocation against the integrated-vehicle budget.</p>
+  </section>
+
+  <hr>
+
+  <!-- ── 6 ── -->
+  <section class="section">
+    <h2>6. Mobility Platform Interface</h2>
+    <p>
+      The mobility chassis — suspension, drivetrain, wheels, and body structure — is sourced from a
+      third-party platform partner drawn from the maturing open-architecture lunar rover market. ASI
+      specifies the interface and integrates the platform; the reference configuration below states the
+      operational envelope and interface requirements the crew module brings to any candidate platform.
+      Specific chassis selection and final parameter values follow once a platform partnership is
+      established around this envelope.
+    </p>
+
+    <h3>Reference Structural Frame</h3>
+    <ul>
+      <li>Rigid metal or composite chassis (partner-defined)</li>
+      <li>Multi-axle geometry (6-wheel reference configuration)</li>
+      <li>Independent terrain-following suspension</li>
+      <li>Wide stance for lateral slope stability</li>
+    </ul>
+
+    <h3>Reference Wheel System</h3>
+    <ul>
+      <li>Non-pneumatic metal-mesh flex wheels</li>
+      <li>Designed for regolith abrasion and thermal cycling</li>
+      <li>Ground-pressure target ≤ 7 kPa for south-pole regolith</li>
+    </ul>
+
+    <p class="note">
+      These figures represent design-baseline expectations consistent with currently demonstrated lunar
+      mobility platforms and serve as the integration starting point for partner discussions.
+    </p>
+  </section>
+
+  <hr>
+
+  <!-- ── 7  (NEW) ── -->
+  <section class="section">
+    <h2>7. Flight Software &amp; Crew Operations Console</h2>
+    <p>
+      The rover flight software is built on NASA's Core Flight System (cFS) — the same flight-heritage
+      framework used across NASA missions. Mission-application source is identical across simulation, bench,
+      and flight targets; only the hardware abstraction layer (HAL) changes between environments, so
+      verification performed in simulation carries forward rather than being rebuilt for each phase.
+    </p>
+
+    <div class="callout">
+      <strong>Development status:</strong> The flight software runs end-to-end in a desktop simulation — a
+      real cFS workspace, all 16 applications, with autonomous FDIR verified live across the full safing
+      chain. <em>Bench and on-vehicle targets share the same source through the HAL; no flight hardware is
+      committed.</em>
+    </div>
+
+    <table>
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>cFS applications</td><td>16 (cFE core + 9 standard cFS + 7 Aegis mission apps)</td></tr>
+      <tr><td>FDIR safing modes</td><td>5 — NOMINAL → THERM_SAFE → ECLSS_SAFE → LOADSHED → SHELTER</td></tr>
+      <tr><td>Navigation update rate</td><td>20 Hz (aegis_nav navigation &amp; odometry)</td></tr>
+      <tr><td>Telemetry protocol</td><td>CCSDS (standards-compliant)</td></tr>
+      <tr><td>Console link</td><td>WebSocket bridge (CCSDS-UDP ↔ browser)</td></tr>
+      <tr><td>Runtime</td><td>cFE — Core Flight Executive, NASA flight heritage</td></tr>
+    </table>
+
+    <h3>Autonomous Fault Detection, Isolation &amp; Recovery</h3>
+    <ul>
+      <li>Continuous watchpoint monitoring across thermal, life support, electrical, and radiation domains</li>
+      <li>Autonomous transition through the safing chain without requiring crew action</li>
+      <li>Each mode a documented operational posture (entry conditions, reconfiguration, crew advisories)</li>
+      <li>Crew override authority preserved at all levels</li>
+    </ul>
+
+    <h3>Autonomous Waypoint Navigation</h3>
+    <ul>
+      <li>Waypoint catalog and guidance state machine for autonomous traverse</li>
+      <li>Reachability gated by live state-of-charge, vehicle load, and multi-hop LUNET reachability — energetic, not geometric range</li>
+      <li>Planner accounts for available recharge stops along candidate routes</li>
+      <li>LIDAR + visual SLAM terrain classification; manual, semi-autonomous, and fully autonomous modes; return-to-base; real-time hazard detection</li>
+    </ul>
+
+    <h3>Crew Operations Console</h3>
+    <ul>
+      <li>Browser-based real-time interface for situational awareness and command authority</li>
+      <li>Pages: summary status, navigation / waypoints, power / thermal, atmosphere / ECLSS, pilot view, contingency recovery</li>
+      <li>Identical across simulation, bench, and flight — consistent operator training and procedure validation</li>
+    </ul>
+
+    <p class="note">
+      The same flight software and console are designed to operate across whichever mobility chassis the
+      crew module is paired with; the integration spine is consistent across platform partnerships.
+    </p>
+  </section>
+
+  <hr>
+
+  <!-- ── 8 ── -->
+  <section class="section">
+    <h2>8. Command Module &amp; Habitability</h2>
+
+    <h3>Interior Dimensions</h3>
+    <table>
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>Interior length</td><td>8.0 m</td></tr>
+      <tr><td>Interior width</td><td>3.4 m</td></tr>
+      <tr><td>Interior height</td><td>2.1 m clear</td></tr>
+      <tr><td>Gross volume</td><td>~57 m³</td></tr>
+      <tr><td>Net habitable volume</td><td>~38–42 m³</td></tr>
+    </table>
+
+    <h3>Functional Zones</h3>
+    <ul>
+      <li><strong>Zone A:</strong> Forward Command</li>
+      <li><strong>Zone B:</strong> Central Workspace / Galley</li>
+      <li><strong>Zone C:</strong> Crew Quarters / Medical</li>
+      <li><strong>Zone D:</strong> Systems Bay</li>
+      <li><strong>Zone E:</strong> Suitport Vestibule</li>
+    </ul>
+
+    <h3>Cabin Atmosphere</h3>
+    <table>
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>Total pressure</td><td>55.2 kPa (8.0 psia)</td></tr>
+      <tr><td>O₂ partial pressure</td><td>21.4 kPa</td></tr>
+      <tr><td>O₂ fraction</td><td>38.7%</td></tr>
+      <tr><td>Temperature</td><td>18–22°C</td></tr>
+      <tr><td>Relative humidity</td><td>40–55%</td></tr>
+    </table>
+    <p class="note">Reduced pressure lowers structural mass and reduces EVA prebreathe requirements.</p>
+  </section>
+
+  <hr>
+
+  <!-- ── 9 ── -->
+  <section class="section">
+    <h2>9. Life Support &amp; Consumables</h2>
+
+    <h3>ECLSS Components</h3>
+    <ul>
+      <li>Dual-bed CO₂ scrubber</li>
+      <li>Trace contaminant control</li>
+      <li>Humidity condensation loop</li>
+      <li>Water recovery (85% nominal)</li>
+      <li>High-pressure O₂/N₂ storage</li>
+    </ul>
+
+    <h3>Water Budget (3 Crew, 60 Days)</h3>
+    <table>
+      <tr><th>Category</th><th>Gross Demand (kg)</th></tr>
+      <tr><td>Drinking</td><td>360</td></tr>
+      <tr><td>Food rehydration</td><td>90</td></tr>
+      <tr><td>Hygiene</td><td>90</td></tr>
+      <tr><td>Medical / contingency</td><td>36</td></tr>
+      <tr><td><strong>Total gross demand</strong></td><td><strong>576</strong></td></tr>
+    </table>
+    <p class="note">With 85% recovery, net makeup requirement ≈ 86 kg. Vehicle carries ~200 kg at mission start.</p>
+  </section>
+
+  <hr>
+
+  <!-- ── 10 ── -->
+  <section class="section">
+    <h2>10. Suitport &amp; Dust Management</h2>
+
+    <h3>EVA Architecture</h3>
+    <ul>
+      <li>External suitport docking</li>
+      <li>No full-cabin depressurization required</li>
+      <li>Faster ingress/egress</li>
+      <li>Reduced atmosphere loss</li>
+    </ul>
+
+    <h3>Vestibule Systems</h3>
+    <ul>
+      <li>Dedicated HEPA filtration</li>
+      <li>Electrostatic dust precipitation</li>
+      <li>Sticky mat threshold control</li>
+      <li>Cyclonic vacuum</li>
+      <li>Mandatory wipe-down protocol</li>
+    </ul>
+    <p class="note">Fallback capability: traditional airlock mode.</p>
+  </section>
+
+  <hr>
+
+  <!-- ── 11 ── -->
+  <section class="section">
+    <h2>11. Radiation Protection</h2>
+
+    <h3>Solar Particle Event Shelter</h3>
+    <ul>
+      <li>Deployable water-wall shielding</li>
+      <li>8–12 cm water equivalent</li>
+      <li>Underfloor water tanks provide bottom shielding</li>
+    </ul>
+    <p class="note">Estimated severe SPE dose reduced from lethal exposure range to survivable emergency exposure range.</p>
+
+    <h3>Galactic Cosmic Radiation</h3>
+    <ul>
+      <li>0.3–0.6 mSv/day baseline</li>
+      <li>60-day exposure within occupational limits</li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <!-- ── 12 ── -->
+  <section class="section">
+    <h2>12. Power Architecture</h2>
+
+    <h3>Electrical Loads</h3>
+    <table>
+      <tr><th>Mode</th><th>Power</th></tr>
+      <tr><td>Cruise</td><td>~4,590 W</td></tr>
+      <tr><td>Station-keeping</td><td>~2,170 W</td></tr>
+      <tr><td>Peak</td><td>~8,890 W</td></tr>
+    </table>
+
+    <h3>Generation Strategy</h3>
+    <table>
+      <tr><th>Source</th><th>Capability</th></tr>
+      <tr><td>Roof SSSRA array (20 m²)</td><td>~724 W @ 6° sun</td></tr>
+      <tr><td>Deployable wing arrays (10 m² tilted)</td><td>~3.5 kW combined</td></tr>
+      <tr><td>Fuel cell</td><td>1–3 kW sustained</td></tr>
+      <tr><td>Battery storage</td><td>40–60 kWh</td></tr>
+      <tr><td>Outpost recharge</td><td>LUNET node, logistics-based</td></tr>
+    </table>
+  </section>
+
+  <hr>
+
+  <!-- ── 13 ── -->
+  <section class="section">
+    <h2>13. Thermal Architecture — SSSRA</h2>
+
+    <h3>Radiator Tier</h3>
+    <table>
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>Area</td><td>6.0 m²</td></tr>
+      <tr><td>Operating temperature</td><td>310 K</td></tr>
+      <tr><td>Degraded net rejection</td><td>~255 W/m²</td></tr>
+      <tr><td>Peak rejection capacity</td><td>~1,530 W</td></tr>
+    </table>
+
+    <h3>Solar Tier</h3>
+    <ul>
+      <li>Roof shading array: 20 m²</li>
+      <li>Deployable wing arrays: 10 m²</li>
+      <li>Low-emissivity backside coating</li>
+      <li>Heading-independent rejection performance</li>
+    </ul>
+
+    <h3>Mass &amp; CG Impact</h3>
+    <ul>
+      <li>Total assembly mass: ~85–110 kg</li>
+      <li>CG rise: ~0.02 m (negligible)</li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <!-- ── 14 ── -->
+  <section class="section">
+    <h2>14. Development Phasing</h2>
+
+    <h3>Current Status</h3>
+    <ul>
+      <li>cFS flight software and crew console running end-to-end in full software simulation</li>
+      <li>Autonomous FDIR verified live across the safing chain</li>
+      <li>Mobility platform partner selection in progress</li>
+    </ul>
+
+    <h3>Phase 1</h3>
+    <ul>
+      <li>Uncrewed demonstrator</li>
+      <li>SSSRA thermal validation</li>
+      <li>Dust and suitport testing</li>
+      <li>Flight software to bench and hardware-in-the-loop targets through the HAL</li>
+    </ul>
+
+    <h3>Phase 2</h3>
+    <ul>
+      <li>Crewed 7-day sortie capability</li>
+      <li>Partial closed-loop ECLSS</li>
+    </ul>
+
+    <h3>Phase 3</h3>
+    <ul>
+      <li>Full 30–60 day mission capability</li>
+      <li>ISRU integration and surface logistics chain</li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <!-- ── 15 ── -->
+  <section class="section">
+    <h2>15. Programmatic Position</h2>
+    <p>The Aegis-Class Rover is designed to:</p>
+    <ul>
+      <li>Bridge short-duration sorties and permanent surface habitats</li>
+      <li>Enable distributed surface industry</li>
+      <li>Operate as part of a broader cislunar logistics architecture</li>
+      <li>Provide safe, stable, long-duration surface mobility without requiring immediate fixed megastructure deployment</li>
+      <li>Concentrate ASI development on the crew module, integrated power/thermal, and flight software — the vehicle-defining systems — while sourcing the mobility chassis from the open-architecture lunar rover market</li>
+    </ul>
+  </section>
+
+  <div class="end-footer">
+    Aegis Station — Aegis-Class Rover · Architecture Reference · Classification: Unrestricted<br>
+    contact@aegisstation.com · aegisstation.com
+  </div>
+
+</div>
+</body>
+</html>
