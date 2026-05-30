@@ -633,6 +633,7 @@ section::before {
       <li><a href="#vehicle">Vehicle</a></li>
       <li><a href="#interior">Interior</a></li>
       <li><a href="#power">Power &amp; Thermal</a></li>
+      <li><a href="#flightsw">Flight SW</a></li>
       <li><a href="#mobility">Mobility</a></li>
       <li><a href="#safety">Safety</a></li>
       <li><a href="dossiers/Aegis_Class_Rover.pdf">Dossier ↗</a></li>
@@ -688,9 +689,22 @@ section::before {
     <div class="sec-tag reveal">01 — Overview</div>
     <h2 class="sec-title reveal">Why a Pressurized Rover</h2>
     <p class="sec-lead reveal">
-      Open rovers solve early sortie missions. Aegis solves permanent lunar presence — 
+      Open rovers solve early sortie missions. Aegis solves permanent lunar presence —
       eliminating the single greatest bottleneck in lunar exploration: EVA fatigue.
     </p>
+
+    <div class="callout reveal">
+      <div class="callout-tag">Program Scope</div>
+      <div class="callout-body">
+        ASI develops the pressurized crew module, the integrated power and thermal architecture
+        (<strong>SSSRA</strong>), and the cFS-based flight software and crew operations console —
+        the systems that define the vehicle. The mobility chassis — suspension, drivetrain, wheels,
+        body structure — is a maturing commodity in the open-architecture lunar rover market, sourced
+        rather than rebuilt; ASI specifies the interface, integrates the platform, and provides the
+        operational software. The platform partnership itself is the open step — a chassis builder
+        and ASI choosing each other around a shared interface.
+      </div>
+    </div>
 
     <div class="features reveal">
       <div class="feature">
@@ -994,15 +1008,131 @@ section::before {
   </div>
 </section>
 
+<!-- FLIGHT SOFTWARE -->
+<section id="flightsw">
+  <div class="container">
+    <div class="sec-tag reveal">05 — Flight Software &amp; Crew Operations Console</div>
+    <h2 class="sec-title reveal">NASA cFS-Based Avionics with Real-Time Operator Awareness</h2>
+    <p class="sec-lead reveal">
+      The Aegis-Class Rover flight software is built on NASA's Core Flight System (cFS) — the same
+      flight-heritage framework used across NASA missions. The stack runs end-to-end in simulation
+      today: all 16 applications build and execute, and the autonomous safing chain has been
+      exercised live against injected sensor faults. Mission-application source is identical across
+      simulation, bench, and flight targets — only the hardware abstraction layer changes between
+      them — so verification done in simulation carries forward rather than being rebuilt for each
+      environment.
+    </p>
+
+    <div class="data-block reveal">
+      <strong>Development status:</strong> The flight software runs end-to-end in a desktop
+      simulation — a real cFS workspace, all 16 applications, with autonomous FDIR verified live
+      across the full safing chain.
+      <em>Bench and on-vehicle targets share the same source through the HAL; no flight hardware is committed.</em>
+    </div>
+
+    <div class="spec-grid reveal">
+      <div class="spec-card">
+        <div class="spec-card-val">16</div>
+        <div class="spec-card-label">cFS Applications</div>
+        <div class="spec-card-note">cFE core + 9 standard cFS + 7 Aegis mission apps</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">5</div>
+        <div class="spec-card-label">FDIR Safing Modes</div>
+        <div class="spec-card-note">NOMINAL → THERM_SAFE → ECLSS_SAFE → LOADSHED → SHELTER</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">20 Hz</div>
+        <div class="spec-card-label">Navigation Rate</div>
+        <div class="spec-card-note">aegis_nav navigation &amp; odometry update</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">CCSDS</div>
+        <div class="spec-card-label">Telemetry Protocol</div>
+        <div class="spec-card-note">Standards-compliant</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">WebSocket</div>
+        <div class="spec-card-label">Console Live Link</div>
+        <div class="spec-card-note">CCSDS-UDP ↔ browser bridge, same schema every env</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card-val">cFE</div>
+        <div class="spec-card-label">Core Flight Executive</div>
+        <div class="spec-card-note">Runtime — NASA flight heritage</div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Outfit',sans-serif;color:var(--white);font-size:22px;font-weight:700;margin-top:48px;margin-bottom:16px;" class="reveal">
+      Autonomous Fault Detection, Isolation &amp; Recovery
+    </h3>
+    <p class="reveal" style="color:var(--fog);max-width:720px;line-height:1.7;">
+      The flight software continuously monitors watchpoint signals across thermal, life support,
+      electrical, and radiation domains. When a watchpoint excursion is detected, the system
+      autonomously transitions through the safing chain without requiring crew action. Each mode is
+      a known operational posture with documented entry conditions, system reconfigurations, and
+      crew advisory protocols. Crew override authority is preserved at all levels.
+    </p>
+
+    <h3 style="font-family:'Outfit',sans-serif;color:var(--white);font-size:22px;font-weight:700;margin-top:48px;margin-bottom:16px;" class="reveal">
+      Autonomous Waypoint Navigation with Energetic Range Gating
+    </h3>
+    <p class="reveal" style="color:var(--fog);max-width:720px;line-height:1.7;">
+      The navigation system maintains a waypoint catalog and a guidance state machine for autonomous
+      traverse to selected destinations. Reachability is not gated by a static geometric range; it is
+      gated by live state-of-charge, vehicle load, and multi-hop reachability through LUNET surface
+      utility nodes. The planner accounts for available recharge stops along candidate routes,
+      providing crew with reachability information that reflects actual energetic constraints rather
+      than nominal range estimates.
+    </p>
+
+    <h3 style="font-family:'Outfit',sans-serif;color:var(--white);font-size:22px;font-weight:700;margin-top:48px;margin-bottom:16px;" class="reveal">
+      Crew Operations Console
+    </h3>
+    <p class="reveal" style="color:var(--fog);max-width:720px;line-height:1.7;">
+      The crew operations console is a browser-based real-time interface for situational awareness
+      and command authority. Pages cover summary system status, navigation and waypoint management,
+      power and thermal, atmosphere and life support, pilot view, and contingency recovery. The same
+      console operates identically across simulation, bench, and flight — supporting consistent
+      operator training and procedure validation across mission phases.
+    </p>
+  </div>
+
+  <!-- Console Screenshot -->
+  <!-- TODO: replace placeholder with actual dashboard screenshot. Suggested path: /images/console_summary.png -->
+  <div class="container-wide" style="margin-top:32px;">
+    <div class="diagram-wrap reveal">
+      <img src="/images/console_summary.png" alt="Aegis Rover Crew Operations Console showing system status, active FDIR mode, and live telemetry across power, thermal, atmosphere, and navigation domains" style="width:100%;height:auto;">
+    </div>
+    <div class="diagram-label">Crew Operations Console — Summary Page</div>
+  </div>
+
+  <div class="container" style="margin-top:48px;">
+    <p class="reveal" style="color:var(--fog);max-width:720px;line-height:1.7;">
+      The same flight software and console are designed to operate across whichever mobility chassis
+      the crew module is paired with — the integration spine is consistent across platform partnerships.
+    </p>
+  </div>
+</section>
+
 <!-- MOBILITY -->
 <section id="mobility">
   <div class="container">
-    <div class="sec-tag reveal">05 — Suspension &amp; Drivetrain</div>
-    <h2 class="sec-title reveal">6×6 All-Wheel Drive &amp; Steer</h2>
+    <div class="sec-tag reveal">06 — Mobility Platform Interface</div>
+    <h2 class="sec-title reveal">Reference Configuration &amp; Interface Envelope</h2>
     <p class="sec-lead reveal">
-      Six independently driven and steered wheels on three axles. No driveshafts, no differentials, 
-      no transfer cases. In-hub motors with harmonic drive reduction eliminate mechanical complexity 
-      and dust-exposed mechanisms.
+      The crew module is designed to mate to a third-party chassis from the maturing
+      open-architecture lunar rover market. The reference configuration below represents the
+      operational envelope and interface requirements the crew module brings to a candidate
+      platform; specific chassis selection and final parameter values follow once a platform
+      partnership is established around this envelope.
+    </p>
+    <p class="sec-lead reveal">
+      The reference platform provides six independently driven and steered wheels on three axles —
+      no driveshafts, differentials, or transfer cases. In-hub motors with harmonic-drive reduction
+      are the baseline expectation, keeping mechanical complexity and dust-exposed mechanisms off the
+      chassis. A candidate platform need not match this mechanism, but must hold the crew module
+      within the envelope the figures below describe.
     </p>
 
     <div class="spec-grid reveal">
@@ -1042,39 +1172,49 @@ section::before {
       <div>
         <h3 style="font-family:'Outfit',sans-serif;color:var(--white);font-size:20px;font-weight:700;margin-bottom:12px;">Suspension</h3>
         <p style="color:var(--fog);line-height:1.7;">
-          Semi-active double-wishbone at all six stations. Titanium control arms, Ni-Ti superelastic 
-          coil springs (fatigue-immune across −170°C to +120°C), and electromechanical ball-screw 
-          dampers providing passive damping (back-EMF), semi-active rate control, and active ride-height 
-          adjustment (±100 mm). No fluids anywhere. Spring rate tuned to ~1.1 Hz ride frequency (lunar 
-          gravity corrected) for automobile-like crew comfort. Electronic anti-roll via differential 
-          damper control. Active cabin leveling on cross-slopes up to ±10°.
+          The reference suspension is a semi-active double-wishbone at all six stations: titanium
+          control arms, Ni-Ti superelastic coil springs (fatigue-immune across −170°C to +120°C), and
+          electromechanical ball-screw dampers providing passive damping (back-EMF), semi-active rate
+          control, and active ride-height adjustment (±100 mm) — with no working fluids anywhere. This
+          fixes the ride-quality envelope the crew module assumes: ~1.1 Hz ride frequency
+          (lunar-gravity corrected) for automobile-like crew comfort, electronic anti-roll via
+          differential damper control, and active cabin leveling on cross-slopes up to ±10°. A
+          candidate platform is free to meet this differently, but must keep the crew module within
+          that comfort and leveling envelope.
         </p>
       </div>
       <div>
         <h3 style="font-family:'Outfit',sans-serif;color:var(--white);font-size:20px;font-weight:700;margin-bottom:12px;">Traction Control</h3>
         <p style="color:var(--fog);line-height:1.7;">
-          Six independent motors enable per-wheel torque vectoring, slip detection and limiting (5–25% 
-          threshold by mode), electronic stability control, and regenerative ABS. Terrain modes: Highway 
-          (5% slip, equal torque), Off-Road (15% slip, adaptive), Rock Crawl (25% slip, per-wheel override), 
-          Emergency (all limits relaxed). The real constraint is traction: at 5,400 kg on the Moon, max 
-          traction is ~4,374 N — a 10° climb demands 4,017 N (92% of limit). Slopes above 12–15° on 
-          loose regolith are traction-limited, not motor-limited.
+          The reference drive system uses six independent motors for per-wheel torque vectoring, slip
+          detection and limiting (5–25% threshold by mode), electronic stability control, and
+          regenerative ABS — across Highway (5% slip, equal torque), Off-Road (15% slip, adaptive),
+          Rock Crawl (25% slip, per-wheel override), and Emergency (limits relaxed) modes. The
+          governing constraint the crew module imposes is traction, not motor power: at 5,400 kg laden
+          on the Moon, available traction is ~4,374 N, and a 10° climb demands 4,017 N (92% of limit).
+          A candidate platform must deliver stable, slip-managed torque control within this margin;
+          slopes above 12–15° on loose regolith are traction-limited regardless of installed motor power.
         </p>
       </div>
     </div>
 
     <div class="data-block reveal" style="margin-top:32px;">
-      <strong>Dust Protection at Hub:</strong> Multi-stage seal — labyrinth (outer, centrifugal ejection) → 
+      <strong>Dust Protection at Hub:</strong> The platform hub-seal interface is expected to provide a multi-stage seal — labyrinth (outer, centrifugal ejection) →
       magnetic particle trap (rare-earth, captures ferromagnetic fraction) → PTFE lip seal on Ti wear sleeve 
       (replaceable at turnaround) → optional N₂ purge (~0.1–0.2 g/hr per wheel, 0.5–1.1 kg total / 60 days)
     </div>
+
+    <p class="reveal" style="color:var(--fog);max-width:720px;line-height:1.7;margin-top:32px;">
+      The figures here represent design-baseline expectations consistent with currently demonstrated
+      lunar mobility platforms and serve as the integration starting point for partner discussions.
+    </p>
   </div>
 </section>
 
 <!-- SAFETY -->
 <section id="safety">
   <div class="container">
-    <div class="sec-tag reveal">06 — Safety Architecture</div>
+    <div class="sec-tag reveal">07 — Safety Architecture</div>
     <h2 class="sec-title reveal">Four-Tier Battery Safety</h2>
     <p class="sec-lead reveal">
       Defense-in-depth for the most energetic system on a crewed pressurized vehicle. Every tier is 
@@ -1128,7 +1268,7 @@ section::before {
 <!-- MISSION ROLES -->
 <section>
   <div class="container">
-    <div class="sec-tag reveal">07 — Mission Roles</div>
+    <div class="sec-tag reveal">08 — Mission Roles</div>
     <h2 class="sec-title reveal">Surface Lifecycle Platform</h2>
 
     <div class="features reveal">

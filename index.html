@@ -443,6 +443,36 @@ footer a:hover { color: var(--accent); }
   color: var(--text-dim);
 }
 
+/* ── Program Status ("Of Late") ────────────────────────── */
+.program-status {
+  margin: 2.5rem 0;
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid var(--accent);
+  background: var(--bg-raised);
+  border-radius: 0 6px 6px 0;
+}
+
+.program-status__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+.program-status__label { font-weight: 700; color: var(--accent); }
+
+.program-status__body {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
 /* ── Responsive ────────────────────────────────────────── */
 @media (max-width: 640px) {
   :root { --section-gap: 3.5rem; }
@@ -463,6 +493,20 @@ footer a:hover { color: var(--accent); }
     <p class="tagline">Shielding Humanity's Future in Space</p>
   </div>
 </section>
+
+<!-- ═══════════ OF LATE ═══════════ -->
+
+<div class="container">
+  <aside class="program-status" aria-label="Recent program update">
+    <div class="program-status__header">
+      <span class="program-status__label">Of Late</span>
+      <span class="program-status__date">May 2026</span>
+    </div>
+    <p class="program-status__body">
+      ASI submitted a NASA SBIR Phase I proposal for the Lunar Regolith Mechanics Head (LRMH), a pre-operational lunar geotechnical capability. The proposal includes a build partnership with a flight-heritage aerospace contractor.
+    </p>
+  </aside>
+</div>
 
 <!-- ═══════════ INSIGHTS ═══════════ -->
 
@@ -726,7 +770,7 @@ footer a:hover { color: var(--accent); }
     <p><em>Aegis-Class Lunar Surface Mobility Platform</em></p>
 
     <p>
-      The Aegis-Class Rover is a pressurized, long-duration lunar surface vehicle engineered for 30–60 day missions in polar terrain. Designed as infrastructure—not a short-sortie explorer—it combines habitation, mobility, dust boundary control, and integrated power/thermal architecture in a single wide-track platform.
+      The Aegis-Class Rover program develops the pressurized crew module, integrated power and thermal architecture, and the cFS-based flight software and operations console for a long-duration lunar surface vehicle. The mobility chassis is sourced rather than rebuilt: ASI specifies the interface and integrates onto a third-party platform from the maturing open-architecture lunar rover market. Engineered for 30–60 day missions in polar terrain — designed as infrastructure, not a short-sortie explorer.
     </p>
 
     <ul class="specs">
