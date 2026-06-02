@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lunar Tanker Fleet — Aegis Station Supply Chain</title>
+<title>Fleet Commander — Aegis Station Lunar Tanker Fleet Ground Control</title>
+<meta name="description" content="The ground-side coordinator for the Aegis Station lunar tanker fleet — dispatch scheduling, pad deconfliction, standby reserves and water-throughput optimisation across 45 autonomous tankers.">
+<link rel="icon" href="favicon_from_art.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -967,22 +969,18 @@
 </style>
 </head>
 <body>
-
 <div class="starfield"></div>
 <div class="grid-overlay"></div>
 
-<!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <div class="nav-logo">LTF <span>/ Aegis Station</span></div>
+    <div class="nav-logo">FLEET CMDR <span>/ Aegis Station</span></div>
     <ul class="nav-links">
-      <li><a href="#mission">Mission</a></li>
-      <li><a href="#specs">Specs</a></li>
-      <li><a href="#status">Status</a></li>
-      <li><a href="#s2s">S2S Ops</a></li>
-      <li><a href="#cartridge">Cartridge</a></li>
-      <li><a href="#propellant">Propellant</a></li>
-      <li><a href="fleet_commander.html">Fleet Commander</a></li>
+      <li><a href="lunar_tanker_fleet.html">&larr; Tanker Fleet</a></li>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#console">Console</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#functions">Functions</a></li>
     </ul>
   </div>
 </nav>
@@ -995,516 +993,209 @@
         <div class="eyebrow-line"></div>
         <div class="eyebrow-text">Aegis Station Logistics Program</div>
       </div>
-      <h1>
-        Lunar Tanker<br>Fleet
-        <em>The Supply Chain for Space</em>
-      </h1>
+      <h1>Fleet Commander<em>Ground Control for the Lunar Tanker Fleet</em></h1>
       <p class="hero-tagline">
-        45 autonomous tankers. 3.3 million metric tons. A continuous cycle of ascent, delivery, and return — building humanity's first orbital city one payload at a time.
+        The ground-side coordinator that dispatches sorties, deconflicts pads,
+        holds emergency reserves, and maximises water throughput to station &mdash;
+        one console commanding the entire 45-tanker constellation.
       </p>
       <div class="hero-stats">
         <div class="stat">
           <div class="stat-value">45</div>
-          <div class="stat-label">Tankers</div>
+          <div class="stat-label">Tankers / 1 Console</div>
         </div>
         <div class="stat">
-          <div class="stat-value">2,025</div>
-          <div class="stat-label">MT / Day</div>
+          <div class="stat-value">6 + 6</div>
+          <div class="stat-label">Pads / Berths</div>
         </div>
         <div class="stat">
-          <div class="stat-value">4.5 YR</div>
-          <div class="stat-label">Fill Timeline</div>
+          <div class="stat-value">1 Hz</div>
+          <div class="stat-label">Fleet Telemetry</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- IMAGE -->
-<section class="image-section" id="image">
+<!-- 01 — OVERVIEW -->
+<section class="mission-section" id="overview">
   <div class="page-wrap">
     <div class="section-header reveal">
       <span class="section-number">// 01</span>
-      <span class="section-title">Fleet Render</span>
+      <span class="section-title">Ground Segment Overview</span>
       <div class="section-rule"></div>
     </div>
-    <div class="reveal" style="border: 1px solid var(--border); overflow: hidden; line-height: 0;">
-      <img src="ltf_tanker.svg" alt="Lunar Tanker Fleet — MK1 Loaded Configuration on Lunar Surface" style="width:100%; display:block;"/>
-    </div>
-    <div class="image-caption reveal">
-      <span class="caption-text">FIG. 01 — LTF-MK1 Loaded Configuration, Lunar Surface — Water Cartridge Mounted</span>
-      <span class="caption-ref">LTF-RENDER-001</span>
+    <div class="s2s-intro reveal">
+      <div class="s2s-callout">
+        <div class="s2s-callout-label">Safety Boundary</div>
+        <div class="s2s-callout-value">Mission-Critical</div>
+        <div class="s2s-callout-desc">
+          Not safety-critical. If the coordinator goes down, every vehicle holds
+          its current mode safely under its own autonomous flight software.
+        </div>
+      </div>
+      <div class="s2s-body">
+        <p>
+          Each tanker flies its own safety-critical flight software &mdash; autonomous
+          flight, fault detection, and safing all live on the vehicle. The Fleet
+          Commander is the <strong>ground-side</strong> brain: it never flies a ship,
+          it orchestrates the fleet.
+        </p>
+        <p>
+          It talks to all 45 vehicles over the same CCSDS-over-UDP link an individual
+          operator console uses &mdash; every tanker is an independent command and
+          telemetry endpoint. The coordinator aggregates per-vehicle telemetry into
+          fleet-wide situational awareness at 1 Hz and issues a small, well-defined
+          command vocabulary back to each ship.
+        </p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- MISSION -->
-<section class="mission-section" id="mission">
+<!-- 02 — CONSOLE GALLERY -->
+<section class="image-section" id="console">
   <div class="page-wrap">
     <div class="section-header reveal">
       <span class="section-number">// 02</span>
-      <span class="section-title">Mission Profile</span>
+      <span class="section-title">Ground Control Console</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <p class="reveal" style="font-family:'Share Tech Mono', monospace; font-size:12px;
+       letter-spacing:0.06em; color:var(--text-dim); line-height:1.8; margin:-24px 0 40px; max-width:760px;">
+      Frames below are screen captures of the coordinator in operation &mdash; a live
+      tanker fleet under auto-dispatch, with telemetry refreshing at 1&nbsp;Hz.
+    </p>
+
+    <div class="reveal" style="border:1px solid var(--border); overflow:hidden; line-height:0;">
+      <img src="images/fc_fleet_overview.png" alt="Fleet Commander — fleet overview" style="width:100%; display:block;">
+    </div>
+    <div class="image-caption reveal">
+      <span class="caption-text">FIG. 01 &mdash; Fleet Overview: water throughput, mode breakdown, pad &amp; berth occupancy</span>
+      <span class="caption-ref">FC-CONSOLE-001</span>
+    </div>
+
+    <div class="reveal" style="border:1px solid var(--border); overflow:hidden; line-height:0; margin-top:48px;">
+      <img src="images/fc_vehicle_detail.png" alt="Fleet Commander — single-vehicle telemetry" style="width:100%; display:block;">
+    </div>
+    <div class="image-caption reveal">
+      <span class="caption-text">FIG. 02 &mdash; Vehicle Detail: GNC, propulsion, power, thermal zones &amp; recovery commands</span>
+      <span class="caption-ref">FC-CONSOLE-002</span>
+    </div>
+
+    <div class="reveal" style="border:1px solid var(--border); overflow:hidden; line-height:0; margin-top:48px;">
+      <img src="images/fc_pad_status.png" alt="Fleet Commander — pad and berth deconfliction" style="width:100%; display:block;">
+    </div>
+    <div class="image-caption reveal">
+      <span class="caption-text">FIG. 03 &mdash; Pad &amp; Berth Status: 6 LUNET surface pads, 6 station berths, FIFO berthing queue</span>
+      <span class="caption-ref">FC-CONSOLE-003</span>
+    </div>
+
+    <div class="reveal" style="border:1px solid var(--border); overflow:hidden; line-height:0; margin-top:48px;">
+      <img src="images/fc_vehicle_grid.png" alt="Fleet Commander — vehicle grid" style="width:100%; display:block;">
+    </div>
+    <div class="image-caption reveal">
+      <span class="caption-text">FIG. 04 &mdash; Vehicle Grid: per-ship mode, state-of-charge and reserve status at a glance</span>
+      <span class="caption-ref">FC-CONSOLE-004</span>
+    </div>
+
+    <div class="reveal" style="border:1px solid var(--border); overflow:hidden; line-height:0; margin-top:48px;">
+      <img src="images/fc_settings.png" alt="Fleet Commander — coordinator settings" style="width:100%; display:block;">
+    </div>
+    <div class="image-caption reveal">
+      <span class="caption-text">FIG. 05 &mdash; Coordinator Settings: fleet size, auto-dispatch, standby reserve, loading-site mode</span>
+      <span class="caption-ref">FC-CONSOLE-005</span>
+    </div>
+  </div>
+</section>
+
+<!-- 03 — ARCHITECTURE / CCSDS CONTRACT -->
+<section class="specs-section" id="architecture">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 03</span>
+      <span class="section-title">Fleet&ndash;to&ndash;Vehicle Contract</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="specs-layout reveal">
+      <div class="specs-group">
+        <h4>Command Vocabulary &mdash; ADR-0014</h4>
+        <div class="spec-row"><span class="spec-key">DISPATCH</span><span class="spec-val">ASSIGN SORTIE</span></div>
+        <div class="spec-row"><span class="spec-key">RELEASE</span><span class="spec-val">FREE PAD / BERTH</span></div>
+        <div class="spec-row"><span class="spec-key">SWAP_COMPLETE</span><span class="spec-val">CARTRIDGE SWAPPED</span></div>
+        <div class="spec-row"><span class="spec-key">RESUME</span><span class="spec-val">EXIT SAFE / STANDBY</span></div>
+        <div class="spec-row"><span class="spec-key">SET_MODE</span><span class="spec-val">FSM ADVANCE</span></div>
+        <div class="spec-row"><span class="spec-key">TLM SUBSCRIBE</span><span class="spec-val">STATE TRACKING</span></div>
+      </div>
+      <div class="specs-group">
+        <h4>Transport &amp; Telemetry</h4>
+        <div class="spec-row"><span class="spec-key">Link</span><span class="spec-val">CCSDS / UDP</span></div>
+        <div class="spec-row"><span class="spec-key">Endpoints</span><span class="spec-val">1 PER VEHICLE</span></div>
+        <div class="spec-row"><span class="spec-key">Fleet TLM Rate</span><span class="spec-val">1 Hz</span></div>
+        <div class="spec-row"><span class="spec-key">State Model</span><span class="spec-val">TLM-GATED</span></div>
+        <div class="spec-row"><span class="spec-key">Console Link</span><span class="spec-val">WEBSOCKET</span></div>
+        <div class="spec-row"><span class="spec-key">Deployment</span><span class="spec-val">GROUND SEGMENT</span></div>
+      </div>
+    </div>
+    <div class="s2s-callout reveal" style="margin-top:40px; max-width:none;">
+      <div class="s2s-callout-label">Clean Separation &mdash; FSW ADR-0006 / 0014</div>
+      <div class="s2s-callout-desc" style="font-size:14px;">
+        The interface is the only coupling between ground and flight. Vehicle FSW is
+        one image flown in 45 copies on each ship's flight processor; the coordinator
+        is a single ground instance managing all 45. Different deployment target,
+        different scaling model, different safety boundary &mdash; joined by one
+        deterministic command/telemetry contract.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 — FUNCTIONS -->
+<section class="mission-section" id="functions">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 04</span>
+      <span class="section-title">What It Coordinates</span>
       <div class="section-rule"></div>
     </div>
     <div class="mission-grid reveal">
       <div class="mission-card">
         <div class="mission-card-accent"></div>
-        <div class="mission-card-num">00 — PRE-FILL</div>
-        <h3>Depot First Light</h3>
-        <p>The fleet's first operational mission is lifting the first ISRU cartridges to the Lunar Orbital Propellant Depot. Single vehicle, low cadence — enough to commission end-to-end propellant production before the shield-fill campaign begins. Depot first light does not require full fleet deployment.</p>
+        <div class="mission-card-num">01 &mdash; DISPATCH</div>
+        <h3>Sortie Scheduling</h3>
+        <p>Selects which vehicle flies the next sortie from state-of-charge, thermal state, maintenance status and position &mdash; maximising water delivered per unit time.</p>
       </div>
       <div class="mission-card">
         <div class="mission-card-accent"></div>
-        <div class="mission-card-num">01 — PRIMARY</div>
-        <h3>Shield Fill Campaign</h3>
-        <p>Sustained surface-to-LLO water delivery to Aegis Station shield reservoirs. Fully autonomous operations across continuous 2,600 m/s ascent-and-return cycles. This is the requirement that sizes the full ~45-vehicle fleet — not depot operations.</p>
+        <div class="mission-card-num">02 &mdash; DECONFLICT</div>
+        <h3>Pad &amp; Berth Management</h3>
+        <p>Guarantees one vehicle per pad across six LUNET surface sites and six station berths, with a FIFO berthing queue when station capacity is saturated.</p>
       </div>
       <div class="mission-card">
         <div class="mission-card-accent"></div>
-        <div class="mission-card-num">02 — CONTINUOUS</div>
-        <h3>Depot Resupply</h3>
-        <p>From first light onward, depot resupply runs in parallel with the shield-fill campaign and continues indefinitely after it. The depot is the fleet's first customer and a permanent one — not a post-fill handoff. Post-fill, the same cycle extends to EML1/2 hubs and deep-space propellant staging.</p>
+        <div class="mission-card-num">03 &mdash; RESERVE</div>
+        <h3>Standby Allocation</h3>
+        <p>Holds one to two highest-charge vehicles in emergency reserve per the fleet spec &mdash; excluded from routine water duty, ready for emergency tasking.</p>
       </div>
       <div class="mission-card">
         <div class="mission-card-accent"></div>
-        <div class="mission-card-num">03 — EXTENDED</div>
-        <h3>Surface Distribution</h3>
-        <p>Ballistic surface hops between ISRU nodes for LOX and water redistribution. 160–940 m/s per hop — up to 6× sorties per orbital propellant load. Becomes operationally relevant once multiple ISRU nodes are producing at capacity.</p>
+        <div class="mission-card-num">04 &mdash; REROUTE</div>
+        <h3>Surface-to-Surface Routing</h3>
+        <p>Plans suborbital hops between LUNET nodes to reposition the fleet where the next demand is, without a return to station between legs.</p>
       </div>
       <div class="mission-card">
         <div class="mission-card-accent"></div>
-        <div class="mission-card-num">04 — EMERGENCY</div>
-        <h3>Rapid Response</h3>
-        <p>1–2 tankers maintained in standby at all times. Emergency water delivery to crewed outposts achievable within 6–8 hours of dispatch authorization.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SPECS -->
-<section class="specs-section" id="specs">
-  <div class="page-wrap">
-    <div class="section-header reveal">
-      <span class="section-number">// 03</span>
-      <span class="section-title">Vehicle Specifications</span>
-      <div class="section-rule"></div>
-    </div>
-    <div class="specs-layout reveal">
-      <div class="specs-group">
-        <h4>Ascent Performance</h4>
-        <div class="spec-row">
-          <span class="spec-key">Payload</span>
-          <span class="spec-val">45,000 KG</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Launch Mass</span>
-          <span class="spec-val">~102,000 KG</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Δv (Ascent)</span>
-          <span class="spec-val">2,600 M/S</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Isp (Vacuum)</span>
-          <span class="spec-val">~360 S</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Propellant Mass</span>
-          <span class="spec-val">~52,000 KG</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Thrust Required</span>
-          <span class="spec-val">~165 KN</span>
-        </div>
-      </div>
-      <div class="specs-group">
-        <h4>Propulsion &amp; Structure</h4>
-        <div class="spec-row">
-          <span class="spec-key">Propellant</span>
-          <span class="spec-val">LOX / CH₄</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Engine Config</span>
-          <span class="spec-val">3×60 KN</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Tank Cartridge</span>
-          <span class="spec-val">49 M³</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Dimensions</span>
-          <span class="spec-val">10 M × 2.5 M</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Return Δv</span>
-          <span class="spec-val">1,800 M/S</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Round-Trip Propellant</span>
-          <span class="spec-val">~57,000 KG</span>
-        </div>
-      </div>
-      <div class="specs-group">
-        <h4>Fleet Operations</h4>
-        <div class="spec-row">
-          <span class="spec-key">Fleet Size</span>
-          <span class="spec-val">45 VEHICLES</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Daily Throughput</span>
-          <span class="spec-val">~2,025 MT</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Fill Target</span>
-          <span class="spec-val">3.3M MT</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Timeline</span>
-          <span class="spec-val">~4.5 YEARS</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Missions / Vehicle / Yr</span>
-          <span class="spec-val">60–100+</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Operation Mode</span>
-          <span class="spec-val">AUTONOMOUS</span>
-        </div>
-      </div>
-      <div class="specs-group">
-        <h4>Reusability &amp; Systems</h4>
-        <div class="spec-row">
-          <span class="spec-key">Round Trips</span>
-          <span class="spec-val">100+ CYCLES</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Landing System</span>
-          <span class="spec-val">VTOL</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Power</span>
-          <span class="spec-val">SOLAR + BATT</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Delivery Cost Est.</span>
-          <span class="spec-val">~$150 / KG</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Total Mission Cost</span>
-          <span class="spec-val">~$495B</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Architecture</span>
-          <span class="spec-val">KISS PRINCIPLE</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MODULAR TANK CARTRIDGE -->
-<section class="cartridge-section" id="cartridge">
-  <div class="page-wrap">
-    <div class="section-header reveal">
-      <span class="section-number">// 03.5</span>
-      <span class="section-title">Modular Tank Cartridge</span>
-      <div class="section-rule"></div>
-    </div>
-
-    <div class="cartridge-layout reveal">
-      <div class="cartridge-image-wrap">
-        <img src="cartridge_cutaway.svg" alt="Modular Tank Cartridge — Cutaway showing flexible bladder, water port, gas port, and inert gas displacement system"/>
-        <div class="cartridge-image-label">
-          <span>FIG. 02 — MTC Standard Cartridge, Cutaway View</span>
-          <span>LTF-MTC-001</span>
-        </div>
-      </div>
-
-      <div class="cartridge-content">
-        <p class="cartridge-intro">
-          The Modular Tank Cartridge (MTC) is the fundamental unit of the LTF logistics chain — a standardized, self-contained water vessel designed for drop-in handling at every point from the ISRU node to the Aegis Station shield reservoir. The cartridge is not a component of the tanker; it is cargo that the tanker carries. This distinction is the key to the system's operational simplicity.
-        </p>
-
-        <div class="cartridge-specs">
-          <div class="cartridge-specs-header">Standard Cartridge Specifications</div>
-          <div class="cartridge-spec-row">
-            <span class="cartridge-spec-key">Form Factor</span>
-            <span class="cartridge-spec-val">10 M × 2.5 M Cylinder</span>
-          </div>
-          <div class="cartridge-spec-row">
-            <span class="cartridge-spec-key">Internal Volume</span>
-            <span class="cartridge-spec-val">~49 M³</span>
-          </div>
-          <div class="cartridge-spec-row">
-            <span class="cartridge-spec-key">Water Capacity</span>
-            <span class="cartridge-spec-val">~45,000 KG</span>
-          </div>
-          <div class="cartridge-spec-row">
-            <span class="cartridge-spec-key">Containment</span>
-            <span class="cartridge-spec-val">Flexible Bladder</span>
-          </div>
-          <div class="cartridge-spec-row">
-            <span class="cartridge-spec-key">Fill Method</span>
-            <span class="cartridge-spec-val">Vacuum Draw / Active Fill</span>
-          </div>
-          <div class="cartridge-spec-row">
-            <span class="cartridge-spec-key">Discharge Method</span>
-            <span class="cartridge-spec-val">Inert Gas Displacement</span>
-          </div>
-          <div class="cartridge-spec-row">
-            <span class="cartridge-spec-key">Interface Ports</span>
-            <span class="cartridge-spec-val">Water Port + Gas Port(s)</span>
-          </div>
-        </div>
-
-        <div class="cartridge-features">
-          <div class="cartridge-feature">
-            <div class="cartridge-feature-label">Bladder Containment</div>
-            <div class="cartridge-feature-desc">A flexible internal bladder separates water from the inert gas charge, preventing contamination, managing slosh, and accommodating microgravity conditions without active pumping.</div>
-          </div>
-          <div class="cartridge-feature">
-            <div class="cartridge-feature-label">CLOSED-LOOP GAS RECOVERY</div>
-            <div class="cartridge-feature-desc">Inert gas displaced from the cartridge annulus during water fill is captured and stored in ground inventory at the ISRU node. Station pressurant is maintained by a dedicated subset of fleet tankers making periodic gas cartridge resupply runs from the surface.</div>
-          </div>
-          <div class="cartridge-feature">
-            <div class="cartridge-feature-label">Gas Displacement Discharge</div>
-            <div class="cartridge-feature-desc">Inert gas (nitrogen or helium) is introduced through the gas port, collapsing the bladder and expelling water through the water port at controlled pressure and flow rate.</div>
-          </div>
-          <div class="cartridge-feature">
-            <div class="cartridge-feature-label">Standardized Interface</div>
-            <div class="cartridge-feature-desc">Single-standard water and gas ports enable identical handling at ISRU nodes, tanker mounts, orbital transfer points, and station shield reservoirs — no adapters, no bespoke ground support.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ENGINEERING STATUS -->
-<section class="specs-section" id="status" style="border-top: 1px solid var(--border);">
-  <div class="page-wrap">
-    <div class="section-header reveal">
-      <span class="section-number">// 03.7</span>
-      <span class="section-title">Engineering Status</span>
-      <div class="section-rule"></div>
-    </div>
-    <div class="mission-grid reveal" style="grid-template-columns: 1fr 1fr;">
-      <div class="mission-card">
-        <div class="mission-card-accent"></div>
-        <div class="mission-card-num">FLIGHT SOFTWARE</div>
-        <h3>Vehicle Autonomy Stack</h3>
-        <p>Per-vehicle flight software implementing the full mode FSM, propulsion feed control, autonomous safing, and CCSDS command/telemetry. Multi-vehicle simulation exercising 45 concurrent instances through complete sortie cycles — ascent, orbital insertion, station capture, cargo swap, deorbit, and surface return.</p>
+        <div class="mission-card-num">05 &mdash; RESPOND</div>
+        <h3>Anomaly Response</h3>
+        <p>When a vehicle goes SAFE or ABORT, its pending sortie is reassigned and its pad freed &mdash; the fleet heals around the loss without operator intervention.</p>
       </div>
       <div class="mission-card">
         <div class="mission-card-accent"></div>
-        <div class="mission-card-num">FLEET OPERATIONS</div>
-        <h3>Ground Coordination</h3>
-        <p>Fleet-level dispatch scheduling, pad deconfliction, station berth queuing, and telemetry-gated ground operations across the full vehicle complement. The sortie cycle runs autonomously with real-time cargo and propellant state verification at every transition — no operator in the loop for nominal operations.</p>
+        <div class="mission-card-num">06 &mdash; OPTIMISE</div>
+        <h3>Throughput &amp; Awareness</h3>
+        <p>Aggregates 45 telemetry streams into fleet-wide situational awareness and drives the conveyor of sorties that keeps water flowing to station.</p>
       </div>
-    </div>
-    <div class="prop-tech-bar reveal" style="margin-top: 24px; margin-bottom: 0;">
-      <div class="tech-bar-label">Validated In Simulation</div>
-      <div class="tech-bar-items">
-        <div class="tech-item">
-          <div class="tech-dot" style="background: var(--amber);"></div>
-          <span class="tech-item-text">45-Vehicle Concurrent Sortie Cycling</span>
-        </div>
-        <div class="tech-item">
-          <div class="tech-dot" style="background: var(--ice);"></div>
-          <span class="tech-item-text">TLM-Gated Cargo &amp; Prop Sequencing</span>
-        </div>
-        <div class="tech-item">
-          <div class="tech-dot" style="background: var(--text-dim);"></div>
-          <span class="tech-item-text">Autonomous Anomaly Recovery</span>
-        </div>
-        <div class="tech-item">
-          <div class="tech-dot" style="background: var(--muted);"></div>
-          <span class="tech-item-text">Pad &amp; Berth Resource Management</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- S2S -->
-<section class="s2s-section" id="s2s">
-  <div class="page-wrap">
-    <div class="section-header reveal">
-      <span class="section-number">// 04</span>
-      <span class="section-title">Surface-to-Surface Operations</span>
-      <div class="section-rule"></div>
-    </div>
-    <div class="s2s-intro reveal">
-      <div>
-        <div class="s2s-callout">
-          <div class="s2s-callout-label">S2S vs Orbital Δv</div>
-          <div class="s2s-callout-value">6×</div>
-          <div class="s2s-callout-desc">More hops possible per propellant load. A 300 km surface transit requires only ~460 m/s — versus 2,600 m/s for a full orbital ascent.</div>
-        </div>
-      </div>
-      <div class="s2s-body">
-        <p>The LTF tanker requires no structural redesign for surface-to-surface operations. Its VTOL architecture and LOX/CH₄ propulsion are inherently suited to ballistic hops between ISRU nodes — ascending on a near-vertical vector, coasting at low altitude, and performing a precision landing at the destination pad.</p>
-        <p>This capability transforms a collection of isolated extraction points into an integrated logistics network, allowing surplus LOX and water to flow to nodes in deficit rather than being vented or stockpiled past capacity.</p>
-      </div>
-    </div>
-    <div class="s2s-scenarios reveal">
-      <div class="scenario">
-        <div class="scenario-tag">Scenario 01</div>
-        <h4>LOX Surplus Redistribution</h4>
-        <p>High-yield nodes producing excess liquid oxygen redistribute to nodes in deficit. Delivered LOX feeds directly into tanker refueling operations at the destination, creating a shared propellant pool across the network.</p>
-      </div>
-      <div class="scenario">
-        <div class="scenario-tag">Scenario 02</div>
-        <h4>Emergency Water Resupply</h4>
-        <p>ISRU extraction failure at a crewed outpost triggers autonomous dispatch from the nearest surplus node. First delivery achievable within 6–8 hours — no crew or operator action required at the origin site.</p>
-      </div>
-      <div class="scenario">
-        <div class="scenario-tag">Scenario 03</div>
-        <h4>Forward Base Pre-Positioning</h4>
-        <p>New exploration outposts 900+ km from the nearest ISRU hub receive propellant caches via a series of surface hops, establishing operational independence before local production comes online.</p>
-      </div>
-      <div class="scenario">
-        <div class="scenario-tag">Scenario 04</div>
-        <h4>Routine Inter-Node Exchange</h4>
-        <p>3–5 tankers operate in dedicated S2S rotation, executing scheduled monthly rebalancing of LOX and water inventories across all active nodes under autonomous dispatch control from Aegis Station.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROPELLANT ARCHITECTURE -->
-<section class="prop-section" id="propellant">
-  <div class="page-wrap">
-    <div class="section-header reveal">
-      <span class="section-number">// 05</span>
-      <span class="section-title">Propellant Architecture</span>
-      <div class="section-rule"></div>
-    </div>
-
-    <div class="prop-intro reveal">
-      <div class="prop-callout">
-        <div class="prop-stat-block">
-          <div class="prop-stat-label">Phase 1 Propellant</div>
-          <div class="prop-stat-value">LOX / CH₄</div>
-          <div class="prop-stat-desc">Proven architecture. LOX sourced locally via ISRU electrolysis. Methane imported from Earth during shield fill.</div>
-        </div>
-        <div class="prop-divider"></div>
-        <div class="prop-stat-block">
-          <div class="prop-stat-label">Phase 3 Target</div>
-          <div class="prop-stat-value">LOX / LH₂</div>
-          <div class="prop-stat-desc">Both propellants produced locally from lunar water. Isp 450s — 25% higher performance. Zero Earth import dependency.</div>
-        </div>
-        <div class="prop-divider"></div>
-        <div class="prop-stat-block">
-          <div class="prop-stat-label">Break-Even vs Imports</div>
-          <div class="prop-stat-value">6–18 mo</div>
-          <div class="prop-stat-desc">Infrastructure investment recovered against methane import costs within the first 18 months of LOX/LH₂ operations.</div>
-        </div>
-      </div>
-
-      <div class="prop-body">
-        <p>The Moon has abundant water ice. Electrolysis splits that water into liquid oxygen and liquid hydrogen — the two highest-performing chemical propellants available. The LTF's ISRU nodes are already producing both as a consequence of the shield-fill operation itself. LOX feeds directly into the current propulsion system. Hydrogen has been the missing piece.</p>
-        <p>The missing piece is now on a credible engineering path. Blue Origin's Lunar Permanence team has demonstrated zero boil-off storage of liquid hydrogen at 20K — the temperature at which LH₂ must be maintained — at twice the performance of the previous state of the art. Active cryocooling powered by the node's solar and fission power supply keeps propellant cold indefinitely, with no boil-off losses.</p>
-        <p>The program consequence is significant: rather than importing methane from Earth on every resupply cycle — a permanent, compounding dependency running into the tens of billions annually at fleet scale — the LTF transitions to a fully closed propellant loop. Water in, LOX and LH₂ out. No Earth supply chain. No launch-dependent consumables. A logistics system that is genuinely autonomous.</p>
-      </div>
-    </div>
-
-    <div class="prop-phases reveal">
-      <div class="phase-card">
-        <div class="phase-tag">Phase 01</div>
-        <div class="phase-timeline">Years 0 – 2</div>
-        <div class="phase-prop">LOX / CH₄</div>
-        <p class="phase-desc">Fleet operates on proven LOX/CH₄ propulsion while LUNET nodes are built to the full 50 kW power specification. Methane import costs are accepted during this period as the cost of mission reliability. Cryogenic and fission infrastructure is commissioned in parallel — not retrofit later.</p>
-      </div>
-      <div class="phase-card">
-        <div class="phase-tag">Phase 02</div>
-        <div class="phase-timeline">Years 2 – 3</div>
-        <div class="phase-prop">Transition</div>
-        <p class="phase-desc">Node cryocoolers and LH₂ storage come online. Tankers are qualified for liquid hydrogen service. The fleet transitions progressively — early vehicles flying LOX/LH₂ missions as nodes are certified, methane imports tapering as the conversion progresses across all six LUNET sites.</p>
-      </div>
-      <div class="phase-card">
-        <div class="phase-tag">Phase 03</div>
-        <div class="phase-timeline">Year 3 → Post-Fill</div>
-        <div class="phase-prop">LOX / LH₂</div>
-        <p class="phase-desc">Full fleet operates on locally produced propellants. Zero Earth import dependency. The higher Isp of LOX/LH₂ reduces propellant mass per mission, increasing payload fraction and compressing the remaining fill timeline. Post-fill, the same fleet serves Aegis Station depot and surface logistics roles indefinitely.</p>
-      </div>
-    </div>
-
-    <div class="prop-tech-bar reveal">
-      <div class="tech-bar-label">Enabling Technologies</div>
-      <div class="tech-bar-items">
-        <div class="tech-item">
-          <div class="tech-dot" style="background: var(--ice);"></div>
-          <span class="tech-item-text">Blue Origin Zero Boil-Off (2× SoA)</span>
-        </div>
-        <div class="tech-item">
-          <div class="tech-dot" style="background: var(--amber);"></div>
-          <span class="tech-item-text">Turbo-Brayton Cryocooler — 20K LH₂</span>
-        </div>
-        <div class="tech-item">
-          <div class="tech-dot" style="background: var(--text-dim);"></div>
-          <span class="tech-item-text">NASA Kilopower Fission — Lunar Night Power</span>
-        </div>
-        <div class="tech-item">
-          <div class="tech-dot" style="background: var(--muted);"></div>
-          <span class="tech-item-text">50 kW-Class Polar Solar Arrays</span>
-        </div>
-        <div class="tech-item">
-          <div class="tech-dot" style="background: var(--ice-dim);"></div>
-          <span class="tech-item-text">LOX/LH₂ Co-Storage Thermal Architecture</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- 06 — GROUND CONTROL TEASER -->
-<section class="s2s-section" id="groundcontrol">
-  <div class="page-wrap">
-    <div class="section-header reveal">
-      <span class="section-number">// 06</span>
-      <span class="section-title">Ground Control</span>
-      <div class="section-rule"></div>
-    </div>
-    <div class="s2s-intro reveal">
-      <div class="s2s-callout">
-        <div class="s2s-callout-label">Fleet Commander</div>
-        <div class="s2s-callout-value">45 : 1</div>
-        <div class="s2s-callout-desc">
-          Forty-five autonomous tankers, one ground console. Dispatch, pad
-          deconfliction, standby reserves and throughput optimisation &mdash;
-          live.
-        </div>
-      </div>
-      <div class="s2s-body">
-        <p>
-          The tankers fly themselves. Coordinating them &mdash; deciding who flies
-          the next sortie, keeping one ship to a pad, healing the schedule around an
-          anomaly, and squeezing maximum water to station &mdash; is the job of the
-          ground-side <strong>Fleet Commander</strong>.
-        </p>
-        <a href="fleet_commander.html"
-           style="display:inline-flex; align-items:center; gap:10px; margin-top:8px;
-                  font-family:'Share Tech Mono', monospace; font-size:12px;
-                  letter-spacing:0.12em; text-transform:uppercase; text-decoration:none;
-                  color:var(--amber); border:1px solid var(--amber-dim);
-                  padding:14px 22px; transition:background 0.2s, color 0.2s;"
-           onmouseover="this.style.background='var(--amber)';this.style.color='var(--void)';"
-           onmouseout="this.style.background='transparent';this.style.color='var(--amber)';">
-          Open the Fleet Commander &rarr;
-        </a>
-      </div>
-    </div>
-    <a href="fleet_commander.html" class="reveal"
-       style="display:block; margin-top:40px; border:1px solid var(--border);
-              overflow:hidden; line-height:0;">
-      <img src="images/fc_fleet_overview.png" alt="Fleet Commander ground control console"
-           style="width:100%; display:block;">
-    </a>
-    <div class="image-caption reveal">
-      <span class="caption-text">FIG. 06 &mdash; Screen capture: Fleet Commander console, live fleet overview &amp; throughput</span>
-      <span class="caption-ref">FC-CONSOLE-001</span>
     </div>
   </div>
 </section>
@@ -1513,9 +1204,9 @@
 <footer>
   <div class="page-wrap">
     <div class="footer-inner">
-      <div class="footer-logo">Lunar Tanker Fleet — Aegis Station Program</div>
+      <div class="footer-logo">Fleet Commander &mdash; Aegis Station Logistics Program</div>
       <div class="footer-copy">
-        <span class="status-dot"></span>Fleet Status: Nominal
+        <span class="status-dot"></span>Coordinator: Nominal
       </div>
     </div>
   </div>
