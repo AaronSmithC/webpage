@@ -47,6 +47,9 @@
     th { color:#f0f0f0; font-family:"Orbitron", system-ui, sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.5px; }
     tbody tr:nth-child(even) { background:#0e0e0e; }
     tbody tr:nth-child(odd) { background:#121212; }
+    figure.diagram { margin: 1.5rem 0 0.5rem; border:1px solid #2b2b2b; background:#0f0f0f; border-radius:14px; padding:1rem 1rem 0.9rem; }
+    figure.diagram img { width:100%; height:auto; display:block; }
+    figure.diagram figcaption { margin:0.7rem 0 0; font-size:0.9rem; color:#b9b9b9; line-height:1.55; }
   </style>
 </head>
 
@@ -64,6 +67,11 @@
       rotary fluid seals. Every crossing is either contactless, cyclic, or eliminated entirely by
       distributing the function across both sides.
     </p>
+
+    <figure class="diagram">
+      <img src="images/hub_ring_boundary_diagram.svg" alt="Schematic cross-section of the hub/ring boundary: crew and cargo cross as cyclic pods through a despun magazine and ring-face vestibule; power crosses by a contactless rotary transformer; data by an on-axis free-space optical link; and heat is rejected independently on each side. No continuous rotary seal in any path."/>
+      <figcaption>Schematic of the boundary (not to scale). Crew &amp; cargo cross as cyclic pods, power by a contactless rotary transformer, data by an on-axis optical link, and heat is rejected independently on each side &#8212; no continuous rotary seal in any path.</figcaption>
+    </figure>
 
     <div class="toc">
       <strong style="font-family: Orbitron, system-ui, sans-serif;">On this page</strong>
