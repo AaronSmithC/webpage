@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Industry Concepts | Aegis Station</title>
+
+<meta name="description" content="Why build industry in lunar orbit. Concept explorations of the industries that earn a place on Aegis Station — microgravity manufacturing, the cislunar resource hub, and the systems that keep a permanent station alive."/>
+<link href="https://www.aegisstation.com/industry.html" rel="canonical"/>
+
+<!-- Open Graph -->
+<meta property="og:title" content="Industry Concepts | Aegis Station"/>
+<meta property="og:description" content="Why build industry in lunar orbit — microgravity manufacturing, the cislunar resource hub, and the systems that keep a permanent station alive."/>
+<meta property="og:image" content="https://aegisstation.com/images/interior_transit_core.png"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://aegisstation.com/industry.html"/>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="https://www.aegisstation.com/favicon_from_art.ico"/>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #f4f5f2;
+  --bg-raised: #ffffff;
+  --ink: #1b1d22;
+  --ink-soft: #4d525c;
+  --muted: #6b7079;
+  --border: #e4e5e0;
+  --accent: #1f7fb0;
+  --accent-soft: #e8f2f8;
+  --font-display: 'Orbitron', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+  --max-w: 1080px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+a:hover { opacity: 0.75; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem; }
+
+/* ── Top bar ─────────────────────────────────────────── */
+.topbar {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-raised);
+}
+.topbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.back-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.back-link::before { content: '←'; }
+.brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+
+/* ── Header ──────────────────────────────────────────── */
+header.page-head {
+  padding: 4rem 0 2.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-raised);
+}
+header.page-head h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+header.page-head .kicker {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+header.page-head .lede {
+  max-width: 720px;
+  margin: 0 auto;
+  color: var(--ink-soft);
+  font-size: 1.08rem;
+}
+header.page-head .note {
+  max-width: 720px;
+  margin: 1.25rem auto 0;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+/* ── Tier sections ───────────────────────────────────── */
+.tier { padding: 3rem 0 0.5rem; }
+.tier:last-of-type { padding-bottom: 3rem; }
+.tier-head { max-width: var(--max-w); margin: 0 auto 1.5rem; padding: 0 1.5rem; }
+.tier-head .tier-tag {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.tier-head h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  margin: 0.4rem 0 0.4rem;
+}
+.tier-head p { color: var(--ink-soft); max-width: 640px; font-size: 0.98rem; }
+
+/* ── Gallery (masonry via columns) ───────────────────── */
+.gallery {
+  column-count: 1;
+  column-gap: 1.5rem;
+}
+@media (min-width: 720px) { .gallery { column-count: 2; } }
+
+.concept {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(20,22,28,0.04), 0 8px 24px rgba(20,22,28,0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.concept:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 2px 4px rgba(20,22,28,0.06), 0 16px 36px rgba(20,22,28,0.10);
+}
+.concept img { width: 100%; }
+.concept .body { padding: 1.15rem 1.3rem 1.4rem; }
+.concept .tag {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+.concept h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.concept p {
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+}
+
+/* Pending (no render yet) placeholder image area */
+.concept.pending .ph {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #edefea;
+  background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.015) 0, rgba(0,0,0,0.015) 12px, transparent 12px, transparent 24px);
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+.tier-more {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-style: italic;
+}
+
+/* ── Footer ──────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  background: var(--bg-raised);
+  text-align: center;
+  padding: 2.5rem 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer .container > * + * { margin-top: 0.75rem; }
+footer a { color: var(--ink-soft); font-weight: 500; }
+.pair-link { font-size: 0.95rem; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <a class="back-link" href="index.html">Back to Home</a>
+    <span class="brand">AEGIS STATION</span>
+  </div>
+</div>
+
+<header class="page-head">
+  <div class="container">
+    <p class="kicker">Concept Explorations</p>
+    <h1>Industry Concepts</h1>
+    <p class="lede">
+      An industry only earns a place in orbit if being there makes it better or cheaper than on Earth.
+      Three things orbit provides — microgravity, vacuum and abundant solar, and proximity to lunar
+      resources — and Aegis Station's industries cluster around them.
+    </p>
+    <p class="note">
+      Concept explorations, not committed plans. Industry lives in the station's weightless central hub;
+      the spinning habitat rings are for living.
+    </p>
+  </div>
+</header>
+
+<!-- ═══════════ TIER 1 ═══════════ -->
+<section class="tier" id="microgravity">
+  <div class="tier-head">
+    <span class="tier-tag">Made in microgravity</span>
+    <h2>Things you can't make on Earth</h2>
+    <p>High-value products whose quality depends on freefall — drawn, printed, or grown without gravity pulling them out of shape.</p>
+  </div>
+  <div class="container">
+    <div class="gallery">
+
+      <article class="concept pending">
+        <div class="ph">Render in progress</div>
+        <div class="body">
+          <span class="tag">Microgravity manufacturing</span>
+          <h3>ZBLAN Optical Fiber</h3>
+          <p>Fluoride-glass fiber drawn in freefall, where the absence of gravity prevents the micro-crystal defects that cloud Earth-made fiber — a dramatically lower-loss product, pulled in a dead-straight line in the hub.</p>
+        </div>
+      </article>
+
+      <article class="concept pending">
+        <div class="ph">Render in progress</div>
+        <div class="body">
+          <span class="tag">Microgravity manufacturing</span>
+          <h3>Bioprinting Bay</h3>
+          <p>Printing tissue and organoids that would sag and collapse under their own weight on Earth, but hold their three-dimensional shape freely in zero gravity. Frontier medical manufacturing.</p>
+        </div>
+      </article>
+
+    </div>
+    <p class="tier-more">Also in development: defect-free semiconductor crystals, novel metal alloys and foams from containerless melting.</p>
+  </div>
+</section>
+
+<!-- ═══════════ TIER 2 ═══════════ -->
+<section class="tier" id="cislunar-hub">
+  <div class="tier-head">
+    <span class="tier-tag">The cislunar hub</span>
+    <h2>Native to lunar orbit</h2>
+    <p>Industries that exist <em>because</em> the station sits where it does — downstream of lunar water, upstream of everything cislunar.</p>
+  </div>
+  <div class="container">
+    <div class="gallery">
+
+      <article class="concept pending">
+        <div class="ph">Render in progress</div>
+        <div class="body">
+          <span class="tag">Build it here</span>
+          <h3>In-Space Assembly</h3>
+          <p>Assembling structures too large to launch from Earth — trusses, antennas, the next habitat ring — from components handled by robotic arms and free-flying work-pods in the hub. We don't ship the station up; we build it here.</p>
+        </div>
+      </article>
+
+    </div>
+    <p class="tier-more">Also in development: propellant production (electrolyzing lunar water into LOX/LH&#8322;, feeding the depot and tanker fleet), regolith and materials processing, and port &amp; logistics operations.</p>
+  </div>
+</section>
+
+<!-- ═══════════ TIER 3 ═══════════ -->
+<section class="tier" id="life-support-industry">
+  <div class="tier-head">
+    <span class="tier-tag">Keeping the station alive</span>
+    <h2>A city needs these</h2>
+    <p>Less export, more upkeep — the closed-loop systems that let a permanent community sustain itself.</p>
+  </div>
+  <div class="container">
+    <p class="tier-more">In development: food production (hydroponic farms in the rings, zero-g processing in the hub), on-demand fabrication and repair, and water reclamation and recycling.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p class="pair-link"><a href="interiors.html">The human side: Life Aboard Aegis Station →</a></p>
+    <p><a href="index.html">← Back to Aegis Station</a></p>
+    <p>&copy; 2026 Aegis Station Infrastructure LLC</p>
+  </div>
+</footer>
+
+</body>
+</html>
