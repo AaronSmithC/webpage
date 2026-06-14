@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Interior Concepts | Aegis Station</title>
+
+<meta name="description" content="Early concept explorations of life aboard Aegis Station — the kinds of spaces a permanent orbital community needs: homes, parks, galleys, labs, and the microgravity hub. Bright, green, and built for people."/>
+<link href="https://www.aegisstation.com/interiors.html" rel="canonical"/>
+
+<!-- Open Graph -->
+<meta property="og:title" content="Interior Concepts | Aegis Station"/>
+<meta property="og:description" content="Early concept explorations of life aboard Aegis Station — homes, parks, galleys, labs, and the microgravity hub."/>
+<meta property="og:image" content="https://aegisstation.com/images/interior_park.png"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://aegisstation.com/interiors.html"/>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="https://www.aegisstation.com/favicon_from_art.ico"/>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #f4f5f2;
+  --bg-raised: #ffffff;
+  --ink: #1b1d22;
+  --ink-soft: #4d525c;
+  --muted: #6b7079;
+  --border: #e4e5e0;
+  --accent: #1f7fb0;
+  --accent-soft: #e8f2f8;
+  --font-display: 'Orbitron', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+  --max-w: 1080px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+a:hover { opacity: 0.75; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem; }
+
+/* ── Top bar ─────────────────────────────────────────── */
+.topbar {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-raised);
+}
+.topbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.back-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.back-link::before { content: '←'; }
+.brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+
+/* ── Header ──────────────────────────────────────────── */
+header.page-head {
+  padding: 4rem 0 2.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-raised);
+}
+header.page-head h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+header.page-head .kicker {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+header.page-head .lede {
+  max-width: 680px;
+  margin: 0 auto;
+  color: var(--ink-soft);
+  font-size: 1.08rem;
+}
+header.page-head .note {
+  max-width: 680px;
+  margin: 1.25rem auto 0;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+/* ── Gallery (masonry via columns) ───────────────────── */
+.gallery-wrap { padding: 3rem 0 4rem; }
+.gallery {
+  column-count: 1;
+  column-gap: 1.5rem;
+}
+@media (min-width: 720px) { .gallery { column-count: 2; } }
+
+.concept {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(20,22,28,0.04), 0 8px 24px rgba(20,22,28,0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.concept:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 2px 4px rgba(20,22,28,0.06), 0 16px 36px rgba(20,22,28,0.10);
+}
+.concept img { width: 100%; }
+.concept .body { padding: 1.15rem 1.3rem 1.4rem; }
+.concept .tag {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+.concept h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.concept p {
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+}
+
+/* ── Footer ──────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  background: var(--bg-raised);
+  text-align: center;
+  padding: 2.5rem 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+footer .container > * + * { margin-top: 0.75rem; }
+footer a { color: var(--ink-soft); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <a class="back-link" href="index.html">Back to Home</a>
+    <span class="brand">AEGIS STATION</span>
+  </div>
+</div>
+
+<header class="page-head">
+  <div class="container">
+    <p class="kicker">Concept Explorations</p>
+    <h1>Interior Concepts</h1>
+    <p class="lede">
+      Early concept explorations of life aboard Aegis Station. These illustrate the kinds of spaces a
+      permanent orbital community needs — how they're laid out is still open. The rings spin to about 1g
+      at the floor, so the feel inside is familiar: bright, green, and built for people.
+    </p>
+    <p class="note">
+      These are visions, not blueprints. The habitat rings provide Earth-normal gravity at the floor; the
+      non-rotating central hub stays weightless — so a few of these spaces float.
+    </p>
+  </div>
+</header>
+
+<div class="gallery-wrap">
+  <div class="container">
+    <div class="gallery">
+
+      <article class="concept">
+        <img src="images/interior_residence.png" alt="A private apartment inside a habitat ring — bed, desk, bookshelves, a screen-window showing the Moon, and a dog asleep in its bed."/>
+        <div class="body">
+          <span class="tag">Somewhere to live</span>
+          <h2>Private Quarters</h2>
+          <p>A home, not a capsule. Personal quarters in a habitat ring — a real bed, a desk, shelves of books, a screen "window" to the Moon, and a place for the dog to sleep.</p>
+        </div>
+      </article>
+
+      <article class="concept">
+        <img src="images/interior_bathroom.png" alt="A normal modern bathroom with a walk-in shower, sink, mirror, and a framed photo of the Moon."/>
+        <div class="body">
+          <span class="tag">An ordinary luxury</span>
+          <h2>A Real Bathroom</h2>
+          <p>The detail that tells you this is real: a proper shower and sink. At about 1g on the ring floor, water behaves exactly as it does on Earth — no space-toilet improvisation required.</p>
+        </div>
+      </article>
+
+      <article class="concept">
+        <img src="images/interior_park.png" alt="A green park inside a rotating ring, the ground curving upward and away on both sides under a long daylight ceiling, with a stream and people picnicking."/>
+        <div class="body">
+          <span class="tag">Somewhere to breathe</span>
+          <h2>The Park</h2>
+          <p>An open green valley that wraps overhead — the ring floor rising away on both sides beneath a full-spectrum daylight ceiling. Room to walk, picnic, and forget you're in orbit.</p>
+        </div>
+      </article>
+
+      <article class="concept">
+        <img src="images/interior_galley.png" alt="A warm station restaurant and galley with communal tables, an open kitchen, and the planted ring curving up beyond the diners."/>
+        <div class="body">
+          <span class="tag">Somewhere to gather</span>
+          <h2>Galley &amp; Restaurant</h2>
+          <p>Somewhere to gather and share a meal, the planted ring curving up beyond the tables. A food culture, not ration packs — the social heart of a community in orbit.</p>
+        </div>
+      </article>
+
+      <article class="concept">
+        <img src="images/interior_lab.png" alt="A bright, busy research laboratory with scientists at work, instrument racks, and sample storage."/>
+        <div class="body">
+          <span class="tag">Somewhere to work</span>
+          <h2>Research Lab</h2>
+          <p>A working research lab — bright, busy, and matter-of-fact. The everyday science that earns a permanent station its place in lunar orbit.</p>
+        </div>
+      </article>
+
+      <article class="concept">
+        <img src="images/interior_observation_cupola.png" alt="A microgravity observation dome in the non-rotating hub, the Moon filling the glass, with people floating and plants in hanging planters."/>
+        <div class="body">
+          <span class="tag">Somewhere to look out</span>
+          <h2>Observation Cupola</h2>
+          <p>A microgravity observation dome in the station's non-rotating hub, the Moon filling the glass. The one place you float to with no purpose but to look.</p>
+        </div>
+      </article>
+
+      <article class="concept">
+        <img src="images/interior_transit_core.png" alt="The weightless central transit core, people floating between labeled docking ports for the habitat rings, with wayfinding signage."/>
+        <div class="body">
+          <span class="tag">Getting around</span>
+          <h2>Transit Core</h2>
+          <p>The weightless heart of the station, where the spinning rings meet the still central hub. Push off, glide past the ring gateways, and arrive at the next neighborhood.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p><a href="index.html">← Back to Aegis Station</a></p>
+    <p>&copy; 2026 Aegis Station Infrastructure LLC</p>
+  </div>
+</footer>
+
+</body>
+</html>
