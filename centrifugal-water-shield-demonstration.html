@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Centrifugal Water Shield Segment Demonstration (CWSSD) | Fluid Shielding Validation</title>
+  <meta name="description" content="A requirements-style reference defining a minimal, repeatable on-orbit demonstration of fill, containment, and spin-up behavior for large water-based radiation shielding systems." />
+
+  <style>
+    :root{
+      --bg:#0a0b10;
+      --card:#11131a;
+      --text:#e9eefb;
+      --muted:#a9b3c9;
+      --accent:#3b82f6;
+      --stroke:#1f2430;
+      --good:#22c55e;
+      --warn:#f59e0b;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1000px;margin:0 auto;padding:24px}
+    header{padding:18px 0 8px}
+    .kicker{color:var(--muted);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+    h1{font-size:40px;line-height:1.1;margin:10px 0 8px}
+    .subhead{color:var(--muted);font-size:18px;max-width:850px;line-height:1.55;margin:0 0 18px}
+    .hero{
+      display:grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap:16px;
+      align-items:stretch;
+      margin:18px 0 18px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--stroke);
+      border-radius:16px;
+      padding:18px;
+    }
+    .hero .card{min-height:220px}
+    .schematic{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:14px;
+      background:linear-gradient(180deg, rgba(59,130,246,.12), rgba(59,130,246,.04));
+      border:1px dashed rgba(59,130,246,.35);
+      height:100%;
+      text-align:center;
+      padding:14px;
+      color:var(--muted);
+    }
+    .schematic strong{color:var(--text)}
+    .pillrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+    .pill{
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.02);
+      color:var(--muted);
+      font-size:13px;
+      padding:8px 10px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+    .grid{display:grid;grid-template-columns: 1fr 1fr;gap:16px;margin:16px 0}
+    h2{font-size:22px;margin:0 0 10px}
+    h3{font-size:16px;margin:0 0 8px;color:var(--text)}
+    p{color:var(--muted);line-height:1.7;margin:10px 0}
+    ul{margin:10px 0 0 18px;color:var(--muted);line-height:1.7}
+    li{margin:6px 0}
+    .note{
+      border-left:3px solid var(--accent);
+      padding:10px 12px;
+      background:rgba(59,130,246,.08);
+      border-radius:12px;
+      color:var(--muted);
+      margin:12px 0 0;
+    }
+    .reqs{width:100%;border-collapse:separate;border-spacing:0;margin-top:10px;overflow:hidden;border-radius:14px;border:1px solid var(--stroke)}
+    .reqs th, .reqs td{padding:12px 12px;border-bottom:1px solid var(--stroke);vertical-align:top}
+    .reqs th{background:rgba(255,255,255,.03);text-align:left;font-size:13px;color:var(--text)}
+    .reqs td{font-size:14px;color:var(--muted)}
+    .reqs tr:last-child td{border-bottom:none}
+    .tag{
+      display:inline-block;
+      font-size:12px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      color:var(--muted);
+      background:rgba(255,255,255,.02);
+      margin-right:6px;
+      margin-top:4px;
+    }
+    .twoCol{display:grid;grid-template-columns: 1fr 1fr;gap:14px}
+    .mini{font-size:13px;color:var(--muted)}
+    .callout{
+      background:rgba(34,197,94,.08);
+      border:1px solid rgba(34,197,94,.25);
+      border-radius:14px;
+      padding:14px;
+      margin-top:12px;
+    }
+    .callout strong{color:var(--text)}
+    footer{margin:26px 0 8px;color:var(--muted);font-size:13px}
+    .hr{height:1px;background:var(--stroke);margin:18px 0}
+    @media (max-width: 860px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .twoCol{grid-template-columns:1fr}
+      h1{font-size:34px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="kicker">Reference Concept • Pre-Operational Validation Capability</div>
+      <h1>Centrifugal Water Shield Segment Demonstration (CWSSD)</h1>
+      <div class="subhead">
+        A requirements-style definition of a minimal, repeatable <strong>on-orbit demonstration</strong>
+        that validates fill, containment, and spin-up behavior of large water-based radiation shielding systems
+        under relevant microgravity and artificial-gravity conditions.
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="card">
+        <h2 style="margin-bottom:8px">What this page is</h2>
+        <p>
+          This is a neutral definition of a minimal &ldquo;CWSSD-class&rdquo; investigation: a compact, free-flying
+          capability for measuring <strong>the dynamic behavior of large fluid masses</strong> during in-orbit fill and controlled rotation.
+          It is not a product announcement, not a solicitation, and not a claim of planned development.
+        </p>
+        <div class="pillrow" aria-label="Scope tags">
+          <span class="pill">Fluid dynamics, not shielding chemistry</span>
+          <span class="pill">Flight-validated parameters, not inference</span>
+          <span class="pill">Mass-scaling risk reduction</span>
+          <span class="pill">Repeatable test recipe</span>
+        </div>
+        <div class="note">
+          <strong>Core idea:</strong> before large orbital habitats or depots depend on water mass for shielding,
+          storage, or artificial gravity, the fill and spin-up behavior of that mass should be measured directly
+          under flight conditions that cannot be reproduced on the ground.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="schematic">
+          <div>
+            <a href="images/CWSSD.png" target="_blank" rel="noopener">
+  <img
+    src="images/CWSSD.png"
+    alt="Centrifugal Water Shield Segment Demonstration (CWSSD) block diagram: annular water tank and incremental fill, to spin platform, to engineering data products."
+    style="max-width:100%; height:auto; border-radius:12px; border:1px solid var(--stroke);"
+  />
+</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="hr"></div>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Why this capability is needed</h2>
+        <p>
+          As orbital architectures move from one-off demonstrations toward large-mass infrastructure, a practical operational gap becomes more consequential:
+          <strong>quantified fluid behavior at the scale and configuration these systems actually use</strong>.
+        </p>
+        <ul>
+          <li>Large-mass fluid shielding introduces mass asymmetry, slosh dynamics, gas entrapment, and spin-up resonance that ground testing cannot fully replicate.</li>
+          <li>&ldquo;The fluid will settle under spin&rdquo; is not a substitute for measured redistribution across the surface-tension-to-acceleration transition.</li>
+          <li>Partial-fill behavior differs materially from full-fill behavior, and operational fill is performed on orbit rather than pre-loaded on the ground.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Scope of application</h2>
+        <p>CWSSD-class characterization should precede or accompany:</p>
+        <ul>
+          <li>Large orbital habitats with water-based radiation shielding</li>
+          <li>Propellant depots and in-space fluid storage</li>
+          <li>Radiation-shielded deep-space vehicles</li>
+          <li>Artificial-gravity systems relying on rotating fluid mass</li>
+          <li>In-space life-support water storage at scale</li>
+        </ul>
+        <p class="mini">
+          CWSSD-class characterization complements structural and radiation payloads; it is focused on operational fluid mechanics rather than shielding-material performance.
+        </p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Measurement objectives</h2>
+      <div class="twoCol">
+        <div>
+          <h3>Primary (minimum) objectives</h3>
+          <ul>
+            <li>Characterize <strong>incremental fill stability</strong> in microgravity, including gas entrapment and surface topology</li>
+            <li>Measure <strong>water redistribution</strong> through the surface-tension- to acceleration-dominated transition</li>
+            <li>Quantify <strong>slosh response and suppression</strong> as a function of fill fraction and spin rate</li>
+            <li>Measure <strong>induced imbalance torques and structural loads</strong> during controlled spin-up</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Recommended (mission-dependent)</h3>
+          <ul>
+            <li>Demonstrate rebalancing strategies using internal flow routing during non-steady operations</li>
+            <li>Capture disturbance recovery following spin-rate modulation, attitude changes, and partial drain/refill</li>
+            <li>Validate reversibility through controlled de-spin and drain</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>Success criterion:</strong> outputs are directly usable by habitat, depot, and artificial-gravity designers
+        (stability envelopes, response curves, scaling parameters), not only raw telemetry or qualitative descriptions.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Functional requirements (requirements-style)</h2>
+
+      <table class="reqs" role="table" aria-label="CWSSD functional requirements">
+        <thead>
+          <tr>
+            <th style="width:20%">ID</th>
+            <th style="width:20%">Function</th>
+            <th>Requirement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>CWSSD-F-001</strong></td>
+            <td>On-orbit fill</td>
+            <td>
+              The system shall transfer water incrementally into the shielding tank in microgravity and measure fluid surface topology, gas migration, and structural load at each fill increment.
+              <div class="tag">Partial-fill</div><div class="tag">Gas entrapment</div><div class="tag">Surface geometry</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>CWSSD-F-002</strong></td>
+            <td>Controlled spin-up</td>
+            <td>
+              The system shall produce programmable rotation from zero to a defined artificial-gravity equivalent and measure water redistribution across the surface-tension-to-acceleration transition.
+              <div class="tag">Regime transition</div><div class="tag">Redistribution</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>CWSSD-F-003</strong></td>
+            <td>Slosh characterization</td>
+            <td>
+              The system shall measure slosh response across fill fractions and spin rates and evaluate suppression performance of internal segmentation.
+              <div class="tag">Slosh curves</div><div class="tag">Baffle performance</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>CWSSD-F-004</strong></td>
+            <td>Imbalance &amp; load sensing</td>
+            <td>
+              The system shall measure induced imbalance torques and tank-wall structural loads throughout fill and spin-up operations.
+              <div class="tag">Mass asymmetry</div><div class="tag">Load evolution</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>CWSSD-F-005</strong> <span class="mini">(recommended)</span></td>
+            <td>Disturbance recovery</td>
+            <td>
+              The system should introduce controlled disturbances (spin-rate modulation, attitude change, drain/refill) and demonstrate rebalancing via internal flow routing.
+              <div class="tag">Controllability</div><div class="tag">Fault tolerance</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>CWSSD-F-006</strong></td>
+            <td>Reversibility</td>
+            <td>
+              The system shall demonstrate controlled de-spin and drain to validate safe shutdown of the fluid system.
+              <div class="tag">Recoverability</div><div class="tag">Safe shutdown</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>CWSSD-F-007</strong></td>
+            <td>Time synchronization</td>
+            <td>
+              The system shall timestamp all measurements and synchronize fluid, structural, and attitude data to support reconstruction of test conditions.
+              <div class="tag">Engineering traceability</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="mini" style="margin-top:10px">
+        Note: quantitative thresholds (water volume, spin rate, accuracies) are mission- and platform-dependent and should be set by the requirements of the target shielding or artificial-gravity system. A representative baseline uses a 50&ndash;150 L configurable annular volume and a 0 to ~1.5 g equivalent programmable spin range in low Earth orbit.
+      </p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Conceptual device elements</h2>
+        <ul>
+          <li><strong>Annular tank:</strong> sealed, instrumented curved annular segment (toroidal sector) geometry</li>
+          <li><strong>Internal segmentation:</strong> curved, soft-cell-inspired baffles avoiding sharp corners, for slosh suppression</li>
+          <li><strong>Fill system:</strong> onboard reservoir and metering for incremental on-orbit transfer</li>
+          <li><strong>Spin platform:</strong> self-contained free-flying bus with programmable rotation and attitude stabilization</li>
+          <li><strong>Sensor set (minimum):</strong> multi-point pressure, flow, tank-wall strain, IMU and torque, internal imaging, temperature</li>
+          <li><strong>Optional:</strong> internal flow-routing for active rebalancing</li>
+        </ul>
+        <div class="note">
+          <strong>Design bias:</strong> fill and manipulate water on orbit, rather than pre-filling on the ground, so the demonstration replicates operational conditions for large infrastructure rather than a launch-loaded approximation.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Minimal test recipe (single-mission class)</h2>
+        <ol style="margin:10px 0 0 18px;color:var(--muted);line-height:1.7">
+          <li><strong>Baseline zero-g diagnostics</strong> &mdash; pressure response, gas distribution, sensor calibration (no rotation)</li>
+          <li><strong>Incremental fill</strong> &mdash; controlled mass steps (e.g., 5&ndash;10 L), imaging surface topology and gas migration between steps</li>
+          <li><strong>Low-g spin initiation</strong> (&le;0.3 g) &mdash; observe the surface-tension- to acceleration-dominated transition</li>
+          <li><strong>Progressive spin-up</strong> (0.3 g &rarr; 1.0 g) &mdash; multiple dwell points, imbalance and slosh measurement</li>
+          <li><strong>Disturbance testing</strong> &mdash; spin-rate modulation, attitude change, drain/refill, rebalancing trials</li>
+          <li><strong>De-spin and drain</strong> &mdash; final diagnostics, validate reversibility, passivate or deorbit</li>
+        </ol>
+        <p class="mini" style="margin-top:10px">
+          This recipe is intentionally compact: it prioritizes engineering-usable stability and scaling parameters over broad exploratory data collection.
+        </p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Data products</h2>
+      <p>
+        CWSSD-class investigations should deliver a small set of standardized outputs suitable for habitat, depot, and artificial-gravity design:
+      </p>
+      <div class="twoCol">
+        <div>
+          <h3>Plots (minimum set)</h3>
+          <ul>
+            <li><strong>Fill fraction vs surface topology / gas entrapment</strong> (per increment)</li>
+            <li><strong>Spin rate vs slosh response</strong> (across fill fractions)</li>
+            <li><strong>Imbalance torque and structural load vs spin rate</strong></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Tables (minimum set)</h3>
+          <ul>
+            <li>Test metadata: configuration, timestamps, instrument setup</li>
+            <li>Stability envelopes for fill/spin combinations</li>
+            <li>Derived scaling parameters and uncertainty bounds</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note">
+        <strong>Engineering usability requirement:</strong> a habitat or depot design team should be able to plug outputs into a model or spreadsheet without bespoke interpretation.
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Where it fits in mission planning</h2>
+        <ul>
+          <li>Precursor step before committing to large water-based shielding, fluid storage, or rotating-fluid artificial-gravity architectures</li>
+          <li>Input to structural, attitude-control, and fill-system design for large-mass platforms</li>
+          <li>Complements radiation and structural payloads by addressing fluid-dynamic uncertainty</li>
+          <li>Improves design margins and reduces conservatism driven by unknown large-mass fluid behavior</li>
+        </ul>
+        <div class="callout">
+          <strong>Framing:</strong> as orbital infrastructure scales toward large fluid masses, measured fill and spin-up behavior becomes an enabling capability rather than an optional add-on.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Why a flight demonstration</h2>
+        <ul>
+          <li>The defining behaviors &mdash; partial-fill stability, the surface-tension-to-acceleration transition, and large-mass slosh under spin &mdash; depend on sustained microgravity and controlled rotation at a scale and duration unreachable in drop towers or parabolic flight.</li>
+          <li>Ground campaigns remain the appropriate precursor for instrument calibration, baffle-geometry screening, and modeling validation.</li>
+          <li>The flight demonstration addresses the regimes those campaigns cannot reach, producing flight-validated scaling data.</li>
+        </ul>
+        <p class="mini">
+          This sequencing keeps ground work as the front end of the investigation rather than something the flight is intended to replace.
+        </p>
+      </div>
+    </section>
+
+    <section class="card">
+  <h2>Relationship to mission risk</h2>
+  <p>
+    Absence of CWSSD-class measurements prior to committing to large-mass fluid shielding or rotating-fluid systems constitutes a known engineering risk,
+    including uncontrolled mass migration, spin-up resonance, persistent imbalance, and structural overload.
+  </p>
+  <p>
+    Because these measurements underpin the feasibility and certification of large human-rated platforms, the underlying capability and its data products
+    should be operator-owned, auditable, and repeatable across missions.
+  </p>
+  <p class="mini">
+    CWSSD-class characterization reduces epistemic uncertainty; it does not eliminate all risk and does not replace disciplined operational constraints.
+  </p>
+  </section>
+    <section class="card">
+      <h2>Standardization potential</h2>
+      <p>
+        Standardizing CWSSD-class investigations enables cross-configuration comparability and accumulation of empirical large-mass fluid datasets.
+        Over time, this reduces the need to re-derive fill and spin-up behavior for each new platform and supports better-grounded design and operational margins.
+      </p>
+    </section>
+
+    <footer>
+      <div class="hr"></div>
+      <div>
+        <strong>Note:</strong> This page is intentionally written in a neutral, requirements-style format to support discussion.
+        It describes a capability class and data products that may be implemented by any qualified mission team.
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
