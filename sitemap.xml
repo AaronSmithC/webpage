@@ -3,22 +3,168 @@
 
   <url>
     <loc>https://aegisstation.com/</loc>
+    <lastmod>2026-07-02</lastmod>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://aegisstation.com/waterlogistics.html</loc>
-    <priority>0.9</priority>
+    <loc>https://aegisstation.com/Aegis_Class_Rover.html</loc>
+    <lastmod>2026-05-30</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/aegis_hauler_v3.html</loc>
+    <lastmod>2026-04-11</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/aocn.html</loc>
+    <lastmod>2026-02-24</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/centrifugal-water-shield-demonstration.html</loc>
+    <lastmod>2026-06-15</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/CMHS.html</loc>
+    <lastmod>2026-06-14</lastmod>
   </url>
 
   <url>
     <loc>https://aegisstation.com/construction-logistics.html</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-04-05</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/dossiers/aegis_class_rover_dossier.html</loc>
+    <lastmod>2026-05-30</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/engagement.html</loc>
+    <lastmod>2025-05-05</lastmod>
   </url>
 
   <url>
     <loc>https://aegisstation.com/explorer.html</loc>
-    <priority>0.7</priority>
+    <lastmod>2026-04-05</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/extravehicular-structural-inspection-capability.html</loc>
+    <lastmod>2026-02-08</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/fleet_commander.html</loc>
+    <lastmod>2026-06-02</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/gradientone.html</loc>
+    <lastmod>2026-02-12</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/hub_ring_boundary.html</loc>
+    <lastmod>2026-06-14</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/industrial-policy-in-orbit.html</loc>
+    <lastmod>2026-02-14</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/industry.html</loc>
+    <lastmod>2026-06-14</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/interiors.html</loc>
+    <lastmod>2026-06-15</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/join_aegis.html</loc>
+    <lastmod>2025-05-08</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/lunar_orbital_depot.html</loc>
+    <lastmod>2026-06-05</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/lunar-regolith-mechanics.html</loc>
+    <lastmod>2026-07-02</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/lunar_tanker_fleet.html</loc>
+    <lastmod>2026-06-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/lunet.html</loc>
+    <lastmod>2026-02-22</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/MM_support.html</loc>
+    <lastmod>2025-12-02</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/movementmodeler-education.html</loc>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/MovementModeler.html</loc>
+    <lastmod>2026-03-31</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/Northern_Sky_Observatory_Lodge.html</loc>
+    <lastmod>2026-02-17</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/Preventing_Deep_Space_Debris_Crisis.html</loc>
+    <lastmod>2026-04-05</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/privacypolicy.html</loc>
+    <lastmod>2025-12-02</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/program_architecture_and_technical_domains.html</loc>
+    <lastmod>2026-04-11</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/short_hopper.html</loc>
+    <lastmod>2026-04-09</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/SSSRA.html</loc>
+    <lastmod>2026-02-21</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/subsurface-ice-deposit-assessment.html</loc>
+    <lastmod>2026-07-02</lastmod>
+  </url>
+
+  <url>
+    <loc>https://aegisstation.com/waterlogistics.html</loc>
+    <lastmod>2025-06-03</lastmod>
   </url>
 
 </urlset>
