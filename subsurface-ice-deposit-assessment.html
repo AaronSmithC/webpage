@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A requirements-style reference defining a deposit-scale subsurface ice assessment capability for lunar resource development — the measurement class required before committing extraction-scale capital.">
+<title>Subsurface Ice Deposit Assessment (SIDA) | Deposit-Scale Lunar Prospecting</title>
+<style>
+  :root{
+    --ink:#2c2c2c;
+    --muted:#5f5e5a;
+    --teal:#1a7e7e;
+    --teal-dark:#0f6e56;
+    --line:#e3e1db;
+    --pill-bg:#eef6f5;
+    --note-bg:#f7f6f2;
+    --max:840px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:0 20px 80px;
+    font-family:Arial, Helvetica, sans-serif;
+    color:var(--ink); background:#fff;
+    line-height:1.6; font-size:17px;
+  }
+  main{max-width:var(--max); margin:0 auto;}
+  .eyebrow{
+    margin:48px 0 10px; font-size:12px; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--teal); font-weight:bold;
+  }
+  h1{
+    margin:0 0 14px; font-size:40px; line-height:1.15; letter-spacing:-0.5px;
+  }
+  .lede{font-size:19px; color:var(--muted); margin:0 0 34px;}
+  .lede strong{color:var(--ink);}
+  h2{
+    margin:52px 0 14px; font-size:24px; line-height:1.25;
+    padding-top:18px; border-top:1px solid var(--line);
+  }
+  h3{margin:26px 0 8px; font-size:17px;}
+  p{margin:0 0 16px;}
+  ul,ol{margin:0 0 16px; padding-left:22px;}
+  li{margin-bottom:6px;}
+  .pills{margin:14px 0 4px;}
+  .pill{
+    display:inline-block; margin:0 8px 8px 0; padding:4px 12px;
+    font-size:12.5px; font-weight:bold; color:var(--teal-dark);
+    background:var(--pill-bg); border:1px solid #cfe6e2; border-radius:999px;
+    white-space:nowrap;
+  }
+  .core{
+    margin:18px 0 0; padding:14px 18px; background:var(--note-bg);
+    border-left:3px solid var(--teal); font-size:16.5px;
+  }
+  figure{margin:30px 0;}
+  figure a{display:block;}
+  figure img{width:100%; height:auto; display:block; border:1px solid var(--line);}
+  figcaption{margin-top:8px; font-size:13.5px; color:var(--muted); font-style:italic;}
+  table{
+    width:100%; border-collapse:collapse; margin:18px 0 8px; font-size:15px;
+  }
+  th,td{
+    text-align:left; vertical-align:top; padding:10px 12px;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-size:12.5px; letter-spacing:0.8px; text-transform:uppercase;
+    color:var(--muted); border-bottom:2px solid var(--ink);
+  }
+  td strong{white-space:nowrap;}
+  .chips{margin-top:8px;}
+  .chip{
+    display:inline-block; margin:0 6px 4px 0; padding:2px 9px;
+    font-size:11.5px; font-weight:bold; color:var(--teal-dark);
+    background:var(--pill-bg); border-radius:999px; white-space:nowrap;
+  }
+  .tablenote{font-size:14px; color:var(--muted); font-style:italic;}
+  .rom li{margin-bottom:10px;}
+  .success{
+    margin:18px 0 0; padding:12px 18px; background:var(--note-bg);
+    border-left:3px solid var(--teal-dark); font-size:16px;
+  }
+  .endnote{
+    margin-top:64px; padding:18px 20px; background:var(--note-bg);
+    border:1px solid var(--line); font-size:14.5px; color:var(--muted);
+  }
+  @media (max-width:640px){
+    h1{font-size:30px;}
+    .lede{font-size:17px;}
+    body{font-size:16px;}
+    th,td{padding:8px 8px;}
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <p class="eyebrow">Reference Concept &bull; Resource Assessment Capability</p>
+
+  <h1>Subsurface Ice Deposit Assessment (SIDA)</h1>
+
+  <p class="lede">A requirements-style definition of a <strong>deposit-scale subsurface assessment
+  capability</strong> for lunar water ice &mdash; the class of measurement required before
+  extraction-scale infrastructure investment can be justified.</p>
+
+  <h2>What this page is</h2>
+  <p>This page defines a neutral <strong>capability class</strong> for locating and characterizing
+  concentrated subsurface ice bodies on the Moon at depths relevant to resource extraction.
+  It is not a product announcement, not a mission design, and not a solicitation.</p>
+
+  <div class="pills">
+    <span class="pill">Deposit-scale, not surface-scale</span>
+    <span class="pill">Depth beyond drill reach</span>
+    <span class="pill">Extraction-economics oriented</span>
+    <span class="pill">Ground-truth calibrated</span>
+  </div>
+
+  <p class="core"><strong>Core idea:</strong> industrial-scale lunar water demand can only be met
+  economically from concentrated deposits &mdash; and if such deposits exist, they lie below the
+  reach of every currently flown prospecting method except one.</p>
+
+  <h2>The deposit question</h2>
+  <p>Lunar water demand at station and depot scale &mdash; propellant, radiation shielding, life
+  support, thermal mass &mdash; is measured in <strong>thousands of tons</strong>. At the low
+  dispersed concentrations reported near the surface (single-digit percent by weight or below),
+  meeting that demand means excavating and processing regolith at a scale of
+  <strong>hundreds of thousands of tons</strong> &mdash; a mining operation whose economics are
+  unlikely to close.</p>
+  <p>What changes the economics is a <strong>concentrated deposit</strong>: a relic ice body, an
+  ice-cemented horizon tens of meters thick, or an equivalent high-grade zone where extraction
+  resembles producing from a well rather than strip-mining a dilute surface layer.</p>
+  <p>Whether such deposits exist, where they are, and how large they are is therefore
+  <strong>the load-bearing question of lunar water economics</strong>. It cannot be answered by
+  surface measurements.</p>
+
+  <h2>The depth gap</h2>
+
+  <figure>
+    <a href="images/sida-depth-gap.png">
+      <img src="images/sida-depth-gap.png"
+           alt="Schematic cross-section comparing the depth reach of lunar prospecting methods: orbital sensing to about one meter, ground-penetrating radar fading with depth, drilling to meters, and active-source seismic reaching through a concentrated deposit at tens to one hundred meters, with reach scaling with source energy and array aperture.">
+    </a>
+    <figcaption>The depth gap: currently flown prospecting methods saturate shallow; active-source
+    seismic is the one method class whose reach scales with the survey. Schematic, not to scale.</figcaption>
+  </figure>
+
+  <p>Currently flown and near-term prospecting methods saturate shallow:</p>
+
+  <table>
+    <thead>
+      <tr><th>Method class</th><th>Effective depth</th><th>Limitation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Orbital neutron / spectral sensing</strong></td>
+        <td>~1 m</td>
+        <td>Senses hydrogen in the uppermost regolith only; no depth profile</td>
+      </tr>
+      <tr>
+        <td><strong>Ground-penetrating radar</strong></td>
+        <td>Meters to tens of m (conditions-dependent)</td>
+        <td>Dielectric-contrast dependent; attenuation limits depth and interpretation</td>
+      </tr>
+      <tr>
+        <td><strong>Drilling / excavation</strong></td>
+        <td>~Meters</td>
+        <td>Point measurement; depth gained only at large engineering cost per meter</td>
+      </tr>
+      <tr>
+        <td><strong>Active-source seismic</strong></td>
+        <td><strong>Tens to hundreds of meters, scalable</strong></td>
+        <td>Depth scales with source energy and array aperture &mdash; an equipment decision, not a physics wall</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Seismic methods are how essentially every deep resource on Earth is located before capital
+  is committed to extraction. They are the only geophysical method class whose depth of
+  investigation <strong>scales with the survey</strong>, rather than saturating at a physical
+  limit.</p>
+  <p>Lunar-surface feasibility is not speculative: the Apollo Active Seismic Experiments
+  (Apollo&nbsp;14, 16) operated small mobile sources on the regolith, and the Apollo&nbsp;17 Lunar
+  Seismic Profiling Experiment scaled the source class and imaged structure at
+  hundreds-of-meters scale. The progression from small prospecting sources to deposit-scale
+  surveys was demonstrated on the Moon five decades ago.</p>
+
+  <h2>Scope of application</h2>
+  <p>SIDA-class assessment should precede:</p>
+  <ul>
+    <li>Extraction-plant siting and ISRU capital commitment</li>
+    <li>Water-dependent architecture decisions (depot placement, station logistics)</li>
+    <li>Long-term surface infrastructure planning in ice-prospective terrain</li>
+    <li>Resource valuation, reserve estimation, and any commercial claims of deposit scale</li>
+  </ul>
+  <p>SIDA-class assessment complements shallow compositional prospecting; it addresses
+  <strong>deposit geometry and continuity at depth</strong>, not surface volatile inventory.</p>
+
+  <h2>Measurement objectives</h2>
+
+  <h3>Primary objectives</h3>
+  <ul>
+    <li>Detect and delineate <strong>subsurface velocity/mechanical contrasts</strong> consistent with ice-bearing bodies at depths beyond direct sampling</li>
+    <li>Estimate <strong>depth, lateral extent, and continuity</strong> of candidate deposits</li>
+    <li><strong>Calibrate subsurface inference against direct measurement</strong> where co-located ground truth (drilling or excavation) is available</li>
+    <li>Attach <strong>explicit uncertainty</strong> to every inferred quantity</li>
+  </ul>
+
+  <h3>Recommended (mission-dependent)</h3>
+  <ul>
+    <li>Discriminate ice-cemented material from mechanically similar dry lithologies via complementary observables</li>
+    <li>Rank candidate sites by inferred grade, volume, and accessibility</li>
+    <li>Repeat surveys to extend coverage and refine deposit models over multiple missions</li>
+  </ul>
+
+  <p class="success"><strong>Success criterion:</strong> outputs support a go/no-go
+  extraction-investment decision with quantified confidence &mdash; not qualitative
+  &ldquo;ice may be present&rdquo; statements.</p>
+
+  <h2>Functional requirements (requirements-style)</h2>
+
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Function</th><th>Requirement</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>SIDA-F-001</strong></td>
+        <td>Depth of investigation</td>
+        <td>The capability shall characterize the subsurface to depths meaningfully beyond direct
+        sampling reach, at minimum the tens-of-meters class relevant to deposit-scale bodies.
+        <div class="chips"><span class="chip">Beyond drill reach</span><span class="chip">Scalable</span></div></td>
+      </tr>
+      <tr>
+        <td><strong>SIDA-F-002</strong></td>
+        <td>Deposit geometry</td>
+        <td>The capability shall constrain the depth, thickness, and lateral extent of candidate
+        ice-bearing zones, not merely their presence.
+        <div class="chips"><span class="chip">Delineation</span><span class="chip">Volume estimation</span></div></td>
+      </tr>
+      <tr>
+        <td><strong>SIDA-F-003</strong></td>
+        <td>Ground-truth calibration</td>
+        <td>Where direct subsurface measurements are available within the survey footprint,
+        inferred properties shall be calibrated against them, and the calibration shall be
+        carried into all extrapolated claims.
+        <div class="chips"><span class="chip">Tie to direct measurement</span><span class="chip">Traceability</span></div></td>
+      </tr>
+      <tr>
+        <td><strong>SIDA-F-004</strong></td>
+        <td>Uncertainty quantification</td>
+        <td>All inferred deposit properties shall carry explicit uncertainty bounds suitable for
+        investment-grade decision making.
+        <div class="chips"><span class="chip">Confidence intervals</span><span class="chip">Decision-ready</span></div></td>
+      </tr>
+      <tr>
+        <td><strong>SIDA-F-005</strong></td>
+        <td>Survey repeatability</td>
+        <td>Measurements shall be positioned and documented such that surveys can be extended,
+        densified, or repeated across missions with cross-comparable results.
+        <div class="chips"><span class="chip">Cumulative coverage</span><span class="chip">Standardized products</span></div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="tablenote">Note: quantitative thresholds (depths, resolutions, confidence levels)
+  are site- and architecture-dependent and should be set by the extraction-economics
+  requirements of the intended use.</p>
+
+  <h2>Graduated capability tiers</h2>
+  <p>A distinguishing property of this capability class is that it <strong>scales</strong>. A
+  credible development path proceeds in tiers, each retiring risk for the next:</p>
+  <ol>
+    <li><strong>Prospecting-class</strong> &mdash; compact mobile source and small sensor array;
+    method validation and shallow-deposit reconnaissance (tens of meters); calibrated against
+    co-located direct sampling.</li>
+    <li><strong>Delineation-class</strong> &mdash; larger sources, longer arrays, denser coverage;
+    mapping the geometry of identified candidate zones (tens to ~hundred meters).</li>
+    <li><strong>Resource-proving class</strong> &mdash; survey campaigns sized to support reserve
+    estimation and extraction-plant siting; the lunar analog of a bankable feasibility study.
+    The terrestrial exploration industry is the existence proof: the equipment ladder from
+    portable sources to vibroseis-class survey systems is continuous, so the lunar version is
+    an engineering transfer, not an invention.</li>
+  </ol>
+  <p>Each tier reuses the methods, data products, and calibration discipline of the tier before
+  it. The Apollo experiments demonstrated the physics of the first two tiers on the lunar
+  surface.</p>
+
+  <h2>Data products</h2>
+
+  <h3>Minimum</h3>
+  <ul>
+    <li>Subsurface structural/velocity model per surveyed site, with uncertainty</li>
+    <li>Candidate deposit inventory: location, depth, extent, inferred grade class, confidence</li>
+    <li>Calibration record tying inference to any co-located direct measurements</li>
+    <li>Survey metadata sufficient for independent reprocessing</li>
+  </ul>
+
+  <h3>Optional / mission-dependent</h3>
+  <ul>
+    <li>Site ranking against extraction-difficulty criteria</li>
+    <li>Depth-of-confidence mapping (directly sampled vs. inferred)</li>
+    <li>Cross-mission cumulative deposit maps</li>
+  </ul>
+
+  <p class="success"><strong>Usability requirement:</strong> outputs should be legible to
+  resource economists and mission architects, not only geophysicists.</p>
+
+  <h2>Ballpark cost (ROM)</h2>
+  <p>Order-of-magnitude cost for flight-qualified SIDA-class capability (excluding mobility
+  platform/lander bus and launch), planning-grade only:</p>
+  <ul class="rom">
+    <li><strong>Prospecting-class instrument payload:</strong> low tens of $M</li>
+    <li><strong>Delineation-class survey campaign:</strong> several tens of $M, dominated by
+    surface operations and coverage rather than instrument cost</li>
+  </ul>
+  <p>These ranges are intended for early architecture budgeting and discussion, not vendor
+  quotes. The economics comparison that matters: either figure is small against the cost of
+  siting extraction infrastructure on an unproven resource.</p>
+
+  <h2>Relationship to mission risk</h2>
+  <p>Absence of SIDA-class assessment before extraction-scale commitment constitutes a known
+  program risk: capital deployed against a resource whose existence, scale, and grade are
+  unmeasured. The commercial history of terrestrial mining is unambiguous on this point &mdash;
+  deposits are proven before plants are built.</p>
+  <p>Conversely, premature architecture conservatism (assuming only dilute surface resources
+  exist) may forfeit the economics that make lunar water viable at all. SIDA-class measurement
+  reduces epistemic uncertainty in both directions; it does not eliminate exploration risk and
+  does not replace staged investment discipline.</p>
+  <p>A proven deep deposit also reshapes the extraction architecture itself: production from a
+  concentrated body at depth favors well-based thermal extraction over surface mining &mdash;
+  which is precisely why deposit-scale assessment, not shallow inventory, is the measurement
+  that extraction economics turn on.</p>
+
+  <h2>Standardization potential</h2>
+  <p>Standardizing SIDA-class survey products across missions enables cumulative,
+  cross-comparable subsurface knowledge &mdash; a growing deposit map rather than isolated
+  soundings. Over time this constitutes the geological survey layer that any sustained lunar
+  economy will require.</p>
+
+  <div class="endnote"><strong>Note:</strong> This page is intentionally written in a neutral,
+  requirements-style format to support discussion. It describes a capability class and data
+  products that may be implemented by any qualified mission team. It does not prescribe a
+  specific source technology, sensor architecture, processing method, or platform.</div>
+
+</main>
+</body>
+</html>
