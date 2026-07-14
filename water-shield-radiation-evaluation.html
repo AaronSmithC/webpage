@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Water Shield Radiation Evaluation (WSRE) | Shield Performance Verification</title>
+  <meta name="description" content="A requirements-style reference defining the simulation and experimental evaluation campaign required to establish, with quantified confidence, the radiation protection performance of multi-meter-class water shielding for long-duration orbital habitation — with shield thickness treated as an evaluated parameter, not an assumed answer." />
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --bg-raised:#10161e;
+      --bg-card:#11181f;
+      --border:#22303c;
+      --border-soft:#1a2530;
+      --accent:#6fc3d9;
+      --accent-dim:rgba(111,195,217,0.12);
+      --text:#d7dee6;
+      --text-secondary:#a7b3bf;
+      --text-dim:#6d7a86;
+      --good:#8fd18f;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:400 1rem/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{opacity:.85}
+    .wrap{max-width:880px;margin:0 auto;padding:3.5rem 1.4rem 4rem}
+    .eyebrow{
+      font-size:.8rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--text-dim);
+      margin-bottom:.9rem;
+    }
+    h1{
+      font-size:clamp(1.7rem,4.5vw,2.4rem);
+      line-height:1.2;
+      margin:.2rem 0 1rem;
+      color:#fff;
+      font-weight:650;
+      letter-spacing:-.01em;
+    }
+    .lede{
+      font-size:1.08rem;
+      color:var(--text-secondary);
+      max-width:64ch;
+    }
+    .lede strong{color:var(--text)}
+    h2{
+      font-size:1.25rem;
+      color:#fff;
+      font-weight:600;
+      margin:0 0 .8rem;
+      letter-spacing:-.005em;
+    }
+    h3{
+      font-size:1rem;
+      color:var(--text);
+      font-weight:600;
+      margin:1.2rem 0 .5rem;
+    }
+    p{margin:.7rem 0}
+    ul{margin:.6rem 0;padding-left:1.2rem}
+    li{margin:.4rem 0}
+    .card{
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:1.5rem 1.6rem;
+      margin:1.4rem 0;
+    }
+    .hr{height:1px;background:var(--border-soft);margin:2.2rem 0}
+    .pillrow{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.1rem 0 .3rem}
+    .pill{
+      padding:.18rem .7rem;
+      border:1px solid var(--border);
+      border-radius:999px;
+      font-size:.82rem;
+      color:var(--text-secondary);
+      background:var(--bg-raised);
+      white-space:nowrap;
+    }
+    .callout{
+      border-left:3px solid var(--accent);
+      background:var(--accent-dim);
+      border-radius:0 8px 8px 0;
+      padding:.9rem 1.1rem;
+      margin:1.2rem 0;
+      color:var(--text);
+    }
+    .callout strong{color:#fff}
+    .mini{font-size:.88rem;color:var(--text-dim)}
+    .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1rem 0}
+    .cell{
+      background:var(--bg-raised);
+      border:1px solid var(--border-soft);
+      border-radius:8px;
+      padding:1rem 1.1rem;
+    }
+    .cell strong{display:block;color:#fff;font-size:.95rem;margin-bottom:.3rem}
+    .cell span, .cell p{color:var(--text-secondary);font-size:.92rem;line-height:1.6;margin:0}
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:1rem 0;
+      font-size:.92rem;
+    }
+    th{
+      text-align:left;
+      color:var(--text-dim);
+      font-weight:600;
+      font-size:.8rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      padding:.5rem .7rem;
+      border-bottom:1px solid var(--border);
+    }
+    td{
+      padding:.65rem .7rem;
+      border-bottom:1px solid var(--border-soft);
+      vertical-align:top;
+      color:var(--text-secondary);
+    }
+    td:first-child{color:var(--text);white-space:nowrap}
+    .reqs td:first-child{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:.82rem;
+      color:var(--accent);
+    }
+    .reqs td:nth-child(2){color:var(--text);white-space:nowrap}
+    .tag{
+      display:inline-block;
+      padding:.05rem .5rem;
+      border:1px solid var(--border);
+      border-radius:999px;
+      font-size:.74rem;
+      color:var(--text-dim);
+      background:var(--bg-raised);
+      margin:.35rem .25rem 0 0;
+      white-space:nowrap;
+    }
+    figure{margin:1.4rem 0}
+    figure a{display:block;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+    figure img{width:100%;display:block}
+    figcaption{font-size:.85rem;color:var(--text-dim);margin-top:.5rem;line-height:1.5}
+    footer{margin-top:2.5rem;font-size:.9rem;color:var(--text-dim)}
+    footer strong{color:var(--text-secondary)}
+    @media (max-width:640px){
+      .wrap{padding:2.5rem 1.1rem 3rem}
+      .twoCol{grid-template-columns:1fr}
+      table{font-size:.85rem}
+      td:first-child{white-space:normal}
+      .reqs td:nth-child(2){white-space:normal}
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Reference Concept &bull; Shield Performance Verification</div>
+  <h1>Water Shield Radiation Evaluation (WSRE)</h1>
+  <p class="lede">
+    A requirements-style definition of the <strong>simulation and experimental evaluation campaign</strong>
+    required to establish, with quantified confidence, what continuous water shielding delivers for
+    long-duration orbital habitation &mdash; across the full range of credible shield thicknesses, with
+    thickness treated as an evaluated parameter rather than an assumed answer.
+  </p>
+
+  <section class="card">
+    <h2>What this page is</h2>
+    <p>
+      This page defines a neutral <strong>evaluation class</strong> for water-based radiation shielding
+      at habitat scale. It specifies what must be modeled, measured, and reported before a thick-water
+      shield can be credited with a protection level in any human-rating argument. It is not a mission
+      design, not a product announcement, and not a claim about the answer.
+    </p>
+    <div class="pillrow">
+      <span class="pill">Full GCR + SPE envelope</span>
+      <span class="pill">Cross-code validated</span>
+      <span class="pill">Phantom-level dosimetry</span>
+      <span class="pill">Beam-anchored</span>
+      <span class="pill">Uncertainty-quantified</span>
+    </div>
+    <div class="callout">
+      <strong>Core idea:</strong> "How much water is enough?" has no rule-of-thumb answer. At
+      multi-meter areal densities, dose reduction is real but sub-exponential, secondary neutrons and
+      light fragments dominate the residual dose, and transport codes disagree most in exactly this
+      regime. The honest output is not a defense of any particular thickness &mdash; it is the
+      <strong>dose-versus-thickness curve, with confidence bounds</strong>, from which any architecture
+      selects its operating point against its own occupancy requirements.
+    </div>
+  </section>
+
+  <!-- Optional schematic slot, e.g. depth&ndash;dose curve through water with secondary buildup annotated:
+  <figure>
+    <a href="images/wsre-depth-dose.png"><img src="images/wsre-depth-dose.png"
+      alt="Schematic depth-dose curve through thick water shielding showing primary attenuation, secondary neutron buildup, and the residual dose floor at large areal density."></a>
+    <figcaption>Thick-shield behavior: primary heavy ions fragment early; the residual dose at depth is
+    carried by neutrons and light charged fragments. Schematic, not to scale.</figcaption>
+  </figure>
+  -->
+
+  <div class="hr"></div>
+
+  <section class="card">
+    <h2>The thick-shield question</h2>
+    <p>
+      For short missions, shielding analysis can lean on thin-shield intuition: more mass, less dose,
+      roughly exponentially. A habitat intended for <strong>decades of occupancy</strong> under
+      career-dose limits (NASA&#8209;STD&#8209;3001 currently sets 600&nbsp;mSv career effective dose)
+      lives in a different regime:
+    </p>
+    <ul>
+      <li><strong>Fragmentation, not absorption.</strong> Galactic cosmic ray heavy ions do not stop in
+        the first tens of g/cm&sup2; &mdash; they fragment into lighter, longer-ranged particles. Dose
+        equivalent falls far more slowly than fluence.</li>
+      <li><strong>Secondary buildup.</strong> Neutrons, light fragments, gammas, and (at depth) pions
+        and muons are produced inside the shield itself. Behind multi-meter water, the interior dose is
+        increasingly carried by particles that did not exist outside it.</li>
+      <li><strong>Model divergence.</strong> High-energy nuclear cross sections carry real uncertainty,
+        and independent transport codes diverge most at large areal densities &mdash; precisely where
+        habitat-class shields operate. A single-code answer is not a verified answer.</li>
+    </ul>
+    <p>
+      Water is among the best bulk shielding materials per unit mass (high hydrogen content, favorable
+      fragmentation), which is why it is the reference material here. The evaluation exists to convert
+      that qualitative advantage into a quantified, defensible protection curve over the credible
+      thickness range (roughly 1&ndash;5&nbsp;m, ~100&ndash;500&nbsp;g/cm&sup2;) &mdash; and to map how
+      any point on that curve degrades under realistic geometry, penetrations, and off-nominal fill
+      states.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Radiation environment envelope</h2>
+    <p>
+      The evaluation shall cover the complete free-space environment at the habitat's operating location
+      (cislunar / deep space; no geomagnetic shielding credited, no trapped-belt population).
+    </p>
+
+    <h3>Galactic cosmic rays</h3>
+    <table>
+      <tr><th>Case</th><th>Definition</th><th>Purpose</th></tr>
+      <tr>
+        <td>Solar minimum</td>
+        <td>Full GCR spectrum at deep solar minimum (e.g., 2009/2019&#8209;class modulation), per the
+          current NASA reference model (Badhwar&ndash;O'Neill&nbsp;2020 or successor; ISO&nbsp;15390 as
+          cross-check)</td>
+        <td>Worst-case chronic exposure; sizing case for annual and career dose</td>
+      </tr>
+      <tr>
+        <td>Solar maximum</td>
+        <td>Full GCR spectrum at strong solar maximum modulation</td>
+        <td>Lower bound on chronic GCR; pairs with SPE-dominated risk</td>
+      </tr>
+      <tr>
+        <td>Mission average</td>
+        <td>Multi-decade average over full solar cycles</td>
+        <td>Career-dose accounting for permanent habitation</td>
+      </tr>
+    </table>
+    <p class="mini">
+      All GCR cases are isotropic over 4&pi;. Species: protons, helium, and all heavy ions Z&nbsp;=&nbsp;3&ndash;28
+      individually (with C, N, O, Ne, Mg, Si, Fe explicitly resolved &mdash; iron is the single largest
+      dose-equivalent contributor at depth), plus electrons and positrons as a boundary term.
+    </p>
+
+    <h3>Solar particle events</h3>
+    <table>
+      <tr><th>Case</th><th>Reference</th><th>Purpose</th></tr>
+      <tr><td>Small / moderate</td><td>Statistical design events (e.g., ESP/PSYCHIC 90th &amp; 99th percentile fluence)</td><td>Frequent-event operational dose</td></tr>
+      <tr><td>August 1972</td><td>King spectrum; classic hard-spectrum design case</td><td>Historical worst-case class for BFO dose</td></tr>
+      <tr><td>October 1989</td><td>Event series incl. Oct 19 ground-level event</td><td>High-fluence, extended-duration case</td></tr>
+      <tr><td>Oct&ndash;Nov 2003</td><td>"Halloween storms" event series</td><td>Multi-event sequence; recovery-interval stressor</td></tr>
+      <tr><td>September 2017</td><td>Sept 10 GLE; modern well-instrumented event</td><td>Best-measured validation case</td></tr>
+      <tr><td>Carrington-class</td><td>Published fluence estimates for an 1859-scale event</td><td>Beyond-design-basis margin assessment</td></tr>
+    </table>
+    <p class="mini">
+      Each SPE case shall be evaluated as event-integrated fluence; the worst-case (1972-class and
+      Carrington-class) shall additionally be evaluated with a time-dependent profile to produce peak
+      hourly dose rates relevant to operational response and 30-day limits.
+    </p>
+
+    <h3>Species and energy coverage</h3>
+    <table>
+      <tr><th>Species</th><th>Range</th><th>Why</th></tr>
+      <tr><td>Protons</td><td>1 MeV &ndash; 100 GeV</td><td>Spectrum peaks near ~1 GeV; the multi-GeV tail penetrates multi-meter water and drives pion/muon production</td></tr>
+      <tr><td>Helium</td><td>1 MeV/n &ndash; 100 GeV/n</td><td>Second-largest primary fluence; strong secondary-neutron source</td></tr>
+      <tr><td>Heavy ions (Z=3&ndash;28)</td><td>1 MeV/n &ndash; 50 GeV/n</td><td>Dominant dose-equivalent contributors via high-LET tracks and fragmentation chains</td></tr>
+      <tr><td>Electrons / positrons</td><td>100 keV &ndash; 10 GeV</td><td>Minor boundary term; completeness of the free-space field</td></tr>
+      <tr><td>Secondary neutrons</td><td>Thermal (0.025 eV) &ndash; 10 GeV</td><td>Dominant interior dose channel; must be transported to thermal capture (2.22 MeV n,&gamma; on hydrogen)</td></tr>
+      <tr><td>Secondary &gamma;, &pi;, &mu;, fragments</td><td>Production threshold &ndash; full cascade</td><td>Complete accounting of the internally generated field at depth</td></tr>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Evaluation objectives</h2>
+    <div class="twoCol">
+      <div class="cell">
+        <strong>Primary</strong>
+        <span>
+          &bull; Produce interior dose quantities (absorbed dose, dose equivalent, effective dose) as a
+          function of shield areal density, at all defined occupancy locations, under every environment
+          case<br>
+          &bull; Resolve the interior field by species and LET spectrum, not dose totals alone<br>
+          &bull; Quantify shield transmission and secondary production (neutron and gamma source terms)<br>
+          &bull; Attach an explicit uncertainty budget to every reported quantity
+        </span>
+      </div>
+      <div class="cell">
+        <strong>Recommended (program-dependent)</strong>
+        <span>
+          &bull; Map 3D dose contours through the full habitat volume<br>
+          &bull; Evaluate degraded and construction-phase shield states<br>
+          &bull; Rank design variants (thickness, additives, layering) by dose-per-mass efficiency<br>
+          &bull; Produce operational products: storm-shelter margins, peak-rate alarms, occupancy guidance
+        </span>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Success criterion:</strong> outputs support a quantitative human-rating and habitability
+      argument &mdash; annual and career doses with confidence intervals, traceable to reference
+      environments, cross-validated codes, and beam data &mdash; not qualitative "water shields well"
+      statements.
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Functional requirements (requirements-style)</h2>
+    <table class="reqs">
+      <tr><th>ID</th><th>Function</th><th>Requirement</th></tr>
+      <tr>
+        <td>WSRE-F-001</td><td>Environment coverage</td>
+        <td>The evaluation shall model the full GCR envelope (solar minimum, solar maximum, mission
+          average) using current accepted NASA reference environments, applied isotropically over 4&pi;.
+          <br><span class="tag">BON2020-class</span><span class="tag">Isotropic</span></td>
+      </tr>
+      <tr>
+        <td>WSRE-F-002</td><td>SPE design cases</td>
+        <td>The evaluation shall model the defined SPE set (statistical design events; Aug 1972; Oct 1989;
+          Oct&ndash;Nov 2003; Sep 2017; Carrington-class), event-integrated, with time-dependent profiles
+          for the bounding cases.
+          <br><span class="tag">Historical worst case</span><span class="tag">Beyond-design-basis</span></td>
+      </tr>
+      <tr>
+        <td>WSRE-F-003</td><td>Species &amp; energy</td>
+        <td>All primary species and energy ranges in the coverage table shall be transported, and all
+          secondary species (n, &gamma;, &pi;, &mu;, light fragments) tracked to absorption or
+          thermalization. Truncating the neutron cascade above thermal energies is non-compliant.
+          <br><span class="tag">Full cascade</span><span class="tag">Thermal capture</span></td>
+      </tr>
+      <tr>
+        <td>WSRE-F-004</td><td>Geometry fidelity</td>
+        <td>Transport shall use the as-designed 3D habitat geometry at each evaluated shield thickness,
+          including a manufacturing tolerance band about that thickness, bulkheads, pipes, structural
+          supports, compartmentation, docking ports, windows, and utility penetrations. A uniform
+          spherical-shell idealization is a scoping tool only and shall not be credited as verification.
+          <br><span class="tag">As-designed CAD</span><span class="tag">Penetrations</span></td>
+      </tr>
+      <tr>
+        <td>WSRE-F-005</td><td>Degraded states</td>
+        <td>The evaluation shall include off-nominal shield states: entrained air/void distributions,
+          partially drained maintenance sections, construction-phase partial fill, and docked-vehicle
+          shadowing/streaming configurations.
+          <br><span class="tag">Voids</span><span class="tag">Partial drain</span><span class="tag">Construction phase</span></td>
+      </tr>
+      <tr>
+        <td>WSRE-F-006</td><td>Rotation averaging</td>
+        <td>Interior dose quantities shall be computed as time-averages over habitat rotation in the
+          isotropic external field, with directional (hub-axis vs. ring-plane) asymmetries and partial
+          shadowing explicitly resolved before averaging.
+          <br><span class="tag">Spin-averaged</span><span class="tag">Directional</span></td>
+      </tr>
+      <tr>
+        <td>WSRE-F-007</td><td>Water properties</td>
+        <td>Baseline transport shall assume liquid water at operating density and temperature; sensitivity
+          cases shall cover density/temperature variation, thermal gradients, borated water, and frozen
+          water.
+          <br><span class="tag">Baseline + sensitivities</span></td>
+      </tr>
+      <tr>
+        <td>WSRE-F-008</td><td>Human dosimetry</td>
+        <td>Organ doses shall be computed using ICRP reference adult male and female voxel (or mesh)
+          phantoms at defined occupancy locations, including blood-forming organs, lens, skin, CNS, and
+          reproductive organs, in representative postures (standing, sleeping).
+          <br><span class="tag">ICRP 110/145</span><span class="tag">Organ dose</span></td>
+      </tr>
+      <tr>
+        <td>WSRE-F-009</td><td>Output metrics</td>
+        <td>Required outputs: absorbed dose, dose equivalent (ICRP Q(LET)), effective dose, LET spectra,
+          species-resolved fluence, secondary n/&gamma; production, 3D dose maps, annual dose, career dose,
+          storm-event dose, peak hourly rate, and shield transmission fraction &mdash; each with
+          uncertainty.
+          <br><span class="tag">Species-resolved</span><span class="tag">With uncertainty</span></td>
+      </tr>
+      <tr>
+        <td>WSRE-F-010</td><td>Code cross-comparison</td>
+        <td>Results shall be produced by at least two independent Monte Carlo transport codes (from
+          GEANT4, PHITS, FLUKA, MCNP6-class tools) plus deterministic scoping (HZETRN-class), with
+          documented physics-model selections and inter-code deltas reported per output quantity.
+          <br><span class="tag">&ge;2 MC codes</span><span class="tag">Documented physics lists</span></td>
+      </tr>
+      <tr>
+        <td>WSRE-F-011</td><td>Convergence &amp; uncertainty</td>
+        <td>Statistical uncertainty at every scoring location shall meet defined targets (e.g., &lt;5%
+          relative on dose equivalent), and a total uncertainty budget shall combine statistical,
+          cross-section, environment-model, and geometry contributions.
+          <br><span class="tag">Uncertainty budget</span><span class="tag">Decision-ready</span></td>
+      </tr>
+      <tr>
+        <td>WSRE-F-012</td><td>Experimental anchoring</td>
+        <td>Simulation results shall be anchored to accelerator measurements on water targets: heavy ions
+          (He, C, Si, Fe) at flight-relevant energies at an NSRL-class facility, and high-energy protons
+          (hundreds of MeV to the multi-GeV GCR tail) at a proton facility, using thick-target staged
+          areal densities, multiple incidence angles, and instrumentation including TEPCs, ion chambers,
+          silicon telescopes, neutron spectrometry, and activation foils.
+          <br><span class="tag">Beam validation</span><span class="tag">Thick target</span><span class="tag">Multi-facility</span></td>
+      </tr>
+      <tr>
+        <td>WSRE-F-013</td><td>Standards traceability</td>
+        <td>All dose quantities, quality factors, and limits shall trace to current standards
+          (NASA&#8209;STD&#8209;3001, ICRP 103/123), and a verification matrix shall link each mission
+          objective to its verifying analysis, test, or inspection.
+          <br><span class="tag">NASA-STD-3001</span><span class="tag">Traceability matrix</span></td>
+      </tr>
+      <tr>
+        <td>WSRE-F-014</td><td>Thickness parameterization</td>
+        <td>Interior dose quantities shall be produced as a function of shield areal density across the
+          credible design range (~100&ndash;500 g/cm&sup2;), such that shield sizing is an output of the
+          evaluation. No specific thickness shall be presumed sufficient in advance of results.
+          <br><span class="tag">Dose-vs-thickness curve</span><span class="tag">Sizing as output</span></td>
+      </tr>
+    </table>
+    <p class="mini">
+      Note: quantitative thresholds (dose targets, agreement bounds, confidence levels) are
+      architecture-dependent and are set by the program's human-rating requirements; representative
+      values appear below.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Interior dosimetry locations</h2>
+    <div class="grid">
+      <div class="cell"><strong>Shield inner wall</strong><span>Bounding exposure surface; highest secondary-field intensity</span></div>
+      <div class="cell"><strong>Living quarters &amp; sleep stations</strong><span>Highest occupancy fraction; sleeping-posture organ doses</span></div>
+      <div class="cell"><strong>Medical bay &amp; command center</strong><span>Continuous-occupancy work positions; storm-shelter candidates</span></div>
+      <div class="cell"><strong>Agriculture volumes</strong><span>Crew transit occupancy plus biological-systems exposure</span></div>
+      <div class="cell"><strong>Ring centerline</strong><span>Best-case reference point; defines the interior dose gradient</span></div>
+      <div class="cell"><strong>Worst-case occupancy</strong><span>Locations adjacent to penetrations, ports, and windows &mdash; the streaming-path check</span></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Graduated evaluation tiers</h2>
+    <p>The campaign proceeds in tiers, each retiring risk for the next:</p>
+    <ul>
+      <li><strong>Tier 1 &mdash; Deterministic scoping.</strong> HZETRN/OLTARIS-class parametric sweeps
+        over the full areal-density range, environments, and additives. Fast, broad, establishes the
+        shape of the dose-vs-thickness curve and the sensitivity ranking. Not creditable as verification
+        on its own.</li>
+      <li><strong>Tier 2 &mdash; Cross-validated Monte Carlo.</strong> Full 3D geometry in &ge;2
+        independent codes at selected points along the thickness range, with phantom dosimetry, degraded
+        states, and the complete uncertainty budget. This tier produces the numbers any sizing decision
+        stands on.</li>
+      <li><strong>Tier 3 &mdash; Beam anchoring.</strong> Accelerator campaigns on instrumented water
+        targets at staged areal densities, including GCR-simulator mixed-field runs where available.
+        Experiment&ndash;simulation comparison closes the loop on the code predictions at the depths
+        that matter.</li>
+    </ul>
+    <p class="mini">
+      The terrestrial analog is standard practice: reactor and accelerator shielding is never certified
+      on a single unvalidated code. The same discipline applies here; the physics is harder, not easier.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Sensitivity studies</h2>
+    <div class="twoCol">
+      <div class="cell">
+        <strong>Shield &amp; configuration</strong>
+        <span>&bull; Graded and layered thickness distributions (e.g., locally augmented zones)<br>
+        &bull; Gap, void, and drain-down distributions<br>
+        &bull; Docked-vehicle attachments and shadowing<br>
+        &bull; Structural materials and internal equipment mass<br>
+        &bull; Polyethylene and boron additions; borated water</span>
+      </div>
+      <div class="cell">
+        <strong>Environment &amp; operations</strong>
+        <span>&bull; Solar-cycle phase and modulation uncertainty<br>
+        &bull; Rotation rate and orientation<br>
+        &bull; Orbital location variants<br>
+        &bull; Shield aging and water-quality drift<br>
+        &bull; Frozen vs. liquid phase, thermal gradients</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Acceptance criterion classes</h2>
+    <p>
+      The evaluation shall report against the following criterion classes. Numerical thresholds are
+      deliberately not asserted here: setting a target dose in advance of the evaluation would presume
+      its conclusion. Thresholds derive from the program's human-rating requirements and current
+      NASA&#8209;STD&#8209;3001 / ICRP guidance at the time of evaluation.
+    </p>
+    <table>
+      <tr><th>Criterion class</th><th>What is reported</th></tr>
+      <tr><td>Chronic exposure</td><td>Annual interior effective dose per occupancy location, per GCR case, with confidence interval, stated against then-current career-limit guidance</td></tr>
+      <tr><td>Shield sizing</td><td>The minimum areal density meeting a given occupancy requirement, read from the dose-vs-thickness curve with its confidence bounds &mdash; the sizing decision follows the data</td></tr>
+      <tr><td>Occupancy duration</td><td>The maximum residency duration each location supports under applicable limits &mdash; an output of the evaluation, not an input to it</td></tr>
+      <tr><td>Storm exposure</td><td>BFO and effective dose per SPE design case, stated against short-term (30-day / annual) limits, with and without operational sheltering assumptions</td></tr>
+      <tr><td>Relative performance</td><td>Dose equivalent versus an equal-mass aluminum reference shield across the full environment envelope</td></tr>
+      <tr><td>Model confidence</td><td>Inter-code agreement per output quantity, and experiment&ndash;simulation agreement at validated beam conditions, each with documented bounds</td></tr>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Data products</h2>
+    <div class="twoCol">
+      <div class="cell">
+        <strong>Minimum</strong>
+        <span>&bull; Simulation report per environment case, with uncertainty<br>
+        &bull; Geometry files and CAD assumptions record<br>
+        &bull; Material and cross-section libraries used<br>
+        &bull; Dose maps and occupancy-location dose tables<br>
+        &bull; Verification matrix and validation report<br>
+        &bull; Executive summary legible to non-specialists</span>
+      </div>
+      <div class="cell">
+        <strong>Optional / program-dependent</strong>
+        <span>&bull; 3D interior dose contours<br>
+        &bull; Design-variant ranking (dose per unit mass)<br>
+        &bull; Operational storm-response products<br>
+        &bull; Risk assessment and recommendations<br>
+        &bull; Public benchmark dataset for cross-team reuse</span>
+      </div>
+    </div>
+    <p class="mini">
+      Usability requirement: outputs must be legible to program managers and human-rating reviewers,
+      not only radiation physicists.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Ballpark cost (ROM)</h2>
+    <p>
+      Order-of-magnitude, planning-grade only: a Tier 1&ndash;2 simulation campaign of this scope is a
+      <strong>low single-digit $M</strong> effort dominated by analyst time and compute; a Tier 3
+      accelerator validation campaign is likewise <strong>low single-digit $M</strong>, dominated by
+      beam time, targets, and instrumentation. Either figure is small against the cost of committing
+      habitat-scale structure to an unverified protection level &mdash; or of over-building shield mass
+      the physics does not require.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Relationship to mission risk</h2>
+    <p>
+      Absence of WSRE-class evaluation before committing to a shield architecture constitutes a known
+      program risk in both directions: an under-performing shield discovered after construction is
+      unrecoverable, and an over-built shield wastes the single most expensive commodity in the
+      architecture &mdash; delivered mass. Chronic GCR exposure is the binding constraint on permanent
+      habitation; it deserves the same evidentiary standard as structure and life support.
+    </p>
+    <p class="mini">
+      WSRE-class evaluation reduces epistemic uncertainty; it does not eliminate radiobiological
+      uncertainty in risk models, and it does not replace onboard dosimetry and operational monitoring.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Standardization potential</h2>
+    <p>
+      Standardizing WSRE-class geometry files, environment definitions, and output formats enables
+      cross-comparable results between independent teams and cumulative refinement as codes and
+      cross-section libraries improve. Over time this constitutes a shared verification baseline for
+      water-shielded habitats generally &mdash; a benchmark class, not a one-off study.
+    </p>
+  </section>
+
+  <footer>
+    <div class="hr"></div>
+    <div>
+      <strong>Note:</strong> This page is intentionally written in a neutral, requirements-style format
+      to support discussion. It describes an evaluation class and data products that may be executed by
+      any qualified simulation and experimental team. It does not prescribe a specific transport code,
+      facility, or contractor, and it does not assert a conclusion about shield sufficiency in advance
+      of the evaluation it defines.
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
