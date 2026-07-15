@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A requirements-style reference defining an orbital propellant depot capability class supplied by lunar-sourced water — the demand-side infrastructure that pulls surface resource production forward.">
+<title>Lunar Orbital Propellant Depot (LOPD) | Orbital Logistics Capability</title>
+<style>
+  :root{
+    --ink:#2c2c2c;
+    --muted:#5f5e5a;
+    --teal:#1a7e7e;
+    --teal-dark:#0f6e56;
+    --line:#e3e1db;
+    --pill-bg:#eef6f5;
+    --note-bg:#f7f6f2;
+    --max:840px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:0 20px 80px;
+    font-family:Arial, Helvetica, sans-serif;
+    color:var(--ink); background:#fff;
+    line-height:1.6; font-size:17px;
+  }
+  main{max-width:var(--max); margin:0 auto;}
+  .eyebrow{
+    margin:48px 0 10px; font-size:12px; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--teal); font-weight:bold;
+  }
+  h1{
+    margin:0 0 14px; font-size:40px; line-height:1.15; letter-spacing:-0.5px;
+  }
+  .lede{font-size:19px; color:var(--muted); margin:0 0 34px;}
+  .lede strong{color:var(--ink);}
+  h2{
+    margin:52px 0 14px; font-size:24px; line-height:1.25;
+    padding-top:18px; border-top:1px solid var(--line);
+  }
+  h3{margin:26px 0 8px; font-size:17px;}
+  p{margin:0 0 16px;}
+  ul,ol{margin:0 0 16px; padding-left:22px;}
+  li{margin-bottom:6px;}
+  .pills{margin:14px 0 4px;}
+  .pill{
+    display:inline-block; margin:0 8px 8px 0; padding:4px 12px;
+    font-size:12.5px; font-weight:bold; color:var(--teal-dark);
+    background:var(--pill-bg); border:1px solid #cfe6e2; border-radius:999px;
+    white-space:nowrap;
+  }
+  .core{
+    margin:18px 0 0; padding:14px 18px; background:var(--note-bg);
+    border-left:3px solid var(--teal); font-size:16.5px;
+  }
+  table{
+    width:100%; border-collapse:collapse; margin:18px 0 8px; font-size:15px;
+  }
+  th,td{
+    text-align:left; vertical-align:top; padding:10px 12px;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-size:12.5px; letter-spacing:0.8px; text-transform:uppercase;
+    color:var(--muted); border-bottom:2px solid var(--ink);
+  }
+  td strong{white-space:nowrap;}
+  .chips{margin-top:8px;}
+  .chip{
+    display:inline-block; margin:0 6px 4px 0; padding:2px 9px;
+    font-size:11.5px; font-weight:bold; color:var(--teal-dark);
+    background:var(--pill-bg); border-radius:999px; white-space:nowrap;
+  }
+  .tablenote{font-size:14px; color:var(--muted); font-style:italic;}
+  .rom li{margin-bottom:10px;}
+  .success{
+    margin:18px 0 0; padding:12px 18px; background:var(--note-bg);
+    border-left:3px solid var(--teal-dark); font-size:16px;
+  }
+  .endnote{
+    margin-top:64px; padding:18px 20px; background:var(--note-bg);
+    border:1px solid var(--line); font-size:14.5px; color:var(--muted);
+  }
+  .endnote a{color:var(--teal); font-weight:bold; text-decoration:none;}
+  .endnote a:hover{text-decoration:underline;}
+  @media (max-width:640px){
+    h1{font-size:30px;}
+    .lede{font-size:17px;}
+    body{font-size:16px;}
+    th,td{padding:8px 8px;}
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <p class="eyebrow">Reference Concept &bull; Orbital Logistics Capability</p>
+
+  <h1>Lunar Orbital Propellant Depot (LOPD)</h1>
+
+  <p class="lede">A requirements-style definition of an <strong>orbital propellant depot capability
+  class supplied by lunar-sourced water</strong> &mdash; the demand-side infrastructure node that
+  converts a surface resource into an orbital economy, and pulls surface production forward by
+  existing.</p>
+
+  <h2>What this page is</h2>
+  <p>This page defines a neutral <strong>capability class</strong> for receiving lunar-derived
+  water in orbit, converting it to propellant, storing cryogens, and dispensing them to visiting
+  vehicles. It is not a product announcement, not a mission design, and not a solicitation.</p>
+
+  <div class="pills">
+    <span class="pill">Water in, propellant out</span>
+    <span class="pill">Commissioning gated on surface supply</span>
+    <span class="pill">Vehicle-agnostic interfaces</span>
+    <span class="pill">Autonomous baseline</span>
+  </div>
+
+  <p class="core"><strong>Core idea:</strong> a depot gated on lunar water is not a passive
+  consumer of surface resource production &mdash; it is the demand signal that justifies it.
+  Depot hardware can precede the resource: its commissioning date is set by first surface water
+  delivery, and its existence in orbit is what makes that date matter.</p>
+
+  <h2>The sequencing question</h2>
+  <p>Every architecture that uses lunar water in orbit faces the same chicken-and-egg problem:
+  surface extraction is hard to justify without an orbital customer, and orbital infrastructure
+  is hard to justify without a proven resource. The conventional resolution &mdash; wait for
+  extraction to mature before building anything in orbit &mdash; serializes the two developments
+  and pushes the payoff of each behind the full schedule of the other.</p>
+  <p>The depot resolves the deadlock structurally. Among orbital infrastructure nodes it is the
+  <strong>earliest useful thing to build</strong>: the first consumer of surface water, the first
+  concrete demand signal that justifies scaling production, and the first operational target that
+  gives extraction a near-term reason to exist. Because routine depot operations are autonomous
+  and the hardware tolerates dormant standby, the depot can be emplaced before the resource
+  flows &mdash; a forcing function, not a waiting room.</p>
+  <p>Once supplied, a depot breaks two standing constraints of cislunar logistics: transit
+  vehicles no longer carry their return propellant outbound, and surface-ascent vehicles top off
+  in orbit rather than lifting full reserves on every flight. The depot also absorbs variability
+  in surface production and smooths it into supply available on demand.</p>
+
+  <h2>Scope of application</h2>
+  <p>LOPD-class capability applies to:</p>
+  <ul>
+    <li>Cislunar transport architectures whose return-leg economics depend on refueling at the destination</li>
+    <li>Surface-ascent logistics fleets operating on repeated orbit&ndash;surface cycles</li>
+    <li>Staging of propellant ahead of demand &mdash; buffering surface production variability</li>
+    <li>Any program seeking to convert lunar water claims into a priced, deliverable orbital commodity</li>
+  </ul>
+  <p>LOPD-class capability sits downstream of resource assessment and extraction in the water
+  supply chain, and upstream of every propellant-consuming element of a cislunar architecture.
+  It complements, and does not replace, surface propellant production concepts.</p>
+
+  <h2>Functional objectives</h2>
+
+  <h3>Primary objectives</h3>
+  <ul>
+    <li>Accept <strong>lunar-sourced water</strong> delivered by surface-ascent vehicles in standardized transfer units</li>
+    <li>Convert water to propellant &mdash; at minimum <strong>LOX via electrolysis</strong> &mdash; at a rate matched to demand cadence</li>
+    <li>Store cryogenic products with managed boil-off and fault isolation between storage banks</li>
+    <li>Dispense metered propellant to <strong>more than one visiting vehicle class</strong> through standardized interfaces</li>
+    <li>Operate routinely <strong>without crew</strong>: reception, production, storage, dispensing, and safing</li>
+  </ul>
+
+  <h3>Recommended (architecture-dependent)</h3>
+  <ul>
+    <li>Accept, condition, and store imported fuel components not yet producible in situ (e.g. methane for methalox architectures), with an explicit substitution path to in-situ production</li>
+    <li>Retain electrolysis hydrogen for future use (fuel-cell reserve, surface delivery, or propellant) rather than venting by default</li>
+    <li>Provide a short-stay habitable maintenance node as a growth option &mdash; the seed of a permanent orbital logistics presence</li>
+  </ul>
+
+  <p class="success"><strong>Success criterion:</strong> a visiting vehicle can plan a mission
+  against depot-supplied propellant with quantified availability &mdash; not against a promise
+  that supply will exist by the time it arrives.</p>
+
+  <h2>Functional requirements (requirements-style)</h2>
+
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Function</th><th>Requirement</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>LOPD-F-001</strong></td>
+        <td>Feedstock acceptance</td>
+        <td>The capability shall receive lunar-sourced water delivered in standardized transfer
+        units, and shall offload, inventory, and buffer it between delivery cycles and continuous
+        production demand.
+        <div class="chips"><span class="chip">Standardized transfer unit</span><span class="chip">Supply buffering</span></div></td>
+      </tr>
+      <tr>
+        <td><strong>LOPD-F-002</strong></td>
+        <td>Propellant production</td>
+        <td>The capability shall convert water to at least liquid oxygen via electrolysis and
+        liquefaction, at a production rate that &mdash; not delivery hardware &mdash; sets the
+        water delivery cadence requirement for the supplying fleet.
+        <div class="chips"><span class="chip">Water &rarr; LOX baseline</span><span class="chip">Rate-limiting step declared</span></div></td>
+      </tr>
+      <tr>
+        <td><strong>LOPD-F-003</strong></td>
+        <td>Cryogenic storage</td>
+        <td>The capability shall store cryogenic products with boil-off management approaching
+        zero-boil-off targets, and with fault isolation such that a single storage-bank failure
+        does not compromise total inventory.
+        <div class="chips"><span class="chip">ZBO target</span><span class="chip">Fault isolation</span></div></td>
+      </tr>
+      <tr>
+        <td><strong>LOPD-F-004</strong></td>
+        <td>Vehicle-agnostic transfer</td>
+        <td>The capability shall dispense metered propellant through standardized ports
+        accommodating more than one visiting vehicle class, with custody-transfer-grade metering
+        and inventory reconciliation.
+        <div class="chips"><span class="chip">Standardized ports</span><span class="chip">Custody metering</span></div></td>
+      </tr>
+      <tr>
+        <td><strong>LOPD-F-005</strong></td>
+        <td>Autonomous operation</td>
+        <td>Routine operations &mdash; reception, production, storage management, dispensing,
+        leak detection, and safing &mdash; shall not require crew presence. Crew visitability is
+        an optional tier, not an operating dependency.
+        <div class="chips"><span class="chip">Uncrewed baseline</span><span class="chip">Autonomous safing</span></div></td>
+      </tr>
+      <tr>
+        <td><strong>LOPD-F-006</strong></td>
+        <td>Dormancy tolerance</td>
+        <td>Because commissioning is gated on surface water supply rather than on depot hardware
+        delivery, the capability shall tolerate extended dormant standby on orbit and shall
+        commission upon first supply arrival without hardware revisit from Earth.
+        <div class="chips"><span class="chip">Forcing function</span><span class="chip">Standby &rarr; first light</span></div></td>
+      </tr>
+      <tr>
+        <td><strong>LOPD-F-007</strong></td>
+        <td>Import substitution path</td>
+        <td>Where the served propellant combination includes components not yet producible in
+        situ, the capability shall accept them as imported cargo, shall track the import
+        dependency as a declared programmatic risk, and shall preserve an interface path to
+        substitute in-situ production without depot redesign.
+        <div class="chips"><span class="chip">Declared dependency</span><span class="chip">Substitution-ready</span></div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="tablenote">Note: quantitative thresholds (production rates, storage capacities,
+  boil-off allowances, port standards) are architecture-dependent and should be set by the
+  demand cadence of the vehicles the depot serves.</p>
+
+  <h2>Graduated capability tiers</h2>
+  <p>A distinguishing property of this capability class is that it <strong>scales in place</strong>.
+  A credible development path proceeds in tiers, each retiring risk for the next:</p>
+  <ol>
+    <li><strong>Demonstration-class</strong> &mdash; single transfer-unit reception, a small
+    electrolysis string, LOX-only production, one vehicle interface. Proves the orbital
+    water-to-propellant chain end to end at minimum capital exposure.</li>
+    <li><strong>Operational-class</strong> &mdash; continuous production, dual-cryogen storage,
+    multiple vehicle classes served, autonomous cadence matched to a working supply fleet.
+    This is the tier at which return-leg and top-off economics actually change.</li>
+    <li><strong>Hub-class</strong> &mdash; adds expanded storage, maintenance access, and a
+    short-stay habitable node: the first shirt-sleeve presence in lunar orbit, emplaced before
+    any larger habitat exists. The depot becomes the beachhead for everything after it.</li>
+  </ol>
+  <p>Each tier reuses the interfaces, accounting standards, and operating discipline of the tier
+  before it. Nothing in the demonstration tier is discarded on the way up.</p>
+
+  <h2>Interface and accounting standards</h2>
+
+  <h3>Minimum</h3>
+  <ul>
+    <li>Standardized water transfer unit: a fixed hardware unit serving as both transport vessel and depot storage element, common across surface, ascent, and depot segments</li>
+    <li>Standardized cryogenic transfer ports with published mechanical, fluid, and data interfaces</li>
+    <li>Custody-transfer metering: reconciled inventory across reception, production, storage, and dispensing, auditable by supplier and customer</li>
+    <li>Telemetry sufficient for independent verification of stored and dispensed quantities</li>
+  </ul>
+
+  <h3>Optional / architecture-dependent</h3>
+  <ul>
+    <li>Published berthing/docking envelopes enabling third-party vehicle compatibility</li>
+    <li>Hydrogen inventory accounting where the byproduct stream is retained</li>
+    <li>Scheduling and reservation protocols for multi-customer dispensing</li>
+  </ul>
+
+  <p class="success"><strong>Usability requirement:</strong> interface and accounting standards
+  should be legible to any qualified vehicle developer &mdash; a depot that only its builder can
+  dock with is a fuel tank, not infrastructure.</p>
+
+  <h2>Ballpark cost (ROM)</h2>
+  <p>Order-of-magnitude cost for flight-qualified LOPD-class capability (excluding launch and
+  the supplying surface/ascent segments), planning-grade only:</p>
+  <ul class="rom">
+    <li><strong>Demonstration-class node:</strong> low hundreds of $M &mdash; dominated by
+    cryogenic fluid management and autonomous rendezvous/berthing qualification rather than
+    electrolysis hardware</li>
+    <li><strong>Operational-class depot:</strong> high hundreds of $M to $B-class, scaling with
+    storage capacity and the number of vehicle classes served</li>
+  </ul>
+  <p>These ranges are intended for early architecture budgeting and discussion, not vendor
+  quotes. The economics comparison that matters: every ton of propellant sourced from lunar
+  water displaces a ton lifted from Earth's surface at cislunar delivery prices &mdash; the
+  depot is amortized against that spread.</p>
+
+  <h2>Relationship to program risk</h2>
+  <p>Absence of LOPD-class capability leaves a lunar water program without a customer: surface
+  extraction matures into a resource with nowhere to go, and its scaling case collapses into
+  speculation. Conversely, orbital vehicles designed without a depot assumption carry their
+  full round-trip propellant forever, locking in the mass fractions the architecture was meant
+  to escape.</p>
+  <p>The depot's own dominant risks are declared rather than hidden: the import dependency for
+  any not-yet-in-situ fuel component (LOPD-F-007), and the dormancy period between hardware
+  emplacement and first surface supply (LOPD-F-006). Both are schedule and economics risks, not
+  feasibility risks &mdash; every constituent technology (orbital electrolysis, cryogenic fluid
+  management, autonomous rendezvous and fluid transfer) has flight heritage or active flight
+  demonstration programs.</p>
+  <p>LOPD-class capability reduces structural risk in both directions of the supply chain; it
+  does not eliminate demand risk and does not replace staged investment discipline.</p>
+
+  <h2>Standardization potential</h2>
+  <p>A depot is infrastructure exactly to the degree that its interfaces are standards. Published
+  transfer-unit, port, and custody-accounting standards allow surface producers, ascent fleets,
+  and visiting vehicles to be developed independently by different parties against a common
+  contract &mdash; the condition under which an orbital propellant <em>market</em>, rather than
+  a single program's fuel tank, can exist.</p>
+
+  <div class="endnote"><strong>Note:</strong> This page is intentionally written in a neutral,
+  requirements-style format to support discussion. It describes a capability class, interfaces,
+  and operating standards that may be implemented by any qualified mission team. It does not
+  prescribe a specific propellant combination, production technology, storage architecture, or
+  platform. One implementation-specific design within the Aegis Station program is described
+  separately: <a href="lunar_orbital_depot.html">Lunar Orbital Propellant Depot &mdash; Aegis
+  Station technical page</a>.</div>
+
+</main>
+</body>
+</html>
