@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mixed-Fleet Surface Operations | Surface Coordination Software</title>
+  <meta name="description" content="Coordination software for heterogeneous autonomous fleets sharing a lunar work site: a proven homogeneous fleet coordinator, a like-fleet tier, a heterogeneous site marshal, and the adapter contract that lets dissimilar assets take tasking from one authority. Working prototypes, real telemetry, honest maturity." />
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --bg-raised:#10161e;
+      --bg-card:#11181f;
+      --border:#22303c;
+      --border-soft:#1a2530;
+      --accent:#6fc3d9;
+      --accent-dim:rgba(111,195,217,0.12);
+      --text:#d7dee6;
+      --text-secondary:#a7b3bf;
+      --text-dim:#6d7a86;
+      --good:#8fd18f;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:400 1rem/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{opacity:.85}
+    .wrap{max-width:880px;margin:0 auto;padding:3.5rem 1.4rem 4rem}
+    .eyebrow{
+      font-size:.8rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--text-dim);
+      margin-bottom:.9rem;
+    }
+    h1{
+      font-size:clamp(1.7rem,4.5vw,2.4rem);
+      line-height:1.2;
+      margin:.2rem 0 1rem;
+      color:#fff;
+      font-weight:650;
+      letter-spacing:-.01em;
+    }
+    .lede{
+      font-size:1.08rem;
+      color:var(--text-secondary);
+      max-width:64ch;
+    }
+    .lede strong{color:var(--text)}
+    h2{
+      font-size:1.25rem;
+      color:#fff;
+      font-weight:600;
+      margin:0 0 .8rem;
+      letter-spacing:-.005em;
+    }
+    h3{
+      font-size:1rem;
+      color:var(--text);
+      font-weight:600;
+      margin:1.2rem 0 .5rem;
+    }
+    p{margin:.7rem 0}
+    ul{margin:.6rem 0;padding-left:1.2rem}
+    li{margin:.4rem 0}
+    .card{
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:1.5rem 1.6rem;
+      margin:1.4rem 0;
+    }
+    .hr{height:1px;background:var(--border-soft);margin:2.2rem 0}
+    .pillrow{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.1rem 0 .3rem}
+    .pill{
+      padding:.18rem .7rem;
+      border:1px solid var(--border);
+      border-radius:999px;
+      font-size:.82rem;
+      color:var(--text-secondary);
+      background:var(--bg-raised);
+      white-space:nowrap;
+    }
+    .callout{
+      border-left:3px solid var(--accent);
+      background:var(--accent-dim);
+      border-radius:0 8px 8px 0;
+      padding:.9rem 1.1rem;
+      margin:1.2rem 0;
+      color:var(--text);
+    }
+    .callout strong{color:#fff}
+    .mini{font-size:.88rem;color:var(--text-dim)}
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:1rem 0;
+      font-size:.92rem;
+    }
+    th{
+      text-align:left;
+      color:var(--text-dim);
+      font-weight:600;
+      font-size:.8rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      padding:.5rem .7rem;
+      border-bottom:1px solid var(--border);
+    }
+    td{
+      padding:.65rem .7rem;
+      border-bottom:1px solid var(--border-soft);
+      vertical-align:top;
+      color:var(--text-secondary);
+    }
+    td:first-child{color:var(--text);white-space:nowrap}
+    code{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:.86em;
+      color:var(--accent);
+      background:var(--bg-raised);
+      border:1px solid var(--border-soft);
+      border-radius:4px;
+      padding:.02rem .3rem;
+    }
+    figure{margin:1.4rem 0}
+    figure a{display:block;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+    figure img{width:100%;display:block}
+    figcaption{font-size:.85rem;color:var(--text-dim);margin-top:.5rem;line-height:1.5}
+    footer{margin-top:2.5rem;font-size:.9rem;color:var(--text-dim)}
+    footer strong{color:var(--text-secondary)}
+    @media (max-width:640px){
+      .wrap{padding:2.5rem 1.1rem 3rem}
+      table{font-size:.85rem}
+      td:first-child{white-space:normal}
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Work in Progress &bull; Surface Operations Software</div>
+  <h1>Mixed-Fleet Surface Operations</h1>
+  <p class="lede">
+    Ground-side coordination software for <strong>autonomous fleets sharing a lunar work
+    site</strong>: a fleet coordinator proven against 45 live flight-software instances, a
+    like-fleet tier that runs dissimilar vehicle classes behind one contract, a site marshal
+    that sequences heterogeneous assets through a build plan, and the adapter boundary that
+    the mixed-asset case rests on. Everything on this page runs today; every number comes
+    from an instrumented run.
+  </p>
+
+  <section class="card">
+    <h2>The coordination gap</h2>
+    <p>
+      Surface operations concentrate: power, comms, extraction targets, and prepared ground
+      pull every operator's assets into the same few square kilometers. Within that footprint,
+      excavators, haulers, prospecting rovers, and ascent vehicles from different builders
+      share pads, routes, and work zones with no common tasking authority &mdash; each fleet
+      arrives speaking its own command dialect, and nothing above the individual vehicle owns
+      the question of who works where, in what order. The failure mode is not a collision
+      algorithm problem; it is the absence of any layer where deconfliction could run.
+    </p>
+    <div class="pillrow">
+      <span class="pill">Coordination above the vehicle safety boundary</span>
+      <span class="pill">Telemetry is the acknowledgement</span>
+      <span class="pill">Assets hold safe if the coordinator dies</span>
+    </div>
+    <div class="callout">
+      <strong>Placement of authority:</strong> every vehicle keeps its own flight software,
+      fault response, and e-stop &mdash; the coordinators command <em>above</em> that boundary
+      and are mission-critical, not safety-critical. A coordinator outage leaves every asset
+      holding its current mode safely. This split is load-bearing for the mixed-fleet case:
+      an operator will hand tasking authority to shared software long before handing it
+      safety authority.
+    </div>
+  </section>
+
+  <div class="hr"></div>
+
+  <section class="card">
+    <h2>Fleet Coordinator &mdash; the homogeneous baseline</h2>
+    <p>
+      The fleet coordinator dispatches a fleet of 45 identical LOX/CH<sub>4</sub> tanker
+      vehicles between six surface pads and six orbital berths. Each vehicle is a live cFS
+      flight-software instance plus a physics simulator &mdash; two OS processes per vehicle,
+      90 at full fleet &mdash; commanded over a CCSDS/UDP vocabulary of five verbs
+      (<code>DISPATCH</code>, <code>RESUME</code>, <code>RELEASE</code>,
+      <code>SWAP_COMPLETE</code>, <code>SET_MODE</code>). The coordinator scores every
+      dispatch on state of charge, idle time, pad proximity, and wear; keeps two vehicles in
+      standby reserve; treats pads as FIFO conveyors so no two vehicles ever occupy one; and
+      when a vehicle goes SAFE, queues an identical replacement sortie and auto-resumes the
+      casualty after a cooldown.
+    </p>
+    <p>
+      It is deliberately the easy case &mdash; one vehicle design, one wire format, one duty
+      &mdash; and it is the operational ancestor of everything below: the scored-dispatch,
+      telemetry-gated, anomaly-requeue pattern was proven here before being generalized.
+      A full-fleet session on one host runs all 45 flight-software instances against the
+      coordinator with pad queues, berth queues, and throughput accounting live.
+    </p>
+    <figure>
+      <a href="images/mfso-fleet-overview.png"><img src="images/mfso-fleet-overview.png"
+        alt="Fleet coordinator ground control showing 45 live vehicle processes, pad and berth occupancy, standby reserve, and sortie throughput statistics."></a>
+      <figcaption>Evidence for full-fleet coordination on one host: the fleet console during a
+      live session &mdash; 45 flight-software processes running, 43 vehicles in sortie, 36
+      sorties completed at a 216.5&nbsp;s average cycle (the demo flies an accelerated
+      timeline), all six surface pads occupied at 100% utilization, three of six berths in
+      use, and vehicles V-01/V-02 held in standby reserve. Every value is decoded from the
+      vehicles' own CCSDS telemetry.</figcaption>
+    </figure>
+    <figure>
+      <a href="images/mfso-fleet-vehicle-grid.png"><img src="images/mfso-fleet-vehicle-grid.png"
+        alt="45 vehicle cards with live modes, state-of-charge, delta-v, cargo, cycle counts, and mode-dwell clocks; the two reserve vehicles outlined."></a>
+      <figcaption>The same session's vehicle grid: 45 cards, each a separate cFS instance,
+      with live mode (CAPTURED_SURFACE, BERTHING, DESCENT, DEORBIT, INSERTION, COAST&hellip;),
+      state of charge, &Delta;v budget, cargo tonnage, cycle count, and a mode-dwell clock the
+      coordinator uses for stuck-vehicle detection. The two outlined cards are the standby
+      reserve, excluded from dispatch.</figcaption>
+    </figure>
+  </section>
+
+  <section class="card">
+    <h2>Foreman &mdash; one class, N vehicles, kept saturated</h2>
+    <p>
+      Before a site has one of everything, it has fleets of the same thing. The Foreman runs a
+      gang of N identical vehicles on one duty cycle and keeps them saturated: it generates
+      one work order per dispatchable vehicle, ranks idle candidates by energy and idle-time
+      fairness, and dispatches to FIFO service points. Completion is telemetry-gated &mdash; an
+      order counts only after the coordinator has observed the vehicle actually enter its
+      working states, so a lost command can never be booked as finished work. Anomalies requeue
+      the order at the front of the line and auto-resume the vehicle once its comms are healthy.
+    </p>
+    <p>
+      A vehicle class plugs in as a five-part contract &mdash; backend, mode vocabulary,
+      service-point layout, duty-cycle verbs, dispatch scoring &mdash; and the Foreman loop
+      never sees anything class-specific beyond it. Two classes exist today: a simulated
+      excavator, and a WOK survey rover class whose backend spawns <em>real</em> cFS
+      flight-software instances, N per host via per-instance port offsets, and whose duty
+      cycle is the rover's own onboard autonomous survey mission.
+    </p>
+    <figure>
+      <a href="images/mfso-foreman-wok-fleet.png"><img src="images/mfso-foreman-wok-fleet.png"
+        alt="Foreman shift board WOK fleet tab: two vehicles tagged REAL in RECORD mode, with the event log showing completed survey orders and immediate re-dispatch."></a>
+      <figcaption>Evidence for telemetry-gated completion and saturation: the shift board's WOK
+      fleet tab during a live run with two real cFS instances (tagged REAL). At 12:38:34 both
+      vehicles' first onboard survey missions &mdash; each roughly 12.5 minutes of autonomous
+      MOVE&rarr;DEPLOY&rarr;THUMP&rarr;RECORD&rarr;EVALUATE&rarr;DRILL&rarr;STOW &mdash; complete
+      on observed DONE telemetry, and the Foreman dispatches the next order to each within the
+      same second. In the same session, three simulated excavators ran 177 excavation orders at
+      100% utilization on the adjacent tab.</figcaption>
+    </figure>
+  </section>
+
+  <section class="card">
+    <h2>Marshal &mdash; heterogeneous assets against a build plan</h2>
+    <p>
+      The Marshal is the site tier: it drives a dependency-ordered plan of construction tasks
+      (excavate &rarr; haul &rarr; pave &rarr; place &rarr; deploy) across whatever mix of
+      asset classes the tasks require &mdash; six classes today, from excavators to a
+      prospecting rover. Tasks become dispatchable when their dependencies complete; the
+      dispatcher selects the best available asset of the required class by energy, idle time,
+      zone proximity, and wear; and work zones carry exclusion radii and explicit
+      mutual-exclusion rules, so a dispatch into a zone that conflicts with occupied ground is
+      refused. There are no acknowledgement packets anywhere: the asset's next telemetry is
+      the ack, and off-sequence mode transitions are flagged as anomalies that requeue the
+      task with its plan edges intact.
+    </p>
+    <p>
+      The commanded tier runs against simulated assets today &mdash; the honest status is in
+      the maturity table. Alongside it, the Marshal already manages real flight software in an
+      observe-only role: it spawns and tracks live cFS instances of a rover, a tanker, and a
+      WOK survey vehicle, decoding their native telemetry into the same normalized state the
+      simulated assets report.
+    </p>
+    <figure>
+      <a href="images/mfso-marshal-console.png"><img src="images/mfso-marshal-console.png"
+        alt="Marshal construction control: site map with exclusion-radius zones, four-task build plan with dependencies, one asset working, three observed vehicles."></a>
+      <figcaption>Evidence for plan-driven mixed-class dispatch: the Marshal console mid-plan
+      on the four-task outbound-water-lift scenario. The WOK-class asset is WORKING the
+      PROSPECT task in the survey zone; EXCAVATE, HAUL, and LOAD are queued behind their
+      dependency edges ("after 37/38/39"); the 45&nbsp;m exclusion radius around the dig zone
+      is drawn on the site map; and the right rail tracks three observed vehicles (rover,
+      hopper, tanker) through their own mode transitions. In the logged session this scenario
+      looped 17 times: 68 tasks dispatched, 68 completed, zero anomalies.</figcaption>
+    </figure>
+  </section>
+
+  <section class="card">
+    <h2>The heterogeneity problem, and the adapter boundary</h2>
+    <p>
+      Homogeneous fleet coordination is the easy case because three hard problems collapse:
+      one wire format, one mode vocabulary, one failure model. The tanker coordinator above
+      could hard-code all three and still be correct. A shared site cannot &mdash; the assets
+      worth coordinating are precisely the ones you didn't build, and waiting for the industry
+      to converge on a common vehicle bus is not a plan.
+    </p>
+    <p>
+      The Marshal's answer is a deliberately narrow seam: the <code>AssetAdapter</code>
+      contract. The coordination core speaks exactly two normalized types &mdash; a
+      <code>WorkOrder</code> going out (work type, destination zone, zone mask) and a
+      <code>NormalizedTlm</code> snapshot coming back (mode, energy, health flags, plus an
+      opaque class-specific detail bag that only the console interprets) &mdash; and an
+      adapter is eight methods: register, poll, and six outbound commands
+      (<code>dispatch</code>, <code>resume</code>, <code>release</code>,
+      <code>swap_complete</code>, <code>set_mode</code>, <code>abort</code> &mdash; abort
+      advisory, because the asset's onboard e-stop is authoritative). The core never sees
+      CCSDS, a ROS topic, or any vendor wire format. Alongside the adapter, each asset
+      registers a capability record declaring what it actually surrenders &mdash;
+      <code>DISPATCH</code> (takes tasking), <code>COORDINATE</code> (accepts constraints),
+      or <code>OBSERVE</code> (shares telemetry only) &mdash; so a foreign asset can join the
+      picture at whatever level of trust its operator will grant, and the site still gains a
+      common operating picture from day one.
+    </p>
+    <p>
+      Status, plainly: the sim adapter is the proven implementation &mdash; every Marshal
+      behavior above runs through it. A CCSDS adapter implementing the same eight methods
+      exists and is verified at the byte level against the dispatch vocabulary, but no real
+      construction-apparatus flight software exists yet to put behind it; the live-cFS path
+      demonstrated today (rover, tanker, WOK) runs at the OBSERVE tier. Zone-exclusion
+      blocking is enforced on every dispatch and proven in the test suite, but the current
+      demo scenarios are linear chains that never trigger it &mdash; so no deconfliction event
+      counts appear on this page.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>The assets are real flight software</h2>
+    <p>
+      The coordination claims above are only as strong as what is being coordinated. The
+      vehicles behind the REAL tags are not simulation stubs: the WOK survey rover, for
+      example, is a six-app cFS flight-software stack &mdash; sequencer, navigation, geophone
+      mechanism, seismic acquisition with a dual-mode EM source, drill, and health/FDIR &mdash;
+      that flies a full autonomous prospecting mission against a simulated-physics hardware
+      abstraction layer, with its own ground segment. The coordinators command it exactly the
+      way any external tasking authority would: CCSDS commands in, telemetry out, no
+      backdoors into the vehicle.
+    </p>
+    <figure>
+      <a href="images/mfso-wok-ground-control.png"><img src="images/mfso-wok-ground-control.png"
+        alt="WOK ground control dashboard mid-mission: drill sampling at 2.5 m, volatile concentration 43,950 ppm, ice flag at 78% confidence, live state machine in DRILL."></a>
+      <figcaption>Evidence that the coordinated asset is a working vehicle, not a mock: WOK's
+      own ground dashboard mid-mission at waypoint 3 of 7, autonomously drilling the site its
+      onboard seismic evaluation flagged (ice signature, 78% confidence) &mdash; drill at
+      2.5&nbsp;m, thermal-extraction cell at 156&nbsp;&deg;C reading 43,950&nbsp;ppm volatiles,
+      state machine in DRILL. The same telemetry stream drives the Foreman shift board above.</figcaption>
+    </figure>
+  </section>
+
+  <div class="hr"></div>
+
+  <section class="card">
+    <h2>Maturity</h2>
+    <table>
+      <tr><th>Component</th><th>Current state</th><th>Next milestone</th></tr>
+      <tr>
+        <td>Fleet Coordinator</td>
+        <td>Working prototype. 45 live cFS vehicle stacks coordinated on one host: scored
+        dispatch, pad/berth FIFO deconfliction, standby reserve, anomaly requeue and
+        auto-resume, throughput accounting.</td>
+        <td>Surface-to-surface repositioning between pads &mdash; the duty type exists in the
+        vocabulary but no routing logic is built.</td>
+      </tr>
+      <tr>
+        <td>Foreman</td>
+        <td>Working prototype. Multi-fleet shift board; WOK class runs real cFS instances
+        end-to-end (dispatch &rarr; onboard mission &rarr; telemetry-gated completion &rarr;
+        re-dispatch); excavator class is sim-only.</td>
+        <td>A second vehicle class with real flight software behind it.</td>
+      </tr>
+      <tr>
+        <td>Marshal</td>
+        <td>Software prototype. Build-plan DAG, zone exclusion, scored dispatch, and anomaly
+        requeue all run &mdash; against simulated assets. Real vehicles (rover, tanker, WOK)
+        managed at the OBSERVE tier only.</td>
+        <td>First live vehicle taking DISPATCH-tier tasking over CCSDS.</td>
+      </tr>
+      <tr>
+        <td>AssetAdapter / CCSDS adapter</td>
+        <td>Contract implemented and proven via the sim adapter; CCSDS implementation
+        byte-level verified. No real apparatus flight software exists to command with it.</td>
+        <td>Construction-apparatus FSW; retire the "working hypothesis" telemetry layout
+        against real packets.</td>
+      </tr>
+      <tr>
+        <td>WOK survey rover FSW</td>
+        <td>Verified end-to-end in simulation: full autonomous survey missions, onboard
+        picks within spec of the sim's ground truth, regression-gated releases. Flight HAL
+        is stubbed.</td>
+        <td>Hardware port of the HAL; bench calibration of the coupling and source models.</td>
+      </tr>
+    </table>
+    <p class="mini">
+      "Working prototype" here means: runs today, on this stack, producing the numbers and
+      screenshots on this page &mdash; not that it has flown, and not that it has been
+      demonstrated on hardware.
+    </p>
+  </section>
+
+  <footer>
+    <div class="hr"></div>
+    <div>
+      Aegis Station is developing this stack for its own surface missions.
+      <strong>Aaron Smith &middot; contact@aegisstation.com</strong>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
