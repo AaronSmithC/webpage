@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What the Moon Is For — Aegis Station</title>
+<meta name="description" content="The Moon is not a destination. It is an on-ramp — the place the rest of the solar system gets provisioned. A strategic note from Aegis Station.">
+<meta property="og:title" content="What the Moon Is For — Aegis Station">
+<meta property="og:description" content="The Moon is not a destination. It is an on-ramp — the place the rest of the solar system gets provisioned.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aegisstation.com/what-the-moon-is-for.html">
+<meta property="og:image" content="https://aegisstation.com/images/moon-is-for-hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0a0e15;
+    --bg-panel:  #0e141d;
+    --ink:       #d9e1ea;
+    --ink-dim:   #8a94a3;
+    --water:     #6fb6d8;
+    --water-deep:#3f7f9e;
+    --hair:      rgba(217, 225, 234, 0.12);
+    --hair-soft: rgba(217, 225, 234, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 1.14rem;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--water); text-decoration: none; }
+  a:hover, a:focus-visible { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--water); outline-offset: 3px; }
+
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+  .wrap-wide { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---- Masthead strip ---- */
+  .masthead {
+    border-bottom: 1px solid var(--hair);
+    background: rgba(10, 14, 21, 0.9);
+  }
+  .masthead .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 3.4rem;
+  }
+  .brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .brand a { color: var(--ink); }
+  .brand a:hover { color: var(--water); }
+  .masthead .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  /* ---- Hero ---- */
+  header.hero {
+    background:
+      radial-gradient(120% 80% at 85% -10%, rgba(63, 127, 158, 0.16), transparent 60%),
+      var(--bg);
+  }
+  header.hero .wrap { padding-top: 5rem; padding-bottom: 3.2rem; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--water); margin-bottom: 1.6rem;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: clamp(2.3rem, 6vw, 3.5rem);
+    line-height: 1.05; letter-spacing: -0.02em;
+    color: #eef3f8;
+  }
+  .dek {
+    margin-top: 1.6rem;
+    font-size: 1.2rem; line-height: 1.6;
+    color: var(--ink-dim);
+    max-width: 34rem;
+  }
+  .dek strong { color: var(--ink); font-weight: 500; }
+
+  /* ---- Figures ---- */
+  figure.art { margin: 0; }
+  figure.art img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--hair-soft);
+    border-radius: 4px;
+  }
+  figure.art figcaption {
+    margin-top: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; line-height: 1.6; letter-spacing: 0.06em;
+    color: var(--ink-dim);
+  }
+  .hero-art {
+    border-bottom: 1px solid var(--hair-soft);
+    padding-bottom: 3rem;
+    background: var(--bg);
+  }
+  main figure.art { margin: 2.6rem 0 3rem; }
+
+  /* ---- Body ---- */
+  main .wrap { padding-top: 3.5rem; padding-bottom: 2rem; }
+
+  main p { margin-bottom: 1.5rem; }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500; font-size: 1.5rem; letter-spacing: -0.01em;
+    color: #eef3f8;
+    margin: 3.2rem 0 1.3rem;
+    padding-top: 0.4rem;
+  }
+  h2 .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; font-weight: 400;
+    color: var(--water-deep);
+    letter-spacing: 0.1em;
+    margin-right: 0.8rem;
+    vertical-align: 0.28em;
+  }
+
+  em { color: var(--ink); font-style: italic; }
+
+  .pull {
+    margin: 3rem 0;
+    padding: 1.6rem 0 1.6rem 1.6rem;
+    border-left: 2px solid var(--water);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
+    font-size: 1.55rem; line-height: 1.35; letter-spacing: -0.01em;
+    color: #eef3f8;
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    margin-top: 3rem;
+    border-top: 1px solid var(--hair);
+    background: var(--bg-panel);
+  }
+  footer .wrap { padding-top: 2.4rem; padding-bottom: 4rem; }
+  .sig {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--ink); font-size: 0.98rem; font-weight: 500;
+  }
+  .sig span { color: var(--ink-dim); font-weight: 400; }
+  .backrow {
+    margin-top: 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    display: flex; gap: 1.4rem; flex-wrap: wrap;
+  }
+  .backrow a { color: var(--ink-dim); }
+  .backrow a:hover { color: var(--water); }
+
+  @media (max-width: 600px) {
+    body { font-size: 1.06rem; }
+    header.hero .wrap { padding-top: 3.5rem; padding-bottom: 2.4rem; }
+    .hero-art { padding-bottom: 2.4rem; }
+    .pull { font-size: 1.3rem; }
+    h2 .num { display: block; margin: 0 0 0.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wrap">
+    <div class="brand"><a href="index.html">Aegis Station</a></div>
+    <div class="kicker">Strategic Note</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Cislunar Infrastructure</div>
+    <h1>What the Moon Is For</h1>
+    <p class="dek">Everyone is talking about going back to the Moon. Very little of the conversation is about what it&rsquo;s for. Here is our answer: <strong>the Moon is not a destination. It is an on-ramp.</strong></p>
+  </div>
+</header>
+
+<div class="hero-art">
+  <div class="wrap-wide">
+    <figure class="art">
+      <img src="images/moon-is-for-hero.jpg" width="1536" height="1024"
+           alt="A lunar surface installation on a cratered plain, its beacon lights glowing against the curve of the lunar horizon, with Mars hanging small and red in the black sky above.">
+      <figcaption>Surface operations at dusk-line. Mars on the horizon — the destination this infrastructure exists to serve.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+
+    <p>There is a strange asymmetry in how we talk about space. We spend enormous energy imagining life on Mars — the domes, the settlers, the first city — and almost none on the part that actually decides whether any of it happens: getting there, in volume, again and again, affordably. The destination is vivid. The transport is an afterthought. But the transport is the whole problem, and it is unsolved.</p>
+
+    <p>That is where the Moon comes in, and it is not as a place to live. It is as the place everything else gets provisioned.</p>
+
+    <h2><span class="num">01</span>Start with water</h2>
+
+    <p>If you were going to build anything beyond Earth, the first thing you would look for is water — and not to drink. Water is propellant. Split it and you have hydrogen and oxygen, the two things a rocket needs most and the two things most expensive to drag up out of Earth&rsquo;s gravity. A body that has water, sitting at the top of a shallow gravity well, is not a science curiosity. It is a fuel supply positioned exactly where the rest of the solar system becomes reachable.</p>
+
+    <p>So the first move is the one nearly everyone already agrees on: find the water, and learn to turn it into fuel where it sits. Not because a base needs a drink. Because everything past the Moon needs a full tank, and the Moon is the cheapest place in the neighborhood to fill it.</p>
+
+    <h2><span class="num">02</span>The Mars problem is a transport problem</h2>
+
+    <p>We talk about Mars as a place we will live. We should talk about it, first, as a place we have to reach — thousands of tonnes of vehicle, crew, and cargo, on a schedule, more than once. At those volumes the limiting factor is never enthusiasm. It is propellant and staging: how much fuel you can put where it&rsquo;s needed, and how much vehicle you can assemble without forcing every kilogram up through an atmosphere.</p>
+
+    <p>Launching a Mars-class ship whole, from Earth&rsquo;s surface, fully fueled, is the hard way to do everything. The easier architecture is older than the rockets: build big things where they operate, and fuel them close to where the fuel is. That means assembly in orbit and in cislunar space, and propellant drawn from the Moon rather than hauled from the ground.</p>
+
+    <div class="pull">The Moon doesn&rsquo;t compete with Mars. It is how Mars gets supplied.</div>
+
+    <figure class="art">
+      <img src="images/moon-is-for-moon-mars.jpg" width="1536" height="1024"
+           alt="The Moon in the near foreground and Mars in the far distance against a starfield — the two bodies framed as points on one supply line.">
+      <figcaption>Two bodies, one supply line. The near one has the fuel; the far one has the headlines.</figcaption>
+    </figure>
+
+    <h2><span class="num">03</span>The dry dock</h2>
+
+    <p>Follow that logic and the Moon stops being a base and becomes a yard. The vehicles that go to Mars and beyond are large, fragile, and best assembled where they never have to survive a launch. They are cheaper to build off Earth, cheaper to fuel off Earth, and — for the highest-performance deep-space propulsion, the kind you operate far from any atmosphere — they can <em>only</em> be built and staged off Earth. That is not a distant fantasy bolted onto a Moon program. It is the natural endpoint of one. A place with fuel, vacuum, a shallow gravity well, and room to work is a shipyard whether or not anyone calls it that yet.</p>
+
+    <figure class="art">
+      <img src="images/moon-is-for-assembly.jpg" width="1536" height="1024"
+           alt="A large deep-space vehicle under assembly in lunar orbit, tank modules being maneuvered into place by manipulator arms above the cratered lunar surface, with Mars visible far beyond.">
+      <figcaption>Assembly in lunar orbit: tankage and structure mated where they will operate, never having to survive a launch.</figcaption>
+    </figure>
+
+    <p>We are not proposing to build those ships tomorrow. We are pointing out that the infrastructure a lunar base needs anyway — water, power, a way to move things around, a way for people to live and work there for longer than a visit — is the same infrastructure that turns the Moon into the place the rest of the solar system launches from. Build the base well, and you have already started building the on-ramp.</p>
+
+    <h2><span class="num">04</span>What we build</h2>
+
+    <p>This is the layer we work on: the unglamorous, load-bearing part underneath all of it. Water as the network commodity, converted to fuel where it&rsquo;s needed. The power and utilities a persistent operation runs on. The staging and depot architecture that lets vehicles be fueled in the right place at the right time. A habitat that lets a workforce stay — not rotate home every few months, but live and work in cislunar space long enough to actually build something.</p>
+
+    <p>None of that is a Mars mission. All of it is the reason a Mars mission, at volume, becomes possible. The destination gets the headlines. The on-ramp is what we&rsquo;re here to build — and it&rsquo;s the part that has to exist first.</p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sig">A.S. <span>— Principal Architect, Aegis Station</span></div>
+    <div class="backrow">
+      <a href="waterlogistics.html">Water Logistics</a>
+      <a href="lunet.html">LUNET</a>
+      <a href="lunar_orbital_depot.html">Propellant Depot</a>
+      <a href="index.html">← Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
