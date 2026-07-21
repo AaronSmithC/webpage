@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Case for Sending Probes to Proxima — Aegis Station</title>
+<meta name="description" content="The nearest star system is the one interstellar question we can actually reach. A strategic note from Aegis Station on why we should send — and why the real barrier isn't propulsion.">
+<meta property="og:title" content="The Case for Sending Probes to Proxima — Aegis Station">
+<meta property="og:description" content="The nearest star system is the one interstellar question we can actually reach. That alone is reason enough to go.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aegisstation.com/proxima-probes.html">
+<meta property="og:image" content="https://aegisstation.com/images/proxima-hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0a0e15;
+    --bg-panel:  #0e141d;
+    --ink:       #d9e1ea;
+    --ink-dim:   #8a94a3;
+    --water:     #6fb6d8;
+    --water-deep:#3f7f9e;
+    --hair:      rgba(217, 225, 234, 0.12);
+    --hair-soft: rgba(217, 225, 234, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 1.14rem;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--water); text-decoration: none; }
+  a:hover, a:focus-visible { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--water); outline-offset: 3px; }
+
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+  .wrap-wide { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---- Masthead ---- */
+  .masthead {
+    border-bottom: 1px solid var(--hair);
+    background: rgba(10, 14, 21, 0.9);
+  }
+  .masthead .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 3.4rem;
+  }
+  .brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .brand a { color: var(--ink); }
+  .brand a:hover { color: var(--water); }
+  .masthead .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  /* ---- Hero ---- */
+  header.hero {
+    background:
+      radial-gradient(120% 80% at 82% -10%, rgba(63, 127, 158, 0.16), transparent 60%),
+      var(--bg);
+  }
+  header.hero .wrap { padding-top: 5rem; padding-bottom: 3.2rem; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--water); margin-bottom: 1.6rem;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: clamp(2.2rem, 5.6vw, 3.4rem);
+    line-height: 1.06; letter-spacing: -0.02em;
+    color: #eef3f8;
+  }
+  .dek {
+    margin-top: 1.6rem;
+    font-size: 1.2rem; line-height: 1.6;
+    color: var(--ink-dim);
+    max-width: 36rem;
+  }
+  .dek strong { color: var(--ink); font-weight: 500; }
+
+  /* ---- Figures ---- */
+  figure.art { margin: 0; }
+  figure.art img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--hair-soft);
+    border-radius: 4px;
+  }
+  figure.art figcaption {
+    margin-top: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; line-height: 1.6; letter-spacing: 0.06em;
+    color: var(--ink-dim);
+  }
+  .hero-art {
+    border-bottom: 1px solid var(--hair-soft);
+    padding-bottom: 3rem;
+    background: var(--bg);
+  }
+  main figure.art { margin: 2.6rem 0 3rem; }
+
+  /* ---- Body ---- */
+  main .wrap { padding-top: 3.5rem; padding-bottom: 2rem; }
+  main p { margin-bottom: 1.5rem; }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500; font-size: 1.5rem; letter-spacing: -0.01em;
+    color: #eef3f8;
+    margin: 3.2rem 0 1.3rem;
+    display: flex; align-items: baseline; gap: 0.85rem;
+  }
+  h2 .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; font-weight: 400;
+    color: var(--water-deep);
+    letter-spacing: 0.1em;
+    flex: none;
+  }
+
+  main p strong { color: #eef3f8; font-weight: 600; }
+  em { color: var(--ink); font-style: italic; }
+
+  .pull {
+    margin: 3rem 0;
+    padding: 1.6rem 0 1.6rem 1.6rem;
+    border-left: 2px solid var(--water);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem; line-height: 1.35; letter-spacing: -0.01em;
+    color: #eef3f8;
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    margin-top: 3rem;
+    border-top: 1px solid var(--hair);
+    background: var(--bg-panel);
+  }
+  footer .wrap { padding-top: 2.4rem; padding-bottom: 4rem; }
+  .sig {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--ink); font-size: 0.98rem; font-weight: 500;
+  }
+  .sig span { color: var(--ink-dim); font-weight: 400; }
+  .backrow {
+    margin-top: 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    display: flex; gap: 1.4rem; flex-wrap: wrap;
+  }
+  .backrow a { color: var(--ink-dim); }
+  .backrow a:hover { color: var(--water); }
+
+  @media (max-width: 600px) {
+    body { font-size: 1.06rem; }
+    header.hero .wrap { padding-top: 3.5rem; padding-bottom: 2.4rem; }
+    .hero-art { padding-bottom: 2.4rem; }
+    .pull { font-size: 1.28rem; }
+    h2 { flex-direction: column; gap: 0.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wrap">
+    <div class="brand"><a href="index.html">Aegis Station</a></div>
+    <div class="kicker">Strategic Note</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Insights &amp; Policy Notes</div>
+    <h1>The Case for Sending Probes to Proxima</h1>
+    <p class="dek">The nearest star system is the one interstellar question we can actually reach. <strong>That alone is reason enough to go.</strong></p>
+  </div>
+</header>
+
+<div class="hero-art">
+  <div class="wrap-wide">
+    <figure class="art">
+      <img src="images/proxima-hero.jpg" width="1536" height="1024"
+           alt="The red dwarf Proxima Centauri as a small, deep-orange star against a dense starfield, with a faint rocky planet in the foreground catching a sliver of its dim light.">
+      <figcaption>Proxima Centauri — 4.24 light-years away. The closest star to the Sun, and the closest we will ever have.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+
+    <p>Interstellar travel sounds like a category of problem reserved for centuries we won&rsquo;t see. For every target but one, that&rsquo;s true. The exception is close enough to change the conversation.</p>
+
+    <h2><span class="num">01</span><span>The gift horse</span></h2>
+
+    <p>Proxima Centauri sits 4.24 light-years away — the closest star to the Sun, and by a wide margin the closest we will ever have. Every other candidate for an interstellar probe is some multiple of that distance farther out. Proxima is the only star system where any propulsion we can plausibly foresee closes the loop in a span a human institution can hold onto.</p>
+
+    <p>And it is not just a star. It has a confirmed planet — Proxima b, roughly Earth&rsquo;s mass, orbiting in the zone where liquid water can exist — along with additional candidates. A real planetary system, next door.</p>
+
+    <p>The star itself is easy to underestimate. It&rsquo;s a red dwarf: small, dim, and ancient, the most common kind of star in the galaxy and the longest-lived by a vast margin. If life turns out to favor these quiet, patient stars — as some models of cosmic habitability suggest it might, precisely because they burn steadily for trillions of years — then the nearest test of that idea is not some distant exotic target. It is the system closest to our own.</p>
+
+    <p>Which is the real prize. The question underneath all of this is whether life is rare — whether the chemistry that started here has started anywhere else, even once. A single second example, even microbial, even long dead, would change what we know about our place in the universe more than any other discovery available to us. That measurement is worth almost any expense. Proxima is the closest place we could ever go looking for it.</p>
+
+    <h2><span class="num">02</span><span>Two probes, not one</span></h2>
+
+    <p>The instinct is to imagine a single heroic mission. The better architecture is a sequence — because two very different missions answer two very different questions, and we want both.</p>
+
+    <p><strong>Within a lifetime.</strong> The first probe is fast and light: the most aggressive propulsion we can nearly build — a laser-driven sail accelerated to a fraction of light speed, or a fusion drive if one matures in time — thrown at Proxima on a flyby. Transit on the order of a few decades, plus about four years for the signal to return. Someone alive at launch could read the result within their own life: is there an atmosphere, is there a biosignature, is the planet what we hope. The data would be thin — a flyby at that speed is over in hours, one pass, no second look — but it would be an <em>answer</em>, delivered as fast as physics allows.</p>
+
+    <p><strong>The complete picture.</strong> The second probe is the opposite: heavier, slower, built to arrive and stay. It decelerates, enters orbit, maps the system over years, perhaps releases a swarm of smaller instruments. This is a century-scale mission. The people who launch it will not see its data; their great-grandchildren will. What it returns is not a snapshot but a survey — the full character of the system, at a depth no flyby can reach. The fast probe tells us <em>whether</em>. The slow probe tells us <em>what</em>.</p>
+
+    <figure class="art">
+      <img src="images/proxima-flyby.jpg" width="1536" height="1024"
+           alt="A gram-scale probe on a wide reflective light sail passing a rocky planet at high speed, the dim red star low behind it, motion implied by the streak of the starfield.">
+      <figcaption>The fast probe: a flyby measured in hours, returning the answer within a launcher&rsquo;s lifetime.</figcaption>
+    </figure>
+
+    <h2><span class="num">03</span><span>Launching early costs nothing</span></h2>
+
+    <p>There is an obvious objection to starting now: why send a slow probe today when a faster one, launched decades from now, might overtake it and arrive first? Why not wait for better propulsion?</p>
+
+    <p>Because you cannot schedule a breakthrough. You do not know if it is coming, or when, and a mission deferred until the technology is ideal is a mission that may never launch at all. So you send the best you have now. If no breakthrough arrives, the early probe is the only probe, and its data is data you would otherwise not have. If a breakthrough does arrive, later probes overtake the earlier ones in flight — and now you have not one arrival but a staggered stream of them, the old probe becoming an earlier baseline against which the newer results are read. Sent early, it is never wasted. It is either the mission or the first measurement in a series.</p>
+
+    <div class="pull">Waiting is the only choice that can lose.</div>
+
+    <h2><span class="num">04</span><span>What it actually costs</span></h2>
+
+    <p>The serious attempt at this — a program to send gram-scale probes to Alpha Centauri — was organized around a figure near a hundred million dollars. For the highest-stakes measurement available to our species, that is not a large number. It is a rounding error against things we fund without debate. And even that program spent only a small fraction of its pledge before stalling.</p>
+
+    <p>Which points at the real barrier, and it is not money and it is not physics. A century-scale mission requires an institution that survives long enough to receive it — that stays pointed at a single objective across generations, funding it, tracking it, waiting for it, long after everyone who authorized it is gone. We have never built anything that lasts that way. That, not propulsion, is the thing we would actually have to develop: not a faster engine, but a longer attention span.</p>
+
+    <h2><span class="num">05</span><span>The staggered fleet</span></h2>
+
+    <p>So the answer to &ldquo;when do we send a probe to Proxima&rdquo; is not a date. It is a cadence. Send the fast one as soon as we can build it, for the answer within a lifetime. Send the slow, complete one for the full picture. And keep sending, each generation of propulsion overtaking the last, until Proxima stops being a target we fired at once and becomes a system under continuous observation — a thread of probes strung out across four light-years, launched decades apart, arriving in sequence, each adding to a picture that sharpens for a century.</p>
+
+    <figure class="art">
+      <img src="images/proxima-alt.jpg" width="1536" height="1024"
+           alt="A wide, dark starfield holding two stars: the faint deep-red point of Proxima Centauri at lower left and the far brighter yellow-white glare of the Alpha Centauri pair at upper right.">
+      <figcaption>The whole span of the problem in one frame: Proxima, faint at lower left, with the bright Alpha Centauri pair beyond — four light-years for a fleet to string itself across.</figcaption>
+    </figure>
+
+    <p>It is the closest thing in the universe that could carry the answer to the only question that has ever really mattered about life: whether we are alone. And it is the one interstellar destination we can actually reach.</p>
+
+    <p>You don&rsquo;t look a gift horse like that in the mouth. You send.</p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sig">A.S. <span>— Principal Architect, Aegis Station</span></div>
+    <div class="backrow">
+      <a href="what-the-moon-is-for.html">What the Moon Is For</a>
+      <a href="index.html#insights">Insights &amp; Policy Notes</a>
+      <a href="index.html">← Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
