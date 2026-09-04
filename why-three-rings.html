@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Three Rings — Aegis Station</title>
+<meta name="description" content="Three rings was never a stability optimization. It is a statement about what is owed to a crew that cannot come home on short notice: more than one chance. A strategic note from Aegis Station.">
+<meta property="og:title" content="Why Three Rings — Aegis Station">
+<meta property="og:description" content="Stability was never the reason there are three. Three chances, a long way from home.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aegisstation.com/why-three-rings.html">
+<meta property="og:image" content="https://aegisstation.com/images/aegis-station-lunar-orbit.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0a0e15;
+    --bg-panel:  #0e141d;
+    --ink:       #d9e1ea;
+    --ink-dim:   #8a94a3;
+    --water:     #6fb6d8;
+    --water-deep:#3f7f9e;
+    --hair:      rgba(217, 225, 234, 0.12);
+    --hair-soft: rgba(217, 225, 234, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 1.14rem;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--water); text-decoration: none; }
+  a:hover, a:focus-visible { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--water); outline-offset: 3px; }
+
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+  .wrap-wide { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---- Masthead strip ---- */
+  .masthead {
+    border-bottom: 1px solid var(--hair);
+    background: rgba(10, 14, 21, 0.9);
+  }
+  .masthead .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 3.4rem;
+  }
+  .brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .brand a { color: var(--ink); }
+  .brand a:hover { color: var(--water); }
+  .masthead .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  /* ---- Hero ---- */
+  header.hero {
+    background:
+      radial-gradient(120% 80% at 85% -10%, rgba(63, 127, 158, 0.16), transparent 60%),
+      var(--bg);
+  }
+  header.hero .wrap { padding-top: 5rem; padding-bottom: 3.2rem; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--water); margin-bottom: 1.6rem;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: clamp(2.3rem, 6vw, 3.5rem);
+    line-height: 1.05; letter-spacing: -0.02em;
+    color: #eef3f8;
+  }
+  .dek {
+    margin-top: 1.6rem;
+    font-size: 1.2rem; line-height: 1.6;
+    color: var(--ink-dim);
+    max-width: 34rem;
+  }
+  .dek strong { color: var(--ink); font-weight: 500; }
+
+  /* ---- Figures ---- */
+  figure.art { margin: 0; }
+  figure.art img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--hair-soft);
+    border-radius: 4px;
+  }
+  figure.art figcaption {
+    margin-top: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; line-height: 1.6; letter-spacing: 0.06em;
+    color: var(--ink-dim);
+  }
+  .hero-art {
+    border-bottom: 1px solid var(--hair-soft);
+    padding-bottom: 3rem;
+    background: var(--bg);
+  }
+  main figure.art { margin: 2.6rem 0 3rem; }
+
+  /* ---- Body ---- */
+  main .wrap { padding-top: 3.5rem; padding-bottom: 2rem; }
+
+  main p { margin-bottom: 1.5rem; }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500; font-size: 1.5rem; letter-spacing: -0.01em;
+    color: #eef3f8;
+    margin: 3.2rem 0 1.3rem;
+    padding-top: 0.4rem;
+  }
+  h2 .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; font-weight: 400;
+    color: var(--water-deep);
+    letter-spacing: 0.1em;
+    margin-right: 0.8rem;
+    vertical-align: 0.28em;
+  }
+
+  em { color: var(--ink); font-style: italic; }
+
+  .pull {
+    margin: 3rem 0;
+    padding: 1.6rem 0 1.6rem 1.6rem;
+    border-left: 2px solid var(--water);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
+    font-size: 1.55rem; line-height: 1.35; letter-spacing: -0.01em;
+    color: #eef3f8;
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    margin-top: 3rem;
+    border-top: 1px solid var(--hair);
+    background: var(--bg-panel);
+  }
+  footer .wrap { padding-top: 2.4rem; padding-bottom: 4rem; }
+  .sig {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--ink); font-size: 0.98rem; font-weight: 500;
+  }
+  .sig span { color: var(--ink-dim); font-weight: 400; }
+  .backrow {
+    margin-top: 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    display: flex; gap: 1.4rem; flex-wrap: wrap;
+  }
+  .backrow a { color: var(--ink-dim); }
+  .backrow a:hover { color: var(--water); }
+
+  @media (max-width: 600px) {
+    body { font-size: 1.06rem; }
+    header.hero .wrap { padding-top: 3.5rem; padding-bottom: 2.4rem; }
+    .hero-art { padding-bottom: 2.4rem; }
+    .pull { font-size: 1.3rem; }
+    h2 .num { display: block; margin: 0 0 0.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wrap">
+    <div class="brand"><a href="index.html">Aegis Station</a></div>
+    <div class="kicker">Strategic Note</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Station Architecture</div>
+    <h1>Why Three Rings</h1>
+    <p class="dek">The most common pushback on Aegis Station is some version of the same question: wouldn&rsquo;t one big ring be more stable than a stack of three? It&rsquo;s a good question. But <strong>stability was never the reason there are three.</strong></p>
+  </div>
+</header>
+
+<div class="hero-art">
+  <div class="wrap-wide">
+    <figure class="art">
+      <img src="images/aegis-station-lunar-orbit.png" width="1730" height="909"
+           alt="Aegis Station in lunar orbit: three co-rotating habitat rings stacked along a central hub, solar arrays extended at either end, against a black starfield.">
+      <figcaption>Three co-rotating rings on one hub. Each ring is a separate pressure vessel with its own life support, thermal loop, and atmosphere.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+
+    <p>The most common pushback on Aegis Station is some version of the same question: wouldn&rsquo;t a single large-diameter ring be more stable, less prone to tumbling end over end, than a stack of three? It&rsquo;s a good question. It&rsquo;s usually the first one a careful person lands on, and the instinct behind it is sound &mdash; you want the configuration that holds its orientation and doesn&rsquo;t drift its way into a slow failure. The short answer is that stability doesn&rsquo;t actually depend on ring count, and a compact co-rotating stack turns out to be a steadier configuration than one big thin ring anyway. The longer answer &mdash; the part worth a whole note &mdash; is that stability was never the reason there are three.</p>
+
+    <h2><span class="num">01</span>What the question assumes</h2>
+
+    <p>The question assumes the number was chosen for performance. That somewhere there was a trade study sweeping ring count against mass and stability, and three fell out as the optimum. There wasn&rsquo;t. The physics that governs spin stability is real and it matters, and at the stage where Aegis Station is being built for real it will be settled by people who do rotational dynamics for a living &mdash; not argued out in a comment thread. That&rsquo;s true of most of the hard parts. The station will take structural engineers, fluid people, radiation people, life-support people, all sharper in their domains than any one architect. The job at this stage isn&rsquo;t to out-physics them. It&rsquo;s to make the decisions that set the constraints they&rsquo;ll work inside, and to make them for reasons that hold up.</p>
+
+    <p>Three rings is one of those decisions. And the reason isn&rsquo;t a number that came out of an equation.</p>
+
+    <h2><span class="num">02</span>The reason</h2>
+
+    <p>Three rings means three physically isolated pressure vessels &mdash; separate life support, separate thermal loops, separate atmospheres. A catastrophic failure in one ring is contained to that ring. It doesn&rsquo;t cascade. The crew evacuates to an adjacent ring and the station survives the loss of a third of itself.</p>
+
+    <p>The honesty matters here, so here&rsquo;s the limit: the rings aren&rsquo;t fully independent. They share the hub. The hub is the one genuine single point of failure in the architecture, and no amount of ring-counting makes that go away. What three rings buys is everything downstream of the hub &mdash; the parts where people actually live. A long way from home, you want somewhere safe to go.</p>
+
+    <figure class="art">
+      <img src="images/hub_ring_boundary_diagram.svg" width="1000" height="640"
+           alt="Schematic cross-section of the hub/ring boundary: crew and cargo cross as cyclic pods through a despun magazine and ring-face vestibule; power crosses by a contactless rotary transformer; data by an on-axis free-space optical link; and heat is rejected independently on each side.">
+      <figcaption>The shared part. Each ring meets the hub through a small number of well-characterized crossings, and rejects its own heat on its own side. <a href="hub_ring_boundary.html">How the hub/ring boundary works &rarr;</a></figcaption>
+    </figure>
+
+    <h2><span class="num">03</span>Where it gets satisfying</h2>
+
+    <p>The part that makes the design feel right, rather than just defensible, is that the survivability reason and the physics happen to agree. The compact co-rotating stack that&rsquo;s the steadier configuration is also the one that gives you isolated failure domains. There was no trade &mdash; no compromising the physics to get the redundancy, or the redundancy to get the physics. The shape that holds the station steady is the same shape that gives the crew somewhere to run.</p>
+
+    <div class="pull">A good constraint does more of the work than a clever designer does.</div>
+
+    <p>That isn&rsquo;t luck, exactly, and it isn&rsquo;t cleverness either. It&rsquo;s what happens when a single hard constraint does the deciding. The constraint is that there&rsquo;s no rescue and no resupply on any useful timescale. When the environment is that unforgiving, the survivable architectures and the stable architectures tend to collapse onto the same answer, because the only designs that make it are the ones where those reasons already agreed.</p>
+
+    <h2><span class="num">04</span>The number</h2>
+
+    <p>So three isn&rsquo;t an optimization result. It&rsquo;s a statement about what&rsquo;s owed to a crew that can&rsquo;t come home on short notice: more than one chance. Everything technical &mdash; the spin dynamics, the structure, the hub that still has to be solved &mdash; is downstream of that one decision, and most of it will be solved by people who haven&rsquo;t joined the project yet.</p>
+
+    <p>That&rsquo;s the reason there are three. Three chances, a long way from home.</p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sig">A.S. <span>&mdash; Principal Architect, Aegis Station</span></div>
+    <div class="backrow">
+      <a href="hub_ring_boundary.html">Hub/Ring Boundary</a>
+      <a href="construction-logistics.html">Construction Logistics</a>
+      <a href="were-going-to-talk-one-day.html">We&rsquo;re Going to Talk One Day</a>
+      <a href="index.html">&larr; Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
