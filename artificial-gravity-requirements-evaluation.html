@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artificial Gravity Requirements Evaluation (AGRE) | Rotation Parameter Verification</title>
+  <meta name="description" content="A requirements-style reference defining the in-orbit evaluation campaign required to establish, with quantified confidence, the human tolerance envelope for sustained rotational gravity — with radius, spin rate, and g-level treated as evaluated outputs, not assumed inputs." />
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --bg-raised:#10161e;
+      --bg-card:#11181f;
+      --border:#22303c;
+      --border-soft:#1a2530;
+      --accent:#6fc3d9;
+      --accent-dim:rgba(111,195,217,0.12);
+      --text:#d7dee6;
+      --text-secondary:#a7b3bf;
+      --text-dim:#6d7a86;
+      --good:#8fd18f;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:400 1rem/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{opacity:.85}
+    .wrap{max-width:880px;margin:0 auto;padding:3.5rem 1.4rem 4rem}
+    .eyebrow{
+      font-size:.8rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--text-dim);
+      margin-bottom:.9rem;
+    }
+    h1{
+      font-size:clamp(1.7rem,4.5vw,2.4rem);
+      line-height:1.2;
+      margin:.2rem 0 1rem;
+      color:#fff;
+      font-weight:650;
+      letter-spacing:-.01em;
+    }
+    .lede{
+      font-size:1.08rem;
+      color:var(--text-secondary);
+      max-width:64ch;
+    }
+    .lede strong{color:var(--text)}
+    h2{
+      font-size:1.25rem;
+      color:#fff;
+      font-weight:600;
+      margin:0 0 .8rem;
+      letter-spacing:-.005em;
+    }
+    h3{
+      font-size:1rem;
+      color:var(--text);
+      font-weight:600;
+      margin:1.2rem 0 .5rem;
+    }
+    p{margin:.7rem 0}
+    ul{margin:.6rem 0;padding-left:1.2rem}
+    li{margin:.4rem 0}
+    .card{
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:1.5rem 1.6rem;
+      margin:1.4rem 0;
+    }
+    .hr{height:1px;background:var(--border-soft);margin:2.2rem 0}
+    .pillrow{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.1rem 0 .3rem}
+    .pill{
+      padding:.18rem .7rem;
+      border:1px solid var(--border);
+      border-radius:999px;
+      font-size:.82rem;
+      color:var(--text-secondary);
+      background:var(--bg-raised);
+      white-space:nowrap;
+    }
+    .callout{
+      border-left:3px solid var(--accent);
+      background:var(--accent-dim);
+      border-radius:0 8px 8px 0;
+      padding:.9rem 1.1rem;
+      margin:1.2rem 0;
+      color:var(--text);
+    }
+    .callout strong{color:#fff}
+    .mini{font-size:.88rem;color:var(--text-dim)}
+    .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1rem 0}
+    .cell{
+      background:var(--bg-raised);
+      border:1px solid var(--border-soft);
+      border-radius:8px;
+      padding:1rem 1.1rem;
+    }
+    .cell strong{display:block;color:#fff;font-size:.95rem;margin-bottom:.3rem}
+    .cell span, .cell p{color:var(--text-secondary);font-size:.92rem;line-height:1.6;margin:0}
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:1rem 0;
+      font-size:.92rem;
+    }
+    th{
+      text-align:left;
+      color:var(--text-dim);
+      font-weight:600;
+      font-size:.8rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      padding:.5rem .7rem;
+      border-bottom:1px solid var(--border);
+    }
+    td{
+      padding:.65rem .7rem;
+      border-bottom:1px solid var(--border-soft);
+      vertical-align:top;
+      color:var(--text-secondary);
+    }
+    td:first-child{color:var(--text);white-space:nowrap}
+    .reqs td:first-child{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:.82rem;
+      color:var(--accent);
+    }
+    .reqs td:nth-child(2){color:var(--text);white-space:nowrap}
+    .tag{
+      display:inline-block;
+      padding:.05rem .5rem;
+      border:1px solid var(--border);
+      border-radius:999px;
+      font-size:.74rem;
+      color:var(--text-dim);
+      background:var(--bg-raised);
+      margin:.35rem .25rem 0 0;
+      white-space:nowrap;
+    }
+    figure{margin:1.4rem 0}
+    figure a{display:block;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+    figure img{width:100%;display:block}
+    figcaption{font-size:.85rem;color:var(--text-dim);margin-top:.5rem;line-height:1.5}
+    footer{margin-top:2.5rem;font-size:.9rem;color:var(--text-dim)}
+    footer strong{color:var(--text-secondary)}
+    @media (max-width:640px){
+      .wrap{padding:2.5rem 1.1rem 3rem}
+      .twoCol{grid-template-columns:1fr}
+      table{font-size:.85rem}
+      td:first-child{white-space:normal}
+      .reqs td:nth-child(2){white-space:normal}
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Reference Concept &bull; Rotation Parameter Verification</div>
+  <h1>Artificial Gravity Requirements Evaluation (AGRE)</h1>
+  <p class="lede">
+    A requirements-style definition of the <strong>in-orbit evaluation campaign</strong> required to
+    establish, with quantified confidence, what sustained rotational gravity does to the people who live
+    in it &mdash; across the credible range of spin rates and g-levels, with radius, spin rate, and
+    g-level treated as evaluated outputs rather than assumed inputs.
+  </p>
+
+  <section class="card">
+    <h2>Purpose</h2>
+    <p>
+      This page defines a neutral <strong>evaluation class</strong> for rotationally generated gravity
+      at habitat scale. It specifies what must be measured, under what controls, and for how long before
+      a (radius, spin rate, g-level) operating point can be credited as tolerable for long-duration
+      occupancy in any human-rating argument. It is not a mission design, not a product announcement,
+      and not a claim about the answer.
+    </p>
+    <p>
+      Rotation parameters are routinely carried into habitat concepts as design assumptions: a spin rate
+      selected from a comfort chart, a radius that follows from it, a g-level chosen because it is
+      familiar. The chart values that anchor those choices derive from short-duration ground studies in
+      which Earth's gravity was present throughout. No sustained measurement of human response to a pure
+      rotating-frame gravity field has been made in orbit. Until it has, every rotation parameter in a
+      habitat specification is a hypothesis, and the evaluation defined here is what would turn it into
+      a requirement.
+    </p>
+    <div class="pillrow">
+      <span class="pill">Rotating-frame human factors</span>
+      <span class="pill">Partial-gravity dose response</span>
+      <span class="pill">In-orbit 1g control</span>
+      <span class="pill">Parameters as outputs</span>
+      <span class="pill">Uncertainty-quantified</span>
+    </div>
+    <div class="callout">
+      <strong>Core idea:</strong> "What spin rate is acceptable?" and "how much gravity is enough?"
+      have no validated answers. The honest output of an evaluation is not a defense of any particular
+      geometry &mdash; it is the <strong>tolerance envelope in (spin rate, g-level) space, with
+      confidence bounds</strong>, from which any architecture derives its radius against its own
+      occupancy requirements. The dataset that would define that envelope does not exist in orbit
+      &mdash; for this program or for any other.
+    </div>
+  </section>
+
+  <div class="hr"></div>
+
+  <section class="card">
+    <h2>State of the evidence</h2>
+    <p>
+      Three bodies of evidence bear on rotational gravity. Two exist. The one that governs does not.
+    </p>
+    <div class="grid">
+      <div class="cell">
+        <strong>Microgravity &mdash; exists</strong>
+        <span>Decades of continuous orbital occupancy have characterized human physiology over
+        months-long exposures at 0g: bone, muscle, cardiovascular, ocular, vestibular, immune, and
+        behavioral endpoints, with established measurement protocols and countermeasure regimes. This
+        is the field's 0g anchor point.</span>
+      </div>
+      <div class="cell">
+        <strong>Ground rotation &mdash; exists, confounded</strong>
+        <span>Slow-rotation rooms and human centrifuges have produced the spin-rate comfort literature
+        and short-duration adaptation data. In every such study Earth's 1g is superimposed on the
+        centripetal field: the resultant vector is tilted, the net magnitude exceeds 1g, and exposure
+        is measured in hours to weeks. Ground data can bound the problem. It cannot close it.</span>
+      </div>
+      <div class="cell">
+        <strong>Sustained orbital rotation &mdash; does not exist</strong>
+        <span>No human has lived in a rotating habitat in orbit for any physiologically meaningful
+        duration. Brief rotational demonstrations have been flown; none produced sustained exposure or
+        health data. There is no measurement of adaptation, dose response, or long-term tolerance in a
+        rotating-frame gravity field free of Earth's vector.</span>
+      </div>
+    </div>
+    <p>
+      This gap is a property of the field, not of any one program. Every rotating-habitat concept, at
+      any scale, currently rests on the same absence. The evaluation defined here is the set of
+      measurements that would fill it for all of them.
+    </p>
+    <p class="mini">
+      Partial-gravity animal data from ground centrifuges is hypergravity relative to the 1g baseline
+      the animals otherwise experience; it does not constitute partial-gravity dose-response data. Bed
+      rest and head-down tilt analogs model unloading, not rotation.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Evaluated parameters</h2>
+    <p>
+      Centripetal acceleration in a rotating habitat is <em>g&nbsp;=&nbsp;&omega;&sup2;r</em>. The three
+      quantities form a coupled triple with two degrees of freedom: fix any two and the third follows.
+      Each is constrained by a different discipline, and only one of the three is a free engineering
+      choice.
+    </p>
+    <table>
+      <tr><th>Parameter</th><th>Governed by</th><th>Evidence status</th></tr>
+      <tr>
+        <td>Spin rate (&omega;)</td>
+        <td>Vestibular tolerance to cross-coupled angular acceleration; Coriolis effects on movement
+          and task performance; adaptation capacity</td>
+        <td>Ground-derived comfort envelopes only; no sustained in-orbit measurement at any rate</td>
+      </tr>
+      <tr>
+        <td>Gravity level (g)</td>
+        <td>Physiological dose response: bone, cardiovascular, ocular, muscular, and sensorimotor
+          endpoints versus fractional g over long exposure</td>
+        <td>Two anchor points (0g in orbit, 1g on Earth); no measured points between them, and no
+          in-orbit 1g point</td>
+      </tr>
+      <tr>
+        <td>Radius (r)</td>
+        <td>Structure, mass, cost, and the head-to-foot gradient across standing height and across the
+          radial extent of the habitable volume</td>
+        <td>Fully determined once &omega; and g are set; an output, not an input</td>
+      </tr>
+    </table>
+    <p>
+      The engineering consequence is that <strong>radius is not a design decision</strong>. It is the
+      result of two human-tolerance findings that have not yet been made. The evaluation therefore
+      treats the (&omega;, g) plane as the object of study and reports radius as a derived quantity.
+    </p>
+
+    <h3>Kinematic mapping at 1g (computed, not a tolerance claim)</h3>
+    <table>
+      <tr><th>Spin rate</th><th>Radius for 1g</th><th>Coriolis at 1 m/s walking</th><th>Head-to-foot gradient (2 m)</th></tr>
+      <tr><td>1.0 rpm</td><td>~895 m</td><td>0.21 m/s&sup2; (~2.1% g)</td><td>~0.22%</td></tr>
+      <tr><td>1.6 rpm</td><td>~350 m</td><td>0.34 m/s&sup2; (~3.4% g)</td><td>~0.57%</td></tr>
+      <tr><td>2.0 rpm</td><td>~224 m</td><td>0.42 m/s&sup2; (~4.3% g)</td><td>~0.89%</td></tr>
+      <tr><td>3.0 rpm</td><td>~99 m</td><td>0.63 m/s&sup2; (~6.4% g)</td><td>~2.0%</td></tr>
+      <tr><td>4.0 rpm</td><td>~56 m</td><td>0.84 m/s&sup2; (~8.5% g)</td><td>~3.6%</td></tr>
+    </table>
+    <p class="mini">
+      Coriolis acceleration is 2&omega;v for motion in the plane of rotation; the same walking speed
+      along the rim changes apparent weight by roughly the same fraction, in opposite directions for
+      prograde and retrograde motion. These are kinematic facts. Whether any row of this table is
+      tolerable for years is the unmeasured question.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Functional requirements (requirements-style)</h2>
+    <table class="reqs">
+      <tr><th>ID</th><th>Function</th><th>Requirement</th></tr>
+      <tr>
+        <td>AGRE-F-001</td><td>Parameter-space coverage</td>
+        <td>The evaluation shall measure human and system response at no fewer than three distinct
+          g-levels between 0g and 1g inclusive of a 1g reference, at a defined spin rate or rates, such
+          that results are reported as a function of g-level and not at a single presumed operating
+          point.
+          <br><span class="tag">&ge;3 g-bands</span><span class="tag">1g reference</span></td>
+      </tr>
+      <tr>
+        <td>AGRE-F-002</td><td>Coriolis effects</td>
+        <td>The evaluation shall measure the effect of Coriolis acceleration on gait, balance,
+          stair and ladder transit in the radial direction, reach accuracy, object handling, and
+          timed manual task performance, prograde and retrograde, at each evaluated band, on arrival
+          and after adaptation.
+          <br><span class="tag">Gait &amp; reach</span><span class="tag">Radial transit</span><span class="tag">Task timing</span></td>
+      </tr>
+      <tr>
+        <td>AGRE-F-003</td><td>Cross-coupled acceleration</td>
+        <td>The evaluation shall measure vestibular response to head movements in pitch, yaw, and roll
+          relative to the spin axis at the evaluated spin rate: motion-sickness incidence and severity,
+          gaze stabilization, postural stability, and illusory-tilt reports, acutely and across the
+          adaptation period. Head-movement restriction shall not be used to suppress the measurement.
+          <br><span class="tag">Head movement</span><span class="tag">Motion sickness</span><span class="tag">Unrestricted</span></td>
+      </tr>
+      <tr>
+        <td>AGRE-F-004</td><td>Gravity gradient</td>
+        <td>The evaluation shall measure physiological and perceptual response to the head-to-foot
+          gravity gradient across standing height, and to the larger gradient encountered during radial
+          movement between decks, including orthostatic response on standing and on radial transit.
+          <br><span class="tag">Standing height</span><span class="tag">Inter-deck</span><span class="tag">Orthostatic</span></td>
+      </tr>
+      <tr>
+        <td>AGRE-F-005</td><td>Adaptation &amp; re-adaptation</td>
+        <td>The evaluation shall measure time to functional adaptation on entering rotation, time to
+          re-adaptation on leaving it (to a microgravity hub and to Earth), and any performance or
+          symptom decrement during each transition, with defined functional endpoints and repeated
+          transitions per subject.
+          <br><span class="tag">Adaptation time</span><span class="tag">Re-adaptation</span><span class="tag">Repeated transitions</span></td>
+      </tr>
+      <tr>
+        <td>AGRE-F-006</td><td>Inter-band transitions</td>
+        <td>The evaluation shall measure crew response to movement between g-bands within the rotating
+          structure, including dual-adaptation state, transition frequency effects, and any limit on
+          permissible transitions per day or week, sufficient to define a transition protocol.
+          <br><span class="tag">Dual adaptation</span><span class="tag">Transition protocol</span></td>
+      </tr>
+      <tr>
+        <td>AGRE-F-007</td><td>Partial-gravity dose response</td>
+        <td>The evaluation shall measure bone (density and microarchitecture), cardiovascular
+          (structure, function, and orthostatic tolerance), and ocular (intraocular pressure, optic
+          nerve, retinal, and refractive) endpoints as a function of g-level over exposures of not less
+          than six months per subject, with pre-flight and post-flight baselines and in-flight interval
+          measurements. Muscular, sensorimotor, and immune endpoints are recommended.
+          <br><span class="tag">Bone</span><span class="tag">Cardiac</span><span class="tag">Ocular</span><span class="tag">&ge;6 months</span></td>
+      </tr>
+      <tr>
+        <td>AGRE-F-008</td><td>In-orbit controls</td>
+        <td>The evaluation shall include a 1g control population and a microgravity control population
+          resident in the same vehicle, sharing radiation environment, atmosphere, lighting, diet,
+          schedule, and instrumentation, such that rotation and g-level effects are separable from
+          spaceflight effects generally.
+          <br><span class="tag">1g in orbit</span><span class="tag">0g hub</span><span class="tag">Shared confounds</span></td>
+      </tr>
+      <tr>
+        <td>AGRE-F-009</td><td>Spin transients</td>
+        <td>The evaluation shall define the angular-acceleration envelope, duration, and permitted crew
+          activity states for spin-up and spin-down, and shall measure crew response and fluid,
+          structural, and balance-system behavior during planned transients and in a simulated
+          unplanned spin-down. Crew exposure during transients shall be treated as a measured quantity,
+          not an assumed non-event.
+          <br><span class="tag">Spin-up / down</span><span class="tag">Unplanned case</span><span class="tag">Crew exposure</span></td>
+      </tr>
+      <tr>
+        <td>AGRE-F-010</td><td>Bioregenerative systems</td>
+        <td>The evaluation shall measure crop germination, gravitropic orientation, growth rate, gas
+          exchange, root-zone water and nutrient distribution, pollination, and harvest yield at each
+          evaluated g-level against the in-orbit 1g control, in the rotating frame with Coriolis
+          present, for at least one full crop cycle per species evaluated.
+          <br><span class="tag">Full crop cycle</span><span class="tag">Per band</span><span class="tag">Root-zone fluids</span></td>
+      </tr>
+      <tr>
+        <td>AGRE-F-011</td><td>Fluid &amp; thermal behavior</td>
+        <td>The evaluation shall characterize buoyancy-driven convection, two-phase flow, free-surface
+          and tank slosh behavior, pressure head and Coriolis-induced asymmetry in radial plumbing, pump
+          and separator performance, and thermal stratification at each g-level and during spin
+          transients, with results reported against the corresponding 1g and 0g predictions.
+          <br><span class="tag">Convection</span><span class="tag">Two-phase</span><span class="tag">Radial plumbing</span></td>
+      </tr>
+      <tr>
+        <td>AGRE-F-012</td><td>Mechanical dynamics</td>
+        <td>The evaluation shall characterize spin-axis stability under crew movement, consumable
+          transfer, and biomass growth; wobble and precession onset and damping; active balance-system
+          authority and response time; structural load cycling; and the performance of the despun-hub
+          interface and docking under rotation.
+          <br><span class="tag">Mass redistribution</span><span class="tag">Wobble damping</span><span class="tag">Hub interface</span></td>
+      </tr>
+      <tr>
+        <td>AGRE-F-013</td><td>Instrumentation</td>
+        <td>Rotation state, centripetal acceleration, and vibration shall be continuously recorded at
+          each evaluated band, and every human endpoint shall be time-tagged against that record. The
+          measurement set for each human endpoint shall be defined in advance, with in-flight
+          capability sufficient to acquire it at the stated interval.
+          <br><span class="tag">Continuous g record</span><span class="tag">Pre-defined endpoints</span></td>
+      </tr>
+      <tr>
+        <td>AGRE-F-014</td><td>Power &amp; uncertainty</td>
+        <td>Primary endpoints, effect sizes of interest, subject numbers, and exposure durations shall
+          be defined before the campaign such that a null result is interpretable, and every reported
+          quantity shall carry a stated confidence interval and an accounting of subject-selection,
+          confound, and measurement uncertainty.
+          <br><span class="tag">Pre-registered</span><span class="tag">Interpretable null</span><span class="tag">Uncertainty budget</span></td>
+      </tr>
+      <tr>
+        <td>AGRE-F-015</td><td>Standards traceability</td>
+        <td>All human endpoints, limits, and acceptability criteria shall trace to the current
+          human-system standard (NASA&#8209;STD&#8209;3001 or successor), and a verification matrix
+          shall link each requirement on this page to its verifying measurement, analysis, or test.
+          <br><span class="tag">NASA-STD-3001</span><span class="tag">Traceability matrix</span></td>
+      </tr>
+      <tr>
+        <td>AGRE-F-016</td><td>Parameter output</td>
+        <td>Results shall be reported as a tolerance envelope in (spin rate, g-level) space with
+          confidence bounds, and as the derived radius range that envelope implies, such that rotation
+          parameters are an output of the evaluation. No specific radius, spin rate, or g-level shall
+          be presumed acceptable in advance of results.
+          <br><span class="tag">Tolerance envelope</span><span class="tag">Radius as output</span></td>
+      </tr>
+    </table>
+    <p class="mini">
+      Note: quantitative thresholds (acceptable symptom incidence, permissible bone-loss rate,
+      minimum adaptation performance) are architecture-dependent and are set by the program's
+      human-rating requirements. None are asserted here; asserting one in advance of the evaluation
+      would presume its conclusion.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Verification approach</h2>
+    <p>
+      <a href="gradientone.html">Gradient One</a> is the platform defined to close these requirements.
+      A single rotating structure at a fixed spin rate places microgravity, lunar-gravity,
+      Mars-gravity, and 1g bands in one vehicle, under one radiation environment, one atmosphere, one
+      lighting schedule, and one instrumentation suite. That configuration is what AGRE-F-001 and
+      AGRE-F-008 require: multiple g-levels measured simultaneously against an in-orbit 1g control,
+      with spaceflight confounds shared across all bands.
+    </p>
+    <table>
+      <tr><th>Requirement group</th><th>Closure on a first campaign</th></tr>
+      <tr><td>F-001, F-007, F-008, F-010</td><td>Closable in full at the platform's spin rate: g-level dose response with in-orbit controls, per band</td></tr>
+      <tr><td>F-002 to F-006, F-009</td><td>Closable at the platform's spin rate; spin-rate sensitivity not resolved by a fixed-rate vehicle</td></tr>
+      <tr><td>F-011 to F-013</td><td>Closable in full; system behavior is measured on the vehicle itself</td></tr>
+      <tr><td>F-014 to F-016</td><td>Closable as campaign design and reporting requirements</td></tr>
+    </table>
+    <p class="mini">
+      Platform geometry, gravity bands, and architecture are described on the Gradient One page and
+      are not restated here.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Open items</h2>
+    <p>
+      A first campaign of the kind described above would produce the field's first sustained
+      rotating-frame dataset. It would not close the following:
+    </p>
+    <ul>
+      <li><strong>Spin-rate sensitivity.</strong> A fixed-rate platform measures g-level response at
+        one spin rate. Separating the effect of &omega; from the effect of g requires either a spin-rate
+        change campaign on the same vehicle or a second platform at a different rate. Until then the
+        tolerance envelope has one measured column.</li>
+      <li><strong>Exposure beyond campaign duration.</strong> Six-month to one-year exposures bound
+        near-term missions. Multi-year and career-length residency, and any effects that emerge only
+        after long exposure, remain extrapolations.</li>
+      <li><strong>Population generalization.</strong> Campaign subjects are few, screened, and trained.
+        Extension to a broader adult population, to older residents, and to individuals with the range
+        of vestibular and cardiovascular baselines a general population carries is unmeasured.</li>
+      <li><strong>Reversibility.</strong> Whether measured changes at partial g reverse on return to 1g,
+        and on what timeline, requires post-exposure follow-up of duration comparable to the exposure.</li>
+      <li><strong>Radial extent of the habitable volume.</strong> A band on a truss samples a narrow
+        radial range. A habitat whose occupied volume spans tens of meters radially presents a gradient
+        across decks that a band campaign does not fully exercise.</li>
+      <li><strong>Countermeasure interaction.</strong> Whether exercise and pharmacological
+        countermeasures developed for microgravity are needed, helpful, or counterproductive at partial
+        and full rotational g is a separate question from the dose response itself.</li>
+      <li><strong>Long-duration coupling with other systems.</strong> Interaction between rotational
+        gravity and chronic radiation exposure, closed-loop life support, and psychological factors over
+        years is outside the scope of a first campaign.</li>
+      <li><strong>Developmental biology.</strong> Human development under rotational or partial gravity
+        is out of scope for this evaluation and for any near-term campaign. No requirement on this page
+        addresses it, and no habitat specification should assume it.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="hr"></div>
+    <div>
+      <strong>Note:</strong> This page is intentionally written in a neutral, requirements-style format
+      to support discussion. It describes an evaluation class and data products that may be executed by
+      any qualified platform and research team. It does not prescribe a specific vehicle, spin rate, or
+      radius, and it does not assert a conclusion about human tolerance of rotational gravity in
+      advance of the evaluation it defines.
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
