@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gradient One — Design Dossier</title>
+<style>
+  @page { size: Letter; margin: 0.8in 0.85in 0.85in; }
+  @page :first { margin: 0; }
+  @page {
+    @bottom-center {
+      content: "© 2026 Aegis Station Infrastructure · Page " counter(page) " of " counter(pages);
+      font-family: 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+      font-size: 8.5pt;
+      color: #7b838b;
+    }
+  }
+  @page :first { @bottom-center { content: none; } }
+
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0;
+    color: #0f1d2c;
+    font-family: 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    height: 11in; width: 8.5in;
+    box-sizing: border-box;
+    padding: 1.15in 0.95in 0.9in;
+    background: linear-gradient(to bottom, #d3e7f6 0%, #e6f1f9 45%, #f8fbfe 100%);
+    display: flex; flex-direction: column;
+    break-after: page;
+  }
+  .cover .bar { width: 0.62in; height: 4pt; background: #1d4f7a; margin-bottom: 40pt; }
+  .cover .kicker { font-size: 9.5pt; letter-spacing: 3.2pt; text-transform: uppercase; color: #1d4f7a; font-weight: 700; margin-bottom: 8pt; }
+  .cover h1 { font-size: 46pt; font-weight: 700; color: #16283a; margin: 0 0 12pt; letter-spacing: -0.8pt; line-height: 1.1; }
+  .cover .subtitle { font-size: 17pt; color: #1d4f7a; margin-bottom: 26pt; }
+  .cover .tagline { font-size: 12pt; font-style: italic; color: #47515d; margin-bottom: 44pt; }
+  .cover .meta { font-size: 10pt; color: #2c3a48; line-height: 1.7; }
+  .cover .meta strong { color: #16283a; }
+  .cover .spacer { flex: 1; }
+  .cover .foot { border-top: 0.75pt solid #b9cbd9; padding-top: 12pt; font-size: 9pt; color: #47515d; line-height: 1.7; }
+  .cover .foot strong { color: #16283a; }
+
+  /* ── Sections ── */
+  h2 {
+    font-size: 17pt; font-weight: 700; color: #0f1d2c;
+    margin: 26pt 0 12pt; padding-bottom: 6pt;
+    border-bottom: 1.5pt solid #4a90c2;
+    break-after: avoid;
+  }
+  h2:first-of-type { margin-top: 0; }
+  h2 .n { color: #4a90c2; margin-right: 6pt; }
+  h3 { font-size: 11pt; font-weight: 700; color: #1d4f7a; margin: 14pt 0 6pt; break-after: avoid; }
+  p { margin: 0 0 9pt; }
+  ul { margin: 0 0 9pt; padding-left: 20pt; }
+  li { margin-bottom: 4pt; }
+  .muted { font-size: 9.5pt; color: #47515d; }
+  .section { break-inside: auto; }
+
+  .callout {
+    border-left: 3pt solid #4a90c2;
+    background: #eef5fb;
+    color: #1d4f7a;
+    padding: 12pt 18pt;
+    margin: 12pt 0 14pt;
+    font-size: 11pt;
+    line-height: 1.5;
+    break-inside: avoid;
+  }
+
+  .pills { margin: 8pt 0 6pt; }
+  .pill {
+    display: inline-block;
+    padding: 3pt 10pt;
+    border: 0.75pt solid #b9d3e8;
+    border-radius: 999px;
+    background: #f3f8fc;
+    color: #1d4f7a;
+    font-size: 8.8pt;
+    margin: 0 6pt 6pt 0;
+  }
+
+  table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 9.6pt; break-inside: avoid; }
+  h3 + table, h3 + .formula { break-before: avoid; }
+  th { text-align: left; background: #1d4f7a; color: #fff; font-weight: 700; padding: 7pt 9pt; }
+  td { padding: 7pt 9pt; background: #f5fafd; border-bottom: 0.75pt solid #dde7ef; vertical-align: top; color: #0f1d2c; }
+  tr { break-inside: avoid; }
+
+  .formula { text-align: center; background: #eef5fb; color: #1d4f7a; padding: 9pt; margin: 8pt 0 10pt; font-family: 'Liberation Serif', 'Times New Roman', serif; font-size: 12pt; }
+
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 16pt; margin: 8pt 0 10pt; }
+  .card {
+    border: 0.75pt solid #cfe0ee; border-radius: 4pt; background: #f7fbfd;
+    padding: 12pt 14pt 8pt; break-inside: avoid;
+  }
+  .card h3 { margin: 0 0 6pt; }
+  .card ul { margin-bottom: 6pt; }
+  .card .muted { margin: 4pt 0 2pt; }
+
+  .rom { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 10pt; }
+  .rom td { padding: 8pt 10pt; background: #f5fafd; border-bottom: 0.75pt solid #dde7ef; }
+  .rom td:first-child { font-weight: 700; color: #1d4f7a; }
+
+  .summary-box {
+    background: linear-gradient(90deg, #1d4f7a 0%, #4a90c2 100%);
+    color: #fff; border-radius: 5pt;
+    padding: 18pt 22pt; margin: 22pt 0 0;
+    break-inside: avoid;
+  }
+  .summary-box strong { display: block; font-size: 11.5pt; margin-bottom: 6pt; }
+  .summary-box span { font-size: 10pt; color: #e6f0f8; }
+</style>
+</head>
+<body>
+
+<!-- ── COVER ── -->
+<div class="cover">
+  <div class="bar"></div>
+  <div class="kicker">Aegis Station Infrastructure</div>
+  <h1>Gradient One</h1>
+  <div class="subtitle">Orbital Multi-Gravity Validation Platform</div>
+  <div class="tagline">One spin. Three worlds. One baseline.</div>
+  <div class="meta">
+    <strong>Design Dossier</strong><br>
+    350-meter Multi-Gravity Campaign Platform<br>
+    Updated: September 2026
+  </div>
+  <div class="spacer"></div>
+  <div class="foot">
+    <strong>Aegis Station Infrastructure LLC</strong><br>
+    contact@aegisstation.com &middot; aegisstation.com
+  </div>
+</div>
+
+<!-- ── 1 ── -->
+<section class="section">
+  <h2><span class="n">1.</span>Overview</h2>
+  <p>
+    Gradient One (G1) is a 350-meter rotating orbital research platform designed to validate sustained
+    artificial gravity and mission-relevant partial-gravity environments in space. Operating at approximately
+    1.6 RPM, G1 simultaneously provides Earth gravity (1g), Mars gravity (0.38g), Lunar gravity (0.16g), and
+    a central microgravity control hub within a single continuous rotating structure.
+  </p>
+  <div class="callout">
+    G1 closes the gap between microgravity research and full-scale rotating habitat deployment by generating
+    operational gravity environments in orbit&mdash;at scale, for long-duration campaigns.
+  </div>
+  <p>
+    G1 is structured for 30&ndash;90 day crewed research campaigns, or longer, to generate comparative
+    biological and operational data across gravity environments within a single rotating system. It is a
+    mission-duration validation platform&mdash;not a permanent settlement station.
+  </p>
+  <div class="pills">
+    <span class="pill">Artificial Gravity</span>
+    <span class="pill">Moon (0.16g)</span>
+    <span class="pill">Mars (0.38g)</span>
+    <span class="pill">Bioregenerative Systems</span>
+    <span class="pill">Rotating Habitat Operations</span>
+  </div>
+</section>
+
+<!-- ── 2 ── -->
+<section class="section">
+  <h2><span class="n">2.</span>Mission Objectives</h2>
+  <p>Gradient One is designed to:</p>
+  <ul>
+    <li>Validate sustained partial-gravity human habitation across weeks-to-months timescales</li>
+    <li>Compare Lunar, Mars, and 1g biological performance simultaneously under matched conditions</li>
+    <li>Validate rotating utility systems (power, data, fluids) at large radius</li>
+    <li>Retire mechanical and operational risk associated with large-radius rotation</li>
+    <li>Generate longitudinal datasets to inform lunar surface and Mars mission architecture</li>
+    <li>Serve as a scalable precursor to Aegis Station&ndash;class infrastructure</li>
+  </ul>
+</section>
+
+<!-- ── 3 ── -->
+<section class="section">
+  <h2><span class="n">3.</span>Core Architecture</h2>
+  <h3>Primary Structure</h3>
+  <table>
+    <tr><th style="width:40%">Parameter</th><th>Value</th></tr>
+    <tr><td>Outer radius</td><td>~350 meters</td></tr>
+    <tr><td>Spin rate</td><td>~1.6 RPM (single fixed regime)</td></tr>
+    <tr><td>Configuration</td><td>Radial aluminum truss with discrete gravity bands</td></tr>
+    <tr><td>Hub</td><td>Central non-rotating docking / control environment (0g)</td></tr>
+    <tr><td>Counterbalance</td><td>Active water-based adjustable mass system</td></tr>
+  </table>
+  <h3>Gravity Scaling</h3>
+  <p>Gravity along the rotating truss follows the standard relation:</p>
+  <div class="formula"><i>a</i> = &omega;&sup2;<i>r</i></div>
+  <p>
+    With a fixed angular velocity, gravity scales linearly with radius&mdash;enabling discrete, simultaneous
+    gravity "bands" without changing spin state.
+  </p>
+</section>
+
+<!-- ── 4 ── -->
+<section class="section">
+  <h2><span class="n">4.</span>Habitat Configuration</h2>
+  <h3>Simultaneous Gravity Bands</h3>
+  <table>
+    <tr><th style="width:42%">Band</th><th style="width:14%">Radius</th><th>Role</th></tr>
+    <tr><td>0g &mdash; Central Hub</td><td>&mdash;</td><td>Docking, logistics staging, microgravity control, contingency refuge</td></tr>
+    <tr><td>0.16g &mdash; Lunar Pod</td><td>~56 m</td><td>Long-duration habitat, plant growth, hydroponics, crew sleep/work</td></tr>
+    <tr><td>0.38g &mdash; Mars Pod</td><td>~133 m</td><td>Long-duration habitat, human physiology, closed-loop biology</td></tr>
+    <tr><td>1g &mdash; Outer Band</td><td>~350 m</td><td>Earth-gravity baseline, work and maintenance zone, comparison deck</td></tr>
+  </table>
+  <p class="muted">
+    Configuration supports comparative testing under identical lighting, atmosphere, instrumentation, and
+    campaign timelines. Crew may move radially between bands via pressurized transition corridor.
+  </p>
+</section>
+
+<!-- ── 5 ── -->
+<section class="section">
+  <h2><span class="n">5.</span>Systems Architecture</h2>
+  <div class="twocol">
+    <div class="card">
+      <h3>Life Support (ECLSS)</h3>
+      <ul>
+        <li>Integrated multi-zone atmospheric management</li>
+        <li>CO&#8322; removal and O&#8322; supply sized for 30&ndash;90 day campaigns, with resupply for longer stays</li>
+        <li>Humidity and condensate recovery</li>
+        <li>Waste management and storage</li>
+        <li>Maintainable modular subsystem layout</li>
+      </ul>
+      <p class="muted">Highest redundancy and contingency capability is centralized to avoid unnecessary duplication across pods.</p>
+    </div>
+    <div class="card">
+      <h3>Power</h3>
+      <ul>
+        <li>Truss-mounted solar arrays</li>
+        <li>Zoned distribution per gravity band</li>
+        <li>Central battery storage in hub</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Thermal</h3>
+      <ul>
+        <li>External radiator arrays</li>
+        <li>Zoned heat rejection per pod</li>
+        <li>Thermal isolation between gravity bands</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Stability &amp; Balance</h3>
+      <ul>
+        <li>Water-based counterweight beyond the outer band</li>
+        <li>Active mass redistribution for biomass growth and consumables</li>
+        <li>Continuous torque and vibration monitoring</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── 6 ── -->
+<section class="section">
+  <h2><span class="n">6.</span>What G1 Validates</h2>
+  <div class="twocol">
+    <div class="card">
+      <h3>Biological Systems</h3>
+      <ul>
+        <li>Plant growth and yield at Lunar and Mars gravity</li>
+        <li>Hydroponic performance under partial gravity and rotation</li>
+        <li>Microbial behavior, biofilm risk, and sanitation dynamics</li>
+        <li>Atmospheric trace management (humidity, VOCs/ethylene) in closed growth racks</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Human &amp; Operations</h3>
+      <ul>
+        <li>Long-duration human work at 1g in a rotating frame</li>
+        <li>Task performance and transitions across gravity bands</li>
+        <li>Rotating utilities: power/data routing, maintenance, inspection</li>
+        <li>Operational procedures for rotating habitat segments</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── 7 ── -->
+<section class="section">
+  <h2><span class="n">7.</span>Campaign Model</h2>
+  <p>Gradient One operates through discrete research campaigns:</p>
+  <ul>
+    <li>30&ndash;90 day crewed missions, or longer</li>
+    <li>2&ndash;4 crew typical</li>
+    <li>Controlled experimental protocols</li>
+    <li>Repeatable biological datasets</li>
+    <li>Post-campaign refurbishment and recalibration</li>
+  </ul>
+  <p>Between missions:</p>
+  <ul>
+    <li>Data review and protocol refinement</li>
+    <li>Hardware updates</li>
+    <li>Maintenance cycles</li>
+  </ul>
+  <p>
+    This approach avoids permanent station overhead while enabling meaningful longitudinal data generation
+    across multiple campaigns.
+  </p>
+</section>
+
+<!-- ── 8 ── -->
+<section class="section">
+  <h2><span class="n">8.</span>Program Scale &amp; Cost Class</h2>
+  <p>The 350-meter, multi-gravity, multi-habitat architecture represents a program class consistent with:</p>
+  <ul>
+    <li>Three habitable gravity bands</li>
+    <li>Multi-launch on-orbit assembly</li>
+    <li>Crew-rating and verification</li>
+    <li>30&ndash;90 day or longer sustained campaigns</li>
+    <li>Integrated systems validation</li>
+  </ul>
+  <h3>Order-of-Magnitude Program Cost (ROM)</h3>
+  <table class="rom">
+    <tr><td style="width:40%">Total program cost</td><td>$600M &ndash; $1.4B</td></tr>
+  </table>
+  <p>Range is dependent on:</p>
+  <ul>
+    <li>Pressurized volume per habitat</li>
+    <li>Launch vehicle architecture</li>
+    <li>Redundancy philosophy</li>
+    <li>Ground operations model</li>
+    <li>Certification pathway</li>
+  </ul>
+  <div class="twocol">
+    <div class="card">
+      <h3>Assumes</h3>
+      <ul>
+        <li>3&ndash;6 launch vehicles</li>
+        <li>On-orbit robotic assembly</li>
+        <li>Full crew-rating validation</li>
+        <li>8&ndash;10 year development timeline</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Does Not Assume</h3>
+      <ul>
+        <li>Continuous permanent occupation</li>
+        <li>250&ndash;500 ton megastructure scale</li>
+        <li>Tourism-driven infrastructure buildout</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── 9 ── -->
+<section class="section">
+  <h2><span class="n">9.</span>Development Timeline</h2>
+  <table>
+    <tr><th style="width:40%">Phase</th><th>Activities</th></tr>
+    <tr><td>Years 0&ndash;1</td><td>Concept finalization, structural validation, vendor selection</td></tr>
+    <tr><td>Years 1&ndash;3</td><td>Detailed engineering design, subsystem development</td></tr>
+    <tr><td>Years 3&ndash;6</td><td>Habitat fabrication, truss manufacturing, systems integration</td></tr>
+    <tr><td>Years 6&ndash;8</td><td>Launch and on-orbit assembly</td></tr>
+    <tr><td>Year 8+</td><td>First 30&ndash;90 day research campaigns</td></tr>
+  </table>
+</section>
+
+<!-- ── 10 ── -->
+<section class="section">
+  <h2><span class="n">10.</span>Technology Readiness</h2>
+  <p>Gradient One integrates flight-proven subsystems:</p>
+  <ul>
+    <li>ISS-derived life support architectures</li>
+    <li>Existing solar power systems</li>
+    <li>Proven docking systems</li>
+    <li>Established robotic assembly methodologies</li>
+  </ul>
+  <p>
+    The innovation lies in system integration and sustained multi-gravity operational validation&mdash;not
+    speculative technology.
+  </p>
+</section>
+
+<!-- ── 11 ── -->
+<section class="section">
+  <h2><span class="n">11.</span>Strategic Role</h2>
+  <p>Gradient One bridges the gap between:</p>
+  <ul>
+    <li>Microgravity-only research</li>
+    <li>Ground centrifuge testing</li>
+    <li>Full-scale rotating habitat deployment</li>
+  </ul>
+  <p>It enables:</p>
+  <ul>
+    <li>Empirical partial-gravity biological validation</li>
+    <li>Operational risk retirement for rotating infrastructure</li>
+    <li>Informed lunar surface design decisions</li>
+    <li>Mars mission architecture refinement</li>
+  </ul>
+  <p>
+    G1 is a disciplined progression step toward scalable orbital habitat systems&mdash;and a precursor
+    platform to large-scale rotating habitats such as Aegis Station.
+  </p>
+</section>
+
+<!-- ── 12 ── -->
+<section class="section">
+  <h2><span class="n">12.</span>Ownership &amp; Partnership Model</h2>
+  <p>Developed under Aegis Station Infrastructure LLC (ASI). Potential engagement models:</p>
+  <ul>
+    <li>Cooperative agreements</li>
+    <li>Agency campaign partnerships</li>
+    <li>International research participation</li>
+    <li>Commercial biological payload contracts</li>
+  </ul>
+  <p>Full title remains with ASI unless otherwise negotiated.</p>
+</section>
+
+<!-- ── 13 ── -->
+<section class="section">
+  <h2><span class="n">13.</span>Summary</h2>
+  <p>
+    Gradient One is a 350-meter rotating, multi-gravity orbital research platform generating 0g, Lunar
+    gravity (0.16g), Mars gravity (0.38g), and Earth gravity (1g) simultaneously within a single rotating
+    structure. It is engineered for feasibility, scientific rigor, campaign-based operations, and scalable
+    infrastructure progression.
+  </p>
+  <div class="summary-box">
+    <strong>Neither a minimal centrifuge demonstrator nor a megastructure space station.</strong>
+    <span>Gradient One is the necessary middle step.</span>
+  </div>
+</section>
+
+</body>
+</html>
