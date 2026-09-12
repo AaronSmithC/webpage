@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="1000" height="560" font-family="'Courier New', Courier, monospace">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#000005"/><stop offset="100%" stop-color="#14142a"/></linearGradient>
+<pattern id="bp" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M25,0 L0,0 L0,25" fill="none" stroke="#0e1a2c" stroke-width="0.6"/></pattern>
+<pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#ff6644" stroke-width="1" opacity="0.45"/></pattern>
+<filter id="glow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1000" height="560" fill="url(#bg)"/>
+<rect width="1000" height="560" fill="url(#bp)"/>
+<rect x="0.5" y="0.5" width="999" height="559" fill="none" stroke="#00ddff" stroke-width="1" opacity="0.5"/>
+<line x1="24" y1="52" x2="976" y2="52" stroke="#00ddff" stroke-width="1" opacity="0.6"/>
+<text x="24" y="32" font-size="17" fill="#00ddff" font-weight="bold" letter-spacing="1">FIG 6-4  WHAT THE REV B VEHICLE CLOSES</text>
+<text x="24" y="46" font-size="11" fill="#8fa3b8">Design Δv (burns + allowances, +10 % margin) for the published vehicle: 8,000 kg wet, 30 kN, Isp 440 s</text>
+<text x="24" y="548" font-size="9.5" fill="#5a6a7e">Source: models/sizing/results/sweep.json · WP1 trajectory tool · generated 2026-09-12</text>
+<text x="976" y="548" font-size="9.5" fill="#5a6a7e" text-anchor="end">AEGIS STATION INFRASTRUCTURE LLC · SHORT HOPPER SRR REV A</text>
+<line x1="80" y1="440.0" x2="940" y2="440.0" stroke="#16233a" stroke-width="1"/>
+<text x="72.0" y="444.0" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">0</text>
+<line x1="80" y1="390.0" x2="940" y2="390.0" stroke="#16233a" stroke-width="1"/>
+<text x="72.0" y="394.0" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">500</text>
+<line x1="80" y1="340.0" x2="940" y2="340.0" stroke="#16233a" stroke-width="1"/>
+<text x="72.0" y="344.0" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">1000</text>
+<line x1="80" y1="290.0" x2="940" y2="290.0" stroke="#16233a" stroke-width="1"/>
+<text x="72.0" y="294.0" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">1500</text>
+<line x1="80" y1="240.0" x2="940" y2="240.0" stroke="#16233a" stroke-width="1"/>
+<text x="72.0" y="244.0" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">2000</text>
+<line x1="80" y1="190.0" x2="940" y2="190.0" stroke="#16233a" stroke-width="1"/>
+<text x="72.0" y="194.0" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">2500</text>
+<line x1="80" y1="140.0" x2="940" y2="140.0" stroke="#16233a" stroke-width="1"/>
+<text x="72.0" y="144.0" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">3000</text>
+<line x1="80" y1="90.0" x2="940" y2="90.0" stroke="#16233a" stroke-width="1"/>
+<text x="72.0" y="94.0" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">3500</text>
+<line x1="80.0" y1="90" x2="80.0" y2="440" stroke="#16233a" stroke-width="1"/>
+<text x="80.0" y="456.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">0</text>
+<line x1="181.2" y1="90" x2="181.2" y2="440" stroke="#16233a" stroke-width="1"/>
+<text x="181.2" y="456.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">100</text>
+<line x1="282.4" y1="90" x2="282.4" y2="440" stroke="#16233a" stroke-width="1"/>
+<text x="282.4" y="456.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">200</text>
+<line x1="383.5" y1="90" x2="383.5" y2="440" stroke="#16233a" stroke-width="1"/>
+<text x="383.5" y="456.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">300</text>
+<line x1="484.7" y1="90" x2="484.7" y2="440" stroke="#16233a" stroke-width="1"/>
+<text x="484.7" y="456.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">400</text>
+<line x1="585.9" y1="90" x2="585.9" y2="440" stroke="#16233a" stroke-width="1"/>
+<text x="585.9" y="456.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">500</text>
+<line x1="687.1" y1="90" x2="687.1" y2="440" stroke="#16233a" stroke-width="1"/>
+<text x="687.1" y="456.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">600</text>
+<line x1="788.2" y1="90" x2="788.2" y2="440" stroke="#16233a" stroke-width="1"/>
+<text x="788.2" y="456.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">700</text>
+<line x1="889.4" y1="90" x2="889.4" y2="440" stroke="#16233a" stroke-width="1"/>
+<text x="889.4" y="456.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">800</text>
+<path d="M80,90 L80,440 L940,440" fill="none" stroke="#5a6a7e" stroke-width="1"/>
+<text x="510.0" y="476.0" font-size="11.5" fill="#d8e4f0" text-anchor="middle" font-weight="normal" opacity="1.0">Single-leg surface range (km)</text>
+<text x="34.0" y="265.0" font-size="11.5" fill="#d8e4f0" text-anchor="middle" font-weight="normal" opacity="1.0" transform="rotate(-90 34 265.0)">Design Δv (m/s)</text>
+<path d="M181.2,315.5 L231.8,294.1 L282.4,276.5 L332.9,261.5 L383.5,248.2 L484.7,225.6 L585.9,206.6 L687.1,190.3 L889.4,163.4" fill="none" stroke="#00ddff" stroke-width="2" stroke-linejoin="round" filter="url(#glow)" opacity="1.0"/>
+<circle cx="181.2" cy="315.5" r="4" fill="#00ddff" stroke="#080818" stroke-width="2"/>
+<circle cx="231.8" cy="294.1" r="4" fill="#00ddff" stroke="#080818" stroke-width="2"/>
+<circle cx="282.4" cy="276.5" r="4" fill="#00ddff" stroke="#080818" stroke-width="2"/>
+<circle cx="332.9" cy="261.5" r="4" fill="#00ddff" stroke="#080818" stroke-width="2"/>
+<circle cx="383.5" cy="248.2" r="4" fill="#00ddff" stroke="#080818" stroke-width="2"/>
+<circle cx="484.7" cy="225.6" r="4" fill="#00ddff" stroke="#080818" stroke-width="2"/>
+<circle cx="585.9" cy="206.6" r="4" fill="#00ddff" stroke="#080818" stroke-width="2"/>
+<circle cx="687.1" cy="190.3" r="4" fill="#00ddff" stroke="#080818" stroke-width="2"/>
+<circle cx="889.4" cy="163.4" r="4" fill="#00ddff" stroke="#080818" stroke-width="2"/>
+<line x1="80" y1="265.0" x2="940" y2="265.0" stroke="#ff6644" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="936.0" y="260.0" font-size="10.5" fill="#ff6644" text-anchor="end" font-weight="normal" opacity="1.0">Rev B propellant load delivers 1,750 m/s usable</text>
+<line x1="320.7" y1="90" x2="320.7" y2="440" stroke="#8fa3b8" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="325.7" y="102.0" font-size="10.5" fill="#8fa3b8" text-anchor="start" font-weight="normal" opacity="1.0">closes 238 km</text>
+<text x="80.0" y="505.0" font-size="10.5" fill="#d8e4f0" text-anchor="start" font-weight="normal" opacity="1.0">Rev B claims 1,500–2,000 km per hop at 1,600–1,700 m/s. With simulated losses and landing allowances the same load closes 238 km.</text>
+<text x="80.0" y="523.0" font-size="10.5" fill="#8fa3b8" text-anchor="start" font-weight="normal" opacity="1.0">A 1,500 km single leg needs the design Δv shown at the right edge of Fig 6-1's single-leg panel, not 1,800 m/s.</text>
+</svg>

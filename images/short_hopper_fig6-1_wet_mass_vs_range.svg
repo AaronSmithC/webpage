@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" width="1000" height="640" font-family="'Courier New', Courier, monospace">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#000005"/><stop offset="100%" stop-color="#14142a"/></linearGradient>
+<pattern id="bp" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M25,0 L0,0 L0,25" fill="none" stroke="#0e1a2c" stroke-width="0.6"/></pattern>
+<pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#ff6644" stroke-width="1" opacity="0.45"/></pattern>
+<filter id="glow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1000" height="640" fill="url(#bg)"/>
+<rect width="1000" height="640" fill="url(#bp)"/>
+<rect x="0.5" y="0.5" width="999" height="639" fill="none" stroke="#00ddff" stroke-width="1" opacity="0.5"/>
+<line x1="24" y1="52" x2="976" y2="52" stroke="#00ddff" stroke-width="1" opacity="0.6"/>
+<text x="24" y="32" font-size="17" fill="#00ddff" font-weight="bold" letter-spacing="1">FIG 6-1  WET MASS VS RANGE — SINGLE LEG AND ROUND TRIP</text>
+<text x="24" y="46" font-size="11" fill="#8fa3b8">Rev B dry mass 5,273 kg · Isp 440 s · RM1 payload 800 kg · 10 % Δv margin · self-consistent gravity/steering loss at each T/W</text>
+<text x="24" y="628" font-size="9.5" fill="#5a6a7e">Source: models/sizing/results/sweep.json · WP1 trajectory tool · generated 2026-09-12</text>
+<text x="976" y="628" font-size="9.5" fill="#5a6a7e" text-anchor="end">AEGIS STATION INFRASTRUCTURE LLC · SHORT HOPPER SRR REV A</text>
+<line x1="60" y1="520.0" x2="480" y2="520.0" stroke="#16233a" stroke-width="1"/>
+<text x="52.0" y="524.0" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">0</text>
+<line x1="60" y1="461.0" x2="480" y2="461.0" stroke="#16233a" stroke-width="1"/>
+<text x="52.0" y="465.0" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">5</text>
+<line x1="60" y1="401.9" x2="480" y2="401.9" stroke="#16233a" stroke-width="1"/>
+<text x="52.0" y="405.9" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">10</text>
+<line x1="60" y1="342.9" x2="480" y2="342.9" stroke="#16233a" stroke-width="1"/>
+<text x="52.0" y="346.9" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">15</text>
+<line x1="60" y1="283.9" x2="480" y2="283.9" stroke="#16233a" stroke-width="1"/>
+<text x="52.0" y="287.9" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">20</text>
+<line x1="60" y1="224.9" x2="480" y2="224.9" stroke="#16233a" stroke-width="1"/>
+<text x="52.0" y="228.9" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">25</text>
+<line x1="60" y1="165.8" x2="480" y2="165.8" stroke="#16233a" stroke-width="1"/>
+<text x="52.0" y="169.8" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">30</text>
+<line x1="60" y1="106.8" x2="480" y2="106.8" stroke="#16233a" stroke-width="1"/>
+<text x="52.0" y="110.8" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">35</text>
+<line x1="60.0" y1="95" x2="60.0" y2="520" stroke="#16233a" stroke-width="1"/>
+<text x="60.0" y="536.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">0</text>
+<line x1="160.0" y1="95" x2="160.0" y2="520" stroke="#16233a" stroke-width="1"/>
+<text x="160.0" y="536.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">500</text>
+<line x1="260.0" y1="95" x2="260.0" y2="520" stroke="#16233a" stroke-width="1"/>
+<text x="260.0" y="536.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">1000</text>
+<line x1="360.0" y1="95" x2="360.0" y2="520" stroke="#16233a" stroke-width="1"/>
+<text x="360.0" y="536.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">1500</text>
+<line x1="460.0" y1="95" x2="460.0" y2="520" stroke="#16233a" stroke-width="1"/>
+<text x="460.0" y="536.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">2000</text>
+<path d="M60,95 L60,520 L480,520" fill="none" stroke="#5a6a7e" stroke-width="1"/>
+<text x="270.0" y="556.0" font-size="11.5" fill="#d8e4f0" text-anchor="middle" font-weight="normal" opacity="1.0">Surface range (km)</text>
+<text x="14.0" y="307.5" font-size="11.5" fill="#d8e4f0" text-anchor="middle" font-weight="normal" opacity="1.0" transform="rotate(-90 14 307.5)">Gross wet mass (t)</text>
+<text x="60.0" y="82.0" font-size="11.5" fill="#00ddff" text-anchor="start" font-weight="bold" opacity="1.0">SINGLE LEG, REFUEL AT DESTINATION</text>
+<line x1="60" y1="425.6" x2="480" y2="425.6" stroke="#8fa3b8" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="476.0" y="420.6" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">Rev B claim 8 t</text>
+<path d="M110.0,409.4 L160.0,392.1 L210.0,378.1 L260.0,366.2 L310.0,356.0 L360.0,347.0 L460.0,333.0" fill="none" stroke="#12a0c0" stroke-width="2" stroke-linejoin="round" opacity="1.0"/>
+<circle cx="110.0" cy="409.4" r="4" fill="#12a0c0" stroke="#080818" stroke-width="2"/>
+<circle cx="160.0" cy="392.1" r="4" fill="#12a0c0" stroke="#080818" stroke-width="2"/>
+<circle cx="210.0" cy="378.1" r="4" fill="#12a0c0" stroke="#080818" stroke-width="2"/>
+<circle cx="260.0" cy="366.2" r="4" fill="#12a0c0" stroke="#080818" stroke-width="2"/>
+<circle cx="310.0" cy="356.0" r="4" fill="#12a0c0" stroke="#080818" stroke-width="2"/>
+<circle cx="360.0" cy="347.0" r="4" fill="#12a0c0" stroke="#080818" stroke-width="2"/>
+<circle cx="460.0" cy="333.0" r="4" fill="#12a0c0" stroke="#080818" stroke-width="2"/>
+<path d="M110.0,411.7 L160.0,396.3 L210.0,384.3 L260.0,374.4 L310.0,366.1 L360.0,359.1 L460.0,348.2" fill="none" stroke="#c4a022" stroke-width="2" stroke-linejoin="round" opacity="1.0"/>
+<circle cx="110.0" cy="411.7" r="4" fill="#c4a022" stroke="#080818" stroke-width="2"/>
+<circle cx="160.0" cy="396.3" r="4" fill="#c4a022" stroke="#080818" stroke-width="2"/>
+<circle cx="210.0" cy="384.3" r="4" fill="#c4a022" stroke="#080818" stroke-width="2"/>
+<circle cx="260.0" cy="374.4" r="4" fill="#c4a022" stroke="#080818" stroke-width="2"/>
+<circle cx="310.0" cy="366.1" r="4" fill="#c4a022" stroke="#080818" stroke-width="2"/>
+<circle cx="360.0" cy="359.1" r="4" fill="#c4a022" stroke="#080818" stroke-width="2"/>
+<circle cx="460.0" cy="348.2" r="4" fill="#c4a022" stroke="#080818" stroke-width="2"/>
+<path d="M110.0,412.6 L160.0,397.9 L210.0,386.6 L260.0,377.3 L310.0,369.5 L360.0,362.9 L460.0,352.5" fill="none" stroke="#8f7ad8" stroke-width="2" stroke-linejoin="round" opacity="1.0"/>
+<circle cx="110.0" cy="412.6" r="4" fill="#8f7ad8" stroke="#080818" stroke-width="2"/>
+<circle cx="160.0" cy="397.9" r="4" fill="#8f7ad8" stroke="#080818" stroke-width="2"/>
+<circle cx="210.0" cy="386.6" r="4" fill="#8f7ad8" stroke="#080818" stroke-width="2"/>
+<circle cx="260.0" cy="377.3" r="4" fill="#8f7ad8" stroke="#080818" stroke-width="2"/>
+<circle cx="310.0" cy="369.5" r="4" fill="#8f7ad8" stroke="#080818" stroke-width="2"/>
+<circle cx="360.0" cy="362.9" r="4" fill="#8f7ad8" stroke="#080818" stroke-width="2"/>
+<circle cx="460.0" cy="352.5" r="4" fill="#8f7ad8" stroke="#080818" stroke-width="2"/>
+<path d="M110.0,413.2 L160.0,399.1 L210.0,388.3 L260.0,379.5 L310.0,372.1 L360.0,365.7 L460.0,355.7" fill="none" stroke="#d85a45" stroke-width="2" stroke-linejoin="round" opacity="1.0"/>
+<circle cx="110.0" cy="413.2" r="4" fill="#d85a45" stroke="#080818" stroke-width="2"/>
+<circle cx="160.0" cy="399.1" r="4" fill="#d85a45" stroke="#080818" stroke-width="2"/>
+<circle cx="210.0" cy="388.3" r="4" fill="#d85a45" stroke="#080818" stroke-width="2"/>
+<circle cx="260.0" cy="379.5" r="4" fill="#d85a45" stroke="#080818" stroke-width="2"/>
+<circle cx="310.0" cy="372.1" r="4" fill="#d85a45" stroke="#080818" stroke-width="2"/>
+<circle cx="360.0" cy="365.7" r="4" fill="#d85a45" stroke="#080818" stroke-width="2"/>
+<circle cx="460.0" cy="355.7" r="4" fill="#d85a45" stroke="#080818" stroke-width="2"/>
+<line x1="464.0" y1="333.0" x2="466.0" y2="326.2" stroke="#12a0c0" stroke-width="0.8" opacity="0.7"/>
+<text x="468.0" y="330.2" font-size="11" fill="#12a0c0" text-anchor="start" font-weight="normal" opacity="1.0">30 kN</text>
+<line x1="464.0" y1="348.2" x2="466.0" y2="341.4" stroke="#c4a022" stroke-width="0.8" opacity="0.7"/>
+<text x="468.0" y="345.4" font-size="11" fill="#c4a022" text-anchor="start" font-weight="normal" opacity="1.0">45 kN</text>
+<text x="468.0" y="358.4" font-size="11" fill="#8f7ad8" text-anchor="start" font-weight="normal" opacity="1.0">60 kN</text>
+<line x1="464.0" y1="355.7" x2="466.0" y2="367.4" stroke="#d85a45" stroke-width="0.8" opacity="0.7"/>
+<text x="468.0" y="371.4" font-size="11" fill="#d85a45" text-anchor="start" font-weight="normal" opacity="1.0">90 kN</text>
+<line x1="540" y1="520.0" x2="960" y2="520.0" stroke="#16233a" stroke-width="1"/>
+<text x="532.0" y="524.0" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">0</text>
+<line x1="540" y1="461.0" x2="960" y2="461.0" stroke="#16233a" stroke-width="1"/>
+<text x="532.0" y="465.0" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">5</text>
+<line x1="540" y1="401.9" x2="960" y2="401.9" stroke="#16233a" stroke-width="1"/>
+<text x="532.0" y="405.9" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">10</text>
+<line x1="540" y1="342.9" x2="960" y2="342.9" stroke="#16233a" stroke-width="1"/>
+<text x="532.0" y="346.9" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">15</text>
+<line x1="540" y1="283.9" x2="960" y2="283.9" stroke="#16233a" stroke-width="1"/>
+<text x="532.0" y="287.9" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">20</text>
+<line x1="540" y1="224.9" x2="960" y2="224.9" stroke="#16233a" stroke-width="1"/>
+<text x="532.0" y="228.9" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">25</text>
+<line x1="540" y1="165.8" x2="960" y2="165.8" stroke="#16233a" stroke-width="1"/>
+<text x="532.0" y="169.8" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">30</text>
+<line x1="540" y1="106.8" x2="960" y2="106.8" stroke="#16233a" stroke-width="1"/>
+<text x="532.0" y="110.8" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">35</text>
+<line x1="540.0" y1="95" x2="540.0" y2="520" stroke="#16233a" stroke-width="1"/>
+<text x="540.0" y="536.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">0</text>
+<line x1="640.0" y1="95" x2="640.0" y2="520" stroke="#16233a" stroke-width="1"/>
+<text x="640.0" y="536.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">500</text>
+<line x1="740.0" y1="95" x2="740.0" y2="520" stroke="#16233a" stroke-width="1"/>
+<text x="740.0" y="536.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">1000</text>
+<line x1="840.0" y1="95" x2="840.0" y2="520" stroke="#16233a" stroke-width="1"/>
+<text x="840.0" y="536.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">1500</text>
+<line x1="940.0" y1="95" x2="940.0" y2="520" stroke="#16233a" stroke-width="1"/>
+<text x="940.0" y="536.0" font-size="10.5" fill="#8fa3b8" text-anchor="middle" font-weight="normal" opacity="1.0">2000</text>
+<path d="M540,95 L540,520 L960,520" fill="none" stroke="#5a6a7e" stroke-width="1"/>
+<text x="750.0" y="556.0" font-size="11.5" fill="#d8e4f0" text-anchor="middle" font-weight="normal" opacity="1.0">Surface range (km)</text>
+<text x="540.0" y="82.0" font-size="11.5" fill="#00ddff" text-anchor="start" font-weight="bold" opacity="1.0">ROUND TRIP, NO REFUEL</text>
+<line x1="540" y1="425.6" x2="960" y2="425.6" stroke="#8fa3b8" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="956.0" y="420.6" font-size="10.5" fill="#8fa3b8" text-anchor="end" font-weight="normal" opacity="1.0">Rev B claim 8 t</text>
+<circle cx="590.0" cy="341.3" r="4" fill="#12a0c0" stroke="#080818" stroke-width="2"/>
+<path d="M636.0,126.41666666666669 L644.0,134.41666666666669 M644.0,126.41666666666669 L636.0,134.41666666666669" stroke="#12a0c0" stroke-width="2"/>
+<path d="M686.0,126.41666666666669 L694.0,134.41666666666669 M694.0,126.41666666666669 L686.0,134.41666666666669" stroke="#12a0c0" stroke-width="2"/>
+<path d="M736.0,126.41666666666669 L744.0,134.41666666666669 M744.0,126.41666666666669 L736.0,134.41666666666669" stroke="#12a0c0" stroke-width="2"/>
+<path d="M786.0,126.41666666666669 L794.0,134.41666666666669 M794.0,126.41666666666669 L786.0,134.41666666666669" stroke="#12a0c0" stroke-width="2"/>
+<path d="M836.0,126.41666666666669 L844.0,134.41666666666669 M844.0,126.41666666666669 L836.0,134.41666666666669" stroke="#12a0c0" stroke-width="2"/>
+<path d="M936.0,126.41666666666669 L944.0,134.41666666666669 M944.0,126.41666666666669 L936.0,134.41666666666669" stroke="#12a0c0" stroke-width="2"/>
+<path d="M590.0,352.8 L640.0,295.1 L690.0,236.6" fill="none" stroke="#c4a022" stroke-width="2" stroke-linejoin="round" opacity="1.0"/>
+<circle cx="590.0" cy="352.8" r="4" fill="#c4a022" stroke="#080818" stroke-width="2"/>
+<circle cx="640.0" cy="295.1" r="4" fill="#c4a022" stroke="#080818" stroke-width="2"/>
+<circle cx="690.0" cy="236.6" r="4" fill="#c4a022" stroke="#080818" stroke-width="2"/>
+<path d="M736.0,145.30555555555554 L744.0,153.30555555555554 M744.0,145.30555555555554 L736.0,153.30555555555554" stroke="#c4a022" stroke-width="2"/>
+<path d="M786.0,145.30555555555554 L794.0,153.30555555555554 M794.0,145.30555555555554 L786.0,153.30555555555554" stroke="#c4a022" stroke-width="2"/>
+<path d="M836.0,145.30555555555554 L844.0,153.30555555555554 M844.0,145.30555555555554 L836.0,153.30555555555554" stroke="#c4a022" stroke-width="2"/>
+<path d="M936.0,145.30555555555554 L944.0,153.30555555555554 M944.0,145.30555555555554 L936.0,153.30555555555554" stroke="#c4a022" stroke-width="2"/>
+<path d="M590.0,356.9 L640.0,305.6 L690.0,258.8 L740.0,214.2 L790.0,170.8 L840.0,127.2" fill="none" stroke="#8f7ad8" stroke-width="2" stroke-linejoin="round" opacity="1.0"/>
+<circle cx="590.0" cy="356.9" r="4" fill="#8f7ad8" stroke="#080818" stroke-width="2"/>
+<circle cx="640.0" cy="305.6" r="4" fill="#8f7ad8" stroke="#080818" stroke-width="2"/>
+<circle cx="690.0" cy="258.8" r="4" fill="#8f7ad8" stroke="#080818" stroke-width="2"/>
+<circle cx="740.0" cy="214.2" r="4" fill="#8f7ad8" stroke="#080818" stroke-width="2"/>
+<circle cx="790.0" cy="170.8" r="4" fill="#8f7ad8" stroke="#080818" stroke-width="2"/>
+<circle cx="840.0" cy="127.2" r="4" fill="#8f7ad8" stroke="#080818" stroke-width="2"/>
+<path d="M936.0,164.1944444444444 L944.0,172.1944444444444 M944.0,164.1944444444444 L936.0,172.1944444444444" stroke="#8f7ad8" stroke-width="2"/>
+<path d="M590.0,360.0 L640.0,313.2 L690.0,272.2 L740.0,235.2 L790.0,201.4 L840.0,170.9 L940.0,118.9" fill="none" stroke="#d85a45" stroke-width="2" stroke-linejoin="round" opacity="1.0"/>
+<circle cx="590.0" cy="360.0" r="4" fill="#d85a45" stroke="#080818" stroke-width="2"/>
+<circle cx="640.0" cy="313.2" r="4" fill="#d85a45" stroke="#080818" stroke-width="2"/>
+<circle cx="690.0" cy="272.2" r="4" fill="#d85a45" stroke="#080818" stroke-width="2"/>
+<circle cx="740.0" cy="235.2" r="4" fill="#d85a45" stroke="#080818" stroke-width="2"/>
+<circle cx="790.0" cy="201.4" r="4" fill="#d85a45" stroke="#080818" stroke-width="2"/>
+<circle cx="840.0" cy="170.9" r="4" fill="#d85a45" stroke="#080818" stroke-width="2"/>
+<circle cx="940.0" cy="118.9" r="4" fill="#d85a45" stroke="#080818" stroke-width="2"/>
+<text x="948.0" y="121.7" font-size="11" fill="#d85a45" text-anchor="start" font-weight="normal" opacity="1.0">90 kN</text>
+<line x1="844.0" y1="127.2" x2="846.0" y2="130.7" stroke="#8f7ad8" stroke-width="0.8" opacity="0.7"/>
+<text x="848.0" y="134.7" font-size="11" fill="#8f7ad8" text-anchor="start" font-weight="normal" opacity="1.0">60 kN</text>
+<text x="698.0" y="239.4" font-size="11" fill="#c4a022" text-anchor="start" font-weight="normal" opacity="1.0">45 kN</text>
+<text x="598.0" y="344.1" font-size="11" fill="#12a0c0" text-anchor="start" font-weight="normal" opacity="1.0">30 kN</text>
+<text x="956.0" y="108.0" font-size="9.5" fill="#5a6a7e" text-anchor="end" font-weight="normal" opacity="1.0">× = sized mass exceeds thrust ÷ lunar g (no liftoff), by thrust colour</text>
+<rect x="70" y="100" width="78" height="82" fill="#080818" fill-opacity="0.85" stroke="#16233a" stroke-width="1"/>
+<line x1="78" y1="114" x2="100" y2="114" stroke="#12a0c0" stroke-width="2"/>
+<circle cx="89" cy="114" r="3.5" fill="#12a0c0" stroke="#080818" stroke-width="2"/>
+<text x="108.0" y="118.0" font-size="11" fill="#d8e4f0" text-anchor="start" font-weight="normal" opacity="1.0">30 kN</text>
+<line x1="78" y1="132" x2="100" y2="132" stroke="#c4a022" stroke-width="2"/>
+<circle cx="89" cy="132" r="3.5" fill="#c4a022" stroke="#080818" stroke-width="2"/>
+<text x="108.0" y="136.0" font-size="11" fill="#d8e4f0" text-anchor="start" font-weight="normal" opacity="1.0">45 kN</text>
+<line x1="78" y1="150" x2="100" y2="150" stroke="#8f7ad8" stroke-width="2"/>
+<circle cx="89" cy="150" r="3.5" fill="#8f7ad8" stroke="#080818" stroke-width="2"/>
+<text x="108.0" y="154.0" font-size="11" fill="#d8e4f0" text-anchor="start" font-weight="normal" opacity="1.0">60 kN</text>
+<line x1="78" y1="168" x2="100" y2="168" stroke="#d85a45" stroke-width="2"/>
+<circle cx="89" cy="168" r="3.5" fill="#d85a45" stroke="#080818" stroke-width="2"/>
+<text x="108.0" y="172.0" font-size="11" fill="#d8e4f0" text-anchor="start" font-weight="normal" opacity="1.0">90 kN</text>
+<text x="60.0" y="585.0" font-size="10.5" fill="#d8e4f0" text-anchor="start" font-weight="normal" opacity="1.0">Read across: the Rev B propellant load closes a ~240 km single leg; a standalone 1,500 km round trip needs ≥60 kN and a 33 t vehicle.</text>
+<text x="60.0" y="603.0" font-size="10.5" fill="#8fa3b8" text-anchor="start" font-weight="normal" opacity="1.0">Round-trip legs are flown in sequence: the outbound leg lands carrying the return load, so its T/W is lower and its loss higher.</text>
+</svg>

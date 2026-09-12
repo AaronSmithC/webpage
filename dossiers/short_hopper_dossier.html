@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Luna–Aegis Short Hopper — Design Dossier Rev C</title>
+<style>
+  @page { size: Letter; margin: 0.8in 0.85in 0.85in; }
+  @page :first { margin: 0; }
+  @page {
+    @bottom-center {
+      content: "© 2026 Aegis Station Infrastructure · ASI–LAS–DD–001 Rev C · Page " counter(page) " of " counter(pages);
+      font-family: 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+      font-size: 8.5pt;
+      color: #7b838b;
+    }
+  }
+  @page :first { @bottom-center { content: none; } }
+
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; color: #0f1d2c; font-family: 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif; font-size: 10.5pt; line-height: 1.55; }
+
+  .cover { height: 11in; width: 8.5in; box-sizing: border-box; padding: 1.15in 0.95in 0.9in;
+    background: linear-gradient(to bottom, #d3e7f6 0%, #e6f1f9 45%, #f8fbfe 100%); display: flex; flex-direction: column; break-after: page; }
+  .cover .bar { width: 0.62in; height: 4pt; background: #1d4f7a; margin-bottom: 40pt; }
+  .cover .kicker { font-size: 9.5pt; letter-spacing: 3.2pt; text-transform: uppercase; color: #1d4f7a; font-weight: 700; margin-bottom: 8pt; }
+  .cover h1 { font-size: 40pt; font-weight: 700; color: #16283a; margin: 0 0 12pt; letter-spacing: -0.6pt; line-height: 1.1; }
+  .cover .subtitle { font-size: 17pt; color: #1d4f7a; margin-bottom: 26pt; }
+  .cover .tagline { font-size: 12pt; font-style: italic; color: #47515d; margin-bottom: 44pt; }
+  .cover .meta { font-size: 10pt; color: #2c3a48; line-height: 1.7; }
+  .cover .meta strong { color: #16283a; }
+  .cover .spacer { flex: 1; }
+  .cover .foot { border-top: 0.75pt solid #b9cbd9; padding-top: 12pt; font-size: 9pt; color: #47515d; line-height: 1.7; }
+  .cover .foot strong { color: #16283a; }
+
+  h2 { font-size: 17pt; font-weight: 700; color: #0f1d2c; margin: 26pt 0 12pt; padding-bottom: 6pt; border-bottom: 1.5pt solid #4a90c2; break-after: avoid; }
+  h2:first-of-type { margin-top: 0; }
+  h2 .n { color: #4a90c2; margin-right: 6pt; }
+  h3 { font-size: 11pt; font-weight: 700; color: #1d4f7a; margin: 14pt 0 6pt; break-after: avoid; }
+  p { margin: 0 0 9pt; }
+  ul { margin: 0 0 9pt; padding-left: 20pt; }
+  li { margin-bottom: 4pt; }
+  .muted { font-size: 9.5pt; color: #47515d; }
+  .callout { border-left: 3pt solid #4a90c2; background: #eef5fb; color: #1d4f7a; padding: 12pt 18pt; margin: 12pt 0 14pt; font-size: 11pt; line-height: 1.5; break-inside: avoid; }
+  .warn { border-left: 3pt solid #c8a022; background: #fbf7ea; color: #5a4a10; }
+  .pills { margin: 8pt 0 6pt; }
+  .pill { display: inline-block; padding: 3pt 10pt; border: 0.75pt solid #b9d3e8; border-radius: 999px; background: #f3f8fc; color: #1d4f7a; font-size: 8.8pt; margin: 0 6pt 6pt 0; }
+  table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 9.6pt; break-inside: auto; }
+  th { text-align: left; background: #1d4f7a; color: #fff; font-weight: 700; padding: 6pt 8pt; }
+  td { padding: 6pt 8pt; background: #f5fafd; border-bottom: 0.75pt solid #dde7ef; vertical-align: top; color: #0f1d2c; }
+  tr { break-inside: avoid; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 16pt; margin: 8pt 0 10pt; }
+  .card { border: 0.75pt solid #cfe0ee; border-radius: 4pt; background: #f7fbfd; padding: 12pt 14pt 8pt; break-inside: avoid; }
+  .card h3 { margin: 0 0 6pt; }
+  figure { margin: 10pt 0 12pt; break-inside: avoid; }
+  figure img { width: 100%; height: auto; border: 0.75pt solid #334; display: block; }
+  figcaption { font-size: 8.8pt; color: #47515d; margin-top: 4pt; }
+  .summary-box { background: linear-gradient(90deg, #1d4f7a 0%, #4a90c2 100%); color: #fff; border-radius: 5pt; padding: 18pt 22pt; margin: 22pt 0 0; break-inside: avoid; }
+  .summary-box strong { display: block; font-size: 11.5pt; margin-bottom: 6pt; }
+  .summary-box span { font-size: 10pt; color: #e6f0f8; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="bar"></div>
+  <div class="kicker">Aegis Station Infrastructure LLC · Design Dossier</div>
+  <h1>Luna–Aegis<br>Short Hopper</h1>
+  <div class="subtitle">Reusable Lunar Surface-to-Surface and Surface-to-Orbit Vehicle</div>
+  <div class="tagline">The vehicle that turns south-polar landing sites into connected nodes.</div>
+  <div class="meta">
+    <strong>Document</strong> ASI–LAS–DD–001 · Revision C · September 2026<br>
+    <strong>Basis</strong> System Requirements Review Rev A (Sep 2026): trajectory simulation, linked budget model, sizing sweep<br>
+    <strong>Status</strong> Engineering baseline; three design-authority decisions open<br>
+    <strong>Export</strong> ITAR/EAR-free baseline<br>
+    <strong>Design authority</strong> Aaron Smith
+  </div>
+  <div class="spacer"></div>
+  <div class="foot">
+    <strong>Rev C supersedes Rev B (Feb 2026).</strong> Rev B's 1,800 m/s design Δv and 1,500–2,000 km range did not survive a trajectory simulation; every number in this revision is generated from the SRR Rev A budget workbook and trajectory tool.<br>
+    aegisstation.com · engage@aegisstation.com
+  </div>
+</div>
+
+<!-- 1 -->
+<div class="section">
+<h2><span class="n">1.</span>Overview</h2>
+<p>The Short Hopper is a reusable, single-stage, vertical-takeoff-and-landing lunar vehicle for crew and cargo transfer between surface sites near the lunar south pole and, in the station era, between the surface and Aegis Station in low lunar orbit. It burns ISRU-compatible LOX/LH₂ through an engine-out-capable cluster and lands powered on unprepared terrain. Its purpose in the Aegis architecture is logistics: surface sites become connected nodes instead of isolated landings, and surface propellant production, when it exists, converts directly into reach.</p>
+<div class="pills">
+  <span class="pill">VTOL</span><span class="pill">Single-stage</span><span class="pill">Engine-out capable</span><span class="pill">LOX/LH₂, ISRU-compatible</span><span class="pill">Reusable</span><span class="pill">Autonomous</span><span class="pill">Artemis-compatible interfaces</span>
+</div>
+<div class="callout warn">
+<strong>What changed from Rev B.</strong> The Rev B vehicle as published — 8,000 kg wet, 2,750 kg of propellant, one 25–30 kN engine — closes a single surface leg of 238 km, not 1,500–2,000 km. A ballistic hop launches at 33–41° above the horizon, so gravity opposes thrust for the whole burn; at 30 kN the two burns of a 1,500 km hop cost 24% over the impulsive ideal against the 6% Rev B assumed. No single 25–30 kN engine closes a standalone round trip of any length. Rev C is the vehicle that closes the mission.
+</div>
+<p>Pre-station there is no low-lunar-orbit customer: Gateway and the HLS landers operate in near-rectilinear halo orbit. The Short Hopper's standalone value is surface-to-surface, and every baseline decision in this revision is made for that case first.</p>
+</div>
+
+<!-- 2 -->
+<div class="section">
+<h2><span class="n">2.</span>Reference Missions</h2>
+<table>
+  <tr><th>Mission</th><th>Definition</th><th>Status</th><th>Gross wet at 60 kN</th></tr>
+  <tr><td>RM1</td><td>500 km surface-to-surface round trip, no refuel at the remote site; 2 crew + 500 kg on both legs</td><td>Baseline, sizing case (decision open)</td><td class="num">18,160 kg</td></tr>
+  <tr><td>RM1-G</td><td>1,500 km one-way, refuel at a LUNET node at destination</td><td>Growth; same tanks, no hardware change</td><td class="num">13,310 kg</td></tr>
+  <tr><td>RM2</td><td>Surface → 100 km LLO → surface, round trip, no orbital refuel; 4 crew + 200 kg</td><td>Station era; covered by the RM1 vehicle with partial propellant</td><td class="num">16,590 kg</td></tr>
+  <tr><td>RM2a</td><td>Surface → LLO, refuel at Aegis Station</td><td>Station era</td><td class="num">9,960 kg</td></tr>
+  <tr><td>RM3</td><td>Surface → NRHO (Gateway)</td><td>Candidate only; not modelled</td><td class="num">—</td></tr>
+</table>
+<h3>RM1 leg, as flown by the trajectory tool</h3>
+<table>
+  <tr><th>Phase</th><th>Duration</th><th>Notes</th></tr>
+  <tr><td>Vertical rise</td><td class="num">10 s</td><td>Clear pad structures and dust</td></tr>
+  <tr><td>Ascent burn</td><td class="num">137 s</td><td>Full thrust, linear-tangent pitch program</td></tr>
+  <tr><td>Ballistic coast</td><td class="num">11.6 min</td><td>Apex 104 km; RCS trim; terrain-relative navigation on approach</td></tr>
+  <tr><td>Braking burn</td><td class="num">113 s</td><td>Full thrust to a 100 m hover gate at zero velocity</td></tr>
+  <tr><td>Hover, divert, terminal descent</td><td class="num">71 s + 28 s divert</td><td>Hazard assessment; up to 100 m divert; 1 m/s touchdown</td></tr>
+</table>
+<figure><img src="../images/short_hopper_fig3-1_profiles.svg" alt="Flight profiles for the 500 km hop, the 1,500 km hop and the ascent to LLO"><figcaption>Figure 1 — Reference-mission flight profiles from the trajectory tool at 45 kN (altitude vs downrange, vertical scale exaggerated).</figcaption></figure>
+</div>
+
+<!-- 3 -->
+<div class="section">
+<h2><span class="n">3.</span>Technical Specifications</h2>
+<table>
+  <tr><th colspan="2">Physical</th></tr>
+  <tr><td>Gross wet mass, full load</td><td>18,160 kg (RM1 round trip)</td></tr>
+  <tr><td>Dry mass</td><td>5,273 kg — Rev B allocation carried unchanged, to be re-sized (TBR)</td></tr>
+  <tr><td>Propellant, full tanks</td><td>12,088 kg (66.6% mass fraction), including residual and boil-off allowances</td></tr>
+  <tr><td>Height / landing zone</td><td>TBR — the Rev B envelope (~6.5 m, ~4.5 m) predates a tank set holding 4.4× the propellant</td></tr>
+  <tr><th colspan="2">Propulsion</th></tr>
+  <tr><td>Propellants</td><td>LOX / LH₂, ISRU-compatible, mixture ratio 6.0</td></tr>
+  <tr><td>Engine configuration</td><td>Gimbaled cluster, engine-out capable; three ~20 kN engines recommended (trade open); lands on one engine at a 49% throttle setting</td></tr>
+  <tr><td>Total vacuum thrust</td><td>60 kN</td></tr>
+  <tr><td>Specific impulse</td><td>440 s nominal (430–450 s)</td></tr>
+  <tr><td>Thrust-to-weight at liftoff</td><td>2.0 at full load (RM1 outbound); 2.2 on RM2</td></tr>
+  <tr><td>Design Δv, one 500 km leg</td><td>2,244 m/s — burns with simulated losses, mid-course, hover, divert, and 10% margin</td></tr>
+  <tr><td>Δv at full tanks</td><td>4,727 m/s with the sizing payload aboard</td></tr>
+  <tr><td>Attitude control</td><td>Engine gimbal (pitch/yaw during burns) + RCS (roll, coast, hover, docking)</td></tr>
+  <tr><th colspan="2">Performance</th></tr>
+  <tr><td>Surface-to-surface, baseline</td><td>500 km round trip, no refuel at the remote site</td></tr>
+  <tr><td>Surface-to-surface, growth</td><td>1,500 km one-way with LUNET refuel at destination</td></tr>
+  <tr><td>Surface-to-LLO</td><td>100 km LLO round trip, no orbital refuel, at 16,590 kg load</td></tr>
+  <tr><td>Flight time, 500 km leg</td><td>~16 min liftoff to hover gate</td></tr>
+  <tr><td>Reusability / turnaround / precision</td><td>10 sorties between depot maintenance; 24–48 h at a node; ±3 m with TRN — all carried as requirements to be confirmed</td></tr>
+  <tr><th colspan="2">Crew and cargo</th></tr>
+  <tr><td>Crew</td><td>4 standard (Config A); 6 maximum at reduced range</td></tr>
+  <tr><td>Cargo</td><td>Up to 1,000 kg palletised (Config B); 2 crew + ~500 kg (Config C, the sizing manifest)</td></tr>
+  <tr><td>Crewed duration</td><td>72–96 h</td></tr>
+  <tr><th colspan="2">Systems</th></tr>
+  <tr><td>Avionics</td><td>Dual-redundant radiation-tolerant flight computers</td></tr>
+  <tr><td>Navigation</td><td>FOG/RLG IMU + MEMS backup, lidar and radar altimeters, terrain-relative navigation, LUNET beacon aiding when available</td></tr>
+  <tr><td>Flight software</td><td>NASA cFS stack, ten mission applications, 13-phase autonomy executive with sequence gates; unit tests and an eight-scenario harness</td></tr>
+  <tr><td>Communications</td><td>S-band/UHF short range; high-gain directional to station or Earth</td></tr>
+  <tr><td>Power / life support</td><td>Battery packs with SSSRA node recharge (budget open); O₂/N₂ pressurised cabin, Orion-class LSS heritage</td></tr>
+  <tr><td>Docking</td><td>Aft/lower hatch, soft-seal pressurised collar; suitport mate with the Aegis-Class Rover; no EVA for crew transfer</td></tr>
+</table>
+</div>
+
+<!-- 4 -->
+<div class="section">
+<h2><span class="n">4.</span>Cabin Configurations</h2>
+<div class="twocol">
+  <div class="card"><h3>Config A — Crew</h3><p>4 astronauts standard, 6 maximum at reduced range. Full pressurised cabin with suits, airlock and emergency portable air; 72–96 h life support; direct suitport mate with the Aegis-Class Rover. Reference mission RM2.</p></div>
+  <div class="card"><h3>Config B — Cargo</h3><p>Up to 1,000 kg on palletised latch-and-lock mounts: ISRU tanks, EVA gear, small rovers, sample-return payloads. Optional robotic assist arm. Not a sizing case.</p></div>
+  <div class="card"><h3>Config C — Hybrid</h3><p>2 crew plus ~500 kg. Medical evacuation, science payload delivery, priority crew and equipment moves between surface nodes. The sizing manifest for RM1.</p></div>
+  <div class="card"><h3>Payload convention</h3><p>Payload is carried on every leg of every reference mission; an empty return is not credited in the sizing.</p></div>
+</div>
+</div>
+
+<!-- 5 -->
+<div class="section">
+<h2><span class="n">5.</span>Propulsion and Mass Budget</h2>
+<p>Thrust class is the finding that reshaped the vehicle. Below a liftoff thrust-to-weight ratio of about 2 the gravity and steering loss on a ballistic hop rises faster than the thrust saves mass, and below 1 the round-trip cases do not close at all. At 30 kN no standalone round trip closes; 45 kN closes the 500 km round trip at 19.1 t with T/W 1.5; 60 kN closes it at 18.2 t with T/W 2.0. Rev C carries 60 kN total from a cluster because a single engine has no engine-out response during powered descent, which is the top hazard for a crewed lander.</p>
+<p>No supplier offers a deep-throttling LOX/LH₂ vacuum engine in the 15–30 kN class; the engine is a technology-development partnership. With three engines the vehicle lands on one at a conventional 49% throttle setting, which takes deep throttling off the critical path.</p>
+<table>
+  <tr><th>Mass element</th><th>Mass</th><th>Share of 18,160 kg wet</th><th>Note</th></tr>
+  <tr><td>Propellant (LOX/LH₂)</td><td class="num">12,088 kg</td><td class="num">66.6%</td><td>RM1 round trip incl. residual and boil-off allowances</td></tr>
+  <tr><td>Structure / tanks</td><td class="num">2,110 kg</td><td class="num">11.6%</td><td>Rev B allocation; TBR for the larger tank set</td></tr>
+  <tr><td>Cabin / LSS</td><td class="num">1,055 kg</td><td class="num">5.8%</td><td>Rev B allocation</td></tr>
+  <tr><td>Propulsion system</td><td class="num">790 kg</td><td class="num">4.4%</td><td>Rev B allocation; TBR for a cluster</td></tr>
+  <tr><td>Landing gear</td><td class="num">527 kg</td><td class="num">2.9%</td><td>Rev B allocation</td></tr>
+  <tr><td>Avionics / GN&amp;C</td><td class="num">422 kg</td><td class="num">2.3%</td><td>Rev B allocation</td></tr>
+  <tr><td>Mass margin (7%)</td><td class="num">369 kg</td><td class="num">2.0%</td><td>Rev B policy</td></tr>
+  <tr><td>Payload (2 crew + 500 kg)</td><td class="num">800 kg</td><td class="num">4.4%</td><td>Carried on both legs</td></tr>
+  <tr><td><strong>Gross wet mass</strong></td><td class="num"><strong>18,160 kg</strong></td><td class="num">100%</td><td>Dry 5,273 kg + payload + propellant</td></tr>
+</table>
+<p class="muted">Sensitivity at 60 kN: dry mass ±15% moves the RM1 vehicle between 15.6 and 20.9 t; Isp 420–460 s moves it between 19.2 and 17.3 t. Dry mass dominates, which is why the structure and cluster allocations are the first partner items.</p>
+<figure><img src="../images/short_hopper_fig6-1_wet_mass_vs_range.svg" alt="Gross wet mass versus range, single leg and round trip, at four thrust levels"><figcaption>Figure 2 — Gross wet mass vs surface range, single leg and round trip, at 30, 45, 60 and 90 kN. Crosses mark cases that cannot lift off.</figcaption></figure>
+<figure><img src="../images/short_hopper_fig6-4_revb_closes.svg" alt="Design delta-v versus range for the Rev B vehicle"><figcaption>Figure 3 — What the Rev B vehicle closes: design Δv vs single-leg range for 8,000 kg at 30 kN against its 1,750 m/s usable Δv.</figcaption></figure>
+</div>
+
+<!-- 6 -->
+<div class="section">
+<h2><span class="n">6.</span>Landing, Autonomy and Interfaces</h2>
+<div class="twocol">
+  <div class="card"><h3>Landing system</h3><ul>
+    <li>Four fixed legs, thermal-shielded, dust-tolerant footpads, per-leg load cells for mass confirmation and touchdown detection</li>
+    <li>Every landing ends at a 100 m hover gate at zero velocity, then hazard assessment, optional 100 m divert, and a rate-profile descent to a 1 m/s touchdown</li>
+    <li>Terrain-relative navigation via lidar and radar altimeter; LUNET beacon aiding when present, not required</li>
+    <li>Abort-to-pad, abort-to-surface and abort-to-orbit modes defined; engine-out on descent designed out by the cluster</li>
+    <li>Operable in permanently shadowed regions</li>
+  </ul></div>
+  <div class="card"><h3>Interfaces and integration</h3><ul>
+    <li>Soft-docking collar compatible with Aegis Station, surface habitats and the Aegis-Class Rover suitport; no EVA for crew transfer</li>
+    <li>Cryogenic refuelling through a LUNET-compatible port; SSSRA roof interface for node power and thermal (an ASI standard shared with the rover)</li>
+    <li>Palletised cargo latch-and-lock; optional robotic assist arm</li>
+    <li>Field diagnostics via rover interface or LUNET node terminal</li>
+    <li>Ground segment: CCSDS command/telemetry bridge and web console; the vehicle does not need a ground link to complete a leg</li>
+  </ul></div>
+</div>
+</div>
+
+<!-- 7 -->
+<div class="section">
+<h2><span class="n">7.</span>Flight Software</h2>
+<p>The flight software exists. It is a NASA core Flight System stack of ten ASI mission applications — executive, GN&amp;C, propulsion, power, thermal, ECLSS, communications with LUNET, cargo, docking with landing gear, crew interface — plus the standard NASA limit-checker, stored-command, health, housekeeping, storage and file applications. The executive implements the 13-phase flight state machine the CONOPS uses, with table-driven sequence gates and a manual-override inhibit mask. The stack carries unit tests, an eight-scenario sortie harness (long-range hop, orbital docking, refuel, crew aborts from ascent and descent, ECLSS leak, LUNET handoff) and nineteen accepted architecture decision records, and boots to operational in the cFS image against a vehicle simulator.</p>
+<p>What it does not yet do is stated plainly in the SRR: the navigation filter is deferred, terrain-relative navigation is not implemented, the abort library's profiles are placeholders for a real solver, and the simulation plant is vertical-axis only. The next software stage flies the reference missions closed-loop against the SRR trajectory tool. The vehicle constants in the software are generated from the SRR budget workbook, so the software and this dossier cannot drift apart.</p>
+</div>
+
+<!-- 8 -->
+<div class="section">
+<h2><span class="n">8.</span>Development Roadmap</h2>
+<p>Undated by design. The sequence is ordered so that every step ASI can execute alone comes first, every hardware step is a partner work package with a defined input, and no step assumes a customer that does not exist. The Rev B PDR 2026 / CDR 2027 / prototype 2028 / flight 2029 line is withdrawn.</p>
+<table>
+  <tr><th>Stage</th><th>Content</th><th>Exit criterion</th></tr>
+  <tr><td>0 — SRR Rev A</td><td>Mission set, reference missions, requirements, budgets, trades, risks, verification strategy</td><td>Done; design-authority decisions pending</td></tr>
+  <tr><td>1 — Analysis closure</td><td>Insertion-altitude trade, abort trajectories, rendezvous budget, boil-off and power budgets with partner data</td><td>Every placeholder replaced or owned</td></tr>
+  <tr><td>2 — Software to flight depth</td><td>Full navigation filter, trajectory-tool guidance targets and abort profiles, FDIR catalogue, closed-loop flights against the trajectory tool</td><td>Reference missions flown closed-loop in simulation</td></tr>
+  <tr><td>3 — Subsystem demonstrators</td><td>Engine class demonstration, tank heat-leak article, gear drop tests, collar seal tests, ECLSS bench</td><td>Subsystem requirements verified with partners</td></tr>
+  <tr><td>4 — Uncrewed flight article</td><td>Full RM1 profile flown uncrewed, including an unprepared-site landing and the return after a surface stay</td><td>Uncrewed before crewed</td></tr>
+  <tr><td>5 — Crewed</td><td>RM1 crewed; RM2 when a station and a customer exist</td><td>Hazard controls closed</td></tr>
+</table>
+</div>
+
+<!-- 9 -->
+<div class="section">
+<h2><span class="n">9.</span>Open Decisions</h2>
+<ul>
+  <li><strong>Baseline range.</strong> 500 km round trip standalone is proposed. 250 km closes at 13.8 t; 750 km at 22.1 t; 1,000 km and beyond are a different vehicle.</li>
+  <li><strong>One vehicle or two.</strong> The surface hopper sized to RM1 and an orbital shuttle sized to RM2 differ by 1.6 t at this baseline; one vehicle flown to orbit with partial propellant is proposed.</li>
+  <li><strong>Engine count.</strong> Three engines of ~20 kN proposed; two of ~30 kN if a partner engine dictates.</li>
+</ul>
+<p class="muted">Each is stated in the SRR with its numbers and what would change the recommendation. Nothing in this dossier should be read as settled beyond the physics.</p>
+</div>
+
+<!-- 10 -->
+<div class="section">
+<h2><span class="n">10.</span>Role in the Lunar Stack and Partnership</h2>
+<p>Artemis puts boots on the surface. CLPS puts instruments on the ground. ISRU demonstrations prove propellant can be made. What is missing is the vehicle that connects them: a reusable, refuelable lander that moves crew and cargo between south-polar sites on a schedule, without a new launch from Earth each time, and that reaches an orbital node once one exists.</p>
+<p>A vehicle like this is not built by one company. What Aegis Station Infrastructure brings is a System Requirements Review baseline that says what closes and what does not — reference missions with simulated trajectories, a linked budget that reproduces the simulation, requirements with sources, trade studies with numbers, a risk register, and flight software already flying the mission profile in simulation — and a make/buy/partner plan in which ASI owns architecture, flight software, GN&amp;C and integration, buys structures, tanks, gear, cabin, thermal and communications hardware, and partners on the engine.</p>
+<div class="summary-box">
+  <strong>Partnership and technical inquiries</strong>
+  <span>engage@aegisstation.com · aegisstation.com/short_hopper.html · ASI–LAS–DD–001 Rev C · ITAR/EAR-free baseline. Partner-facing releases are classified before distribution; no partner is named in any released artefact without written authorisation.</span>
+</div>
+</div>
+
+</body>
+</html>

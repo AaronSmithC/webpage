@@ -639,8 +639,8 @@
     <div class="header-right">
       <div class="doc-meta">
         <strong>DESIGN AUTHORITY</strong> Aegis Station Infrastructure LLC<br>
-        <strong>REVISION</strong> B · Feb 2026<br>
-        <strong>STATUS</strong> Concept — Feasibility Ready<br>
+        <strong>REVISION</strong> C · Sep 2026<br>
+        <strong>STATUS</strong> SRR Rev A baseline — model-based<br>
         <strong>EXPORT</strong> ITAR/EAR-Free Baseline
       </div>
     </div>
@@ -654,11 +654,15 @@
       <div class="section-line"></div>
     </div>
     <p class="overview-text">
-      The Luna–Aegis Short Hopper is a reusable single-stage VTOL lunar shuttle designed for rapid transfer between Aegis Station in low lunar orbit and surface sites near the Moon's south pole. Operating on ISRU-compatible LOX/LH₂ propellants with a single gimbaled vacuum engine, it supports crew, cargo, and hybrid missions across a 1,500–2,000 km range — serving as the primary logistics backbone of the Aegis architecture.
+      The Luna–Aegis Short Hopper is a reusable single-stage VTOL lunar vehicle for crew and cargo transfer between south-polar surface sites and, in the station era, between the surface and Aegis Station in low lunar orbit. It burns ISRU-compatible LOX/LH₂ through an engine-out-capable cluster and lands powered on unprepared terrain. Its baseline mission is a 500 km surface-to-surface round trip with no refuelling at the far end; a 1,500 km one-way hop becomes available once a LUNET propellant node exists at the destination.
+    </p>
+    <p class="overview-text" style="margin-top:16px;">
+      Rev C replaces the Rev B (Feb 2026) performance claims with the System Requirements Review Rev A baseline (Sep 2026), which is derived from a trajectory simulation validated against the Apollo 11 ascent and a linked budget model. The Rev B vehicle as published closes a 238 km single leg, not 1,500–2,000 km; the numbers below are the vehicle that closes the mission.
     </p>
     <div class="tag-row" style="margin-top:18px;">
       <span class="tag">VTOL</span>
       <span class="tag">Single-Stage</span>
+      <span class="tag">Engine-Out Capable</span>
       <span class="tag">ISRU-Compatible</span>
       <span class="tag">Fully Reusable</span>
       <span class="tag">Autonomous Capable</span>
@@ -676,28 +680,30 @@
     <div class="corner-marks">
     <table class="spec-table">
       <tr class="group-header"><td colspan="2">// PHYSICAL</td></tr>
-      <tr><td>TOTAL HEIGHT</td><td>~6.5 m</td></tr>
-      <tr><td>LANDING ZONE DIA.</td><td>~4.5 m</td></tr>
-      <tr><td>GROSS WET MASS</td><td class="val-highlight">~8,000 kg</td></tr>
-      <tr><td>DRY MASS</td><td>~5,250 kg</td></tr>
-      <tr><td>PROPELLANT MASS</td><td class="val-highlight">~2,750 kg (34.4% mass fraction)</td></tr>
+      <tr><td>TOTAL HEIGHT / LANDING ZONE</td><td>TBR — Rev B envelope (~6.5 m / ~4.5 m) predates the Rev C tank set</td></tr>
+      <tr><td>GROSS WET MASS</td><td class="val-highlight">18,160 kg (full load, 500 km round trip)</td></tr>
+      <tr><td>DRY MASS</td><td>5,273 kg (Rev B allocation carried, TBR)</td></tr>
+      <tr><td>PROPELLANT MASS</td><td class="val-highlight">12,088 kg (66.6% mass fraction)</td></tr>
+      <tr><td>PAYLOAD, SIZING CASE</td><td>800 kg — 2 crew + 500 kg cargo, carried on both legs</td></tr>
 
       <tr class="group-header"><td colspan="2">// PROPULSION</td></tr>
       <tr><td>PROPELLANTS</td><td>LOX / LH₂ (ISRU-compatible)</td></tr>
-      <tr><td>ENGINE CONFIG</td><td class="val-highlight">Single gimbaled vacuum engine</td></tr>
-      <tr><td>THRUST (VAC)</td><td>~25–30 kN</td></tr>
-      <tr><td>ISP (VACUUM)</td><td class="val-highlight">430–450 s</td></tr>
-      <tr><td>T/W AT LIFTOFF (LUNAR)</td><td>~1.9–2.3 (liftoff) → increasing as propellant burns</td></tr>
-      <tr><td>DESIGN ΔV</td><td class="val-highlight">1,800 m/s (incl. 10% margin)</td></tr>
-      <tr><td>MISSION ΔV RANGE</td><td>1,600–1,700 m/s per one-way hop</td></tr>
+      <tr><td>ENGINE CONFIG</td><td class="val-highlight">Gimbaled cluster, engine-out capable — three ~20 kN engines recommended (trade open)</td></tr>
+      <tr><td>THRUST (VAC, TOTAL)</td><td>60 kN</td></tr>
+      <tr><td>ISP (VACUUM)</td><td class="val-highlight">440 s nominal (430–450 s)</td></tr>
+      <tr><td>T/W AT LIFTOFF (LUNAR)</td><td>2.0 at full load → increasing as propellant burns</td></tr>
+      <tr><td>DESIGN ΔV, ONE 500 km LEG</td><td class="val-highlight">2,244 m/s (burns + landing allowances, incl. 10% margin)</td></tr>
+      <tr><td>ΔV AT FULL TANKS</td><td>4,727 m/s with the sizing payload aboard</td></tr>
       <tr><td>ATTITUDE CONTROL</td><td>Engine gimbal (primary) + RCS thrusters (fine)</td></tr>
 
       <tr class="group-header"><td colspan="2">// PERFORMANCE</td></tr>
-      <tr><td>SURFACE–SURFACE RANGE</td><td class="val-highlight">1,500–2,000 km one-way</td></tr>
-      <tr><td>SURFACE–LLO CAPABLE</td><td>Yes (with ISRU refuel at surface)</td></tr>
-      <tr><td>REUSABILITY</td><td>Min. 5–10 sorties; indefinite w/ proactive maintenance</td></tr>
-      <tr><td>TURNAROUND TIME</td><td>24–48 hours (LUNET node support)</td></tr>
-      <tr><td>LANDING PRECISION</td><td>±3 meters (nominal)</td></tr>
+      <tr><td>SURFACE–SURFACE, BASELINE</td><td class="val-highlight">500 km round trip, no refuel at the remote site</td></tr>
+      <tr><td>SURFACE–SURFACE, GROWTH</td><td>1,500 km one-way with LUNET refuel at destination — same tanks, no hardware change</td></tr>
+      <tr><td>SURFACE–LLO</td><td>100 km LLO round trip, no orbital refuel, at 16,590 kg load (station era)</td></tr>
+      <tr><td>FLIGHT TIME, 500 km LEG</td><td>~16 min liftoff to hover gate; apex ~104 km</td></tr>
+      <tr><td>REUSABILITY</td><td>Min. 10 sorties between depot maintenance (requirement, TBD)</td></tr>
+      <tr><td>TURNAROUND TIME</td><td>24–48 hours at a LUNET node (requirement, TBD)</td></tr>
+      <tr><td>LANDING PRECISION</td><td>±3 m with terrain-relative navigation (TBR)</td></tr>
 
       <tr class="group-header"><td colspan="2">// CREW & CARGO</td></tr>
       <tr><td>CREW (STANDARD)</td><td class="val-highlight">4 astronauts</td></tr>
@@ -713,6 +719,7 @@
       <tr><td>POWER</td><td>Rechargeable battery packs + passive solar backup</td></tr>
       <tr><td>LIFE SUPPORT</td><td>O₂/N₂ pressurized cabin; Orion-class LSS heritage</td></tr>
       <tr><td>DOCKING INTERFACE</td><td>Aft/lower hatch; soft-seal pressurized collar</td></tr>
+      <tr><td>FLIGHT SOFTWARE</td><td>NASA cFS stack, ten mission applications, 13-phase autonomy executive (aegis-hopper-fsw 2.0)</td></tr>
     </table>
     </div>
   </div>
@@ -759,77 +766,97 @@
 
     <div class="prop-box">
       <div style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--white-dim);line-height:1.7;letter-spacing:0.04em;">
-        A single gimbaled LOX/LH₂ vacuum engine (~25–30 kN) is both mass-efficient and mechanically simpler than a multi-engine cluster at this vehicle scale.
-        At 8,000 kg wet mass, lunar liftoff weight is only ~13 kN, giving a T/W of ~1.9–2.3 at ignition — ideal for controlled VTOL ascent.
-        Gimbal provides full pitch/yaw authority; RCS handles roll and fine station-keeping. The architecture is compatible with ISRU-derived propellant
-        production, enabling full lunar surface access via staged hops.
+        A ballistic hop launches at 33–41° above the horizon, so lunar gravity opposes thrust for the whole burn: at Rev B's 30 kN the two burns of a
+        1,500 km hop cost 24% over the impulsive ideal, not the 6% Rev B assumed, and no single 25–30 kN engine closes a standalone round trip of any
+        length. The Rev C vehicle carries 60 kN of total thrust from an engine-out-capable cluster, which holds liftoff T/W at 2.0 on the heaviest leg
+        and, with three engines, lands on one at a conventional 49% throttle setting. Gimbal provides pitch/yaw authority; RCS handles roll, coast trim,
+        hover and docking. Propellant is LOX/LH₂ throughout, so ISRU production converts directly into reach.
       </div>
       <div class="prop-stats">
         <div class="prop-stat">
-          <div class="prop-stat-val">~30 kN</div>
-          <div class="prop-stat-label">Vac Thrust</div>
+          <div class="prop-stat-val">60 kN</div>
+          <div class="prop-stat-label">Total Vac Thrust</div>
         </div>
         <div class="prop-stat">
           <div class="prop-stat-val">440 s</div>
           <div class="prop-stat-label">Isp (nominal)</div>
         </div>
         <div class="prop-stat">
-          <div class="prop-stat-val">1,800 m/s</div>
-          <div class="prop-stat-label">Design ΔV</div>
+          <div class="prop-stat-val">2,244 m/s</div>
+          <div class="prop-stat-label">Design ΔV per 500 km leg</div>
         </div>
         <div class="prop-stat">
-          <div class="prop-stat-val">2.1×</div>
-          <div class="prop-stat-label">T/W (lunar)</div>
+          <div class="prop-stat-val">2.0×</div>
+          <div class="prop-stat-label">T/W at full load</div>
         </div>
       </div>
     </div>
 
     <div style="margin-top:24px;">
       <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:14px;">
-        MASS BUDGET — 8,000 kg WET
+        MASS BUDGET — 18,160 kg WET (500 km ROUND TRIP, FULL LOAD)
       </div>
       <div class="mass-budget">
         <div class="mass-row">
           <div class="mass-label">PROPELLANT (LOX/LH₂)</div>
-          <div class="mass-bar-track"><div class="mass-bar-fill propellant" style="width:34.4%"></div></div>
-          <div class="mass-val">~2,750 kg · 34.4%</div>
+          <div class="mass-bar-track"><div class="mass-bar-fill propellant" style="width:66.6%"></div></div>
+          <div class="mass-val">12,088 kg · 66.6%</div>
         </div>
         <div class="mass-row">
           <div class="mass-label">STRUCTURE / TANKS</div>
-          <div class="mass-bar-track"><div class="mass-bar-fill structure" style="width:26.4%"></div></div>
-          <div class="mass-val">~2,110 kg · 26.4%</div>
+          <div class="mass-bar-track"><div class="mass-bar-fill structure" style="width:11.6%"></div></div>
+          <div class="mass-val">2,110 kg · 11.6% (TBR)</div>
         </div>
         <div class="mass-row">
-          <div class="mass-label">CABIN / LSS / PAYLOAD</div>
-          <div class="mass-bar-track"><div class="mass-bar-fill cabin" style="width:13.2%"></div></div>
-          <div class="mass-val">~1,055 kg · 13.2%</div>
+          <div class="mass-label">CABIN / LSS</div>
+          <div class="mass-bar-track"><div class="mass-bar-fill cabin" style="width:5.8%"></div></div>
+          <div class="mass-val">1,055 kg · 5.8%</div>
         </div>
         <div class="mass-row">
           <div class="mass-label">PROPULSION SYSTEM</div>
-          <div class="mass-bar-track"><div class="mass-bar-fill propulsion" style="width:9.9%"></div></div>
-          <div class="mass-val">~790 kg · 9.9%</div>
+          <div class="mass-bar-track"><div class="mass-bar-fill propulsion" style="width:4.4%"></div></div>
+          <div class="mass-val">790 kg · 4.4% (TBR, cluster)</div>
         </div>
         <div class="mass-row">
           <div class="mass-label">LANDING GEAR</div>
-          <div class="mass-bar-track"><div class="mass-bar-fill landing" style="width:6.6%"></div></div>
-          <div class="mass-val">~527 kg · 6.6%</div>
+          <div class="mass-bar-track"><div class="mass-bar-fill landing" style="width:2.9%"></div></div>
+          <div class="mass-val">527 kg · 2.9%</div>
         </div>
         <div class="mass-row">
           <div class="mass-label">AVIONICS / GN&amp;C</div>
-          <div class="mass-bar-track"><div class="mass-bar-fill avionics" style="width:5.3%"></div></div>
-          <div class="mass-val">~422 kg · 5.3%</div>
+          <div class="mass-bar-track"><div class="mass-bar-fill avionics" style="width:2.3%"></div></div>
+          <div class="mass-val">422 kg · 2.3%</div>
         </div>
         <div class="mass-row">
           <div class="mass-label">MASS MARGIN (7%)</div>
-          <div class="mass-bar-track"><div class="mass-bar-fill margin" style="width:4.6%"></div></div>
-          <div class="mass-val">~369 kg · 4.6%</div>
+          <div class="mass-bar-track"><div class="mass-bar-fill margin" style="width:2.0%"></div></div>
+          <div class="mass-val">369 kg · 2.0%</div>
+        </div>
+        <div class="mass-row">
+          <div class="mass-label">PAYLOAD (2 CREW + 500 kg)</div>
+          <div class="mass-bar-track"><div class="mass-bar-fill cabin" style="width:4.4%"></div></div>
+          <div class="mass-val">800 kg · 4.4%</div>
         </div>
         <div class="mass-total">
           <div class="mass-label">GROSS WET MASS</div>
           <div class="mass-bar-track" style="border-top:1px solid var(--cyan);"></div>
-          <div class="mass-val">8,000 kg</div>
+          <div class="mass-val">18,160 kg</div>
         </div>
       </div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--white-dim);line-height:1.7;margin-top:12px;">
+        Dry mass is the Rev B allocation carried unchanged; the tank set now holds 4.4× the Rev B propellant and the structure, tank and cluster allocations are to be re-sized by partners. Every figure on this page is generated from the SRR Rev A linked budget workbook and trajectory tool.
+      </div>
+    </div>
+
+    <div style="margin-top:28px;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:12px;">
+        SIZING — WET MASS vs RANGE, SINGLE LEG AND ROUND TRIP
+      </div>
+      <img src="images/short_hopper_fig6-1_wet_mass_vs_range.svg" alt="Gross wet mass versus surface range for single-leg and round-trip hops at 30, 45, 60 and 90 kN" style="width:100%;height:auto;border:1px solid var(--cyan-dim);display:block;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--white-dim);line-height:1.7;margin-top:10px;">
+        Round trips are flown leg by leg: the outbound leg lands carrying the return load. A 1,500 km standalone round trip needs a 33 t vehicle at 60 kN and does not lift off at 30 or 45 kN, which is why the baseline is 500 km round trip and 1,500 km one-way is a growth case that depends on a LUNET node.
+      </div>
+      <img src="images/short_hopper_fig6-4_revb_closes.svg" alt="Design delta-v versus range for the Rev B vehicle, showing it closes a 238 km single leg" style="width:100%;height:auto;border:1px solid var(--cyan-dim);display:block;margin-top:18px;">
     </div>
   </div>
 
@@ -848,7 +875,7 @@
           <li>Terrain-relative navigation via lidar + radar altimeter</li>
           <li>FOG or RLG IMU with MEMS backup; Kalman sensor fusion</li>
           <li>LUNET beacon alignment for node-assisted precision landing</li>
-          <li>Nominal precision: ±3 m; abort logic with redundant nav paths</li>
+          <li>Nominal precision: ±3 m; abort-to-pad, abort-to-surface and abort-to-orbit modes defined; engine-out on descent is designed out by the cluster</li>
           <li>Operable in permanently shadowed regions (PSRs)</li>
         </ul>
       </div>
@@ -887,8 +914,10 @@
     <p class="overview-text" style="margin-top:20px;">
       A vehicle like this doesn't get built by one company. It requires the kind of sustained investment and technical depth that comes from
       NASA program involvement and major aerospace partners working toward a shared architecture.
-      Aegis Station Infrastructure has done the design work to show it closes — the mass budgets, the propulsion trades, the ops concept, the interface definitions.
-      That's the part we bring to the table.
+      What Aegis Station Infrastructure brings is a System Requirements Review baseline that says what closes and what does not: reference missions with
+      simulated trajectories, a linked budget that reproduces the simulation, requirements with sources, trade studies with numbers, a risk register, and a
+      flight-software stack already flying the mission profile in simulation. The open decisions — baseline range, one vehicle or two, engine count — are
+      stated as open. That is the part we bring to the table.
     </p>
 
     <div class="info-box" style="margin-top:28px;">
@@ -900,7 +929,7 @@
   <footer>
     <div class="footer-left">
       AEGIS STATION INFRASTRUCTURE LLC &nbsp;·&nbsp; LUNA–AEGIS SHUTTLE DESIGN DOSSIER<br>
-      DOC: ASI–LAS–DD–001 &nbsp;·&nbsp; REV B &nbsp;·&nbsp; FEBRUARY 2026 &nbsp;·&nbsp; ITAR/EAR-FREE BASELINE<br>
+      DOC: ASI–LAS–DD–001 &nbsp;·&nbsp; REV C &nbsp;·&nbsp; SEPTEMBER 2026 &nbsp;·&nbsp; SRR REV A BASELINE &nbsp;·&nbsp; ITAR/EAR-FREE BASELINE<br>
       DESIGNED FOR COMPATIBILITY WITH ARTEMIS LOGISTICS AND NASA STMD PRIORITIES
     </div>
     <div class="footer-right">
