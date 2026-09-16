@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rebalancing National Priorities — Aegis Station</title>
+<meta name="description" content="The United States spends close to $900 billion a year on defense and under $30 billion on NASA. The gap is not a budget line; it is a misread of what the century is about. A strategic note from Aegis Station.">
+<meta property="og:title" content="Rebalancing National Priorities — Aegis Station">
+<meta property="og:description" content="Space as the new high ground. Why a small share of the defense budget belongs in lunar and cislunar infrastructure, and what it should buy first.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aegisstation.com/rebalancing-national-priorities.html">
+<meta property="og:image" content="https://aegisstation.com/images/moon-is-for-hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0a0e15;
+    --bg-panel:  #0e141d;
+    --ink:       #d9e1ea;
+    --ink-dim:   #8a94a3;
+    --water:     #6fb6d8;
+    --water-deep:#3f7f9e;
+    --hair:      rgba(217, 225, 234, 0.12);
+    --hair-soft: rgba(217, 225, 234, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 1.14rem;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--water); text-decoration: none; }
+  a:hover, a:focus-visible { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--water); outline-offset: 3px; }
+
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---- Masthead strip ---- */
+  .masthead {
+    border-bottom: 1px solid var(--hair);
+    background: rgba(10, 14, 21, 0.9);
+  }
+  .masthead .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 3.4rem;
+  }
+  .brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .brand a { color: var(--ink); }
+  .brand a:hover { color: var(--water); }
+  .masthead .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  /* ---- Hero ---- */
+  header.hero {
+    background:
+      radial-gradient(120% 80% at 85% -10%, rgba(63, 127, 158, 0.16), transparent 60%),
+      var(--bg);
+    border-bottom: 1px solid var(--hair-soft);
+  }
+  header.hero .wrap { padding-top: 5rem; padding-bottom: 3.2rem; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--water); margin-bottom: 1.6rem;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: clamp(2.3rem, 6vw, 3.5rem);
+    line-height: 1.05; letter-spacing: -0.02em;
+    color: #eef3f8;
+  }
+  .dek {
+    margin-top: 1.6rem;
+    font-size: 1.2rem; line-height: 1.6;
+    color: var(--ink-dim);
+    max-width: 34rem;
+  }
+  .dek strong { color: var(--ink); font-weight: 500; }
+
+  /* ---- Body ---- */
+  main .wrap { padding-top: 3.5rem; padding-bottom: 2rem; }
+
+  main p { margin-bottom: 1.5rem; }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500; font-size: 1.5rem; letter-spacing: -0.01em;
+    color: #eef3f8;
+    margin: 3.2rem 0 1.3rem;
+    padding-top: 0.4rem;
+  }
+  h2 .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; font-weight: 400;
+    color: var(--water-deep);
+    letter-spacing: 0.1em;
+    margin-right: 0.8rem;
+    vertical-align: 0.28em;
+  }
+
+  em { color: var(--ink); font-style: italic; }
+
+  .pull {
+    margin: 3rem 0;
+    padding: 1.6rem 0 1.6rem 1.6rem;
+    border-left: 2px solid var(--water);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
+    font-size: 1.55rem; line-height: 1.35; letter-spacing: -0.01em;
+    color: #eef3f8;
+  }
+
+  ol.recs {
+    margin: 0 0 1.8rem 1.4rem;
+    padding: 0;
+  }
+  ol.recs li {
+    margin-bottom: 0.9rem;
+    padding-left: 0.3rem;
+  }
+  ol.recs li strong { color: #eef3f8; font-weight: 500; }
+
+  .note {
+    margin-top: 2.6rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--hair-soft);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem; line-height: 1.7; letter-spacing: 0.04em;
+    color: var(--ink-dim);
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    margin-top: 3rem;
+    border-top: 1px solid var(--hair);
+    background: var(--bg-panel);
+  }
+  footer .wrap { padding-top: 2.4rem; padding-bottom: 4rem; }
+  .sig {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--ink); font-size: 0.98rem; font-weight: 500;
+  }
+  .sig span { color: var(--ink-dim); font-weight: 400; }
+  .backrow {
+    margin-top: 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    display: flex; gap: 1.4rem; flex-wrap: wrap;
+  }
+  .backrow a { color: var(--ink-dim); }
+  .backrow a:hover { color: var(--water); }
+
+  @media (max-width: 600px) {
+    body { font-size: 1.06rem; }
+    header.hero .wrap { padding-top: 3.5rem; padding-bottom: 2.4rem; }
+    .pull { font-size: 1.3rem; }
+    h2 .num { display: block; margin: 0 0 0.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wrap">
+    <div class="brand"><a href="index.html">Aegis Station</a></div>
+    <div class="kicker">Strategic Note</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">National Priorities</div>
+    <h1>Rebalancing National Priorities</h1>
+    <p class="dek">Space as the new high ground. The United States spends close to $900 billion a year on defense and under $30 billion on NASA. <strong>That gap is not a budget line. It is a misread of what the century is about.</strong></p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <p>Nobody disputes American military strength. The defense budget is larger than the next several militaries combined, and the capability it buys is real. What is in dispute, or ought to be, is whether the balance of that spending still matches the domain where leadership will actually be decided. On the ground, the answer has been settled for decades. Above it, the answer is being written now, and the United States is writing it with a fraction of the attention and a fraction of the money.</p>
+
+    <p>This note makes a narrow argument. Not that defense spending is too high in the abstract, and not that space is a nicer place to put money than a carrier group. The argument is that space is already a defense domain, that the competition in it is real and on a schedule, and that a small reallocation would change the outcome. The last section says what the money should buy first, because that is where most of these arguments go wrong.</p>
+
+    <h2><span class="num">01</span>The scale of the imbalance</h2>
+
+    <p>Take the numbers at face value. Defense at roughly $900 billion. NASA under $30 billion, and only part of that is exploration. Moving ten percent of the defense budget, about $90 billion, would more than triple the civil space budget in a single year. Moving fifteen percent would roughly quadruple it and still leave the defense budget larger than any rival&rsquo;s by a wide margin.</p>
+
+    <p>That is what makes the proposal a rebalancing rather than a sacrifice. The ratio between the two budgets is not the product of a strategic decision anyone made. It is inertia, compounded annually. A deliberate ratio, chosen for the century ahead rather than the one behind, would look different.</p>
+
+    <h2><span class="num">02</span>Space is already a defense domain</h2>
+
+    <p>Navigation, communications, weather, missile warning, and most of the intelligence picture already run through orbit. A modern force does not operate without them. The next layer, the one being contested now, is cislunar: the volume between Earth orbit and the Moon, the logistics that move through it, and the resources on the surface at the far end. Whoever operates there routinely will set the terms for everyone who arrives later.</p>
+
+    <p>Investing in that layer is not a diversion from defense. It is the same logic that built the interstate highways, the deep-water ports, and the long-range aircraft: infrastructure first, and the security follows from the ability to move.</p>
+
+    <div class="pull">Overwhelming dominance on the ground does little good if a rival owns the high ground above it.</div>
+
+    <h2><span class="num">03</span>The competition is on a schedule</h2>
+
+    <p>China has published its intent: a crewed lunar landing by 2030 and a permanent research station at the south pole with international partners. Those are not aspirations tucked into a white paper. They are funded programs with hardware in test. The lunar south pole is where the water is, and the water is what turns a landing site into a supply chain. The party that characterizes and works those deposits first will hold the position that matters.</p>
+
+    <p>Apollo was driven by exactly this kind of urgency, and it produced not just a landing but a generation of industry, instruments, and people. The same urgency is available now. What is missing is the decision to act on it.</p>
+
+    <h2><span class="num">04</span>What a year of delay costs</h2>
+
+    <p>Delay is not free, and its costs are specific. Every year without a working surface program is a year in which the ice at the south pole stays uncharacterized, which means every downstream number, from propellant to shielding to how many people a base can support, stays a guess. Every year without cislunar logistics is a year in which each mission is launched whole from Earth, at full cost, with nothing left behind. Planetary defense stays a study. Space-based power stays a slide. And the standards for how cislunar traffic is managed, who lands where, and who owns what get written by whoever shows up, with the United States reacting instead of drafting.</p>
+
+    <h2><span class="num">05</span>The objections</h2>
+
+    <p><em>Cutting defense weakens security.</em> Halve the defense budget and the United States would still outspend every other nation. A ten to fifteen percent shift does not change the terrestrial balance. It changes the orbital one.</p>
+
+    <p><em>Space returns are too long-term.</em> Apollo returned on its investment inside a decade, in materials, computing, and an industrial base that still exists. Lunar infrastructure built now would pay in propulsion, autonomy, robotics, power, and communications, the same fields the defense budget already spends heavily to advance. The returns are not deferred. They are the same returns, bought in a domain that also confers position.</p>
+
+    <p><em>The private sector will do it.</em> Parts of it, yes, and faster than government can. But the private sector builds where there is a customer, and the first customers for lunar water, surface power, and cislunar logistics are governments. A public commitment is what makes the private investment rational. The two are not alternatives.</p>
+
+    <h2><span class="num">06</span>What the money should buy first</h2>
+
+    <p>This is where most rebalancing arguments fail: they ask for the money and then name the station, the base, and the Mars ship in the same breath, as if funding were the only gate. It is not. The right order is the one that opens the gates behind the others. In practice that means:</p>
+
+    <ol class="recs">
+      <li><strong>Reallocate ten to fifteen percent of defense spending</strong> to civil and dual-use space, over a fixed multi-year ramp so programs can plan against it.</li>
+      <li><strong>Fund prospecting before habitats.</strong> Deposit-scale characterization of polar ice, with instruments on the surface, is the single number every later decision depends on. It is also cheap relative to everything downstream.</li>
+      <li><strong>Stand up a National Space Infrastructure Initiative</strong> with a surface-first sequence: prospecting, water extraction at industrial scale, surface power and mobility, cislunar logistics and depots, and only then long-duration orbital habitats.</li>
+      <li><strong>Name cislunar space a core domain</strong> in the national security strategy, alongside land, sea, air, and cyber, with the authorities and budget lines that follow from the designation.</li>
+      <li><strong>Buy from industry against published interfaces.</strong> Government sets the requirements, the interface standards, and the demand signal. Industry builds to them. That is how the launch market was made, and it works for surface systems too.</li>
+      <li><strong>Frame it as competition, honestly.</strong> Bipartisan support for space has always come through the security lens. That lens is accurate this time.</li>
+    </ol>
+
+    <p>None of this is a station. All of it is what a station, or a base, or a Mars vehicle, sits on top of. The United States has the resources, the industrial base, and the people to lead in this domain. What it has not done is decide that the domain matters as much as the budget says the ground does. That decision costs a rounding error in the defense budget and changes what the rest of the century looks like.</p>
+
+    <p>The choice is still ours to make. It will not be for long.</p>
+
+    <p class="note">Adapted from an essay first published on Medium in October 2025. Figures are order-of-magnitude and drawn from public budget summaries; the argument does not depend on the last decimal.</p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sig">A.S. <span>&mdash; Principal Architect, Aegis Station</span></div>
+    <div class="backrow">
+      <a href="industrial-policy-in-orbit.html">Industrial Policy in Orbit</a>
+      <a href="what-the-moon-is-for.html">What the Moon Is For</a>
+      <a href="subsurface-ice-deposit-assessment.html">Ice Prospecting (SIDA)</a>
+      <a href="index.html">&larr; Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
