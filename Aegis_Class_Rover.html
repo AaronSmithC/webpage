@@ -648,7 +648,7 @@ section::before {
     <div class="hero-tag">Pressurized Lunar Mobility Platform</div>
     <h1 class="hero-title">
       Aegis-Class<br>Rover
-      <span>Command Module Specification</span>
+      <span>Command Module Specification — Rev B</span>
     </h1>
     <div class="hero-line"></div>
     <p class="hero-desc">
@@ -666,12 +666,12 @@ section::before {
         <div class="hero-stat-label">Day Endurance</div>
       </div>
       <div class="hero-stat">
-        <div class="hero-stat-val">500+</div>
-        <div class="hero-stat-label">km Range</div>
+        <div class="hero-stat-val">500</div>
+        <div class="hero-stat-label">km Range via LUNET (76 km per charge)</div>
       </div>
       <div class="hero-stat">
-        <div class="hero-stat-val">5,400</div>
-        <div class="hero-stat-label">kg GVM</div>
+        <div class="hero-stat-val">10.6 t</div>
+        <div class="hero-stat-label">GVM, Rev B bottom-up</div>
       </div>
     </div>
     <div class="hero-cta">
@@ -710,12 +710,12 @@ section::before {
       <div class="feature">
         <div class="feature-icon">🫁</div>
         <h3>Shirtsleeves Environment</h3>
-        <p>Full life support at 55.2 kPa / 38.7% O₂ — equivalent sea-level oxygen. Crew works, sleeps, eats, and plans without suits. Productivity multiplied 4–6× over EVA-only concepts.</p>
+        <p>Full life support at 56.5 kPa / 34% O₂, the NASA exploration atmosphere. Crew works, sleeps, eats, and plans without suits. Productivity multiplied 4–6× over EVA-only concepts.</p>
       </div>
       <div class="feature">
         <div class="feature-icon">☀️</div>
         <h3>Solar Storm Shelter</h3>
-        <p>Deployable water-wall bladders in Zone C provide ~10 cm shielding on all sides. Reduces August-1972-class SPE dose from unsurvivable to manageable emergency exposure over 12 hours.</p>
+        <p>700 kg of water in deployable bladders, with food, tanks and racks arranged around a Zone C huddle, gives about 7 cm of water on five faces. Cuts an August-1972-class SPE to an emergency exposure; 10 cm would need about 1.0 t of water.</p>
       </div>
       <div class="feature">
         <div class="feature-icon">🔧</div>
@@ -760,17 +760,17 @@ section::before {
       <div class="spec-card">
         <div class="spec-card-val">4.0 m</div>
         <div class="spec-card-label">Track Width (C-C)</div>
-        <div class="spec-card-note">~4.6–4.8 m with treads</div>
+        <div class="spec-card-note">4.7 m overall with 0.7 m wheels; 4.1 m hull</div>
       </div>
       <div class="spec-card">
-        <div class="spec-card-val">3.90 m</div>
+        <div class="spec-card-val">4.10 m</div>
         <div class="spec-card-label">Total Height</div>
-        <div class="spec-card-note">Incl. SSSRA array tier</div>
+        <div class="spec-card-note">0.5 clearance + 0.45 battery bay + 2.7 hull + 0.45 SSSRA</div>
       </div>
       <div class="spec-card">
-        <div class="spec-card-val">3.4 × 8.0 m</div>
-        <div class="spec-card-label">Cabin Interior</div>
-        <div class="spec-card-note">27.2 m² floor / ~57 m³ gross</div>
+        <div class="spec-card-val">3.9 × 8.0 m</div>
+        <div class="spec-card-label">Cabin Interior (mid-height)</div>
+        <div class="spec-card-note">3.1 m at deck and shoulder · ~59 m³ + 7 m³ cove</div>
       </div>
       <div class="spec-card">
         <div class="spec-card-val">6.5 m</div>
@@ -778,14 +778,14 @@ section::before {
         <div class="spec-card-note">3 axles, 6×6 all-wheel drive</div>
       </div>
       <div class="spec-card">
-        <div class="spec-card-val">1.54 m</div>
+        <div class="spec-card-val">~1.66 m</div>
         <div class="spec-card-label">CG Height</div>
-        <div class="spec-card-note">SSF 1.30 rollover margin</div>
+        <div class="spec-card-note">SSF ~1.20 — at the NASA 1.2 floor (TBR)</div>
       </div>
       <div class="spec-card">
         <div class="spec-card-val">2.1 m</div>
         <div class="spec-card-label">Interior Height</div>
-        <div class="spec-card-note">Standing room, full cabin</div>
+        <div class="spec-card-note">Full headroom over the 2.1 m centre; 1.8 m+ across 3.1 m</div>
       </div>
       <div class="spec-card">
         <div class="spec-card-val">~100 mm</div>
@@ -795,20 +795,30 @@ section::before {
     </div>
   </div>
 
+  <div class="container">
+    <div class="data-block reveal" style="margin-top:32px;">
+      <strong>Rev B hull: flattened cylinder, 4.1 × 2.7 m exterior.</strong> The Rev A cabin was a 3.6 × 2.3 m box. At the cabin design pressure a flat 3.6 m roof
+      and floor have to be held by ring frames in bending, and the cross-section trade puts that hull at ~2,550 kg, of which ~1,300 kg is frames. The obround keeps
+      the flat floor and roof (frames now bend over 1.4 m, not 3.6 m), puts the side walls in hoop tension, gives the same 3.1 m width at shoulder height, a wider
+      cabin at berth height, 7 m³ of pressurised cove under the deck for water and ECLSS, and comes in at ~1,360 kg. The price is 0.5 m of width and 0.4 m of height.
+      A stayed box (two lines of tie columns) was the fallback at ~1,830 kg; a pure cylinder was rejected on height.
+    </div>
+  </div>
+
   <!-- Cross Section -->
   <div class="container-wide">
     <div class="diagram-wrap reveal">
-      <img src="Aegis_Cross_Section.svg" alt="Aegis Command Module Cross-Section — looking forward" style="width:100%;height:auto;">
+      <img src="Aegis_Cross_Section_RevB.svg" alt="Aegis Command Module Cross-Section (Rev B) — looking forward, flattened-cylinder hull" style="width:100%;height:auto;">
     </div>
-    <div class="diagram-label">Cross-Section — Looking Forward — All Subsystems Shown</div>
+    <div class="diagram-label">Cross-Section (Rev B) — Looking Forward — Flattened-Cylinder Hull</div>
   </div>
 
   <!-- Longitudinal Section -->
   <div class="container-wide" style="margin-top:48px;">
     <div class="diagram-wrap reveal">
-      <img src="Aegis_Longitudinal_Section.svg" alt="Aegis Command Module Longitudinal Section — port side view" style="width:100%;height:auto;">
+      <img src="Aegis_Longitudinal_Section_RevB.svg" alt="Aegis Command Module Longitudinal Section (Rev B) — port side view" style="width:100%;height:auto;">
     </div>
-    <div class="diagram-label">Longitudinal Section — Port Side View — Zones A through E</div>
+    <div class="diagram-label">Longitudinal Section (Rev B) — Port Side View — Zones A through E</div>
   </div>
 </section>
 
@@ -875,7 +885,7 @@ section::before {
   <!-- Plan View -->
   <div class="container-wide" style="margin-top:32px;">
     <div class="diagram-wrap reveal">
-      <img src="Aegis_Cabin_Plan_View.svg" alt="Aegis Command Module Cabin Plan View — top down" style="width:100%;height:auto;">
+      <img src="Aegis_Cabin_Plan_View_RevB.svg" alt="Aegis Command Module Cabin Plan View (Rev B) — top down" style="width:100%;height:auto;">
     </div>
     <div class="diagram-label">Cabin Plan View — Top-Down, Roof Removed — Equipment Placement</div>
   </div>
@@ -906,11 +916,11 @@ section::before {
     </div>
 
     <div class="data-block reveal" style="margin-top:40px;">
-      <strong>Cabin Atmosphere:</strong> 55.2 kPa (8.0 psia) / <strong>38.7% O₂</strong> / 21.4 kPa ppO₂ (sea-level equivalent)<br>
+      <strong>Cabin Atmosphere:</strong> 56.5 kPa (8.2 psia) / <strong>34% O₂</strong> / 19.2 kPa ppO₂ — the NASA exploration atmosphere<br>
       <strong>Temperature:</strong> 20–22°C day, 18–19°C sleep &nbsp;|&nbsp; <strong>Humidity:</strong> 40–55% RH<br>
       <strong>CO₂ limit:</strong> &lt;0.53 kPa nominal, alarm at 0.67 kPa &nbsp;|&nbsp; <strong>Particulate:</strong> &lt;1.0 mg/m³ respirable<br>
-      <strong>Benefit:</strong> Reduced hull structural loads + EVA prebreathe cut to ~40 min (vs. 2–4 hr from 101.3 kPa)<br>
-      <em>⚠ All interior materials must pass NASA-STD-6001 flammability at &gt;35% O₂</em>
+      <strong>Benefit:</strong> Reduced hull structural loads + short EVA prebreathe (vs. 2–4 hr from 101.3 kPa); 34% stays under the 36% flammability line, so the NASA-STD-6001 materials database applies<br>
+      <strong>Habitable volume:</strong> ~66 m³ pressurised, ~30–35 m³ net for 3 crew over 60 days — about 10 m³ per person, below the ~25 m³ long-duration guideline. A known compromise, stated as such.
     </div>
   </div>
 </section>
@@ -943,7 +953,7 @@ section::before {
         <div class="spec-card-note">4 × 25 kWh LFP modules</div>
       </div>
       <div class="spec-card">
-        <div class="spec-card-val">1–3 kW</div>
+        <div class="spec-card-val">3 kW</div>
         <div class="spec-card-label">Fuel Cell</div>
         <div class="spec-card-note">H₂-O₂ for night operations</div>
       </div>
@@ -971,10 +981,9 @@ section::before {
 
     <div class="data-block reveal">
       <strong>Power Budget (24-hr traverse day):</strong><br>
-      Cruise (6 hr): <strong>4,590 W</strong> → 27.5 kWh &nbsp;|&nbsp;
-      Station-keeping (12 hr): <strong>2,170 W</strong> → 26.0 kWh &nbsp;|&nbsp;
-      Sleep (6 hr): <strong>1,200 W</strong> → 7.2 kWh<br>
-      <strong>Daily total: ~60.7 kWh</strong> &nbsp;|&nbsp; Peak transient: <strong>8,890 W</strong>
+      Traverse day (6 hr driving at ~11 km/h, 64 km): <strong>~98 kWh</strong> incl. hotel &nbsp;|&nbsp;
+      Parked day: <strong>~41 kWh</strong> &nbsp;|&nbsp; Solar: ~17 kWh/day roof while moving, ~101 kWh/day parked with wings<br>
+      <strong>Energy per km: 1.05 kWh</strong> at 10.6 t (mass-driven) &nbsp;|&nbsp; 1.3 parked days per traverse day → <strong>~27 km/day sustained</strong>, 500 km in ~18 days &nbsp;|&nbsp; Fuel cell: 3 kW, reactants and tanks for 5 shadow days (~428 kg)
     </div>
 
     <h3 style="font-family:'Outfit',sans-serif;color:var(--white);font-size:22px;font-weight:700;margin-top:48px;margin-bottom:16px;" class="reveal">
@@ -982,9 +991,8 @@ section::before {
     </h3>
     <p class="reveal" style="color:var(--fog);max-width:720px;line-height:1.7;">
       NMC/NCA chemistries were explicitly rejected. Thermal runaway at 140–170°C with violent 
-      oxygen release, fire, and HF gas is unsurvivable in a sealed 57 m³ cabin. LFP (LiFePO₄) is 
-      stable above 250°C with slow, self-limiting failure and no fire. The mass penalty — 700–860 kg 
-      pack vs. 450–550 kg for NMC — is accepted. The battery sits underfloor at 0.75–0.95 m height, 
+      oxygen release, fire, and HF gas is unsurvivable in a sealed ~66 m³ cabin. LFP (LiFePO₄) is 
+      stable above 250°C with slow, self-limiting failure and no fire. The mass penalty — ~926 kg pack vs. ~600 kg for NMC — is accepted. The battery sits underfloor at 0.75–0.95 m height, 
       pulling the CG low.
     </p>
 
@@ -1141,14 +1149,14 @@ section::before {
         <div class="spec-card-note">Ni-Ti superelastic spring + SS mesh</div>
       </div>
       <div class="spec-card">
-        <div class="spec-card-val">~6 kPa</div>
-        <div class="spec-card-label">Ground Pressure</div>
-        <div class="spec-card-note">Target ≤7 kPa for south pole regolith</div>
+        <div class="spec-card-val">≤7 kPa</div>
+        <div class="spec-card-label">Ground Pressure (requirement)</div>
+        <div class="spec-card-note">12 kPa at 10.6 t on 0.4 m wheels → ~0.7 m wide wheels or 8 wheels</div>
       </div>
       <div class="spec-card">
-        <div class="spec-card-val">750 W</div>
+        <div class="spec-card-val">1.5 kW</div>
         <div class="spec-card-label">Motor (continuous)</div>
-        <div class="spec-card-note">Per wheel / 4,500 W system total</div>
+        <div class="spec-card-note">Per wheel / 9 kW system; 750 W gives ~5 km/h at 10.6 t</div>
       </div>
       <div class="spec-card">
         <div class="spec-card-val">500 mm</div>
@@ -1161,9 +1169,9 @@ section::before {
         <div class="spec-card-note">Front/rear counter-phase steering</div>
       </div>
       <div class="spec-card">
-        <div class="spec-card-val">25 km/h</div>
-        <div class="spec-card-label">Sprint Speed</div>
-        <div class="spec-card-note">Short duration, firm terrain</div>
+        <div class="spec-card-val">~11 km/h</div>
+        <div class="spec-card-label">Cruise Speed</div>
+        <div class="spec-card-note">Firm regolith at 9 kW; ~6 km/h soft; 5 km/h on a 10° climb</div>
       </div>
     </div>
 
@@ -1189,10 +1197,13 @@ section::before {
           detection and limiting (5–25% threshold by mode), electronic stability control, and
           regenerative ABS — across Highway (5% slip, equal torque), Off-Road (15% slip, adaptive),
           Rock Crawl (25% slip, per-wheel override), and Emergency (limits relaxed) modes. The
-          governing constraint the crew module imposes is traction, not motor power: at 5,400 kg laden
-          on the Moon, available traction is ~4,374 N, and a 10° climb demands 4,017 N (92% of limit).
-          A candidate platform must deliver stable, slip-managed torque control within this margin;
-          slopes above 12–15° on loose regolith are traction-limited regardless of installed motor power.
+          governing constraint the crew module imposes is traction, not motor power: with a traction
+          coefficient of 0.5 and rolling resistance of 0.15–0.25, the slope limit is ~21° on firm and
+          ~15° on soft regolith regardless of mass, because traction and slope demand both scale with
+          weight. What the 10.6 t Rev B mass does change is ground pressure (12 kPa on 0.4 m wheels), speed at a
+          given power, and energy per kilometre (1.05 kWh/km, 76 km per charge on firm ground,
+          46 km soft). A candidate platform must deliver stable, slip-managed torque control within the
+          traction margin and meet the ≤7 kPa ground-pressure requirement at Rev B mass.
         </p>
       </div>
     </div>
@@ -1257,7 +1268,7 @@ section::before {
     <div class="data-block reveal">
       <strong>Water:</strong> 3.2 kg/person/day gross (drinking 2.0 + food rehydration 0.5 + hygiene 0.5 + medical 0.2)<br>
       Recovery rate 85% → <strong>net 0.48 kg/person/day</strong> → ~86 kg makeup for 60-day, 3-crew mission<br>
-      Vehicle carries <strong>~200 kg</strong> at mission start (initial fill + margin)<br><br>
+      Vehicle carries <strong>700 kg</strong> at mission start: 200 kg consumable fill plus 500 kg in the storm-shelter bladders, which doubles as reserve<br><br>
       <strong>Food:</strong> 1.8 kg/person/day × 3 crew × 60 days = <strong>324 kg</strong> (freeze-dried + thermostabilized, 16-day rotation)<br>
       <strong>O₂:</strong> 0.84 kg/person/day × 3 × 60 = <strong>~151 kg</strong> &nbsp;|&nbsp; <strong>N₂ makeup:</strong> ~0.6–1.2 kg total
     </div>
@@ -1284,7 +1295,7 @@ section::before {
       <div class="feature">
         <div class="feature-icon">🚀</div>
         <h3>Long-Range Transport</h3>
-        <p>Move crews safely between outposts, sites, domes, and landers. Passenger module extends capacity to 24 crew for base transfers.</p>
+        <p>Move crews safely between outposts, sites, domes, and landers. Hopper collar mate at the aft dock; no EVA for crew transfer.</p>
       </div>
       <div class="feature">
         <div class="feature-icon">🔭</div>
@@ -1294,9 +1305,7 @@ section::before {
     </div>
 
     <div class="data-block reveal" style="margin-top:24px;">
-      <strong>Module Train Configuration:</strong><br>
-      Command Module (~10 m) + Passenger Module (~24 m, up to 24 crew) + Cargo Module (12–24 m) + Systems Module (~6 m)<br>
-      <em>All modules share standardized mechanical, electrical, and data interfaces</em>
+      <strong>Growth:</strong> towed cargo and passenger modules on the same mechanical, electrical and data interfaces are a growth concept. They are not part of this vehicle's budget and are not sized here.
     </div>
   </div>
 </section>
@@ -1312,7 +1321,7 @@ section::before {
         Full Dossier (PDF)
       </a>
     </div>
-    <p style="font-size:12px;color:var(--slate);margin-top:24px;">Aaron Smith — Independent Systems Architect — February 2026</p>
+    <p style="font-size:12px;color:var(--slate);margin-top:24px;">Aaron Smith — Independent Systems Architect — Rev A February 2026 · Rev B September 2026 (bottom-up budget, flattened-cylinder hull)</p>
   </div>
 </footer>
 

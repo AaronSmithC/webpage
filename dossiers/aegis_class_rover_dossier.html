@@ -146,7 +146,7 @@
   <div class="kicker">Aegis Station</div>
   <h1>Aegis-Class Rover</h1>
   <div class="subtitle">Lunar Surface Mobility Platform</div>
-  <div class="meta">Architecture Reference Document &nbsp;|&nbsp; May 2026 &nbsp;|&nbsp; Not for Hardware Commitment</div>
+  <div class="meta">Architecture Reference Document &nbsp;|&nbsp; Rev B — September 2026 &nbsp;|&nbsp; Not for Hardware Commitment</div>
 
   <hr>
 
@@ -194,9 +194,9 @@
       <tr><td>Nominal crew</td><td>2–4</td></tr>
       <tr><td>Emergency crew</td><td>Up to 6 (short-duration)</td></tr>
       <tr><td>Mission duration</td><td>30–60 days</td></tr>
-      <tr><td>Range</td><td>~100 km nominal; extended via LUNET recharge (energetic, not geometric)</td></tr>
-      <tr><td>Cruise speed</td><td>10–15 km/h</td></tr>
-      <tr><td>Maximum speed</td><td>25 km/h (terrain limited)</td></tr>
+      <tr><td>Range</td><td>~76 km per battery charge on firm ground (46 km soft); 500 km via LUNET recharge (energetic, not geometric); ~27 km/day sustained on solar</td></tr>
+      <tr><td>Cruise speed</td><td>~11 km/h firm, ~6 km/h soft, at 1.5 kW continuous per wheel</td></tr>
+      <tr><td>Maximum speed</td><td>~15 km/h, terrain and hazard-detection limited</td></tr>
     </table>
   </section>
 
@@ -230,19 +230,20 @@
     <table>
       <tr><th>Parameter</th><th>Value</th></tr>
       <tr><td>Overall length</td><td>~10.0 m</td></tr>
-      <tr><td>Overall width (with treads)</td><td>4.6–4.8 m</td></tr>
+      <tr><td>Overall width</td><td>4.7 m (4.1 m hull over a 4.0 m track, 0.7 m wheels)</td></tr>
       <tr><td>Track width (center-to-center)</td><td>4.0 m</td></tr>
       <tr><td>Wheelbase</td><td>6.5 m</td></tr>
-      <tr><td>Height to cabin roof</td><td>3.45 m</td></tr>
-      <tr><td>Height to array top</td><td>3.90 m</td></tr>
+      <tr><td>Hull section</td><td>Flattened cylinder, 4.1 × 2.7 m exterior (3.9 × 2.5 m interior), 1.4 m flats, 1.35 m side-wall radius</td></tr>
+      <tr><td>Height to hull roof</td><td>3.65 m</td></tr>
+      <tr><td>Height to array top</td><td>4.10 m</td></tr>
       <tr><td>Ground clearance</td><td>~0.50 m</td></tr>
     </table>
 
     <h3>Stability Metrics</h3>
     <table>
       <tr><th>Parameter</th><th>Value</th></tr>
-      <tr><td>CG height</td><td>~1.54 m above ground</td></tr>
-      <tr><td>Static Stability Factor (SSF)</td><td>1.30</td></tr>
+      <tr><td>CG height</td><td>~1.66 m above ground (group-height estimate, TBR)</td></tr>
+      <tr><td>Static Stability Factor (SSF)</td><td>~1.20 — at the floor; track or battery-bay height is the lever</td></tr>
       <tr><td>NASA target (crewed)</td><td>≥ 1.2</td></tr>
     </table>
     <p class="note">The 4.0 m track width provides margin for dynamic loads, slope traversal, and cargo asymmetry.</p>
@@ -252,22 +253,23 @@
 
   <!-- ── 5 ── -->
   <section class="section">
-    <h2>5. Mass Budget (Baseline Configuration)</h2>
+    <h2>5. Mass Budget (Rev B, bottom-up)</h2>
     <table>
-      <tr><th>Subsystem</th><th>Mass (kg)</th></tr>
-      <tr><td>Chassis, suspension, drivetrain</td><td>1,200</td></tr>
-      <tr><td>Pressure hull &amp; structure</td><td>1,000</td></tr>
-      <tr><td>Underfloor systems (batteries, tanks)</td><td>800</td></tr>
-      <tr><td>ECLSS + interior equipment</td><td>600</td></tr>
-      <tr><td>Radiator assembly (6 m²)</td><td>60</td></tr>
-      <tr><td>Roof solar array (20 m²)</td><td>110</td></tr>
-      <tr><td>Deployable wing arrays (10 m²)</td><td>75</td></tr>
-      <tr><td>Fuel cell + reactants</td><td>180</td></tr>
-      <tr><td>Crew (3 × 80 kg)</td><td>240</td></tr>
-      <tr><td>Remaining systems + margin</td><td>~1,135</td></tr>
-      <tr><td><strong>Gross vehicle mass</strong></td><td><strong>~5,400</strong></td></tr>
+      <tr><th>Group</th><th>Mass (kg)</th></tr>
+      <tr><td>Pressure hull (flattened cylinder), deck, racks, outer layer, mounts</td><td>2,231</td></tr>
+      <tr><td>Mobility platform — partner allocation (frame, 6 stations, steering, brakes)</td><td>1,226</td></tr>
+      <tr><td>Battery pack 100 kWh LFP, PMAD, harness</td><td>1,196</td></tr>
+      <tr><td>Fuel cell, reactants for 5 shadow days, COPV tanks</td><td>428</td></tr>
+      <tr><td>SSSRA: roof array, radiator, wings, truss, fluid loop</td><td>365</td></tr>
+      <tr><td>ECLSS hardware, O₂ and N₂ with tanks</td><td>747</td></tr>
+      <tr><td>Water 700 kg (200 consumable + 500 shelter) and bladders</td><td>840</td></tr>
+      <tr><td>Interior outfit, avionics, sensors, comms</td><td>700</td></tr>
+      <tr><td>Crew (3 × 80 kg), 2 EVA suits, tools</td><td>590</td></tr>
+      <tr><td>Food, clothing, spares, medical, science allocation</td><td>773</td></tr>
+      <tr><td>Growth margin, 20 % on dry hardware</td><td>1,504</td></tr>
+      <tr><td><strong>Gross vehicle mass</strong></td><td><strong>~10,599</strong></td></tr>
     </table>
-    <p class="note">Chassis, suspension, and drivetrain mass is the platform partner's allocation against the integrated-vehicle budget.</p>
+    <p class="note">Chassis, suspension, and drivetrain mass is the platform partner's allocation against the integrated-vehicle budget. The Rev A figure of ~5,400 kg carried no food, water, oxygen or reactant contents, no growth margin, and a cylinder's hull mass on a box-shaped cabin; the Rev B budget is built line by line with the bases stated, and the hull comes from a cross-section trade that replaced the 3.6 × 2.3 m box with a 4.1 × 2.7 m flattened cylinder at about half the hull mass for the same width at shoulder height. Line items are held in the Rev B model set.</p>
   </section>
 
   <hr>
@@ -373,10 +375,10 @@
     <table>
       <tr><th>Parameter</th><th>Value</th></tr>
       <tr><td>Interior length</td><td>8.0 m</td></tr>
-      <tr><td>Interior width</td><td>3.4 m</td></tr>
+      <tr><td>Interior width</td><td>3.9 m at mid-height; 3.1 m at deck and shoulder height; 2.1 m at full headroom (aisle)</td></tr>
       <tr><td>Interior height</td><td>2.1 m clear</td></tr>
-      <tr><td>Gross volume</td><td>~57 m³</td></tr>
-      <tr><td>Net habitable volume</td><td>~38–42 m³</td></tr>
+      <tr><td>Pressurised volume</td><td>~66 m³ (59 m³ above the deck to 2.1 m, 7 m³ cove under the deck)</td></tr>
+      <tr><td>Net habitable volume</td><td>~30–35 m³ — about 10 m³ per crew for 60 days, below the ~25 m³ long-duration guideline; a known compromise</td></tr>
     </table>
 
     <h3>Functional Zones</h3>
@@ -391,9 +393,9 @@
     <h3>Cabin Atmosphere</h3>
     <table>
       <tr><th>Parameter</th><th>Value</th></tr>
-      <tr><td>Total pressure</td><td>55.2 kPa (8.0 psia)</td></tr>
-      <tr><td>O₂ partial pressure</td><td>21.4 kPa</td></tr>
-      <tr><td>O₂ fraction</td><td>38.7%</td></tr>
+      <tr><td>Total pressure</td><td>56.5 kPa (8.2 psia) — NASA exploration atmosphere</td></tr>
+      <tr><td>O₂ partial pressure</td><td>19.2 kPa</td></tr>
+      <tr><td>O₂ fraction</td><td>34% — under the 36% flammability line, so the NASA-STD-6001 materials database applies</td></tr>
       <tr><td>Temperature</td><td>18–22°C</td></tr>
       <tr><td>Relative humidity</td><td>40–55%</td></tr>
     </table>
@@ -424,7 +426,7 @@
       <tr><td>Medical / contingency</td><td>36</td></tr>
       <tr><td><strong>Total gross demand</strong></td><td><strong>576</strong></td></tr>
     </table>
-    <p class="note">With 85% recovery, net makeup requirement ≈ 86 kg. Vehicle carries ~200 kg at mission start.</p>
+    <p class="note">With 85% recovery, net makeup requirement ≈ 86 kg. Vehicle carries 700 kg at mission start: 200 kg consumable fill plus 500 kg in the storm-shelter bladders, which doubles as reserve.</p>
   </section>
 
   <hr>
@@ -461,7 +463,7 @@
     <h3>Solar Particle Event Shelter</h3>
     <ul>
       <li>Deployable water-wall shielding</li>
-      <li>8–12 cm water equivalent</li>
+      <li>700 kg of water in deployable bladders around a three-person huddle: ~7 cm on five faces, plus food, tanks and racks; 10 cm would need ~1,044 kg</li>
       <li>Underfloor water tanks provide bottom shielding</li>
     </ul>
     <p class="note">Estimated severe SPE dose reduced from lethal exposure range to survivable emergency exposure range.</p>
@@ -482,7 +484,7 @@
     <h3>Electrical Loads</h3>
     <table>
       <tr><th>Mode</th><th>Power</th></tr>
-      <tr><td>Cruise</td><td>~4,590 W</td></tr>
+      <tr><td>Cruise (11 km/h, 1.5 kW per wheel)</td><td>~11,200 W incl. hotel (1.05 kWh/km at 10.6 t)</td></tr>
       <tr><td>Station-keeping</td><td>~2,170 W</td></tr>
       <tr><td>Peak</td><td>~8,890 W</td></tr>
     </table>
@@ -492,8 +494,8 @@
       <tr><th>Source</th><th>Capability</th></tr>
       <tr><td>Roof SSSRA array (20 m²)</td><td>~724 W @ 6° sun</td></tr>
       <tr><td>Deployable wing arrays (10 m² tilted)</td><td>~3.5 kW combined</td></tr>
-      <tr><td>Fuel cell</td><td>1–3 kW sustained</td></tr>
-      <tr><td>Battery storage</td><td>40–60 kWh</td></tr>
+      <tr><td>Fuel cell</td><td>3 kW; reactants and tanks for 5 shadow days (~430 kg)</td></tr>
+      <tr><td>Battery storage</td><td>100 kWh, 4 × 25 kWh LFP; one traverse day</td></tr>
       <tr><td>Outpost recharge</td><td>LUNET node, logistics-based</td></tr>
     </table>
   </section>
