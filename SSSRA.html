@@ -375,15 +375,16 @@ to { opacity: 1; transform: translateY(0); }
   <div class="hero">
     <div class="hero-eyebrow">Lunar Thermal Architecture</div>
     <h1>Stacked Solar-Shade<br><span class="thin">Radiator Architecture</span></h1>
-    <div class="subtitle">A Dual-Use Thermal Rejection and Power Generation Configuration for Lunar Surface Platforms</div>
-    <div class="author-line"><span>Aaron Smith</span> — Independent Systems Architect · February 2026</div>
+    <div class="subtitle">A Photovoltaic Canopy for Equatorial-Belt Lunar Surface Assets — Rev B</div>
+    <div class="author-line"><span>Aaron Smith</span> — Independent Systems Architect · Rev B, September 2026 (replaces February 2026)</div>
   </div>
 
   <div class="divider"></div>
 
   <div class="abstract">
     <div class="section-label">Abstract</div>
-    <p>A stacked configuration in which a photovoltaic solar array is mounted above a horizontal flat-plate radiator, simultaneously generating electrical power and shading the radiator from direct solar flux. The architecture eliminates the primary parasitic thermal load on lunar surface radiators, achieving consistent rejection performance independent of rover heading or sun angle — a key enabler for autonomous, long-duration surface mobility.</p>
+    <p>A photovoltaic canopy mounted above a horizontal flat-plate radiator, shading it from the sun while generating power. Rev B rebuilds the analysis from the real geometry: a canopy large enough to cast a shadow occupies most of the radiator's view of the sky, so a clean radiator is never improved by it. The configuration pays in one regime, fixed assets within about 15° of the equator running through lunar noon with dust-degraded radiators, where a canopy 3 m or more above the radiator holds rejection at roughly four times the unshaded value while producing power and a shaded work area. It is a fixed-asset configuration for low latitudes rather than a vehicle roof, and polar sites do not need it: the Aegis polar vehicles carry unshaded radiators and keep the roof power-and-thermal interface plate defined alongside the concept.</p>
+    <p class="note" style="margin-top:14px;font-size:12.5px;line-height:1.6;color:var(--text-dim);">Rev B rebuilds the February 2026 analysis. Every table is generated from one closed-form model whose inputs are coating properties and geometry; the radiator-to-canopy view factor is computed numerically for the actual rectangles rather than assumed.</p>
   </div>
 
   <div class="schematic" style="margin-bottom: 48px; opacity: 0; animation: fadeIn 0.8s ease forwards 0.85s;">
@@ -393,39 +394,39 @@ to { opacity: 1; transform: translateY(0); }
       <img src="SSSRA_schematic.svg" alt="SSSRA Conceptual Cross-Section Schematic" style="width: 100%; display: block; max-width: 100%;">
     </div>
     <div style="font-size: 10px; color: var(--text-dim); letter-spacing: 0.08em; margin-top: 8px; text-align: center;">
-      Cross-section showing solar array tier, clearance gap, radiator panel, and thermal flux pathways · Not to scale
+      Rev B canopy configuration for an equatorial fixed asset: 3 m clearance, overhang for shade at ≥70°, sky-view and backradiation paths · Not to scale
     </div>
   </div>
 
   <div class="figures">
     <div class="figure">
-      <div class="figure-value">302</div>
-      <div class="figure-label">W/m² net rejection<br>(shaded, clean)</div>
+      <div class="figure-value">±15°</div>
+      <div class="figure-label">Latitude band where<br>the canopy pays</div>
     </div>
     <div class="figure">
-      <div class="figure-value">≤0.15</div>
-      <div class="figure-label">Backside ε<br>(key enabler)</div>
+      <div class="figure-value">≥3 m</div>
+      <div class="figure-label">Canopy height<br>above the radiator</div>
     </div>
     <div class="figure">
-      <div class="figure-value">~2 cm</div>
-      <div class="figure-label">CG rise on<br>2,000 kg platform</div>
+      <div class="figure-value">4×</div>
+      <div class="figure-label">Dusty-radiator rejection<br>vs unshaded, equatorial noon</div>
     </div>
   </div>
 
   <div class="platforms">
     <div class="section-label">Platform Applicability</div>
     <div class="tag-row">
-      <div class="tag">Pressurized Rovers</div>
-      <div class="tag">Unpressurized Rovers</div>
-      <div class="tag">Surface Habitats</div>
-      <div class="tag">ISRU Equipment</div>
-      <div class="tag">Logistics Nodes</div>
+      <div class="tag">Equatorial-Belt Habitats</div>
+      <div class="tag">Equatorial ISRU Plants</div>
+      <div class="tag">Low-Latitude Logistics Nodes</div>
+      <div class="tag" style="opacity:0.55;">Mid-Latitude — Not Recommended</div>
+      <div class="tag" style="opacity:0.55;">Mobile and Polar — Not Applicable</div>
     </div>
   </div>
 
   <div class="download-section">
     <div class="download-title">Full Architecture Reference Document</div>
-    <div class="download-meta">PDF · 14 pages · Not for hardware commitment</div>
+    <div class="download-meta">PDF · 8 pages · Rev B · Not for hardware commitment</div>
     <a href="dossiers/SSSRA.pdf" class="download-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -435,7 +436,7 @@ to { opacity: 1; transform: translateY(0); }
       Download PDF
     </a>
 <div class="download-title">Mission Scenario Analysis</div>
-    <div class="download-meta">PDF · 9 pages · Mission profiles & operational envelopes</div>
+    <div class="download-meta">PDF · 4 pages · Rev B · Scenario matrix and program application</div>
     <a href="dossiers/SSSRA_Mission_Scenarios.pdf" class="download-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>

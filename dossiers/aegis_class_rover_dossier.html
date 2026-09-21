@@ -162,7 +162,7 @@
     </p>
     <p>
       ASI develops the vehicle-defining systems: the pressurized crew module, the integrated power and
-      thermal architecture (SSSRA), and the flight software and operations console. The mobility chassis is
+      thermal architecture (roof radiator and the ASI node power/thermal interface), and the flight software and operations console. The mobility chassis is
       sourced rather than rebuilt — drawn from the maturing open-architecture lunar rover market — with ASI
       specifying the interface and integrating the platform.
     </p>
@@ -235,15 +235,15 @@
       <tr><td>Wheelbase</td><td>6.5 m</td></tr>
       <tr><td>Hull section</td><td>Flattened cylinder, 4.1 × 2.7 m exterior (3.9 × 2.5 m interior), 1.4 m flats, 1.35 m side-wall radius</td></tr>
       <tr><td>Height to hull roof</td><td>3.65 m</td></tr>
-      <tr><td>Height to array top</td><td>4.10 m</td></tr>
+      <tr><td>Height to roof radiator top</td><td>3.80 m</td></tr>
       <tr><td>Ground clearance</td><td>~0.50 m</td></tr>
     </table>
 
     <h3>Stability Metrics</h3>
     <table>
       <tr><th>Parameter</th><th>Value</th></tr>
-      <tr><td>CG height</td><td>~1.66 m above ground (group-height estimate, TBR)</td></tr>
-      <tr><td>Static Stability Factor (SSF)</td><td>~1.20 — at the floor; track or battery-bay height is the lever</td></tr>
+      <tr><td>CG height</td><td>~1.64 m above ground (group-height estimate, TBR)</td></tr>
+      <tr><td>Static Stability Factor (SSF)</td><td>~1.22 — just above the 1.2 floor; track or battery-bay height is the lever</td></tr>
       <tr><td>NASA target (crewed)</td><td>≥ 1.2</td></tr>
     </table>
     <p class="note">The 4.0 m track width provides margin for dynamic loads, slope traversal, and cargo asymmetry.</p>
@@ -260,14 +260,14 @@
       <tr><td>Mobility platform — partner allocation (frame, 6 stations, steering, brakes)</td><td>1,226</td></tr>
       <tr><td>Battery pack 100 kWh LFP, PMAD, harness</td><td>1,196</td></tr>
       <tr><td>Fuel cell, reactants for 5 shadow days, COPV tanks</td><td>428</td></tr>
-      <tr><td>SSSRA: roof array, radiator, wings, truss, fluid loop</td><td>365</td></tr>
+      <tr><td>Roof radiator, node interface plate, wings, fluid loop</td><td>280</td></tr>
       <tr><td>ECLSS hardware, O₂ and N₂ with tanks</td><td>747</td></tr>
       <tr><td>Water 700 kg (200 consumable + 500 shelter) and bladders</td><td>840</td></tr>
       <tr><td>Interior outfit, avionics, sensors, comms</td><td>700</td></tr>
       <tr><td>Crew (3 × 80 kg), 2 EVA suits, tools</td><td>590</td></tr>
       <tr><td>Food, clothing, spares, medical, science allocation</td><td>773</td></tr>
       <tr><td>Growth margin, 20 % on dry hardware</td><td>1,504</td></tr>
-      <tr><td><strong>Gross vehicle mass</strong></td><td><strong>~10,599</strong></td></tr>
+      <tr><td><strong>Gross vehicle mass</strong></td><td><strong>~10,489</strong></td></tr>
     </table>
     <p class="note">Chassis, suspension, and drivetrain mass is the platform partner's allocation against the integrated-vehicle budget. The Rev A figure of ~5,400 kg carried no food, water, oxygen or reactant contents, no growth margin, and a cylinder's hull mass on a box-shaped cabin; the Rev B budget is built line by line with the bases stated, and the hull comes from a cross-section trade that replaced the 3.6 × 2.3 m box with a 4.1 × 2.7 m flattened cylinder at about half the hull mass for the same width at shoulder height. Line items are held in the Rev B model set.</p>
   </section>
@@ -484,7 +484,7 @@
     <h3>Electrical Loads</h3>
     <table>
       <tr><th>Mode</th><th>Power</th></tr>
-      <tr><td>Cruise (11 km/h, 1.5 kW per wheel)</td><td>~11,200 W incl. hotel (1.05 kWh/km at 10.6 t)</td></tr>
+      <tr><td>Cruise (11 km/h, 1.5 kW per wheel)</td><td>~11,200 W incl. hotel (1.04 kWh/km at 10.5 t)</td></tr>
       <tr><td>Station-keeping</td><td>~2,170 W</td></tr>
       <tr><td>Peak</td><td>~8,890 W</td></tr>
     </table>
@@ -492,8 +492,8 @@
     <h3>Generation Strategy</h3>
     <table>
       <tr><th>Source</th><th>Capability</th></tr>
-      <tr><td>Roof SSSRA array (20 m²)</td><td>~724 W @ 6° sun</td></tr>
-      <tr><td>Deployable wing arrays (10 m² tilted)</td><td>~3.5 kW combined</td></tr>
+      <tr><td>Roof array</td><td>None in Rev B: a flat 20 m² array made ~0.8 kW at 6° and blocked the radiator; a sun-tracking mast array for driving is TBD</td></tr>
+      <tr><td>Deployable wing arrays (10 m², sun-tracking when parked)</td><td>~3.5 kW combined; the only solar source until the mast array is sized</td></tr>
       <tr><td>Fuel cell</td><td>3 kW; reactants and tanks for 5 shadow days (~430 kg)</td></tr>
       <tr><td>Battery storage</td><td>100 kWh, 4 × 25 kWh LFP; one traverse day</td></tr>
       <tr><td>Outpost recharge</td><td>LUNET node, logistics-based</td></tr>
@@ -504,29 +504,30 @@
 
   <!-- ── 13 ── -->
   <section class="section">
-    <h2>13. Thermal Architecture — SSSRA</h2>
+    <h2>13. Thermal Architecture — Roof Radiator</h2>
 
-    <h3>Radiator Tier</h3>
+    <h3>Roof Radiator, Unshaded</h3>
     <table>
       <tr><th>Parameter</th><th>Value</th></tr>
-      <tr><td>Area</td><td>6.0 m²</td></tr>
+      <tr><td>Area</td><td>6.0 m², horizontal, white coating, on the hull roof</td></tr>
       <tr><td>Operating temperature</td><td>310 K</td></tr>
-      <tr><td>Degraded net rejection</td><td>~255 W/m²</td></tr>
-      <tr><td>Peak rejection capacity</td><td>~1,530 W</td></tr>
+      <tr><td>Net rejection, clean (ε 0.88, α_s 0.12, 6° sun)</td><td>~444 W/m² — ~2,662 W</td></tr>
+      <tr><td>Net rejection, dusty end of mission (ε 0.75, α_s 0.25)</td><td>~357 W/m² — ~2,143 W (sizing case)</td></tr>
+      <tr><td>Solar load on a horizontal surface at 6°</td><td>~142 W/m² incident, ~17 W/m² absorbed clean</td></tr>
+      <tr><td>Roof interface</td><td>Node power and thermal connection plate — the ASI standard shared with the hopper</td></tr>
     </table>
 
-    <h3>Solar Tier</h3>
-    <ul>
-      <li>Roof shading array: 20 m²</li>
-      <li>Deployable wing arrays: 10 m²</li>
-      <li>Low-emissivity backside coating</li>
-      <li>Heading-independent rejection performance</li>
-    </ul>
+    <h3>Roof array tier: trade result</h3>
+    <p>Rev A carried a 20 m² solar array 0.4 m above the radiator to shade it. At polar sun angles the shade saves almost nothing, because
+    the sun grazes a horizontal surface, while the array blocks the radiator's view of space. With the documented view factor of 0.30 the shaded
+    panel rejected ~302 W/m² against ~444 W/m² unshaded; the view factor for a full-coverage array at 0.4 m is about 0.73,
+    which takes the shaded figure to ~75 W/m². The shadow itself needs a 3.8 m overhang at 6° to cover the panel,
+    so the low sun passed under the array regardless. The concept is kept for high-sun-angle assets and is described as such on its own page.</p>
 
     <h3>Mass &amp; CG Impact</h3>
     <ul>
-      <li>Total assembly mass: ~85–110 kg</li>
-      <li>CG rise: ~0.02 m (negligible)</li>
+      <li>Radiator panel and fluid loop: ~140 kg; interface plate ~25 kg</li>
+      <li>Roof array tier deleted: −0.30 m total height, CG lowered</li>
     </ul>
   </section>
 
@@ -546,7 +547,7 @@
     <h3>Phase 1</h3>
     <ul>
       <li>Uncrewed demonstrator</li>
-      <li>SSSRA thermal validation</li>
+      <li>Roof radiator and node-interface validation</li>
       <li>Dust and suitport testing</li>
       <li>Flight software to bench and hardware-in-the-loop targets through the HAL</li>
     </ul>
