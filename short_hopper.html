@@ -701,7 +701,7 @@
       <tr><td>SURFACE–SURFACE, GROWTH</td><td>1,500 km one-way with LUNET refuel at destination — same tanks, no hardware change</td></tr>
       <tr><td>SURFACE–LLO</td><td>100 km LLO round trip, no orbital refuel, at 16,590 kg load (station era)</td></tr>
       <tr><td>FLIGHT TIME, 500 km LEG</td><td>~16 min liftoff to hover gate; apex ~104 km</td></tr>
-      <tr><td>REUSABILITY</td><td>Min. 10 sorties between depot maintenance (requirement, TBD)</td></tr>
+      <tr><td>REUSABILITY</td><td>Min. 10 sorties between intermediate service; wear items field-replaceable; core structure life 50 sorties to retirement (requirements, TBD)</td></tr>
       <tr><td>TURNAROUND TIME</td><td>24–48 hours at a LUNET node (requirement, TBD)</td></tr>
       <tr><td>LANDING PRECISION</td><td>±3 m with terrain-relative navigation (TBR)</td></tr>
 
@@ -890,6 +890,19 @@
           <li>Modular avionics and structural interfaces for rapid field swap</li>
         </ul>
       </div>
+    </div>
+
+    <div style="margin-top:36px;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:12px;">REUSE &amp; SERVICING</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--white-dim);line-height:1.7;margin-bottom:18px;">
+        There is no hangar or depot on the Moon before the station exists, so reuse is built around a LUNET node, EVA crew and the rover arm. Everything that wears is a field-replaceable unit: engines, legs and footpads, RCS pods, collar and hatch seals, sensor heads, battery and avionics boxes. The one thing that is not, the tank and structure core, sets the vehicle's retirement. What limits life, in order: engine starts, cryogenic fill and pressure cycles on the tanks, landings on unprepared terrain with plume ejecta on every touchdown, and dust on everything that moves or seals. Cycle counters live on the vehicle in the flight software and trigger service; per-leg load cells trigger a hard-landing inspection.
+      </div>
+      <table class="spec-table">
+        <tr class="group-header"><td colspan="2">// SERVICE TIERS (SRR §2.8, REQUIREMENTS TBD)</td></tr>
+        <tr><td>1 — LINE SERVICE</td><td>Every sortie, inside the 48 h turnaround, at the home node. Telemetry and cycle-counter review, leak check on refuel, camera inspection of gear and underside, sensor-window cleaning, consumables and RCS reload. No planned hands-on work.</td></tr>
+        <tr><td>2 — INTERMEDIATE</td><td>On counters or on condition, not more often than every 10 sorties. EVA crew or rover arm, no pressurised facility. Engine inspection or swap, footpad and damper replacement, seal replacement, sensor recalibration, insulation inspection.</td></tr>
+        <tr><td>3 — RETIREMENT</td><td>Tanks, structure and pressure vessel at their certified life, 50 sorties (200 burns, 300 starts, 100 landings), to be reviewed against dust and ejecta erosion data. Credible on cycles: reusable boosters already exceed 20 flights. Pre-station the vehicle is retired in place; station-era return to an orbital facility is a growth option, not a dependency.</td></tr>
+      </table>
     </div>
   </div>
 

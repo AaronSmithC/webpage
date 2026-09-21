@@ -142,7 +142,7 @@
   <tr><td>Surface-to-surface, growth</td><td>1,500 km one-way with LUNET refuel at destination</td></tr>
   <tr><td>Surface-to-LLO</td><td>100 km LLO round trip, no orbital refuel, at 16,590 kg load</td></tr>
   <tr><td>Flight time, 500 km leg</td><td>~16 min liftoff to hover gate</td></tr>
-  <tr><td>Reusability / turnaround / precision</td><td>10 sorties between depot maintenance; 24–48 h at a node; ±3 m with TRN — all carried as requirements to be confirmed</td></tr>
+  <tr><td>Reusability / turnaround / precision</td><td>10 sorties between intermediate service with wear items field-replaceable; core structure life 50 sorties to retirement; 24–48 h at a node; ±3 m with TRN — all carried as requirements to be confirmed</td></tr>
   <tr><th colspan="2">Crew and cargo</th></tr>
   <tr><td>Crew</td><td>4 standard (Config A); 6 maximum at reduced range</td></tr>
   <tr><td>Cargo</td><td>Up to 1,000 kg palletised (Config B); 2 crew + ~500 kg (Config C, the sizing manifest)</td></tr>
@@ -209,6 +209,16 @@
     <li>Ground segment: CCSDS command/telemetry bridge and web console; the vehicle does not need a ground link to complete a leg</li>
   </ul></div>
 </div>
+<h3>Reuse and servicing</h3>
+<p>Rev B carried "10 sorties between depot maintenance" without saying what a depot is or what limits the vehicle. There is no hangar, workshop or depot on the Moon before the station exists, so the servicing concept assumes a LUNET node, EVA crew and the rover assist arm, and nothing else. Reuse is organised in three tiers. Everything that wears is a field-replaceable unit: engines, landing legs and footpads, RCS pods, collar, hatch and suitport seals, sensor heads, battery modules and avionics boxes, each removable without a pressurised facility and without breaking a cryogenic tank joint. The three-engine cluster is what makes engine swap the reuse strategy for the item with the least known life. The tank and structure core cannot be swapped in the field, and its cycle life sets the vehicle's retirement.</p>
+<p>What limits life, in order: engine starts (six per sortie with abort relights), cryogenic fill and pressure cycles on the tanks, landings on unprepared terrain at twice the sortie count with plume ejecta on every touchdown, and dust on everything that moves or seals. The flight software keeps non-volatile cycle counters per engine, tank, leg, thruster and mechanism and raises a maintenance-due event at each limit; the per-leg load cells already in the gear trigger a hard-landing inspection. Sensor apertures, the engine bay, RCS pods and the refuel port get covers or purge after safing.</p>
+<table>
+  <tr><th>Tier</th><th>When</th><th>Where, by whom</th><th>Content</th></tr>
+  <tr><td>1 — Line service</td><td>Every sortie, inside the 48 h turnaround</td><td>Home node; automated plus rover or node camera</td><td>Telemetry and cycle-counter review, leak check on refuel, camera inspection of gear, footpads and underside, sensor-window cleaning, consumables and RCS reload. No planned hands-on work unless a watchpoint or inspection finding calls for it.</td></tr>
+  <tr><td>2 — Intermediate service</td><td>On counters or on condition, not more often than every 10 sorties</td><td>Node; EVA crew or rover arm, no pressurised facility</td><td>Engine inspection or swap, footpad and damper replacement, collar, hatch and suitport seal replacement, sensor recalibration, insulation inspection. Only field-replaceable units are touched.</td></tr>
+  <tr><td>3 — Retirement</td><td>Core life reached: 50 sorties, to be reviewed (200 burns, 300 starts, 50 fills, 200 pressure cycles, 100 landings)</td><td>Pre-station: retired in place or cannibalised for units. Station-era: return to an orbital facility is a growth option</td><td>Tanks, primary structure and pressure vessel at their certified cycle life.</td></tr>
+</table>
+<p class="muted">The cycle counts behind the 50-sortie core life are low for a metallic tank by any fatigue standard, and reusable LOX/LH₂ and LOX/RP-1 boosters have each exceeded 20 flights with cryogenic fills and powered landings, so the number is credible on cycles. What is not known is dust and plume-ejecta erosion of the underside, insulation and tank skins over 100 landings on unprepared regolith; that is the review item, and it is a subsystem-demonstrator test question. Both life figures are carried as values to be reviewed, not as unknowns.</p>
 </div>
 
 <!-- 7 -->
