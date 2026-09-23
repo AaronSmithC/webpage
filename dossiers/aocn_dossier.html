@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aegis Orbital Compute Node — Architecture Reference Document</title>
+<style>
+  @page { size: Letter; margin: 0; }
+
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    margin: 0;
+    background: #0d0d0d;
+    color: #b9b9bf;
+    font-family: 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+
+  .doc { padding: 0.85in 0.9in 0.9in; }
+
+  /* ── Header block ── */
+  .kicker {
+    font-size: 10.5pt;
+    color: #8a8a90;
+    margin-bottom: 6pt;
+  }
+  h1 {
+    font-size: 30pt;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 4pt;
+    letter-spacing: -0.5pt;
+  }
+  .subtitle {
+    font-size: 13pt;
+    color: #c4c4c8;
+    margin-bottom: 8pt;
+  }
+  .meta {
+    font-size: 9pt;
+    color: #7a7a80;
+    letter-spacing: 0.2pt;
+  }
+
+  /* ── Section rules & headings ── */
+  hr {
+    border: 0;
+    border-top: 0.75pt solid #303034;
+    margin: 24pt 0 0;
+  }
+  h2 {
+    font-size: 17pt;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 24pt 0 12pt;
+    break-after: avoid;
+  }
+  h3 {
+    font-size: 11.5pt;
+    font-weight: 700;
+    color: #f0f0f2;
+    margin: 16pt 0 6pt;
+    break-after: avoid;
+  }
+  p { margin: 0 0 10pt; }
+
+  /* ── Lists ── */
+  ul { margin: 0 0 10pt; padding-left: 18pt; }
+  li { margin-bottom: 4pt; }
+  ul.numbered { list-style: none; padding-left: 0; }
+  ul.numbered li {
+    display: flex;
+    gap: 18pt;
+    margin-bottom: 6pt;
+  }
+  ul.numbered .n { color: #7a7a80; width: 16pt; flex: none; }
+  li strong { color: #e8e8ea; }
+
+  /* ── Tables ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6pt 0 6pt;
+    font-size: 9.5pt;
+    break-inside: avoid;
+  }
+  th {
+    text-align: left;
+    background: #1f1f23;
+    color: #ededf0;
+    font-weight: 700;
+    padding: 6pt 9pt;
+    border: 0.75pt solid #2c2c30;
+  }
+  td {
+    padding: 6pt 9pt;
+    border: 0.75pt solid #242428;
+    color: #b9b9bf;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #141416; }
+  tr:nth-child(odd) td { background: #101012; }
+  td strong { color: #e8e8ea; }
+
+  .note {
+    font-size: 9pt;
+    color: #76767c;
+    margin: 4pt 0 10pt;
+  }
+
+  /* ── Status callout ── */
+  .callout {
+    border: 0.75pt solid #34342c;
+    border-left: 2.5pt solid #8f8f96;
+    background: #151513;
+    padding: 11pt 14pt;
+    margin: 12pt 0;
+    font-size: 9.8pt;
+    break-inside: avoid;
+  }
+  .callout strong { color: #ffffff; }
+  .callout em { color: #95959b; font-style: italic; }
+
+  /* ── Footer ── */
+  .end-footer {
+    margin-top: 34pt;
+    padding-top: 14pt;
+    border-top: 0.75pt solid #303034;
+    text-align: center;
+    font-size: 8.5pt;
+    color: #6c6c72;
+    line-height: 1.7;
+  }
+
+  .section { break-inside: auto; }
+</style>
+</head>
+<body>
+<div class="doc">
+<div class="doc">
+
+  <!-- ── HEADER ── -->
+  <div class="kicker">Aegis Station</div>
+  <h1>Aegis Orbital Compute Node</h1>
+  <div class="subtitle">1 MW Batch-Compute Node, Dawn-Dusk Sun-Synchronous Orbit</div>
+  <div class="meta">Architecture Reference Document &nbsp;|&nbsp; Rev B — September 2026 &nbsp;|&nbsp; Not for Hardware Commitment</div>
+
+  <hr>
+
+  <section class="section">
+    <h2>1. Executive Summary</h2>
+    <p>
+      The Aegis Orbital Compute Node (AOCN) is a free-flying unit of one megawatt of commercial accelerator load in an
+      unpressurised shielded vault, powered by a fixed 5,400 m² solar sheet and cooled by 2,000 m² of pumped-loop
+      radiator, in a 650 km dawn-dusk sun-synchronous orbit. The orbit has no eclipse season, so the node carries no
+      energy storage beyond a safe-mode pack and runs continuously. The node is sized for batch work: model training,
+      large-scale inference, simulation, and processing of data already in orbit. It is not a cloud region.
+    </p>
+    <p>
+      Rev B rebuilds the sizing from the load up. Accelerator load is 1.0 MW IT with 1.2 MW electrical end of life.
+      Solar area is stated end of life with derates shown. Water shielding is replaced by an aluminium vault and a
+      3–5 year tray refresh matched to the commercial hardware cycle. Node mass is ~65 t with 20 % growth. The document
+      states the data path and the launch price at which the node reaches parity with a terrestrial hall: about
+      $300 per kilogram to sun-synchronous orbit. That is a launch-price gate. The node itself is buildable with
+      current spaceflight technology.
+    </p>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>2. Purpose and Positioning</h2>
+    <h3>The case, in three parts</h3>
+    <ul class="numbered">
+      <li><span class="n">1</span><span><strong>The terrestrial constraint is the grid.</strong> Interconnect queues, cooling water, and siting permits gate AI capacity on Earth. None exist in orbit. Power is not free; it costs launched array mass. A square metre of array in a dawn-dusk orbit yields ~4.5× the annual energy of the same square metre on the ground, lit 100 % of the time at full solar constant with no storage.</span></li>
+      <li><span class="n">2</span><span><strong>Batch work is comms-light.</strong> Training is weeks of computation on a dataset that arrives once and a result that leaves once. The dataset is launched on solid-state storage; results return over optical links. Section 4 sizes the path.</span></li>
+      <li><span class="n">3</span><span><strong>Some customers are already in space.</strong> Earth-observation constellations and future cislunar operations want compute seconds away. This is the only case with no terrestrial competitor and today the smallest; AOCN is designed to serve it without being designed around it.</span></li>
+    </ul>
+    <div class="callout">
+      <strong>What AOCN is not.</strong> Not a cloud region, not an edge for latency-sensitive traffic, and not a claim that
+      orbital compute is cheaper today. <em>At current launch prices it is two to five times the cost of a terrestrial hall for the same accelerators. Section 10 states where that crosses over.</em>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>3. Orbit Selection</h2>
+    <table>
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>Orbit</td><td>650 km circular, sun-synchronous, ~98° inclination, dawn-dusk local time of ascending node</td></tr>
+      <tr><td>Period</td><td>~97.7 min</td></tr>
+      <tr><td>Sun angle to orbit normal</td><td>≤ 23.4° through the year</td></tr>
+      <tr><td>Eclipse</td><td>None at any season above ~620 km (Earth angular radius from 650 km is 65.2°, below the 66.6° minimum beta angle)</td></tr>
+      <tr><td>Energy storage</td><td>Safe-mode pack only, order 50 kWh</td></tr>
+      <tr><td>Array pointing</td><td>Fixed sheet in the orbit plane, facing the sun; no gimbal</td></tr>
+      <tr><td>Radiator pointing</td><td>Wings in the plane containing the sun vector and nadir; faces look along ±velocity, never at the sun, obliquely at Earth; shaded by the array</td></tr>
+      <tr><td>Drag makeup</td><td>~2,100 m² ram area; ~13 m/s per year; &lt; 50 kg xenon per year on electric propulsion at mean solar activity</td></tr>
+      <tr><td>Ground contact</td><td>Both poles every orbit; ~150 min per day of contact with a single high-latitude terminal</td></tr>
+      <tr><td>Penalty</td><td>Radiation: auroral horns and the South Atlantic Anomaly; total dose several times an ISS-orbit figure (Section 7)</td></tr>
+    </table>
+    <p class="note">Rev 1.1 assumed a generic 500–600 km orbit with a 35 % worst-case eclipse and 2.6 t of battery per MW. That figure was cell-level; at a LEO-survivable depth of discharge of ~35 % with pack overhead it is ~12 t per node. The dawn-dusk orbit removes the mass and the throttling.</p>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>4. Data Path</h2>
+    <table>
+      <tr><th>Leg</th><th>Method</th><th>Capacity</th><th>Note</th></tr>
+      <tr><td>Dataset up</td><td>Launched solid-state storage installed with each tray refresh</td><td>10 PB ≈ 164 × 61 TB drives, &lt; 0.5 t</td><td>Cheaper and faster than any uplink</td></tr>
+      <tr><td>Results down</td><td>Optical to polar ground stations; Ka-band fallback</td><td>~110 TB/day at 100 Gb/s over ~150 min of contact</td><td>1 TB checkpoint at 10 Gb/s: ~13 min; station diversity covers weather</td></tr>
+      <tr><td>Tasking, telemetry</td><td>RF via relay, continuous</td><td>kb/s to Mb/s</td><td>Ground plans, node executes autonomously between contacts</td></tr>
+      <tr><td>Node to node</td><td>Optical crosslink within the plane</td><td>10–100 Gb/s</td><td>Distributed training across nodes; not required for one node</td></tr>
+    </table>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>5. Thermal Architecture</h2>
+    <p>
+      At steady state every watt of electrical input becomes heat. Commercial accelerators hold junction temperature below
+      ~363 K; direct liquid cooling delivers coolant at 305–320 K and returns it 10–15 K warmer. The radiator runs between
+      ~330 K inlet and ~305 K outlet: a 315 K mean radiating temperature. Rejection is two-sided at emissivity 0.88 with an
+      effective factor of 0.6 covering Earth infrared on the oblique face, inter-wing view factor, coating degradation, and
+      fin efficiency. With the wings shaded by the array and no direct solar load, the factor is conservative.
+    </p>
+    <table>
+      <tr><th>Mean radiating temperature</th><th>Two-sided, theoretical</th><th>Effective (× 0.6)</th><th>Area per MW rejected</th></tr>
+      <tr><td>300 K</td><td>808 W/m²</td><td>485 W/m²</td><td>2,060 m²</td></tr>
+      <tr><td>310 K</td><td>922 W/m²</td><td>553 W/m²</td><td>1,810 m²</td></tr>
+      <tr><td><strong>315 K, baseline</strong></td><td><strong>983 W/m²</strong></td><td><strong>590 W/m²</strong></td><td><strong>1,700 m²</strong></td></tr>
+      <tr><td>320 K</td><td>1,046 W/m²</td><td>628 W/m²</td><td>1,590 m²</td></tr>
+      <tr><td>330 K</td><td>1,183 W/m²</td><td>710 W/m²</td><td>1,410 m²</td></tr>
+    </table>
+    <table>
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>Heat rejected</td><td>1.2 MW</td></tr>
+      <tr><td>Radiator area</td><td>~2,000 m² two-sided; two 50 × 20 m wings, zenith and nadir of the truss</td></tr>
+      <tr><td>Loop</td><td>Single-phase pumped, redundant pumps, isolable sections per wing</td></tr>
+      <tr><td>Panel mass</td><td>6 kg/m² deployable pumped-loop panel; ~12 t</td></tr>
+      <tr><td>Coatings</td><td>Atomic-oxygen tolerant; ram-facing wing faces</td></tr>
+      <tr><td>Growth path</td><td>Hotter-tolerant accelerator generations raise rejection per m² on the same wings</td></tr>
+    </table>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>6. Power Architecture</h2>
+    <table>
+      <tr><th>Step</th><th>Factor</th><th>Running value</th></tr>
+      <tr><td>Solar constant 1,361 W/m² × 29 % triple-junction GaAs</td><td>—</td><td>395 W/m²</td></tr>
+      <tr><td>Blanket packing: cells, gaps, harness, hinges</td><td>0.85</td><td>336 W/m²</td></tr>
+      <tr><td>Radiation degradation, 10 years polar</td><td>0.85</td><td>285 W/m²</td></tr>
+      <tr><td>Operating temperature derate</td><td>0.85</td><td>243 W/m²</td></tr>
+      <tr><td>Worst-season sun angle on a fixed array, cos 23.4°</td><td>0.92</td><td><strong>223 W/m² end of life</strong></td></tr>
+    </table>
+    <table>
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>Electrical demand, end of life</td><td>1.2 MW (1.0 MW IT plus ~20 % pumps, conversion, comms, attitude control, propulsion)</td></tr>
+      <tr><td>Array area</td><td>5,400 m², carried as a 90 × 60 m fixed sheet</td></tr>
+      <tr><td>Area per MW electrical, EOL</td><td>~4,500 m² (Rev 1.1: ~2,500 m² at beginning of life, normal incidence)</td></tr>
+      <tr><td>Blanket mass</td><td>2.5 kg/m²; ~13.5 t</td></tr>
+      <tr><td>Capacity factor</td><td>~100 %, against 20–25 % for ground solar</td></tr>
+      <tr><td>Storage</td><td>Safe-mode pack, order 50 kWh, for attitude, comms and heaters through a fault</td></tr>
+    </table>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>7. Compute Vault and Radiation</h2>
+    <p>
+      Rev 1.1 carried 15–50 t of water and structure as shielding: a crew figure applied to electronics. Silicon needs a
+      tolerable total dose, a handled upset rate, and a refresh plan.
+    </p>
+    <table>
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>Vault</td><td>Unpressurised cylinder ⌀4 × 10 m; trays, storage pool, power conversion and loop pumps inside</td></tr>
+      <tr><td>Wall</td><td>10–15 mm aluminium-equivalent; cuts annual dose by 3–5× against thin structure</td></tr>
+      <tr><td>Total dose environment</td><td>Order of several krad/yr behind thin aluminium at 650 km polar, SAA-proton dominated; commercial accelerators and memory demonstrated tolerant into the 10–30 krad range</td></tr>
+      <tr><td>Tray life</td><td>3–5 years, matched to the commercial hardware cycle</td></tr>
+      <tr><td>Upset handling</td><td>ECC memory, frequent checkpoint to local storage, scheduling that expects a few percent throughput lost to restarts on polar and SAA passes. <strong>Open question; not closed in Rev B.</strong></td></tr>
+      <tr><td>Servicing</td><td>Cold-plated trays on rails, swappable by a robotic servicer without breaking the loop; EVA-compatible interfaces; array blankets and radiator wings line-replaceable</td></tr>
+      <tr><td>Vault structure and shielding mass</td><td>~5 t</td></tr>
+    </table>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>8. Mass Budget (Rev B, bottom-up)</h2>
+    <table>
+      <tr><th>Group</th><th>Basis</th><th>Mass (t)</th></tr>
+      <tr><td>Solar array sheet</td><td>5,400 m² at 2.5 kg/m²</td><td>13.5</td></tr>
+      <tr><td>Radiator wings and loop</td><td>2,000 m² at 6 kg/m²</td><td>12.2</td></tr>
+      <tr><td>Compute trays and storage</td><td>1 MW IT at ~12 kg/kW</td><td>12.0</td></tr>
+      <tr><td>Vault structure and shielding</td><td>⌀4 × 10 m, 10–15 mm Al-eq, rails</td><td>5.0</td></tr>
+      <tr><td>Power conversion, distribution, pumps, fluid, avionics, comms</td><td>Allocation</td><td>5.0</td></tr>
+      <tr><td>Truss, mechanisms, attitude control, electric propulsion and propellant</td><td>Allocation</td><td>7.0</td></tr>
+      <tr><td>Subtotal</td><td></td><td>54.7</td></tr>
+      <tr><td>Growth margin, 20 %</td><td></td><td>10.9</td></tr>
+      <tr><td><strong>Node mass</strong></td><td></td><td><strong>~65</strong></td></tr>
+    </table>
+    <p class="note">Rev 1.1 carried 40–80 t for 200–500 kW of accelerator. Rev B carries ~65 t for 1,000 kW: the water shield and batteries are gone and compute is accounted at liquid-cooled rack density. A refresh relaunches only the ~12 t of trays and storage.</p>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>9. Arrangement</h2>
+    <p>
+      The array is a 90 × 60 m sheet in the orbit plane facing the sun. A truss runs anti-sunward from its centre; the
+      vault sits 8–18 m behind the array, and two 50 × 20 m radiator wings extend from 20 to 70 m behind it, one zenith and
+      one nadir of the truss, in the plane containing the sun vector and nadir. The array is edge-on to the velocity
+      vector and shades the wings; the wings are edge-on to the sun and to the array. Truss lengths and the wing split
+      are placeholders; areas are not. The arrangement drawing is published with the web page.
+    </p>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>10. Economics</h2>
+    <p>
+      Both an orbital node and a terrestrial hall buy the same accelerators, on the order of $40–50 M per MW of
+      current-generation hardware, and those dominate either bill. What differs is the plant around them. A terrestrial
+      AI hall costs roughly $10–15 M per MW to build plus ~$0.6–0.9 M per MW-year in energy: about $15–20 M per MW of
+      plant and power over a five-year hardware life, before the years spent in an interconnect queue. The orbital node
+      replaces all of it with launch mass.
+    </p>
+    <table>
+      <tr><th>Launch price to SSO</th><th>Launch cost per 65 t node</th><th>Against $15–20 M terrestrial plant + power</th></tr>
+      <tr><td>$3,000 /kg</td><td>$195 M</td><td>10× worse</td></tr>
+      <tr><td>$1,500 /kg</td><td>$98 M</td><td>5× worse</td></tr>
+      <tr><td>$500 /kg</td><td>$33 M</td><td>~2× worse</td></tr>
+      <tr><td><strong>$300 /kg</strong></td><td><strong>$20 M</strong></td><td><strong>parity</strong></td></tr>
+      <tr><td>$200 /kg</td><td>$13 M</td><td>better</td></tr>
+      <tr><td>$100 /kg</td><td>$7 M</td><td>2–3× better</td></tr>
+    </table>
+    <p class="note">Crossover near $300/kg, before on-orbit assembly, qualification and operations (which push it lower) and before the value of skipping a multi-year grid queue (which pushes it higher). Refresh at $500/kg relaunches ~12 t for ~$6 M against $40 M or more of hardware inside, so refresh does not decide the case. The gate is launch price, not technology.</p>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>11. Scaling</h2>
+    <ul>
+      <li><strong>Fixed unit.</strong> Deployed area, bending modes, pointing disturbance and fault-domain size grow faster than the compute they carry. The 1 MW node is the unit; the fleet grows.</li>
+      <li><strong>Plane fill.</strong> Nodes in one dawn-dusk plane share ground stations and crosslink; ten nodes is 10 MW with one ground segment.</li>
+      <li><strong>Independent failure.</strong> A punctured loop or lost wing throttles one node, not the fleet.</li>
+      <li><strong>One servicer, one tray standard.</strong></li>
+      <li><strong>Lifecycle split.</strong> Plant 10–15 years; trays 3–5. The plant is the asset; the trays are inventory.</li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>12. Beyond Earth Orbit</h2>
+    <p>
+      Around the Moon or Mars there is no advantage until customers are there, and the Earth link is worse. The case changes
+      only on the lunar polar surface.
+    </p>
+    <table>
+      <tr><th>Site</th><th>Thermal environment</th><th>Verdict</th></tr>
+      <tr><td>Lunar equatorial surface, day</td><td>~390 K ground at noon for 14 days; regolith is an insulator, conduction into the ground is negligible</td><td>Not a cold sink. Radiators see hot ground and sun, then 14 days of darkness with no power.</td></tr>
+      <tr><td>Lunar polar rim</td><td>Lit 80–90 % of the year at grazing angles; permanently shadowed floors at 40–100 K alongside</td><td>A vertical radiator facing the shadowed floor and cold sky rejects ~490 W/m² one-sided at 315 K, no Earth IR, no solar load: comparable to the orbital wing per m².</td></tr>
+    </table>
+    <p>
+      The gain at the pole is not the sink; it is what surrounds it. Once regolith structure and local water are available
+      the plant stops being launched, radiators can be built as walls, deployment mechanisms disappear, and the program's
+      water provides thermal storage across the short polar nights. The LEO node is the near-term product and the testbed
+      for the plant. The lunar polar node waits on the same gate as the rest of the program: a viable moonbase and
+      industrial-scale lunar water.
+    </p>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>13. Changes From Rev 1.1</h2>
+    <table>
+      <tr><th>Item</th><th>Rev 1.1</th><th>Rev B</th></tr>
+      <tr><td>Orbit</td><td>500–600 km generic; 35 % eclipse</td><td>650 km dawn-dusk SSO; no eclipse</td></tr>
+      <tr><td>Eclipse storage</td><td>2.6 t/MW or throttling</td><td>Safe-mode pack only</td></tr>
+      <tr><td>Accelerator load</td><td>200–500 kW in a 1–2 MW bus</td><td>1.0 MW IT, 1.2 MW electrical</td></tr>
+      <tr><td>Radiator area</td><td>1,800–3,300 m²/MW at 290–330 K</td><td>~1,700 m²/MW at 315 K mean; 2,000 m² per node</td></tr>
+      <tr><td>Solar area</td><td>~2,500 m²/MW BOL</td><td>~4,500 m²/MW EOL; 5,400 m² per node</td></tr>
+      <tr><td>Shielding</td><td>15–50 t water and structure</td><td>~5 t aluminium vault; 3–5 year tray refresh</td></tr>
+      <tr><td>Node mass</td><td>40–80 t</td><td>~65 t bottom-up, 20 % growth</td></tr>
+      <tr><td>Use case</td><td>Power density, thermal isolation, space adjacency</td><td>Batch training and inference; space-native data second</td></tr>
+      <tr><td>Data path</td><td>Not stated</td><td>Launched storage up, optical down, budget stated</td></tr>
+      <tr><td>Economics</td><td>Not stated</td><td>Parity near $300/kg to SSO</td></tr>
+    </table>
+  </section>
+
+  <div class="end-footer">
+    Aegis Station — Aegis Orbital Compute Node · Architecture Reference · Classification: Unrestricted<br>
+    contact@aegisstation.com · aegisstation.com
+  </div>
+
+</div>
+</body>
+</html>

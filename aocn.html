@@ -5,7 +5,7 @@
   <title>AOCN | Aegis Orbital Compute Node</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description"
-        content="The Aegis Orbital Compute Node (AOCN) is a modular LEO compute platform designed around thermal realism, serviceability, and current spaceflight technology." />
+        content="The Aegis Orbital Compute Node (AOCN) is a 1 MW batch-compute node for a dawn-dusk sun-synchronous orbit: eclipse-free solar power, pumped-loop radiators, a shielded COTS compute vault, and a launch-cost break-even stated in the open." />
 
   <style>
     :root{
@@ -247,11 +247,11 @@
   <header class="hero">
     <div class="container">
       <h1>Aegis Orbital Compute Node (AOCN)</h1>
-      <h2>LEO compute architecture constrained by power generation, heat rejection, and serviceability</h2>
+      <h2>A 1 MW batch-compute node in a dawn-dusk orbit: power without a grid, heat without water, and a break-even stated in the open</h2>
 
       <img
         src="images/AOCN_concept.png"
-        alt="AOCN in low Earth orbit with large radiator panels and solar arrays"
+        alt="AOCN Rev B in a dawn-dusk orbit: a single sunlit solar array sheet with the compute vault and two edge-on radiator wings in its shadow on a truss behind it, Earth's terminator, city lights and aurora below"
       />
     </div>
   </header>
@@ -260,374 +260,352 @@
   <div style="background:#0d0f18; border-bottom:1px solid var(--stroke); padding: 18px 0;">
     <div class="container">
       <div class="revision-banner">
-        <strong>Rev. 1.1 — Assumption Review.</strong>
-        This revision corrects an internal inconsistency in the thermal control section (operating temperature vs. stated heat rejection rate), clarifies that solar array area is a co-equal structural driver alongside radiators, and adds notes on eclipse buffering mass. Substantive conclusions are unchanged.
+        <strong>Rev B — September 2026.</strong>
+        Rebuilt from the sizing up. The orbit moves to a 650 km dawn-dusk sun-synchronous orbit, which has no eclipse season and deletes the battery problem. The node is sized as 1 MW of accelerator load, not 200–500 kW inside a 1–2 MW bus. Solar area is stated end-of-life with the derates shown. Water shielding is replaced by an aluminium compute vault with a planned refresh cycle. The page now says what the node is for, what the data path is, and at what launch price it beats a building. Rev 1.1 thermal arithmetic is retained and checked; its dossier remains available below.
       </div>
     </div>
   </div>
 
-  <!-- PROGRAM POSITIONING -->
+  <!-- 1. WHAT IT IS -->
   <section>
     <div class="container">
-      <h3>Program Positioning</h3>
+      <h3>What It Is</h3>
       <p>
-        The <strong>Aegis Orbital Compute Node (AOCN)</strong> is a modular compute platform intended for
-        deployment in <strong>Low Earth Orbit (LEO)</strong>. The architecture is sized and organized around
-        first-order physical constraints: electrical power generation, waste heat rejection, radiation
-        environment, and on-orbit serviceability.
+        The <strong>Aegis Orbital Compute Node (AOCN)</strong> is a free-flying compute unit: one megawatt of commercial
+        accelerators in a shielded vault, a fixed solar sheet that faces the sun all year, and pumped-loop radiators
+        that never see it. It runs <strong>batch work</strong>: model training, large-scale inference, simulation, and the
+        processing of data that is already in orbit. It does not run a cloud. Nothing on it answers a request in
+        milliseconds, and nothing on it needs to.
       </p>
       <p>
-        AOCN is not intended to replicate terrestrial data centers in orbit. It is structured as an
-        orbital compute accelerator for workloads where power density, thermal isolation, or space
-        adjacency dominate over latency or interactive access.
+        The node is the unit of scale. Capacity grows by flying more of them, not by making one bigger. Every node
+        is sized, launched, and serviced the same way, and the compute inside is expected to be replaced every
+        three to five years while the power and thermal plant stays.
       </p>
-    </div>
-  </section>
-
-  <!-- DESIGN CONSTRAINTS -->
-  <section>
-    <div class="container">
-      <h3>Design Constraints and Assumptions</h3>
-      <ul>
-        <li>
-          <strong>Thermal scaling:</strong> Radiator area and heat transport capacity determine maximum
-          sustained compute power.
-        </li>
-        <li>
-          <strong>Infrastructure separation:</strong> Power generation, thermal control, shielding, and
-          communications are treated as persistent infrastructure; compute hardware is replaceable.
-        </li>
-        <li>
-          <strong>Incremental deployment:</strong> Nodes are designed to be deployed, serviced, and
-          upgraded independently rather than as a single monolithic structure.
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- SYSTEM ARCHITECTURE -->
-  <section>
-    <div class="container">
-      <h3>System Architecture Overview</h3>
-
       <div class="spec-grid">
-        <div class="spec">
-          <strong>Orbit</strong>
-          500–600 km circular LEO
-          <div class="note">Eclipse fraction ~35% worst-case (β = 0°); improves toward sun-synchronous geometries</div>
-        </div>
-        <div class="spec">
-          <strong>Compute Payload</strong>
-          COTS GPUs and accelerators with ECC and checkpointing
-        </div>
-        <div class="spec">
-          <strong>Thermal Control</strong>
-          Pumped liquid loops feeding deployable radiator panels
-          <div class="note">Radiator outlet temperature 290–330 K, dictated by COTS GPU thermal limits (junction ≤ 363 K)</div>
-        </div>
-        <div class="spec">
-          <strong>Radiator Area</strong>
-          1,500–3,500 m² per MW sustained input
-          <div class="note">Revised from prior estimate; see thermal assumptions section below</div>
-        </div>
-        <div class="spec">
-          <strong>Solar Array Area</strong>
-          ~2,500 m² per MW electrical output
-          <div class="note">Co-equal structural driver; ~29% efficient triple-junction GaAs at LEO solar constant (1,361 W/m²)</div>
-        </div>
-        <div class="spec">
-          <strong>Power</strong>
-          1–5 MW class solar arrays with eclipse buffering
-          <div class="note">Eclipse buffering: ~580 kWh per MW at worst-case 35-min eclipse; ~2.6 tons Li-ion per MW</div>
-        </div>
-        <div class="spec">
-          <strong>Shielding</strong>
-          Aluminum hull + targeted water shielding
-        </div>
-        <div class="spec">
-          <strong>Orbit Eclipse</strong>
-          Orbital period ~96 min at 550 km; eclipse ~35 min worst-case
-          <div class="note">Battery or power-down strategy required; full-power eclipse operation imposes significant battery mass penalty</div>
-        </div>
-      </div>
-
-      <div class="callout">
-        <p>
-          At steady state, essentially all electrical input power is rejected as heat.
-          Radiator geometry, operating temperature, and loop architecture therefore set the upper bound
-          on continuous compute output. Solar array area is a comparable structural driver that was
-          understated in prior documentation.
-        </p>
+        <div class="spec"><strong>Orbit</strong>650 km dawn-dusk sun-synchronous, ~98° inclination<div class="note">No eclipse at any point in the year above ~620 km; the sun stays within 24° of the orbit normal</div></div>
+        <div class="spec"><strong>Accelerator load</strong>1.0 MW IT<div class="note">1.2 MW electrical at end of life, with pumps, conversion, comms and attitude control inside the 20 % overhead</div></div>
+        <div class="spec"><strong>Solar array</strong>5,400 m², fixed, no gimbal<div class="note">~223 W/m² end-of-life after the derates in the power section</div></div>
+        <div class="spec"><strong>Radiators</strong>2,000 m² two-sided, 315 K mean<div class="note">~590 W/m² effective; edge-on to the sun and to the Earth limb</div></div>
+        <div class="spec"><strong>Node mass</strong>~65 t with 20 % growth<div class="note">Bottom-up budget in the mass section</div></div>
+        <div class="spec"><strong>Servicing</strong>Robotic, EVA-compatible interfaces<div class="note">Unpressurised vault; compute trays swap on rails, wings and array blankets are line-replaceable</div></div>
       </div>
     </div>
   </section>
 
-  <!-- THERMAL ASSUMPTIONS — KEY REVISION -->
+  <!-- 2. WHY ORBIT -->
   <section>
     <div class="container">
-      <h3>Thermal Assumptions: Corrected</h3>
-
+      <h3>Why Put Compute in Orbit</h3>
       <p>
-        The prior version stated a radiator operating temperature of 350–450 K alongside a heat rejection
-        rate of 500–1,000 W/m². These figures are internally inconsistent. The Stefan-Boltzmann law
-        governs radiative heat rejection; at 350–450 K, a two-sided panel with emissivity ε ≈ 0.88
-        would reject 1,500–4,100 W/m², not 500–1,000 W/m². The lower figure is only consistent
-        with much cooler operating temperatures.
+        The honest case is narrower than the slogans and stronger than the sceptics allow. Three things are true at once.
       </p>
 
+      <h4>1. The constraint on Earth is the grid, not the chip</h4>
       <p>
-        The correct framing depends on which constraint drives the design:
+        Terrestrial AI capacity is gated by interconnect queues measured in years, by water for cooling, and by
+        siting permits. In orbit none of those exist. Power is not free; it costs launched array mass. But a square
+        metre of array in a dawn-dusk orbit produces about <strong>four and a half times</strong> the energy of the same
+        square metre on the ground, because it is lit 100 % of the time at full solar constant and needs no storage.
+        The question is whether that buys back the launch cost, and the economics section answers it with a number
+        rather than a mood.
       </p>
 
-      <h4>Option A — COTS GPU thermal limits drive operating temperature</h4>
+      <h4>2. Batch work does not need a fast link to Earth</h4>
       <p>
-        Commercial GPUs have junction temperature limits of approximately 363 K (90 °C). A practical
-        cooling loop delivers coolant to the radiator at roughly 300–330 K after accounting for
-        thermal resistance across the cold plate and heat exchanger. At these temperatures, the
-        two-sided rejection rate is approximately 490–760 W/m² (theoretical), falling to
-        300–550 W/m² after applying a 0.6 effective factor for solar loading, view-factor losses,
-        and degradation margin. This supports a radiator area requirement of roughly
-        <strong>1,800–3,300 m² per MW</strong>.
+        Training a large model is weeks of computation on a dataset that arrives once and a result that leaves once.
+        That is the opposite of a cloud workload. The dataset goes up on launched storage: ten petabytes on enterprise
+        SSDs is under 200 drives and well under half a tonne. Checkpoints and weights come down over optical
+        crosslinks. A dawn-dusk orbit passes a polar ground station on nearly every revolution, so downlink capacity
+        is not the limit. The data section sizes it.
       </p>
 
-      <h4>Option B — Higher operating temperature reduces radiator area</h4>
+      <h4>3. Some customers are already in space</h4>
       <p>
-        If a different compute architecture (e.g., high-temperature ASICs or future hardware) can
-        tolerate junction temperatures allowing 350–400 K coolant outlet temperatures, the effective
-        rejection rate rises to approximately 900–1,500 W/m², reducing area requirements to
-        roughly <strong>650–1,100 m² per MW</strong>. This path is not consistent with current
-        COTS GPU constraints.
+        Earth-observation constellations downlink raw data they could process in orbit. Cislunar operations, when they
+        exist, will want compute that is seconds away rather than a round trip through Earth. This is the only case
+        with no terrestrial competitor. It is also the smallest market today, which is why AOCN is not designed
+        around it. It is designed so that the same node serves it when it arrives.
       </p>
 
-      <p>
-        <strong>Revised working assumption for AOCN v1.0 (COTS hardware baseline):</strong>
-        radiator outlet temperature 290–330 K, effective heat rejection ~300–550 W/m²,
-        radiator area <strong>1,800–3,300 m² per MW</strong>. The prior upper bound of 5,000 m²/MW
-        is overly conservative; the prior lower bound of 2,000 m²/MW remains within range.
-      </p>
+      <div class="assumption-note">
+        <strong>What AOCN is not.</strong> It is not a cloud region, not an edge for latency-sensitive traffic, and not a
+        claim that orbital compute is cheaper today. At current launch prices it is two to five times the cost of a
+        terrestrial hall for the same accelerators. The page states where that crosses over.
+      </div>
+    </div>
+  </section>
 
+  <!-- 3. DATA PATH -->
+  <section>
+    <div class="container">
+      <h3>Data Path</h3>
       <table class="thermal-table">
-        <thead>
-          <tr>
-            <th>Radiator Outlet Temp</th>
-            <th>Two-sided Rejection (theoretical)</th>
-            <th>Effective (~×0.6 margin)</th>
-            <th>Area per MW (effective)</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Leg</th><th>Method</th><th>Capacity</th><th>Note</th></tr></thead>
         <tbody>
-          <tr><td>275 K (2 °C)</td><td>571 W/m²</td><td>343 W/m²</td><td>2,920 m²</td></tr>
-          <tr><td>300 K (27 °C)</td><td>808 W/m²</td><td>485 W/m²</td><td>2,060 m²</td></tr>
-          <tr><td>325 K (52 °C)</td><td>1,113 W/m²</td><td>668 W/m²</td><td>1,497 m²</td></tr>
-          <tr><td>350 K (77 °C) ✕ exceeds COTS limits</td><td>1,498 W/m²</td><td>899 W/m²</td><td>1,113 m²</td></tr>
-          <tr><td>400 K (127 °C) ✕ exceeds COTS limits</td><td>2,555 W/m²</td><td>1,533 W/m²</td><td>652 m²</td></tr>
+          <tr><td>Dataset up</td><td>Launched solid-state storage, installed with each compute refresh</td><td>10 PB ≈ 164 × 61 TB drives, &lt; 0.5 t</td><td>Cheaper and faster than any uplink; refreshed with the trays it feeds</td></tr>
+          <tr><td>Results down</td><td>Optical to polar ground stations, Ka-band RF fallback</td><td>~110 TB/day at 100 Gb/s over ~150 min of contact</td><td>A 1 TB checkpoint at 10 Gb/s takes ~13 min; weather handled by station diversity</td></tr>
+          <tr><td>Tasking and telemetry</td><td>RF, continuous via relay</td><td>kb/s to Mb/s</td><td>Autonomous operation between contacts; ground plans, node executes</td></tr>
+          <tr><td>Node to node</td><td>Optical crosslink within a plane</td><td>10–100 Gb/s</td><td>For distributed training across nodes in the same orbit plane; not required for a single node</td></tr>
         </tbody>
       </table>
+      <p class="note" style="margin-top:12px; color:var(--muted); font-size:0.9rem;">
+        Dawn-dusk sun-synchronous orbits cross both poles every ~97 minutes. A single high-latitude optical terminal
+        sees the node on most passes; two terminals on different continents cover weather.
+      </p>
+    </div>
+  </section>
 
-      <div class="assumption-note" style="margin-top:18px;">
-        <strong>Correction summary:</strong> The 350–450 K operating temperature range in prior documentation is incompatible with COTS GPU cooling requirements. The correct radiator outlet temperature for this architecture is approximately 290–330 K. Heat rejection rates of 500–1,000 W/m² are plausible at this range with margins applied, but should not be paired with the 350–450 K label.
+  <!-- 4. ORBIT -->
+  <section>
+    <div class="container">
+      <h3>Orbit Selection</h3>
+      <p>
+        Rev 1.1 assumed a generic 500–600 km orbit with a 35 % worst-case eclipse and either 2.6 t of battery per
+        megawatt or a throttled duty cycle. The battery figure was cell-level; at a LEO-survivable depth of discharge
+        and pack overhead it is closer to <strong>12 t per node</strong>. Either penalty is avoidable.
+      </p>
+      <p>
+        A <strong>dawn-dusk sun-synchronous orbit</strong> keeps its plane at the day-night terminator all year. The sun
+        sits within about 24° of the orbit normal. Above roughly 620 km the Earth never gets between the node and
+        the sun, at any season. AOCN Rev B baselines <strong>650 km</strong>.
+      </p>
+      <ul>
+        <li><strong>No eclipse, no battery.</strong> A small pack for safe-mode only. Compute runs continuously.</li>
+        <li><strong>Fixed geometry.</strong> The array is a flat sheet in the orbit plane facing the sun; it needs no gimbal. Radiators lie in the plane containing the sun vector and nadir, so their faces look along the velocity vector, never at the sun and only obliquely at Earth. The array shades them as well.</li>
+        <li><strong>Ground contact.</strong> Both poles every orbit, which is what makes the optical downlink budget work.</li>
+        <li><strong>Drag.</strong> The array is edge-on to the velocity vector; the radiators are not. About 2,100 m² of ram area at 650 km costs ~13 m/s per year, under 50 kg of xenon per year on electric propulsion. Atomic-oxygen-tolerant radiator coatings are required.</li>
+        <li><strong>Radiation.</strong> The price of the orbit. A polar orbit crosses the auroral horns and the South Atlantic Anomaly; total dose is several times an ISS-orbit figure. The vault section carries it.</li>
+      </ul>
+
+      <h4>Arrangement</h4>
+      <div class="spec" style="padding:10px; margin-top:12px;">
+        <img src="images/AOCN_RevB_blueprint.png" alt="Blueprint-style illustration of the AOCN Rev B arrangement: sun's-eye view of the array sheet with the vault and edge-on wings at its centre, a view along the flight direction with sun rays stopping at the array, the vault on the truss and two radiator wings behind, and detail insets of the array edge, vault, truss joint, radiator ribs and thruster pod" style="width:100%;height:auto;">
+      </div>
+      <div class="spec" style="padding:10px; margin-top:12px;">
+        <img src="AOCN_RevB_Arrangement.svg" alt="AOCN Rev B arrangement drawing: sun's-eye view of the 90 by 60 metre array sheet with radiators edge-on behind it, and a view along the velocity vector showing the array edge-on, the compute vault on a truss, and two 50 by 20 metre radiator wings" style="width:100%;height:auto;">
       </div>
     </div>
   </section>
 
-  <!-- SOLAR ARRAY AS CO-EQUAL DRIVER -->
+  <!-- 5. THERMAL -->
   <section>
     <div class="container">
-      <h3>Solar Arrays: A Co-Equal Structural Driver</h3>
-
+      <h3>Thermal: Radiator Sizing</h3>
       <p>
-        Prior documentation emphasized radiator area as the dominant system driver. Solar array area
-        is comparable in scale and should be treated with equal weight in structural and launch
-        planning.
+        At steady state every watt of electrical input becomes heat. Commercial accelerators hold junction
+        temperatures below about 363 K; direct liquid cooling delivers coolant at 305–320 K and returns it 10–15 K
+        warmer. The radiator therefore runs between roughly 330 K inlet and 305 K outlet, a <strong>315 K mean
+        radiating temperature</strong>. Rev 1.1 stated 290–330 K; the same range, now pinned to a sizing point.
       </p>
+      <p>
+        Two-sided rejection follows the Stefan-Boltzmann law with an emissivity of 0.88. An effective factor of 0.6
+        covers Earth infrared on the oblique face, view-factor losses between wings, coating degradation, and fin
+        efficiency. With the array shading the wings and no direct solar load, this factor is conservative.
+      </p>
+      <table class="thermal-table">
+        <thead>
+          <tr><th>Mean radiating temperature</th><th>Two-sided, theoretical</th><th>Effective (× 0.6)</th><th>Area per MW rejected</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>300 K</td><td>808 W/m²</td><td>485 W/m²</td><td>2,060 m²</td></tr>
+          <tr><td>310 K</td><td>922 W/m²</td><td>553 W/m²</td><td>1,810 m²</td></tr>
+          <tr><td><strong>315 K (baseline)</strong></td><td><strong>983 W/m²</strong></td><td><strong>590 W/m²</strong></td><td><strong>1,700 m²</strong></td></tr>
+          <tr><td>320 K</td><td>1,046 W/m²</td><td>628 W/m²</td><td>1,590 m²</td></tr>
+          <tr><td>330 K</td><td>1,183 W/m²</td><td>710 W/m²</td><td>1,410 m²</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:16px;">
+        The node rejects 1.2 MW, so the baseline radiator area is <strong>~2,000 m² two-sided</strong>, carried as two
+        50 × 20 m wings on a pumped single-phase loop with redundant pumps and isolable sections. At 6 kg/m² for
+        deployable pumped-loop panels the wings weigh about 12 t. If a future accelerator generation tolerates
+        hotter coolant, the same wings reject more; the plant does not need to change when the trays do.
+      </p>
+    </div>
+  </section>
 
+  <!-- 6. POWER -->
+  <section>
+    <div class="container">
+      <h3>Power: Solar Array Sizing</h3>
+      <p>
+        Rev 1.1 sized the array at ~2,500 m² per MW from beginning-of-life cell efficiency at normal incidence. That
+        is the number for a new panel pointed perfectly on the day it deploys. The array has to make 1.2 MW on its
+        last day, at its worst sun angle, through a blanket that is not all cells.
+      </p>
+      <table class="thermal-table">
+        <thead><tr><th>Step</th><th>Factor</th><th>Running value</th></tr></thead>
+        <tbody>
+          <tr><td>Solar constant × 29 % triple-junction GaAs</td><td>—</td><td>395 W/m²</td></tr>
+          <tr><td>Blanket packing (cells, gaps, harness, hinges)</td><td>0.85</td><td>336 W/m²</td></tr>
+          <tr><td>Radiation degradation, 10 years in a polar orbit</td><td>0.85</td><td>285 W/m²</td></tr>
+          <tr><td>Operating temperature derate</td><td>0.85</td><td>243 W/m²</td></tr>
+          <tr><td>Worst-season sun angle, fixed array (cos 23.4°)</td><td>0.92</td><td><strong>223 W/m² end-of-life</strong></td></tr>
+        </tbody>
+      </table>
       <div class="spec-grid">
-        <div class="spec">
-          <strong>Solar constant at LEO</strong>
-          ~1,361 W/m²
-        </div>
-        <div class="spec">
-          <strong>Array efficiency (GaAs triple-junction)</strong>
-          ~28–30%
-        </div>
-        <div class="spec">
-          <strong>Array area per MW output</strong>
-          ~2,450–2,600 m²
-        </div>
-        <div class="spec">
-          <strong>Array specific power</strong>
-          ~150–200 W/kg (modern deployable arrays)
-        </div>
-        <div class="spec">
-          <strong>Array mass per MW</strong>
-          ~5–7 metric tons
-        </div>
-        <div class="spec">
-          <strong>Eclipse buffering mass per MW</strong>
-          ~2.6 tons (Li-ion at 225 Wh/kg, 35-min worst-case eclipse)
-        </div>
+        <div class="spec"><strong>Area per MW electrical, EOL</strong>~4,500 m²<div class="note">Rev 1.1 said ~2,500; the difference is the derates, not the physics</div></div>
+        <div class="spec"><strong>Node array</strong>5,400 m² for 1.2 MW<div class="note">Carried as a 90 × 60 m sheet; deployable-blanket mass ~2.5 kg/m², ~13.5 t</div></div>
+        <div class="spec"><strong>Capacity factor</strong>~100 %<div class="note">Against 20–25 % for ground solar; the array's only real advantage, and it is a large one</div></div>
+        <div class="spec"><strong>Storage</strong>Safe-mode pack only<div class="note">No eclipse to bridge; sizing on the order of 50 kWh for attitude, comms and heaters through a fault</div></div>
       </div>
+    </div>
+  </section>
 
-      <p style="margin-top:24px;">
-        At 1 MW, the solar array footprint (~2,500 m²) is comparable to the radiator footprint
-        (~1,800–3,300 m²). Both are dominant structural and deployment drivers. Neither is
-        negligible. Total deployed surface area for a 1 MW node approaches
-        <strong>4,000–6,000 m²</strong> combining both functions.
+  <!-- 7. VAULT -->
+  <section>
+    <div class="container">
+      <h3>Compute Vault and Radiation</h3>
+      <p>
+        Rev 1.1 carried 15–50 t of water and structure as shielding for a compute payload. That is a crew figure
+        applied to electronics. Silicon does not need a storm shelter; it needs a tolerable total dose, a handled
+        upset rate, and a refresh plan.
       </p>
+      <ul>
+        <li><strong>Total dose.</strong> A 650 km polar orbit delivers on the order of several kilorad per year behind thin aluminium, dominated by South Atlantic Anomaly protons. Commercial accelerators and memory have been shown tolerant into the 10–30 krad range. A vault wall of <strong>10–15 mm aluminium-equivalent</strong> cuts the annual dose by a factor of three to five and puts a 3–5 year tray life inside the envelope. That interval already matches the commercial hardware cycle.</li>
+        <li><strong>Upsets.</strong> Polar and SAA passes raise the single-event rate on unhardened parts. The answer is architectural: ECC memory, frequent checkpointing to the local storage pool, and scheduling that expects a few percent of throughput lost to restarts. This is the open engineering question on the node and the page does not pretend it is closed.</li>
+        <li><strong>Geometry.</strong> The vault is an unpressurised cylinder, ⌀4 × 10 m, with cold-plated trays on rails so a robotic servicer can swap a tray without breaking the coolant loop. Storage, power conversion, and the loop pumps live in the same shell. Vault structure and shielding together are ~5 t, not 15–50.</li>
+        <li><strong>Serviceability.</strong> Interfaces are EVA-compatible so a crewed servicing mission is possible, but nothing on the node requires a person. The array blankets and radiator wings are line-replaceable units on the same truss standard.</li>
+      </ul>
+    </div>
+  </section>
 
+  <!-- 8. MASS -->
+  <section>
+    <div class="container">
+      <h3>Mass Budget, 1 MW IT Node</h3>
+      <table class="thermal-table">
+        <thead><tr><th>Group</th><th>Basis</th><th>Mass (t)</th></tr></thead>
+        <tbody>
+          <tr><td>Solar array sheet</td><td>5,400 m² at 2.5 kg/m² deployable blanket</td><td>13.5</td></tr>
+          <tr><td>Radiator wings and loop</td><td>2,000 m² at 6 kg/m² pumped-loop panel</td><td>12.2</td></tr>
+          <tr><td>Compute trays and storage</td><td>1 MW IT at ~12 kg/kW, liquid-cooled rack density</td><td>12.0</td></tr>
+          <tr><td>Vault structure and shielding</td><td>⌀4 × 10 m shell, 10–15 mm Al-equivalent, rails</td><td>5.0</td></tr>
+          <tr><td>Power conversion, distribution, pumps, fluid, avionics, comms</td><td>Allocation</td><td>5.0</td></tr>
+          <tr><td>Truss, deployment mechanisms, attitude control, electric propulsion and propellant</td><td>Allocation</td><td>7.0</td></tr>
+          <tr><td>Subtotal</td><td></td><td>54.7</td></tr>
+          <tr><td>Growth margin, 20 %</td><td></td><td>10.9</td></tr>
+          <tr><td><strong>Node mass</strong></td><td></td><td><strong>~65</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="note" style="margin-top:12px; color:var(--muted); font-size:0.9rem;">
+        Rev 1.1 carried 40–80 t for 200–500 kW of accelerator. Rev B carries ~65 t for 1,000 kW. The change is not
+        optimism; it is the removal of the water shield and the batteries, and the accounting of compute at the
+        density liquid-cooled racks actually achieve. The refresh cycle relaunches only the 12 t of trays.
+      </p>
+    </div>
+  </section>
+
+  <!-- 9. ECONOMICS -->
+  <section>
+    <div class="container">
+      <h3>Economics: Where It Crosses Over</h3>
+      <p>
+        Both an orbital node and a terrestrial hall buy the same accelerators, and those dominate the bill either
+        way: on the order of $40–50 M per megawatt of current-generation hardware. What differs is the plant around
+        them. A terrestrial AI hall costs roughly <strong>$10–15 M per MW</strong> to build, plus around
+        <strong>$0.6–0.9 M per MW-year</strong> in energy. Over a five-year hardware life that is about
+        <strong>$15–20 M per MW</strong> of plant and power, before the years spent waiting for an interconnect.
+      </p>
+      <p>
+        The orbital node replaces all of that with launch mass. At 65 t per megawatt:
+      </p>
+      <table class="thermal-table">
+        <thead><tr><th>Launch price</th><th>Launch cost per MW node</th><th>Against $15–20 M terrestrial plant + power</th></tr></thead>
+        <tbody>
+          <tr><td>$3,000 /kg</td><td>$195 M</td><td>10× worse</td></tr>
+          <tr><td>$1,500 /kg</td><td>$98 M</td><td>5× worse</td></tr>
+          <tr><td>$500 /kg</td><td>$33 M</td><td>~2× worse</td></tr>
+          <tr><td><strong>$300 /kg</strong></td><td><strong>$20 M</strong></td><td><strong>parity</strong></td></tr>
+          <tr><td>$200 /kg</td><td>$13 M</td><td>better</td></tr>
+          <tr><td>$100 /kg</td><td>$7 M</td><td>2–3× better</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:16px;">
+        The crossover sits near <strong>$300 per kilogram to sun-synchronous orbit</strong>, before counting on-orbit
+        assembly, qualification, and the operations team, which push it lower, and before counting the value of
+        skipping a multi-year grid queue, which pushes it higher. That price does not exist today. It is the stated
+        goal of fully reusable heavy launch, and the point of writing the number down is that it is a
+        launch-price gate, not a technology gate. Everything else on this page is buildable now.
+      </p>
+      <div class="assumption-note">
+        <strong>Refresh.</strong> Each accelerator generation relaunches ~12 t of trays and storage per node. At
+        $500 /kg that is $6 M against $40 M or more of hardware inside them, so refresh cost is not what decides the case.
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. SCALING -->
+  <section>
+    <div class="container">
+      <h3>Scaling</h3>
+      <p>
+        Nothing in the node gets easier when it gets bigger. Deployed area, bending modes, pointing disturbance,
+        fault-domain size, and the mass of any single failure all grow faster than the compute they carry. A 1 MW node
+        is already a 90 m sheet with 50 m wings. The unit is fixed and the fleet grows.
+      </p>
+      <ul>
+        <li><strong>Plane fill.</strong> Nodes in the same dawn-dusk plane share ground stations and can crosslink for distributed training. Ten nodes is 10 MW of accelerator in one plane with one ground segment.</li>
+        <li><strong>Independent failure.</strong> A punctured loop or a lost wing takes out one node, throttled, not a fleet.</li>
+        <li><strong>Same servicer.</strong> One robotic servicing vehicle and one tray standard cover every node in the plane.</li>
+        <li><strong>Lifecycle split.</strong> Plant lasts 10–15 years; trays turn over in 3–5. The plant is the asset; the trays are inventory.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 11. BEYOND LEO -->
+  <section>
+    <div class="container">
+      <h3>Beyond Earth Orbit</h3>
+      <p>
+        The node does not care which body it orbits, but the case does. Around the Moon or Mars there is no
+        advantage until there are customers there, and the Earth link gets worse. Where the case changes is
+        the <strong>lunar surface</strong>, and only one part of it.
+      </p>
+      <h4>The lunar surface as a heat sink, with the caveat</h4>
+      <p>
+        The daytime surface is not a cold sink. At the equator it reaches ~390 K at noon for two weeks, and regolith
+        is an insulator, so nothing conducts into the ground worth counting. A radiator on the day side of the Moon
+        looks at hot ground and a hot sun for 14 days and then at nothing but darkness for 14 more, with no power.
+      </p>
+      <p>
+        The <strong>polar</strong> surface is different. Rim sites near the south pole are lit 80–90 % of the year at
+        grazing angles, and next to them are permanently shadowed floors at 40–100 K. A vertical radiator on a rim,
+        facing the shadowed floor and the cold sky, rejects about 490 W/m² one-sided at 315 K with no Earth infrared
+        and no solar load. Per square metre that is comparable to the orbital wing. The difference is everything
+        around it: no launch of the plant from Earth once regolith structure and local water are available, no
+        deployment mechanisms, radiators that can be built as walls, and the program's own water on site for thermal
+        storage across the short polar nights.
+      </p>
       <div class="callout">
         <p>
-          An alternative architecture worth evaluating: throttle compute during eclipse periods
-          rather than buffering full power in batteries. At 1 MW sustained input, worst-case
-          eclipse buffering requires ~580 kWh (~2.6 tons of batteries). Designing for 60–70%
-          duty cycle instead substantially reduces battery mass while maintaining high average
-          throughput for non-latency-sensitive workloads.
+          The LEO node is the near-term product and the testbed for the plant. The lunar polar node is where the
+          plant stops being launched. That is the same gate the rest of the program is waiting on: a viable moonbase
+          and industrial-scale lunar water.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- SCALE REFERENCE — UPDATED -->
+  <!-- 12. REV B CHANGES -->
   <section>
     <div class="container">
-      <h3>Scale Reference (Updated)</h3>
-      <p>
-        Radiator and solar array sizing are included here for physical scale reference. One American
-        football field (including end zones) has an area of approximately 5,350 m².
-      </p>
-
-      <div class="spec-grid">
-        <div class="spec">
-          <strong>Radiator Area (revised)</strong>
-          1,800–3,300 m² per MW<br/>
-          (~0.34–0.62 football fields per MW)
-        </div>
-        <div class="spec">
-          <strong>Solar Array Area</strong>
-          ~2,500 m² per MW<br/>
-          (~0.47 football fields per MW)
-        </div>
-        <div class="spec">
-          <strong>Combined deployed area (1 MW node)</strong>
-          ~4,300–5,800 m² total<br/>
-          (~0.8–1.1 football fields)
-        </div>
-        <div class="spec">
-          <strong>Design implication</strong>
-          Both radiators and solar wings are first-order structural infrastructure. Neither can be treated as secondary in deployment or assembly planning.
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- OPERATIONS -->
-  <section>
-    <div class="container">
-      <h3>Operational Concept</h3>
-      <ul>
-        <li>Modular launch and on-orbit assembly</li>
-        <li>Robotic and crew-compatible servicing</li>
-        <li>Swappable compute payloads without de-orbit</li>
-        <li>Replaceable radiators and solar wings</li>
-        <li>Autonomous operation with periodic ground tasking</li>
-        <li>Eclipse-period compute throttling as an alternative to full battery buffering</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- MODULARITY & SCALING -->
-  <section>
-    <div class="container">
-      <h3>Modularity & Scaling</h3>
-      <p>
-        As deployable surface area increases, structural flexibility, attitude control authority,
-        deployment complexity, and fault-domain size increase nonlinearly. Beyond a moderate scale,
-        distributing capability across multiple nodes becomes simpler than increasing the size of a
-        single structure.
-      </p>
-      <ul>
-        <li>
-          <strong>Fault containment:</strong> Smaller thermal loops and pressure volumes limit the impact
-          of punctures or component failures.
-        </li>
-        <li>
-          <strong>Control:</strong> Shorter spans reduce bending modes and pointing disturbances,
-          particularly for optical communications.
-        </li>
-        <li>
-          <strong>Lifecycle:</strong> Compute payloads can be refreshed independently of power and thermal
-          infrastructure.
-        </li>
-        <li>
-          <strong>Thermal temperature refresh:</strong> As GPU architecture evolves, cold-plate and
-          loop temperatures may increase if future hardware tolerates higher junction temperatures,
-          improving radiator specific performance without infrastructure replacement.
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- REPRESENTATIVE SPECS — REVISED -->
-  <section>
-    <div class="container">
-      <h3>Representative v1.0 Node Specifications (Revised)</h3>
-
-      <div class="spec-grid">
-        <div class="spec">
-          <strong>Total Mass</strong>
-          40–80 metric tons
-          <div class="note">Includes structure, shielding, compute racks, solar arrays, batteries, and thermal hardware</div>
-        </div>
-        <div class="spec">
-          <strong>Electrical Input</strong>
-          1–2 MW
-        </div>
-        <div class="spec">
-          <strong>Compute Accelerator Power</strong>
-          200–500 kW (total rack TDP)
-          <div class="note">All accelerator power ultimately becomes waste heat; this figure represents accelerator TDP, not "useful output"</div>
-        </div>
-        <div class="spec">
-          <strong>Radiator Area (revised)</strong>
-          1,800–3,300 m² per MW sustained input
-          <div class="note">Revised down from prior 2,000–5,000 m²/MW; based on corrected 300–330 K operating temperature</div>
-        </div>
-        <div class="spec">
-          <strong>Solar Array Area</strong>
-          ~2,500–5,000 m² (1–2 MW)
-        </div>
-        <div class="spec">
-          <strong>Shielding Mass</strong>
-          15–50 tons (water + structure)
-        </div>
-        <div class="spec">
-          <strong>Battery Mass (eclipse buffer)</strong>
-          ~2.6–5.2 tons (1–2 MW, worst-case eclipse)
-          <div class="note">Throttle-on-eclipse strategy can substantially reduce this</div>
-        </div>
-        <div class="spec">
-          <strong>Operational Life</strong>
-          10–15 years per node with modular refresh
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ARCHITECTURAL SUMMARY -->
-  <section>
-    <div class="container">
-      <h3>Architectural Summary</h3>
-      <p>
-        In orbit, compute hardware is not the primary scaling constraint. Power generation and heat
-        rejection dominate system size, mass, and operational complexity.
-      </p>
-      <p>
-        AOCN treats these constraints explicitly and organizes compute capability around infrastructure
-        that can be assembled, serviced, and expanded using current spaceflight technologies. This revision
-        corrects the thermal operating temperature assumption to align with COTS GPU constraints,
-        establishes solar array area as a co-equal structural driver alongside radiators, and adds
-        eclipse buffering mass as a planning consideration.
-      </p>
+      <h3>What Changed From Rev 1.1</h3>
+      <table class="thermal-table">
+        <thead><tr><th>Item</th><th>Rev 1.1</th><th>Rev B</th></tr></thead>
+        <tbody>
+          <tr><td>Orbit</td><td>500–600 km, generic; 35 % eclipse</td><td>650 km dawn-dusk sun-synchronous; no eclipse</td></tr>
+          <tr><td>Eclipse storage</td><td>2.6 t/MW battery or throttling</td><td>Safe-mode pack only</td></tr>
+          <tr><td>Accelerator load</td><td>200–500 kW in a 1–2 MW bus</td><td>1.0 MW IT, 1.2 MW electrical</td></tr>
+          <tr><td>Radiator area</td><td>1,800–3,300 m²/MW at 290–330 K</td><td>~1,700 m²/MW at 315 K mean; 2,000 m² per node</td></tr>
+          <tr><td>Solar area</td><td>~2,500 m²/MW, beginning of life</td><td>~4,500 m²/MW end of life; 5,400 m² per node</td></tr>
+          <tr><td>Shielding</td><td>15–50 t water and structure</td><td>~5 t aluminium vault; 3–5 year tray refresh</td></tr>
+          <tr><td>Node mass</td><td>40–80 t</td><td>~65 t, bottom-up with 20 % growth</td></tr>
+          <tr><td>Use case</td><td>"Power density, thermal isolation, space adjacency"</td><td>Batch training and inference; space-native data second</td></tr>
+          <tr><td>Data path</td><td>Not stated</td><td>Launched storage up, optical down, budget stated</td></tr>
+          <tr><td>Economics</td><td>Not stated</td><td>Break-even near $300/kg to SSO, shown as a table</td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
@@ -636,16 +614,17 @@
     <div class="container">
       <h3>Technical Reference</h3>
       <p>
-        Full technical overview of AOCN — positioning, architecture, thermal scaling,
-        and LEO operating assumptions — in a printable PDF format.
+        The Rev B architecture reference document carries the sizing set above with its bases, the mass budget,
+        the economics table, and the lunar polar variant.
       </p>
 
       <div class="spec" style="max-width: 720px; margin: 24px auto 0; text-align:center;">
         <a class="btn btn-primary" href="dossiers/Aegis_Orbital_Compute_Node.pdf" target="_blank" rel="noopener">
-          View / Technical Dossier (PDF) — Rev. 1.1
+          View / Technical Dossier (PDF) — Rev B
         </a>
         <div style="margin-top: 12px; color: var(--muted); font-size: 0.95rem;">
-          If the PDF doesn't open in your browser, right-click and choose "Save Link As…"
+          If the PDF doesn't open in your browser, right-click and choose "Save Link As…"<br>
+          <a href="dossiers/Aegis_Orbital_Compute_Node_Rev1.1.pdf" target="_blank" rel="noopener" style="font-size:0.9rem;">Rev 1.1 dossier (archived, February 2026)</a>
         </div>
       </div>
     </div>
