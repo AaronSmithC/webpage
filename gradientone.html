@@ -2,267 +2,509 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gradient One | Aegis Station</title>
-
-  <meta name="description" content="Gradient One (G1) is a 350-meter orbital multi-gravity validation platform generating 0g, 0.16g (Moon), 0.38g (Mars), and 1g simultaneously at ~1.6 RPM—advancing artificial gravity, bioregenerative systems, and rotating habitat operations." />
-
-  <link rel="stylesheet" href="/style.css" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gradient One | Multi-Gravity Validation Platform, Rev B</title>
+  <meta name="description" content="Gradient One Rev B: a three-arm rotating research platform placing 1g, Mars gravity, lunar gravity and a rotating microgravity hub in one vehicle at 1.6 rpm, for six-month crewed campaigns. Bottom-up mass of about 230 t, a stated cost class, and the hub/rotor boundary built on the station's own principle." />
   <style>
-    body {
-      background-color: white;
-      color: black;
-      font-family: sans-serif;
-      line-height: 1.6;
-      margin: 0;
+    :root{
+      --bg:#0b0f14;
+      --bg-raised:#10161e;
+      --bg-card:#11181f;
+      --border:#22303c;
+      --border-soft:#1a2530;
+      --accent:#6fc3d9;
+      --accent-dim:rgba(111,195,217,0.12);
+      --text:#d7dee6;
+      --text-secondary:#a7b3bf;
+      --text-dim:#6d7a86;
+      --good:#8fd18f;
     }
-
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:400 1rem/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
     }
-
-    header, footer {
-      text-align: center;
-      padding: 1.5rem;
-      background-color: #f0f0f0;
+    a{color:var(--accent);text-decoration:none}
+    a:hover{opacity:.85}
+    .wrap{max-width:880px;margin:0 auto;padding:3.5rem 1.4rem 4rem}
+    .eyebrow{
+      font-size:.8rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--text-dim);
+      margin-bottom:.9rem;
     }
-
-    h1, h2, h3 {
-      margin-top: 1.5rem;
-      color: #222;
+    h1{
+      font-size:clamp(1.7rem,4.5vw,2.4rem);
+      line-height:1.2;
+      margin:.2rem 0 1rem;
+      color:#fff;
+      font-weight:650;
+      letter-spacing:-.01em;
     }
-
-    p { margin: 0.75rem 0; }
-
-    ul {
-      padding-left: 1.2rem;
-      margin: 0.5rem 0 1rem 0;
+    .lede{
+      font-size:1.08rem;
+      color:var(--text-secondary);
+      max-width:64ch;
     }
-
-    .spec-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      margin-top: 1rem;
+    .lede strong{color:var(--text)}
+    h2{
+      font-size:1.25rem;
+      color:#fff;
+      font-weight:600;
+      margin:0 0 .8rem;
+      letter-spacing:-.005em;
     }
-
-    @media (min-width: 760px) {
-      .spec-grid {
-        grid-template-columns: 1fr 1fr;
-      }
+    h3{
+      font-size:1rem;
+      color:var(--text);
+      font-weight:600;
+      margin:1.2rem 0 .5rem;
     }
-
-    .card {
-      border: 1px solid #e2e2e2;
-      border-radius: 8px;
-      padding: 1rem 1.25rem;
-      background: #fff;
+    p{margin:.7rem 0}
+    ul{margin:.6rem 0;padding-left:1.2rem}
+    li{margin:.4rem 0}
+    .card{
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:1.5rem 1.6rem;
+      margin:1.4rem 0;
     }
-
-    .pill {
-      display: inline-block;
-      padding: 0.2rem 0.6rem;
-      border: 1px solid #ddd;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      margin: 0.15rem 0.25rem 0.15rem 0;
-      background: #fafafa;
+    .hr{height:1px;background:var(--border-soft);margin:2.2rem 0}
+    .pillrow{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.1rem 0 .3rem}
+    .pill{
+      padding:.18rem .7rem;
+      border:1px solid var(--border);
+      border-radius:999px;
+      font-size:.82rem;
+      color:var(--text-secondary);
+      background:var(--bg-raised);
+      white-space:nowrap;
     }
-
-    .button {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      margin-top: 1rem;
-      background-color: black;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
+    .callout{
+      border-left:3px solid var(--accent);
+      background:var(--accent-dim);
+      border-radius:0 8px 8px 0;
+      padding:.9rem 1.1rem;
+      margin:1.2rem 0;
+      color:var(--text);
     }
-
-    .button:hover {
-      background-color: #333;
+    .callout strong{color:#fff}
+    .mini{font-size:.88rem;color:var(--text-dim)}
+    .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1rem 0}
+    .cell{
+      background:var(--bg-raised);
+      border:1px solid var(--border-soft);
+      border-radius:8px;
+      padding:1rem 1.1rem;
     }
-
-    a {
-      color: black;
+    .cell strong{display:block;color:#fff;font-size:.95rem;margin-bottom:.3rem}
+    .cell span, .cell p{color:var(--text-secondary);font-size:.92rem;line-height:1.6;margin:0}
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:1rem 0;
+      font-size:.92rem;
     }
-
-    a:hover {
-      text-decoration: underline;
+    th{
+      text-align:left;
+      color:var(--text-dim);
+      font-weight:600;
+      font-size:.8rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      padding:.5rem .7rem;
+      border-bottom:1px solid var(--border);
     }
-
-    .muted {
-      color: #444;
-      font-size: 0.98rem;
+    td{
+      padding:.65rem .7rem;
+      border-bottom:1px solid var(--border-soft);
+      vertical-align:top;
+      color:var(--text-secondary);
     }
-
-    .callout {
-      border-left: 4px solid #000;
-      padding: 0.75rem 1rem;
-      background: #fafafa;
-      margin: 1rem 0;
+    td:first-child{color:var(--text);white-space:nowrap}
+    .reqs td:first-child{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:.82rem;
+      color:var(--accent);
     }
-
-    .gravity-list li {
-      margin: 0.3rem 0;
+    .reqs td:nth-child(2){color:var(--text);white-space:nowrap}
+    .tag{
+      display:inline-block;
+      padding:.05rem .5rem;
+      border:1px solid var(--border);
+      border-radius:999px;
+      font-size:.74rem;
+      color:var(--text-dim);
+      background:var(--bg-raised);
+      margin:.35rem .25rem 0 0;
+      white-space:nowrap;
     }
-    .ref-concept {
-      color: #666;
-      font-size: 0.95rem;
-      margin-top: 1rem;
-    }
-    .ref-concept a {
-      color: #0f766e;
+    figure{margin:1.4rem 0}
+    figure a{display:block;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+    figure img{width:100%;display:block}
+    figcaption{font-size:.85rem;color:var(--text-dim);margin-top:.5rem;line-height:1.5}
+    footer{margin-top:2.5rem;font-size:.9rem;color:var(--text-dim)}
+    footer strong{color:var(--text-secondary)}
+    @media (max-width:640px){
+      .wrap{padding:2.5rem 1.1rem 3rem}
+      .twoCol{grid-template-columns:1fr}
+      table{font-size:.85rem}
+      td:first-child{white-space:normal}
+      .reqs td:nth-child(2){white-space:normal}
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <h1>Gradient One</h1>
-    <p><strong>Orbital Multi-Gravity Validation Platform</strong></p>
-    <p class="muted">One spin. Three worlds. One baseline.</p>
-  </header>
+<div class="wrap">
 
-  <main>
-    <section>
-      <h2>Overview</h2>
-      <p>
-        Gradient One (G1) is a 350-meter rotating orbital platform designed to validate sustained artificial gravity and mission-relevant partial-gravity environments in space.
-        Operating at ~1.6 RPM, G1 simultaneously provides Earth gravity (1g), Mars gravity (0.38g), Lunar gravity (0.16g), and a central microgravity control hub within a single continuous rotating structure.
-      </p>
+  <div class="eyebrow">Validation Platform &bull; Rev B, September 2026</div>
+  <h1>Gradient One</h1>
+  <p class="lede">
+    A three-arm rotating research platform that places <strong>1g, Mars gravity, lunar gravity and a
+    rotating microgravity hub</strong> in one vehicle at one spin rate, for six-month crewed campaigns.
+    It exists to produce the dataset that the
+    <a href="artificial-gravity-requirements-evaluation.html">Artificial Gravity Requirements Evaluation</a>
+    defines, and to retire the rotating-structure risks that Aegis Station carries as assumptions.
+  </p>
 
-      <div class="callout">
-        <p>
-          G1 closes the gap between microgravity research and full-scale rotating habitat deployment by generating operational gravity environments in orbit—at scale, for long-duration campaigns.
-        </p>
-      </div>
+  <figure>
+    <img src="images/gradient-one-g1-2.png" alt="Gradient One Rev B in low Earth orbit: three long open-truss arms at 120 degrees from a small hub, an identical pressurised module hung along each arm at the tip with a radiator panel, a water tank and a thruster pod beyond it, two more modules inboard on two of the arms, and a despun node on the hub axis carrying six solar array wings and docked crew and cargo vehicles, Earth below">
+    <figcaption>Gradient One Rev B: three-arm rotor with the 1g modules at the tips, the Moon and Mars modules inboard, and the despun docking node with its arrays on the spin axis. Concept render.</figcaption>
+  </figure>
 
-      <div>
-        <span class="pill">Artificial Gravity</span>
-        <span class="pill">Moon (0.16g)</span>
-        <span class="pill">Mars (0.38g)</span>
-        <span class="pill">Bioregenerative Systems</span>
-        <span class="pill">Rotating Habitat Operations</span>
-      </div>
-    </section>
+  <div class="callout">
+    <strong>Rev B, September 2026.</strong> Rebuilt from the sizing up. The single-arm truss with a
+    counterweight becomes a three-arm rotor that balances itself and spins about its major axis. The
+    despun hub becomes a small docking node joined to a rotating 0g hub through the same boundary
+    principle as the station's own hub/ring boundary: no continuous rotary seal in a life-critical path.
+    Campaigns move from 30&ndash;90 days to six months, because the requirements page asks for six
+    months. Crew moves from 2&ndash;4 to 10. The mass budget is bottom-up at about 230 t, and the cost
+    class moves from the Rev A figure of $0.6&ndash;1.4 B to $5&ndash;10 B, stated with its basis. The
+    Rev A dossier remains available below.
+  </div>
 
-    <section>
-      <h2>Why It Matters</h2>
-      <p>
-        We have extensive microgravity data. We have ground centrifuge data.
-        What we do not yet have is sustained, comparative multi-gravity operational data in orbit—across lunar and Mars gravity levels, alongside a 1g baseline, within a single system.
-      </p>
-      <p>
-        Gradient One is designed to generate that dataset while validating the mechanical, fluid, and operational realities of living and working in a rotating environment.
-      </p>
-      <p class="ref-concept">Reference concept:
-        <a href="artificial-gravity-requirements-evaluation.html">Artificial Gravity Requirements Evaluation (AGRE)</a>
-        &mdash; defines what that dataset must contain
-      </p>
-    </section>
+  <section class="card">
+    <h2>What it is for</h2>
+    <p>
+      Two questions, one vehicle. The first is the station's own: whether people can live and work
+      for months at <strong>1g produced by rotation at 1.6 rpm</strong>, the operating point Aegis
+      Station is designed around. No one has measured that in orbit. The second is the surface
+      program's: how bone, cardiovascular, ocular and plant endpoints respond to
+      <strong>lunar and Mars gravity</strong> over months, against a 1g control in the same vehicle,
+      sharing the same radiation, diet, lighting and instruments.
+    </p>
+    <p>
+      Both questions need the same thing: several gravity levels, held for a long time, in one place,
+      with rotation present. A fixed-rate rotor with modules at three radii is the cheapest structure
+      that gives all of that at once. The platform also carries a rotating 0g population, so that the
+      effect of rotation can be separated from the effect of gravity level.
+    </p>
+    <div class="pillrow">
+      <span class="pill">1g in a rotating frame</span>
+      <span class="pill">0.378 g Mars</span>
+      <span class="pill">0.165 g Moon</span>
+      <span class="pill">Rotating 0g control</span>
+      <span class="pill">Six-month campaigns</span>
+      <span class="pill">Hub/rotor boundary at 1.6 rpm</span>
+    </div>
+  </section>
 
-    <section>
-      <h2>Gravity Configuration</h2>
-      <p>
-        G1 uses a single fixed rotation rate (~1.6 RPM). Gravity scales with radius along the rotating truss, enabling discrete gravity “bands” without changing spin state.
-      </p>
+  <section class="card">
+    <h2>Configuration</h2>
+    <p>
+      A <strong>Y-shaped rotor</strong>: three open-truss arms at 120&deg;, each about 344 m long, with an
+      identical habitat module hung from every tip at the 1g radius. The lunar module sits inboard on
+      arm A and the Mars module inboard on arm B. A rotating hub module joins the three arms and houses the
+      0g crew. A small despun node on the spin axis carries the docking ports, solar arrays, reboost
+      thrusters and antennas, and does not rotate.
+    </p>
+    <figure>
+      <img src="images/Gradient_One_RevB_blueprint.png" alt="Blueprint-style illustration of the Gradient One Rev B arrangement: plan view of the three-arm rotor with the tip and inboard modules and band circles, a side elevation along one arm with the despun node and arrays, the bearing band, the hub, the inboard and tip modules with their decks and the tip tank, and detail insets of the truss and rail, the transit car at a module port, the bearing and transfer lock, the tip tank and thruster pod, and an array hinge">
+      <figcaption>Rev B general arrangement, blueprint rendering. Plan view, elevation along one arm, and detail insets. Concept illustration; the drawing below is the one generated from the sizing model.</figcaption>
+    </figure>
+    <figure>
+      <a href="Gradient_One_RevB_Arrangement.svg" target="_blank" rel="noopener">
+        <img src="Gradient_One_RevB_Arrangement.svg" alt="Gradient One Rev B arrangement drawing: plan view of the three-arm rotor with 1g modules at the tips, the Moon module inboard on arm A and the Mars module inboard on arm B, and a section along one arm showing the despun node, the hub/rotor boundary, the rotating hub, the arm, the Moon module, the 1g module and the tip trim tank">
+      </a>
+      <figcaption>Rev B arrangement. Plan view to scale with modules enlarged for legibility; section along arm A not to scale radially. Generated from the sizing model.</figcaption>
+    </figure>
+    <table>
+      <thead><tr><th>Band</th><th>Middle deck radius</th><th>Gravity on the three decks</th><th>Location</th><th>Crew</th></tr></thead>
+      <tbody>
+        <tr><td>1g</td><td>350 m</td><td>1.007 / 1.000 / 0.993 g</td><td>Three tip modules (two habitats, one lab)</td><td>4</td></tr>
+        <tr><td>Mars</td><td>132 m</td><td>0.385 / 0.378 / 0.371 g</td><td>Inboard on arm B</td><td>2</td></tr>
+        <tr><td>Moon</td><td>58 m</td><td>0.172 / 0.165 / 0.158 g</td><td>Inboard on arm A</td><td>2</td></tr>
+        <tr><td>0g, rotating</td><td>0 m</td><td>&lt; 0.001 g, 1.6 rpm present</td><td>Rotating hub module</td><td>2</td></tr>
+        <tr><td>0g, non-rotating</td><td>on axis</td><td>0 g, no rotation</td><td>Despun node (transit only)</td><td>&ndash;</td></tr>
+      </tbody>
+    </table>
+    <p class="mini">
+      Spin rate 1.60 rpm (&omega; = 0.167 rad/s). Coriolis acceleration at 1 m/s walking is 0.34 m/s&sup2;,
+      3.4 % of g. Head-to-foot gradient over 2 m at the 1g band is 0.57 %. Overall diameter about 714 m.
+    </p>
+  </section>
 
-      <div class="card">
-        <h3>Simultaneous Gravity Bands</h3>
-        <ul class="gravity-list">
-          <li><strong>0g:</strong> Central non-rotating hub (microgravity control + docking)</li>
-          <li><strong>0.16g (Moon):</strong> ~56 m radius band</li>
-          <li><strong>0.38g (Mars):</strong> ~133 m radius band</li>
-          <li><strong>1g (Earth baseline):</strong> ~350 m outer band</li>
-        </ul>
-        <p class="muted">
-          This configuration supports comparative testing under identical lighting, atmosphere, instrumentation, and campaign timelines.
-        </p>
-      </div>
-    </section>
+  <section class="card">
+    <h2>Why 350 m and 1.6 rpm</h2>
+    <p>
+      The radius is not chosen for the biology. Earth is the 1g control for the biology, and a smaller,
+      faster platform would give the partial-g bands at a fraction of the arm length. The radius is
+      chosen because <strong>1g at 1.6 rpm is the station's operating point</strong>, and the tolerance
+      data AGRE produces is reported per spin rate. A platform at a different rate measures a different
+      column of the table.
+    </p>
+    <p>
+      The sizing model makes the trade explicit. At 3 rpm the 1g radius is 99 m, Mars is 38 m and the
+      Moon is 16 m. The arms shrink by about 250 m each. Because the arms are light open trusses under
+      tension, that saves about 33 t of the 227 t vehicle, roughly 14 %, and a similar fraction of the
+      structure cost. The crew-rated modules, the boundary, the assembly campaign and the operations are
+      unchanged. The 3 rpm platform also carries twice the Coriolis at walking speed, 6.4 % of g, which
+      is the effect the smaller radius was supposed to avoid measuring.
+    </p>
+    <div class="callout">
+      <strong>Finding:</strong> radius is cheap on this vehicle. Pressurized, crew-rated volume is what
+      costs. The 1g band earns its 350 m because the arm to reach it is a few tonnes of truss and the
+      question it answers is the station's.
+    </div>
+  </section>
 
-    <section>
-      <h2>Architecture</h2>
+  <section class="card">
+    <h2>Modules</h2>
+    <p>
+      One common pressurized module, five copies: a 4.5 m diameter, 11 m hull with three 2.4 m decks and a
+      utility deck, about 14 t dry and 17 t outfitted, in the class of the ISS laboratory and node modules.
+      Every module is mounted <strong>radially</strong>, its long axis along the arm, so that the
+      centripetal load runs through the hull along the same axis its launch structure already carries at
+      several g. The 1g service load is a fraction of the launch case. Tip modules hang from the arm end;
+      the Moon and Mars modules sit beside the arm on cradles at 0.17 g and 0.38 g respectively.
+    </p>
+    <p>
+      The radial orientation is also what the requirements ask for. Three decks give a measured gravity
+      gradient between floors (AGRE-F-004). Stairs and ladders between decks are radial transit
+      (AGRE-F-002). Floors in the 1g modules are built to the 350 m radius, as the station's rings are.
+      The hub-facing end of every module carries the port that the transit car docks to.
+    </p>
+    <div class="grid">
+      <div class="cell"><strong>1g modules A and B</strong><span>Habitats: crew quarters, galley, exercise, hygiene. Water processing and oxygen generation for the vehicle live here, where gravity separation is available, and are themselves a validation item.</span></div>
+      <div class="cell"><strong>1g module C</strong><span>Laboratory: bioregenerative growth racks, the radial fluids and two-phase test bed, medical and imaging suite for all bands.</span></div>
+      <div class="cell"><strong>Mars and Moon modules</strong><span>Same hull, two crew each, growth racks and physiology instrumentation. Atmosphere revitalization is local; water is processed at 1g and returned by the arm lines.</span></div>
+      <div class="cell"><strong>Rotating hub</strong><span>Node-class module with three radial arm ports and an axial port to the boundary. 0g band: two crew, ISS-type microgravity life support, contingency refuge for the rotor.</span></div>
+    </div>
+  </section>
 
-      <div class="spec-grid">
-        <div class="card">
-          <h3>Primary Structure</h3>
-          <ul>
-            <li><strong>Outer Radius:</strong> ~350 meters</li>
-            <li><strong>Spin Rate:</strong> ~1.6 RPM</li>
-            <li><strong>Configuration:</strong> Single rotation regime with discrete gravity bands</li>
-            <li><strong>Hub:</strong> Central non-rotating docking/control environment (0g)</li>
-          </ul>
-        </div>
+  <section class="card">
+    <h2>Hub/rotor boundary</h2>
+    <p>
+      Rev A had a "central non-rotating hub" and said nothing about how anything crossed into it.
+      Rev B adopts the station's own principle from the
+      <a href="hub_ring_boundary.html">hub/ring boundary</a> page: <strong>no continuous rotary
+      mechanical interface carries a life-critical flow</strong>. Every crossing is cyclic,
+      contactless, or eliminated.
+    </p>
+    <table>
+      <thead><tr><th>Flow</th><th>Crossing</th><th>Heritage</th></tr></thead>
+      <tbody>
+        <tr><td>Crew and cargo</td><td>A transfer lock: a short pressurized cylinder on the bearing that clamps to the despun node, spins up to 1.6 rpm, and clamps to the rotating hub. Hatches on both faces. No seal ever slips under pressure.</td><td>Hatches and docking mechanisms; the station's transit-pod magazine in miniature</td></tr>
+        <tr><td>Power</td><td>Contactless rotary transformer across the bearing. Arrays and battery on the despun side.</td><td>Rotary transformers in flight mechanisms; no slip ring</td></tr>
+        <tr><td>Data</td><td>Free-space optical link on the spin axis.</td><td>Optical intersatellite links</td></tr>
+        <tr><td>Heat</td><td>Rejected on each side independently. No fluid crosses.</td><td>Body and panel radiators</td></tr>
+        <tr><td>Thrust and torque</td><td>Reboost thrust from the despun node passes through the bearing as a radial load. A drive at the bearing holds the node despun.</td><td>Dual-spin spacecraft</td></tr>
+      </tbody>
+    </table>
+    <p>
+      The vehicle is a <strong>dual-spin spacecraft</strong>: a rotor spinning about its major axis and a
+      despun platform on the same bearing. That arrangement flew for decades on communications
+      satellites at far higher rates. The failure case is benign: a seized bearing turns the node into a
+      co-rotating hub, and the two crew vehicles that stay docked for the whole campaign remain the
+      crew's way home either way. The boundary's performance under rotation is itself a campaign
+      objective (AGRE-F-012), and it is the station's boundary at the station's spin rate.
+    </p>
+  </section>
 
-        <div class="card">
-          <h3>Stability & Balance</h3>
-          <ul>
-            <li><strong>Counterbalance:</strong> Water-based adjustable mass system</li>
-            <li><strong>Balancing:</strong> Active mass redistribution for long-duration stability</li>
-            <li><strong>Rationale:</strong> Compensates for consumables, transfers, and biomass growth</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+  <section class="card">
+    <h2>Dynamics and balance</h2>
+    <div class="grid">
+      <div class="cell"><strong>Major-axis spinner</strong><span>A three-arm rotor in a plane has a spin-axis inertia twice its transverse inertia. Energy dissipation from crew, fluids and flexure drives it toward the spin it already has. A two-arm dumbbell does not have that property, which is why Rev B has three arms.</span></div>
+      <div class="cell"><strong>Self-balancing</strong><span>Three identical tip modules balance in the plane. The Moon and Mars modules and consumables are trimmed by pumping water between three 4 t tip tanks, which double as the water reserve.</span></div>
+      <div class="cell"><strong>Spin-up is cheap</strong><span>Angular momentum 1.8 GN&middot;m&middot;s, kinetic energy 43 kWh. Spin-up from the tip thruster pods costs about 1.8 t of propellant at 300 s. A full spin-down for a repair and re-spin is affordable.</span></div>
+      <div class="cell"><strong>Loads are small</strong><span>Tension at the hub end of the most loaded arm is about 360 kN, which is 18 cm&sup2; of aluminium at 200 MPa. The arm is sized by stiffness and by the car rail, not by strength.</span></div>
+      <div class="cell"><strong>Mass excursions</strong><span>One person moving from the 1g band to the hub shifts the centre of mass 16 cm. A 2 t car moving the length of an arm shifts it 3 m. Car transits are scheduled and trimmed in advance; the untrimmed case is a planned measurement.</span></div>
+      <div class="cell"><strong>Attitude</strong><span>The spin axis is held near the orbit normal. Gravity gradient precesses a flat rotor at this rate about the orbit normal at roughly 28&deg; per day, faster than the 4.9&deg; per day nodal regression, so the axis follows the orbit with a lag of order 10&deg; without propellant. Confirming that coupled motion is an open item.</span></div>
+    </div>
+  </section>
 
-    <section>
-      <h2>What G1 Validates</h2>
+  <section class="card">
+    <h2>Radial transit and radial plumbing</h2>
+    <p>
+      Crew move between bands in a <strong>pressurized two-seat car</strong> on a rail along each arm,
+      docking to the hub-facing port of each module. The alternative, a pressurized spoke tube along
+      each arm, is a walkable path and is what the station will need, but at about 90 kg per metre it
+      adds about 60 t to this vehicle. The car gives the transition measurements AGRE asks for and
+      leaves the spoke to the station's own design.
+    </p>
+    <p>
+      The water and gas lines along the arms are where the rotating-frame fluids requirement gets
+      tested. The static pressure head from the hub to the tip is <strong>1.8 MPa</strong>, about
+      18 atmospheres, and the station's rings at 390 m see 1.9 MPa. Pumps at the tip work against it;
+      a line draining toward the hub has it for free. Coriolis asymmetry in radial flow, two-phase
+      behaviour and separator performance at each gravity level are measured on the lines and in the
+      lab module (AGRE-F-011).
+    </p>
+  </section>
 
-      <div class="spec-grid">
-        <div class="card">
-          <h3>Biological Systems</h3>
-          <ul>
-            <li>Plant growth and yield at Lunar and Mars gravity</li>
-            <li>Hydroponic performance under partial gravity and rotation</li>
-            <li>Microbial behavior, biofilm risk, and sanitation dynamics</li>
-            <li>Atmospheric trace management (humidity, VOCs/ethylene) in closed growth racks</li>
-          </ul>
-        </div>
+  <section class="card">
+    <h2>Systems</h2>
+    <table>
+      <thead><tr><th>System</th><th>Rev B sizing</th></tr></thead>
+      <tbody>
+        <tr><td>Orbit</td><td>450 km, 51.6&deg;. Drag on ~900 m&sup2; effective area is about 0.09 N; reboost from the despun node about 0.9 t of propellant per year at 300 s.</td></tr>
+        <tr><td>Power</td><td>Load about 55 kW: five habitat modules at 5 kW, hub and node 6 kW, growth racks 11 kW, exercise and science 8 kW, arm utilities 5 kW. Six 20 kW deployable arrays on two gimbals give about 102 kW sunlit at end of life and 58 kW orbit-average. Battery 82 kWh for the 36-minute eclipse at 40 % depth of discharge. Arm distribution at 300 V DC, about 1 t of copper.</td></tr>
+        <tr><td>Thermal</td><td>Rejected per module by body-mounted and arm-mounted panels. No long fluid loops, nothing across the boundary.</td></tr>
+        <tr><td>Life support</td><td>Atmosphere revitalization local to each module. Water recovery and oxygen generation centralized in the 1g habitats, where gravity phase separation applies. The hub keeps ISS-type microgravity equipment. Consumables about 7 t per 180-day campaign for ten crew, delivered by two to three cargo flights.</td></tr>
+        <tr><td>Crew transport</td><td>Two seven-seat crew vehicles docked at the despun node for the full campaign, one cargo port. Standard docking; the visiting vehicle never has to match a spin.</td></tr>
+        <tr><td>Radiation</td><td>Six months at 450 km and 51.6&deg; is the ISS exposure regime. No shielding beyond standard module walls; the tip water tanks are not in a useful geometry for shielding and are not credited.</td></tr>
+      </tbody>
+    </table>
+  </section>
 
-        <div class="card">
-          <h3>Human & Operations</h3>
-          <ul>
-            <li>Long-duration human work at 1g in a rotating frame</li>
-            <li>Task performance and transitions across gravity bands</li>
-            <li>Rotating utilities: power/data routing, maintenance, inspection</li>
-            <li>Operational procedures for rotating habitat segments</li>
-          </ul>
-        </div>
-      </div>
+  <section class="card">
+    <h2>Crew and campaigns</h2>
+    <p>
+      The requirements page asks for at least six months of exposure per subject (AGRE-F-007) and for
+      the study to be powered before it starts (AGRE-F-014). Rev A's 30&ndash;90 day campaigns with
+      2&ndash;4 crew did not meet either. Rev B baselines <strong>180-day campaigns with ten crew</strong>:
+      four at 1g, two at Mars gravity, two at lunar gravity, two in the rotating hub. The first campaign
+      is a 60-day shakedown.
+    </p>
+    <p>
+      That is still two subjects per partial-gravity band per campaign. The human dose-response result
+      is a <strong>program</strong> result, not a campaign result: five campaigns over about three years
+      give ten subjects per partial-g band and twenty at 1g. The plant, microbial, fluids and mechanical
+      results are complete within a campaign. The page says so rather than implying a single mission
+      settles the human question.
+    </p>
+  </section>
 
-      <p class="muted">
-        G1 is structured for 30–90 day campaigns, or longer, with repeatable modules and instrumentation, enabling progressive refinement over multiple missions.
-      </p>
-    </section>
+  <section class="card">
+    <h2>Mass budget</h2>
+    <table>
+      <thead><tr><th>Item</th><th>Mass</th><th>Basis</th></tr></thead>
+      <tbody>
+        <tr><td>Tip modules, 1g &times; 3</td><td>51 t</td><td>14 t hull + 3 t outfit each, ISS lab-class</td></tr>
+        <tr><td>Mars and Moon modules</td><td>34 t</td><td>Same module</td></tr>
+        <tr><td>Rotating hub module</td><td>14 t</td><td>Node-class, three radial ports</td></tr>
+        <tr><td>Arm trusses &times; 3</td><td>31 t</td><td>344 m at 30 kg/m, tension-dominated</td></tr>
+        <tr><td>Arm utilities: rail, power, lines, MMOD</td><td>6 t</td><td>6 kg/m</td></tr>
+        <tr><td>Transit cars &times; 3, radiator panels, tip tanks and thruster pods</td><td>12 t</td><td>2 t per car</td></tr>
+        <tr><td>Despun node, boundary, transfer lock</td><td>13 t</td><td>8 t pressurized node, 3 t bearing and couplings, 2 t lock</td></tr>
+        <tr><td>Arrays, gimbals, battery, propulsion, avionics</td><td>7 t</td><td>Six 20 kW arrays at 0.4 t</td></tr>
+        <tr><td><strong>Dry hardware</strong></td><td><strong>168 t</strong></td><td></td></tr>
+        <tr><td>Growth, 20 % on dry hardware</td><td>34 t</td><td></td></tr>
+        <tr><td>Trim and reserve water, consumables, propellant</td><td>25 t</td><td>12 + 10 + 3 t</td></tr>
+        <tr><td><strong>On orbit, campaign start</strong></td><td><strong>~227 t</strong></td><td>Excludes docked visiting vehicles</td></tr>
+      </tbody>
+    </table>
+    <p class="mini">Rev A did not carry a mass budget. Its "does not assume" list excluded a 250&ndash;500 t vehicle; Rev B lands under that, but only because the arms are light and the modules are few.</p>
+  </section>
 
-    <section>
-      <h2>Strategic Role</h2>
-      <p>
-        Gradient One is a precursor platform to large-scale rotating habitats such as Aegis Station.
-        It enables a disciplined progression from validated rotating segments to scalable infrastructure—while producing high-value partial-gravity biological and operational datasets relevant to lunar and Mars missions.
-      </p>
-    </section>
+  <section class="card">
+    <h2>Cost class</h2>
+    <p>
+      Rev A gave $600 M to $1.4 B. That is below the cost of a single crew-rated module program with its
+      launch and does not survive contact with the analogs. Rev B states a rough order of magnitude by
+      element, using ISS-module, Gateway-element and commercial-station analogs, with 30 % for program
+      management and reserves. It is a cost class, not an estimate.
+    </p>
+    <table>
+      <thead><tr><th>Element</th><th>Low</th><th>High</th></tr></thead>
+      <tbody>
+        <tr><td>Common habitat module, non-recurring plus five units</td><td>$1.6 B</td><td>$2.4 B</td></tr>
+        <tr><td>Rotating hub module</td><td>$0.3 B</td><td>$0.5 B</td></tr>
+        <tr><td>Despun node, boundary hardware, arrays</td><td>$0.5 B</td><td>$0.9 B</td></tr>
+        <tr><td>Arms, cars, trim system, arm utilities</td><td>$0.3 B</td><td>$0.6 B</td></tr>
+        <tr><td>Integration, test, ground segment, operations development</td><td>$0.5 B</td><td>$0.8 B</td></tr>
+        <tr><td>Launch of ~230 t</td><td>$0.4 B (heavy lift, 3&ndash;4 flights)</td><td>$2.0 B (medium lift, ~15 flights)</td></tr>
+        <tr><td>On-orbit assembly campaign</td><td>$0.4 B</td><td>$0.7 B</td></tr>
+        <tr><td><strong>To first campaign, with 30 % reserves</strong></td><td><strong>$5 B</strong></td><td><strong>$10 B</strong></td></tr>
+        <tr><td>Operations per year: two crew flights, three cargo flights, ground</td><td>$0.8 B</td><td>$1.1 B</td></tr>
+      </tbody>
+    </table>
+    <p class="mini">Development timeline of 8&ndash;10 years to first campaign is retained from Rev A; it is consistent with the Gateway analog. The number that moved is the price.</p>
+  </section>
 
-    <section>
-      <h2>Dossier</h2>
-      <p>The full Gradient One mission dossier is available below:</p>
-      <a href="dossiers/Gradient_One_Full_Mission_Dossier.pdf" target="_blank" class="button">Download Full Dossier (PDF)</a>
-    </section>
+  <section class="card">
+    <h2>What it validates</h2>
+    <table class="reqs">
+      <thead><tr><th>AGRE</th><th>Closure on Gradient One Rev B</th></tr></thead>
+      <tbody>
+        <tr><td>F-001, F-007, F-008</td><td>Four gravity levels in one vehicle, including a 1g control and a rotating 0g control sharing every confound; six-month exposures per subject.</td></tr>
+        <tr><td>F-002 to F-006</td><td>Coriolis, cross-coupled head movement, inter-deck gradient, adaptation and inter-band transitions, at 1.6 rpm. Spin-rate sensitivity is not resolved by a fixed-rate vehicle.</td></tr>
+        <tr><td>F-009</td><td>Spin-up and spin-down with crew aboard are affordable in propellant and are planned transients, including one simulated unplanned spin-down.</td></tr>
+        <tr><td>F-010, F-011</td><td>Growth racks in every band against the 1g lab; the arm lines and the lab module as the radial fluids test bed at 1.8 MPa head.</td></tr>
+        <tr><td>F-012</td><td>Balance authority, wobble damping, car-transit excursions, and the hub/rotor boundary under rotation.</td></tr>
+        <tr><td>F-013 to F-016</td><td>Campaign design and reporting; the human result is stated as a five-campaign program result.</td></tr>
+      </tbody>
+    </table>
+  </section>
 
-    <section>
-      <h2>Contact</h2>
-      <p>For partnership inquiries or technical questions:</p>
-      <p><a href="mailto:engage@aegisstation.com">engage@aegisstation.com</a></p>
-    </section>
-  </main>
+  <section class="card">
+    <h2>What changed from Rev A</h2>
+    <table>
+      <thead><tr><th>Item</th><th>Rev A</th><th>Rev B</th></tr></thead>
+      <tbody>
+        <tr><td>Rotor</td><td>Single truss with a water counterweight "beyond the outer band"</td><td>Three arms at 120&deg;, three identical 1g tip modules, self-balancing, major-axis spin</td></tr>
+        <tr><td>Hub</td><td>Non-rotating hub, docking and refuge, crossing unspecified</td><td>Rotating 0g hub module on the rotor; small despun docking node; cyclic transfer lock, contactless power and data</td></tr>
+        <tr><td>0g control</td><td>In the non-rotating hub</td><td>Rotating hub, so rotation and gravity level are separable</td></tr>
+        <tr><td>Modules</td><td>"Pods", unsized</td><td>One common 17 t module, five copies, hung radially along the launch-load axis, three decks</td></tr>
+        <tr><td>Radial transit</td><td>Pressurized transition corridor</td><td>Pressurized car on an arm rail; spoke tube deferred to the station, +60 t if adopted</td></tr>
+        <tr><td>Campaign</td><td>30&ndash;90 days, 2&ndash;4 crew</td><td>180 days, 10 crew, 60-day shakedown first; human result stated as a five-campaign program result</td></tr>
+        <tr><td>Mass</td><td>Not stated</td><td>~227 t bottom-up with 20 % growth</td></tr>
+        <tr><td>Cost</td><td>$0.6&ndash;1.4 B</td><td>$5&ndash;10 B to first campaign; ~$1 B per year to operate</td></tr>
+        <tr><td>Attitude, orbit, power, reboost, loads</td><td>Not stated</td><td>Stated, with the arithmetic in the dossier</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Open items</h2>
+    <ul>
+      <li><strong>Coupled attitude simulation.</strong> The gravity-gradient precession estimate is a closed-form rate for a flat rotor. The bounded motion of the spin axis with nodal regression, the despun node's own pointing, and array shadowing need a simulation before the orbit is fixed.</li>
+      <li><strong>Transfer lock cycle.</strong> Spin-up torque on a loaded lock, its reaction into the bearing, cycle time and leak budget per cycle are unsized. The station's magazine concept is the starting point.</li>
+      <li><strong>Arm first modes.</strong> A 344 m open truss with a moving 2 t car; stiffness and damping requirements, and whether the car's Coriolis load, about 1.3 kN at 2 m/s, sets the rail design.</li>
+      <li><strong>Module thermal at 1g.</strong> Natural convection inside the 1g and partial-g modules changes cabin air handling and condensation behaviour from the ISS design basis; a benefit, but an unmodelled one.</li>
+      <li><strong>Assembly sequence.</strong> Arm erection and module hanging before spin-up, with a robotic and EVA crew campaign, is costed but not sequenced.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Technical reference</h2>
+    <p>
+      The Rev B design dossier carries the sizing set above with its bases, the mass and cost tables, the
+      band and deck geometry, and the requirement closure map.
+    </p>
+    <p>
+      <a href="dossiers/Gradient_One_Full_Mission_Dossier.pdf" target="_blank" rel="noopener"><strong>Design Dossier (PDF), Rev B</strong></a><br>
+      <a href="dossiers/Gradient_One_Full_Mission_Dossier_RevA.pdf" target="_blank" rel="noopener" class="mini">Rev A dossier (archived, September 2026)</a>
+    </p>
+    <p class="mini">
+      Reference concepts: <a href="artificial-gravity-requirements-evaluation.html">Artificial Gravity Requirements Evaluation</a>, which defines the dataset;
+      <a href="hub_ring_boundary.html">Hub/Ring Boundary</a>, whose principle the despun node adopts.
+    </p>
+  </section>
 
   <footer>
-    <p>&copy; 2026 Aegis Station Infrastructure LLC</p>
+    <strong>Contact:</strong> <a href="mailto:engage@aegisstation.com">engage@aegisstation.com</a><br>
+    &copy; 2026 Aegis Station Infrastructure LLC
   </footer>
+
+</div>
 </body>
 </html>

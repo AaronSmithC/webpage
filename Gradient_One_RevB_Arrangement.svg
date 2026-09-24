@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" width="1200" height="820"><defs><style>text{font-family:Arial,Helvetica,sans-serif}.t{font-size:15px;font-weight:bold;fill:#e6edf3;letter-spacing:.5px}.s{font-size:11px;fill:#8b98a8}.l{font-size:12px;fill:#c9d4e0}.n{font-size:10.5px;fill:#8b98a8}.d{font-size:11px;fill:#f2c14e}.g{font-size:10px;fill:#8fd18f}</style></defs>
+<rect width="1200" height="820" fill="#0d1117"/>
+<text x="600.0" y="34" text-anchor="middle" class="t">GRADIENT ONE — REV B ARRANGEMENT, THREE-ARM ROTOR, 1.6 rpm</text>
+<text x="600.0" y="52" text-anchor="middle" class="s">1g AT 350 m · MARS 132 m · MOON 58 m · ROTATING 0g HUB · DESPUN NODE ON THE SPIN AXIS · PLAN VIEW TO SCALE, MODULES ENLARGED ×3 FOR LEGIBILITY</text>
+<rect x="20" y="80" width="620" height="720" fill="none" stroke="#2a3441" stroke-dasharray="4,4"/>
+<text x="28" y="98" class="l">VIEW A — PLAN, LOOKING ALONG THE SPIN AXIS (ω OUT OF PAGE, COUNTER-CLOCKWISE)</text>
+<circle cx="330" cy="410" r="262.7" fill="none" stroke="#2a3441" stroke-dasharray="2,6"/>
+<circle cx="330" cy="410" r="99.4" fill="none" stroke="#2a3441" stroke-dasharray="2,6"/>
+<circle cx="330" cy="410" r="43.4" fill="none" stroke="#2a3441" stroke-dasharray="2,6"/>
+<line x1="330" y1="410" x2="554.0" y2="280.7" stroke="#cfd8e3" stroke-width="2.5"/>
+<circle cx="563.4" cy="275.2" r="5" fill="#2b6ea3" stroke="#6fc3d9"/>
+<line x1="330" y1="410" x2="106.0" y2="280.7" stroke="#cfd8e3" stroke-width="2.5"/>
+<circle cx="96.6" cy="275.2" r="5" fill="#2b6ea3" stroke="#6fc3d9"/>
+<line x1="330" y1="410" x2="330.0" y2="668.6" stroke="#cfd8e3" stroke-width="2.5"/>
+<circle cx="330.0" cy="679.5" r="5" fill="#2b6ea3" stroke="#6fc3d9"/>
+<circle cx="330" cy="410" r="13.5" fill="#16202c" stroke="#4a90c2" stroke-width="1.5"/>
+<text x="352" y="404" class="l">ROTATING HUB</text><text x="352" y="418" class="g">0g band, 2 crew · despun node behind</text>
+<g transform="translate(102.5,278.6) rotate(-150.0)"><rect x="-12.4" y="-5.1" width="24.8" height="10.1" rx="5.1" fill="#16202c" stroke="#4a90c2" stroke-width="1.5"/></g>
+<text x="116.5" y="268.6" text-anchor="start" class="l">1g MODULE A (HAB)</text><text x="116.5" y="282.6" text-anchor="start" class="g">1.00 g · 2 crew</text>
+<g transform="translate(557.5,278.6) rotate(-30.0)"><rect x="-12.4" y="-5.1" width="24.8" height="10.1" rx="5.1" fill="#16202c" stroke="#4a90c2" stroke-width="1.5"/></g>
+<text x="571.5" y="268.6" text-anchor="start" class="l">1g MODULE B (HAB)</text><text x="571.5" y="282.6" text-anchor="start" class="g">1.00 g · 2 crew</text>
+<g transform="translate(330.0,672.7) rotate(-270.0)"><rect x="-12.4" y="-5.1" width="24.8" height="10.1" rx="5.1" fill="#16202c" stroke="#4a90c2" stroke-width="1.5"/></g>
+<text x="344.0" y="656.7" text-anchor="start" class="l">1g MODULE C (LAB)</text><text x="344.0" y="670.7" text-anchor="start" class="g">1.00 g · bioregen, fluids, medical</text>
+<g transform="translate(292.4,388.3) rotate(-150.0)"><rect x="-12.4" y="-5.1" width="24.8" height="10.1" rx="5.1" fill="#16202c" stroke="#f2c14e" stroke-width="1.5"/></g>
+<text x="278.4" y="366.3" text-anchor="end" class="l">MOON MODULE</text><text x="278.4" y="380.3" text-anchor="end" class="g">0.165 g · 2 crew</text>
+<g transform="translate(416.1,360.3) rotate(-30.0)"><rect x="-12.4" y="-5.1" width="24.8" height="10.1" rx="5.1" fill="#16202c" stroke="#f2c14e" stroke-width="1.5"/></g>
+<text x="430.1" y="350.3" text-anchor="start" class="l">MARS MODULE</text><text x="430.1" y="364.3" text-anchor="start" class="g">0.378 g · 2 crew</text>
+<rect x="324.0" y="533.4" width="12" height="12" fill="#f2c14e" stroke="#0d1117"/><text x="340.0" y="543.4" class="n">transit car on arm rail</text>
+<text x="342.0" y="695.5" class="n">tip: trim tank 4 t water + thruster pod</text>
+<line x1="40" y1="770" x2="115.1" y2="770" stroke="#c9d4e0" stroke-width="2"/><text x="40" y="786" class="n">100 m</text>
+<text x="300" y="786" class="n">overall diameter 714 m · band circles are the 1g, Mars and Moon radii</text>
+<path d="M 370 350 A 72 72 0 0 0 290 350" fill="none" stroke="#8fd18f" stroke-width="1.5"/><polygon points="286,344 298,352 284,358" fill="#8fd18f"/><text x="316" y="330" class="g">ω</text>
+<rect x="660" y="80" width="520" height="720" fill="none" stroke="#2a3441" stroke-dasharray="4,4"/>
+<text x="668" y="98" class="l">VIEW B — SECTION ALONG ARM A, SPIN AXIS VERTICAL (NOT TO SCALE RADIALLY)</text>
+<rect x="880" y="130" width="80" height="44" rx="10" fill="#16202c" stroke="#6fc3d9" stroke-width="1.5"/><text x="970" y="146" class="l">DESPUN NODE (does not rotate)</text><text x="970" y="160" class="n">3 docking ports · 6 gimballed arrays · reboost</text>
+<line x1="810" y1="152" x2="880" y2="152" stroke="#4a90c2" stroke-width="6"/><line x1="810" y1="152" x2="760" y2="120" stroke="#4a90c2" stroke-width="6"/><text x="720" y="114" class="n">arrays, sun-tracking</text>
+<rect x="890" y="178" width="60" height="22" fill="#2b2a1a" stroke="#f2c14e"/><text x="970" y="186" class="d">HUB/ROTOR BOUNDARY</text><text x="970" y="199" class="n">bearing · rotary transformer · optical link</text><text x="970" y="212" class="n">transfer lock: clamps to node, spins up,</text><text x="970" y="225" class="n">clamps to hub — no continuous rotary seal</text>
+<rect x="884" y="204" width="72" height="56" rx="8" fill="#16202c" stroke="#4a90c2" stroke-width="1.5"/><text x="760" y="228" class="l">ROTATING HUB</text><text x="760" y="242" class="g">0g band · 2 crew · ISS-type ECLSS</text>
+<line x1="920" y1="260" x2="920" y2="660" stroke="#cfd8e3" stroke-width="3"/>
+<text x="930" y="285" class="n">arm: 3 m open truss, tension-only under spin</text><text x="930" y="298" class="n">car rail · 300 V DC power · water and gas lines</text>
+<rect x="905.0" y="314.0" width="30" height="72" rx="6" fill="#16202c" stroke="#f2c14e" stroke-width="1.5"/>
+<line x1="908.0" y1="332.0" x2="932.0" y2="332.0" stroke="#f2c14e" stroke-width="1" opacity=".7"/>
+<line x1="908.0" y1="350.0" x2="932.0" y2="350.0" stroke="#f2c14e" stroke-width="1" opacity=".7"/>
+<line x1="908.0" y1="368.0" x2="932.0" y2="368.0" stroke="#f2c14e" stroke-width="1" opacity=".7"/>
+<circle cx="920" cy="310.0" r="4" fill="#0d1117" stroke="#f2c14e"/>
+<text x="894" y="342" text-anchor="end" class="l">MOON MODULE</text><text x="894" y="356" text-anchor="end" class="g">0.158 / 0.165 / 0.172 g on three decks</text><text x="894" y="370" text-anchor="end" class="n">middle deck r = 58 m · hung along launch axis</text>
+<rect x="905.0" y="584.0" width="30" height="72" rx="6" fill="#16202c" stroke="#4a90c2" stroke-width="1.5"/>
+<line x1="908.0" y1="602.0" x2="932.0" y2="602.0" stroke="#4a90c2" stroke-width="1" opacity=".7"/>
+<line x1="908.0" y1="620.0" x2="932.0" y2="620.0" stroke="#4a90c2" stroke-width="1" opacity=".7"/>
+<line x1="908.0" y1="638.0" x2="932.0" y2="638.0" stroke="#4a90c2" stroke-width="1" opacity=".7"/>
+<circle cx="920" cy="580.0" r="4" fill="#0d1117" stroke="#4a90c2"/>
+<text x="894" y="612" text-anchor="end" class="l">1g MODULE A</text><text x="894" y="626" text-anchor="end" class="g">0.993 / 1.000 / 1.007 g on three decks</text><text x="894" y="640" text-anchor="end" class="n">middle deck r = 350 m · floors built to r = 350 m</text>
+<text x="930" y="430" class="n">(Mars module at 132 m sits on arm B, not shown)</text>
+<text x="944" y="350" class="n">car docks to the hub-facing port of each module</text>
+<rect x="900" y="666" width="40" height="16" fill="#1a4f7a" stroke="#6fc3d9"/><text x="950" y="678" class="n">tip trim tank 4 t · thruster pod · r ≈ 357 m</text>
+<text x="670" y="716" class="l">SIZING SET</text>
+<text x="670" y="734" class="n">on-orbit mass ≈ 227 t incl. 20 % growth on dry hardware</text>
+<text x="670" y="748" class="n">crew 10: 4 at 1g · 2 Mars · 2 Moon · 2 in 0g hub</text>
+<text x="670" y="762" class="n">campaign 180 d nominal (AGRE-F-007) · first campaign 60 d shakedown</text>
+<text x="670" y="776" class="n">spin-up ≈ 1.8 t propellant at Isp 300 · hub tension per arm ≈ 358 kN</text>
+<text x="670" y="790" class="n">radial pressure head at the tip ≈ 1.8 MPa · orbit 450 km, reboost ≈ 0.9 t/yr</text>
+</svg>
