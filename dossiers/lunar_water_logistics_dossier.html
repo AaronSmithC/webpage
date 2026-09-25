@@ -110,7 +110,7 @@
     <p>
       The rest of the architecture is unchanged and is stated here as a baseline, not a closed design: 45 tankers,
       2,025 tonnes a day, a fill of roughly 4.5 years, and the Lunar Orbital Propellant Depot as the fleet's first
-      customer before the station exists. Section 10 lists what does not yet close.
+      customer before the station exists. Section 11 lists what does not yet close.
     </p>
   </section>
 
@@ -193,7 +193,7 @@
       <tr><td>Thrust, engines</td><td>~165 kN, 3 × 60 kN</td><td>~155 kN, 4 × 40 kN, BE-7 class, engine-out capable</td></tr>
       <tr><td>Recurring Earth import per sortie</td><td>~12.5 t methane</td><td>None</td></tr>
     </table>
-    <p class="note">Rev B propellant masses follow the rocket equation at the same payload, delta-v, and implied dry mass as Rev A. They are not a new sizing pass; see Section 10.</p>
+    <p class="note">Rev B propellant masses follow the rocket equation at the same payload, delta-v, and implied dry mass as Rev A. They are not a new sizing pass; see Section 11.</p>
     <h3>The hydrogen objection</h3>
     <p>
       Liquid hydrogen at 20 K is hard to store and harder to move. This architecture answers that the same way LUNET does:
@@ -210,18 +210,90 @@
       water and liquefying the result. The tanker pad is therefore not a LUNET fill node, which is sized at tens to a few
       hundred kilowatts. It is a refinery-class facility with power to match, and it is the same plant the depot and the
       surface network already assume exists. That is one thing to build, once, on the Moon, rather than something to keep
-      launching. Its size scales with sortie cadence and is an open item in Section 10.
+      launching. Its size scales with sortie cadence and is an open item in Section 11.
     </p>
     <div class="callout">
       <strong>Design rule.</strong> No vehicle in the surface fleet may depend on a consumable that must be resupplied from
       Earth. <em>Methane failed this rule. Hydrolox passes it because the feedstock is the cargo.</em>
     </div>
   </section>
+  <hr>
+
+  <section class="section">
+    <h2>5. Refuelling: Method and Location</h2>
+    <p>
+      The loading-site capacity row in Section 11 makes pad turnaround the number the fleet keys off. Two decisions set
+      it: how propellant gets aboard, and where. This section closes both under the fleet-analysis assumptions of
+      Section 11: a full cartridge is at the pad, an empty is at the station, and propellant is available when called for.
+    </p>
+
+    <h3>What has to be moved each cycle</h3>
+    <table class="breakable">
+      <thead><tr><th>Item</th><th>Value</th></tr></thead>
+      <tr><td>Round-trip propellant</td><td>~45 t: ~6.4 t LH₂ at 20 K, ~38.6 t LOX at 90 K</td></tr>
+      <tr><td>Tank volume</td><td>~90 m³ LH₂ plus ~34 m³ LOX, about 125 m³, two and a half times the water cartridge</td></tr>
+      <tr><td>Fill rate, fluid transfer</td><td>Shuttle-era ground systems loaded LH₂ at ~10 kg/s. At 2–5 kg/s LH₂ and ~10 kg/s LOX, in parallel, a full load takes 60–75 minutes</td></tr>
+      <tr><td>Cryogenic connections per cycle</td><td>Two, either way. A fluid coupling connects a hose; a swappable module connects the module's feed to the engines. Neither option removes the connect cycle; they move it.</td></tr>
+    </table>
+
+    <h3>Method: fluid couplings versus swappable propellant modules</h3>
+    <table class="breakable">
+      <thead><tr><th>Turnaround step</th><th>Fluid couplings</th><th>Swappable modules</th></tr></thead>
+      <tr><td>Land, safe, vent checks</td><td>15 min</td><td>15 min</td></tr>
+      <tr><td>Cartridge swap: unlatch empty, mount full, latch, check</td><td>50 min, in parallel with fill</td><td>50 min, in parallel with module swap only if two heavy handlers work one vehicle at once</td></tr>
+      <tr><td>Propellant aboard</td><td>Couple and chill lines 20 min, transfer 60–75 min, disconnect, leak check and purge 15 min</td><td>Disconnect and remove spent module 25 min, install, latch, connect and leak-check 35 min, chill engine feed 10 min</td></tr>
+      <tr><td>Inspection and prelaunch</td><td>30 min</td><td>30 min</td></tr>
+      <tr><td><strong>Pad time, steps overlapped</strong></td><td><strong>~2.6 h</strong></td><td><strong>~2.0 h</strong></td></tr>
+      <tr><td>Pad time, sequential</td><td>~3.5 h</td><td>~2.7 h</td></tr>
+    </table>
+    <table class="breakable">
+      <thead><tr><th>Consequence</th><th>Fluid couplings</th><th>Swappable modules</th></tr></thead>
+      <tr><td>Pads for 45 sorties/day</td><td>5 at 2.6 h; 6 gives ~10 % margin</td><td>4 at 2.0 h; 6 gives ~45 % margin</td></tr>
+      <tr><td>Vehicle dry mass</td><td>Tanks are primary structure, as on every lander flown</td><td>Tanks become cargo, so the airframe needs its own thrust structure plus a flight-rated structural, fluid and electrical interface: about +2–3 t</td></tr>
+      <tr><td>Payload per sortie</td><td>45 t</td><td>~42–43 t at the same launch mass, roughly 5 % more sorties over the campaign, so 5 % more engines, propellant, pad-hours and years</td></tr>
+      <tr><td>Where the cycle wear lives</td><td>Ground-side hose couplings: cheap, replaceable on a schedule, no flight mass. This is the LUNET rule for cryogenic lines applied to the pad.</td><td>A flight-loaded interface on the vehicle that must survive ~1,600 connect cycles and every launch and landing between them</td></tr>
+      <tr><td>Ground hardware</td><td>Buffered LOX and LH₂ store, transfer lines, one set of couplings per pad</td><td>The same store and lines, plus a fill bay, a module handling system for a ~50 t cryogenic unit, and a pool of ~25 modules at a few tonnes each</td></tr>
+      <tr><td>Boil-off</td><td>Fill on demand; losses are line chilldown per cycle</td><td>Filled modules wait on the apron and lose LH₂ while they do</td></tr>
+      <tr><td>Off-nominal</td><td>A failed coupling closes one pad</td><td>A failed module is one module; a failed interface grounds the vehicle</td></tr>
+    </table>
+    <p>
+      The module buys about 0.6 hours of pad time per sortie, which at fleet cadence is one or two pads. Pads are among
+      the cheapest things on the site. It pays for that with two to three tonnes of dry mass on every flight for the
+      whole campaign, a heavy cryogenic handling system that the water cartridge does not need because water is not
+      cryogenic, and a flight-rated interface that carries the same connect-cycle count as the hose coupling it replaces
+      but under launch loads. The water cartridge is swappable because water tolerates it. Propellant does not get the
+      same treatment for the same reason the network moves water and not hydrogen.
+    </p>
+
+    <h3>Location: surface only versus depot top-off</h3>
+    <table class="breakable">
+      <thead><tr><th>Consideration</th><th>Surface only</th><th>Surface plus depot top-off for the return leg</th></tr></thead>
+      <tr><td>Return-leg propellant</td><td>Lifted from the surface, ~3–5 t</td><td>Taken on at the depot, ~3–5 t of hydrolox per sortie</td></tr>
+      <tr><td>Ascent saving</td><td>None</td><td>Not lifting the return propellant saves ~6–9 t of ascent propellant, worth roughly +3–4 t of payload per sortie</td></tr>
+      <tr><td>What it costs in orbit</td><td>Nothing</td><td>3–5 t of hydrolox per sortie is ~6 t of water electrolysed at the depot per sortie, ~290 t/day at fleet cadence, of order 90 MW of orbital power and a large 20 K storage bank</td></tr>
+      <tr><td>Berth time</td><td>Cartridge swap only</td><td>Cartridge swap plus a second cryogenic connection and transfer per cycle, on the resource the capacity row says is as tight as the pad</td></tr>
+      <tr><td>Where the power already is</td><td>The refinery is on the surface and is sized for the ascent load anyway; the return leg is a ~10 % increment on it</td><td>Moves a tenth of the refinery into orbit for a tenth more payload</td></tr>
+    </table>
+    <p>
+      Depot top-off is the right answer for the Hauler, which cannot lift its return propellant from Earth economically,
+      and for any vehicle that arrives from elsewhere. For a tanker that departs from a pad with a refinery on it, the
+      return leg is a small increment on a plant that already exists, and buying it in orbit instead costs berth time and
+      an orbital power plant. The tanker fills at the surface. Depot top-off stays available as an option for
+      contingency and for post-fill operations when the depot has surplus, and the depot interface is unchanged.
+    </p>
+
+    <div class="callout">
+      <strong>Decision.</strong> Fluid couplings at the surface pad, filled on demand from a buffered store, cartridge
+      swap in parallel with propellant transfer, ground couplings treated as scheduled consumables. Turnaround target
+      2.6 hours, ceiling 3.2. <em>Swappable propellant modules and routine depot top-off are rejected for the water
+      tanker. Eight pads are recommended over six for margin against the 4–8 hour range in the dispatch protocol.</em>
+    </div>
+  </section>
 
   <hr>
 
   <section class="section">
-    <h2>5. The Depot as First Customer</h2>
+    <h2>6. The Depot as First Customer</h2>
     <p>
       Every lunar-water architecture faces the same deadlock: surface extraction is hard to justify without an orbital
       customer, and orbital hardware is hard to justify without a proven resource. The Lunar Orbital Propellant Depot
@@ -239,7 +311,7 @@
   <hr>
 
   <section class="section">
-    <h2>6. ISRU and Extraction</h2>
+    <h2>7. ISRU and Extraction</h2>
     <p>
       Ice-bearing regolith is excavated from permanently shadowed craters near the south pole and heated by microwave or
       radiant thermal rigs; the ice sublimes, is cold-trapped, condensed, and filtered to a single water grade that serves
@@ -260,7 +332,7 @@
   <hr>
 
   <section class="section">
-    <h2>7. Logistics Infrastructure</h2>
+    <h2>8. Logistics Infrastructure</h2>
     <h3>Surface</h3>
     <ul>
       <li>Launch pads with dust control and blast deflection</li>
@@ -286,7 +358,7 @@
   <hr>
 
   <section class="section">
-    <h2>8. Cost Considerations</h2>
+    <h2>9. Cost Considerations</h2>
     <table>
       <tr><th>Source</th><th>Cost per kg delivered</th><th>Cost per Olympic pool</th></tr>
       <tr><td>Earth-launched</td><td>$2,500</td><td>~$6.25 billion</td></tr>
@@ -304,7 +376,7 @@
   <hr>
 
   <section class="section">
-    <h2>9. Long-Term Applications and Strategic Value</h2>
+    <h2>10. Long-Term Applications and Strategic Value</h2>
     <p>
       The extraction and delivery chain does not retire when the shield is full. The same fleet, pad, and depot serve
       depot resupply, surface distribution, emergency response, and propellant staging for anything leaving cislunar
@@ -323,7 +395,7 @@
   <hr>
 
   <section class="section">
-    <h2>10. Open Items</h2>
+    <h2>11. Open Items</h2>
     <p>
       This revision fixes the propellant decision and leaves the campaign numbers as stated. The following do not yet
       close and are carried as open, not hidden.
@@ -340,8 +412,8 @@
     </ul>
     <p>
       Under those assumptions the fleet's own limits are pad-hours, berth-hours, orbital phasing, airframe availability,
-      and turnaround mechanics. Where refuelling happens and how propellant gets aboard are both still open and are
-      carried below.
+      and turnaround mechanics. Where refuelling happens and how propellant gets aboard are decided in Section 5; the turnaround target that
+      follows from it is carried below.
     </p>
     <table class="breakable">
       <thead><tr><th>Item</th><th>Status</th></tr></thead>
@@ -351,7 +423,7 @@
       <tr><td>Surface power</td><td>Electrolysis and hydrogen liquefaction at fleet cadence are of order hundreds of megawatts continuous. LUNET node sizing does not cover this; the pad refinery is a separate facility and is not yet sized.</td></tr>
       <tr><td>Cartridge reuse</td><td>The cartridge is infrastructure, not a consumable, but its cycle life and bladder material are undefined. Fleet size of cartridges bounds throughput.</td></tr>
       <tr><td>Loading-site capacity</td><td>Forty-five sorties a day is one launch every 32 minutes. With six pads and six berths, each tanker may hold a pad for at most 3.2 hours and a berth for at most 3.2 hours, all steps included. The fleet dispatch ADR cites a 4–8 hour nominal swap; at that range six pads cap the fleet at 18–36 sorties a day and the fill runs 6–11 years however many tankers exist. Pads are cheap against megawatts: ten pads relax the turnaround to five hours. A tanker waiting on propellant or a cartridge must not hold a pad; it waits on an apron, so pad occupancy measures servicing only.</td></tr>
-      <tr><td>Refuelling method and location</td><td>Open. Two methods: swappable propellant modules, pre-chilled and filled off the critical path, so pad time is mount time and the same pattern the water cartridge already uses; or fluid connections, a lighter vehicle but chilldown and transfer on every cycle and cryogenic coupling wear at the pad. Two locations: surface only, or surface plus depot top-off for the return leg, which the depot already provides for. The choice sets the turnaround time in the row above and is the next fleet-level trade.</td></tr>
+      <tr><td>Turnaround target</td><td>Closed to a target by Section 5: fluid couplings at the surface, 2.6 hours with cartridge swap and propellant transfer overlapped, 3.2 hour ceiling for six pads. Still open: whether a 2.6 hour turnaround is achievable in practice with the cargo and coupling hardware as designed. Eight pads recommended for margin.</td></tr>
       <tr><td>Airframe availability</td><td>Engine swaps and inspections take each airframe out of service for a fraction of the campaign. At ~90 % availability, 45 airframes deliver ~40 sorties a day; the 45-a-day figure needs about 50 airframes or accepts the shortfall.</td></tr>
       <tr><td>Resource base</td><td>Shield water plus propellant water is several million tonnes against polar ice estimates that span two orders of magnitude. Deposit assessment is the gate, and it is why the program is waiting.</td></tr>
     </table>
@@ -360,7 +432,7 @@
   <hr>
 
   <section class="section">
-    <h2>11. Changes From the Previous Revision</h2>
+    <h2>12. Changes From the Previous Revision</h2>
     <table>
       <tr><th>Item</th><th>Previous</th><th>Rev B</th></tr>
       <tr><td>Tanker propellant</td><td>LOX/CH₄, methane imported from Earth, hydrolox as a later phase</td><td>LOX/LH₂ from lunar water, first flight onward</td></tr>
@@ -370,7 +442,8 @@
       <tr><td>Depot</td><td>Not described</td><td>First customer; commissions on first cartridge; hydrogen retained for tanker top-off</td></tr>
       <tr><td>Delivery cost</td><td>~$247.5 billion</td><td>~$495 billion, matching $150/kg × 3.3 Mt</td></tr>
       <tr><td>Infrastructure cost</td><td>~$400–500 billion</td><td>Not yet costed</td></tr>
-      <tr><td>Open items</td><td>Not stated</td><td>Section 10</td></tr>
+      <tr><td>Open items</td><td>Not stated</td><td>Section 11</td></tr>
+      <tr><td>Refuelling</td><td>Not stated</td><td>Fluid couplings at the surface pad, fill-on-demand from a buffered store; swappable propellant modules and routine depot top-off rejected (Section 5)</td></tr>
     </table>
   </section>
 
