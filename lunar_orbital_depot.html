@@ -6,13 +6,13 @@
   <title>Lunar Orbital Propellant Depot — Aegis Station</title>
 
   <!-- SEO -->
-  <meta name="description" content="The Lunar Orbital Propellant Depot (LOPD) is the pre-station infrastructure node that enables methalox refueling for the Aegis Long-Hauler and Lunar Tanker fleet in lunar orbit."/>
+  <meta name="description" content="The Lunar Orbital Propellant Depot (LOPD) is the pre-station infrastructure node that refuels the Aegis Long-Hauler (methalox) and the Lunar Tanker fleet (hydrolox) in lunar orbit from lunar-sourced water."/>
   <meta name="keywords" content="Aegis Station, lunar orbital depot, propellant depot, methalox, electrolysis, cislunar infrastructure, LOPD, cryogenic storage"/>
   <meta name="author" content="A.S., Principal Architect"/>
 
   <!-- Open Graph -->
   <meta property="og:title" content="Lunar Orbital Propellant Depot — Aegis Station"/>
-  <meta property="og:description" content="Pre-station infrastructure that decouples propellant availability from Earth launch timing. Water in. Methalox out."/>
+  <meta property="og:description" content="Pre-station infrastructure that decouples propellant availability from Earth launch timing. Water in. Propellant out."/>
   <meta property="og:image" content="https://aegisstation.com/images/OG_Main.jpg"/>
   <meta property="og:url" content="https://aegisstation.com/lunar_orbital_depot.html"/>
   <meta property="og:type" content="website"/>
@@ -310,9 +310,10 @@
     <h1>Lunar Orbital Propellant Depot</h1>
     <p style="font-size:1.1rem; color:var(--text-secondary); max-width:640px; margin-top:0.75rem;">
       Pre-station infrastructure that decouples propellant availability from Earth launch timing.
-      Water in. Methalox out. Operational before the station ring is assembled.
+      Water in. Propellant out. Operational before the station ring is assembled.
     </p>
     <div class="pill-row">
+      <span class="pill">Hydrolox</span>
       <span class="pill">Methalox</span>
       <span class="pill">Electrolysis</span>
       <span class="pill">Cryogenic storage</span>
@@ -368,8 +369,9 @@
   <div class="container">
     <h2>Propellant Flow</h2>
     <p class="subdued">
-      The depot operates two parallel input streams that converge into a single methalox output.
-      LOX is produced locally from water. Methane is imported. Both are stored cryogenically and dispensed on demand.
+      The depot runs one local production stream and one import stream. Water from the surface is split into LOX and LH₂ —
+      the Lunar Tanker fleet flies on both, so nothing the tankers burn ever comes from Earth. Methane is imported for the
+      Long-Hauler's return burn only. All three products are stored cryogenically and dispensed on demand.
     </p>
 
     <h3>LOX Production — Water → Electrolysis → LOX</h3>
@@ -380,11 +382,11 @@
       <div class="flow-arrow">→</div>
       <div class="flow-node accent">Electrolysis Plant<span>H₂O → H₂ + O₂</span></div>
       <div class="flow-arrow">→</div>
-      <div class="flow-node">LOX Storage<span>cryo tanks, ZBO target</span></div>
+      <div class="flow-node">LOX / LH₂ Storage<span>cryo tanks, ZBO target</span></div>
     </div>
     <ul class="specs">
       <li>Electrolysis capacity is the <strong>rate-limiting step</strong> — it sets the water delivery cadence requirement for the LT fleet</li>
-      <li>Hydrogen byproduct vented or retained for future use (fuel cell backup, surface delivery TBD)</li>
+      <li>Hydrogen is a product, not a byproduct — liquefied and stored for Lunar Tanker top-off; only surplus is held for fuel-cell reserve or surface delivery</li>
       <li>Water inventory provides a buffer between LT delivery cycles and continuous electrolysis demand</li>
     </ul>
 
@@ -404,7 +406,7 @@
       <li>Future pathway: lunar in-situ methane synthesis (Sabatier reaction from CO₂ + H₂) could close the loop — not baselined</li>
     </ul>
 
-    <h3>Methalox Dispensing</h3>
+    <h3>Propellant Dispensing</h3>
     <div class="flow">
       <div class="flow-node accent">LOX Storage</div>
       <div class="flow-arrow">→</div>
@@ -413,11 +415,11 @@
       <div class="flow-node">Long-Hauler<span>return burn tanks</span></div>
     </div>
     <div class="flow" style="margin-top:0.5rem;">
-      <div class="flow-node accent">LCH₄ Storage</div>
+      <div class="flow-node accent">LOX / LH₂ Storage</div>
       <div class="flow-arrow">→</div>
       <div class="flow-node">Fueling Interface<span>flow control &amp; metering</span></div>
       <div class="flow-arrow">→</div>
-      <div class="flow-node">Lunar Tanker Fleet<span>top-off between cycles</span></div>
+      <div class="flow-node">Lunar Tanker Fleet<span>hydrolox top-off between cycles</span></div>
     </div>
     <ul class="specs" style="margin-top:1.25rem;">
       <li>Standardized fueling ports accommodate both Hauler and LT docking geometries</li>
@@ -611,7 +613,7 @@
       <div class="info-card">
         <h4>Cryogenic Thermal Management</h4>
         <p>
-          Active cryo cooling to suppress boiloff in both LOX and LCH₄ tanks.
+          Active cryo cooling to suppress boiloff in LOX, LH₂ and LCH₄ tanks — the 20 K hydrogen bank sets the cryocooler requirement.
           Zero-boiloff (ZBO) target for long-duration storage windows between Hauler arrivals.
           Thermal isolation, multilayer insulation, and controlled venting provisions.
           Heat rejection to space via dedicated radiator panels.
@@ -692,7 +694,7 @@
       <li>Sole water delivery path — LT cartridge offload is the only way water ever enters the depot; there is no Earth-sourced alternative</li>
       <li><strong>Depot first-light requires only minimal LT capability</strong> — a single vehicle flying at low cadence is sufficient to deliver initial cartridges and commission end-to-end propellant production</li>
       <li>The full ~45-vehicle LT fleet is sized for the downstream <strong>station shield-layer fill</strong> campaign, which is a much higher-throughput requirement — fleet completion is not a prerequisite for depot operations</li>
-      <li>LTs top off LCH₄/LOX at the depot between descent cycles once the depot is operational — depot acts as a propellant buffer smoothing surface production variability</li>
+      <li>LTs top off LOX/LH₂ at the depot between descent cycles once the depot is operational — depot acts as a propellant buffer smoothing surface production variability</li>
       <li>High call rate in steady state: LT docking and transfer operations become the depot's most frequent interaction during the shield-fill campaign, driving reliability and throughput requirements</li>
     </ul>
 

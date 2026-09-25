@@ -43,12 +43,12 @@
 
     
 <section id="1g-update-note" style="background-color: #222; padding: 1em; border-left: 6px solid #00bcd4; margin-bottom: 2em; border-radius: 6px;">
-  <h3 style="margin-top: 0; color: #00ffff;">Update: Water Logistics Now Reflects 1g Configuration</h3>
+  <h3 style="margin-top: 0; color: #00ffff;">Baseline: 1g Configuration, Hydrolox Fleet</h3>
   <p>
-    Aegis Station has transitioned to a 1g artificial gravity baseline. This change increases shielding volume to <strong>3.3 million metric tons</strong>, requiring an expanded tanker fleet and updated logistics architecture.
+    Aegis Station is baselined at 1g artificial gravity, which sets the shielding requirement at <strong>3.3 million metric tons</strong> of lunar water and sizes the tanker fleet and logistics architecture below.
   </p>
   <p style="opacity: 0.8;">
-    The new fleet delivers <strong>2,025 tons per day</strong> with 45 upgraded tankers, cutting the projected fill time to under 5 years. Shielding depth and architecture remain unchanged—3 meters of lunar-sourced water along each ring's outer hull.
+    The fleet delivers <strong>2,025 tons per day</strong> with 45 tankers for a projected fill time under 5 years. Every tanker flies on <strong>LOX/LH₂ split from lunar water at the pad</strong>—no fuel is supplied from Earth in any phase. Shielding depth is 3 meters of lunar-sourced water along each ring's outer hull. See the <a href="lunar_tanker_fleet.html" style="color: #00ffff;">Lunar Tanker Fleet</a> and <a href="lunar_orbital_depot.html" style="color: #00ffff;">Lunar Orbital Propellant Depot</a> pages for the vehicle and the first orbital customer.
   </p>
 </section>
 
@@ -101,11 +101,17 @@
       <li>Daily Throughput: 2,025 tons/day</li>
       <li>Fill Time: ~4.5 years</li>
       <li>Estimated Trips: 73,333</li>
+      <li>Propellant: LOX/LH₂, both produced from lunar water—no Earth-supplied fuel</li>
+      <li>Transfer unit: 45-ton <a href="lunar_tanker_fleet.html#cartridge" style="color: white;">Modular Tank Cartridge</a>, common to surface, tanker, depot and station</li>
     </ul>
+    <div style="text-align: center;">
+      <img src="water_supply_chain.svg" alt="Delivery chain: the ISRU node fills 45-ton cartridges, the launch pad mounts them and fills the tanker with LOX and LH2 made on site, the tanker climbs 2,600 m/s to 100 km lunar orbit where the propellant depot and Aegis Station receive the water, and the empty cartridge returns on a 1,800 m/s descent" style="width: 100%; max-width: 600px; border-radius: 6px; margin-top: 10px; margin-bottom: 10px;">
+      <p style="font-size: 0.9em; opacity: 0.7;">The delivery loop. Every sortie carries water up and an empty cartridge down; nothing on the loop is supplied from Earth.</p>
+    </div>
 
     <h2 id="lunar-isru">4. Lunar ISRU Operations</h2>
     <p>
-      Water is extracted from permanently shadowed craters near the lunar south pole using microwave heating and thermal processing. The resulting vapor is condensed, purified, and loaded into cryogenic transport tanks.
+      Water is extracted from permanently shadowed craters near the lunar south pole using microwave heating and thermal processing. The resulting vapor is condensed, purified, and loaded into standard water cartridges. Water needs no cryogenic handling; the only cryogens in the chain are the propellants split from it at the pad.
     </p>
     <ul>
       <li>Excavation and thermal separation</li>
@@ -115,20 +121,22 @@
 
     <h3 style="margin-top: 30px;">ISRU Process Flow</h3>
     <div style="text-align: center;">
-      <img src="images/isru-process-flow.png" alt="ISRU Process Flow Diagram" style="width: 100%; max-width: 600px; border-radius: 12px; margin-top: 10px; margin-bottom: 10px;">
-      <p style="font-size: 0.9em; opacity: 0.7;">Lunar ice mining and processing from excavation to tanker loading.</p>
+      <img src="isru_process_flow.svg" alt="ISRU process flow: ice from a permanently shadowed crater is excavated, thermally extracted, condensed and purified into a surface water buffer, then split between cartridge fill for the tanker and electrolysis plus liquefaction into LOX and LH2 for the tanker's own propellant" style="width: 100%; max-width: 600px; border-radius: 6px; margin-top: 10px; margin-bottom: 10px;">
+      <p style="font-size: 0.9em; opacity: 0.7;">From ice in the crater to water in a cartridge and hydrolox in the tanker. Water is never a cryogen; the propellants split from it are.</p>
     </div>
 
     <h2 id="infrastructure">5. Logistics Infrastructure</h2>
     <p><strong>Surface systems:</strong></p>
     <ul>
       <li>Launch pads with dust control</li>
-      <li>Cryogenic storage tanks</li>
-      <li>Remote Operations Nodes (RONs)</li>
+      <li>Cartridge fill and staging</li>
+      <li>Pad-side electrolysis and liquefaction—the refinery that fuels the fleet</li>
+      <li><a href="lunet.html" style="color: white;">LUNET</a> utility nodes for surface mobility and inter-node exchange</li>
     </ul>
     <p><strong>Orbital systems (at Aegis):</strong></p>
     <ul>
-      <li>Docking ports and cryo lines</li>
+      <li>Cartridge docking ports and water transfer lines</li>
+      <li><a href="lunar_orbital_depot.html" style="color: white;">Lunar Orbital Propellant Depot</a>—the first cartridge customer, online before the station</li>
       <li>Water routing and shield integration</li>
       <li>Autonomous transfer monitoring</li>
     </ul>
@@ -175,11 +183,11 @@
       </tr>
       <tr>
         <td>Lunar Water (delivery only)</td>
-        <td align="right">~$247.5 billion</td>
+        <td align="right">~$495 billion</td>
       </tr>
       <tr>
-        <td>Lunar Water (with infrastructure)</td>
-        <td align="right">~$400–500 billion</td>
+        <td>Surface refinery, power, and depot</td>
+        <td align="right">Not yet costed—see program pages</td>
       </tr>
     </table>
 
@@ -197,7 +205,7 @@
       </a>
     </div>
 
-    <h2>10. Learn More</h2>
+    <h2>9. Learn More</h2>
     <p>
       Visit <a href="https://aegisstation.com" style="color: white; text-decoration: underline;">aegisstation.com</a> for additional concept art, vehicle dossiers, and orbital system planning.
     </p>

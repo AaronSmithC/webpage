@@ -384,6 +384,9 @@
     background: var(--border);
     margin-top: 40px;
   }
+  .mission-grid > .mission-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
   .mission-card {
     background: var(--deep);
     padding: 36px 32px;
@@ -955,6 +958,34 @@
   }
 
   /* Fade-in on scroll */
+  /* ─── PHONE WIDTH ─── */
+  @media (max-width: 760px) {
+    .page-wrap { padding: 0 16px; }
+    .nav-inner { padding: 0 16px; }
+    .nav-links { display: none; }
+    .hero { min-height: auto; padding-top: 110px; padding-bottom: 48px; }
+    .hero::before { left: -16px; right: -16px; }
+    .hero-stats { grid-template-columns: 1fr; max-width: none; }
+    .stat + .stat { border-left: none; border-top: 1px solid var(--border); }
+    .mission-grid,
+    .mission-grid[style],
+    .specs-layout,
+    .s2s-intro,
+    .s2s-scenarios,
+    .prop-intro,
+    .prop-phases,
+    .cartridge-layout,
+    .cartridge-features { grid-template-columns: 1fr !important; }
+    .mission-grid > .mission-card:last-child:nth-child(odd) { grid-column: auto; }
+    .specs-layout, .s2s-intro, .prop-intro, .cartridge-layout { gap: 32px; }
+    .spec-row, .cartridge-spec-row { gap: 12px; }
+    .spec-val, .cartridge-spec-val { text-align: right; }
+    .prop-callout { position: static; }
+    .prop-tech-bar { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; }
+    .tech-bar-items { gap: 12px 24px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+
   .reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -1098,7 +1129,7 @@
         </div>
         <div class="spec-row">
           <span class="spec-key">Launch Mass</span>
-          <span class="spec-val">~102,000 KG</span>
+          <span class="spec-val">~95,000 KG</span>
         </div>
         <div class="spec-row">
           <span class="spec-key">Δv (Ascent)</span>
@@ -1106,26 +1137,26 @@
         </div>
         <div class="spec-row">
           <span class="spec-key">Isp (Vacuum)</span>
-          <span class="spec-val">~360 S</span>
+          <span class="spec-val">~450 S</span>
         </div>
         <div class="spec-row">
           <span class="spec-key">Propellant Mass</span>
-          <span class="spec-val">~52,000 KG</span>
+          <span class="spec-val">~42,000 KG</span>
         </div>
         <div class="spec-row">
           <span class="spec-key">Thrust Required</span>
-          <span class="spec-val">~165 KN</span>
+          <span class="spec-val">~155 KN</span>
         </div>
       </div>
       <div class="specs-group">
         <h4>Propulsion &amp; Structure</h4>
         <div class="spec-row">
           <span class="spec-key">Propellant</span>
-          <span class="spec-val">LOX / CH₄</span>
+          <span class="spec-val">LOX / LH₂</span>
         </div>
         <div class="spec-row">
           <span class="spec-key">Engine Config</span>
-          <span class="spec-val">3×60 KN</span>
+          <span class="spec-val">4×40 KN</span>
         </div>
         <div class="spec-row">
           <span class="spec-key">Tank Cartridge</span>
@@ -1141,7 +1172,7 @@
         </div>
         <div class="spec-row">
           <span class="spec-key">Round-Trip Propellant</span>
-          <span class="spec-val">~57,000 KG</span>
+          <span class="spec-val">~45,000 KG</span>
         </div>
       </div>
       <div class="specs-group">
@@ -1343,7 +1374,7 @@
         </div>
       </div>
       <div class="s2s-body">
-        <p>The LTF tanker requires no structural redesign for surface-to-surface operations. Its VTOL architecture and LOX/CH₄ propulsion are inherently suited to ballistic hops between ISRU nodes — ascending on a near-vertical vector, coasting at low altitude, and performing a precision landing at the destination pad.</p>
+        <p>The LTF tanker requires no structural redesign for surface-to-surface operations. Its VTOL architecture and LOX/LH₂ propulsion are inherently suited to ballistic hops between ISRU nodes — ascending on a near-vertical vector, coasting at low altitude, and performing a precision landing at the destination pad.</p>
         <p>This capability transforms a collection of isolated extraction points into an integrated logistics network, allowing surplus LOX and water to flow to nodes in deficit rather than being vented or stockpiled past capacity.</p>
       </div>
     </div>
@@ -1384,49 +1415,50 @@
     <div class="prop-intro reveal">
       <div class="prop-callout">
         <div class="prop-stat-block">
-          <div class="prop-stat-label">Phase 1 Propellant</div>
-          <div class="prop-stat-value">LOX / CH₄</div>
-          <div class="prop-stat-desc">Proven architecture. LOX sourced locally via ISRU electrolysis. Methane imported from Earth during shield fill.</div>
-        </div>
-        <div class="prop-divider"></div>
-        <div class="prop-stat-block">
-          <div class="prop-stat-label">Phase 3 Target</div>
+          <div class="prop-stat-label">Propellant — Day One</div>
           <div class="prop-stat-value">LOX / LH₂</div>
-          <div class="prop-stat-desc">Both propellants produced locally from lunar water. Isp 450s — 25% higher performance. Zero Earth import dependency.</div>
+          <div class="prop-stat-desc">Both propellants split from lunar water at the pad. The same propellant the Short Hopper flies — one ISRU product feeds the whole surface fleet.</div>
         </div>
         <div class="prop-divider"></div>
         <div class="prop-stat-block">
-          <div class="prop-stat-label">Break-Even vs Imports</div>
-          <div class="prop-stat-value">6–18 mo</div>
-          <div class="prop-stat-desc">Infrastructure investment recovered against methane import costs within the first 18 months of LOX/LH₂ operations.</div>
+          <div class="prop-stat-label">Earth-Supplied Consumables</div>
+          <div class="prop-stat-value">None</div>
+          <div class="prop-stat-desc">No fuel rides up from Earth on any sortie, in any phase. The only recurring import the fleet ever needed is designed out before the first flight.</div>
+        </div>
+        <div class="prop-divider"></div>
+        <div class="prop-stat-block">
+          <div class="prop-stat-label">Specific Impulse</div>
+          <div class="prop-stat-value">~450 s</div>
+          <div class="prop-stat-desc">Roughly 25% over methalox. Less propellant lifted per sortie, so more of every launch is water.</div>
         </div>
       </div>
 
       <div class="prop-body">
-        <p>The Moon has abundant water ice. Electrolysis splits that water into liquid oxygen and liquid hydrogen — the two highest-performing chemical propellants available. The LTF's ISRU nodes are already producing both as a consequence of the shield-fill operation itself. LOX feeds directly into the current propulsion system. Hydrogen has been the missing piece.</p>
-        <p>The missing piece is now on a credible engineering path. Blue Origin's Lunar Permanence team has demonstrated zero boil-off storage of liquid hydrogen at 20K — the temperature at which LH₂ must be maintained — at twice the performance of the previous state of the art. Active cryocooling powered by the node's solar and fission power supply keeps propellant cold indefinitely, with no boil-off losses.</p>
-        <p>The program consequence is significant: rather than importing methane from Earth on every resupply cycle — a permanent, compounding dependency running into the tens of billions annually at fleet scale — the LTF transitions to a fully closed propellant loop. Water in, LOX and LH₂ out. No Earth supply chain. No launch-dependent consumables. A logistics system that is genuinely autonomous.</p>
+        <p>The Moon has water ice. Electrolysis splits it into liquid oxygen and liquid hydrogen — the two highest-performing chemical propellants there are, and the only ones the Moon can make from a single feedstock without importing anything. The tanker burns both from its first flight. There is no methane phase, no transition, and no import to taper off later.</p>
+        <p>An earlier revision of this page baselined methalox for the shield-fill campaign with methane shipped from Earth, and treated hydrolox as a later upgrade. That was backwards. At fleet cadence the methane alone would have been a recurring import measured in hundreds of tonnes a day, landed on the Moon — a supply chain larger than every lunar landing to date, repeated indefinitely. Anything a program has to keep buying from Earth is the thing that ends it. So the fuel that needs an Earth supply chain is gone, and the vehicle is designed around the one that doesn't.</p>
+        <p>The hydrogen objection is real and this architecture answers it the same way LUNET does: <em>produce near, consume fast.</em> A tanker fills from a liquefier a few metres from the pad and is empty in orbit within hours. That is the shortest hydrogen dwell any lunar vehicle will ever have. The long-dwell problem — boil-off, thermal-cycle fatigue on transfer lines, embrittlement — belongs to depots holding LH₂ for months, not to a vehicle that burns its load the same day it is filled. Zero boil-off storage at 20 K has already been demonstrated at twice the previous state of the art, and the industry's own next-generation lunar lander is hydrolox for precisely this reason: it is the propellant ISRU can actually make.</p>
+        <p>The honest cost moves from the launch manifest to the power plant. Hydrogen is a ninth of water by mass, so a full tanker load means splitting several times its own hydrogen mass in water and liquefying the result. The tanker pad is therefore not a LUNET fill node — it is a refinery-class facility, with power to match, and it is the same plant the depot and the surface network already assume exists. One thing to build, once, on the Moon; not something to keep launching.</p>
       </div>
     </div>
 
     <div class="prop-phases reveal">
       <div class="phase-card">
         <div class="phase-tag">Phase 01</div>
-        <div class="phase-timeline">Years 0 – 2</div>
-        <div class="phase-prop">LOX / CH₄</div>
-        <p class="phase-desc">Fleet operates on proven LOX/CH₄ propulsion while LUNET nodes are built to the full 50 kW power specification. Methane import costs are accepted during this period as the cost of mission reliability. Cryogenic and fission infrastructure is commissioned in parallel — not retrofit later.</p>
+        <div class="phase-timeline">First Light</div>
+        <div class="phase-prop">LOX / LH₂</div>
+        <p class="phase-desc">A single vehicle at low cadence lifts the first cartridges to the depot, fuelled from the first pad-side electrolysis and liquefaction string. Sortie rate is set by how fast the pad can make hydrogen, not by the vehicle. This is the end-to-end proof: water out of the ground, propellant on the pad, cartridge in orbit, nothing from Earth.</p>
       </div>
       <div class="phase-card">
         <div class="phase-tag">Phase 02</div>
-        <div class="phase-timeline">Years 2 – 3</div>
-        <div class="phase-prop">Transition</div>
-        <p class="phase-desc">Node cryocoolers and LH₂ storage come online. Tankers are qualified for liquid hydrogen service. The fleet transitions progressively — early vehicles flying LOX/LH₂ missions as nodes are certified, methane imports tapering as the conversion progresses across all six LUNET sites.</p>
+        <div class="phase-timeline">Shield-Fill Campaign</div>
+        <div class="phase-prop">LOX / LH₂</div>
+        <p class="phase-desc">Pad-side production scales to fleet cadence: additional electrolysis strings, liquefiers and fission modules are added in parallel with vehicles, and the refinery grows with the fleet rather than ahead of it. Every sortie flies on the same propellant as the first one. Nothing in the vehicle, the pad, or the fleet software changes between first light and full cadence.</p>
       </div>
       <div class="phase-card">
         <div class="phase-tag">Phase 03</div>
-        <div class="phase-timeline">Year 3 → Post-Fill</div>
+        <div class="phase-timeline">Post-Fill</div>
         <div class="phase-prop">LOX / LH₂</div>
-        <p class="phase-desc">Full fleet operates on locally produced propellants. Zero Earth import dependency. The higher Isp of LOX/LH₂ reduces propellant mass per mission, increasing payload fraction and compressing the remaining fill timeline. Post-fill, the same fleet serves Aegis Station depot and surface logistics roles indefinitely.</p>
+        <p class="phase-desc">The depot's electrolysis hydrogen — once a vented byproduct — becomes tanker fuel in orbit, so vehicles top off both propellants at the depot between cycles and the loop closes at both ends of the ascent. The same fleet serves depot resupply, surface distribution and emergency response indefinitely, still without an Earth-supplied consumable.</p>
       </div>
     </div>
 
@@ -1447,11 +1479,11 @@
         </div>
         <div class="tech-item">
           <div class="tech-dot" style="background: var(--muted);"></div>
-          <span class="tech-item-text">50 kW-Class Polar Solar Arrays</span>
+          <span class="tech-item-text">Refinery-Class Polar Power — Solar + Fission</span>
         </div>
         <div class="tech-item">
           <div class="tech-dot" style="background: var(--ice-dim);"></div>
-          <span class="tech-item-text">LOX/LH₂ Co-Storage Thermal Architecture</span>
+          <span class="tech-item-text">Hydrolox VTOL Lander Engines — BE-7 Class</span>
         </div>
       </div>
     </div>
