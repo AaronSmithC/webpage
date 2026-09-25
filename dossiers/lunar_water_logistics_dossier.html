@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lunar Water Logistics — Architecture Reference Document</title>
+<style>
+  @page { size: Letter; margin: 0; }
+
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    margin: 0;
+    background: #0d0d0d;
+    color: #b9b9bf;
+    font-family: 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+
+  .doc { padding: 0.85in 0.9in 0.9in; }
+
+  .kicker { font-size: 10.5pt; color: #8a8a90; margin-bottom: 6pt; }
+  h1 { font-size: 30pt; font-weight: 700; color: #ffffff; margin: 0 0 4pt; letter-spacing: -0.5pt; }
+  .subtitle { font-size: 13pt; color: #c4c4c8; margin-bottom: 8pt; }
+  .meta { font-size: 9pt; color: #7a7a80; letter-spacing: 0.2pt; }
+
+  hr { border: 0; border-top: 0.75pt solid #303034; margin: 24pt 0 0; }
+  h2 { font-size: 17pt; font-weight: 700; color: #ffffff; margin: 24pt 0 12pt; break-after: avoid; }
+  h3 { font-size: 11.5pt; font-weight: 700; color: #f0f0f2; margin: 16pt 0 6pt; break-after: avoid; }
+  p { margin: 0 0 10pt; }
+
+  ul { margin: 0 0 10pt; padding-left: 18pt; }
+  li { margin-bottom: 4pt; }
+  ul.numbered { list-style: none; padding-left: 0; }
+  ul.numbered li { display: flex; gap: 18pt; margin-bottom: 6pt; }
+  ul.numbered .n { color: #7a7a80; width: 16pt; flex: none; }
+  li strong { color: #e8e8ea; }
+
+  table { width: 100%; border-collapse: collapse; margin: 6pt 0 6pt; font-size: 9.5pt; break-inside: avoid; }
+  th { text-align: left; background: #1f1f23; color: #ededf0; font-weight: 700; padding: 6pt 9pt; border: 0.75pt solid #2c2c30; }
+  td { padding: 6pt 9pt; border: 0.75pt solid #242428; color: #b9b9bf; vertical-align: top; }
+  tr:nth-child(even) td { background: #141416; }
+  tr:nth-child(odd) td { background: #101012; }
+  td strong { color: #e8e8ea; }
+
+  .note { font-size: 9pt; color: #76767c; margin: 4pt 0 10pt; }
+
+  .callout {
+    border: 0.75pt solid #34342c;
+    border-left: 2.5pt solid #8f8f96;
+    background: #151513;
+    padding: 11pt 14pt;
+    margin: 12pt 0;
+    font-size: 9.8pt;
+    break-inside: avoid;
+  }
+  .callout strong { color: #ffffff; }
+  .callout em { color: #95959b; font-style: italic; }
+
+  .figure { margin: 12pt 0 14pt; break-inside: avoid; }
+  .figure img { width: 100%; display: block; border: 0.75pt solid #2c2c30; }
+  .figure .cap { font-size: 8.5pt; color: #76767c; margin-top: 5pt; }
+  .figure.tall img { width: auto; max-height: 4.9in; margin: 0 auto; }
+
+  .end-footer {
+    margin-top: 34pt;
+    padding-top: 14pt;
+    border-top: 0.75pt solid #303034;
+    text-align: center;
+    font-size: 8.5pt;
+    color: #6c6c72;
+    line-height: 1.7;
+  }
+
+  .section { break-inside: auto; }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <div class="kicker">Aegis Station</div>
+  <h1>Lunar Water Logistics</h1>
+  <div class="subtitle">3.3 Million Tonnes of Lunar Water to Lunar Orbit, on a Fleet That Imports Nothing</div>
+  <div class="meta">Architecture Reference Document &nbsp;|&nbsp; Rev B — September 2026 &nbsp;|&nbsp; Not for Hardware Commitment</div>
+
+  <hr>
+
+  <section class="section">
+    <h2>1. Executive Summary</h2>
+    <p>
+      Aegis Station is a rotating habitat in a 100 km lunar orbit, shielded by three metres of water around the outer hull
+      of each of its three rings. At the 1g baseline that shield is 3.3 million tonnes. Lifting that mass from Earth is
+      not a plan; it is a number that ends the program. Every tonne of shield water is therefore mined at the lunar south
+      pole, carried to the pad in a standard 45-tonne cartridge, and flown to orbit by an autonomous tanker.
+    </p>
+    <p>
+      Rev B makes one structural change to the chain. The tanker flies on liquid oxygen and liquid hydrogen split from
+      lunar water at the pad, from its first flight. The earlier revision baselined methalox with methane shipped from
+      Earth and treated hydrolox as a later upgrade. At fleet cadence that methane was a recurring import of hundreds of
+      tonnes a day landed on the Moon, a supply chain larger than every lunar landing to date, repeated indefinitely.
+      Anything a program has to keep buying from Earth is the thing that ends it. The import is designed out before the
+      first flight, and the honest cost moves from the launch manifest to a refinery-class power plant on the surface.
+    </p>
+    <p>
+      The rest of the architecture is unchanged and is stated here as a baseline, not a closed design: 45 tankers,
+      2,025 tonnes a day, a fill of roughly 4.5 years, and the Lunar Orbital Propellant Depot as the fleet's first
+      customer before the station exists. Section 10 lists what does not yet close.
+    </p>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>2. Water Requirement</h2>
+    <p>
+      The shield is a 3 m water layer on the outer hull of each ring, outboard of a 7 m utility band and a 40 m habitable
+      depth. The requirement is set by geometry and the 1g rotation baseline, not by logistics.
+    </p>
+    <table>
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>Shield thickness</td><td>3 m of water, outer hull, all three rings</td></tr>
+      <tr><td>Shield radial span</td><td>47 m to 50 m from the ring centreline, outboard of the utility band</td></tr>
+      <tr><td>Shield volume, three rings</td><td>~3.3 million m³</td></tr>
+      <tr><td>Water mass</td><td>~3.3 million tonnes</td></tr>
+      <tr><td>Olympic pool equivalent</td><td>~1,320</td></tr>
+      <tr><td>Source</td><td>Lunar south pole, permanently shadowed craters. Earth-sourced water is excluded in every phase.</td></tr>
+    </table>
+    <p class="note">Shield thickness is the multiplier on every number in this document: tankers, sorties, power, and years. The 3 m figure is held by the station design; the dose case for it is stated on the water-shield evaluation page, not here.</p>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>3. Delivery Architecture</h2>
+    <div class="figure">
+      <img src="../water_supply_chain.svg" alt="Delivery chain from ISRU node to launch pad to 100 km lunar orbit and back">
+      <div class="cap">Fig. 1 — The delivery loop. Every sortie carries 45 t of water up and an empty cartridge down. Nothing on the loop is supplied from Earth.</div>
+    </div>
+    <table>
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>Fleet</td><td>45 autonomous reusable tankers, VTOL, one ground console</td></tr>
+      <tr><td>Payload</td><td>45 t of water per sortie, in one Modular Tank Cartridge</td></tr>
+      <tr><td>Ascent</td><td>2,600 m/s to 100 km lunar orbit</td></tr>
+      <tr><td>Return</td><td>1,800 m/s, empty cartridge, fuel topped off at the depot</td></tr>
+      <tr><td>Daily throughput</td><td>~2,025 t/day</td></tr>
+      <tr><td>Fill time</td><td>~4.5 years at that throughput</td></tr>
+      <tr><td>Sorties, total</td><td>~73,333</td></tr>
+      <tr><td>Propellant</td><td>LOX / LH₂, both split from lunar water at the pad</td></tr>
+      <tr><td>Earth-supplied consumables</td><td>None, in any phase</td></tr>
+    </table>
+    <h3>The Modular Tank Cartridge</h3>
+    <p>
+      The cartridge is the atomic unit of the chain: a 10 m × 2.5 m structural cylinder holding a flexible bladder of
+      ~49 m³, filled by vacuum draw at the ISRU node and emptied by inert-gas displacement at the destination. It is
+      cargo the tanker carries, not part of the tanker, and it has one water port and one gas port that are identical at
+      the node, the pad, the depot, and the station. Water is never a cryogen anywhere in the chain. It needs no
+      insulation, no vacuum-jacketed lines, and no boil-off management, which is why it is the commodity that moves.
+    </p>
+    <h3>Mission profile</h3>
+    <ul class="numbered">
+      <li><span class="n">0</span><span><strong>Depot first light.</strong> A single tanker at low cadence lifts the first cartridges to the Lunar Orbital Propellant Depot and commissions end-to-end propellant production. Full fleet deployment is not required.</span></li>
+      <li><span class="n">1</span><span><strong>Shield-fill campaign.</strong> Sustained surface-to-orbit delivery to the station's shield reservoirs. This is the requirement that sizes the 45-vehicle fleet.</span></li>
+      <li><span class="n">2</span><span><strong>Depot resupply.</strong> Runs in parallel from first light and continues indefinitely after the fill. The depot is the fleet's first customer and a permanent one.</span></li>
+      <li><span class="n">3</span><span><strong>Surface distribution.</strong> Ballistic hops between ISRU and LUNET nodes at 160–940 m/s, redistributing water and LOX. Up to six hops per orbital propellant load.</span></li>
+      <li><span class="n">4</span><span><strong>Rapid response.</strong> One or two tankers held in standby; emergency water to a crewed outpost within 6–8 hours of dispatch.</span></li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>4. Propellant: Hydrolox From Day One</h2>
+    <p>
+      The Moon has water ice. Electrolysis splits it into liquid oxygen and liquid hydrogen, the two highest-performing
+      chemical propellants there are, and the only ones the Moon can make from a single feedstock without importing
+      anything. The tanker burns both from its first flight. There is no methane phase, no transition, and no import to
+      taper off later. The Short Hopper already flies LOX/LH₂ for the same reason; with this revision every vehicle on
+      the surface burns the same ISRU product.
+    </p>
+    <table>
+      <tr><th>Parameter</th><th>Rev A (methalox)</th><th>Rev B (hydrolox)</th></tr>
+      <tr><td>Propellant</td><td>LOX / CH₄, methane imported from Earth</td><td>LOX / LH₂, both from lunar water</td></tr>
+      <tr><td>Specific impulse, vacuum</td><td>~360 s</td><td>~450 s</td></tr>
+      <tr><td>Launch mass</td><td>~102 t</td><td>~95 t</td></tr>
+      <tr><td>Ascent propellant</td><td>~52 t</td><td>~42 t</td></tr>
+      <tr><td>Round-trip propellant</td><td>~57 t</td><td>~45 t</td></tr>
+      <tr><td>Thrust, engines</td><td>~165 kN, 3 × 60 kN</td><td>~155 kN, 4 × 40 kN, BE-7 class, engine-out capable</td></tr>
+      <tr><td>Recurring Earth import per sortie</td><td>~12.5 t methane</td><td>None</td></tr>
+    </table>
+    <p class="note">Rev B propellant masses follow the rocket equation at the same payload, delta-v, and implied dry mass as Rev A. They are not a new sizing pass; see Section 10.</p>
+    <h3>The hydrogen objection</h3>
+    <p>
+      Liquid hydrogen at 20 K is hard to store and harder to move. This architecture answers that the same way LUNET does:
+      <em>produce near, consume fast.</em> A tanker fills from a liquefier a few metres from the pad and is empty in orbit
+      within hours. That is the shortest hydrogen dwell any lunar vehicle will have. The long-dwell problems, boil-off,
+      thermal-cycle fatigue on transfer lines, and embrittlement, belong to depots holding LH₂ for months, not to a
+      vehicle that burns its load the same day it is filled. Zero boil-off storage at 20 K has been demonstrated at twice
+      the previous state of the art, and the industry's own next-generation lunar lander is hydrolox for precisely this
+      reason: it is the propellant ISRU can actually make.
+    </p>
+    <h3>The honest cost</h3>
+    <p>
+      Hydrogen is a ninth of water by mass, so a full tanker load means splitting several times its own hydrogen mass in
+      water and liquefying the result. The tanker pad is therefore not a LUNET fill node, which is sized at tens to a few
+      hundred kilowatts. It is a refinery-class facility with power to match, and it is the same plant the depot and the
+      surface network already assume exists. That is one thing to build, once, on the Moon, rather than something to keep
+      launching. Its size scales with sortie cadence and is an open item in Section 10.
+    </p>
+    <div class="callout">
+      <strong>Design rule.</strong> No vehicle in the surface fleet may depend on a consumable that must be resupplied from
+      Earth. <em>Methane failed this rule. Hydrolox passes it because the feedstock is the cargo.</em>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>5. The Depot as First Customer</h2>
+    <p>
+      Every lunar-water architecture faces the same deadlock: surface extraction is hard to justify without an orbital
+      customer, and orbital hardware is hard to justify without a proven resource. The Lunar Orbital Propellant Depot
+      breaks it by being the earliest useful thing in lunar orbit. Its hardware can be emplaced and stand dormant; its
+      commissioning date is set by the first cartridge to arrive, and its existence is what makes that date matter.
+    </p>
+    <ul>
+      <li><strong>Water in, propellant out.</strong> Depot electrolysis produces LOX and LH₂ from cartridge water. With a hydrolox fleet the hydrogen is a product, not a vented byproduct: tankers top off both propellants at the depot between cycles, so the loop closes at both ends of the ascent.</li>
+      <li><strong>Methane for the Hauler only.</strong> The Earth–Aegis Long-Hauler still burns methalox for its return; it brings its own methane as manifest cargo. That import is declared, bounded, and never touches the tanker fleet.</li>
+      <li><strong>Standard interfaces.</strong> The cartridge and its two ports are the same at the depot as at the pad. A depot that only its builder can dock with is a fuel tank, not infrastructure.</li>
+      <li><strong>Beachhead.</strong> The depot's pressurised node is the program's first shirt-sleeve presence in lunar orbit, before any ring is assembled.</li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>6. ISRU and Extraction</h2>
+    <p>
+      Ice-bearing regolith is excavated from permanently shadowed craters near the south pole and heated by microwave or
+      radiant thermal rigs; the ice sublimes, is cold-trapped, condensed, and filtered to a single water grade that serves
+      both cargo and propellant. An ambient surface buffer absorbs production swings and feeds two consumers: cartridge
+      fill for the tanker, and pad-side electrolysis and liquefaction for the tanker's own propellant.
+    </p>
+    <ul>
+      <li>Deposit assessment precedes extraction; the subsurface ice assessment capability and the WOK prospecting rover are the instruments aimed at that gate.</li>
+      <li>Mining, extraction, and transfer are autonomous and modular; power is polar solar with fission for the lunar night.</li>
+      <li>For every tonne delivered to orbit, roughly another tonne and a half is split for propellant. The mining rate, not the delivery rate, sizes the node.</li>
+    </ul>
+    <div class="figure tall">
+      <img src="../isru_process_flow.svg" alt="ISRU process flow from permanently shadowed crater to water cargo and hydrolox propellant">
+      <div class="cap">Fig. 2 — From ice in the crater to water in a cartridge and hydrolox in the tanker. The buffer is ambient; the only cryogens are the propellants split from it.</div>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>7. Logistics Infrastructure</h2>
+    <h3>Surface</h3>
+    <ul>
+      <li>Launch pads with dust control and blast deflection</li>
+      <li>Cartridge fill, staging, and ground inventory of displaced inert gas</li>
+      <li>Pad-side electrolysis and liquefaction: the refinery that fuels the fleet</li>
+      <li>LUNET utility nodes for surface mobility, refuelling, and inter-node exchange</li>
+      <li>Fleet Commander ground console: dispatch, pad deconfliction, berth queuing, standby reserve</li>
+    </ul>
+    <h3>Orbital</h3>
+    <ul>
+      <li>Lunar Orbital Propellant Depot: cartridge reception, electrolysis, LOX and LH₂ storage, tanker top-off</li>
+      <li>Station cartridge docking ports and water transfer lines to the shield reservoirs</li>
+      <li>Autonomous transfer monitoring, inventory reconciliation, and fault management</li>
+    </ul>
+    <h3>Shield fill</h3>
+    <p>
+      Rings receive shield water from the start of assembly through evenly spaced fill ports. Fill sequencing preserves
+      mass balance across each ring, and spin-up to 1g follows structural and systems verification of the complete ring
+      assembly, so the shield is filled and balanced before the ring rotates.
+    </p>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>8. Cost Considerations</h2>
+    <table>
+      <tr><th>Source</th><th>Cost per kg delivered</th><th>Cost per Olympic pool</th></tr>
+      <tr><td>Earth-launched</td><td>$2,500</td><td>~$6.25 billion</td></tr>
+      <tr><td>Lunar-sourced, target</td><td>$150</td><td>~$375 million</td></tr>
+    </table>
+    <table>
+      <tr><th>Scenario</th><th>Total</th></tr>
+      <tr><td>Earth-launched water, 3.3 Mt</td><td>~$4.1 trillion</td></tr>
+      <tr><td>Lunar water, delivery only, at $150/kg</td><td>~$495 billion</td></tr>
+      <tr><td>Surface refinery, power, mining, and depot</td><td>Not yet costed; stated on the program pages as they close</td></tr>
+    </table>
+    <p class="note">The $150/kg figure is a program target, not a bottom-up estimate. The earlier revision stated $247.5 billion for delivery, which is inconsistent with its own per-kilogram figure; Rev B corrects it. Under Rev A the methane import alone, at any plausible landed price, would have exceeded this delivery total every few years of the campaign.</p>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>9. Long-Term Applications and Strategic Value</h2>
+    <p>
+      The extraction and delivery chain does not retire when the shield is full. The same fleet, pad, and depot serve
+      depot resupply, surface distribution, emergency response, and propellant staging for anything leaving cislunar
+      space, still without an Earth-supplied consumable.
+    </p>
+    <ul>
+      <li>LOX and LH₂ production for cislunar and deep-space vehicles</li>
+      <li>Depot refuelling in lunar orbit and at Earth–Moon staging points</li>
+      <li>Life support reserves and shielding water for future habitats and platforms</li>
+      <li>Water as a priced, deliverable orbital commodity with published interfaces</li>
+      <li>A replicable model for any station built where water is available</li>
+    </ul>
+    <p><em>The water economy doesn't end with Aegis. It begins with it.</em></p>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>10. Open Items</h2>
+    <p>
+      This revision fixes the propellant decision and leaves the campaign numbers as stated. The following do not yet
+      close and are carried as open, not hidden.
+    </p>
+    <table>
+      <tr><th>Item</th><th>Status</th></tr>
+      <tr><td>Sortie cadence versus vehicle life</td><td>2,025 t/day at 45 t per sortie is one flight per tanker per day, about 1,600 cycles per airframe over a 4.5-year fill, against a stated 100+ cycle life and 60–100 missions per year. Either the fill is longer, the fleet is larger, or airframes are replaced through the campaign. A 16-year fill at the stated cadence is an acceptable outcome; faster is better.</td></tr>
+      <tr><td>Vehicle dry mass</td><td>The launch, payload, and propellant figures imply roughly 5 t of structure, tanks, engines, and cartridge shell. A realistic lander dry fraction would reduce payload or raise launch mass. Not resized in Rev B.</td></tr>
+      <tr><td>Surface power</td><td>Electrolysis and hydrogen liquefaction at fleet cadence are of order hundreds of megawatts continuous. LUNET node sizing does not cover this; the pad refinery is a separate facility and is not yet sized.</td></tr>
+      <tr><td>Cartridge reuse</td><td>The cartridge is infrastructure, not a consumable, but its cycle life and bladder material are undefined. Fleet size of cartridges bounds throughput.</td></tr>
+      <tr><td>Resource base</td><td>Shield water plus propellant water is several million tonnes against polar ice estimates that span two orders of magnitude. Deposit assessment is the gate, and it is why the program is waiting.</td></tr>
+    </table>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>11. Changes From the Previous Revision</h2>
+    <table>
+      <tr><th>Item</th><th>Previous</th><th>Rev B</th></tr>
+      <tr><td>Tanker propellant</td><td>LOX/CH₄, methane imported from Earth, hydrolox as a later phase</td><td>LOX/LH₂ from lunar water, first flight onward</td></tr>
+      <tr><td>Earth-supplied consumables</td><td>~12.5 t methane per sortie for the first years</td><td>None</td></tr>
+      <tr><td>Water handling</td><td>"Cryogenic transport tanks", "cryogenic storage tanks", "cryogenic transfer lines"</td><td>Ambient water in bladder cartridges; only the propellants are cryogenic</td></tr>
+      <tr><td>Surface nodes</td><td>Remote Operations Nodes</td><td>LUNET utility nodes plus a refinery-class pad</td></tr>
+      <tr><td>Depot</td><td>Not described</td><td>First customer; commissions on first cartridge; hydrogen retained for tanker top-off</td></tr>
+      <tr><td>Delivery cost</td><td>~$247.5 billion</td><td>~$495 billion, matching $150/kg × 3.3 Mt</td></tr>
+      <tr><td>Infrastructure cost</td><td>~$400–500 billion</td><td>Not yet costed</td></tr>
+      <tr><td>Open items</td><td>Not stated</td><td>Section 10</td></tr>
+    </table>
+  </section>
+
+  <div class="end-footer">
+    Aegis Station — Lunar Water Logistics · Architecture Reference · Rev B · Classification: Unrestricted<br>
+    contact@aegisstation.com · aegisstation.com
+  </div>
+
+</div>
+</body>
+</html>
