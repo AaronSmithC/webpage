@@ -45,6 +45,9 @@
   tr:nth-child(even) td { background: #141416; }
   tr:nth-child(odd) td { background: #101012; }
   td strong { color: #e8e8ea; }
+  table.breakable { break-inside: auto; }
+  table.breakable tr { break-inside: avoid; }
+  table.breakable thead { display: table-header-group; }
 
   .note { font-size: 9pt; color: #76767c; margin: 4pt 0 10pt; }
 
@@ -325,12 +328,31 @@
       This revision fixes the propellant decision and leaves the campaign numbers as stated. The following do not yet
       close and are carried as open, not hidden.
     </p>
-    <table>
-      <tr><th>Item</th><th>Status</th></tr>
-      <tr><td>Sortie cadence versus vehicle life</td><td>2,025 t/day at 45 t per sortie is one flight per tanker per day, about 1,600 cycles per airframe over a 4.5-year fill, against a stated 100+ cycle life and 60–100 missions per year. Either the fill is longer, the fleet is larger, or airframes are replaced through the campaign. A 16-year fill at the stated cadence is an acceptable outcome; faster is better.</td></tr>
+    <h3>Scope and assumptions for the fleet analysis</h3>
+    <p>
+      The tanker fleet is analysed as a vehicle cycle between a surface pad and a station berth. Three things are
+      assumed rather than analysed here, because each belongs to another part of the program:
+    </p>
+    <ul class="numbered">
+      <li><span class="n">A1</span><span><strong>A full cartridge is available at the pad whenever a tanker is ready to lift.</strong> Mining, extraction, cartridge fill, and the size of the cartridge pool are upstream of the fleet and sized separately.</span></li>
+      <li><span class="n">A2</span><span><strong>An empty cartridge is available at the station whenever a tanker berths.</strong> Shield-side discharge and cartridge handling are station systems.</span></li>
+      <li><span class="n">A3</span><span><strong>Refuelling is timely wherever it happens, surface or station.</strong> Refinery and depot capacity are their own items; they set the ceiling on cadence but are not part of the vehicle cycle.</span></li>
+    </ul>
+    <p>
+      Under those assumptions the fleet's own limits are pad-hours, berth-hours, orbital phasing, airframe availability,
+      and turnaround mechanics. Where refuelling happens and how propellant gets aboard are both still open and are
+      carried below.
+    </p>
+    <table class="breakable">
+      <thead><tr><th>Item</th><th>Status</th></tr></thead>
+      <tr><td>Daily turnaround</td><td>2,025 t/day at 45 t per sortie is one flight per tanker per day for the whole campaign, about 1,600 cycles per airframe. That is an airliner cadence in an environment gentler than any reusable booster faces: no reentry, no aerodynamic load, one-sixth-g landings. The airframe can plausibly do it. No reusable orbital-class vehicle has yet flown daily. If turnaround settles at three to five days the fill runs 13 to 22 years with the same fleet.</td></tr>
+      <tr><td>Engine pipeline</td><td>Each engine position sees roughly 500 hours of burn over an airframe life, many times any demonstrated engine life, so engines are scheduled replacement items. At 50–100 sorties per engine set, four engines per vehicle, the campaign consumes about 3,000–6,000 engines, two to four a day from a single printed part number, 450–900 t landed on the Moon. As serial printed 40 kN-class engines at $0.5–2 M each that is $3–10 B, one to two percent of the delivery target; at legacy bespoke hydrolox pricing it would be $60–120 B. Engine life is the lever: 200 sorties per set quarters the count. Life-expired engines stay at the pad as the first refurbishment demand on the surface.</td></tr>
       <tr><td>Vehicle dry mass</td><td>The launch, payload, and propellant figures imply roughly 5 t of structure, tanks, engines, and cartridge shell. A realistic lander dry fraction would reduce payload or raise launch mass. Not resized in Rev B.</td></tr>
       <tr><td>Surface power</td><td>Electrolysis and hydrogen liquefaction at fleet cadence are of order hundreds of megawatts continuous. LUNET node sizing does not cover this; the pad refinery is a separate facility and is not yet sized.</td></tr>
       <tr><td>Cartridge reuse</td><td>The cartridge is infrastructure, not a consumable, but its cycle life and bladder material are undefined. Fleet size of cartridges bounds throughput.</td></tr>
+      <tr><td>Loading-site capacity</td><td>Forty-five sorties a day is one launch every 32 minutes. With six pads and six berths, each tanker may hold a pad for at most 3.2 hours and a berth for at most 3.2 hours, all steps included. The fleet dispatch ADR cites a 4–8 hour nominal swap; at that range six pads cap the fleet at 18–36 sorties a day and the fill runs 6–11 years however many tankers exist. Pads are cheap against megawatts: ten pads relax the turnaround to five hours. A tanker waiting on propellant or a cartridge must not hold a pad; it waits on an apron, so pad occupancy measures servicing only.</td></tr>
+      <tr><td>Refuelling method and location</td><td>Open. Two methods: swappable propellant modules, pre-chilled and filled off the critical path, so pad time is mount time and the same pattern the water cartridge already uses; or fluid connections, a lighter vehicle but chilldown and transfer on every cycle and cryogenic coupling wear at the pad. Two locations: surface only, or surface plus depot top-off for the return leg, which the depot already provides for. The choice sets the turnaround time in the row above and is the next fleet-level trade.</td></tr>
+      <tr><td>Airframe availability</td><td>Engine swaps and inspections take each airframe out of service for a fraction of the campaign. At ~90 % availability, 45 airframes deliver ~40 sorties a day; the 45-a-day figure needs about 50 airframes or accepts the shortfall.</td></tr>
       <tr><td>Resource base</td><td>Shield water plus propellant water is several million tonnes against polar ice estimates that span two orders of magnitude. Deposit assessment is the gate, and it is why the program is waiting.</td></tr>
     </table>
   </section>
