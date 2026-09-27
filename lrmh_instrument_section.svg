@@ -110,7 +110,7 @@
   <path d="M972.0,192.0 L980.8,167.6 L989.6,148.0 L998.4,132.4 L1007.2,120.0 L1016.0,110.0 L1024.8,102.1 L1033.6,95.8 L1042.4,90.7 L1051.2,86.7 L1060.0,83.4 L1068.8,80.9 L1077.6,78.8 L1086.4,77.2 L1095.2,75.9 L1104.0,74.8 L1112.8,74.0 L1121.6,73.3 L1130.4,72.8 L1139.2,72.3 L1148.0,72.0" fill="none" stroke="#e8a825" stroke-width="1.4" stroke-dasharray="4 2"/>
   <text x="968" y="224" font-size="8" fill="#c8d8ec">LOAD vs SINKAGE</text>
   <text x="968" y="235" font-size="7.5" fill="#6a8aaa">baseline ramp · repeat load · RMH-F-001</text>
-  <text x="1154" y="206" text-anchor="end" font-size="7" fill="#6a8aaa">sinkage →</text>
+  <text x="1154" y="72" text-anchor="end" font-size="7" fill="#6a8aaa">sinkage →</text>
   <text x="964" y="72" font-size="7" fill="#6a8aaa">load ↑</text>
   <line x1="972" y1="200" x2="990" y2="200" stroke="#7fc4e8" stroke-width="1.4"/><text x="994" y="203" font-size="7" fill="#6a8aaa">baseline</text>
   <line x1="1040" y1="200" x2="1058" y2="200" stroke="#e8a825" stroke-width="1.2" stroke-dasharray="4 2"/><text x="1062" y="203" font-size="7" fill="#6a8aaa">repeat · stiffer</text>
