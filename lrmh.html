@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LRMH — Lunar Regolith Mechanics Head | Geotechnical Instrument</title>
+<meta name="description" content="LRMH is a host-mounted geotechnical instrument: instrumented penetration and load tests on lunar regolith, processed onboard into strength, layering, and compaction results. The Aegis realization of the RMH-class capability, flight software on NASA cFS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<style>
+  /* ─── RESET & BASE ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --void:       #050810;
+    --deep:       #090e1a;
+    --surface:    #0d1528;
+    --panel:      #111d35;
+    --border:     #1e3158;
+    --muted:      #2a4470;
+    --amber:      #e8a825;
+    --amber-dim:  #a0721a;
+    --amber-glow: #f5c84a;
+    --ice:        #a8cce8;
+    --ice-dim:    #5a8ab0;
+    --text:       #c8d8ec;
+    --text-dim:   #6a8aaa;
+    --white:      #eef4fa;
+    --danger:     #e85c2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--void);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── STARFIELD ─── */
+  .starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .starfield::before,
+  .starfield::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 42% 8%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 62%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 83% 75%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 45%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 33%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 48% 55%, rgba(168,204,232,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 77% 12%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 93% 88%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 95%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 3% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 67% 78%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 25%, rgba(255,255,255,0.3) 0%, transparent 100%);
+  }
+  .starfield::after {
+    transform: rotate(180deg) scale(1.2);
+    opacity: 0.5;
+  }
+
+  /* ─── GRID OVERLAY ─── */
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(30,49,88,0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,49,88,0.15) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  /* ─── LAYOUT ─── */
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(5,8,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--ice-dim); font-weight: 400; }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--amber); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -40px;
+    right: -40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), var(--amber-dim), var(--border), transparent);
+  }
+  .hero-content {
+    max-width: 800px;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .eyebrow-line {
+    width: 40px;
+    height: 1px;
+    background: var(--amber);
+  }
+  .eyebrow-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 8px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 em {
+    display: block;
+    color: var(--amber);
+    font-style: normal;
+    font-size: 0.55em;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+  .hero-tagline {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--ice);
+    max-width: 520px;
+    margin: 28px 0 48px;
+    animation: fadeUp 0.8s 0.2s ease both;
+    line-height: 1.6;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 580px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .stat {
+    background: var(--deep);
+    padding: 20px 24px;
+    position: relative;
+  }
+  .stat::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .stat:hover::after { background: var(--amber); }
+  .stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--amber-glow);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .section-number {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--amber-dim);
+    letter-spacing: 0.12em;
+  }
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ─── IMAGE SECTION ─── */
+  .image-section {
+    padding: 100px 0 80px;
+  }
+  .image-placeholder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/7;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s;
+  }
+  .image-placeholder:hover { border-color: var(--muted); }
+  .image-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(30,49,88,0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,49,88,0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .image-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(232,168,37,0.03) 0%, transparent 70%);
+  }
+  /* Corner accents */
+  .img-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--amber-dim);
+    border-style: solid;
+  }
+  .img-corner.tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
+  .img-corner.tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
+  .img-corner.bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
+  .img-corner.br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+  .placeholder-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .placeholder-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    opacity: 0.25;
+  }
+  .placeholder-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .placeholder-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .image-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .caption-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+  .caption-ref {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+  }
+
+  /* ─── MISSION OVERVIEW ─── */
+  .mission-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-top: 40px;
+  }
+  .mission-grid > .mission-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+  .mission-card {
+    background: var(--deep);
+    padding: 36px 32px;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .mission-card:hover { background: var(--surface); }
+  .mission-card-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    color: var(--amber-dim);
+    letter-spacing: 0.15em;
+    margin-bottom: 20px;
+  }
+  .mission-card h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .mission-card p {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .mission-card-accent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .mission-card:hover .mission-card-accent { background: var(--amber); }
+
+  /* ─── SPECS TABLE ─── */
+  .specs-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .specs-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  .specs-group h4 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(30,49,88,0.5);
+    gap: 16px;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-key {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+  .spec-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ice);
+    text-align: right;
+  }
+
+  /* ─── S2S SECTION ─── */
+  .s2s-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .s2s-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .s2s-callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    padding: 28px;
+  }
+  .s2s-callout-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .s2s-callout-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--amber-glow);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .s2s-callout-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .s2s-body { }
+  .s2s-body p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .s2s-scenarios {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 40px;
+  }
+  .scenario {
+    background: var(--deep);
+    padding: 28px;
+    transition: background 0.3s;
+  }
+  .scenario:hover { background: var(--panel); }
+  .scenario-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .scenario-tag::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--amber-dim);
+  }
+  .scenario h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .scenario p {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* ─── DOCUMENT LINK ─── */
+  .doc-section {
+    padding: 80px 0 60px;
+    border-top: 1px solid var(--border);
+  }
+  .doc-card {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    background: var(--deep);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    max-width: 700px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .doc-card:hover {
+    border-color: var(--amber-dim);
+    box-shadow: 0 0 40px rgba(232,168,37,0.08);
+  }
+  .doc-icon-panel {
+    width: 80px;
+    background: var(--amber);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .doc-icon-panel svg {
+    width: 32px;
+    height: 32px;
+    fill: var(--void);
+  }
+  .doc-info {
+    padding: 24px 28px;
+    flex: 1;
+  }
+  .doc-type {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .doc-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+    letter-spacing: 0.03em;
+  }
+  .doc-subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .doc-action {
+    display: flex;
+    align-items: center;
+    padding: 24px 28px;
+    flex-shrink: 0;
+    border-left: 1px solid var(--border);
+  }
+  .doc-link {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--amber);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.2s, color 0.2s;
+  }
+  .doc-link:hover { gap: 14px; color: var(--amber-glow); }
+  .doc-link-arrow { font-size: 16px; }
+
+  /* ─── PROPELLANT SECTION ─── */
+  .prop-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .prop-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+    margin-bottom: 48px;
+  }
+  .prop-callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--ice-dim);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .prop-stat-block { }
+  .prop-stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ice-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .prop-stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--ice);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .prop-stat-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .prop-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+  .prop-body p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .prop-body p:last-child { margin-bottom: 0; }
+  .prop-phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+  .phase-card {
+    background: var(--deep);
+    padding: 32px 28px;
+    position: relative;
+    transition: background 0.3s;
+    overflow: hidden;
+  }
+  .phase-card:hover { background: var(--panel); }
+  .phase-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .phase-card:nth-child(1)::after { background: var(--amber-dim); }
+  .phase-card:nth-child(2)::after { background: var(--muted); }
+  .phase-card:nth-child(3)::after { background: var(--ice-dim); }
+  .phase-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .phase-card:nth-child(2) .phase-tag { color: var(--muted); }
+  .phase-card:nth-child(3) .phase-tag { color: var(--ice-dim); }
+  .phase-timeline {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 14px;
+    letter-spacing: 0.05em;
+  }
+  .phase-prop {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--amber-glow);
+    margin-bottom: 14px;
+    letter-spacing: 0.06em;
+  }
+  .phase-card:nth-child(2) .phase-prop { color: var(--text-dim); }
+  .phase-card:nth-child(3) .phase-prop { color: var(--ice); }
+  .phase-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .prop-tech-bar {
+    margin-top: 48px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .tech-bar-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .tech-bar-items {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .tech-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tech-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .tech-item-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    margin-top: 60px;
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .footer-copy {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #2ecc71;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(46,204,113,0.4); }
+    50%       { opacity: 0.7; box-shadow: 0 0 0 4px rgba(46,204,113,0); }
+  }
+  @keyframes scanline {
+    from { transform: translateY(-100%); }
+    to   { transform: translateY(100vh); }
+  }
+
+  /* ─── CARTRIDGE SECTION ─── */
+  .cartridge-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .cartridge-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .cartridge-image-wrap {
+    position: relative;
+  }
+  .cartridge-image-wrap img {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--border);
+    filter: brightness(0.92) contrast(1.05);
+  }
+  .cartridge-image-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+  }
+  .cartridge-content {}
+  .cartridge-intro {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .cartridge-specs {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .cartridge-specs-header {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    padding: 14px 20px;
+    background: var(--deep);
+    border-bottom: 1px solid var(--border);
+  }
+  .cartridge-spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(30,49,88,0.5);
+    gap: 16px;
+  }
+  .cartridge-spec-row:last-child { border-bottom: none; }
+  .cartridge-spec-key {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+  .cartridge-spec-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ice);
+    text-align: right;
+  }
+  .cartridge-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+  }
+  .cartridge-feature {
+    background: var(--deep);
+    padding: 20px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .cartridge-feature:hover { background: var(--panel); }
+  .cartridge-feature::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 2px;
+    background: var(--amber-dim);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .cartridge-feature:hover::before { opacity: 1; }
+  .cartridge-feature-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .cartridge-feature-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* Fade-in on scroll */
+  /* ─── PHONE WIDTH ─── */
+  @media (max-width: 760px) {
+    .page-wrap { padding: 0 16px; }
+    .nav-inner { padding: 0 16px; }
+    .nav-links { display: none; }
+    .hero { min-height: auto; padding-top: 110px; padding-bottom: 48px; }
+    .hero::before { left: -16px; right: -16px; }
+    .hero-stats { grid-template-columns: 1fr; max-width: none; }
+    .stat + .stat { border-left: none; border-top: 1px solid var(--border); }
+    .mission-grid,
+    .mission-grid[style],
+    .specs-layout,
+    .s2s-intro,
+    .s2s-scenarios,
+    .prop-intro,
+    .prop-phases,
+    .cartridge-layout,
+    .cartridge-features { grid-template-columns: 1fr !important; }
+    .mission-grid > .mission-card:last-child:nth-child(odd) { grid-column: auto; }
+    .specs-layout, .s2s-intro, .prop-intro, .cartridge-layout { gap: 32px; }
+    .spec-row, .cartridge-spec-row { gap: 12px; }
+    .spec-val, .cartridge-spec-val { text-align: right; }
+    .prop-callout { position: static; }
+    .prop-tech-bar { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; }
+    .tech-bar-items { gap: 12px 24px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── WOK: TRACEABILITY TABLE ─── */
+  .trace-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+    border: 1px solid var(--border);
+    background: var(--deep);
+  }
+  .trace-table th, .trace-table td {
+    text-align: left;
+    vertical-align: top;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .trace-table th {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    background: var(--surface);
+  }
+  .trace-table td { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+  .trace-table td:first-child {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--ice);
+    white-space: nowrap;
+  }
+  .trace-table td:nth-child(2) { color: var(--text); }
+  .trace-table tr:last-child td { border-bottom: none; }
+  .trace-tag {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    margin-top: 8px;
+  }
+  .trace-tag.met { border-color: var(--amber-dim); color: var(--amber); }
+  .trace-tag.partial { border-color: var(--ice-dim); color: var(--ice); }
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+    align-items: start;
+  }
+  .evidence-grid figure { margin: 0; border: 1px solid var(--border); background: var(--surface); }
+  .evidence-grid img { display: block; width: 100%; height: auto; }
+  .evidence-grid figcaption {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    padding: 12px 14px;
+    border-top: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  .tbr-note {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--amber-dim);
+    letter-spacing: 0.08em;
+    margin-top: 12px;
+  }
+  .image-caption .caption-text { flex: 1; padding-right: 24px; line-height: 1.5; }
+  .image-caption .caption-ref { white-space: nowrap; }
+  .hero h1 em { font-size: 0.42em; margin-top: 8px; }
+  .inline-link { color: var(--ice); text-decoration: none; border-bottom: 1px solid var(--ice-dim); }
+  .inline-link:hover { color: var(--amber); border-color: var(--amber); }
+  @media (max-width: 760px) {
+    .evidence-grid { grid-template-columns: 1fr; }
+    .trace-table thead { display: none; }
+    .trace-table tr { display: block; border-bottom: 1px solid var(--border); }
+    .trace-table td { display: block; border-bottom: none; padding: 8px 14px; }
+    .trace-table td:first-child { padding-top: 16px; }
+    .trace-table td:last-child { padding-bottom: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="starfield"></div>
+<div class="grid-overlay"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">LRMH <span>/ Aegis Station</span></div>
+    <ul class="nav-links">
+      <li><a href="#test">Site Test</a></li>
+      <li><a href="#status">What Exists</a></li>
+      <li><a href="#rmh">RMH Trace</a></li>
+      <li><a href="#specs">Parameters</a></li>
+      <li><a href="#host">Host Vehicle</a></li>
+      <li><a href="#open">Open Items</a></li>
+      <li><a href="lunar-regolith-mechanics.html">RMH</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="page-wrap">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow-text">RMH-Class Geotechnical Instrument</div>
+      </div>
+      <h1>LRMH<em>Lunar Regolith Mechanics Head</em></h1>
+      <p class="hero-tagline">A host-mounted instrument that drives a tool into the regolith under controlled force or position and turns what it feels into engineering numbers: penetration resistance with depth, load against sinkage, layer breaks, and how much the ground stiffens under repeated load. Answers whether a wheel can drive across a patch and a lander can set down on it.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">8</div>
+          <div class="stat-label">cFS Flight Apps</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">100 Hz</div>
+          <div class="stat-label">Force · Depth · Current · Temp</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">350 mm</div>
+          <div class="stat-label">Stroke · Depth of Profile</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUMENT -->
+<section class="image-section" id="image">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 01</span>
+      <span class="section-title">Instrument</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="reveal" style="border: 1px solid var(--border); overflow: hidden; line-height: 0;">
+      <img src="lrmh_instrument_section.svg" alt="LRMH in section: a linear actuator hung from a host rover bracket drives a tool through a load cell and depth encoder into layered regolith. Plots at right show penetration resistance versus depth with a layer break, and load versus sinkage for baseline and repeat loading." style="width:100%; display:block;"/>
+    </div>
+    <div class="image-caption reveal">
+      <span class="caption-text">FIG. 01 — Instrument section and the two curves a site test produces. Sensing is force, depth, stroke, motor current, bus voltage, and temperature at 100 Hz. The tool head is a cone or plate installed per deployment.</span>
+      <span class="caption-ref">LRMH-CONCEPT-001 · NOT TO SCALE</span>
+    </div>
+  </div>
+</section>
+
+<!-- SITE TEST -->
+<section class="mission-section" id="test">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 02</span>
+      <span class="section-title">Site Test — Per Site</span>
+      <div class="section-rule"></div>
+    </div>
+    <p style="max-width:760px; font-size:15px; color:var(--text); line-height:1.8;">The host vehicle parks, clears the workspace, and issues one command. The instrument walks the phases below on its own and returns a site result. A hard site that saturates force early and a soft site that swallows the tool are both valid outcomes, not faults. Only a genuine hardware fault safes the instrument.</p>
+    <div class="mission-grid reveal">
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">PHASE 01</div>
+        <h3>Precheck and Position</h3>
+        <p>On deploy the tool runs a self-test against a witness target on its own bracket, so a bad load cell or encoder is caught before it touches regolith. The tool is then placed over the commanded micro-site.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">PHASE 02</div>
+        <h3>Baseline Penetration</h3>
+        <p>Position-controlled penetration at a held rate, recording resistance continuously with depth. The processor picks the largest stiffness discontinuity as the layer break. Reaching the force limit before target depth is recorded as force-limited depth, which is data.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">PHASE 03</div>
+        <h3>Load Ramp</h3>
+        <p>Force-controlled loading at the surface, incremental or continuous, producing the load against sinkage curve. Its slope is the stiffness proxy and, with tool area, the bearing proxy a mobility or landing engineer actually wants.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">PHASE 04</div>
+        <h3>Repeat Load</h3>
+        <p>The same load applied again at the same point, several cycles. The change in stiffness from the first cycle is the compaction delta: how much the ground firms up under traffic.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">PHASE 05</div>
+        <h3>Post-Disturbance Penetration</h3>
+        <p>A second penetration profile through the loaded zone. Compared against the baseline at the same micro-site it quantifies the strength and density change caused by the loading, which is the disturbance-sensitivity requirement made measurable.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">PHASE 06</div>
+        <h3>Process and Report</h3>
+        <p>Onboard processing reduces every phase to stiffness, bearing proxy, layer-break depth, compaction delta, and a quality flag. A compact site record with the host's pose at test start is written to the data recorder and published for downlink. The host moves on. Sessions run from one site to hundreds.</p>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top: 24px; border: 1px solid var(--border); overflow: hidden; line-height: 0;">
+      <img src="lrmh_test_recipe.svg" alt="Six-panel storyboard of the LRMH site test: position, baseline penetration, load ramp, repeat load, post-disturbance penetration, process and report" style="width:100%; display:block;"/>
+    </div>
+    <div class="image-caption">
+      <span class="caption-text">FIG. 02 — One site, six states. The five canonical recipe phases from the RMH capability page, with the flight software's precheck and reporting bookends.</span>
+      <span class="caption-ref">LRMH-RECIPE-001</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT EXISTS -->
+<section class="specs-section" id="status">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 03</span>
+      <span class="section-title">What Exists Today</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="mission-grid reveal" style="grid-template-columns: 1fr 1fr;">
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">FLIGHT SOFTWARE</div>
+        <h3>Eight Apps on NASA cFS, Second Generation</h3>
+        <p>Command, sequencer, actuator control, sensing, processing, reporting, fault orchestration, and housekeeping on the core Flight System. This is the 2.0 rewrite and the third member of the Aegis flight-software family after the rover and tanker stacks, sharing their layout, HAL pattern, and eighteen recorded architecture decisions.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">VERIFICATION</div>
+        <h3>Full Site Test in a Real cFS Image</h3>
+        <p>The complete nine-phase site test runs end to end in a flight-software image against a physics simulator that actually moves the actuator, with the commanded depth reached, repeat-load cycles walked, and a correctly identified site record published. Eight standalone unit-test suites and an end-to-end smoke test pass on every commit.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">FAULT MANAGEMENT</div>
+        <h3>Standard cFS FDIR, Three Recovery Tiers</h3>
+        <p>Limits are watched by the stock cFS Limit Checker and answered by Stored Command sequences, with the instrument's own fault app reduced to a thin orchestrator. Every fault maps to a tier: resume the phase, skip the site, or safe the instrument. Hardware envelopes live in one place with their origin and margin recorded.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">HOST INTERFACE &amp; GROUND</div>
+        <h3>Mounts on a Host, Talks to a Browser</h3>
+        <p>The first Aegis flight-software image that rides on another vehicle. It subscribes to the host's pose and velocity so every sample is stamped with where the vehicle was. A bridge turns the packet stream into a live browser console with manual actuator commands routed through the sequencer's safety logic.</p>
+      </div>
+    </div>
+    <div class="prop-tech-bar reveal" style="margin-top: 24px; margin-bottom: 0;">
+      <div class="tech-bar-label">Validated In Simulation</div>
+      <div class="tech-bar-items">
+        <div class="tech-item"><div class="tech-dot" style="background: var(--amber);"></div><span class="tech-item-text">Nine-Phase Site Test, Physics-Driven Actuator</span></div>
+        <div class="tech-item"><div class="tech-dot" style="background: var(--ice);"></div><span class="tech-item-text">Per-Fault Recovery Tiers via LC/SC</span></div>
+        <div class="tech-item"><div class="tech-dot" style="background: var(--text-dim);"></div><span class="tech-item-text">Sequence-Token Command Ordering</span></div>
+        <div class="tech-item"><div class="tech-dot" style="background: var(--muted);"></div><span class="tech-item-text">Apps Identical Across Sim, Bench, Flight</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RMH TRACE -->
+<section class="s2s-section" id="rmh">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 04</span>
+      <span class="section-title">Traceability to RMH</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="s2s-intro reveal">
+      <div>
+        <div class="s2s-callout">
+          <div class="s2s-callout-label">Capability Definition</div>
+          <div class="s2s-callout-value">RMH</div>
+          <div class="s2s-callout-desc">The Regolith Mechanics Head page defines the capability class: five functional requirements and a five-phase test recipe, with no mass, power, envelope, or mounting numbers. LRMH is one realization of it.</div>
+        </div>
+      </div>
+      <div class="s2s-body">
+        <p>The <a class="inline-link" href="lunar-regolith-mechanics.html">Regolith Mechanics Head</a> page is a requirements page, not a device. It says what an RMH-class investigation must be able to do. Every hard number on this page is an Aegis engineering choice layered on top of it, and a different realization with different hardware would carry different numbers without violating the canon.</p>
+        <p>The table maps each RMH functional requirement to where it lands in the LRMH flight software. Where a requirement is deferred, that is stated.</p>
+      </div>
+    </div>
+    <table class="trace-table reveal">
+      <thead><tr><th>Req</th><th>Function</th><th>How LRMH addresses it</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>RMH-F-001</td>
+          <td>Normal load testing</td>
+          <td>Load-ramp and repeat-load phases under force control. Load against sinkage is recorded directly; stiffness and bearing proxies are computed onboard.<br><span class="trace-tag met">Implemented</span></td>
+        </tr>
+        <tr>
+          <td>RMH-F-002</td>
+          <td>Penetration profiling</td>
+          <td>Baseline and post-disturbance penetration under position control with continuous force sampling to 350 mm, covering the wheel and footing interaction zone. Force saturation is a valid termination, recorded as force-limited depth.<br><span class="trace-tag met">Implemented</span></td>
+        </tr>
+        <tr>
+          <td>RMH-F-003</td>
+          <td>Disturbance sensitivity</td>
+          <td>The repeat-load and post-penetration pair operates on the same micro-site as the baseline pair. Compaction delta and strength change are first-class fields in the site record.<br><span class="trace-tag met">Implemented</span></td>
+        </tr>
+        <tr>
+          <td>RMH-F-004</td>
+          <td>Traction correlation (recommended)</td>
+          <td>Drawbar pull against slip needs a reaction-load reference. The traction phase exists in the state machine as a stub. Whether the reference comes from host wheel torque or a dedicated tether sensor is an open trade, so the phase is deferred to the next development phase.<br><span class="trace-tag partial">Deferred · open trade</span></td>
+        </tr>
+        <tr>
+          <td>RMH-F-005</td>
+          <td>Time synchronization</td>
+          <td>Every sample is timestamped against the flight time base and stamped with the host's cached pose and velocity at acquisition. Host pose at test start is carried in the site record; populating it in the binary record is on the flight-readiness list.<br><span class="trace-tag partial">Designed · in work</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PARAMETERS -->
+<section class="specs-section" id="specs">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 05</span>
+      <span class="section-title">Key Parameters</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="tbr-note">PROJECT ENGINEERING ENVELOPES · NOT CANON · SUBJECT TO MECHANISM PARTNER INPUT</div>
+    <div class="specs-layout reveal">
+      <div class="specs-group">
+        <h4>Actuator</h4>
+        <div class="spec-row"><span class="spec-key">Stroke</span><span class="spec-val">350 mm</span></div>
+        <div class="spec-row"><span class="spec-key">Force, continuous</span><span class="spec-val">650 N</span></div>
+        <div class="spec-row"><span class="spec-key">Position accuracy</span><span class="spec-val">±0.1 mm</span></div>
+        <div class="spec-row"><span class="spec-key">Control</span><span class="spec-val">Position or force setpoint</span></div>
+        <div class="spec-row"><span class="spec-key">Lifetime</span><span class="spec-val">≥ 10,000 full strokes</span></div>
+      </div>
+      <div class="specs-group">
+        <h4>Sensing</h4>
+        <div class="spec-row"><span class="spec-key">Channels</span><span class="spec-val">Force · depth · stroke · current · bus V · temp</span></div>
+        <div class="spec-row"><span class="spec-key">Rate</span><span class="spec-val">100 Hz</span></div>
+        <div class="spec-row"><span class="spec-key">Freshness floor</span><span class="spec-val">30 ms force, depth, stroke</span></div>
+        <div class="spec-row"><span class="spec-key">Timestamp</span><span class="spec-val">Flight time base + host pose</span></div>
+      </div>
+      <div class="specs-group">
+        <h4>Tool Heads</h4>
+        <div class="spec-row"><span class="spec-key">Cone, standard</span><span class="spec-val">30° · 12 mm²</span></div>
+        <div class="spec-row"><span class="spec-key">Plate</span><span class="spec-val">80 mm dia</span></div>
+        <div class="spec-row"><span class="spec-key">Cone, loose material</span><span class="spec-val">60° · 20 mm²</span></div>
+        <div class="spec-row"><span class="spec-key">Change</span><span class="spec-val">Per deployment, not runtime</span></div>
+      </div>
+      <div class="specs-group">
+        <h4>Operations</h4>
+        <div class="spec-row"><span class="spec-key">Site test</span><span class="spec-val">2 – 15 min</span></div>
+        <div class="spec-row"><span class="spec-key">Sites per session</span><span class="spec-val">1 – 256</span></div>
+        <div class="spec-row"><span class="spec-key">Recovery tiers</span><span class="spec-val">Resume · skip site · safe</span></div>
+        <div class="spec-row"><span class="spec-key">Host</span><span class="spec-val">Rover today · lander later</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOST VEHICLE -->
+<section class="s2s-section" id="host">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 06</span>
+      <span class="section-title">Host Vehicle</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="s2s-intro reveal">
+      <div>
+        <div class="s2s-callout">
+          <div class="s2s-callout-label">Baseline Host</div>
+          <div class="s2s-callout-value">Rover</div>
+          <div class="s2s-callout-desc">The <a class="inline-link" href="Aegis_Class_Rover.html">Aegis-Class Rover</a> positions the tool, provides power, data, and thermal interfaces, and publishes the pose the samples are stamped with.</div>
+        </div>
+      </div>
+      <div class="s2s-body">
+        <p>LRMH is a payload, not a vehicle. Site selection, traverse planning, and the decision to stop and test belong to the host's flight software and to ground tools outside the instrument's envelope. The instrument owns what happens between the start command and the site record.</p>
+        <p>That split is why the same instrument image can move to a lander later. The host interface is a telemetry subscription and a handful of commands, and the hardware abstraction below the apps has simulation, bench, and flight backends with the mission apps unchanged across all three.</p>
+        <p>Regolith mechanics and ice prospecting are paired capabilities: the <a class="inline-link" href="wok.html">WOK</a> prospecting rover asks whether the ice is there, LRMH asks whether a vehicle can get to it and a plant can be set on it. Both trace to requirements pages that predate the vehicles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN ITEMS -->
+<section class="s2s-section" id="open">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 07</span>
+      <span class="section-title">Open Items — Where It Stops</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="s2s-intro reveal">
+      <div>
+        <div class="s2s-callout">
+          <div class="s2s-callout-label">Program Context</div>
+          <div class="s2s-callout-value">Bench</div>
+          <div class="s2s-callout-desc">The next layer of evidence is the instrument on a bench. The bench backend of the hardware abstraction is defined and awaits a mechanism partner's hardware. Flight software and instrument architecture remain with Aegis Station.</div>
+        </div>
+      </div>
+      <div class="s2s-body">
+        <p>The software proves the sequencing, the fault posture, and the data path. It does not prove the geotechnics. The regolith model is deliberately opaque to the flight software, which means the physics in the simulator is a placeholder until a testbed says otherwise.</p>
+      </div>
+    </div>
+    <div class="s2s-scenarios reveal">
+      <div class="scenario">
+        <div class="scenario-tag">Open 01</div>
+        <h4>Bench and Flight Backends</h4>
+        <p>The simulation backend is complete. The bench backend is specified and stubbed pending mechanism hardware. The flight backend is empty and awaits a flight controller. Everything above that line is done.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-tag">Open 02</div>
+        <h4>Tool Calibration to Engineering Units</h4>
+        <p>Resistance and bearing fields are computed and carried, but conversion from newtons to kilopascals waits on a loadable tool table with measured tip areas and calibration shape from the mechanism partner.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-tag">Open 03</div>
+        <h4>Traction Reference</h4>
+        <p>The recommended traction correlation needs a reaction-load source. Host wheel torque is cheap and indirect. A tether sensor is direct and adds hardware. The trade is open and the phase is deferred until it closes.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-tag">Open 04</div>
+        <h4>Validation in Simulant</h4>
+        <p>Cone index to bearing capacity in lunar regolith, plate scale sensitivity, penetration rate effects, and what a compaction delta means for traffic. These are testbed questions, and the people who run regolith testbeds are who this page is for.</p>
+      </div>
+    </div>
+    <div class="s2s-body reveal" style="max-width:760px; margin-top:40px;">
+      <p>Discussion welcome through the <a class="inline-link" href="engagement.html">engagement</a> page.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="page-wrap">
+    <div class="footer-inner">
+      <div class="footer-logo">LRMH — Lunar Regolith Mechanics Head — Aegis Station Program</div>
+      <div class="footer-copy">
+        <span class="status-dot"></span>Flight Software: Simulation-Verified
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
