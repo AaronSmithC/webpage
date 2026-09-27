@@ -1,80 +1,1303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Engage with Aegis</title>
-  <style>
-    body {
-      background-color: black;
-      color: white;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    section {
-      padding: 3rem 1rem;
-    }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    h2 {
-      font-size: 1.5rem;
-      text-align: left;
-    }
-    p {
-      font-size: 1.2rem;
-      text-align: left;
-    }
-    blockquote {
-      margin: 2rem 0;
-      font-style: italic;
-      font-size: 1.1rem;
-      text-align: left;
-    }
-    a {
-      color: #4dd0e1;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engage — Aegis Station Infrastructure</title>
+<meta name="description" content="How to work with Aegis Station Infrastructure: who the program is looking for, what a one-person architecture and flight-software shop delivers, where it stops, and how to start.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<style>
+  /* ─── RESET & BASE ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --void:       #050810;
+    --deep:       #090e1a;
+    --surface:    #0d1528;
+    --panel:      #111d35;
+    --border:     #1e3158;
+    --muted:      #2a4470;
+    --amber:      #e8a825;
+    --amber-dim:  #a0721a;
+    --amber-glow: #f5c84a;
+    --ice:        #a8cce8;
+    --ice-dim:    #5a8ab0;
+    --text:       #c8d8ec;
+    --text-dim:   #6a8aaa;
+    --white:      #eef4fa;
+    --danger:     #e85c2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--void);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── STARFIELD ─── */
+  .starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .starfield::before,
+  .starfield::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 42% 8%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 62%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 83% 75%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 45%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 33%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 48% 55%, rgba(168,204,232,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 77% 12%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 93% 88%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 95%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 3% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 67% 78%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 25%, rgba(255,255,255,0.3) 0%, transparent 100%);
+  }
+  .starfield::after {
+    transform: rotate(180deg) scale(1.2);
+    opacity: 0.5;
+  }
+
+  /* ─── GRID OVERLAY ─── */
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(30,49,88,0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,49,88,0.15) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  /* ─── LAYOUT ─── */
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(5,8,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--ice-dim); font-weight: 400; }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--amber); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -40px;
+    right: -40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), var(--amber-dim), var(--border), transparent);
+  }
+  .hero-content {
+    max-width: 800px;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .eyebrow-line {
+    width: 40px;
+    height: 1px;
+    background: var(--amber);
+  }
+  .eyebrow-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 8px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 em {
+    display: block;
+    color: var(--amber);
+    font-style: normal;
+    font-size: 0.55em;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+  .hero-tagline {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--ice);
+    max-width: 520px;
+    margin: 28px 0 48px;
+    animation: fadeUp 0.8s 0.2s ease both;
+    line-height: 1.6;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 580px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .stat {
+    background: var(--deep);
+    padding: 20px 24px;
+    position: relative;
+  }
+  .stat::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .stat:hover::after { background: var(--amber); }
+  .stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--amber-glow);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .section-number {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--amber-dim);
+    letter-spacing: 0.12em;
+  }
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ─── IMAGE SECTION ─── */
+  .image-section {
+    padding: 100px 0 80px;
+  }
+  .image-placeholder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/7;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s;
+  }
+  .image-placeholder:hover { border-color: var(--muted); }
+  .image-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(30,49,88,0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,49,88,0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .image-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(232,168,37,0.03) 0%, transparent 70%);
+  }
+  /* Corner accents */
+  .img-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--amber-dim);
+    border-style: solid;
+  }
+  .img-corner.tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
+  .img-corner.tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
+  .img-corner.bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
+  .img-corner.br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+  .placeholder-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .placeholder-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    opacity: 0.25;
+  }
+  .placeholder-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .placeholder-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .image-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .caption-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+  .caption-ref {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+  }
+
+  /* ─── MISSION OVERVIEW ─── */
+  .mission-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-top: 40px;
+  }
+  .mission-grid > .mission-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+  .mission-card {
+    background: var(--deep);
+    padding: 36px 32px;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .mission-card:hover { background: var(--surface); }
+  .mission-card-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    color: var(--amber-dim);
+    letter-spacing: 0.15em;
+    margin-bottom: 20px;
+  }
+  .mission-card h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .mission-card p {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .mission-card-accent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .mission-card:hover .mission-card-accent { background: var(--amber); }
+
+  /* ─── SPECS TABLE ─── */
+  .specs-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .specs-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  .specs-group h4 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(30,49,88,0.5);
+    gap: 16px;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-key {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+  .spec-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ice);
+    text-align: right;
+  }
+
+  /* ─── S2S SECTION ─── */
+  .s2s-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .s2s-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .s2s-callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    padding: 28px;
+  }
+  .s2s-callout-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .s2s-callout-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--amber-glow);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .s2s-callout-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .s2s-body { }
+  .s2s-body p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .s2s-scenarios {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 40px;
+  }
+  .scenario {
+    background: var(--deep);
+    padding: 28px;
+    transition: background 0.3s;
+  }
+  .scenario:hover { background: var(--panel); }
+  .scenario-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .scenario-tag::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--amber-dim);
+  }
+  .scenario h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .scenario p {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* ─── DOCUMENT LINK ─── */
+  .doc-section {
+    padding: 80px 0 60px;
+    border-top: 1px solid var(--border);
+  }
+  .doc-card {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    background: var(--deep);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    max-width: 700px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .doc-card:hover {
+    border-color: var(--amber-dim);
+    box-shadow: 0 0 40px rgba(232,168,37,0.08);
+  }
+  .doc-icon-panel {
+    width: 80px;
+    background: var(--amber);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .doc-icon-panel svg {
+    width: 32px;
+    height: 32px;
+    fill: var(--void);
+  }
+  .doc-info {
+    padding: 24px 28px;
+    flex: 1;
+  }
+  .doc-type {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .doc-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+    letter-spacing: 0.03em;
+  }
+  .doc-subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .doc-action {
+    display: flex;
+    align-items: center;
+    padding: 24px 28px;
+    flex-shrink: 0;
+    border-left: 1px solid var(--border);
+  }
+  .doc-link {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--amber);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.2s, color 0.2s;
+  }
+  .doc-link:hover { gap: 14px; color: var(--amber-glow); }
+  .doc-link-arrow { font-size: 16px; }
+
+  /* ─── PROPELLANT SECTION ─── */
+  .prop-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .prop-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+    margin-bottom: 48px;
+  }
+  .prop-callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--ice-dim);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .prop-stat-block { }
+  .prop-stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ice-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .prop-stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--ice);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .prop-stat-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .prop-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+  .prop-body p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .prop-body p:last-child { margin-bottom: 0; }
+  .prop-phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+  .phase-card {
+    background: var(--deep);
+    padding: 32px 28px;
+    position: relative;
+    transition: background 0.3s;
+    overflow: hidden;
+  }
+  .phase-card:hover { background: var(--panel); }
+  .phase-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .phase-card:nth-child(1)::after { background: var(--amber-dim); }
+  .phase-card:nth-child(2)::after { background: var(--muted); }
+  .phase-card:nth-child(3)::after { background: var(--ice-dim); }
+  .phase-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .phase-card:nth-child(2) .phase-tag { color: var(--muted); }
+  .phase-card:nth-child(3) .phase-tag { color: var(--ice-dim); }
+  .phase-timeline {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 14px;
+    letter-spacing: 0.05em;
+  }
+  .phase-prop {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--amber-glow);
+    margin-bottom: 14px;
+    letter-spacing: 0.06em;
+  }
+  .phase-card:nth-child(2) .phase-prop { color: var(--text-dim); }
+  .phase-card:nth-child(3) .phase-prop { color: var(--ice); }
+  .phase-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .prop-tech-bar {
+    margin-top: 48px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .tech-bar-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .tech-bar-items {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .tech-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tech-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .tech-item-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    margin-top: 60px;
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .footer-copy {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #2ecc71;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(46,204,113,0.4); }
+    50%       { opacity: 0.7; box-shadow: 0 0 0 4px rgba(46,204,113,0); }
+  }
+  @keyframes scanline {
+    from { transform: translateY(-100%); }
+    to   { transform: translateY(100vh); }
+  }
+
+  /* ─── CARTRIDGE SECTION ─── */
+  .cartridge-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .cartridge-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .cartridge-image-wrap {
+    position: relative;
+  }
+  .cartridge-image-wrap img {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--border);
+    filter: brightness(0.92) contrast(1.05);
+  }
+  .cartridge-image-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+  }
+  .cartridge-content {}
+  .cartridge-intro {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .cartridge-specs {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .cartridge-specs-header {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    padding: 14px 20px;
+    background: var(--deep);
+    border-bottom: 1px solid var(--border);
+  }
+  .cartridge-spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(30,49,88,0.5);
+    gap: 16px;
+  }
+  .cartridge-spec-row:last-child { border-bottom: none; }
+  .cartridge-spec-key {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+  .cartridge-spec-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ice);
+    text-align: right;
+  }
+  .cartridge-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+  }
+  .cartridge-feature {
+    background: var(--deep);
+    padding: 20px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .cartridge-feature:hover { background: var(--panel); }
+  .cartridge-feature::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 2px;
+    background: var(--amber-dim);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .cartridge-feature:hover::before { opacity: 1; }
+  .cartridge-feature-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .cartridge-feature-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* Fade-in on scroll */
+  /* ─── PHONE WIDTH ─── */
+  @media (max-width: 760px) {
+    .page-wrap { padding: 0 16px; }
+    .nav-inner { padding: 0 16px; }
+    .nav-links { display: none; }
+    .hero { min-height: auto; padding-top: 110px; padding-bottom: 48px; }
+    .hero::before { left: -16px; right: -16px; }
+    .hero-stats { grid-template-columns: 1fr; max-width: none; }
+    .stat + .stat { border-left: none; border-top: 1px solid var(--border); }
+    .mission-grid,
+    .mission-grid[style],
+    .specs-layout,
+    .s2s-intro,
+    .s2s-scenarios,
+    .prop-intro,
+    .prop-phases,
+    .cartridge-layout,
+    .cartridge-features { grid-template-columns: 1fr !important; }
+    .mission-grid > .mission-card:last-child:nth-child(odd) { grid-column: auto; }
+    .specs-layout, .s2s-intro, .prop-intro, .cartridge-layout { gap: 32px; }
+    .spec-row, .cartridge-spec-row { gap: 12px; }
+    .spec-val, .cartridge-spec-val { text-align: right; }
+    .prop-callout { position: static; }
+    .prop-tech-bar { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; }
+    .tech-bar-items { gap: 12px 24px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── WOK: TRACEABILITY TABLE ─── */
+  .trace-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+    border: 1px solid var(--border);
+    background: var(--deep);
+  }
+  .trace-table th, .trace-table td {
+    text-align: left;
+    vertical-align: top;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .trace-table th {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    background: var(--surface);
+  }
+  .trace-table td { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+  .trace-table td:first-child {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--ice);
+    white-space: nowrap;
+  }
+  .trace-table td:nth-child(2) { color: var(--text); }
+  .trace-table tr:last-child td { border-bottom: none; }
+  .trace-tag {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    margin-top: 8px;
+  }
+  .trace-tag.met { border-color: var(--amber-dim); color: var(--amber); }
+  .trace-tag.partial { border-color: var(--ice-dim); color: var(--ice); }
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+    align-items: start;
+  }
+  .evidence-grid figure { margin: 0; border: 1px solid var(--border); background: var(--surface); }
+  .evidence-grid img { display: block; width: 100%; height: auto; }
+  .evidence-grid figcaption {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    padding: 12px 14px;
+    border-top: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  .tbr-note {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--amber-dim);
+    letter-spacing: 0.08em;
+    margin-top: 12px;
+  }
+  .image-caption .caption-text { flex: 1; padding-right: 24px; line-height: 1.5; }
+  .image-caption .caption-ref { white-space: nowrap; }
+  .hero h1 em { margin-top: 10px; }
+  .inline-link { color: var(--ice); text-decoration: none; border-bottom: 1px solid var(--ice-dim); }
+  .inline-link:hover { color: var(--amber); border-color: var(--amber); }
+  @media (max-width: 760px) {
+    .evidence-grid { grid-template-columns: 1fr; }
+    .trace-table thead { display: none; }
+    .trace-table tr { display: block; border-bottom: 1px solid var(--border); }
+    .trace-table td { display: block; border-bottom: none; padding: 8px 14px; }
+    .trace-table td:first-child { padding-top: 16px; }
+    .trace-table td:last-child { padding-bottom: 16px; }
+  }
+</style>
 </head>
 <body>
-  <section id="engage">
-    <div class="container">
-      <h1>Engage with Aegis</h1>
-      <p>
-        Whether you're an investor, a builder, or someone who believes space should belong to all of us—
-        we're building something real, and we want the right people in the loop.
-      </p>
 
-      <div style="text-align: left;">
-        <h2>💼 Fund / Invest</h2>
-        <p>We're preparing to raise support for early development phases. If you're serious about backing a permanent city in orbit—get in touch.</p>
+<div class="starfield"></div>
+<div class="grid-overlay"></div>
 
-        <h2>🔧 Build / Partner</h2>
-        <p>Engineers, mission designers, logistics minds—if you’re building hardware or infrastructure that belongs in orbit, we’d like to talk.</p>
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">ENGAGE <span>/ Aegis Station</span></div>
+    <ul class="nav-links">
+      <li><a href="#who">Who</a></li>
+      <li><a href="#what">What You Get</a></li>
+      <li><a href="#limits">Where It Stops</a></li>
+      <li><a href="#how">How to Start</a></li>
+      <li><a href="program_architecture_and_technical_domains.html">Program</a></li>
+      <li><a href="index.html">Home</a></li>
+    </ul>
+  </div>
+</nav>
 
-        <h2>🌍 Support the Mission</h2>
-        <p>Share the project, follow its progress, or help us connect to those who can move it forward. Every signal matters.</p>
-
-        <h2>🛰️ Policy & Access</h2>
-        <p>If you're involved in space policy, public funding, or international access—your insight could shape how this unfolds. Let's connect.</p>
+<section class="hero">
+  <div class="page-wrap">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow-text">Engagement · Revised September 2026</div>
       </div>
-
-      <blockquote>
-        “I started Aegis because I was tired of space being theoretical. We know what to build. We know how to build it.
-        Now we need the will—and the people—to make it happen.”<br>—A.S., Principal Architect
-      </blockquote>
-
-      <p style="font-size: 1.2rem; margin-top: 2rem;">
-        📩 <strong>Serious inquiries only:</strong> <a href="mailto:engage@aegisstation.com">engage@aegisstation.com</a>
-      </p>
+      <h1>Engage<em>Working with Aegis Station</em></h1>
+      <p class="hero-tagline">Aegis Station Infrastructure is a one-person architecture and flight-software shop with a published reference set: surface vehicles, a logistics chain, and the station they are built toward. Every page on this site ends in open items. This page is how those items find owners.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">6</div>
+          <div class="stat-label">Systems in the Reference Set</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">cFS</div>
+          <div class="stat-label">Flight Software That Runs</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">1</div>
+          <div class="stat-label">Set of Hands · Then Yours</div>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="mission-section" id="who">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 01</span>
+      <span class="section-title">Who This Is For</span>
+      <div class="section-rule"></div>
+    </div>
+    <p style="max-width:760px; font-size:15px; color:var(--text); line-height:1.8;">The program is written as requirements, not finished designs, because the people who have spent a career on a given thing will design it better. Five kinds of people move it forward.</p>
+    <div class="mission-grid reveal">
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">DOMAIN EXPERTS</div>
+        <h3>Own an Open Item</h3>
+        <p>Geophysics, cryogenic propulsion, structures and fatigue, thermal, radiation transport, human factors. Push any page deep enough and the right answer is a name, not a claim. If a requirement on this site is set at the wrong level, say so. If an open item is yours, take it.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">HARDWARE BUILDERS</div>
+        <h3>Partner on the Vehicles</h3>
+        <p>Aegis Station is architect, integrator, and software developer. Structures, tanks, landing gear, pressure vessels, mechanisms, thermal and communications hardware are bought or partnered. Engines and deep-throttling cryogenic propulsion are development partnerships. Each vehicle page carries a make, buy, or partner position you can respond to.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">PROGRAM OFFICES &amp; OPERATORS</div>
+        <h3>Team on Near-Term Surface Work</h3>
+        <p>Ice prospecting, regolith mechanics, short-range hoppers, and autonomous water logistics have customers before any station exists. Study contracts, teaming on solicitations, and subcontracts to universities and labs are how the surface program gets built. Bring the requirement you actually have.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">INVESTORS</div>
+        <h3>Fund the Next Layer of Evidence</h3>
+        <p>The shop is bootstrapped and software-first. What capital buys next is not a rendering. It is testbed campaigns for the prospecting method, hardware-in-the-loop against the flight software, and subsystem demonstrators with partners. Serious inquiries get the model chain, not a pitch.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">POLICY &amp; ACCESS</div>
+        <h3>Shape How It Unfolds</h3>
+        <p>Lunar water at industrial scale is an infrastructure question before it is an engineering one: who builds, who owns, who gets access. The strategy notes on this site are the current position. Disagreement in writing is welcome and gets answered in writing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="s2s-section" id="what">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 02</span>
+      <span class="section-title">What You Get</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="s2s-intro reveal">
+      <div>
+        <div class="s2s-callout">
+          <div class="s2s-callout-label">Sketch to Sized Vehicle</div>
+          <div class="s2s-callout-value">1 wk</div>
+          <div class="s2s-callout-desc">The one real advantage of a single design authority: no dissent on requirements. Five vehicles went from concept to sized baseline this year on that speed.</div>
+        </div>
+      </div>
+      <div class="s2s-body">
+        <p>A reference architecture that closes on paper and says where it does not. Mission and sizing trades, trajectories and abort profiles, and flight-software constants sit in one linked model chain, so a number on a page can be traced to the cell that produced it.</p>
+        <p>Software that runs. Flight software on NASA's core Flight System for the tanker, rover, hopper, and prospecting rover, and a ground coordination stack that dispatches them as a mixed fleet. The demonstrations are documented on their capability pages. The repositories are private and are opened under agreement.</p>
+        <p>A counterpart who answers. Questions go to the person who set the requirement, and the reply is technical, not a form response.</p>
+      </div>
+    </div>
+    <div class="prop-tech-bar reveal" style="margin-top: 48px; margin-bottom: 0;">
+      <div class="tech-bar-label">Available Under Agreement</div>
+      <div class="tech-bar-items">
+        <div class="tech-item"><div class="tech-dot" style="background: var(--amber);"></div><span class="tech-item-text">Flight Software Repositories</span></div>
+        <div class="tech-item"><div class="tech-dot" style="background: var(--ice);"></div><span class="tech-item-text">Linked Model Chain &amp; Budgets</span></div>
+        <div class="tech-item"><div class="tech-dot" style="background: var(--text-dim);"></div><span class="tech-item-text">Design Dossiers, Rev B</span></div>
+        <div class="tech-item"><div class="tech-dot" style="background: var(--muted);"></div><span class="tech-item-text">Live Simulation Demonstrations</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHERE IT STOPS -->
+<section class="s2s-section" id="limits">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 03</span>
+      <span class="section-title">Where It Stops</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="s2s-body reveal" style="max-width:760px;">
+      <p>Honest closure is a rule on every page here, so it applies to the shop itself. These are the limits a collaborator should know before the first call.</p>
+    </div>
+    <div class="s2s-scenarios reveal">
+      <div class="scenario">
+        <div class="scenario-tag">Limit 01</div>
+        <h4>Verified in Simulation, Not on Hardware</h4>
+        <p>The flight software has flown complete missions against physics models with known ground truth. It has not flown on a vehicle. Hardware-in-the-loop and testbed campaigns are the next layer, and they need partners with benches.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-tag">Limit 02</div>
+        <h4>Hardware Is Built by Partners</h4>
+        <p>There is no machine shop, clean room, or test range behind this site. Every physical article in the reference set is a partnership, and the make, buy, or partner positions on the vehicle pages are proposals, not orders.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-tag">Limit 03</div>
+        <h4>One Set of Eyes Until Yours</h4>
+        <p>A single design authority is fast and unchecked in equal measure. The things one person cannot verify are the things a second reader catches first. That is why the pages end in open-items lists instead of conclusions.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-tag">Limit 04</div>
+        <h4>Requirements, Not Detailed Design</h4>
+        <p>Each capability is specified to the level that sets the requirement and sizes the vehicle. Detailed design, qualification, and certification are downstream and belong to the people and organizations that do them for a living.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO START -->
+<section class="specs-section" id="how">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 04</span>
+      <span class="section-title">How to Start</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="mission-grid reveal" style="grid-template-columns: 1fr 1fr;">
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">STEP 01</div>
+        <h3>Start From a Page</h3>
+        <p>Pick the vehicle, capability, or strategy note closest to your field. Read to the open items. The <a class="inline-link" href="program_architecture_and_technical_domains.html">program architecture</a> page maps every domain to the page that carries it.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">STEP 02</div>
+        <h3>Name the Item</h3>
+        <p>Write with the page and the item in the first line. "SIDA-F-001, depth of investigation, here is what a small aperture actually resolves" gets a faster and better answer than a general introduction.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">STEP 03</div>
+        <h3>Expect a Technical Reply</h3>
+        <p>The first exchange is about the engineering. Agreements, non-disclosure where the software or a partner's detail requires it, and commercial terms follow once both sides know there is something to build.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">CONTACT</div>
+        <h3><a class="inline-link" href="mailto:contact@aegisstation.com">contact@aegisstation.com</a></h3>
+        <p>Aaron C. Smith, design authority. Aegis Station Infrastructure LLC. Public updates are posted on the capability pages as they change. There is no mailing list and no form.</p>
+      </div>
+    </div>
+    <div class="s2s-body reveal" style="max-width:760px; margin-top:40px;">
+      <p>The longer version of why the program is shaped this way is in <a class="inline-link" href="were-going-to-talk-one-day.html">We're Going to Talk One Day</a>.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="page-wrap">
+    <div class="footer-inner">
+      <div class="footer-logo">Engage — Aegis Station Infrastructure LLC</div>
+      <div class="footer-copy">
+        <span class="status-dot"></span>Open Items: Accepting Owners
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
