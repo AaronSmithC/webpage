@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WOK — Water Observation Kit | Seismic Ice-Prospecting Rover</title>
+<meta name="description" content="WOK is a prospecting-class seismic ice-prospecting rover: autonomous multi-site survey, onboard ice-signature evaluation, and drill confirmation. Flight software on NASA cFS, demonstrated end to end in simulation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<style>
+  /* ─── RESET & BASE ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --void:       #050810;
+    --deep:       #090e1a;
+    --surface:    #0d1528;
+    --panel:      #111d35;
+    --border:     #1e3158;
+    --muted:      #2a4470;
+    --amber:      #e8a825;
+    --amber-dim:  #a0721a;
+    --amber-glow: #f5c84a;
+    --ice:        #a8cce8;
+    --ice-dim:    #5a8ab0;
+    --text:       #c8d8ec;
+    --text-dim:   #6a8aaa;
+    --white:      #eef4fa;
+    --danger:     #e85c2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--void);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── STARFIELD ─── */
+  .starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .starfield::before,
+  .starfield::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 42% 8%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 62%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 83% 75%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 45%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 33%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 48% 55%, rgba(168,204,232,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 77% 12%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 93% 88%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 95%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 3% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 67% 78%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 25%, rgba(255,255,255,0.3) 0%, transparent 100%);
+  }
+  .starfield::after {
+    transform: rotate(180deg) scale(1.2);
+    opacity: 0.5;
+  }
+
+  /* ─── GRID OVERLAY ─── */
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(30,49,88,0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,49,88,0.15) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  /* ─── LAYOUT ─── */
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(5,8,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--ice-dim); font-weight: 400; }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--amber); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -40px;
+    right: -40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), var(--amber-dim), var(--border), transparent);
+  }
+  .hero-content {
+    max-width: 800px;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .eyebrow-line {
+    width: 40px;
+    height: 1px;
+    background: var(--amber);
+  }
+  .eyebrow-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 8px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 em {
+    display: block;
+    color: var(--amber);
+    font-style: normal;
+    font-size: 0.55em;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+  .hero-tagline {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--ice);
+    max-width: 520px;
+    margin: 28px 0 48px;
+    animation: fadeUp 0.8s 0.2s ease both;
+    line-height: 1.6;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 580px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .stat {
+    background: var(--deep);
+    padding: 20px 24px;
+    position: relative;
+  }
+  .stat::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .stat:hover::after { background: var(--amber); }
+  .stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--amber-glow);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .section-number {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--amber-dim);
+    letter-spacing: 0.12em;
+  }
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ─── IMAGE SECTION ─── */
+  .image-section {
+    padding: 100px 0 80px;
+  }
+  .image-placeholder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/7;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s;
+  }
+  .image-placeholder:hover { border-color: var(--muted); }
+  .image-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(30,49,88,0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,49,88,0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .image-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(232,168,37,0.03) 0%, transparent 70%);
+  }
+  /* Corner accents */
+  .img-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--amber-dim);
+    border-style: solid;
+  }
+  .img-corner.tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
+  .img-corner.tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
+  .img-corner.bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
+  .img-corner.br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+  .placeholder-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .placeholder-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    opacity: 0.25;
+  }
+  .placeholder-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .placeholder-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .image-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .caption-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+  .caption-ref {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+  }
+
+  /* ─── MISSION OVERVIEW ─── */
+  .mission-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-top: 40px;
+  }
+  .mission-grid > .mission-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+  .mission-card {
+    background: var(--deep);
+    padding: 36px 32px;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .mission-card:hover { background: var(--surface); }
+  .mission-card-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    color: var(--amber-dim);
+    letter-spacing: 0.15em;
+    margin-bottom: 20px;
+  }
+  .mission-card h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .mission-card p {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .mission-card-accent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .mission-card:hover .mission-card-accent { background: var(--amber); }
+
+  /* ─── SPECS TABLE ─── */
+  .specs-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .specs-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  .specs-group h4 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(30,49,88,0.5);
+    gap: 16px;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-key {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+  .spec-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ice);
+    text-align: right;
+  }
+
+  /* ─── S2S SECTION ─── */
+  .s2s-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .s2s-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .s2s-callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    padding: 28px;
+  }
+  .s2s-callout-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .s2s-callout-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--amber-glow);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .s2s-callout-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .s2s-body { }
+  .s2s-body p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .s2s-scenarios {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 40px;
+  }
+  .scenario {
+    background: var(--deep);
+    padding: 28px;
+    transition: background 0.3s;
+  }
+  .scenario:hover { background: var(--panel); }
+  .scenario-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .scenario-tag::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--amber-dim);
+  }
+  .scenario h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .scenario p {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* ─── DOCUMENT LINK ─── */
+  .doc-section {
+    padding: 80px 0 60px;
+    border-top: 1px solid var(--border);
+  }
+  .doc-card {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    background: var(--deep);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    max-width: 700px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .doc-card:hover {
+    border-color: var(--amber-dim);
+    box-shadow: 0 0 40px rgba(232,168,37,0.08);
+  }
+  .doc-icon-panel {
+    width: 80px;
+    background: var(--amber);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .doc-icon-panel svg {
+    width: 32px;
+    height: 32px;
+    fill: var(--void);
+  }
+  .doc-info {
+    padding: 24px 28px;
+    flex: 1;
+  }
+  .doc-type {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .doc-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+    letter-spacing: 0.03em;
+  }
+  .doc-subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .doc-action {
+    display: flex;
+    align-items: center;
+    padding: 24px 28px;
+    flex-shrink: 0;
+    border-left: 1px solid var(--border);
+  }
+  .doc-link {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--amber);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.2s, color 0.2s;
+  }
+  .doc-link:hover { gap: 14px; color: var(--amber-glow); }
+  .doc-link-arrow { font-size: 16px; }
+
+  /* ─── PROPELLANT SECTION ─── */
+  .prop-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .prop-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+    margin-bottom: 48px;
+  }
+  .prop-callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--ice-dim);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .prop-stat-block { }
+  .prop-stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ice-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .prop-stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--ice);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .prop-stat-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .prop-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+  .prop-body p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .prop-body p:last-child { margin-bottom: 0; }
+  .prop-phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+  .phase-card {
+    background: var(--deep);
+    padding: 32px 28px;
+    position: relative;
+    transition: background 0.3s;
+    overflow: hidden;
+  }
+  .phase-card:hover { background: var(--panel); }
+  .phase-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .phase-card:nth-child(1)::after { background: var(--amber-dim); }
+  .phase-card:nth-child(2)::after { background: var(--muted); }
+  .phase-card:nth-child(3)::after { background: var(--ice-dim); }
+  .phase-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .phase-card:nth-child(2) .phase-tag { color: var(--muted); }
+  .phase-card:nth-child(3) .phase-tag { color: var(--ice-dim); }
+  .phase-timeline {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 14px;
+    letter-spacing: 0.05em;
+  }
+  .phase-prop {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--amber-glow);
+    margin-bottom: 14px;
+    letter-spacing: 0.06em;
+  }
+  .phase-card:nth-child(2) .phase-prop { color: var(--text-dim); }
+  .phase-card:nth-child(3) .phase-prop { color: var(--ice); }
+  .phase-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .prop-tech-bar {
+    margin-top: 48px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .tech-bar-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .tech-bar-items {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .tech-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tech-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .tech-item-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    margin-top: 60px;
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .footer-copy {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #2ecc71;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(46,204,113,0.4); }
+    50%       { opacity: 0.7; box-shadow: 0 0 0 4px rgba(46,204,113,0); }
+  }
+  @keyframes scanline {
+    from { transform: translateY(-100%); }
+    to   { transform: translateY(100vh); }
+  }
+
+  /* ─── CARTRIDGE SECTION ─── */
+  .cartridge-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .cartridge-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .cartridge-image-wrap {
+    position: relative;
+  }
+  .cartridge-image-wrap img {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--border);
+    filter: brightness(0.92) contrast(1.05);
+  }
+  .cartridge-image-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+  }
+  .cartridge-content {}
+  .cartridge-intro {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .cartridge-specs {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .cartridge-specs-header {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    padding: 14px 20px;
+    background: var(--deep);
+    border-bottom: 1px solid var(--border);
+  }
+  .cartridge-spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(30,49,88,0.5);
+    gap: 16px;
+  }
+  .cartridge-spec-row:last-child { border-bottom: none; }
+  .cartridge-spec-key {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+  .cartridge-spec-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ice);
+    text-align: right;
+  }
+  .cartridge-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+  }
+  .cartridge-feature {
+    background: var(--deep);
+    padding: 20px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .cartridge-feature:hover { background: var(--panel); }
+  .cartridge-feature::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 2px;
+    background: var(--amber-dim);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .cartridge-feature:hover::before { opacity: 1; }
+  .cartridge-feature-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .cartridge-feature-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* Fade-in on scroll */
+  /* ─── PHONE WIDTH ─── */
+  @media (max-width: 760px) {
+    .page-wrap { padding: 0 16px; }
+    .nav-inner { padding: 0 16px; }
+    .nav-links { display: none; }
+    .hero { min-height: auto; padding-top: 110px; padding-bottom: 48px; }
+    .hero::before { left: -16px; right: -16px; }
+    .hero-stats { grid-template-columns: 1fr; max-width: none; }
+    .stat + .stat { border-left: none; border-top: 1px solid var(--border); }
+    .mission-grid,
+    .mission-grid[style],
+    .specs-layout,
+    .s2s-intro,
+    .s2s-scenarios,
+    .prop-intro,
+    .prop-phases,
+    .cartridge-layout,
+    .cartridge-features { grid-template-columns: 1fr !important; }
+    .mission-grid > .mission-card:last-child:nth-child(odd) { grid-column: auto; }
+    .specs-layout, .s2s-intro, .prop-intro, .cartridge-layout { gap: 32px; }
+    .spec-row, .cartridge-spec-row { gap: 12px; }
+    .spec-val, .cartridge-spec-val { text-align: right; }
+    .prop-callout { position: static; }
+    .prop-tech-bar { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; }
+    .tech-bar-items { gap: 12px 24px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── WOK: TRACEABILITY TABLE ─── */
+  .trace-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+    border: 1px solid var(--border);
+    background: var(--deep);
+  }
+  .trace-table th, .trace-table td {
+    text-align: left;
+    vertical-align: top;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .trace-table th {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    background: var(--surface);
+  }
+  .trace-table td { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+  .trace-table td:first-child {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--ice);
+    white-space: nowrap;
+  }
+  .trace-table td:nth-child(2) { color: var(--text); }
+  .trace-table tr:last-child td { border-bottom: none; }
+  .trace-tag {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    margin-top: 8px;
+  }
+  .trace-tag.met { border-color: var(--amber-dim); color: var(--amber); }
+  .trace-tag.partial { border-color: var(--ice-dim); color: var(--ice); }
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+    align-items: start;
+  }
+  .evidence-grid figure { margin: 0; border: 1px solid var(--border); background: var(--surface); }
+  .evidence-grid img { display: block; width: 100%; height: auto; }
+  .evidence-grid figcaption {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    padding: 12px 14px;
+    border-top: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  .tbr-note {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--amber-dim);
+    letter-spacing: 0.08em;
+    margin-top: 12px;
+  }
+  .inline-link { color: var(--ice); text-decoration: none; border-bottom: 1px solid var(--ice-dim); }
+  .inline-link:hover { color: var(--amber); border-color: var(--amber); }
+  @media (max-width: 760px) {
+    .evidence-grid { grid-template-columns: 1fr; }
+    .trace-table thead { display: none; }
+    .trace-table tr { display: block; border-bottom: 1px solid var(--border); }
+    .trace-table td { display: block; border-bottom: none; padding: 8px 14px; }
+    .trace-table td:first-child { padding-top: 16px; }
+    .trace-table td:last-child { padding-bottom: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="starfield"></div>
+<div class="grid-overlay"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">WOK <span>/ Aegis Station</span></div>
+    <ul class="nav-links">
+      <li><a href="#cycle">Survey Cycle</a></li>
+      <li><a href="#status">What Exists</a></li>
+      <li><a href="#sida">SIDA Trace</a></li>
+      <li><a href="#specs">Parameters</a></li>
+      <li><a href="#fleet">Fleet Context</a></li>
+      <li><a href="#open">Open Questions</a></li>
+      <li><a href="subsurface-ice-deposit-assessment.html">SIDA</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="page-wrap">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow-text">Prospecting-Class SIDA Vehicle</div>
+      </div>
+      <h1>WOK<em>Water Observation Kit</em></h1>
+      <p class="hero-tagline">A micro-rover that surveys a site seismically, decides onboard whether it looks ice-bearing, and drills to confirm. Where drill and seismic sample the same ground, the drill calibrates the seismic, so the survey can support resource claims at depths the drill cannot reach.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">6</div>
+          <div class="stat-label">cFS Flight Apps</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">4 × 6 m</div>
+          <div class="stat-label">Geophone Pods · Aperture</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">5 m</div>
+          <div class="stat-label">Drill Reach (max)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT IMAGE -->
+<section class="image-section" id="image">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 01</span>
+      <span class="section-title">Operating Concept</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="image-placeholder reveal">
+      <div class="img-corner tl"></div><div class="img-corner tr"></div>
+      <div class="img-corner bl"></div><div class="img-corner br"></div>
+      <div class="placeholder-inner">
+        <svg class="placeholder-icon" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M4 40 H56"/><path d="M8 40 Q30 26 52 40"/><path d="M14 40 Q30 32 46 40"/>
+          <rect x="24" y="30" width="12" height="6"/><circle cx="26" cy="38" r="2"/><circle cx="34" cy="38" r="2"/>
+          <path d="M30 30 V22"/><path d="M12 40 v4 M22 40 v4 M38 40 v4 M48 40 v4"/>
+        </svg>
+        <div class="placeholder-label">Survey Site — Cross Section</div>
+        <div class="placeholder-sub">Rover, source plate, four-pod line, drill, refracted arrivals through dry regolith into ice-cemented regolith</div>
+      </div>
+    </div>
+    <div class="image-caption">
+      <span class="caption-text">Premise: ice-cemented regolith transmits seismic energy faster than dry regolith. Co-located drill and seismic at one site form the calibration tie point.</span>
+      <span class="caption-ref">WOK-CONCEPT-001 · NOTIONAL</span>
+    </div>
+  </div>
+</section>
+
+<!-- SURVEY CYCLE -->
+<section class="mission-section" id="cycle">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 02</span>
+      <span class="section-title">Survey Cycle — Per Site</span>
+      <div class="section-rule"></div>
+    </div>
+    <p style="max-width:760px; font-size:15px; color:var(--text); line-height:1.8;">The vehicle runs the cycle below autonomously at each waypoint in an uploaded plan. Any critical fault drops the vehicle to a SAFE state with the array stowed and the drill parked, where it waits for ground.</p>
+    <div class="mission-grid reveal">
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">STEP 01</div>
+        <h3>Traverse to Site</h3>
+        <p>Dead-reckoned drive to the next waypoint in a persistent start frame. Ground can hold the vehicle after a move for a pose check and realignment before anything is placed, so site stamps stay honest over a long traverse.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">STEP 02</div>
+        <h3>Place the Array, Verify Coupling</h3>
+        <p>Four geophone pods are placed along a line to create the survey aperture. A low-energy test shot scores each pod's actual ground coupling before data is taken. Poorly seated pods are reseated within bounded attempts, and coupling is recorded as a measured condition, not assumed from a mechanism endstop.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">STEP 03</div>
+        <h3>Fire and Stack</h3>
+        <p>Repeatable strikes from a compact electromagnetic source, recorded against a hardware-referenced zero time and stacked per site. First-break arrivals are picked onboard for every pod.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">STEP 04</div>
+        <h3>Evaluate Onboard</h3>
+        <p>The picks are inverted onboard for refractor velocity and layer depth. The site is flagged on the probability that the refractor is ice-fast, and that flag, with battery state, gates the drill decision without a ground round trip.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">STEP 05</div>
+        <h3>Drill if Warranted</h3>
+        <p>A drill cycle logs a stiffness profile with depth and runs evolved-gas volatile analysis on the sample. The release temperature classifies how the water is bound, which matters for extraction cost, not just presence.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">STEP 06</div>
+        <h3>Retrieve and Continue</h3>
+        <p>Pods are retrieved with per-pod recapture confirmation and the vehicle moves on. A mission cannot end without at least one drill: the sequencer returns to its best-scoring site for a calibration tie, because that tie is what anchors every inferred claim across the survey.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT EXISTS TODAY -->
+<section class="specs-section" id="status">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 03</span>
+      <span class="section-title">What Exists Today</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="mission-grid reveal" style="grid-template-columns: 1fr 1fr;">
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">FLIGHT SOFTWARE</div>
+        <h3>Six Apps on NASA cFS</h3>
+        <p>Mission sequencer, navigation, geophone array, seismic acquisition and source control, drill, and health/FDIR, on the core Flight System (Draco). All hardware access goes through a per-subsystem hardware abstraction layer; the flight-hardware side of that layer is a documented porting boundary.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">VERIFICATION</div>
+        <h3>End-to-End Missions in Simulation</h3>
+        <p>Complete multi-site missions run against a physics simulation in which one shared subsurface model feeds both the seismic and drill instruments. A correct inversion of the synthetic seismic agrees with what the synthetic drill finds, so onboard algorithms are checked against known ground truth, not against themselves.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">DATA PRODUCTS</div>
+        <h3>Pose-Stamped, Reprocessable</h3>
+        <p>Per-shot raw traces, per-site stacks with picks, per-site coupling records, and per-cycle drill logs with stiffness and evolved-gas curves. Every product carries the surveyed site pose. Ground analysis fits a velocity-to-ice transfer function from the drill ties and ranks prospects as confirmed or inferred.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">GROUND SEGMENT</div>
+        <h3>Console, Dashboard, Analysis</h3>
+        <p>Command console with full test suites and file downlink, a live web dashboard of the mission state machine and telemetry, and site-analysis tooling for refraction inversion, tie points, and prospect ranking. Plans are ground-uploadable, including per-waypoint drill and recalibration flags.</p>
+      </div>
+    </div>
+    <div class="prop-tech-bar reveal" style="margin-top: 24px; margin-bottom: 0;">
+      <div class="tech-bar-label">Validated In Simulation</div>
+      <div class="tech-bar-items">
+        <div class="tech-item"><div class="tech-dot" style="background: var(--amber);"></div><span class="tech-item-text">Multi-Site Autonomous Survey Missions</span></div>
+        <div class="tech-item"><div class="tech-dot" style="background: var(--ice);"></div><span class="tech-item-text">Measured Per-Pod Ground Coupling</span></div>
+        <div class="tech-item"><div class="tech-dot" style="background: var(--text-dim);"></div><span class="tech-item-text">Onboard Refraction Inversion &amp; Drill Gate</span></div>
+        <div class="tech-item"><div class="tech-dot" style="background: var(--muted);"></div><span class="tech-item-text">Ground-Commanded Pose Realignment</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIDA TRACE -->
+<section class="s2s-section" id="sida">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 04</span>
+      <span class="section-title">Traceability to SIDA</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="s2s-intro reveal">
+      <div>
+        <div class="s2s-callout">
+          <div class="s2s-callout-label">Capability Tier</div>
+          <div class="s2s-callout-value">Tier 1</div>
+          <div class="s2s-callout-desc">Prospecting-class: compact mobile source, small sensor array, method validation and shallow-deposit reconnaissance, calibrated against co-located direct sampling.</div>
+        </div>
+      </div>
+      <div class="s2s-body">
+        <p>The <a class="inline-link" href="subsurface-ice-deposit-assessment.html">Subsurface Ice Deposit Assessment</a> page defines the capability class without naming a vehicle. WOK is the first-tier instance of it: the vehicle that validates the method and the calibration discipline before larger sources and longer arrays are worth building.</p>
+        <p>The table maps each SIDA functional requirement to how WOK addresses it today. Where the prospecting tier cannot fully meet a requirement by design, that is stated rather than softened.</p>
+      </div>
+    </div>
+    <table class="trace-table reveal">
+      <thead><tr><th>Req</th><th>Function</th><th>How WOK addresses it</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>SIDA-F-001</td>
+          <td>Depth of investigation</td>
+          <td>Drill samples directly to 5 m. The refraction survey infers layer velocity and interface depth below drill reach, in the band a small-aperture array can resolve. Deposit-scale tens-of-meters depth is the next tier's job.<br><span class="trace-tag partial">Partial · by tier</span></td>
+        </tr>
+        <tr>
+          <td>SIDA-F-002</td>
+          <td>Deposit geometry</td>
+          <td>Per-site refractor depth and velocity; lateral variation emerges across sites in a survey plan. Presence and depth class, not full 3-D extent.<br><span class="trace-tag partial">Partial · by tier</span></td>
+        </tr>
+        <tr>
+          <td>SIDA-F-003</td>
+          <td>Ground-truth calibration</td>
+          <td>The mission-success gate. Seismic and drill at the same pose form a tie point; the sequencer will not end a mission without one, and the velocity-to-ice transfer function is fit from ties and carried into every extrapolated claim.<br><span class="trace-tag met">Enforced onboard</span></td>
+        </tr>
+        <tr>
+          <td>SIDA-F-004</td>
+          <td>Uncertainty quantification</td>
+          <td>Per-pick confidence, stack coherence, coupling scores that deweight weak channels, a probabilistic ice flag onboard, and confirmed-versus-inferred labels on every ranked prospect.<br><span class="trace-tag met">Carried in products</span></td>
+        </tr>
+        <tr>
+          <td>SIDA-F-005</td>
+          <td>Survey repeatability</td>
+          <td>Every product is stamped with surveyed pose in a persistent frame with ground-commanded realignment. Archived formats are documented for independent reprocessing, so later missions can densify or repeat coverage.<br><span class="trace-tag met">Designed in</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- KEY PARAMETERS -->
+<section class="specs-section" id="specs">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 05</span>
+      <span class="section-title">Key Parameters</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="tbr-note">ALL VALUES NOTIONAL · TO BE REVIEWED · SET BY SIMULATION BASELINE, NOT FLIGHT HARDWARE</div>
+    <div class="specs-layout reveal">
+      <div class="specs-group">
+        <h4>Source</h4>
+        <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Electromagnetic, plate-coupled</span></div>
+        <div class="spec-row"><span class="spec-key">Modes</span><span class="spec-val">Impulse · Swept-sine</span></div>
+        <div class="spec-row"><span class="spec-key">Energy class</span><span class="spec-val">Tens of joules / strike</span></div>
+        <div class="spec-row"><span class="spec-key">Stacking</span><span class="spec-val">3 strikes / site (default)</span></div>
+        <div class="spec-row"><span class="spec-key">Coupling check</span><span class="spec-val">Low-energy test shot</span></div>
+      </div>
+      <div class="specs-group">
+        <h4>Array</h4>
+        <div class="spec-row"><span class="spec-key">Pods</span><span class="spec-val">4 geophone pods</span></div>
+        <div class="spec-row"><span class="spec-key">Offsets</span><span class="spec-val">1.5 · 3.0 · 4.5 · 6.0 m</span></div>
+        <div class="spec-row"><span class="spec-key">Placement</span><span class="spec-val">Rover-placed · retrievable</span></div>
+        <div class="spec-row"><span class="spec-key">Coupling</span><span class="spec-val">Measured per pod</span></div>
+      </div>
+      <div class="specs-group">
+        <h4>Acquisition</h4>
+        <div class="spec-row"><span class="spec-key">Channels</span><span class="spec-val">4</span></div>
+        <div class="spec-row"><span class="spec-key">Sample rate</span><span class="spec-val">4 kHz</span></div>
+        <div class="spec-row"><span class="spec-key">Record</span><span class="spec-val">Seconds-long</span></div>
+        <div class="spec-row"><span class="spec-key">Zero time</span><span class="spec-val">Hardware-referenced</span></div>
+        <div class="spec-row"><span class="spec-key">Onboard picks</span><span class="spec-val">STA/LTA first break</span></div>
+      </div>
+      <div class="specs-group">
+        <h4>Drill &amp; Platform</h4>
+        <div class="spec-row"><span class="spec-key">Depth</span><span class="spec-val">2.5 m typical · 5 m max</span></div>
+        <div class="spec-row"><span class="spec-key">Logs</span><span class="spec-val">Depth · WOB · torque · ROP</span></div>
+        <div class="spec-row"><span class="spec-key">Volatiles</span><span class="spec-val">Evolved-gas vs temperature</span></div>
+        <div class="spec-row"><span class="spec-key">Platform</span><span class="spec-val">Micro-rover class</span></div>
+        <div class="spec-row"><span class="spec-key">Operations</span><span class="spec-val">Autonomous multi-site</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLEET CONTEXT -->
+<section class="s2s-section" id="fleet">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 06</span>
+      <span class="section-title">Fleet Context</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="s2s-body reveal" style="max-width:760px;">
+      <p>WOK is not a standalone instrument demonstration. It already runs as a vehicle class inside the Aegis surface-operations stack: the same flight software binaries are dispatched by the fleet coordinator, report through the Foreman shift board, and complete survey orders on telemetry, not on a timer. The <a class="inline-link" href="mixed-fleet-surface-operations.html">mixed-fleet surface operations</a> page documents that demonstration with rover, tanker, and WOK assets working one scenario.</p>
+    </div>
+    <div class="evidence-grid reveal">
+      <figure>
+        <img src="images/mfso-foreman-wok-fleet.png" alt="Foreman shift board WOK fleet tab: two vehicles tagged REAL in RECORD mode, with the event log showing completed survey orders and immediate re-dispatch." loading="lazy">
+        <figcaption>Foreman shift board, WOK fleet tab. Two vehicles tagged REAL in RECORD, survey orders completing and re-dispatching.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/mfso-wok-ground-control.png" alt="WOK ground control dashboard showing the live mission state machine and telemetry panels." loading="lazy">
+        <figcaption>WOK ground dashboard. Live mission state machine and telemetry from a running flight-software instance.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN QUESTIONS -->
+<section class="s2s-section" id="open">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 07</span>
+      <span class="section-title">Open Questions — Seeking Expertise</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="s2s-intro reveal">
+      <div>
+        <div class="s2s-callout">
+          <div class="s2s-callout-label">Program Context</div>
+          <div class="s2s-callout-value">Open</div>
+          <div class="s2s-callout-desc">Flight software and vehicle systems remain with Aegis Station. The geophysics of survey design, methods, and validation is where outside expertise is sought.</div>
+        </div>
+      </div>
+      <div class="s2s-body">
+        <p>The software proves the choreography and the calibration discipline. It does not settle the geophysics. These are the questions a collaborator would be asked to own.</p>
+      </div>
+    </div>
+    <div class="s2s-scenarios reveal">
+      <div class="scenario">
+        <div class="scenario-tag">Question 01</div>
+        <h4>Survey Design on a Small Rover</h4>
+        <p>Which acquisition parameters are worth having on a micro-rover: pod count and spacing, stack count, sweep versus impulse, and how much of that should adapt onboard to what the first shot shows.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-tag">Question 02</div>
+        <h4>Resolution of a Small-Aperture Array</h4>
+        <p>What a four-pod, six-meter line can and cannot resolve in lunar regolith: depth of investigation, velocity contrast needed for a confident refractor pick, and the failure modes of a thin ice-cemented layer.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-tag">Question 03</div>
+        <h4>Interpretation and Validation</h4>
+        <p>How to validate the onboard evaluation in relevant conditions, such as regolith simulant testbeds, and what a defensible velocity-to-ice-content transfer function looks like with a handful of drill ties.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-tag">Question 04</div>
+        <h4>Coupling in Vacuum Regolith</h4>
+        <p>How a plate source and rover-placed pods actually couple to dry, electrostatically active regolith, and whether the low-energy coupling check the software performs today measures the right thing.</p>
+      </div>
+    </div>
+    <div class="s2s-body reveal" style="max-width:760px; margin-top:40px;">
+      <p>Discussion welcome through the <a class="inline-link" href="engagement.html">engagement</a> page.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="page-wrap">
+    <div class="footer-inner">
+      <div class="footer-logo">WOK — Water Observation Kit — Aegis Station Program</div>
+      <div class="footer-copy">
+        <span class="status-dot"></span>Flight Software: Simulation-Verified
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
