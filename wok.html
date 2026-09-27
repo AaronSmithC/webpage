@@ -1066,6 +1066,8 @@
     letter-spacing: 0.08em;
     margin-top: 12px;
   }
+  .image-caption .caption-text { flex: 1; padding-right: 24px; line-height: 1.5; }
+  .image-caption .caption-ref { white-space: nowrap; }
   .inline-link { color: var(--ice); text-decoration: none; border-bottom: 1px solid var(--ice-dim); }
   .inline-link:hover { color: var(--amber); border-color: var(--amber); }
   @media (max-width: 760px) {
@@ -1135,22 +1137,12 @@
       <span class="section-title">Operating Concept</span>
       <div class="section-rule"></div>
     </div>
-    <div class="image-placeholder reveal">
-      <div class="img-corner tl"></div><div class="img-corner tr"></div>
-      <div class="img-corner bl"></div><div class="img-corner br"></div>
-      <div class="placeholder-inner">
-        <svg class="placeholder-icon" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M4 40 H56"/><path d="M8 40 Q30 26 52 40"/><path d="M14 40 Q30 32 46 40"/>
-          <rect x="24" y="30" width="12" height="6"/><circle cx="26" cy="38" r="2"/><circle cx="34" cy="38" r="2"/>
-          <path d="M30 30 V22"/><path d="M12 40 v4 M22 40 v4 M38 40 v4 M48 40 v4"/>
-        </svg>
-        <div class="placeholder-label">Survey Site — Cross Section</div>
-        <div class="placeholder-sub">Rover, source plate, four-pod line, drill, refracted arrivals through dry regolith into ice-cemented regolith</div>
-      </div>
+    <div class="reveal" style="border: 1px solid var(--border); overflow: hidden; line-height: 0;">
+      <img src="wok_concept_section.svg" alt="WOK survey site in cross section: rover with source plate and drill, four-pod geophone line, refracted arrivals through dry regolith into ice-cemented regolith, drill tip at the calibration tie point" style="width:100%; display:block;"/>
     </div>
     <div class="image-caption">
-      <span class="caption-text">Premise: ice-cemented regolith transmits seismic energy faster than dry regolith. Co-located drill and seismic at one site form the calibration tie point.</span>
-      <span class="caption-ref">WOK-CONCEPT-001 · NOTIONAL</span>
+      <span class="caption-text">FIG. 01 — Survey site cross section. Refracted arrivals carry the ice-cemented layer's velocity. The drill tip in that layer is the calibration tie point.</span>
+      <span class="caption-ref">WOK-CONCEPT-001 · NOTIONAL · NOT TO SCALE</span>
     </div>
   </div>
 </section>
@@ -1201,6 +1193,13 @@
         <h3>Retrieve and Continue</h3>
         <p>Pods are retrieved with per-pod recapture confirmation and the vehicle moves on. A mission cannot end without at least one drill: the sequencer returns to its best-scoring site for a calibration tie, because that tie is what anchors every inferred claim across the survey.</p>
       </div>
+    </div>
+    <div class="reveal" style="margin-top: 24px; border: 1px solid var(--border); overflow: hidden; line-height: 0;">
+      <img src="wok_survey_cycle.svg" alt="Six-panel storyboard of the WOK survey cycle: traverse, place and verify the array, fire and stack, evaluate onboard, drill, retrieve and continue" style="width:100%; display:block;"/>
+    </div>
+    <div class="image-caption">
+      <span class="caption-text">FIG. 02 — One site, six states. Amber marks the active element in each panel. The ice-cemented layer lights once the onboard inversion flags it.</span>
+      <span class="caption-ref">WOK-CYCLE-001</span>
     </div>
   </div>
 </section>
