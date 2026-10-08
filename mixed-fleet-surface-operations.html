@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mixed-Fleet Surface Operations | Surface Coordination Software</title>
-  <meta name="description" content="Coordination software for heterogeneous autonomous fleets sharing a lunar work site: a proven homogeneous fleet coordinator, a like-fleet tier, a heterogeneous site marshal, and the adapter contract that lets dissimilar assets take tasking from one authority. Working prototypes, real telemetry, honest maturity." />
+  <meta name="description" content="Coordination software for heterogeneous autonomous fleets sharing a lunar work site: a proven homogeneous fleet coordinator, a like-fleet tier, a heterogeneous site marshal, and the adapter contract that lets dissimilar assets take tasking from one authority. Working prototypes, live telemetry, honest maturity." />
   <style>
     :root{
       --bg:#0b0f14;
@@ -241,7 +241,7 @@
       A vehicle class plugs in as a five-part contract &mdash; backend, mode vocabulary,
       service-point layout, duty-cycle verbs, dispatch scoring &mdash; and the Foreman loop
       never sees anything class-specific beyond it. Two classes exist today: a simulated
-      excavator, and a WOK survey rover class whose backend spawns <em>real</em> cFS
+      excavator, and a WOK survey rover class whose backend spawns live cFS
       flight-software instances, N per host via per-instance port offsets, and whose duty
       cycle is the rover's own onboard autonomous survey mission.
     </p>
@@ -249,7 +249,7 @@
       <a href="images/mfso-foreman-wok-fleet.png"><img src="images/mfso-foreman-wok-fleet.png"
         alt="Foreman shift board WOK fleet tab: two vehicles tagged REAL in RECORD mode, with the event log showing completed survey orders and immediate re-dispatch."></a>
       <figcaption>Evidence for telemetry-gated completion and saturation: the shift board's WOK
-      fleet tab during a live run with two real cFS instances (tagged REAL). At 12:38:34 both
+      fleet tab during a live run with two live cFS instances (tagged REAL). At 12:38:34 both
       vehicles' first onboard survey missions &mdash; each roughly 12.5 minutes of autonomous
       MOVE&rarr;DEPLOY&rarr;THUMP&rarr;RECORD&rarr;EVALUATE&rarr;DRILL&rarr;STOW &mdash; complete
       on observed DONE telemetry, and the Foreman dispatches the next order to each within the
@@ -274,7 +274,7 @@
     </p>
     <p>
       The commanded tier runs against simulated assets today &mdash; the honest status is in
-      the maturity table. Alongside it, the Marshal already manages real flight software in an
+      the maturity table. Alongside it, the Marshal already tracks live flight-software instances in an
       observe-only role: it spawns and tracks live cFS instances of a rover, a tanker, and a
       WOK survey vehicle, decoding their native telemetry into the same normalized state the
       simulated assets report.
@@ -321,7 +321,7 @@
     <p>
       Status, plainly: the sim adapter is the proven implementation &mdash; every Marshal
       behavior above runs through it. A CCSDS adapter implementing the same eight methods
-      exists and is verified at the byte level against the dispatch vocabulary, but no real
+      exists and is verified at the byte level against the dispatch vocabulary, but no
       construction-apparatus flight software exists yet to put behind it; the live-cFS path
       demonstrated today (rover, tanker, WOK) runs at the OBSERVE tier. Zone-exclusion
       blocking is enforced on every dispatch and proven in the test suite, but the current
@@ -331,7 +331,7 @@
   </section>
 
   <section class="card">
-    <h2>The assets are real flight software</h2>
+    <h2>The assets are flight software, not stubs</h2>
     <p>
       The coordination claims above are only as strong as what is being coordinated. The
       vehicles behind the REAL tags are not simulation stubs: the WOK survey rover, for
@@ -369,24 +369,24 @@
       </tr>
       <tr>
         <td>Foreman</td>
-        <td>Working prototype. Multi-fleet shift board; WOK class runs real cFS instances
+        <td>Working prototype. Multi-fleet shift board; WOK class runs live cFS instances
         end-to-end (dispatch &rarr; onboard mission &rarr; telemetry-gated completion &rarr;
         re-dispatch); excavator class is sim-only.</td>
-        <td>A second vehicle class with real flight software behind it.</td>
+        <td>A second vehicle class with its own flight software behind it.</td>
       </tr>
       <tr>
         <td>Marshal</td>
         <td>Software prototype. Build-plan DAG, zone exclusion, scored dispatch, and anomaly
-        requeue all run &mdash; against simulated assets. Real vehicles (rover, tanker, WOK)
+        requeue all run &mdash; against simulated assets. The flight-software vehicles (rover, tanker, WOK)
         managed at the OBSERVE tier only.</td>
         <td>First live vehicle taking DISPATCH-tier tasking over CCSDS.</td>
       </tr>
       <tr>
         <td>AssetAdapter / CCSDS adapter</td>
         <td>Contract implemented and proven via the sim adapter; CCSDS implementation
-        byte-level verified. No real apparatus flight software exists to command with it.</td>
+        byte-level verified. No apparatus flight software exists yet to command with it.</td>
         <td>Construction-apparatus FSW; retire the "working hypothesis" telemetry layout
-        against real packets.</td>
+        against live packets.</td>
       </tr>
       <tr>
         <td>WOK survey rover FSW</td>
