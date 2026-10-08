@@ -147,7 +147,7 @@
       <tr><td>Fleet</td><td>45 autonomous reusable tankers, VTOL, one ground console</td></tr>
       <tr><td>Payload</td><td>45 t of water per sortie, in one Modular Tank Cartridge</td></tr>
       <tr><td>Ascent</td><td>2,600 m/s to 100 km lunar orbit</td></tr>
-      <tr><td>Return</td><td>1,800 m/s, empty cartridge, fuel topped off at the depot</td></tr>
+      <tr><td>Return</td><td>1,800 m/s, empty cartridge, round-trip propellant loaded at the surface pad</td></tr>
       <tr><td>Daily throughput</td><td>~2,025 t/day</td></tr>
       <tr><td>Fill time</td><td>~4.5 years at that throughput</td></tr>
       <tr><td>Sorties, total</td><td>~73,333</td></tr>
@@ -286,7 +286,7 @@
       <strong>Decision.</strong> Fluid couplings at the surface pad, filled on demand from a buffered store, cartridge
       swap in parallel with propellant transfer, ground couplings treated as scheduled consumables. Turnaround target
       2.6 hours, ceiling 3.2. <em>Swappable propellant modules and routine depot top-off are rejected for the water
-      tanker. Eight pads are recommended over six for margin against the 4–8 hour range in the dispatch protocol.</em>
+      tanker. Eight pads are recommended over six for margin: six hold the cadence only at the 3.2-hour ceiling, eight hold it with a pad occupancy up to 4.3 hours, so a slow transfer or a pad out of service does not stall the fill.</em>
     </div>
   </section>
 
@@ -301,7 +301,7 @@
       commissioning date is set by the first cartridge to arrive, and its existence is what makes that date matter.
     </p>
     <ul>
-      <li><strong>Water in, propellant out.</strong> Depot electrolysis produces LOX and LH₂ from cartridge water. With a hydrolox fleet the hydrogen is a product, not a vented byproduct: tankers top off both propellants at the depot between cycles, so the loop closes at both ends of the ascent.</li>
+      <li><strong>Water in, propellant out.</strong> Depot electrolysis produces LOX and LH₂ from cartridge water. With a hydrolox fleet the hydrogen is a product, not a vented byproduct: the depot holds both propellants for visiting vehicles and for contingency top-off of the tanker fleet. Routine tanker refuelling is at the surface pad, per the decision above, so the depot is not in the daily cycle.</li>
       <li><strong>Methane for the Hauler only.</strong> The Earth–Aegis Long-Hauler still burns methalox for its return; it brings its own methane as manifest cargo. That import is declared, bounded, and never touches the tanker fleet.</li>
       <li><strong>Standard interfaces.</strong> The cartridge and its two ports are the same at the depot as at the pad. A depot that only its builder can dock with is a fuel tank, not infrastructure.</li>
       <li><strong>Beachhead.</strong> The depot's pressurised node is the program's first shirt-sleeve presence in lunar orbit, before any ring is assembled.</li>
@@ -321,7 +321,7 @@
     <ul>
       <li>Deposit assessment precedes extraction; the subsurface ice assessment capability and the WOK prospecting rover are the instruments aimed at that gate.</li>
       <li>Mining, extraction, and transfer are autonomous and modular; power is polar solar with fission for the lunar night.</li>
-      <li>For every tonne delivered to orbit, roughly another tonne and a half is split for propellant. The mining rate, not the delivery rate, sizes the node.</li>
+      <li>For every tonne delivered to orbit, roughly another tonne and a quarter is split for propellant. The mining rate, not the delivery rate, sizes the node.</li>
     </ul>
     <div class="figure tall">
       <img src="../isru_process_flow.svg" alt="ISRU process flow from permanently shadowed crater to water cargo and hydrolox propellant">

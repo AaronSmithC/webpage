@@ -1,0 +1,11 @@
+{
+  "name": "Aegis Station",
+  "short_name": "Aegis",
+  "icons": [
+    { "src": "/favicon_from_art.ico", "sizes": "any", "type": "image/x-icon" }
+  ],
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0a0e15",
+  "theme_color": "#0a0e15"
+}

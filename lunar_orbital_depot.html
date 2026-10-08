@@ -349,8 +349,8 @@
     <p>
       Once operational, the depot breaks two standing constraints. The Hauler arrives,
       offloads LCH₄, refuels its return burn from depot-produced LOX, and departs.
-      The Tanker fleet tops off between cycles rather than carrying full reserves on every
-      ascent. The depot absorbs production variability from the surface and smooths it into
+      The Tanker fleet refuels at the surface pad and uses the depot for contingency top-off
+      rather than as a step in every cycle. The depot absorbs production variability from the surface and smooths it into
       a stable supply available on demand.
     </p>
 
@@ -386,7 +386,7 @@
     </div>
     <ul class="specs">
       <li>Electrolysis capacity is the <strong>rate-limiting step</strong> — it sets the water delivery cadence requirement for the LT fleet</li>
-      <li>Hydrogen is a product, not a byproduct — liquefied and stored for Lunar Tanker top-off; only surplus is held for fuel-cell reserve or surface delivery</li>
+      <li>Hydrogen is a product, not a byproduct — liquefied and stored for visiting-vehicle supply and Lunar Tanker contingency top-off; only surplus is held for fuel-cell reserve or surface delivery</li>
       <li>Water inventory provides a buffer between LT delivery cycles and continuous electrolysis demand</li>
     </ul>
 
@@ -462,9 +462,9 @@
         <h4>Bladder Design</h4>
         <p>
           Interior inflatable/deflatable bladder contained within the outer structural cylinder.
-          Bladder collapses fully when empty — cartridge ships to the surface as a lightweight
-          structural shell and returns to orbit full. Single-use fill cycle per mission is the
-          baseline; reuse cadence TBD pending durability analysis.
+          Bladder collapses fully when empty — the cartridge rides back to the surface empty on the
+          tanker and returns to orbit full. Reusable over the fleet life; bladder cycle life against
+          the ~1,600-cycle airframe TBD pending durability analysis.
         </p>
       </div>
       <div class="info-card">
@@ -694,13 +694,13 @@
       <li>Sole water delivery path — LT cartridge offload is the only way water ever enters the depot; there is no Earth-sourced alternative</li>
       <li><strong>Depot first-light requires only minimal LT capability</strong> — a single vehicle flying at low cadence is sufficient to deliver initial cartridges and commission end-to-end propellant production</li>
       <li>The full ~45-vehicle LT fleet is sized for the downstream <strong>station shield-layer fill</strong> campaign, which is a much higher-throughput requirement — fleet completion is not a prerequisite for depot operations</li>
-      <li>LTs top off LOX/LH₂ at the depot between descent cycles once the depot is operational — depot acts as a propellant buffer smoothing surface production variability</li>
-      <li>High call rate in steady state: LT docking and transfer operations become the depot's most frequent interaction during the shield-fill campaign, driving reliability and throughput requirements</li>
+      <li>LTs refuel at the surface pad; the depot holds LOX/LH₂ for contingency top-off and acts as a propellant buffer smoothing surface production variability</li>
+      <li>High call rate in steady state: LT berthing and cartridge-swap operations become the depot's most frequent interaction during the shield-fill campaign, driving reliability and throughput requirements</li>
     </ul>
 
     <h3>Luna–Aegis Shuttle (Hopper)</h3>
     <ul class="specs">
-      <li>Shuttle operates on LH₂/LOX — <strong>out of scope for depot propellant services</strong></li>
+      <li>Shuttle operates on LOX/LH₂, the depot's native products — <strong>depot propellant services to the shuttle are an option, not a baseline</strong>; its reference missions refuel at the surface or at Aegis Station</li>
       <li>Crew transfer and short-stay access via pressurized docking node is in scope</li>
       <li>Depot may serve as a staging point for crew transiting between Hauler and Shuttle during early program phases before station is assembled</li>
     </ul>
