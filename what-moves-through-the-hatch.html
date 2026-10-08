@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Moves Through the Hatch — Aegis Station</title>
+<meta name="description" content="Surface mating is a logistics question before it is a mechanism question. What crosses a lunar surface interface, how often, and from where, stated as requirements from the Aegis reference designs. A strategic note from Aegis Station.">
+<meta property="og:title" content="What Moves Through the Hatch — Aegis Station">
+<meta property="og:description" content="Surface mating is a logistics question before it is a mechanism question. What crosses the interface, how often, and from where, and why the answer runs through lunar orbit.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aegisstation.com/what-moves-through-the-hatch.html">
+<meta property="og:image" content="https://aegisstation.com/images/moon-is-for-hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0a0e15;
+    --bg-panel:  #0e141d;
+    --ink:       #d9e1ea;
+    --ink-dim:   #8a94a3;
+    --water:     #6fb6d8;
+    --water-deep:#3f7f9e;
+    --hair:      rgba(217, 225, 234, 0.12);
+    --hair-soft: rgba(217, 225, 234, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 1.14rem;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--water); text-decoration: none; }
+  a:hover, a:focus-visible { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--water); outline-offset: 3px; }
+
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---- Masthead strip ---- */
+  .masthead {
+    border-bottom: 1px solid var(--hair);
+    background: rgba(10, 14, 21, 0.9);
+  }
+  .masthead .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 3.4rem;
+  }
+  .brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .brand a { color: var(--ink); }
+  .brand a:hover { color: var(--water); }
+  .masthead .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  /* ---- Hero ---- */
+  header.hero {
+    background:
+      radial-gradient(120% 80% at 85% -10%, rgba(63, 127, 158, 0.16), transparent 60%),
+      var(--bg);
+    border-bottom: 1px solid var(--hair-soft);
+  }
+  header.hero .wrap { padding-top: 5rem; padding-bottom: 3.2rem; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--water); margin-bottom: 1.6rem;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: clamp(2.3rem, 6vw, 3.5rem);
+    line-height: 1.05; letter-spacing: -0.02em;
+    color: #eef3f8;
+  }
+  .dek {
+    margin-top: 1.6rem;
+    font-size: 1.2rem; line-height: 1.6;
+    color: var(--ink-dim);
+    max-width: 34rem;
+  }
+  .dek strong { color: var(--ink); font-weight: 500; }
+
+  /* ---- Body ---- */
+  main .wrap { padding-top: 3.5rem; padding-bottom: 2rem; }
+
+  main p { margin-bottom: 1.5rem; }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500; font-size: 1.5rem; letter-spacing: -0.01em;
+    color: #eef3f8;
+    margin: 3.2rem 0 1.3rem;
+    padding-top: 0.4rem;
+  }
+  h2 .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; font-weight: 400;
+    color: var(--water-deep);
+    letter-spacing: 0.1em;
+    margin-right: 0.8rem;
+    vertical-align: 0.28em;
+  }
+
+  em { color: var(--ink); font-style: italic; }
+
+  .pull {
+    margin: 3rem 0;
+    padding: 1.6rem 0 1.6rem 1.6rem;
+    border-left: 2px solid var(--water);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
+    font-size: 1.55rem; line-height: 1.35; letter-spacing: -0.01em;
+    color: #eef3f8;
+  }
+
+  ol.recs {
+    margin: 0 0 1.8rem 1.4rem;
+    padding: 0;
+  }
+  ol.recs li {
+    margin-bottom: 0.9rem;
+    padding-left: 0.3rem;
+  }
+  ol.recs li strong { color: #eef3f8; font-weight: 500; }
+
+  .note {
+    margin-top: 2.6rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--hair-soft);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem; line-height: 1.7; letter-spacing: 0.04em;
+    color: var(--ink-dim);
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    margin-top: 3rem;
+    border-top: 1px solid var(--hair);
+    background: var(--bg-panel);
+  }
+  footer .wrap { padding-top: 2.4rem; padding-bottom: 4rem; }
+  .sig {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--ink); font-size: 0.98rem; font-weight: 500;
+  }
+  .sig span { color: var(--ink-dim); font-weight: 400; }
+  .backrow {
+    margin-top: 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    display: flex; gap: 1.4rem; flex-wrap: wrap;
+  }
+  .backrow a { color: var(--ink-dim); }
+  .backrow a:hover { color: var(--water); }
+
+  @media (max-width: 600px) {
+    body { font-size: 1.06rem; }
+    header.hero .wrap { padding-top: 3.5rem; padding-bottom: 2.4rem; }
+    .pull { font-size: 1.3rem; }
+    h2 .num { display: block; margin: 0 0 0.3rem; }
+  }
+
+  table.flows {
+    width: 100%; border-collapse: collapse;
+    margin: 1.6rem 0 2.2rem;
+    font-size: 0.93rem; line-height: 1.5;
+  }
+  table.flows th, table.flows td {
+    text-align: left; vertical-align: top;
+    padding: 0.7rem 0.8rem 0.7rem 0;
+    border-bottom: 1px solid var(--hair-soft);
+  }
+  table.flows th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-dim); font-weight: 400;
+    border-bottom: 1px solid var(--hair);
+  }
+  table.flows td:first-child { color: #eef3f8; font-weight: 500; white-space: nowrap; }
+  table.flows td:last-child { color: var(--ink-dim); font-size: 0.86rem; }
+  @media (max-width: 600px) {
+    table.flows, table.flows thead, table.flows tbody, table.flows tr, table.flows th, table.flows td { display: block; }
+    table.flows thead { display: none; }
+    table.flows tr { padding: 0.9rem 0; border-bottom: 1px solid var(--hair-soft); }
+    table.flows td { border: 0; padding: 0.2rem 0; }
+    table.flows td:first-child { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wrap">
+    <div class="brand"><a href="index.html">Aegis Station</a></div>
+    <div class="kicker">Strategic Note</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Surface Logistics</div>
+    <h1>What Moves Through the Hatch</h1>
+    <p class="dek">Surface mating is a logistics question before it is a mechanism question. What crosses the interface, how often, and from where, stated as requirements. <strong>The answer runs through lunar orbit.</strong></p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <p>NASA&rsquo;s Directed Call 02 under the NextSTEP-3 Appendix B solicitation, Moon Base Demonstrations, asks industry for ground demonstrations of surface mating systems: the hardware that connects pressurized habitat and logistics elements on the lunar surface. White papers are due 16 October 2026 and proposals 20 November, with awards expected around 18 December and demonstrations evaluated by the end of September 2027. The call sits among nine Appendix B topic areas: infrastructure, power systems, communications and PNT, transportation, mobility, habitation, autonomy and robotics, lunar science, and concepts of operations.</p>
+
+    <p>Aegis Station is not bidding. The program works on the orbital side of the same supply line, and the reference designs on this site state what they require of a surface interface without designing one. This note sets those requirements out. The mechanism, the seal, and the demonstration itself are the work of the teams that build them.</p>
+
+    <h2><span class="num">01</span>A hatch is a flow boundary</h2>
+
+    <p>A mating system is specified by what crosses it before it is specified by how it closes. Six things cross a surface interface: crew, cargo, water, propellant, power, and data. Each has a cadence, a direction, and an origin. Crew cross a few at a time, in both directions, on a schedule set by rotation and by sortie length. Cargo crosses in pallets and in sealed units, inbound more than outbound. Water and propellant cross in bulk, on the fastest cadence of anything on a base. Power and data cross continuously for as long as the elements are joined. Those six facts, with numbers attached, are the requirement set. The seal standard, the hatch dimensions, the actuator, and the dust management are design answers to it, and they come second.</p>
+
+    <p>The program has worked one interface this way, at a different boundary. The <a href="hub_ring_boundary.html">hub/ring boundary</a> of the station is where a despun hub meets rotating rings, and everything the station needs to move crosses it: crew, cargo, bulk water, pressurant, power, data, heat. That page takes the flows one at a time and gives each a crossing matched to its duty cycle. Crew, cargo, and fluids cross in sealed units by cyclic transfer. Power and data cross by contactless coupling. Heat does not cross at all; each side rejects its own. The governing rule falls out of the flows rather than out of a mechanism catalogue: no continuous rotary seal carries a life-critical flow. The same discipline applies on the surface. List what crosses, give each flow its cadence, and the shape of an acceptable interface follows.</p>
+
+    <h2><span class="num">02</span>What moves, and how often</h2>
+
+    <p>The reference designs on this site put numbers on each flow at the surface. They are requirements and sizing cases, not demonstrated hardware, and where a design says TBD this table says so.</p>
+
+    <table class="flows">
+      <thead>
+        <tr><th>Flow</th><th>Reference design</th><th>Requirement as stated</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Crew</td>
+          <td><a href="short_hopper.html">Short Hopper</a>, Aegis-Class Rover</td>
+          <td>Two crew with 500 kg of cargo is the hopper sizing case, four crew standard, six at reduced range. Transfer without EVA through a soft-seal pressurized collar or a suitport mate. The rover carries two to four crew for 30 to 60 days and docks at its aft face.</td>
+          <td>Requirement. Collar loads, seal standard, and hatch dimensions not yet set.</td>
+        </tr>
+        <tr>
+          <td>Cargo</td>
+          <td>Short Hopper</td>
+          <td>Up to 1,000 kg in the cargo configuration, palletized, on latch-and-lock mounts.</td>
+          <td>Requirement. Pallet dimensions and tie-down loads not yet set.</td>
+        </tr>
+        <tr>
+          <td>Water</td>
+          <td><a href="waterlogistics.html">Lunar water logistics</a></td>
+          <td>A sealed 45-tonne cartridge with one water port and one gas port, identical at the node, the pad, the depot, and the station. Water is never a cryogen anywhere in the chain.</td>
+          <td>Standard stated. Cartridge cycle life not yet set.</td>
+        </tr>
+        <tr>
+          <td>Propellant</td>
+          <td>Tanker fleet, LUNET</td>
+          <td>Fluid couplings at the surface pad, filled on demand from a buffered store. Turnaround target 2.6 hours, ceiling 3.2. Ground couplings treated as scheduled consumables. The hopper refuels through a LUNET-compatible port.</td>
+          <td>Requirement. Coupling cycle life is the open item.</td>
+        </tr>
+        <tr>
+          <td>Power, thermal</td>
+          <td>Rover, Short Hopper</td>
+          <td>One roof interface plate for node power and thermal, the same standard on both vehicles.</td>
+          <td>Standard named. Power delivered at south-pole sun elevation is open.</td>
+        </tr>
+        <tr>
+          <td>Data</td>
+          <td>All vehicles</td>
+          <td>CCSDS command and telemetry. A vehicle completes a leg without a ground link and hands off to the node on arrival.</td>
+          <td>Software baseline.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Cadence is what turns a list into a load. The water chain is sized at 45 sorties a day at full cadence, one launch every 32 minutes across the pads, each sortie a cartridge swap and a propellant transfer through surface couplings, with about 1,600 cycles on each airframe over the campaign. A pad coupling in that chain mates every few hours. The hopper&rsquo;s turnaround is written as 24 to 48 hours at a node, with ten sorties between services and fifty to retirement, all three still marked TBD. A hatch that mates twice a week and a coupling that mates several times a day are different requirements, even when the fluid behind them is the same.</p>
+
+    <h2><span class="num">03</span>Where it comes from</h2>
+
+    <p>A surface base is the end of a line, not the start of one. Crew arrive from orbit and return to it. Cargo arrives on landers that were staged in orbit. Propellant for those landers is made from lunar water, and in the reference architecture it is made at the pad, with an orbital depot holding stock for visiting vehicles. Water leaves the surface in cartridges and comes back as empties. Every flow that crosses a surface hatch has crossed an orbital interface first, or will cross one next: a berth, a transfer port, a custody meter.</p>
+
+    <div class="pull">Every flow that crosses a surface hatch has crossed an orbital one first.</div>
+
+    <p>The two sets of interfaces are one chain, and the reference designs give them shared standards. The same cartridge port at the node, the pad, the depot, and the station. Published berthing and docking envelopes, so that a vehicle built by someone else can use them. Custody-transfer metering, so that supplier and customer agree on what moved. Those are the terms on which the orbital side is written, and they are the terms a surface interface inherits, because the cartridge that crosses a surface pad is the one that crosses a depot berth and, at the far end, the station&rsquo;s own rotating boundary.</p>
+
+    <p>This is the part of the chain Aegis Station works on: the depot, the tanker fleet that supplies it, the hopper that carries crew and cargo between orbit and the surface, and the station at the far end. The surface base is where that chain terminates, and the surface mating system is its last link.</p>
+
+    <h2><span class="num">04</span>What the supply line asks of the interface</h2>
+
+    <p>Read from the logistics side, a surface mating interface is held to a short list of requirements. None of them names a mechanism.</p>
+
+    <ol class="recs">
+      <li><strong>State the flows and their cadence before the mechanism.</strong> Crew, cargo, water, propellant, power, data, each with a rate, a direction, and a dwell time. The interface is sized to the list, not the list to the interface.</li>
+      <li><strong>Count cycles over life, not per mission.</strong> The water chain writes about 1,600 cycles per airframe. A pad coupling sees a mate every few hours. Seal life and dust tolerance then become stated numbers with a verification method behind them.</li>
+      <li><strong>Decide which flows share an interface and which get their own.</strong> Crew and bulk fluid do not share a seal. The hub/ring boundary separates them, and so does the hopper, which carries crew through a collar and propellant through a port.</li>
+      <li><strong>Put the wear item on the side that is serviced.</strong> In the water chain the ground couplings at the pad are scheduled consumables, and the vehicle side is designed to be the part that lasts. A surface element and a logistics element can make the same choice about which side owns the actuator and the seal.</li>
+      <li><strong>Meter what crosses.</strong> Water and propellant are custody transfers between a supplier and a customer. The interface produces a number both sides accept, or the transfer is not complete.</li>
+      <li><strong>Publish the envelope.</strong> The depot page says it of a depot: one that only its builder can dock with is a fuel tank, not infrastructure. An interface standard that other elements can be built to is what makes a surface base a node in a network rather than a set of matched pairs.</li>
+    </ol>
+
+    <h2><span class="num">05</span>Where this program stops</h2>
+
+    <p>The pages linked here carry requirements and interface definitions: a collar, a suitport, a cartridge port, a roof plate, a pad coupling, with the numbers that are set and the ones that are not. None of them is a mechanism design. The seal standard, the hatch dimensions, the loads, the dust management, and the ground demonstration belong to the teams that do that work, and the open items on each page are written so that they can take them.</p>
+
+    <p>What a logistics architecture can offer a surface mating demonstration is the duty cycle it will be held to: what moves, how often, and from where.</p>
+
+    <p class="note">Call details are from NASA&rsquo;s NextSTEP-3 Appendix B page and the Directed Call 02 Step 1 request for white papers. Reference-design figures are from the linked pages as of October 2026 and carry their own TBDs.</p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sig">A.S. <span>&mdash; Principal Architect, Aegis Station</span></div>
+    <div class="backrow">
+      <a href="short_hopper.html">Short Hopper</a>
+      <a href="waterlogistics.html">Water Logistics</a>
+      <a href="hub_ring_boundary.html">Hub/Ring Boundary</a>
+      <a href="lunar-orbital-propellant-depot.html">Propellant Depot (LOPD)</a>
+      <a href="index.html">&larr; Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
