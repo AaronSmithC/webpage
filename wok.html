@@ -1235,19 +1235,25 @@
         <div class="mission-card-accent"></div>
         <div class="mission-card-num">VERIFICATION</div>
         <h3>End-to-End Missions in Simulation</h3>
-        <p>Complete multi-site missions run against a physics simulation in which one shared subsurface model feeds both the seismic and drill instruments. A correct inversion of the synthetic seismic agrees with what the synthetic drill finds, so onboard algorithms are checked against known ground truth, not against themselves.</p>
+        <p>Complete multi-site missions run against a physics simulation in which one shared subsurface model feeds both the seismic and drill instruments. A correct inversion of the synthetic seismic agrees with what the synthetic drill finds, so onboard algorithms are checked against the model's known ground truth rather than against themselves.</p>
       </div>
       <div class="mission-card">
         <div class="mission-card-accent"></div>
         <div class="mission-card-num">DATA PRODUCTS</div>
         <h3>Pose-Stamped, Reprocessable</h3>
-        <p>Per-shot raw traces, per-site stacks with picks, per-site coupling records, and per-cycle drill logs with stiffness and evolved-gas curves. Every product carries the surveyed site pose. Ground analysis fits a velocity-to-ice transfer function from the drill ties and ranks prospects as confirmed or inferred.</p>
+        <p>Per-shot raw traces, per-site stacks with picks, per-site coupling records, and per-cycle drill logs with drilling-response and evolved-gas curves. Every product carries the surveyed site pose. Ground analysis fits a velocity-to-ice transfer function from the drill ties and ranks prospects as confirmed or inferred.</p>
       </div>
       <div class="mission-card">
         <div class="mission-card-accent"></div>
         <div class="mission-card-num">GROUND SEGMENT</div>
         <h3>Console, Dashboard, Analysis</h3>
         <p>Command console with full test suites and file downlink, a live web dashboard of the mission state machine and telemetry, and site-analysis tooling for refraction inversion, tie points, and prospect ranking. Plans are ground-uploadable, including per-waypoint drill and recalibration flags.</p>
+      </div>
+      <div class="mission-card" style="grid-column: 1 / -1;">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">SOURCE</div>
+        <h3>Open Source, Apache 2.0</h3>
+        <p>The flight software, the physics simulator, the console and dashboard, and the analysis tools are public at <a class="inline-link" href="https://github.com/Aegis-Station-Infrastructure/wok-cfs">github.com/Aegis-Station-Infrastructure/wok-cfs</a>. Clone it, build it against a stock NASA cFS v7.0.0 checkout, fly a mission in about twelve minutes, and read every number it produces. It is a simulation and educational project; nothing in it is flight-qualified.</p>
       </div>
     </div>
     <div class="prop-tech-bar reveal" style="margin-top: 24px; margin-bottom: 0;">
@@ -1257,6 +1263,7 @@
         <div class="tech-item"><div class="tech-dot" style="background: var(--ice);"></div><span class="tech-item-text">Measured Per-Pod Ground Coupling</span></div>
         <div class="tech-item"><div class="tech-dot" style="background: var(--text-dim);"></div><span class="tech-item-text">Onboard Refraction Inversion &amp; Drill Gate</span></div>
         <div class="tech-item"><div class="tech-dot" style="background: var(--muted);"></div><span class="tech-item-text">Ground-Commanded Pose Realignment</span></div>
+        <div class="tech-item"><div class="tech-dot" style="background: var(--amber);"></div><span class="tech-item-text">Open Source · Apache 2.0</span></div>
       </div>
     </div>
   </div>
