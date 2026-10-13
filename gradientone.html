@@ -147,6 +147,15 @@
       margin:.35rem .25rem 0 0;
       white-space:nowrap;
     }
+    .audience td:first-child{white-space:normal;font-weight:600}
+    .audience tr.measure td{
+      padding-top:0;
+      font-size:.86rem;
+      color:var(--text-dim);
+      font-weight:400;
+      white-space:normal;
+    }
+    .audience tr.lead td{border-bottom:0}
     figure{margin:1.4rem 0}
     figure a{display:block;border:1px solid var(--border);border-radius:10px;overflow:hidden}
     figure img{width:100%;display:block}
@@ -159,6 +168,19 @@
       table{font-size:.85rem}
       td:first-child{white-space:normal}
       .reqs td:nth-child(2){white-space:normal}
+      .audience thead{display:none}
+      .audience, .audience tbody, .audience tr, .audience td{display:block;width:100%}
+      .audience tr.lead td{padding:.25rem 0}
+      .audience tr.lead td:first-child{padding-top:.9rem}
+      .audience tr.lead td:nth-child(n+2)::before{
+        content:attr(data-label);
+        display:block;
+        font-size:.74rem;
+        letter-spacing:.06em;
+        text-transform:uppercase;
+        color:var(--text-dim);
+      }
+      .audience tr.measure td{padding:.25rem 0 .9rem}
     }
   </style>
 </head>
@@ -174,6 +196,45 @@
     <a href="artificial-gravity-requirements-evaluation.html">Artificial Gravity Requirements Evaluation</a>
     defines, and to retire the rotating-structure risks that Aegis Station carries as assumptions.
   </p>
+
+  <section class="card" id="who-this-is-for">
+    <h2>Who this is for</h2>
+    <table class="audience">
+      <thead><tr><th>Audience</th><th>What they get from G1</th><th>Where to read more</th></tr></thead>
+      <tbody>
+        <tr class="lead">
+          <td>Physiology researchers</td>
+          <td data-label="What they get from G1">Bone, cardiovascular, ocular and plant endpoints at lunar and Mars gravity, against a 1g control in the same vehicle.</td>
+          <td data-label="Where to read more"><a href="artificial-gravity-requirements-evaluation.html#agre-f-001">AGRE&#8209;F&#8209;001</a>, <a href="artificial-gravity-requirements-evaluation.html#agre-f-007">F&#8209;007</a>, <a href="artificial-gravity-requirements-evaluation.html#agre-f-008">F&#8209;008</a></td>
+        </tr>
+        <tr class="measure"><td colspan="3">Six-month exposures per subject; five campaigns over about three years give ten subjects per partial-g band and twenty at 1g.</td></tr>
+        <tr class="lead">
+          <td>Plant and bioregenerative scientists</td>
+          <td data-label="What they get from G1">Growth racks in every band, sharing the same radiation, diet, lighting and instruments.</td>
+          <td data-label="Where to read more"><a href="artificial-gravity-requirements-evaluation.html#agre-f-010">AGRE&#8209;F&#8209;010</a>; <a href="#plant-growth">Plant growth</a></td>
+        </tr>
+        <tr class="measure"><td colspan="3">Growth in every band is measured against the 1g lab, and the plant result is complete within a campaign.</td></tr>
+        <tr class="lead">
+          <td>Fluids and two-phase researchers</td>
+          <td data-label="What they get from G1">Radial water and gas lines at 1.8 MPa static head, and the two-phase test bed in the lab module.</td>
+          <td data-label="Where to read more"><a href="artificial-gravity-requirements-evaluation.html#agre-f-011">AGRE&#8209;F&#8209;011</a>; <a href="#fluids">Fluids</a></td>
+        </tr>
+        <tr class="measure"><td colspan="3">Coriolis asymmetry in radial flow, two-phase behaviour and separator performance at each gravity level are measured on the lines and in the lab module.</td></tr>
+        <tr class="lead">
+          <td>Rotating-systems and dual-spin engineers</td>
+          <td data-label="What they get from G1">The hub/rotor boundary, the transfer lock, the bearing, and the open items that remain.</td>
+          <td data-label="Where to read more"><a href="artificial-gravity-requirements-evaluation.html#agre-f-012">AGRE&#8209;F&#8209;012</a>; <a href="#open-items">Open items</a></td>
+        </tr>
+        <tr class="measure"><td colspan="3">Balance authority, wobble damping, car-transit excursions, and the hub/rotor boundary under rotation, at the station's spin rate.</td></tr>
+        <tr class="lead">
+          <td>Station customers</td>
+          <td data-label="What they get from G1">The rotating-structure risks that Aegis Station carries as assumptions, retired.</td>
+          <td data-label="Where to read more"><a href="hub_ring_boundary.html">Hub/ring boundary</a></td>
+        </tr>
+        <tr class="measure"><td colspan="3">Whether people can live and work for months at 1g produced by rotation at 1.6 rpm, the station's operating point, which no one has measured in orbit.</td></tr>
+      </tbody>
+    </table>
+  </section>
 
   <figure>
     <img src="images/gradient-one-g1-2.png" alt="Gradient One Rev B in low Earth orbit: three long open-truss arms at 120 degrees from a small hub, an identical pressurised module hung along each arm at the tip with a radiator panel, a water tank and a thruster pod beyond it, two more modules inboard on two of the arms, and a despun node on the hub axis carrying six solar array wings and docked crew and cargo vehicles, Earth below">
@@ -453,6 +514,24 @@
         <tr><td>F&#8209;013 to F&#8209;016</td><td>Campaign design and reporting; the human result is stated as a five-campaign program result.</td></tr>
       </tbody>
     </table>
+
+    <h3 id="plant-growth">Plant growth and bioregenerative systems (<a href="artificial-gravity-requirements-evaluation.html#agre-f-010">AGRE&#8209;F&#8209;010</a>)</h3>
+    <p>
+      Growth racks sit in the 1g laboratory module and in the Mars and Moon modules, and growth in every
+      band is measured against the 1g lab. Every band shares the same radiation, diet, lighting and
+      instruments. The racks draw 11 kW of the 55 kW load. The plant result is complete within a
+      campaign; it does not wait for the five-campaign human program.
+    </p>
+
+    <h3 id="fluids">Fluids and two-phase behaviour (<a href="artificial-gravity-requirements-evaluation.html#agre-f-011">AGRE&#8209;F&#8209;011</a>)</h3>
+    <p>
+      The water and gas lines along the arms and the lab module are the radial fluids test bed. The
+      static pressure head from the hub to the tip is 1.8 MPa, about 18 atmospheres; the station's rings
+      at 390 m see 1.9 MPa. Coriolis asymmetry in radial flow, two-phase behaviour and separator
+      performance at each gravity level are measured on the lines and in the lab module. Water recovery
+      and oxygen generation run in the 1g habitats, where gravity phase separation applies, and are
+      themselves a validation item. The fluids result is complete within a campaign.
+    </p>
   </section>
 
   <section class="card">
@@ -473,7 +552,7 @@
     </table>
   </section>
 
-  <section class="card">
+  <section class="card" id="open-items">
     <h2>Open items</h2>
     <ul>
       <li><strong>Coupled attitude simulation.</strong> The gravity-gradient precession estimate is a closed-form rate for a flat rotor. The bounded motion of the spin axis with nodal regression, the despun node's own pointing, and array shadowing need a simulation before the orbit is fixed.</li>
@@ -482,6 +561,10 @@
       <li><strong>Module thermal at 1g.</strong> Natural convection inside the 1g and partial-g modules changes cabin air handling and condensation behaviour from the ISS design basis; a benefit, but an unmodelled one.</li>
       <li><strong>Assembly sequence.</strong> Arm erection and module hanging before spin-up, with a robotic and EVA crew campaign, is costed but not sequenced.</li>
     </ul>
+    <div class="callout">
+      Engineers with comments on any of these items can open an issue on the
+      <a href="https://github.com/Aegis-Station-Infrastructure/gradient-one/issues" target="_blank" rel="noopener">Gradient One repository</a>.
+    </div>
   </section>
 
   <section class="card">
