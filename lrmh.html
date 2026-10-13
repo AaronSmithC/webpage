@@ -1248,6 +1248,12 @@
         <h3>Mounts on a Host, Talks to a Browser</h3>
         <p>The first Aegis flight-software image that rides on another vehicle. It subscribes to the host's pose and velocity so every sample is stamped with where the vehicle was. A bridge turns the packet stream into a live browser console with manual actuator commands routed through the sequencer's safety logic.</p>
       </div>
+      <div class="mission-card" style="grid-column: 1 / -1;">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">SOURCE</div>
+        <h3>Open Source, Apache 2.0</h3>
+        <p>The eight flight apps, the hardware abstraction layer with its physics simulator, the fault tables, the browser console and terminal console, and the site-record readers are public at <a class="inline-link" href="https://github.com/Aegis-Station-Infrastructure/lrmh-cfs">github.com/Aegis-Station-Infrastructure/lrmh-cfs</a>. Clone it, build it against a stock NASA cFS v7.0.0 checkout, run a full site test on a simulated highland site, and read the record it writes. It is a simulation and educational project; nothing in it is flight-qualified.</p>
+      </div>
     </div>
     <div class="prop-tech-bar reveal" style="margin-top: 24px; margin-bottom: 0;">
       <div class="tech-bar-label">Validated In Simulation</div>
@@ -1256,6 +1262,7 @@
         <div class="tech-item"><div class="tech-dot" style="background: var(--ice);"></div><span class="tech-item-text">Per-Fault Recovery Tiers via LC/SC</span></div>
         <div class="tech-item"><div class="tech-dot" style="background: var(--text-dim);"></div><span class="tech-item-text">Sequence-Token Command Ordering</span></div>
         <div class="tech-item"><div class="tech-dot" style="background: var(--muted);"></div><span class="tech-item-text">Apps Identical Across Sim, Bench, Flight</span></div>
+        <div class="tech-item"><div class="tech-dot" style="background: var(--amber);"></div><span class="tech-item-text">Open Source · Apache 2.0</span></div>
       </div>
     </div>
   </div>
