@@ -148,6 +148,9 @@
       white-space:nowrap;
     }
     .audience td:first-child{white-space:normal;font-weight:600}
+    .build td:first-child{white-space:normal;font-weight:600}
+    .build td:nth-child(3){min-width:16rem}
+    .build td:nth-child(3), .build td:nth-child(2), .build td:nth-child(4){white-space:normal}
     .audience tr.measure td{
       padding-top:0;
       font-size:.86rem;
@@ -181,6 +184,19 @@
         color:var(--text-dim);
       }
       .audience tr.measure td{padding:.25rem 0 .9rem}
+      .build thead{display:none}
+      .build, .build tbody, .build tr, .build td{display:block;width:100%}
+      .build td{padding:.25rem 0;border-bottom:0;min-width:0}
+      .build td:first-child{padding-top:.9rem}
+      .build tr{border-bottom:1px solid var(--border-soft);padding-bottom:.7rem}
+      .build td:nth-child(n+2)::before{
+        content:attr(data-label);
+        display:block;
+        font-size:.74rem;
+        letter-spacing:.06em;
+        text-transform:uppercase;
+        color:var(--text-dim);
+      }
     }
   </style>
 </head>
@@ -232,6 +248,12 @@
           <td data-label="Where to read more"><a href="hub_ring_boundary.html">Hub/ring boundary</a></td>
         </tr>
         <tr class="measure"><td colspan="3">Whether people can live and work for months at 1g produced by rotation at 1.6 rpm, the station's operating point, which no one has measured in orbit.</td></tr>
+        <tr class="lead">
+          <td>Hardware builders</td>
+          <td data-label="What they get from G1">A parts list by element: the flown article each one descends from, who built it, and the three rows with no analog.</td>
+          <td data-label="Where to read more"><a href="#build-map">What it is made of</a></td>
+        </tr>
+        <tr class="measure"><td colspan="3">Five copies of one module, one bearing, one lock, three arms, and a hardware class that already flies for nearly every row.</td></tr>
       </tbody>
     </table>
   </section>
@@ -476,7 +498,7 @@
     <p class="mini">Rev A did not carry a mass budget. Its "does not assume" list excluded a 250&ndash;500 t vehicle; Rev B lands under that, but only because the arms are light and the modules are few.</p>
   </section>
 
-  <section class="card">
+  <section class="card" id="cost-class">
     <h2>Cost class</h2>
     <p>
       Rev A gave $600 M to $1.4 B. That is below the cost of a single crew-rated module program with its
@@ -499,6 +521,105 @@
       </tbody>
     </table>
     <p class="mini">Development timeline of 8&ndash;10 years to first campaign is retained from Rev A; it is consistent with the Gateway analog. The number that moved is the price.</p>
+  </section>
+
+  <section class="card" id="build-map">
+    <h2>What it is made of</h2>
+    <p>
+      Flown hardware, by element. Nothing on this vehicle needs inventing: each row names the flown article
+      the G1 element descends from and the firm that built it. Three rows have no analog at the scale G1 needs and
+      say so; they are the open items. Firms are named as builders of record, nothing more. No relationship with
+      any of them is implied, and a row is a hardware-class match, not a proposal they have seen. The
+      <a href="engagement.html">engagement page</a> says what a partner position means on this site.
+    </p>
+    <table class="build">
+      <thead><tr><th>Element</th><th>G1 article</th><th>Flown analog and builder of record</th><th>What is new</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Common habitat module</td>
+          <td data-label="G1 article">4.5 m &times; 11 m hull, three decks, about 17 t outfitted, five copies, mounted radially</td>
+          <td data-label="Flown analog and builder of record">ISS and Gateway pressurized modules in the CBM class. Nodes 2 and 3, Cupola, the MPLM and PMM, the Cygnus cargo module and the HALO primary structure: Thales Alenia Space. Destiny and Unity: Boeing. Kibo: Mitsubishi Heavy Industries. Columbus: Airbus as prime, structure by Thales Alenia Space. Cygnus and HALO as prime: Northrop Grumman.</td>
+          <td data-label="What is new">Radial mounting, so the 1g service load runs along the launch axis; three decks with floors built to a 350 m radius; natural convection inside, which the ISS design basis does not have.</td>
+        </tr>
+        <tr>
+          <td>Rotating hub module</td>
+          <td data-label="G1 article">Node-class, three radial arm ports and one axial port, 0g crew of two</td>
+          <td data-label="Flown analog and builder of record">The same node class as above. HALO, with three docking ports: Northrop Grumman and Thales Alenia Space.</td>
+          <td data-label="What is new">Nothing structural. It lives on the rotor at 1.6 rpm and is the contingency refuge.</td>
+        </tr>
+        <tr>
+          <td>Despun node and bearing</td>
+          <td data-label="G1 article">8 t pressurized node held despun on a bearing; reboost thrust passes through the bearing as a radial load</td>
+          <td data-label="Flown analog and builder of record">Dual-spin communications satellites, despun for decades at tens of rpm: Hughes, now Boeing. The ISS Solar Alpha Rotary Joint, a 3.2 m bearing that turns the array trusses continuously: Lockheed Martin.</td>
+          <td data-label="What is new">Diameter, and a pressurized element on the despun side. A bearing with crew on both sides of it has not flown. A seized bearing is benign: the node co-rotates and the docked crew vehicles remain the way home.</td>
+        </tr>
+        <tr>
+          <td>Transfer lock</td>
+          <td data-label="G1 article">Short pressurized cylinder that clamps to the node, spins up, and clamps to the hub; hatches on both faces</td>
+          <td data-label="Flown analog and builder of record">Hatches, and the NASA Docking System and International Docking Adapters: Boeing. The IDSS standard every visiting vehicle already meets.</td>
+          <td data-label="What is new"><strong>No flown analog.</strong> A clamp, spin, clamp cycle on a pressurized element. The cycle is unsized and is an open item; the station's magazine concept is the starting point.</td>
+        </tr>
+        <tr>
+          <td>Power across the boundary</td>
+          <td data-label="G1 article">Contactless rotary transformer at the bearing; arrays and battery on the despun side</td>
+          <td data-label="Flown analog and builder of record">Rotary transformers have flown at signal level: the Galileo orbiter's spin bearing assembly carried data through rotary transformers and power through slip rings. Power-class contactless transfer across a rotating joint exists as prototype and study hardware.</td>
+          <td data-label="What is new"><strong>No flown analog</strong> at the tens-of-kilowatt class. No builder of record. This is the one component G1 asks industry to qualify rather than supply, and it is the station's component too.</td>
+        </tr>
+        <tr>
+          <td>Data across the boundary</td>
+          <td data-label="G1 article">Free-space optical link on the spin axis</td>
+          <td data-label="Flown analog and builder of record">Laser terminals on the European Data Relay System and the Sentinel satellites, tens of thousands of links since 2016: Tesat-Spacecom. The Laser Communications Relay Demonstration: NASA Goddard with MIT Lincoln Laboratory and JPL.</td>
+          <td data-label="What is new">Nothing. A fixed on-axis link at 1.6 rpm is an easier pointing case than any of those.</td>
+        </tr>
+        <tr>
+          <td>Solar arrays</td>
+          <td data-label="G1 article">Six 20 kW deployable wings on two gimbals, about 102 kW sunlit at end of life</td>
+          <td data-label="Flown analog and builder of record">Roll-Out Solar Array: Redwire. Six wings on the ISS under Boeing, and the array on the DART spacecraft.</td>
+          <td data-label="What is new">Nothing. Catalogue hardware on the despun side.</td>
+        </tr>
+        <tr>
+          <td>Arm trusses</td>
+          <td data-label="G1 article">Three 344 m open trusses at about 30 kg/m, tension-dominated, sized by stiffness and by the car rail</td>
+          <td data-label="Flown analog and builder of record">The ISS integrated truss, about 109 m assembled on orbit: Boeing. Deployable masts to 60 m on the Shuttle Radar Topography Mission: ATK Goleta, now Northrop Grumman.</td>
+          <td data-label="What is new"><strong>No flown analog</strong> at this length. The loads are small (360 kN at the hub end, 18 cm&sup2; of aluminium) but the first modes and the rail are open items. No builder of record.</td>
+        </tr>
+        <tr>
+          <td>Transit car and rail</td>
+          <td data-label="G1 article">Pressurized two-seat car on a rail along each arm, docking to the hub-facing port of each module</td>
+          <td data-label="Flown analog and builder of record">The ISS Mobile Transporter, a rail cart on the truss that carries Canadarm2 to its worksites: TRW Astro Aerospace, now Northrop Grumman, under Boeing.</td>
+          <td data-label="What is new">Pressurized, crewed, with a docking port, and faster. The analog is unpressurized and moves at a few centimetres per second.</td>
+        </tr>
+        <tr>
+          <td>Life support</td>
+          <td data-label="G1 article">Water recovery and oxygen generation centralized in the 1g habitats; atmosphere revitalization local to each module</td>
+          <td data-label="Flown analog and builder of record">The ISS Water Processor and Oxygen Generation Assemblies: Hamilton Sundstrand, now Collins Aerospace. The Urine Processor Assembly: NASA Marshall.</td>
+          <td data-label="What is new">Running them at 1g is the simpler case, and gravity phase separation is itself a validation item (AGRE-F-011).</td>
+        </tr>
+        <tr>
+          <td>Growth racks</td>
+          <td data-label="G1 article">Racks in the 1g laboratory and in the Mars and Moon modules, 11 kW of the 55 kW load</td>
+          <td data-label="Flown analog and builder of record">The Advanced Plant Habitat and Veggie on the ISS: ORBITEC, now Sierra Space, with NASA Kennedy.</td>
+          <td data-label="What is new">Operation at partial gravity and at 1g under rotation, which no rack has done.</td>
+        </tr>
+        <tr>
+          <td>Crew vehicles</td>
+          <td data-label="G1 article">Two seven-seat vehicles docked at the despun node for the full 180-day campaign; one cargo port</td>
+          <td data-label="Flown analog and builder of record">Dragon: SpaceX. Starliner: Boeing. Both are designed for seven.</td>
+          <td data-label="What is new">The 180-day docked stay at a despun node, which is a standard docking with no spin to match.</td>
+        </tr>
+        <tr>
+          <td>Propulsion and trim</td>
+          <td data-label="G1 article">Reboost thrusters at the node; tip thruster pods for spin-up; water pumped between three 4 t tip tanks for balance</td>
+          <td data-label="Flown analog and builder of record">Standard monopropellant and bipropellant thrusters, many builders. Spin-up costs about 1.8 t of propellant at 300 s.</td>
+          <td data-label="What is new">Water trim as the balance system. The pumps are ordinary; the control law is the station's.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="mini">
+      Rows name flown hardware only. Announced programs that have not flown are left out, whoever is building them.
+      Where a class has several builders with flown articles, the row lists the ones with ISS or Gateway hardware;
+      corrections to any attribution go to <a href="mailto:contact@aegisstation.com">contact@aegisstation.com</a>.
+    </p>
   </section>
 
   <section class="card">
