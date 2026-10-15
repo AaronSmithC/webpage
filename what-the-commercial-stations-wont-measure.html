@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What the Commercial Stations Won&rsquo;t Measure &mdash; Aegis Station</title>
+<meta name="description" content="NASA's commercial stations will keep the microgravity record going after the ISS. That is the right job. None of them can hold a crew at lunar or Mars gravity for six months, and that is the measurement every Moon and Mars program needs. A strategic note on how Gradient One relates to the stations being chosen.">
+<meta property="og:title" content="What the Commercial Stations Won&rsquo;t Measure &mdash; Aegis Station">
+<meta property="og:description" content="The commercial stations extend the record. Gradient One starts one. Two classes of vehicle, one missing dataset.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aegisstation.com/what-the-commercial-stations-wont-measure.html">
+<meta property="og:image" content="https://aegisstation.com/images/gradient-one-g1-2.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0a0e15;
+    --bg-panel:  #0e141d;
+    --ink:       #d9e1ea;
+    --ink-dim:   #8a94a3;
+    --water:     #6fb6d8;
+    --water-deep:#3f7f9e;
+    --hair:      rgba(217, 225, 234, 0.12);
+    --hair-soft: rgba(217, 225, 234, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 1.14rem;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--water); text-decoration: none; }
+  a:hover, a:focus-visible { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--water); outline-offset: 3px; }
+
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+  .wrap-wide { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  .masthead {
+    border-bottom: 1px solid var(--hair);
+    background: rgba(10, 14, 21, 0.9);
+  }
+  .masthead .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 3.4rem;
+  }
+  .brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .brand a { color: var(--ink); }
+  .brand a:hover { color: var(--water); }
+  .masthead .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  header.hero {
+    background:
+      radial-gradient(120% 80% at 85% -10%, rgba(63, 127, 158, 0.16), transparent 60%),
+      var(--bg);
+  }
+  header.hero .wrap { padding-top: 5rem; padding-bottom: 3.2rem; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--water); margin-bottom: 1.6rem;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: clamp(2.3rem, 6vw, 3.5rem);
+    line-height: 1.05; letter-spacing: -0.02em;
+    color: #eef3f8;
+  }
+  .dek {
+    margin-top: 1.6rem;
+    font-size: 1.2rem; line-height: 1.6;
+    color: var(--ink-dim);
+    max-width: 34rem;
+  }
+  .dek strong { color: var(--ink); font-weight: 500; }
+
+  figure.art { margin: 0; }
+  figure.art img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--hair-soft);
+    border-radius: 4px;
+  }
+  figure.art figcaption {
+    margin-top: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; line-height: 1.6; letter-spacing: 0.06em;
+    color: var(--ink-dim);
+  }
+  .hero-art {
+    border-bottom: 1px solid var(--hair-soft);
+    padding-bottom: 3rem;
+    background: var(--bg);
+  }
+
+  main .wrap { padding-top: 3.5rem; padding-bottom: 2rem; }
+  main p { margin-bottom: 1.5rem; }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500; font-size: 1.5rem; letter-spacing: -0.01em;
+    color: #eef3f8;
+    margin: 3.2rem 0 1.3rem;
+    padding-top: 0.4rem;
+  }
+  h2 .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; font-weight: 400;
+    color: var(--water-deep);
+    letter-spacing: 0.1em;
+    margin-right: 0.8rem;
+    vertical-align: 0.28em;
+  }
+
+  em { color: var(--ink); font-style: italic; }
+
+  .pull {
+    margin: 3rem 0;
+    padding: 1.6rem 0 1.6rem 1.6rem;
+    border-left: 2px solid var(--water);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
+    font-size: 1.55rem; line-height: 1.35; letter-spacing: -0.01em;
+    color: #eef3f8;
+  }
+
+  ul.plain { margin: 0 0 1.5rem 1.2rem; }
+  ul.plain li { margin-bottom: 0.6rem; }
+  ul.plain li strong { color: var(--ink); font-weight: 500; }
+
+  footer {
+    margin-top: 3rem;
+    border-top: 1px solid var(--hair);
+    background: var(--bg-panel);
+  }
+  footer .wrap { padding-top: 2.4rem; padding-bottom: 4rem; }
+  .sig {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--ink); font-size: 0.98rem; font-weight: 500;
+  }
+  .sig span { color: var(--ink-dim); font-weight: 400; }
+  .backrow {
+    margin-top: 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    display: flex; gap: 1.4rem; flex-wrap: wrap;
+  }
+  .backrow a { color: var(--ink-dim); }
+  .backrow a:hover { color: var(--water); }
+
+  @media (max-width: 600px) {
+    body { font-size: 1.06rem; }
+    header.hero .wrap { padding-top: 3.5rem; padding-bottom: 2.4rem; }
+    .hero-art { padding-bottom: 2.4rem; }
+    .pull { font-size: 1.3rem; }
+    h2 .num { display: block; margin: 0 0 0.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wrap">
+    <div class="brand"><a href="index.html">Aegis Station</a></div>
+    <div class="kicker">Strategic Note</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Station Verification</div>
+    <h1>What the Commercial Stations Won&rsquo;t Measure</h1>
+    <p class="dek">NASA&rsquo;s commercial stations will keep the microgravity record going after the ISS. That is the right job, and it is being done well. <strong>None of them can hold a crew at lunar or Mars gravity for six months,</strong> and that is the measurement every Moon and Mars program is waiting on.</p>
+  </div>
+</header>
+
+<div class="hero-art">
+  <div class="wrap-wide">
+    <figure class="art">
+      <img src="images/gradient-one-g1-2.png" width="1536" height="1024"
+           alt="Gradient One Rev B in low Earth orbit: three long open-truss arms from a small hub, a pressurised module at each tip, two more modules inboard, and a despun node on the spin axis carrying solar arrays and docked crew vehicles, Earth below.">
+      <figcaption>Gradient One, Rev B. Four gravity levels in one vehicle at one spin rate: 1g at the tips, Mars and lunar gravity inboard, a rotating 0g hub. Concept render.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+
+    <p>Gradient One is not a candidate in NASA&rsquo;s commercial station program, and this note is not a complaint about that. A one-person design shop does not build a 230&nbsp;t rotor, and the program is buying something else anyway. What is worth doing is saying plainly how the two classes of vehicle relate, because they get confused with each other, and because the honest answer is that they need each other.</p>
+
+    <h2><span class="num">01</span>What the commercial stations are for</h2>
+
+    <p>The stations NASA will select are zero-g free-flyers in the ISS class: crews of four to eight, pressurized volume that goes up in one to a few launches, continuous occupancy. Their job is continuity. The ISS record is a quarter century of human physiology at 0g, with countermeasures that work and protocols that are standard, and it is the only long-duration dataset the field has. Losing it would be a loss, and the program exists so that there is no gap. The same stations are where microgravity manufacturing and pharmaceutical work will live once the ISS is gone. That is a sensible thing to buy, and the companies building for it are doing a hard thing well.</p>
+
+    <h2><span class="num">02</span>The measurement none of them can make</h2>
+
+    <p>Every one of those stations is a single point on the chart that matters: 0g, 0&nbsp;rpm. The <a href="artificial-gravity-requirements-evaluation.html">Artificial Gravity Requirements Evaluation</a> on this site lays out what a Moon base or a Mars transit actually needs to know: what months at 0.165g or 0.38g do to bone, eyes, heart and plants, what rotation does on top of that, and what the tolerance envelope looks like in spin rate and gravity level with confidence bounds on it. No part of that dataset exists in orbit. Not for this program, not for anyone.</p>
+
+    <p>A free-flyer cannot hold a gravity level. A small centrifuge aboard one can hold cell cultures and small animals at partial gravity, and that work matters, but it does not put a person at lunar gravity for six months, and it does not put a floor under their feet. <a href="gradientone.html">Gradient One</a> is a fixed-rate rotor that holds 1g, Mars gravity, lunar gravity and a rotating 0g control in one vehicle, under one radiation environment, with one instrument suite and one diet, for 180 days at a time. It is a different class of vehicle, built to answer a question the free-flyers are not asked.</p>
+
+    <div class="pull">The commercial stations extend the record. Gradient One starts one.</div>
+
+    <h2><span class="num">03</span>Where Gradient One is weaker</h2>
+
+    <p>The weaknesses come first, because they are real and the <a href="gradientone.html#cost-class">G1 page</a> states them.</p>
+
+    <ul class="plain">
+      <li><strong>Cost class.</strong> $5 to $10&nbsp;billion to first campaign, against commercial stations that are being built for a fraction of that. The money buys five crew-rated modules, a bearing with people on both sides of it, and three arms a third of a kilometre long.</li>
+      <li><strong>No commercial customer.</strong> The customer is the research question. A free-flyer can sell volume to a dozen tenants. A rotor sells one dataset, and the people who need it are agencies and the programs that follow them.</li>
+      <li><strong>An assembly campaign.</strong> Arm erection and module hanging before spin-up is a robotic and EVA campaign no commercial station requires. It is costed; it is not yet sequenced.</li>
+      <li><strong>Eight to ten years.</strong> The timeline is consistent with the Gateway analog and it is longer than any commercial station&rsquo;s.</li>
+      <li><strong>No shop behind it.</strong> Every physical article in the reference set on this site is a partnership. The <a href="gradientone.html#build-map">build map</a> on the G1 page says which flown hardware each element descends from and who built it; it does not say Aegis will.</li>
+    </ul>
+
+    <h2><span class="num">04</span>Why the two classes need each other</h2>
+
+    <p>Whichever stations fly, they become Gradient One&rsquo;s neighbours and its infrastructure. The crew vehicles and cargo services that serve them are exactly the ones G1 was sized to use: seven-seat capsules, standard docking at a despun node, no spin to match, 180-day docked stays. A commercial station in the same orbital class is the natural staging point for a G1 campaign and the natural place to run the pre-flight and post-flight baselines on a crew. G1 does not compete with any of that. It is a customer for it.</p>
+
+    <p>The benefit runs the other way too. The question a station operator will face within a decade is whether a rotating follow-on is worth building, and at what radius and spin rate. The only honest answer today is a comfort chart from ground studies with Earth&rsquo;s gravity superimposed. A G1 result at 1.6&nbsp;rpm and 1g, with the partial-g bands beside it, is what turns that into an engineering decision instead of a guess. NASA&rsquo;s own purpose statement for the commercial stations names preparation for the Moon and Mars. The free-flyers cover one half of that: long-duration operations, logistics, a place to practise. The other half is gravity, and no free-flyer can carry it.</p>
+
+    <h2><span class="num">05</span>The on-ramp</h2>
+
+    <p>If a full Gradient One is too much to ask of this decade, there is a smaller first step. A single G1-class module on a short arm or a tether, hosted by a commercial station, holding lunar gravity for a plant and small-animal campaign, is a payload a station operator could carry. It would not answer the human question. It would answer the plant and fluids questions, and it would exercise the radial plumbing and the boundary principle at a scale a host could tolerate. It is sized here as a sentence; it will get a page of its own.</p>
+
+    <p>The larger point stands either way. Nothing in Gradient One needs inventing. The modules are ISS-class, the bearing is a scaled rotary joint, the arrays and docking and life support are catalogue hardware, and the <a href="gradientone.html#build-map">build map</a> lists the flown article behind each one. What is new is the arrangement, and the three rows on that map that say &ldquo;no flown analog&rdquo; are the open items. Engineers with a view on any of them know where to write.</p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sig">A.S. <span>&mdash; Principal Architect, Aegis Station</span></div>
+    <div class="backrow">
+      <a href="gradientone.html">Gradient One</a>
+      <a href="artificial-gravity-requirements-evaluation.html">AGRE</a>
+      <a href="engagement.html">How to Engage</a>
+      <a href="index.html">&larr; Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
