@@ -116,6 +116,14 @@
   <tr><td>Braking burn</td><td class="num">113 s</td><td>Full thrust to a 100 m hover gate at zero velocity</td></tr>
   <tr><td>Hover, divert, terminal descent</td><td class="num">71 s + 28 s divert</td><td>Hazard assessment; up to 100 m divert; 1 m/s touchdown</td></tr>
 </table>
+<h3>The same leg, as flown by the flight software in simulation (October 2026)</h3>
+<table>
+  <tr><th>Quantity</th><th>Flight software</th><th>Trajectory tool</th></tr>
+  <tr><td>Propellant to the hover gate</td><td class="num">6,711 kg</td><td class="num">6,643 kg</td></tr>
+  <tr><td>Hover gate</td><td class="num">96 m, 500.3 km downrange</td><td class="num">100 m, 500 km</td></tr>
+  <tr><td>Touchdown</td><td class="num">283 m long, 1.0 m/s, T+1109 s</td><td class="num">1 m/s</td></tr>
+</table>
+<p>The software flies the solver's profile for the range and the liftoff mass and closes the loop on an on-board predictor (the ascent cutoff, the braking ignition, the braking throttle) over the same equations of motion, on a planar point-mass plant with no sensor noise; see section 7.</p>
 <figure><img src="../images/short_hopper_fig3-1_profiles.svg" alt="Flight profiles for the 500 km hop, the 1,500 km hop and the ascent to LLO"><figcaption>Figure 1 — Reference-mission flight profiles from the trajectory tool at 45 kN (altitude vs downrange, vertical scale exaggerated).</figcaption></figure>
 </div>
 
@@ -150,7 +158,7 @@
   <tr><th colspan="2">Systems</th></tr>
   <tr><td>Avionics</td><td>Dual-redundant radiation-tolerant flight computers</td></tr>
   <tr><td>Navigation</td><td>FOG/RLG IMU + MEMS backup, lidar and radar altimeters, terrain-relative navigation, LUNET beacon aiding when available</td></tr>
-  <tr><td>Flight software</td><td>NASA cFS stack, ten mission applications, 13-phase autonomy executive with sequence gates; unit tests and an eight-scenario harness</td></tr>
+  <tr><td>Flight software</td><td>NASA cFS stack, ten mission applications, 13-phase autonomy executive with launch gates; closed-loop hop guidance from the SRR profiles; a loaded FDIR catalogue (28 watchpoints, 10 actionpoints, six stored-command sequences); three-engine cluster with an engine-out response; unit, scenario and decoder tests under continuous integration. Flown in simulation only (section 7)</td></tr>
   <tr><td>Communications</td><td>S-band/UHF short range; high-gain directional to station or Earth</td></tr>
   <tr><td>Power / life support</td><td>Battery packs with node recharge through the roof power/thermal interface plate (budget open); O₂/N₂ pressurised cabin, Orion-class LSS heritage</td></tr>
   <tr><td>Docking</td><td>Aft/lower hatch, soft-seal pressurised collar; suitport mate with the Aegis-Class Rover; no EVA for crew transfer</td></tr>
@@ -224,8 +232,9 @@
 <!-- 7 -->
 <div class="section">
 <h2><span class="n">7.</span>Flight Software</h2>
-<p>The flight software exists. It is a NASA core Flight System stack of ten ASI mission applications — executive, GN&amp;C, propulsion, power, thermal, ECLSS, communications with LUNET, cargo, docking with landing gear, crew interface — plus the standard NASA limit-checker, stored-command, health, housekeeping, storage and file applications. The executive implements the 13-phase flight state machine the CONOPS uses, with table-driven sequence gates and a manual-override inhibit mask. The stack carries unit tests, an eight-scenario sortie harness (long-range hop, orbital docking, refuel, crew aborts from ascent and descent, ECLSS leak, LUNET handoff) and nineteen accepted architecture decision records, and boots to operational in the cFS image against a vehicle simulator.</p>
-<p>What it does not yet do is stated plainly in the SRR: the navigation filter is deferred, terrain-relative navigation is not implemented, the abort library's profiles are placeholders for a real solver, and the simulation plant is vertical-axis only. The next software stage flies the reference missions closed-loop against the SRR trajectory tool. The vehicle constants in the software are generated from the SRR budget workbook, so the software and this dossier cannot drift apart.</p>
+<p>The flight software exists and, as of October 2026, flies the reference missions closed-loop in simulation. It is a NASA core Flight System stack of ten ASI mission applications — executive, GN&amp;C, propulsion, power, thermal, ECLSS, communications with LUNET, cargo, docking with landing gear, crew interface — plus the standard NASA limit-checker, stored-command, health, housekeeping, storage and file applications. The executive implements the 13-phase flight state machine the CONOPS uses, with launch gates (a destination that closes on the propellant aboard, nav and guidance valid, gear, reserve, charge) and the crew inhibit mask read, the manual-override path specified and not yet built. Guidance flies the hop profile the SRR solver generated for the range and the liftoff mass and closes the loop on an on-board predictor over the same equations of motion, which decides the ascent cutoff, the braking ignition and the braking throttle; the abort executor flies the solver's abort profiles. On the 500 km leg it lands 283 m long at 1.0 m/s and spends 6,711 kg to the hover gate against the solver's 6,643 (section 2).</p>
+<p>Fault protection is declarative and loaded: 28 watchpoints and 10 actionpoints in the limit checker, six stored-command sequences. The software owns the refuel (one actionpoint starts the LUNET sequence on landing, another ends it at full tanks), a life-support loss in flight aborts through the same machinery, and a safing gate holds a re-arm until the vehicle is healthy. The propulsion model is a three-engine cluster; an engine lost at the hover gate is landed on the remaining two, with guidance flying on the thrust propulsion reports. Faults are injected into the simulated plant, never into the software. The stack carries unit tests, an eight-scenario sortie harness (long-range hop, orbital docking, refuel, crew aborts from ascent and descent, ECLSS loss, LUNET handoff), a packet-layout and ground-decoder round trip, twenty-one accepted architecture decision records, continuous integration that builds the image from the pinned NASA sources on every change, and boots to operational in the cFS image against the vehicle simulator.</p>
+<p>What it does not do is stated as plainly. The plant is a planar point mass over a spherical Moon with no attitude dynamics, no sensor noise and no model mismatch; the navigation solution is taken as given, with no filter and no terrain-relative navigation. An engine lost at braking ignition is not survivable with profiles solved for three engines, and a two-engine braking family is the open item. Docking is carried as a mechanism walk, not flown. Nothing has run on hardware or with a crew. The vehicle constants in the software are generated from the SRR budget workbook, so the software and this dossier cannot drift apart.</p>
 </div>
 
 <!-- 8 -->
@@ -236,7 +245,7 @@
   <tr><th>Stage</th><th>Content</th><th>Exit criterion</th></tr>
   <tr><td>0 — SRR Rev A</td><td>Mission set, reference missions, requirements, budgets, trades, risks, verification strategy</td><td>Done; design-authority decisions pending</td></tr>
   <tr><td>1 — Analysis closure</td><td>Insertion-altitude trade, abort trajectories, rendezvous budget, boil-off and power budgets with partner data</td><td>Every placeholder replaced or owned</td></tr>
-  <tr><td>2 — Software to flight depth</td><td>Full navigation filter, trajectory-tool guidance targets and abort profiles, FDIR catalogue, closed-loop flights against the trajectory tool</td><td>Reference missions flown closed-loop in simulation</td></tr>
+  <tr><td>2 — Software to flight depth</td><td>Trajectory-tool guidance targets and abort profiles, FDIR catalogue and closed-loop flights against the trajectory tool: done (October 2026, section 7). Remaining: the navigation filter, terrain-relative navigation, the two-engine braking profiles, a plant with attitude and sensor noise</td><td>Reference missions flown closed-loop in simulation (met on the planar plant); the filter and the noisy plant close the stage</td></tr>
   <tr><td>3 — Subsystem demonstrators</td><td>Engine class demonstration, tank heat-leak article, gear drop tests, collar seal tests, ECLSS bench</td><td>Subsystem requirements verified with partners</td></tr>
   <tr><td>4 — Uncrewed flight article</td><td>Full RM1 profile flown uncrewed, including an unprepared-site landing and the return after a surface stay</td><td>Uncrewed before crewed</td></tr>
   <tr><td>5 — Crewed</td><td>RM1 crewed; RM2 when a station and a customer exist</td><td>Hazard controls closed</td></tr>

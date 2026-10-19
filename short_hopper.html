@@ -719,7 +719,7 @@
       <tr><td>POWER</td><td>Rechargeable battery packs; node recharge through the roof power/thermal interface plate (budget open); passive solar backup</td></tr>
       <tr><td>LIFE SUPPORT</td><td>O₂/N₂ pressurized cabin; Orion-class LSS heritage</td></tr>
       <tr><td>DOCKING INTERFACE</td><td>Aft/lower hatch; soft-seal pressurized collar</td></tr>
-      <tr><td>FLIGHT SOFTWARE</td><td>NASA cFS stack, ten mission applications, 13-phase autonomy executive (aegis-hopper-fsw 2.0)</td></tr>
+      <tr><td>FLIGHT SOFTWARE</td><td>NASA cFS stack, ten mission applications, 13-phase autonomy executive with launch gates; closed-loop hop guidance from the SRR profiles; a loaded FDIR catalogue (28 watchpoints, 10 actionpoints, six stored-command sequences); three-engine cluster with an engine-out response; unit, scenario and decoder tests under continuous integration. Flown in simulation only (section 06)</td></tr>
     </table>
     </div>
   </div>
@@ -769,7 +769,8 @@
         A ballistic hop launches at 33–41° above the horizon, so lunar gravity opposes thrust for the whole burn: at Rev B's 30 kN the two burns of a
         1,500 km hop cost 24% over the impulsive ideal, not the 6% Rev B assumed, and no single 25–30 kN engine closes a standalone round trip of any
         length. The Rev C vehicle carries 60 kN of total thrust from an engine-out-capable cluster, which holds liftoff T/W at 2.0 on the heaviest leg
-        and, with three engines, lands on one at a conventional 49% throttle setting. Gimbal provides pitch/yaw authority; RCS handles roll, coast trim,
+        and, with three engines, is sized to land on one at a conventional 49% throttle setting. The flight software keeps two engines as its minimum and lands
+        on two after an engine loss, so the single-engine case is carried as margin. Gimbal provides pitch/yaw authority; RCS handles roll, coast trim,
         hover and docking. Propellant is LOX/LH₂ throughout, so ISRU production converts directly into reach.
       </div>
       <div class="prop-stats">
@@ -875,7 +876,7 @@
           <li>Terrain-relative navigation via lidar + radar altimeter</li>
           <li>FOG or RLG IMU with MEMS backup; Kalman sensor fusion</li>
           <li>LUNET beacon alignment for node-assisted precision landing</li>
-          <li>Nominal precision: ±3 m; abort-to-pad, abort-to-surface and abort-to-orbit modes defined; engine-out on descent is designed out by the cluster</li>
+          <li>Nominal precision: ±3 m; abort-to-pad, abort-to-surface and abort-to-orbit modes defined; an engine lost at the hover gate is landed on the remaining two in simulation, and the two-engine braking case is the open item (section 06)</li>
           <li>Operable in permanently shadowed regions (PSRs)</li>
         </ul>
       </div>
@@ -906,10 +907,56 @@
     </div>
   </div>
 
-  <!-- 06 ROLE IN THE LUNAR STACK -->
+  <!-- 06 FLIGHT SOFTWARE -->
   <div class="section">
     <div class="section-header">
       <span class="section-num">06</span>
+      <span class="section-title">Flight Software, as Flown in Simulation</span>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="overview-text">
+      The flight software exists and flies the reference missions closed-loop in simulation, as of October 2026. It is a NASA core Flight System stack of ten
+      mission applications — executive, guidance, propulsion, power, thermal, life support, communications with LUNET, cargo, docking with landing gear, crew
+      interface — beside NASA's limit-checker, stored-command, health, housekeeping, storage and file applications. The executive owns the 13-phase flight
+      state machine and its launch gates; guidance flies the hop profile the SRR solver generated for the range and the liftoff mass, closing the loop on an
+      on-board predictor that decides the ascent cutoff, the braking ignition and the braking throttle. The 500 km leg lands 283 m long at 1.0 m/s, having
+      spent 6,711 kg of propellant to the hover gate against the SRR's 6,643.
+    </p>
+    <p class="overview-text" style="margin-top:20px;">
+      Fault protection is declarative: 28 watchpoints and 10 actionpoints in the limit checker, six stored-command sequences. The software owns the refuel
+      (an actionpoint starts the LUNET sequence on landing and another ends it at full tanks), a life-support loss in flight aborts through the same
+      machinery, and a safing gate holds a re-arm until the vehicle is healthy. The cluster is three engines; an engine lost at the hover gate is landed on
+      the remaining two, with guidance flying on the thrust propulsion reports. Faults are injected into the simulated plant, never into the software.
+    </p>
+
+    <div class="two-col" style="margin-top:28px;">
+      <div>
+        <img src="images/short_hopper_fsw_coast.png" alt="Side view of the simulated hopper at the end of its ballistic coast on a 25 km hop: the vehicle held in the frame, the ground scrolling beneath it with the site flag behind and the destination flag ahead, and the guidance predictor's landing mark sitting on the destination a few seconds before braking ignition; readouts of altitude, range to go, velocity and throttle above, the limit checker's ten actionpoints, and the executive's phase band below" style="width:100%;height:auto;border:1px solid var(--cyan-dim);display:block;">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--white-dim);line-height:1.7;margin-top:10px;">
+          End of coast, 25 km hop. The predictor's mark ("braking now lands at") has converged on the destination; ignition follows in seconds. Every element drawn is a telemetry field from the running software.
+        </div>
+      </div>
+      <div>
+        <img src="images/short_hopper_fsw_engine_out.png" alt="Side view of the simulated hopper in hover at 97 m with its middle engine marked failed and two plumes lit; the readouts show two of three engines, 40 kN available and the throttle raised, the limit checker's engine-out actionpoint shows failed, and the propulsion event reports the engine-out mask" style="width:100%;height:auto;border:1px solid var(--cyan-dim);display:block;">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--white-dim);line-height:1.7;margin-top:10px;">
+          Engine 2 failed three seconds after the hover gate. Propulsion reports two of three and 40 kN, the limit checker's engine-out actionpoint fires, guidance raises the throttle, and the vehicle lands on two.
+        </div>
+      </div>
+    </div>
+
+    <div style="font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--white-dim);line-height:1.7;margin-top:28px;">
+      What the software does not do is stated as plainly. The plant is a planar point mass over a spherical Moon with no sensor noise; the navigation
+      solution is taken as given, with no filter and no terrain-relative navigation. An engine lost at braking ignition is not survivable with profiles
+      solved for three engines; a two-engine braking family is the open item. Docking is carried as a mechanism, not flown. Nothing has run on hardware.
+      Every vehicle constant in the software is generated from the SRR budget workbook, so the software and this page cannot drift apart.
+    </div>
+  </div>
+
+  <!-- 07 ROLE IN THE LUNAR STACK -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">07</span>
       <span class="section-title">Role in the Lunar Stack</span>
       <div class="section-line"></div>
     </div>
@@ -942,7 +989,7 @@
   <footer>
     <div class="footer-left">
       AEGIS STATION INFRASTRUCTURE LLC &nbsp;·&nbsp; LUNA–AEGIS SHUTTLE DESIGN DOSSIER<br>
-      DOC: ASI–LAS–DD–001 &nbsp;·&nbsp; REV C &nbsp;·&nbsp; SEPTEMBER 2026 &nbsp;·&nbsp; SRR REV A BASELINE &nbsp;·&nbsp; ITAR/EAR-FREE BASELINE<br>
+      DOC: ASI–LAS–DD–001 &nbsp;·&nbsp; REV C &nbsp;·&nbsp; SEPTEMBER 2026, FLIGHT SOFTWARE OCTOBER 2026 &nbsp;·&nbsp; SRR REV A BASELINE &nbsp;·&nbsp; ITAR/EAR-FREE BASELINE<br>
       DESIGNED FOR COMPATIBILITY WITH ARTEMIS LOGISTICS AND NASA STMD PRIORITIES
     </div>
     <div class="footer-right">
