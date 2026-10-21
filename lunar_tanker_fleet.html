@@ -1324,46 +1324,61 @@
   </div>
 </section>
 
-<!-- ENGINEERING STATUS -->
+<!-- ENGINEERING STATUS: FLIGHT SOFTWARE -->
 <section class="specs-section" id="status" style="border-top: 1px solid var(--border);">
   <div class="page-wrap">
     <div class="section-header reveal">
       <span class="section-number">// 03.7</span>
-      <span class="section-title">Engineering Status</span>
+      <span class="section-title">Flight Software, as Flown in Simulation</span>
       <div class="section-rule"></div>
     </div>
-    <div class="mission-grid reveal" style="grid-template-columns: 1fr 1fr;">
-      <div class="mission-card">
-        <div class="mission-card-accent"></div>
-        <div class="mission-card-num">FLIGHT SOFTWARE</div>
-        <h3>Vehicle Autonomy Stack</h3>
-        <p>Per-vehicle flight software implementing the full mode FSM, propulsion feed control, autonomous safing, and CCSDS command/telemetry. Multi-vehicle simulation exercising 45 concurrent instances through complete sortie cycles — ascent, orbital insertion, station capture, cargo swap, deorbit, and surface return.</p>
+    <div class="s2s-body reveal" style="max-width: none;">
+      <p>The flight software exists and flies the water sortie closed-loop in simulation, as of October 2026. It is a NASA core Flight System stack of seven mission applications — executive, guidance, propulsion, power, thermal, communications, cargo — beside NASA's limit-checker, stored-command, health, housekeeping, storage, file and memory applications. The executive owns a twelve-mode flight state machine under an allowed-transitions matrix and five autonomous safing rules; the ground dispatches one sortie at a time and the executive enforces the matrix. Guidance dead-reckons from the IMU and flies each mode to its milestone: a vertical-rate ascent to a 12.8 × 100 km transfer (cutoff at 18.4 km and 1,689 m/s, 444 s after ignition), the insertion burn at apoapsis to a circular 100 km orbit, a retrograde deorbit to a 15 km periapsis, the braking burn from the 20 km gate on three engines, and a landing on as many engines as the mass needs, touching down at 1 m/s with 1.3 t of propellant left. The surface load is sized for the ascent; the station refuels the descent leg, 12.1 t, at the berth.</p>
+      <p>The same vehicle and the same software serve the Lunar Orbital Propellant Depot first. The depot precedes the station, and the depot sortie is this flight: an ascent to low lunar orbit, a cartridge swap at a berth, a refuelled return. The software does not distinguish the two; which berth it is sent to is the fleet coordinator's decision.</p>
+      <p>Fault protection is declarative: eleven watchpoints and nine actionpoints in the limit checker, seven of them armed, driving seven stored-command sequences, with the abort criteria's hard triggers mapped onto them and abort meaning land and safe. The cartridge is opaque to the vehicle. The cargo application reports the mount's engagement and load, the latch and the restraint; the executive aborts on a mount disengaged in flight; the swap belongs to the station and the pad, not to the vehicle. The simulated cartridge mechanism can fault — a latch that reports FAULT, a restraint released under an engaged latch, a swap that stalls — and each has been recorded, the software observing and nothing aborting, as designed. Faults are injected into the simulated plant, never into the software. 523 assertions across seven unit-test binaries.</p>
+      <p>Above the vehicle, the fleet coordinator dispatches sorties, deconflicts pads and berths and runs the ground operations for 45 instances of the stack at once: telemetry-gated cargo and propellant sequencing at the berth and the pad, berth queueing, surface-pad conveyors, a standby reserve, and reassignment of a safed or aborted vehicle's sortie. A walkthrough is on the <a href="fleet_commander.html" style="color: var(--ice);">Fleet Commander</a> page.</p>
+    </div>
+    <div class="mission-grid reveal" style="grid-template-columns: 1fr 1fr; margin-top: 28px;">
+      <div>
+        <div style="border: 1px solid var(--border); overflow: hidden; line-height: 0;">
+          <img src="images/tanker_fsw_ascent.png" alt="Side view of the simulated tanker in its ascent burn at 12 km: the vehicle pitched 75 degrees toward prograde with the full cartridge latched at its nose and three plumes lit at full throttle; readouts of altitude, tangential speed, mass and delta-v above, the five fault words clear, and the executive's mode band below" style="width:100%; display:block;"/>
+        </div>
+        <div class="image-caption">
+          <span class="caption-text">The ascent burn, 200 s after ignition: 12 km and 495 m/s, pitched 75° toward prograde, three engines at full throttle, the full 45 t cartridge latched and restrained at the nose. Every element drawn is a telemetry field from the running software.</span>
+          <span class="caption-ref" style="white-space: nowrap; margin-left: 24px;">LTF-FSW-001</span>
+        </div>
       </div>
-      <div class="mission-card">
-        <div class="mission-card-accent"></div>
-        <div class="mission-card-num">FLEET OPERATIONS</div>
-        <h3>Ground Coordination</h3>
-        <p>Fleet-level dispatch scheduling, pad deconfliction, station berth queuing, and telemetry-gated ground operations across the full vehicle complement. The sortie cycle runs autonomously with real-time cargo and propellant state verification at every transition — no operator in the loop for nominal operations.</p>
+      <div>
+        <div style="border: 1px solid var(--border); overflow: hidden; line-height: 0;">
+          <img src="images/tanker_fsw_descent.png" alt="Side view of the simulated tanker in its braking burn at 18 km: the vehicle flying retrograde with the cartridge forward and three plumes lit at full throttle, 698 m/s tangential and 61 m/s of descent rate in the readouts, the pad rising toward the legs on the altitude axis at the right, and the executive's mode band below" style="width:100%; display:block;"/>
+        </div>
+        <div class="image-caption">
+          <span class="caption-text">The braking burn: 18 km, 698 m/s and 61 m/s of descent rate, flown retrograde on three engines at full throttle with 1,312 m/s available. The pad meets the legs at the bottom of the frame as the altitude falls.</span>
+          <span class="caption-ref" style="white-space: nowrap; margin-left: 24px;">LTF-FSW-002</span>
+        </div>
       </div>
+    </div>
+    <div class="s2s-body reveal" style="max-width: none; margin-top: 28px;">
+      <p>What the software does not do is stated as plainly. The plant is a planar two-body problem over a spherical Moon with no sensor noise and no navigation filter; the dead reckoning reads a few metres a second off by the end of a two-hour flight. The simulator has no pads and no places: the deorbit is commanded by the ground on a dwell, not phased to a site, and the vehicle does not judge where it has landed; which pad a returning tanker takes is the coordinator's conveyor at landing, and placing sites, berths and pads in one shared world is the open architecture decision. The station and the depot are an injector's lines in the simulator, not objects with berths. The software's propellant constants are behind this page and are not yet generated from one budget workbook as the Short Hopper's are. Nothing has run on hardware.</p>
     </div>
     <div class="prop-tech-bar reveal" style="margin-top: 24px; margin-bottom: 0;">
       <div class="tech-bar-label">Validated In Simulation</div>
       <div class="tech-bar-items">
         <div class="tech-item">
           <div class="tech-dot" style="background: var(--amber);"></div>
-          <span class="tech-item-text">45-Vehicle Concurrent Sortie Cycling</span>
+          <span class="tech-item-text">Closed-Loop Water Sortie, Pad to Berth to Pad</span>
         </div>
         <div class="tech-item">
           <div class="tech-dot" style="background: var(--ice);"></div>
-          <span class="tech-item-text">TLM-Gated Cargo &amp; Prop Sequencing</span>
+          <span class="tech-item-text">45-Vehicle Concurrent Sortie Cycling</span>
         </div>
         <div class="tech-item">
           <div class="tech-dot" style="background: var(--text-dim);"></div>
-          <span class="tech-item-text">Autonomous Anomaly Recovery</span>
+          <span class="tech-item-text">TLM-Gated Cargo &amp; Prop Sequencing</span>
         </div>
         <div class="tech-item">
           <div class="tech-dot" style="background: var(--muted);"></div>
-          <span class="tech-item-text">Pad &amp; Berth Resource Management</span>
+          <span class="tech-item-text">Cartridge Mechanism Faults on Tape</span>
         </div>
       </div>
     </div>
