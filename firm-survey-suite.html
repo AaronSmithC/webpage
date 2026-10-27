@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIRM — Aegis Station</title>
+<meta name="description" content="FIRM, Footing and In-situ Regolith Mechanics: the LRMH bearing head and a wheel-instrumentation trafficability package, one flight-software image, bolted to a commercial lunar rover to survey a landing zone at crew-vehicle scale. A capability note from Aegis Station.">
+<meta property="og:title" content="FIRM — Aegis Station">
+<meta property="og:description" content="A landing-zone geotechnical survey suite that rides on someone else's rover. The flight software exists first; the mechanism is the small part.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aegisstation.com/firm-survey-suite.html">
+<meta property="og:image" content="https://aegisstation.com/images/lrmh_instrument.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0a0e15;
+    --bg-panel:  #0e141d;
+    --ink:       #d9e1ea;
+    --ink-dim:   #8a94a3;
+    --water:     #6fb6d8;
+    --water-deep:#3f7f9e;
+    --hair:      rgba(217, 225, 234, 0.12);
+    --hair-soft: rgba(217, 225, 234, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 1.14rem;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--water); text-decoration: none; }
+  a:hover, a:focus-visible { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--water); outline-offset: 3px; }
+
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+  .wrap-wide { max-width: 60rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---- Masthead strip ---- */
+  .masthead {
+    border-bottom: 1px solid var(--hair);
+    background: rgba(10, 14, 21, 0.9);
+  }
+  .masthead .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 3.4rem;
+  }
+  .brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .brand a { color: var(--ink); }
+  .brand a:hover { color: var(--water); }
+  .masthead .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  /* ---- Hero ---- */
+  header.hero {
+    background:
+      radial-gradient(120% 80% at 85% -10%, rgba(63, 127, 158, 0.16), transparent 60%),
+      var(--bg);
+    border-bottom: 1px solid var(--hair-soft);
+  }
+  header.hero .wrap { padding-top: 5rem; padding-bottom: 3.2rem; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--water); margin-bottom: 1.6rem;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: clamp(2.3rem, 6vw, 3.5rem);
+    line-height: 1.05; letter-spacing: -0.02em;
+    color: #eef3f8;
+  }
+  .dek {
+    margin-top: 1.6rem;
+    font-size: 1.2rem; line-height: 1.6;
+    color: var(--ink-dim);
+    max-width: 34rem;
+  }
+  .dek strong { color: var(--ink); font-weight: 500; }
+
+  /* ---- Figures ---- */
+  figure.art { margin: 0; }
+  figure.art img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--hair-soft);
+    border-radius: 4px;
+  }
+  figure.art figcaption {
+    margin-top: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; line-height: 1.6; letter-spacing: 0.06em;
+    color: var(--ink-dim);
+  }
+  .hero-art {
+    border-bottom: 1px solid var(--hair-soft);
+    padding: 3rem 0;
+    background: var(--bg);
+  }
+  main figure.art { margin: 2.6rem 0 3rem; }
+
+  /* ---- Body ---- */
+  main .wrap { padding-top: 3.5rem; padding-bottom: 2rem; }
+
+  main p { margin-bottom: 1.5rem; }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500; font-size: 1.5rem; letter-spacing: -0.01em;
+    color: #eef3f8;
+    margin: 3.2rem 0 1.3rem;
+    padding-top: 0.4rem;
+  }
+  h2 .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; font-weight: 400;
+    color: var(--water-deep);
+    letter-spacing: 0.1em;
+    margin-right: 0.8rem;
+    vertical-align: 0.28em;
+  }
+
+  em { color: var(--ink); font-style: italic; }
+
+  .pull {
+    margin: 3rem 0;
+    padding: 1.6rem 0 1.6rem 1.6rem;
+    border-left: 2px solid var(--water);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
+    font-size: 1.55rem; line-height: 1.35; letter-spacing: -0.01em;
+    color: #eef3f8;
+  }
+
+  /* ---- Two-column instrument table ---- */
+  table.pair {
+    width: 100%; border-collapse: collapse;
+    margin: 2.2rem 0 2.6rem;
+    font-size: 0.98rem; line-height: 1.5;
+  }
+  table.pair th, table.pair td {
+    text-align: left; vertical-align: top;
+    padding: 0.8rem 0.9rem 0.8rem 0;
+    border-top: 1px solid var(--hair-soft);
+  }
+  table.pair th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-dim); font-weight: 400;
+    border-top: 0;
+  }
+  table.pair td:first-child {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 500;
+    color: #eef3f8; white-space: nowrap;
+  }
+
+  .note {
+    margin-top: 2.6rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--hair-soft);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem; line-height: 1.7; letter-spacing: 0.04em;
+    color: var(--ink-dim);
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    margin-top: 3rem;
+    border-top: 1px solid var(--hair);
+    background: var(--bg-panel);
+  }
+  footer .wrap { padding-top: 2.4rem; padding-bottom: 4rem; }
+  .sig {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--ink); font-size: 0.98rem; font-weight: 500;
+  }
+  .sig span { color: var(--ink-dim); font-weight: 400; }
+  .backrow {
+    margin-top: 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    display: flex; gap: 1.4rem; flex-wrap: wrap;
+  }
+  .backrow a { color: var(--ink-dim); }
+  .backrow a:hover { color: var(--water); }
+
+  @media (max-width: 600px) {
+    body { font-size: 1.06rem; }
+    header.hero .wrap { padding-top: 3.5rem; padding-bottom: 2.4rem; }
+    .pull { font-size: 1.3rem; }
+    h2 .num { display: block; margin: 0 0 0.3rem; }
+    table.pair td:first-child { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wrap">
+    <div class="brand"><a href="index.html">Aegis Station</a></div>
+    <div class="kicker">Capability Note</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Surface &amp; Logistics</div>
+    <h1>FIRM</h1>
+    <p class="dek">Footing and In-situ Regolith Mechanics. A landing-zone geotechnical survey suite that rides on someone else&rsquo;s rover: the LRMH bearing head, plus a trafficability package that reads the host&rsquo;s own wheels. <strong>The flight software exists first. The mechanism is the small part.</strong></p>
+  </div>
+</header>
+
+<div class="hero-art">
+  <div class="wrap-wide">
+    <figure class="art">
+      <img src="images/lrmh_instrument.jpg" width="1600" height="1066"
+           alt="The LRMH instrument head mounted on a rover deck above the lunar surface, its penetrometer tool extended toward the regolith beside a wheel track.">
+      <figcaption>The LRMH head on a rover deck. The second instrument has no photograph: it is software listening to the wheels.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+
+    <p>Before a crewed vehicle drives a corridor near the lunar south pole, and before a lander sets down beside it, somebody has to know whether the ground will hold. The last direct measurements at that scale were made by hand in the early 1970s, at three sites, with a spring-loaded penetrometer that stopped at 215 newtons. Everything since has been orbital inference and the occasional wheel trench.</p>
+
+    <p>The <a href="lunar-regolith-mechanics.html">RMH capability page</a> set out what an instrument for that job should do, and <a href="lrmh.html">LRMH</a> is the Aegis realization of it: a head that drives a cone or a plate into the regolith under controlled force or position and reduces what it feels into penetration resistance, load against sinkage, layer breaks, and how much the ground stiffens under repeated load. It was conceived as an instrument on a host vehicle. This note is about what changed: LRMH is now one half of a suite, and the suite is built to bolt onto a commercial rover that already exists.</p>
+
+    <h2><span class="num">01</span>Two instruments, one flight image</h2>
+
+    <table class="pair">
+      <tr><th>Instrument</th><th>What it measures</th><th>Hardware</th></tr>
+      <tr>
+        <td>LRMH</td>
+        <td>Bearing capacity at a stop: penetration resistance with depth, load&ndash;sinkage, layer breaks, compaction under repeat load</td>
+        <td>Linear actuator, load cell, encoder, cone and plate tools. Under 5&nbsp;kg, under 30&nbsp;W peak.</td>
+      </tr>
+      <tr>
+        <td>TREAD</td>
+        <td>Trafficability along the drive: wheel slip, tractive coefficient against slip, rut sinkage, per traverse segment</td>
+        <td>None. Two flight-software applications and a sensor interface. Reads encoder rate, motor current, commanded speed and visual odometry the rover already has.</td>
+      </tr>
+    </table>
+
+    <p>The two share a flight image, a host interface, and a product: a survey map that joins site records and segment records by the pose they were taken at. Bearing where the rover stopped, trafficability where it drove, co-registered. That is the number a traverse planner and a landing-site board both want, and neither measurement gives it alone.</p>
+
+    <p>TREAD also closes a loop the LRMH design left open. The capability page recommends a traction correlation, drawbar pull against slip, and the flight software carried that phase as a stub while the reaction-load reference stayed an open trade: the host&rsquo;s wheel torque, or a dedicated tether sensor. The host&rsquo;s wheels won. They are already instrumented, they are already on the ground, and they apply the load that matters.</p>
+
+    <h2><span class="num">02</span>The flight software leads</h2>
+
+    <p>The part of an instrument that usually arrives last exists first here. The LRMH flight software is eight applications on NASA&rsquo;s core Flight System. It runs a nine-phase site test on its own, samples six channels at 100&nbsp;Hz, reduces the samples onboard into a standardized site record, and persists it through the stock Data Storage app. Faults are watched by the stock Limit Checker and answered by Stored Command sequences, with three recovery tiers: resume the phase, skip the site, safe the instrument. Every sample and every record is stamped with the host&rsquo;s pose and velocity at the moment of acquisition, which is to say the image was designed from its first architecture decision to ride on another vehicle.</p>
+
+    <figure class="art">
+      <img src="images/firm-demo-viewer.png" width="1400" height="730"
+           alt="The LRMH operator dashboard in a browser during an unattended simulated cone penetration test: a banner reading SIMULATION UNATTENDED DEMO with site, regolith preset and seed; the phase bar at Processing; live force, depth and motor current cards; and a force-versus-depth plot rising steeply near 12 centimetres.">
+      <figcaption>The image running unattended against a drawn lunar highland site, viewed read-only in a browser. Phase six of seven, the force-depth trace meeting the dense layer. This is a simulation; nothing here is flight-qualified.</figcaption>
+    </figure>
+
+    <p>What is new on this side is modest and useful. The dashboard has a viewer role, so a reviewer can watch a test in progress without the ability to send a command, and a director runs the simulation through site after site, drawing a different regolith each time and injecting a recoverable fault every few sites so the recovery tiers show. The mechanism interface below the apps is nine C functions behind a documented wire envelope, with a bench scaffold waiting for real sensors.</p>
+
+    <div class="pull">Bearing where the rover stopped. Trafficability where it drove. One map.</div>
+
+    <h2><span class="num">03</span>What a host provides</h2>
+
+    <p>The suite is built so that the ask of a rover provider is small enough to answer in an afternoon. A bolt pattern on the payload deck with 350&nbsp;mm of reach to the surface beside the wheel track. A switched 28&nbsp;V feed, under 30&nbsp;W peak. One payload data link, Ethernet preferred, serial acceptable. And three telemetry packets the rover already has the data for: pose and body velocity with a quality flag, per-wheel encoder rate and motor current and commanded speed, and optionally a camera frame on request.</p>
+
+    <p>FIRM brings its own compute. The flight image runs on a payload single-board computer, not the host&rsquo;s flight computer, and a single host-interface application owns the link. Nothing new is sensed, no control authority is requested, and the host does what it does anyway: drive, stop, drive. The head works at the stops. TREAD listens in between.</p>
+
+    <p>One number became a host property in the process. A penetrometer can only push as hard as its vehicle can react, and a rover-class host on the Moon weighs a few hundred newtons. So the force envelope is set per host from the load the vehicle can take at the mount without unloading a wheel, and crew-vehicle scale is reached the honest way: a loading plate sized to produce the target contact stress, and a Bekker fit to carry it to a bigger wheel.</p>
+
+    <h2><span class="num">04</span>Where it fits</h2>
+
+    <p>NASA selected three PRISM investigations for the Moon Base Program at the end of September 2026. One of them, DISCO, images ice in micro-cold traps and observes how rocket exhaust disturbs the surface and how stable it is for mobility near the base site. That is an optical payload observing the ground. FIRM contacts it. It measures the mechanical response under controlled load and under a vehicle&rsquo;s own wheels, along corridors leading away from the lander, at the loads a crewed vehicle will apply. The two together give what neither gives alone: the imaged state of the surface near base, and the measured strength of the routes out of it.</p>
+
+    <p>The delivery is a CLPS rover. Several commercial providers are flying rovers of the right class in 2027, and the suite is written to any of them: the host is a configuration, not a port. The funding path is a PRISM proposal, or a hosted-payload or data-purchase arrangement with a provider directly. Both are conversations in progress, and this page will say so when either becomes more than that.</p>
+
+    <h2><span class="num">05</span>Status, plainly</h2>
+
+    <p>The flight software is complete and verified in simulation against a regolith model fitted to the Apollo 16 penetrometer records. The host interface is specified. The trafficability estimators are designed and their inputs are defined; the applications are next. The mechanism is a bounded build for a partner with planetary actuator heritage, and the first thing after this note is a bench analog in simulant, because the one critique that software cannot answer is the absence of a force-depth curve from real sand.</p>
+
+    <p>LRMH was an instrument looking for a vehicle. FIRM is a survey looking for a ride, and it asks very little of the vehicle that gives it one.</p>
+
+    <p class="note">Sources: the <a href="lunar-regolith-mechanics.html">RMH capability page</a> and the <a href="lrmh.html">LRMH page</a> on this site; the public LRMH flight software at <a href="https://github.com/Aegis-Station-Infrastructure/lrmh-cfs">github.com/Aegis-Station-Infrastructure/lrmh-cfs</a>; <a href="https://nasa.gov/news-release/nasa-adds-new-science-investigations-for-moon-base">NASA, new science investigations for Moon Base</a>, 30 September 2026 (DISCO). Apollo self-recording penetrometer limits from the Apollo 15 and 16 Preliminary Science Reports. Status as of October 2026.</p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sig">A.S. <span>&mdash; Principal Architect, Aegis Station</span></div>
+    <div class="backrow">
+      <a href="lrmh.html">LRMH</a>
+      <a href="lunar-regolith-mechanics.html">Lunar Regolith Mechanics</a>
+      <a href="wok.html">WOK</a>
+      <a href="index.html">&larr; Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
