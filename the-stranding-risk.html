@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Stranding Risk — Aegis Station</title>
+<meta name="description" content="Managing irrecoverable failure in a crewed lunar south pole landing. Every vehicle flown to the Moon this decade was built to stay there. The ascent leg has no flight heritage, and the demonstration program does not require it. A strategic note from Aegis Station.">
+<meta property="og:title" content="The Stranding Risk — Aegis Station">
+<meta property="og:description" content="Astronauts survive a landing near the lunar south pole and then lose the ability to leave. The one leg with no flight heritage is the one nobody is being asked to prove.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aegisstation.com/the-stranding-risk.html">
+<meta property="og:image" content="https://aegisstation.com/images/stranding-risk-hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0a0e15;
+    --bg-panel:  #0e141d;
+    --ink:       #d9e1ea;
+    --ink-dim:   #8a94a3;
+    --water:     #6fb6d8;
+    --water-deep:#3f7f9e;
+    --hair:      rgba(217, 225, 234, 0.12);
+    --hair-soft: rgba(217, 225, 234, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 1.14rem;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--water); text-decoration: none; }
+  a:hover, a:focus-visible { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--water); outline-offset: 3px; }
+
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+  .wrap-wide { max-width: 60rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---- Masthead strip ---- */
+  .masthead {
+    border-bottom: 1px solid var(--hair);
+    background: rgba(10, 14, 21, 0.9);
+  }
+  .masthead .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 3.4rem;
+  }
+  .brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .brand a { color: var(--ink); }
+  .brand a:hover { color: var(--water); }
+  .masthead .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  /* ---- Hero ---- */
+  header.hero {
+    background:
+      radial-gradient(120% 80% at 85% -10%, rgba(63, 127, 158, 0.16), transparent 60%),
+      var(--bg);
+    border-bottom: 1px solid var(--hair-soft);
+  }
+  header.hero .wrap { padding-top: 5rem; padding-bottom: 3.2rem; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--water); margin-bottom: 1.6rem;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: clamp(2.3rem, 6vw, 3.5rem);
+    line-height: 1.05; letter-spacing: -0.02em;
+    color: #eef3f8;
+  }
+  .dek {
+    margin-top: 1.6rem;
+    font-size: 1.2rem; line-height: 1.6;
+    color: var(--ink-dim);
+    max-width: 34rem;
+  }
+  .dek strong { color: var(--ink); font-weight: 500; }
+
+  /* ---- Figures ---- */
+  figure.art { margin: 0; }
+  figure.art img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--hair-soft);
+    border-radius: 4px;
+  }
+  figure.art figcaption {
+    margin-top: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; line-height: 1.6; letter-spacing: 0.06em;
+    color: var(--ink-dim);
+  }
+  .hero-art {
+    border-bottom: 1px solid var(--hair-soft);
+    padding: 3rem 0;
+    background: var(--bg);
+  }
+  main figure.art { margin: 2.6rem 0 3rem; }
+
+  /* ---- Body ---- */
+  main .wrap { padding-top: 3.5rem; padding-bottom: 2rem; }
+
+  main p { margin-bottom: 1.5rem; }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500; font-size: 1.5rem; letter-spacing: -0.01em;
+    color: #eef3f8;
+    margin: 3.2rem 0 1.3rem;
+    padding-top: 0.4rem;
+  }
+  h2 .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; font-weight: 400;
+    color: var(--water-deep);
+    letter-spacing: 0.1em;
+    margin-right: 0.8rem;
+    vertical-align: 0.28em;
+  }
+
+  em { color: var(--ink); font-style: italic; }
+
+  .pull {
+    margin: 3rem 0;
+    padding: 1.6rem 0 1.6rem 1.6rem;
+    border-left: 2px solid var(--water);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
+    font-size: 1.55rem; line-height: 1.35; letter-spacing: -0.01em;
+    color: #eef3f8;
+  }
+
+  .note {
+    margin-top: 2.6rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--hair-soft);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem; line-height: 1.7; letter-spacing: 0.04em;
+    color: var(--ink-dim);
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    margin-top: 3rem;
+    border-top: 1px solid var(--hair);
+    background: var(--bg-panel);
+  }
+  footer .wrap { padding-top: 2.4rem; padding-bottom: 4rem; }
+  .sig {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--ink); font-size: 0.98rem; font-weight: 500;
+  }
+  .sig span { color: var(--ink-dim); font-weight: 400; }
+  .backrow {
+    margin-top: 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    display: flex; gap: 1.4rem; flex-wrap: wrap;
+  }
+  .backrow a { color: var(--ink-dim); }
+  .backrow a:hover { color: var(--water); }
+
+  @media (max-width: 600px) {
+    body { font-size: 1.06rem; }
+    header.hero .wrap { padding-top: 3.5rem; padding-bottom: 2.4rem; }
+    .pull { font-size: 1.3rem; }
+    h2 .num { display: block; margin: 0 0 0.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wrap">
+    <div class="brand"><a href="index.html">Aegis Station</a></div>
+    <div class="kicker">Strategic Note</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Lunar Ascent</div>
+    <h1>The Stranding Risk</h1>
+    <p class="dek">Managing irrecoverable failure in a crewed lunar south pole landing. Astronauts survive the landing and then lose the ability to leave. <strong>The one leg with no flight heritage is the one nobody is being asked to prove.</strong></p>
+  </div>
+</header>
+
+<div class="hero-art">
+  <div class="wrap-wide">
+    <figure class="art">
+      <img src="images/stranding-risk-hero.jpg" width="1536" height="1024"
+           alt="A crewed lunar lander standing on a rocky slope near the lunar south pole, the Sun just above the horizon behind it, its cabin window lit, with Earth small in the black sky and no other vehicle in sight.">
+      <figcaption>South polar surface, low Sun. The cabin is intact. Whether the vehicle can leave was decided before it landed.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+
+    <p>As the first Artemis landing moves toward execution, attention focuses on engines, schedules, and landing sites. Less visible, and more fundamental, is a risk that cannot be mitigated late in flight: astronauts survive a landing near the lunar south pole and then lose the ability to leave.</p>
+
+    <p>This is not a dramatic hypothetical. It follows directly from mission geometry, environment, and logistics. Once the crew descends, the Human Landing System is the only path back to lunar orbit. Orion can return to Earth. It cannot descend, cannot retrieve crew, and cannot intervene if ascent capability is lost.</p>
+
+    <p>If ascent fails and the crew survives, the mission enters a state of survivable but irrecoverable failure. There is no rapid rescue option and no backup launch on standby. Whatever happens next depends entirely on what was proven before the landing began.</p>
+
+    <h2><span class="num">01</span>Everybody is landing. Nobody is taking off.</h2>
+
+    <p>The modern lunar flight record is one-way. Every commercial lander flown this decade was designed to stay where it touched down. The only vehicles that have ever left the lunar surface are Apollo&rsquo;s hypergolic ascent stages and the Soviet and Chinese sample-return capsules: small, storable-propellant, single-use. No one has ever relit a cryogenic engine on the Moon. No one has ever done it after the vehicle sat there for days.</p>
+
+    <p>That is the technology gap, and it hides in plain sight because landing is the photogenic half. Landing is a problem of sensors and control. Ascent is a problem of what happened to the vehicle while it sat on the surface: propellant boiloff with no way to top off, dust in the mechanisms, a tilted stance on unprepared regolith, a cold-soaked engine that has to start on the first try with no abort mode.</p>
+
+    <p>None of that shows up unless you try to leave. A hundred more one-way landers teach nothing about the half of the mission that kills the crew if it fails. The vehicle that proves ascent is not a lander. It is a shuttle, and it only gets proven by flying the round trip.</p>
+
+    <figure class="art">
+      <img src="images/stranding-risk-one-way.jpg" width="1536" height="1024"
+           alt="A lunar plain scattered with small robotic landers of different eras, each resting where it touched down, some tilted on the regolith, with a single larger crewed lander standing alone in the distance under a black sky with Earth above the horizon.">
+      <figcaption>The modern flight record. Every one of these was built to stay where it touched down.</figcaption>
+    </figure>
+
+    <h2><span class="num">02</span>Why the south pole makes this worse</h2>
+
+    <p>The lunar south pole is not another Apollo-era landing site. It is defined by persistent low Sun angles, long shadows, rugged overlapping craters, intermittent communications, and sharp thermal gradients. These conditions place exceptional demands on navigation, sensing, and landing-system robustness.</p>
+
+    <p>They also raise the odds of the failure modes that matter here: the non-catastrophic ones. Tip-over on uneven terrain. Sensor disagreement in terminal descent. A post-landing propulsion or avionics fault. Mechanical damage that leaves the cabin intact and the ascent engines unusable. Many lunar and planetary landers have failed exactly this way, not as high-speed impacts but as systems that reached the surface and could not finish the mission.</p>
+
+    <p>Those cases define the stranding risk. They are not common. They are credible, and they are structurally different from a failure that kills the crew outright.</p>
+
+    <h2><span class="num">03</span>Why Orion is not a safety net</h2>
+
+    <p>An orbiting spacecraft looks like a backstop. In lunar operations it is not. Orion cannot land, cannot loiter at low altitude, and cannot maneuver between surface sites. A second crewed mission with another lander would need weeks or months of preparation, another heavy-lift launch, favorable orbital alignment, and a fully crew-rated vehicle. None of that fits inside the survival window of a crew stranded on the surface.</p>
+
+    <p>This is the sharp difference between the Moon and low Earth orbit. There is no equivalent of an ISS lifeboat launch on short notice. A surface rescue capability would need a lifeboat already on the ground, mobility across polar terrain, and enough consumables and communications to keep the crew alive while extraction happens. That is a second program, not a contingency option. For a first landing, adding an immature rescue layer increases total mission risk faster than it reduces it. A rescue system that fails when needed is worse than none.</p>
+
+    <p>So for the first landings, the single ascent path is the architecture. There is no second layer coming. Everything rides on whether that one path has been proven.</p>
+
+    <h2><span class="num">04</span>Proven, not promised</h2>
+
+    <p>If one path is all there is, it has to be demonstrably robust before crew board it. That means uncrewed demonstrations in representative south polar conditions, conservative site selection, overspecified sensing and navigation, real divert capability, and explicit design requirements that preserve ascent even after a hard or imperfect landing.</p>
+
+    <p>It also means repetition. Nobody human-rates a launch vehicle on two flights. They fly it twenty times and the crew certification falls out of the flight history. A single uncrewed demo is one data point. One sample tells you the vehicle can work; it does not tell you the vehicle works. The ascent-and-return leg is the one with no flight heritage at all, so it is the leg that most needs reps.</p>
+
+    <p>The test that matters is test-like-you-fly: the crew configuration, the full surface stay, engine relight after cold soak, climb to orbit, and rendezvous with the vehicle that takes the crew home. Anything less is a landing demo with a liftoff attached.</p>
+
+    <div class="pull">Everybody is landing. Nobody is taking off.</div>
+
+    <figure class="art">
+      <img src="images/stranding-risk-ascent.jpg" width="1536" height="1024"
+           alt="An uncrewed lunar lander a few metres above a prepared surface pad on its engine plume, dust sheeting across the regolith, a strapped cargo pallet left beside the pad, Earth small in the black sky.">
+      <figcaption>The vehicle that proves ascent is not a lander. Every uncrewed cycle is a data point the crew program inherits.</figcaption>
+    </figure>
+
+    <h2><span class="num">05</span>What is actually being required</h2>
+
+    <p>The program is not doing this. Artemis III has been restructured into a 2027 low-Earth-orbit docking test between Orion and lander test articles, and the first crewed landing has moved to Artemis IV in 2028. Both providers owe an uncrewed landing demonstration before then, both currently slated for 2027.</p>
+
+    <p>NASA&rsquo;s own Office of Inspector General has said in writing that those demonstrations do not follow test-like-you-fly principles. Starship HLS is required to lift off from the surface and fire its engines, but not to reach orbit. Blue Moon Mark 2 is required to reach orbit. Neither is required to demonstrate end-to-end ascent, return, and docking with Orion or Gateway. The Starship demo vehicle is not expected to be the crew configuration.</p>
+
+    <p>So the architecture is now the worst quadrant: a single ascent path, no rescue layer, and a demonstration program that stops short of proving the one leg with no flight heritage. The part of the mission that gets the public attention, docking in LEO, is 1966 technology. The part that is unproven is the part nobody is being asked to prove.</p>
+
+    <h2><span class="num">06</span>Defensible in hindsight</h2>
+
+    <p>The cost of a stranding is not measured in budget. It is highly trained astronauts, years of institutional knowledge, and national investment. But history shows that fatal accidents do not automatically end human spaceflight. Programs have continued, and strengthened, after tragedy when causes were understood, fixes were clear, and leadership kept its credibility.</p>
+
+    <p>Outcomes differ when a failure is seen as avoidable. The reaction to an accident depends less on the event than on whether the architecture is defensible in hindsight. An ascent failure after the agency&rsquo;s own inspector general recorded that ascent-to-orbit was never demonstrated is the textbook indefensible case. The paper trail already exists.</p>
+
+    <p>When Apollo 13 suffered a cascading systems failure, the crew came home because redundancy existed where it mattered. That redundancy looked expensive and unnecessary until it was the only reason anyone returned. Not every mission can carry that much contingency. Every mission must be able to explain, afterward, why the risks it accepted were reasonable at the time.</p>
+
+    <h2><span class="num">07</span>Bottom line</h2>
+
+    <p>For the first crewed landing, a single ascent system is the least risky option, provided it is proven under representative conditions, in the crew configuration, through the full round trip, more than once. Right now it is none of those things.</p>
+
+    <p>The fix is not a rescue program. It is reps. Get surface landing and ascent out from under the crewed schedule and fly it like a launch vehicle: repeatedly, uncrewed, on a manifest that does not stop every four years. A lander that cycles surface-to-orbit is a <a href="short_hopper.html">logistics vehicle</a>, cargo down and hardware up, and every cycle is a data point the crew program inherits for free.</p>
+
+    <p>Everybody is landing. Until somebody is routinely taking off, the stranding risk is not a contingency. It is the plan.</p>
+
+    <p class="note">Sources: <a href="https://spacepolicyonline.com/?p=87371">NASA OIG findings on HLS crew safety</a>, reported by SpacePolicyOnline; <a href="https://ntrs.nasa.gov/api/citations/20260009199/downloads/HLS%20IAC%202026%20Presentation%20FINAL.pdf">NASA HLS program status, IAC October 2026</a>. Schedule and demonstration requirements as stated in those documents as of October 2026.</p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sig">A.S. <span>&mdash; Principal Architect, Aegis Station</span></div>
+    <div class="backrow">
+      <a href="short_hopper.html">Short Hopper</a>
+      <a href="what-moves-through-the-hatch.html">What Moves Through the Hatch</a>
+      <a href="what-the-moon-is-for.html">What the Moon Is For</a>
+      <a href="index.html">&larr; Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
