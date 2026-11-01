@@ -321,16 +321,19 @@
 
     <div class="callout">
       <strong>Development status:</strong> The flight software runs end-to-end in a desktop simulation — a
-      full cFS workspace, all 16 applications, with autonomous FDIR verified live across the full safing
-      chain. <em>Bench and on-vehicle targets share the same source through the HAL; no flight hardware is
-      committed.</em>
+      full cFS workspace, all 17 applications, with autonomous FDIR verified live across the full safing
+      chain, a six-wheel chassis and the Rev B power system behind the HAL, and the world run on the
+      simulator's clock at ten times real time in lockstep. A 4.95 km leg with four faults injected on the
+      way and recovered is recorded (November 2026). <em>Bench and on-vehicle targets share the same source
+      through the HAL; no flight hardware is committed.</em>
     </div>
 
     <table>
       <tr><th>Parameter</th><th>Value</th></tr>
-      <tr><td>cFS applications</td><td>16 (cFE core + 9 standard cFS + 7 Aegis mission apps)</td></tr>
-      <tr><td>FDIR safing modes</td><td>5 — NOMINAL → THERM_SAFE → ECLSS_SAFE → LOADSHED → SHELTER</td></tr>
-      <tr><td>Navigation update rate</td><td>20 Hz (aegis_nav navigation &amp; odometry)</td></tr>
+      <tr><td>cFS applications</td><td>17 (cFE core + 10 standard and lab cFS + 7 Aegis mission apps)</td></tr>
+      <tr><td>Fault protection</td><td>19 watchpoints, 8 actionpoints, 4 stored-command sequences (NASA Limit Checker and Stored Command)</td></tr>
+      <tr><td>Vehicle modes</td><td>6 — NOMINAL, SAFE, THERM_SAFE, ECLSS_SAFE, LOADSHED, SHELTER</td></tr>
+      <tr><td>Navigation update rate</td><td>20 Hz (aegis_nav navigation &amp; odometry); six wheel stations at 5 Hz</td></tr>
       <tr><td>Telemetry protocol</td><td>CCSDS (standards-compliant)</td></tr>
       <tr><td>Console link</td><td>WebSocket bridge (CCSDS-UDP ↔ browser)</td></tr>
       <tr><td>Runtime</td><td>cFE — Core Flight Executive, NASA flight heritage</td></tr>
@@ -339,6 +342,7 @@
     <h3>Autonomous Fault Detection, Isolation &amp; Recovery</h3>
     <ul>
       <li>Continuous watchpoint monitoring across thermal, life support, electrical, and radiation domains</li>
+      <li>Mechanisms watched against their commands: a stuck heater, a tripped battery contactor, a jammed shelter, a failed fuel cell</li>
       <li>Autonomous transition through the safing chain without requiring crew action</li>
       <li>Each mode a documented operational posture (entry conditions, reconfiguration, crew advisories)</li>
       <li>Crew override authority preserved at all levels</li>
