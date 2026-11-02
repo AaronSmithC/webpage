@@ -666,6 +666,33 @@ footer a:hover { color: var(--accent); }
   </div>
 </section>
 
+<!-- ═══════════ HULL INSPECTION ═══════════ -->
+
+<section id="hull-inspection">
+  <div class="container">
+    <h2>Hull Inspection</h2>
+    <p>
+      Long-duration pressurized platforms accumulate debris strikes, thermal fatigue and joint wear that cannot be seen from inside, and the only answers today are an episodic EVA or whatever imagery happens to exist. A capability page defines the inspection class; a vehicle realizes it.
+    </p>
+    <ul class="specs">
+      <li><a href="extravehicular-structural-inspection-capability.html">Extravehicular Structural Inspection Capability (ESIC)</a> — repeatable, localized, engineering-usable inspection from outside the pressure vessel</li>
+    </ul>
+    <h3 style="margin-top:32px;">AHID — Aegis Hull Inspection Drone</h3>
+    <p>
+      The Aegis realization of the ESIC class. A resident cold-gas free-flyer that lives on a hull cradle, flies a task list of cells on named surfaces, and comes home with a product per cell and a coverage report. It navigates in the frame of the surface it inspects, so every image, thermal frame and point cloud is keyed to a patch of structure and can be flown again. Built for Aegis Station; useful on any crewed platform first. Eight apps on NASA cFS, a whole module flown in simulation with seven injected faults caught.
+    </p>
+    <ul class="specs">
+      <li>Surface-grid navigation: coverage, repeatability and localization are one map</li>
+      <li>Standard cFS fault management: hold, return or safe on the vehicle's own measurements</li>
+      <li>Traceable to the ESIC functional requirements; flight software private pending export classification</li>
+    </ul>
+    <div class="gallery-grid" style="grid-template-columns: 1fr;">
+      <a href="ahid.html"><img alt="AHID, a spherical inspection free-flyer, at standoff over a station module with its camera and illuminator ring toward the hull, Earth below" src="images/ahid_standoff.jpg" style="aspect-ratio:16/9; object-fit:cover;"/></a>
+    </div>
+    <a class="btn" href="ahid.html">View Full Technical Page →</a>
+  </div>
+</section>
+
 <!-- ═══════════ LOGISTICS ═══════════ -->
 
 <section id="logistics">
@@ -756,7 +783,7 @@ footer a:hover { color: var(--accent); }
       The chain starts with a trajectory tool validated against the Apollo 11 ascent, feeding a sizing model, a budget workbook, and a requirements set that all render from the same inputs. That chain is how the hopper's published 1,500 km mission was found not to close as a standalone round trip, and why the baseline is the 500 km mission that does.
     </p>
     <p>
-      At the bottom of that chain, flight software on NASA's core Flight System for five flight software stacks—four vehicle classes and one instrument—each with a hardware abstraction layer, a physics simulation, fault-management tables, and unit tests. The mission apps do not change between simulation, bench, and flight; only the hardware layer beneath them does.
+      At the bottom of that chain, flight software on NASA's core Flight System for six flight software stacks—five vehicle classes and one instrument—each with a hardware abstraction layer, a physics simulation, fault-management tables, and unit tests. The mission apps do not change between simulation, bench, and flight; only the hardware layer beneath them does.
     </p>
     <p>
       Above the vehicles, a ground coordination tier that has run 45 flight software instances as a fleet, and that is being generalized to mixed fleets of dissimilar vehicles sharing one lunar work site.
@@ -765,6 +792,7 @@ footer a:hover { color: var(--accent); }
       <li><a href="fleet_commander.html">Fleet Commander</a> — 45 tankers, one console: live captures of the coordinator in operation</li>
       <li><a href="mixed-fleet-surface-operations.html">Mixed-Fleet Surface Operations</a> — the coordination tier above the vehicle safety boundary</li>
       <li><a href="short_hopper.html">Short Hopper, Rev C</a> — the vehicle re-baselined from the model chain</li>
+      <li><a href="ahid.html">AHID</a> — hull inspection free-flyer: a whole module flown in simulation, with faults, recorded and played back</li>
     </ul>
   </div>
 </section>
@@ -1045,6 +1073,7 @@ footer a:hover { color: var(--accent); }
       <li><a href="artificial-gravity-requirements-evaluation.html">Artificial Gravity Requirements Evaluation (AGRE) &mdash; Rotation Parameters as Evaluated Outputs</a></li>
       <li><a href="what-the-commercial-stations-wont-measure.html">What the Commercial Stations Won&rsquo;t Measure &mdash; Two Classes of Vehicle, One Missing Dataset</a></li>
       <li><a href="extravehicular-structural-inspection-capability.html">Extravehicular Structural Inspection Capability</a></li>
+      <li><a href="ahid.html">AHID &mdash; Aegis Hull Inspection Drone &mdash; the ESIC Realization, Flown in Simulation</a></li>
       <li><a href="why-three-rings.html">Why Three Rings &mdash; Three Chances, a Long Way from Home</a></li>
     </ul>
 

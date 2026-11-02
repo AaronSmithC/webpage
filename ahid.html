@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHID — Aegis Hull Inspection Drone | Autonomous Hull Inspection Free-Flyer</title>
+<meta name="description" content="AHID is a resident cold-gas free-flyer that inspects the outside of a crewed station without EVA. It navigates in the frame of the surface it inspects, so every image, thermal frame and point cloud is keyed to a structural cell. The Aegis realization of the ESIC capability class; flight software on NASA cFS, flown end to end in simulation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<style>
+  /* ─── RESET & BASE ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --void:       #050810;
+    --deep:       #090e1a;
+    --surface:    #0d1528;
+    --panel:      #111d35;
+    --border:     #1e3158;
+    --muted:      #2a4470;
+    --amber:      #e8a825;
+    --amber-dim:  #a0721a;
+    --amber-glow: #f5c84a;
+    --ice:        #a8cce8;
+    --ice-dim:    #5a8ab0;
+    --text:       #c8d8ec;
+    --text-dim:   #6a8aaa;
+    --white:      #eef4fa;
+    --danger:     #e85c2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--void);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── STARFIELD ─── */
+  .starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .starfield::before,
+  .starfield::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 42% 8%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 62%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 83% 75%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 45%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 33%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 48% 55%, rgba(168,204,232,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 77% 12%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 93% 88%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 95%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 3% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 67% 78%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 25%, rgba(255,255,255,0.3) 0%, transparent 100%);
+  }
+  .starfield::after {
+    transform: rotate(180deg) scale(1.2);
+    opacity: 0.5;
+  }
+
+  /* ─── GRID OVERLAY ─── */
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(30,49,88,0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,49,88,0.15) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  /* ─── LAYOUT ─── */
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(5,8,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--ice-dim); font-weight: 400; }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--amber); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -40px;
+    right: -40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), var(--amber-dim), var(--border), transparent);
+  }
+  .hero-content {
+    max-width: 800px;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .eyebrow-line {
+    width: 40px;
+    height: 1px;
+    background: var(--amber);
+  }
+  .eyebrow-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 8px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 em {
+    display: block;
+    color: var(--amber);
+    font-style: normal;
+    font-size: 0.55em;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+  .hero-tagline {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--ice);
+    max-width: 520px;
+    margin: 28px 0 48px;
+    animation: fadeUp 0.8s 0.2s ease both;
+    line-height: 1.6;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 580px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .stat {
+    background: var(--deep);
+    padding: 20px 24px;
+    position: relative;
+  }
+  .stat::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .stat:hover::after { background: var(--amber); }
+  .stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--amber-glow);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .section-number {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--amber-dim);
+    letter-spacing: 0.12em;
+  }
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ─── IMAGE SECTION ─── */
+  .image-section {
+    padding: 100px 0 80px;
+  }
+  .image-placeholder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/7;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s;
+  }
+  .image-placeholder:hover { border-color: var(--muted); }
+  .image-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(30,49,88,0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,49,88,0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .image-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(232,168,37,0.03) 0%, transparent 70%);
+  }
+  /* Corner accents */
+  .img-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--amber-dim);
+    border-style: solid;
+  }
+  .img-corner.tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
+  .img-corner.tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
+  .img-corner.bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
+  .img-corner.br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+  .placeholder-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .placeholder-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    opacity: 0.25;
+  }
+  .placeholder-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .placeholder-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .image-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .caption-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+  .caption-ref {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+  }
+
+  /* ─── MISSION OVERVIEW ─── */
+  .mission-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-top: 40px;
+  }
+  .mission-grid > .mission-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+  .mission-card {
+    background: var(--deep);
+    padding: 36px 32px;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .mission-card:hover { background: var(--surface); }
+  .mission-card-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    color: var(--amber-dim);
+    letter-spacing: 0.15em;
+    margin-bottom: 20px;
+  }
+  .mission-card h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .mission-card p {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .mission-card-accent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .mission-card:hover .mission-card-accent { background: var(--amber); }
+
+  /* ─── SPECS TABLE ─── */
+  .specs-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .specs-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  .specs-group h4 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(30,49,88,0.5);
+    gap: 16px;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-key {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+  .spec-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ice);
+    text-align: right;
+  }
+
+  /* ─── S2S SECTION ─── */
+  .s2s-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .s2s-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .s2s-callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    padding: 28px;
+  }
+  .s2s-callout-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .s2s-callout-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--amber-glow);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .s2s-callout-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .s2s-body { }
+  .s2s-body p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .s2s-scenarios {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 40px;
+  }
+  .scenario {
+    background: var(--deep);
+    padding: 28px;
+    transition: background 0.3s;
+  }
+  .scenario:hover { background: var(--panel); }
+  .scenario-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .scenario-tag::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--amber-dim);
+  }
+  .scenario h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .scenario p {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* ─── DOCUMENT LINK ─── */
+  .doc-section {
+    padding: 80px 0 60px;
+    border-top: 1px solid var(--border);
+  }
+  .doc-card {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    background: var(--deep);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    max-width: 700px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .doc-card:hover {
+    border-color: var(--amber-dim);
+    box-shadow: 0 0 40px rgba(232,168,37,0.08);
+  }
+  .doc-icon-panel {
+    width: 80px;
+    background: var(--amber);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .doc-icon-panel svg {
+    width: 32px;
+    height: 32px;
+    fill: var(--void);
+  }
+  .doc-info {
+    padding: 24px 28px;
+    flex: 1;
+  }
+  .doc-type {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .doc-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+    letter-spacing: 0.03em;
+  }
+  .doc-subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .doc-action {
+    display: flex;
+    align-items: center;
+    padding: 24px 28px;
+    flex-shrink: 0;
+    border-left: 1px solid var(--border);
+  }
+  .doc-link {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--amber);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.2s, color 0.2s;
+  }
+  .doc-link:hover { gap: 14px; color: var(--amber-glow); }
+  .doc-link-arrow { font-size: 16px; }
+
+  /* ─── PROPELLANT SECTION ─── */
+  .prop-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .prop-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+    margin-bottom: 48px;
+  }
+  .prop-callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--ice-dim);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .prop-stat-block { }
+  .prop-stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ice-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .prop-stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--ice);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .prop-stat-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .prop-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+  .prop-body p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .prop-body p:last-child { margin-bottom: 0; }
+  .prop-phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+  .phase-card {
+    background: var(--deep);
+    padding: 32px 28px;
+    position: relative;
+    transition: background 0.3s;
+    overflow: hidden;
+  }
+  .phase-card:hover { background: var(--panel); }
+  .phase-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .phase-card:nth-child(1)::after { background: var(--amber-dim); }
+  .phase-card:nth-child(2)::after { background: var(--muted); }
+  .phase-card:nth-child(3)::after { background: var(--ice-dim); }
+  .phase-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .phase-card:nth-child(2) .phase-tag { color: var(--muted); }
+  .phase-card:nth-child(3) .phase-tag { color: var(--ice-dim); }
+  .phase-timeline {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 14px;
+    letter-spacing: 0.05em;
+  }
+  .phase-prop {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--amber-glow);
+    margin-bottom: 14px;
+    letter-spacing: 0.06em;
+  }
+  .phase-card:nth-child(2) .phase-prop { color: var(--text-dim); }
+  .phase-card:nth-child(3) .phase-prop { color: var(--ice); }
+  .phase-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .prop-tech-bar {
+    margin-top: 48px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .tech-bar-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .tech-bar-items {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .tech-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tech-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .tech-item-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    margin-top: 60px;
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .footer-copy {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #2ecc71;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(46,204,113,0.4); }
+    50%       { opacity: 0.7; box-shadow: 0 0 0 4px rgba(46,204,113,0); }
+  }
+  @keyframes scanline {
+    from { transform: translateY(-100%); }
+    to   { transform: translateY(100vh); }
+  }
+
+  /* ─── CARTRIDGE SECTION ─── */
+  .cartridge-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .cartridge-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .cartridge-image-wrap {
+    position: relative;
+  }
+  .cartridge-image-wrap img {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--border);
+    filter: brightness(0.92) contrast(1.05);
+  }
+  .cartridge-image-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+  }
+  .cartridge-content {}
+  .cartridge-intro {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .cartridge-specs {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .cartridge-specs-header {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    padding: 14px 20px;
+    background: var(--deep);
+    border-bottom: 1px solid var(--border);
+  }
+  .cartridge-spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(30,49,88,0.5);
+    gap: 16px;
+  }
+  .cartridge-spec-row:last-child { border-bottom: none; }
+  .cartridge-spec-key {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+  .cartridge-spec-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ice);
+    text-align: right;
+  }
+  .cartridge-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+  }
+  .cartridge-feature {
+    background: var(--deep);
+    padding: 20px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .cartridge-feature:hover { background: var(--panel); }
+  .cartridge-feature::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 2px;
+    background: var(--amber-dim);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .cartridge-feature:hover::before { opacity: 1; }
+  .cartridge-feature-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .cartridge-feature-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* Fade-in on scroll */
+  /* ─── PHONE WIDTH ─── */
+  @media (max-width: 760px) {
+    .page-wrap { padding: 0 16px; }
+    .nav-inner { padding: 0 16px; }
+    .nav-links { display: none; }
+    .hero { min-height: auto; padding-top: 110px; padding-bottom: 48px; }
+    .hero::before { left: -16px; right: -16px; }
+    .hero-stats { grid-template-columns: 1fr; max-width: none; }
+    .stat + .stat { border-left: none; border-top: 1px solid var(--border); }
+    .mission-grid,
+    .mission-grid[style],
+    .specs-layout,
+    .s2s-intro,
+    .s2s-scenarios,
+    .prop-intro,
+    .prop-phases,
+    .cartridge-layout,
+    .cartridge-features { grid-template-columns: 1fr !important; }
+    .mission-grid > .mission-card:last-child:nth-child(odd) { grid-column: auto; }
+    .specs-layout, .s2s-intro, .prop-intro, .cartridge-layout { gap: 32px; }
+    .spec-row, .cartridge-spec-row { gap: 12px; }
+    .spec-val, .cartridge-spec-val { text-align: right; }
+    .prop-callout { position: static; }
+    .prop-tech-bar { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; }
+    .tech-bar-items { gap: 12px 24px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── WOK: TRACEABILITY TABLE ─── */
+  .trace-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+    border: 1px solid var(--border);
+    background: var(--deep);
+  }
+  .trace-table th, .trace-table td {
+    text-align: left;
+    vertical-align: top;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .trace-table th {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    background: var(--surface);
+  }
+  .trace-table td { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+  .trace-table td:first-child {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--ice);
+    white-space: nowrap;
+  }
+  .trace-table td:nth-child(2) { color: var(--text); }
+  .trace-table tr:last-child td { border-bottom: none; }
+  .trace-tag {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    margin-top: 8px;
+  }
+  .trace-tag.met { border-color: var(--amber-dim); color: var(--amber); }
+  .trace-tag.partial { border-color: var(--ice-dim); color: var(--ice); }
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+    align-items: start;
+  }
+  .evidence-grid figure { margin: 0; border: 1px solid var(--border); background: var(--surface); }
+  .evidence-grid img { display: block; width: 100%; height: auto; }
+  .evidence-grid figcaption {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    padding: 12px 14px;
+    border-top: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  .tbr-note {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--amber-dim);
+    letter-spacing: 0.08em;
+    margin-top: 12px;
+  }
+  .image-caption .caption-text { flex: 1; padding-right: 24px; line-height: 1.5; }
+  .image-caption .caption-ref { white-space: nowrap; }
+  .hero h1 em { font-size: 0.42em; margin-top: 8px; }
+  .inline-link { color: var(--ice); text-decoration: none; border-bottom: 1px solid var(--ice-dim); }
+  .inline-link:hover { color: var(--amber); border-color: var(--amber); }
+  @media (max-width: 760px) {
+    .evidence-grid { grid-template-columns: 1fr; }
+    .trace-table thead { display: none; }
+    .trace-table tr { display: block; border-bottom: 1px solid var(--border); }
+    .trace-table td { display: block; border-bottom: none; padding: 8px 14px; }
+    .trace-table td:first-child { padding-top: 16px; }
+    .trace-table td:last-child { padding-bottom: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="starfield"></div>
+<div class="grid-overlay"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">AHID <span>/ Aegis Station</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#sortie">Sortie</a></li>
+      <li><a href="#flown">As Flown</a></li>
+      <li><a href="#status">What Exists</a></li>
+      <li><a href="#esic">ESIC Trace</a></li>
+      <li><a href="#specs">Parameters</a></li>
+      <li><a href="#host">Host Platform</a></li>
+      <li><a href="#open">Open Items</a></li>
+      <li><a href="extravehicular-structural-inspection-capability.html">ESIC</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="page-wrap">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow-text">ESIC-Class Hull Inspection Free-Flyer</div>
+      </div>
+      <h1>AHID<em>Aegis Hull Inspection Drone</em></h1>
+      <p class="hero-tagline">A resident cold-gas free-flyer that inspects the outside of a crewed station without an EVA. It navigates in the frame of the surface it is inspecting, so every image, thermal frame and point cloud is keyed to a cell of the structure and can be flown again on the next sortie. Scheduled surveys, post-event checks, repair verification: the operator owns the products and the vehicle lives on the hull.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">8</div>
+          <div class="stat-label">cFS Flight Apps</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">324</div>
+          <div class="stat-label">Cells · One Module · One Sortie</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">1.0 m</div>
+          <div class="stat-label">Standoff · Surface-Frame Navigation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VEHICLE AND FRAME -->
+<section class="image-section" id="image">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 01</span>
+      <span class="section-title">Vehicle Render</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="reveal" style="border: 1px solid var(--border); overflow: hidden; line-height: 0;">
+      <img src="images/ahid_standoff.jpg" alt="AHID at standoff over a station module: a matte spherical free-flyer with its work face toward the gold multi-layer insulation of the hull, the inspection camera in its illuminator ring lit, a green status ring around the body, Earth below" style="width:100%; display:block;"/>
+    </div>
+    <div class="image-caption reveal">
+      <span class="caption-text">FIG. 01 — AHID at standoff over a module, work face toward the hull: the inspection camera in its illuminator ring, the thermal and mapper apertures beside it, the four range-beam apertures at the corners of the face, proximity windows and thruster ports flush in the body, the status ring lit.</span>
+      <span class="caption-ref">AHID-RENDER-001 · CONCEPT ART</span>
+    </div>
+    <div class="section-header reveal" style="margin-top: 80px;">
+      <span class="section-number">// 02</span>
+      <span class="section-title">The Surface Grid</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="reveal" style="border: 1px solid var(--border); overflow: hidden; line-height: 0;">
+      <img src="ahid_surface_grid.svg" alt="Left: AHID holding one metre off a station module with four range beams meeting the hull at the corners of its camera footprint. Right: the same module unrolled into a grid of cells with the scan path, anchors, cradle and a keep-out marked." style="width:100%; display:block;"/>
+    </div>
+    <div class="image-caption reveal">
+      <span class="caption-text">FIG. 02 — The organizing idea. Each inspectable surface in the station model is a named frame: u along it, v across it (wrapping around a cylinder), h along the local normal. The camera footprint at standoff tiles (u, v) into cells; a cell id is a fixed patch of structure. Coverage is "every tasked cell has a product", repeatability is "fly the same cell ids again", localization is "cell id plus the surface's transform". A curved surface costs nothing extra: v wraps, the normal rotates, and the range beams measure both.</span>
+      <span class="caption-ref">AHID-FRAME-001 · NOT TO SCALE</span>
+    </div>
+  </div>
+</section>
+
+<!-- SORTIE -->
+<section class="mission-section" id="sortie">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 03</span>
+      <span class="section-title">Sortie — Cradle to Cradle</span>
+      <div class="section-rule"></div>
+    </div>
+    <p style="max-width:760px; font-size:15px; color:var(--text); line-height:1.8;">The operator loads a task list of cell blocks on named surfaces and gives the release. The vehicle flies the phases below on its own and comes home with a coverage report: cells tasked, inspected, skipped and why. The operator can hold, return or safe it at any time, and resumes it from a hold. There is no joystick in the baseline.</p>
+    <div class="mission-grid reveal">
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">PHASE 01</div>
+        <h3>Docked and Undock</h3>
+        <p>Charged, filled with nitrogen and off-loaded by wire at a cradle on the hull. On release it backs away at low speed on the cradle's own anchor until it is clear of the cradle volume.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">PHASE 02</div>
+        <h3>Transit</h3>
+        <p>Free flight in the station frame to the approach point of the next surface, dead-reckoned between fixes under a speed cap, with every active keep-out volume checked against the path. Entering one is a hold, and the operator is told why.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">PHASE 03</div>
+        <h3>Acquire</h3>
+        <p>The range beams see the surface; the vehicle settles to standoff, aligns to the local normal, takes its first anchor fix on a feature of the station model, and switches its navigation into the surface frame. About a minute.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">PHASE 04</div>
+        <h3>Scan</h3>
+        <p>Rows along the surface at scan speed, a cross step between rows, a capture at every cell: a visual frame, a thermal frame and, where tasked, a point cloud, each with a cell record. Anchors re-fix the position as they pass; between them the surface-facing camera's flow odometry carries it. One module is 324 cells and about 36 minutes.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">PHASE 05</div>
+        <h3>Return and Dock</h3>
+        <p>Transit back on the station frame, approach on the cradle's anchor, capture. The coverage report is written at the cradle and the products off-load by wire. Low nitrogen or low charge during a scan brings it home early, with the untouched cells listed as skipped.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">ANY PHASE</div>
+        <h3>Hold, Reacquire, Safe</h3>
+        <p>A hold parks the vehicle at standoff on its current cell: degraded navigation, a keep-out activation, a valve verdict or an operator command. Reacquire re-establishes the frame after a hold. Safe nulls the relative velocity, closes the valves and waits for the operator: a lost standoff measurement, lost attitude knowledge or a stuck valve gets that.</p>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top: 24px; border: 1px solid var(--border); overflow: hidden; line-height: 0;">
+      <img src="images/ahid_cradle.jpg" alt="AHID seated in its cradle on the hull at night: three capture arms around the sphere, a nitrogen line and a data connector at its rear, an amber charging ring, a reflector plate on the insulation nearby, city lights on Earth below" style="width:100%; display:block;"/>
+    </div>
+    <div class="image-caption">
+      <span class="caption-text">FIG. 03 — Docked. The cradle is where a sortie starts and ends: contact power, a nitrogen fill and the product off-load by wire at every docking, the capture arms around the sphere, the status ring amber while it charges. A reflector on the hull beside it is one of the anchors the navigation fixes on.</span>
+      <span class="caption-ref">AHID-RENDER-002 · CONCEPT ART</span>
+    </div>
+  </div>
+</section>
+
+<!-- AS FLOWN -->
+<section class="specs-section" id="flown">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 04</span>
+      <span class="section-title">A Sortie With Faults, in the Flight-Software Image</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="reveal" style="border: 1px solid var(--border); overflow: hidden; line-height: 0; background: #000;">
+      <video controls muted playsinline preload="metadata" poster="images/ahid_sortie_poster.png" style="width:100%; display:block;">
+        <source src="media/ahid_sortie.mp4" type="video/mp4">
+        Your browser does not play MP4 video.
+      </video>
+    </div>
+    <div class="image-caption reveal">
+      <span class="caption-text">FIG. 04 — A whole-module sortie and a panel, flown by the flight software image against its physics simulator and recorded from the live telemetry, played at twenty times mission time. Three faults are injected on the way and each is recovered: a keep-out volume switches on across the scan and the vehicle holds until it is cleared; a thruster valve dies and the fault chain holds the vehicle until the operator resumes it on the eleven that remain; a range beam drops out and the navigation carries on with three. The gauges show the nitrogen and charge spent.</span>
+      <span class="caption-ref">AHID-TAPE-002 · SIMULATION · REFERENCE STATION MODEL</span>
+    </div>
+    <div class="s2s-body reveal" style="max-width:760px; margin-top:32px;">
+      <p>What the player draws is what the flight software published: its estimated position on the grid, its target, the cells it has captured, the four beams, the twelve pulses it commanded this control period, the valves the driver reports open beside them, the tank, the battery, and the stock cFS Limit Checker's watchpoints and actionpoints. The station is the reference model the requirements review uses, a 4.4 by 10 m module and a 3 by 6 m panel, not any real vehicle.</p>
+      <p>The sizing model was written before the software and then checked against it. The model's figure for a module scan is within 2 % of what the controller spent in simulation, and the cradle-to-cradle sortie within 10 %. That agreement is the point of flying it: the budgets are now numbers with a flown counterpart, not a spreadsheet alone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT EXISTS -->
+<section class="specs-section" id="status">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 05</span>
+      <span class="section-title">What Exists Today</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="mission-grid reveal" style="grid-template-columns: 1fr 1fr;">
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">FLIGHT SOFTWARE</div>
+        <h3>Eight Apps on NASA cFS</h3>
+        <p>Executive, navigation, guidance and control, propulsion, sensing, data, power and link, on the core Flight System. The fifth member of the Aegis flight-software family after the rover, hopper, tanker and LRMH stacks, on their layout, their hardware-abstraction pattern and their lockstep simulation rule. The navigation runs in the surface frame during a scan and in the station frame in transit; the guidance flies a serpentine over the tasked cells and allocates the twelve thrusters so none exhausts toward the hull.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">VERIFICATION</div>
+        <h3>Whole Module Flown, Seven Faults Caught</h3>
+        <p>A six-degree-of-freedom simulator with the station model, surface-relative sensors and an injectable fault set. First light, a two-surface sortie and the whole 324-cell module have been flown end to end in the flight-software image, with every cell captured and the coverage report written. Seven scripted fault scenarios pass on the image: a stuck valve, a dead valve, lost range beams, a flow dropout, a keep-out, low nitrogen and a stalled simulation clock. The standalone test suites run on every build.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">FAULT MANAGEMENT</div>
+        <h3>Standard cFS FDIR, Three Responses</h3>
+        <p>The stock Limit Checker watches the published telemetry and the Stored Command app answers: hold for a degraded fix, a dead valve or a low standoff; return home on low nitrogen or low charge; safe the vehicle, master valve closed, for a lost frame or a stuck valve. The propulsion app judges every thruster command against what the valve driver sensed and declares a stuck or dead valve itself.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">GROUND</div>
+        <h3>Console, Products by Cell, Tape Player</h3>
+        <p>A bridge turns the packet stream into a browser console: the task editor, the phase commands, a sortie map that fills cell by cell, a product viewer keyed by cell id reading the coverage report, and the tape player live on the same stream. Every telemetry field the console decodes is pinned by a round-trip test against the flight structs.</p>
+      </div>
+      <div class="mission-card" style="grid-column: 1 / -1;">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">SOURCE</div>
+        <h3>Private, Pending Export Classification</h3>
+        <p>The flight software, its simulator, the console and the player are complete and held in a private repository. Proximity operations and relative navigation around a crewed station are the class of content Aegis Station holds pending an export-control opinion, as it does for the hopper. Aegis Station shares the code for evaluation with qualified US organizations under a non-disclosure agreement. <strong>Station operators, propulsion and mechanism partners</strong> who want to see it against the boundary described on this page can write to <a class="inline-link" href="mailto:contact@aegisstation.com">contact@aegisstation.com</a>. The requirements review that the software was built from is available on the same terms.</p>
+      </div>
+    </div>
+    <div class="prop-tech-bar reveal" style="margin-top: 24px; margin-bottom: 0;">
+      <div class="tech-bar-label">Validated In Simulation</div>
+      <div class="tech-bar-items">
+        <div class="tech-item"><div class="tech-dot" style="background: var(--amber);"></div><span class="tech-item-text">Surface-Frame Navigation, Cell-Keyed Products</span></div>
+        <div class="tech-item"><div class="tech-dot" style="background: var(--ice);"></div><span class="tech-item-text">Whole Module, 324 of 324 Cells</span></div>
+        <div class="tech-item"><div class="tech-dot" style="background: var(--text-dim);"></div><span class="tech-item-text">Seven Injected Faults via LC/SC</span></div>
+        <div class="tech-item"><div class="tech-dot" style="background: var(--muted);"></div><span class="tech-item-text">Sizing Model Within 2 % of the Flown Scan</span></div>
+        <div class="tech-item"><div class="tech-dot" style="background: var(--amber);"></div><span class="tech-item-text">Nothing Flight-Qualified</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESIC TRACE -->
+<section class="s2s-section" id="esic">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 06</span>
+      <span class="section-title">Traceability to ESIC</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="s2s-intro reveal">
+      <div>
+        <div class="s2s-callout">
+          <div class="s2s-callout-label">Capability Definition</div>
+          <div class="s2s-callout-value">ESIC</div>
+          <div class="s2s-callout-desc">The Extravehicular Structural Inspection Capability page defines the class: four functional requirements and the data products, with no vehicle, propulsion or sensor prescribed. AHID is one realization of it.</div>
+        </div>
+      </div>
+      <div class="s2s-body">
+        <p>The <a class="inline-link" href="extravehicular-structural-inspection-capability.html">ESIC</a> page is a requirements page. It says what an inspection capability for a long-duration pressurized platform must do and leaves the how open. Every number on this page is an Aegis engineering choice layered on top of it.</p>
+        <p>The table maps each ESIC requirement to where it lands in the AHID design and its flight software. Where something is designed but not yet in the software, that is stated.</p>
+      </div>
+    </div>
+    <table class="trace-table reveal">
+      <thead><tr><th>Req</th><th>Function</th><th>How AHID addresses it</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>ESIC-F-001</td>
+          <td>Extravehicular access</td>
+          <td>A resident free-flyer on a hull cradle: undock, transit in the station frame, acquire a surface, scan, return and dock, all onboard from one release. Keep-out volumes, including EVA volumes, are checked in flight and hold the vehicle.<br><span class="trace-tag met">Implemented in simulation</span></td>
+        </tr>
+        <tr>
+          <td>ESIC-F-002</td>
+          <td>Repeatability</td>
+          <td>A cell is a fixed patch of structure. A task list is a set of cell ids, so the same cells are flown again at the same standoff, on the same normal, at the same heading, under the illuminator's repeatable light. The first survey of a cell is its baseline; later sorties ask whether it still looks like itself.<br><span class="trace-tag met">Implemented</span> <span class="trace-tag partial">Per-cell baselines designed · ground work</span></td>
+        </tr>
+        <tr>
+          <td>ESIC-F-003</td>
+          <td>Localization</td>
+          <td>Every product carries its surface id, cell id, the pose it was taken from and the sortie it belongs to; the surface's transform in the station model turns a cell into station coordinates. Position comes from range beams for standoff and normal, flow odometry along the surface and anchor fixes on features of the station model.<br><span class="trace-tag met">Implemented</span></td>
+        </tr>
+        <tr>
+          <td>ESIC-F-004</td>
+          <td>Data usability</td>
+          <td>Visual, thermal and geometric products are files keyed by cell beside a plain-text coverage report; the console shows them by cell with no vendor tooling. Change detection against the previous products of the same cell ids runs on the station or the ground.<br><span class="trace-tag met">Implemented</span> <span class="trace-tag partial">Change detection designed</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PARAMETERS -->
+<section class="specs-section" id="specs">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 07</span>
+      <span class="section-title">Key Parameters</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="tbr-note">PROJECT ENGINEERING ENVELOPES · MEASURED IN SIMULATION WHERE MARKED · NOTHING MEASURED ON HARDWARE</div>
+    <div class="specs-layout reveal">
+      <div class="specs-group">
+        <h4>Vehicle</h4>
+        <div class="spec-row"><span class="spec-key">Body</span><span class="spec-val">0.5 m sphere, compliant shell, no protrusions</span></div>
+        <div class="spec-row"><span class="spec-key">Wet mass</span><span class="spec-val">8.5 kg (TBR)</span></div>
+        <div class="spec-row"><span class="spec-key">Propulsion</span><span class="spec-val">Cold-gas nitrogen, 12 thrusters, 0.50 kg fill</span></div>
+        <div class="spec-row"><span class="spec-key">Battery</span><span class="spec-val">138 Wh, about 3 h of sortie</span></div>
+        <div class="spec-row"><span class="spec-key">Precedent</span><span class="spec-val">AERCam Sprint (1997) · Astrobee</span></div>
+      </div>
+      <div class="specs-group">
+        <h4>Navigation</h4>
+        <div class="spec-row"><span class="spec-key">Frame in scan</span><span class="spec-val">(u, v) on the surface, h on its normal</span></div>
+        <div class="spec-row"><span class="spec-key">Standoff</span><span class="spec-val">1.0 m</span></div>
+        <div class="spec-row"><span class="spec-key">Sensors</span><span class="spec-val">4 range beams · flow camera · IMU · 8 proximity</span></div>
+        <div class="spec-row"><span class="spec-key">Fixes</span><span class="spec-val">Anchors: hatches, seams, handrails in the station model</span></div>
+        <div class="spec-row"><span class="spec-key">Transit</span><span class="spec-val">Station frame, dead-reckoned, 0.30 m/s cap</span></div>
+      </div>
+      <div class="specs-group">
+        <h4>Products</h4>
+        <div class="spec-row"><span class="spec-key">Footprint · cell</span><span class="spec-val">1.15 × 0.83 m · 0.58 × 0.81 m pitch</span></div>
+        <div class="spec-row"><span class="spec-key">Visual</span><span class="spec-val">12 MP, fixed focus at standoff, LED ring</span></div>
+        <div class="spec-row"><span class="spec-key">Thermal</span><span class="spec-val">Radiometric LWIR, 640 × 512 class</span></div>
+        <div class="spec-row"><span class="spec-key">Geometry</span><span class="spec-val">Short-range mapper, 5 mm pitch, where tasked</span></div>
+        <div class="spec-row"><span class="spec-key">Per module</span><span class="spec-val">324 cells · about 2 GB with the mapper</span></div>
+      </div>
+      <div class="specs-group">
+        <h4>Sortie</h4>
+        <div class="spec-row"><span class="spec-key">Scan speed</span><span class="spec-val">0.10 m/s · one module about 36 min</span></div>
+        <div class="spec-row"><span class="spec-key">Nitrogen, module sortie</span><span class="spec-val">166 g as flown in simulation</span></div>
+        <div class="spec-row"><span class="spec-key">Sorties per fill</span><span class="spec-val">About 3 as flown · 1.1 with 100 % contingency</span></div>
+        <div class="spec-row"><span class="spec-key">Servicing</span><span class="spec-val">Fill, charge and off-load at every docking</span></div>
+        <div class="spec-row"><span class="spec-key">Responses</span><span class="spec-val">Hold · return · safe</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOST PLATFORM -->
+<section class="s2s-section" id="host">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 08</span>
+      <span class="section-title">Host Platform</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="s2s-intro reveal">
+      <div>
+        <div class="s2s-callout">
+          <div class="s2s-callout-label">Baseline Host</div>
+          <div class="s2s-callout-value">Any Crewed LEO Platform</div>
+          <div class="s2s-callout-desc">The design host is a non-rotating, human-rated low Earth orbit station of ISS or commercial-station class. Aegis Station's rotating rings are a later variant: a torus with a fixed spin is still a surface in the station model.</div>
+        </div>
+      </div>
+      <div class="s2s-body">
+        <p>AHID is built for Aegis Station, and like the <a class="inline-link" href="short_hopper.html">hopper</a> its usefulness comes first. Every long-duration pressurized platform accumulates micrometeoroid and debris strikes, thermal-cycling fatigue and joint wear that cannot be seen from inside, and today the only answers are an episodic EVA or whatever imagery happens to exist. A resident inspector that re-flies the same cells on a schedule is a capability the commercial stations will need before any ring is built.</p>
+        <p>What the host provides is small: a cradle on the hull with contact power, a nitrogen port and a data connector; a station model naming the surfaces, their anchors and the keep-out volumes; and a safety process the vehicle flies under. What the host gets is a product database keyed to its own structure, and a vehicle that holds or safes itself, master valve closed, the moment its own measurements say it should.</p>
+        <p>The safety case cannot be written by Aegis alone. The two flown precedents, AERCam Sprint outside the Shuttle and Astrobee inside the ISS, set the shape of it, and host engagement on it is the first item of the next stage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN ITEMS -->
+<section class="s2s-section" id="open">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 09</span>
+      <span class="section-title">Open Items — Where It Stops</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="s2s-intro reveal">
+      <div>
+        <div class="s2s-callout">
+          <div class="s2s-callout-label">Program Context</div>
+          <div class="s2s-callout-value">Analysis, Then Bench</div>
+          <div class="s2s-callout-desc">The software stage is done. The analyses that close the mass and thermal budgets are not started, and the next layer of evidence is sensors and thrusters on a bench against real hull surfaces.</div>
+        </div>
+      </div>
+      <div class="s2s-body">
+        <p>The software proves the navigation frame, the sortie sequencing, the fault posture and the product path. It does not prove the sensors on a real hull, the thrusters, or the safety case. The simulator's surfaces, lighting and valves are models until a bench says otherwise, and the page says so wherever a number came from them.</p>
+      </div>
+    </div>
+    <div class="s2s-scenarios reveal">
+      <div class="scenario">
+        <div class="scenario-tag">Open 01</div>
+        <h4>What the Flown Software Found</h4>
+        <p>Two gaps the live runs exposed and the roadmap carries: a hold with the anchors just out of the footprint waits out its timeout instead of searching for one, and a keep-out left active across the return path is retried at every hold timeout rather than routed around. Both are on the list, with a bound on hold cycles.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-tag">Open 02</div>
+        <h4>Thermal, Plume, Fault Trees, Mass</h4>
+        <p>A lumped thermal model of the sphere, a plume-impingement estimate for the hull and the host's sensors, hazard fault trees for collision and a stuck valve, and a mass rollup from a candidate parts list. The propulsion, battery and instrument fractions are the only allocations with a model behind them.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-tag">Open 03</div>
+        <h4>Sensors on Real Surfaces</h4>
+        <p>Range beams and flow odometry against MLI, radiator panels and handrails under the illuminator, with introduced defects, for the per-cell baselines and change detection. Thruster and valve characterization. A cradle concept with a mechanism partner; none exists at this scale.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-tag">Open 04</div>
+        <h4>The Safety Case and a Host</h4>
+        <p>Operation near crew and near an EVA needs a host's process and the precedents' lessons. Then an air-bearing demonstration with the flight software unchanged, and a technology demonstration on a host station under its own safety process.</p>
+      </div>
+    </div>
+    <div class="s2s-body reveal" style="max-width:760px; margin-top:40px;">
+      <p>Discussion welcome through the <a class="inline-link" href="engagement.html">engagement</a> page.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="page-wrap">
+    <div class="footer-inner">
+      <div class="footer-logo">AHID — Aegis Hull Inspection Drone — Aegis Station Program</div>
+      <div class="footer-copy">
+        <span class="status-dot"></span>Flight Software: Simulation-Verified
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+<p style="text-align:center;font-size:13px;margin:24px 0 40px;"><a href="index.html">&larr; Back to Aegis Station</a></p>
+</body>
+</html>
