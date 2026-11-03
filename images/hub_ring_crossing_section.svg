@@ -48,16 +48,17 @@
       <rect x="344" y="316" width="4" height="12" fill="#4dd0e1"/><rect x="396" y="316" width="4" height="12" fill="#4dd0e1"/>
       <!-- floor arrow in pod: outward -->
       <line x1="372" y1="186" x2="372" y2="170" stroke="#4dd0e1" stroke-width="1.2" marker-end="url(#arA)"/>
-      <text class="lab" x="372" y="134" text-anchor="middle">pod Ø 3.5 × 7 m · floor outward</text>
+      <text class="lab" x="404" y="134" text-anchor="end">pod Ø 3.5 × 7 m · floor outward</text>
       <text class="hd" x="372" y="118" text-anchor="middle">MAGAZINE DRUM</text>
       <!-- ring lock -->
       <rect x="404" y="162" width="6" height="10" fill="#d3756a"/><rect x="404" y="328" width="6" height="10" fill="#d3756a"/>
       <text class="lab" x="337" y="150" text-anchor="middle">hub lock</text>
-      <text class="lab" x="412" y="150" text-anchor="middle">ring lock</text>
+      <text class="lab" x="468" y="150" text-anchor="start">ring lock</text>
+      <line x1="408" y1="161" x2="466" y2="151" stroke="#9a9a9a" stroke-width="1"/>
       <!-- drive: stator on collar face, rotor on drum aft face at r ~5.5 (y 206) -->
       <rect x="398" y="200" width="6" height="14" fill="#4dd0e1"/><rect x="412" y="200" width="6" height="14" fill="#4dd0e1"/>
       <rect x="398" y="286" width="6" height="14" fill="#4dd0e1"/><rect x="412" y="286" width="6" height="14" fill="#4dd0e1"/>
-      <text class="lab" x="371" y="372" text-anchor="middle">drum drive: rotor on drum, stator on collar</text>
+      <text class="lab" x="404" y="372" text-anchor="end">drum drive: rotor on drum, stator on collar</text>
       <line x1="407" y1="300" x2="390" y2="362" stroke="#9a9a9a" stroke-width="1"/>
 
       <!-- ring collar x 412..460, r 4..16 (y 122..378) -->

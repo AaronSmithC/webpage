@@ -45,7 +45,7 @@
         <line class="dim" x1="0" y1="0" x2="96" y2="-60" opacity="0"/>
         <text class="dimt" x="100" y="-100">OD 24 m</text>
         <text class="dimt" x="104" y="-16">r 9 m</text>
-        <text class="dimt" x="156" y="-60" fill="#4dd0e1">vestibules, 20° off before align</text>
+        <text class="dimt" x="0" y="160" text-anchor="middle" fill="#4dd0e1">dashed: the ring's vestibules, 20° off before align</text>
       </g>
       <!-- frames diagram at right -->
       <g transform="translate(430 60)">
@@ -67,9 +67,9 @@
         <text class="lab" x="0" y="124">Rules of the mechanism (none of them in the hatch's path):</text>
         <text x="0" y="144">· a lock releases only with the drive at zero torque and the pods retracted and sealed</text>
         <text x="0" y="162">· the drive torques only with both locks released</text>
-        <text x="0" y="180">· a lock engages only inside rate and phase tolerance (|Δω| &lt; 0.01 rpm, |Δθ| &lt; 10 mm at r = 9 m)</text>
+        <text x="0" y="180">· a lock engages only inside tolerance: 0.01 rpm and 10 mm at r = 9 m</text>
         <text x="0" y="198">· a berth pushes only with that side's lock engaged</text>
-        <text x="0" y="216">· a hatch is manual and mechanically held unless the pod is hard-mated with the pressure equalized</text>
+        <text x="0" y="216">· a hatch is manual, held shut unless hard-mated with pressure equalized</text>
         <text class="hd" x="0" y="252">THE TORQUE GOES INTO THE RING</text>
         <text class="lab" x="0" y="270">Drive stator on the collar, rotor on the drum. Spin-up takes 1.2 MN·m·s from a ring</text>
         <text class="lab" x="0" y="286">holding ~3 × 10¹³ N·m·s: one part in 25 million. No reaction wheel needed, and the</text>
