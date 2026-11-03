@@ -135,7 +135,7 @@
         <div class="card">
           <h3>Despun Magazine</h3>
           <ul>
-            <li>Annular drum on a despun spine core at each ring face, between the hub bulkhead and the ring face; outer diameter just exceeds the hub wall</li>
+            <li>Annular drum on a despun spine core at each ring face, between the hub bulkhead and the ring face; 24 m across, 8 m long, its outer diameter just exceeding the hub wall</li>
             <li>Four pod berths around the rim, matching the four ring-face vestibules so that all pods transfer together; rotation axis on the station spin axis</li>
             <li>Locked to the hub or to the ring at all times except while driven between them; a lock engages only inside a rate and phase tolerance</li>
             <li>Loads despun from the hub-internal corridor; spins up to ring rate for transfer</li>
@@ -165,6 +165,16 @@
         </div>
       </div>
 
+      <figure class="diagram">
+        <img src="images/hub_ring_crossing_section.svg" alt="Axial section through one crossing station: the despun hub and spine core on the left, the magazine drum between the hub bulkhead and the ring collar face with pods at 9 m radius, the rotating ring collar on the right with its vestibules, and the main bearing carrying the rotary transformer and the near-axis optical link."/>
+        <figcaption>One crossing station, cut along the spin axis (Rev 0 concept, 8 px per metre; the clearances are drawn at 1 m and built at 0.6 m). Grey is despun (hub, spine core, bulkhead), cyan is rotating (collar, spokes), and the drum belongs to neither frame. Pods sit in through-berths at 9 m radius with a hatch at each end: pushed 1.1 m aft they mate to the hub bulkhead, pushed 1.1 m forward to the collar's vestibules. The cargo drum is the mirror image on the ring's aft face.</figcaption>
+      </figure>
+
+      <figure class="diagram">
+        <img src="images/hub_ring_crossing_frames.svg" alt="Looking along the axis: four pods at 9 m radius in an annular drum around the 7 m core, the hub bulkhead ports fixed and the ring's four vestibules turning at ring rate; beside it the three frames the drum can belong to, the two locks between them, the rules of the mechanism, where the drive's torque goes, and what happens on a stall between frames."/>
+        <figcaption>Along the axis, before alignment, with the ring's vestibules 20&deg; ahead of the drum's pods. The drum is locked to the hub, locked to the ring, or being driven between them, and never free. The drive's torque reacts into the ring, whose angular momentum is tens of millions of times the drum's. A stall between frames is survived in the pod and ended on the brake.</figcaption>
+      </figure>
+
       <h3 style="margin-top:1.25rem;">Sizing & Cadence</h3>
       <p>
         With a design complement of roughly 3,000–5,000 permanent crew distributed across three identical
@@ -174,6 +184,21 @@
         incident in one sector is survived in the next, and a ring remains habitable indefinitely with its
         crossings out of service.
       </p>
+
+      <table>
+        <thead><tr><th>Rev 0 figure</th><th>Value</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td>Magazine drum</td><td>24 m across, 8 m bore, 8 m long</td><td>an annulus on the despun spine core, between the hub bulkhead and the ring collar face</td></tr>
+          <tr><td>Berths</td><td>four, at 9 m radius, 90&deg; apart</td><td>matching the four vestibules on the ring face</td></tr>
+          <tr><td>Pod</td><td>3.5 m &times; 7 m, a hatch at each end</td><td>4 crew nominal, 6 in contingency; cargo variant carries one 45 t MTC</td></tr>
+          <tr><td>Push stroke</td><td>1.1 m each way</td><td>soft capture at 1.0 m within &plusmn;50 mm, hard mate with a static seal</td></tr>
+          <tr><td>Lock tolerance</td><td>10 mm at the berth radius, 0.01 rpm</td><td>a fifth of the capture envelope, so a locked drum always captures</td></tr>
+          <tr><td>Spin-up</td><td>120 s at about 10 kN&middot;m</td><td>passenger drum; peak drive power about 1.5 kW; the cargo drum takes 240 s</td></tr>
+          <tr><td>Gravity in a pod at ring rate</td><td>about 0.02 g</td><td>floor outward; crew step into the vestibule and take a lift in a spoke to the rim</td></tr>
+          <tr><td>One-way cycle</td><td>about 15 min</td><td>board, seal, retract, spin, align, lock, push, mate, disembark</td></tr>
+          <tr><td>Throughput per ring face</td><td>64 crew/h nominal, about 140 in surge</td><td>sized for scheduled traffic; the ring is its own refuge</td></tr>
+        </tbody>
+      </table>
 
       <h3 style="margin-top:1.25rem;">Crew Safety Layers</h3>
       <table>

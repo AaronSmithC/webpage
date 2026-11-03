@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-labelledby="title desc">
+  <title id="title">Aegis Station hub/ring crossing — axial section, Rev 0</title>
+  <desc id="desc">Axial section through one crossing station: despun hub and spine core on the left, the magazine drum in the middle with pods at 9 m radius, the rotating ring collar on the right with vestibules, main bearing, rotary transformer and optical link at the bearing</desc>
+  <style>
+    text{font-family:"Open Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:11px;fill:#e6e6e6;}
+    .lab{fill:#9a9a9a;font-size:10px;} .hd{font-family:"Orbitron",system-ui,sans-serif;font-size:11px;letter-spacing:.8px;fill:#e6e6e6;}
+    .acc{fill:#4dd0e1;} .num{font-variant-numeric:tabular-nums;} .dim{stroke:#9a9a9a;stroke-width:1;fill:none;} .dimt{fill:#9a9a9a;font-size:10px;}
+  </style>
+  <rect x="0" y="0" width="960" height="460" fill="#0f0f0f"/>
+
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e6e6e6"/></marker>
+        <marker id="arA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4dd0e1"/></marker>
+        <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#9a9a9a" stroke-width="1"/></pattern>
+      </defs>
+      <!-- scale: 8 px per metre, axis at y=250, gaps drawn at 1 m -->
+      <line x1="20" y1="250" x2="940" y2="250" stroke="#9a9a9a" stroke-width="1" stroke-dasharray="6 6"/>
+      <text class="lab" x="24" y="244">SPIN AXIS</text>
+
+      <!-- hub section -->
+      <rect x="40" y="170" width="290" height="160" rx="6" fill="#3a3a3a" stroke="#8f8f8f" stroke-width="2"/>
+      <text class="hd" x="185" y="214" text-anchor="middle">DESPUN HUB</text>
+      <text class="lab" x="185" y="230" text-anchor="middle">Ø 20 m · pressurized · 0 g</text>
+      <text class="lab" x="185" y="296" text-anchor="middle">pod boarding bay: four ports at r = 9 m</text>
+      <!-- hub bulkhead flange r=12 -->
+      <rect x="326" y="154" width="8" height="192" fill="#8f8f8f"/>
+      <!-- hub ports (hatches) -->
+      <rect x="326" y="172" width="8" height="12" fill="#0b0b0b" stroke="#e6e6e6" stroke-width="1"/>
+      <rect x="326" y="316" width="8" height="12" fill="#0b0b0b" stroke="#e6e6e6" stroke-width="1"/>
+      <text class="lab" x="320" y="162" text-anchor="end">bulkhead</text>
+      <!-- spine core r=3.5 through everything -->
+      <rect x="330" y="222" width="610" height="56" fill="#3a3a3a" stroke="#8f8f8f" stroke-width="2"/>
+      <text class="hd" x="640" y="246" text-anchor="middle">SPINE CORE · despun</text>
+      <text class="lab" x="640" y="262" text-anchor="middle">Ø 7 m · 4 m corridor · power and data trunks</text>
+
+      <!-- hub lock -->
+      <rect x="334" y="162" width="6" height="10" fill="#d3756a"/><rect x="334" y="328" width="6" height="10" fill="#d3756a"/>
+      <!-- magazine drum: annulus r 4..12, x 340..404 -->
+      <rect x="340" y="154" width="64" height="64" fill="#101010" stroke="#e6e6e6" stroke-width="2"/>
+      <rect x="340" y="282" width="64" height="64" fill="#101010" stroke="#e6e6e6" stroke-width="2"/>
+      <!-- drum bearing on core, r 3.5..4 -->
+      <rect x="340" y="218" width="64" height="4" fill="url(#hatch)"/><rect x="340" y="278" width="64" height="4" fill="url(#hatch)"/>
+      <!-- pods r 7.25..10.75 (y 164..192 and 308..336), length 7 m = 56 px, centred -->
+      <rect x="344" y="164" width="56" height="28" rx="8" fill="#143a40" stroke="#4dd0e1" stroke-width="2"/>
+      <rect x="344" y="308" width="56" height="28" rx="8" fill="#143a40" stroke="#4dd0e1" stroke-width="2"/>
+      <!-- pod hatches both ends -->
+      <rect x="344" y="172" width="4" height="12" fill="#4dd0e1"/><rect x="396" y="172" width="4" height="12" fill="#4dd0e1"/>
+      <rect x="344" y="316" width="4" height="12" fill="#4dd0e1"/><rect x="396" y="316" width="4" height="12" fill="#4dd0e1"/>
+      <!-- floor arrow in pod: outward -->
+      <line x1="372" y1="186" x2="372" y2="170" stroke="#4dd0e1" stroke-width="1.2" marker-end="url(#arA)"/>
+      <text class="lab" x="372" y="134" text-anchor="middle">pod Ø 3.5 × 7 m · floor outward</text>
+      <text class="hd" x="372" y="118" text-anchor="middle">MAGAZINE DRUM</text>
+      <!-- ring lock -->
+      <rect x="404" y="162" width="6" height="10" fill="#d3756a"/><rect x="404" y="328" width="6" height="10" fill="#d3756a"/>
+      <text class="lab" x="337" y="150" text-anchor="middle">hub lock</text>
+      <text class="lab" x="412" y="150" text-anchor="middle">ring lock</text>
+      <!-- drive: stator on collar face, rotor on drum aft face at r ~5.5 (y 206) -->
+      <rect x="398" y="200" width="6" height="14" fill="#4dd0e1"/><rect x="412" y="200" width="6" height="14" fill="#4dd0e1"/>
+      <rect x="398" y="286" width="6" height="14" fill="#4dd0e1"/><rect x="412" y="286" width="6" height="14" fill="#4dd0e1"/>
+      <text class="lab" x="371" y="372" text-anchor="middle">drum drive: rotor on drum, stator on collar</text>
+      <line x1="407" y1="300" x2="390" y2="362" stroke="#9a9a9a" stroke-width="1"/>
+
+      <!-- ring collar x 412..460, r 4..16 (y 122..378) -->
+      <rect x="412" y="122" width="48" height="100" fill="#143a40" stroke="#4dd0e1" stroke-width="2"/>
+      <rect x="412" y="278" width="48" height="100" fill="#143a40" stroke="#4dd0e1" stroke-width="2"/>
+      <!-- spokes continuing to the torus -->
+      <path d="M418 122 V60 M454 122 V60 M418 378 V440 M454 378 V440" stroke="#4dd0e1" stroke-width="2" stroke-dasharray="8 6" fill="none"/>
+      <text class="acc hd" x="436" y="52" text-anchor="middle">RING COLLAR</text>
+      <text class="lab" x="436" y="40" text-anchor="middle">spokes to the torus, r 100–200 m</text>
+      <text class="lab" x="436" y="452" text-anchor="middle">lifts to the rim run in the spokes</text>
+      <!-- receptacle / vestibule at r=9 -->
+      <rect x="412" y="164" width="48" height="28" fill="#0b0b0b" stroke="#4dd0e1" stroke-width="1.5"/>
+      <rect x="412" y="308" width="48" height="28" fill="#0b0b0b" stroke="#4dd0e1" stroke-width="1.5"/>
+      <text class="lab" x="436" y="182" text-anchor="middle">vestibule</text>
+      <text class="lab" x="436" y="326" text-anchor="middle">vestibule</text>
+      <!-- push arrow -->
+      <line x1="400" y1="300" x2="420" y2="300" stroke="#e6e6e6" stroke-width="1.5" marker-end="url(#ar)" opacity="0"/>
+      <!-- main bearing r 3.5..4 at the collar -->
+      <rect x="412" y="218" width="48" height="4" fill="url(#hatch)"/><rect x="412" y="278" width="48" height="4" fill="url(#hatch)"/>
+      <!-- RPCU coils at bearing, hub side on core flange, ring side on collar bore: draw at x 436..444 r 4..5.5 -->
+      <rect x="440" y="206" width="4" height="12" fill="#8f8f8f"/><rect x="446" y="206" width="4" height="12" fill="#4dd0e1"/>
+      <rect x="440" y="282" width="4" height="12" fill="#8f8f8f"/><rect x="446" y="282" width="4" height="12" fill="#4dd0e1"/>
+      <!-- labels for bearing/RPCU/optical -->
+      <line x1="447" y1="282" x2="520" y2="330" stroke="#9a9a9a" stroke-width="1"/>
+      <text class="lab" x="524" y="326">main bearing Ø 8 m, despin drive</text>
+      <text class="lab" x="524" y="340">RPCU rotary transformer, coils 2–10 mm apart</text>
+      <text class="lab" x="524" y="354">optical link, near-axis, handoff between 4 ring-side heads</text>
+      <text class="lab" x="524" y="368">no fluid, no slip ring crosses here</text>
+
+      <!-- cargo drum note to the right -->
+      <text class="lab" x="700" y="190" text-anchor="middle">aft face of the same ring:</text>
+      <text class="lab" x="700" y="204" text-anchor="middle">cargo drum, mirror image, 45 t MTC per pod</text>
+
+      <!-- dimensions -->
+      <line class="dim" x1="340" y1="98" x2="404" y2="98" marker-start="url(#ar)" marker-end="url(#ar)"/>
+      <text class="dimt" x="372" y="94" text-anchor="middle">8 m</text>
+      <line class="dim" x1="480" y1="154" x2="480" y2="250"/><line class="dim" x1="476" y1="154" x2="484" y2="154"/><line class="dim" x1="476" y1="250" x2="484" y2="250"/>
+      <text class="dimt" x="486" y="206">r 12 m drum OD</text>
+      <line class="dim" x1="300" y1="178" x2="300" y2="250"/><line class="dim" x1="296" y1="178" x2="304" y2="178"/>
+      <text class="dimt" x="294" y="206" text-anchor="end">r 9 m berths</text>
+      <line class="dim" x1="520" y1="222" x2="520" y2="250"/><line class="dim" x1="516" y1="222" x2="524" y2="222"/>
+      <text class="dimt" x="526" y="232">r 3.5 m core</text>
+      <text class="lab" x="880" y="440" text-anchor="end">8 px per metre · gaps drawn at 1 m, built at 0.6 m</text>
+    
+</svg>

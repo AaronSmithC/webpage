@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+  <title id="title">Aegis Station hub/ring crossing — along the axis, three frames and two locks, Rev 0</title>
+  <desc id="desc">End view of the drum: four pods at 9 m radius in an annular drum around the 7 m core, with the hub bulkhead ports fixed and the ring's four vestibules turning at ring rate; beside it the three frames and which one the drum belongs to in each phase</desc>
+  <style>
+    text{font-family:"Open Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:11px;fill:#e6e6e6;}
+    .lab{fill:#9a9a9a;font-size:10px;} .hd{font-family:"Orbitron",system-ui,sans-serif;font-size:11px;letter-spacing:.8px;fill:#e6e6e6;}
+    .acc{fill:#4dd0e1;} .num{font-variant-numeric:tabular-nums;} .dim{stroke:#9a9a9a;stroke-width:1;fill:none;} .dimt{fill:#9a9a9a;font-size:10px;}
+  </style>
+  <rect x="0" y="0" width="900" height="420" fill="#0f0f0f"/>
+
+      <defs>
+        <marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4dd0e1"/></marker>
+      </defs>
+      <!-- end view centred at 210,210; 8 px/m -->
+      <g transform="translate(210 210)">
+        <!-- ring collar r 12..16 (behind) -->
+        <circle r="128" fill="none" stroke="#4dd0e1" stroke-width="2" stroke-dasharray="10 6"/>
+        <!-- receptacles (ring) at r=72, rotated 20 deg to show misalignment before align -->
+        <g transform="rotate(20)">
+          <circle cx="72" cy="0" r="16" fill="none" stroke="#4dd0e1" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <circle cx="-72" cy="0" r="16" fill="none" stroke="#4dd0e1" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <circle cx="0" cy="72" r="16" fill="none" stroke="#4dd0e1" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <circle cx="0" cy="-72" r="16" fill="none" stroke="#4dd0e1" stroke-width="1.5" stroke-dasharray="4 3"/>
+        </g>
+        <!-- drum annulus r 4..12 -->
+        <circle r="96" fill="#101010" stroke="#e6e6e6" stroke-width="2"/>
+        <circle r="32" fill="#3a3a3a" stroke="#8f8f8f" stroke-width="2"/>
+        <circle r="28" fill="#3a3a3a" stroke="#8f8f8f" stroke-width="1"/>
+        <!-- hub ports fixed at 0/90/180/270 -->
+        <g>
+          <circle cx="72" cy="0" r="14" fill="#143a40" stroke="#4dd0e1" stroke-width="2"/>
+          <circle cx="-72" cy="0" r="14" fill="#143a40" stroke="#4dd0e1" stroke-width="2"/>
+          <circle cx="0" cy="72" r="14" fill="#143a40" stroke="#4dd0e1" stroke-width="2"/>
+          <circle cx="0" cy="-72" r="14" fill="#143a40" stroke="#4dd0e1" stroke-width="2"/>
+        </g>
+        <!-- floor arrow -->
+        <line x1="72" y1="0" x2="84" y2="0" stroke="#4dd0e1" stroke-width="1.2" marker-end="url(#ar2)"/>
+        <!-- ring rotation arrow -->
+        <path d="M -40 -118 A 125 125 0 0 1 40 -118" fill="none" stroke="#4dd0e1" stroke-width="2" marker-end="url(#ar2)"/>
+        <text class="acc num" x="0" y="-146" text-anchor="middle">ring 1.50 rpm · 1.4 m/s at the berths</text>
+        <text class="lab" x="0" y="4" text-anchor="middle">core</text>
+        <text class="lab" x="0" y="-52" text-anchor="middle">drum</text>
+        <text class="lab" x="0" y="46" text-anchor="middle">pod</text>
+        <!-- dim -->
+        <line class="dim" x1="0" y1="0" x2="96" y2="-60" opacity="0"/>
+        <text class="dimt" x="100" y="-100">OD 24 m</text>
+        <text class="dimt" x="104" y="-16">r 9 m</text>
+        <text class="dimt" x="156" y="-60" fill="#4dd0e1">vestibules, 20° off before align</text>
+      </g>
+      <!-- frames diagram at right -->
+      <g transform="translate(430 60)">
+        <text class="hd" x="0" y="0">THREE FRAMES, TWO LOCKS</text>
+        <text class="lab" x="0" y="18">The drum is always locked to one frame or being driven between them. Never free.</text>
+        <!-- hub frame -->
+        <rect x="0" y="40" width="130" height="54" rx="8" fill="#3a3a3a" stroke="#8f8f8f" stroke-width="2"/>
+        <text class="hd" x="65" y="62" text-anchor="middle">HUB</text><text class="lab" x="65" y="80" text-anchor="middle">0 rpm · boarding</text>
+        <!-- drum -->
+        <rect x="170" y="40" width="130" height="54" rx="8" fill="#101010" stroke="#e6e6e6" stroke-width="2"/>
+        <text class="hd" x="235" y="62" text-anchor="middle">DRUM</text><text class="lab" x="235" y="80" text-anchor="middle">0 → 1.50 rpm in 120 s</text>
+        <!-- ring -->
+        <rect x="340" y="40" width="130" height="54" rx="8" fill="#143a40" stroke="#4dd0e1" stroke-width="2"/>
+        <text class="hd acc" x="405" y="62" text-anchor="middle">RING</text><text class="lab" x="405" y="80" text-anchor="middle">1.50 rpm · vestibules</text>
+        <!-- locks -->
+        <rect x="130" y="58" width="40" height="18" fill="#d3756a" opacity=".9"/><text x="150" y="71" text-anchor="middle" style="font-size:9px;fill:#fff">LOCK</text>
+        <rect x="300" y="58" width="40" height="18" fill="#d3756a" opacity=".9"/><text x="320" y="71" text-anchor="middle" style="font-size:9px;fill:#fff">LOCK</text>
+        <!-- interlock text -->
+        <text class="lab" x="0" y="124">Rules of the mechanism (none of them in the hatch's path):</text>
+        <text x="0" y="144">· a lock releases only with the drive at zero torque and the pods retracted and sealed</text>
+        <text x="0" y="162">· the drive torques only with both locks released</text>
+        <text x="0" y="180">· a lock engages only inside rate and phase tolerance (|Δω| &lt; 0.01 rpm, |Δθ| &lt; 10 mm at r = 9 m)</text>
+        <text x="0" y="198">· a berth pushes only with that side's lock engaged</text>
+        <text x="0" y="216">· a hatch is manual and mechanically held unless the pod is hard-mated with the pressure equalized</text>
+        <text class="hd" x="0" y="252">THE TORQUE GOES INTO THE RING</text>
+        <text class="lab" x="0" y="270">Drive stator on the collar, rotor on the drum. Spin-up takes 1.2 MN·m·s from a ring</text>
+        <text class="lab" x="0" y="286">holding ~3 × 10¹³ N·m·s: one part in 25 million. No reaction wheel needed, and the</text>
+        <text class="lab" x="0" y="302">hub despin drive at the main bearing never feels a cycle.</text>
+        <text class="hd" x="0" y="338">A STALL BETWEEN FRAMES: NEAREST FRAME BY RATE</text>
+        <text class="lab" x="0" y="356">A drive fault mid-spin leaves pods in no frame. Below half rate the drum is braked back to</text>
+        <text class="lab" x="0" y="372">the hub; above it, it finishes to the ring. The pod's 24 h ECLSS covers the case where the</text>
+        <text class="lab" x="0" y="388">drive is lost outright and the drum is walked home on the brake.</text>
+      </g>
+    
+</svg>
