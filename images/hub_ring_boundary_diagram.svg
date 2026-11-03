@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" role="img" aria-labelledby="title desc">
   <title id="title">Aegis Station hub/ring boundary — schematic cross-section</title>
-  <desc id="desc">Schematic showing how crew, cargo, power, data and thermal flows cross between the despun hub and a rotating habitat ring without any continuous rotary mechanical seal.</desc>
+  <desc id="desc">Schematic showing how crew, cargo, power, data and thermal flows cross between the despun hub and a rotating habitat ring without any continuous rotary mechanical seal: four-berth magazine, rotary transformer, near-axis optical link with handoff, heat rejected on each side.</desc>
   <defs>
     <marker id="aCyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#4dd0e1"/>
@@ -52,11 +52,10 @@
   <text class="sub" font-size="11" text-anchor="middle"><tspan x="472" y="149">cyclic pod transfer</tspan><tspan x="472" y="162">no sliding seal</tspan></text>
   <!-- despun magazine carousel -->
   <circle class="struct sStill" cx="408" cy="205" r="26"/>
-  <circle cx="408" cy="184" r="4" fill="#8f8f8f"/>
-  <circle cx="428" cy="199" r="4" fill="#8f8f8f"/>
-  <circle cx="420" cy="223" r="4" fill="#8f8f8f"/>
-  <circle cx="396" cy="223" r="4" fill="#8f8f8f"/>
-  <circle cx="388" cy="199" r="4" fill="#8f8f8f"/>
+  <circle cx="408" cy="186" r="4" fill="#8f8f8f"/>
+  <circle cx="427" cy="205" r="4" fill="#8f8f8f"/>
+  <circle cx="408" cy="224" r="4" fill="#8f8f8f"/>
+  <circle cx="389" cy="205" r="4" fill="#8f8f8f"/>
   <text class="sub" x="408" y="250" font-size="10.5" text-anchor="middle">despun magazine</text>
   <!-- transit pod + transfer arrow -->
   <rect x="446" y="192" width="34" height="26" rx="6" class="struct sRot"/>
@@ -77,12 +76,12 @@
   </g>
   <line class="bound" x1="472" y1="320" x2="472" y2="348"/>
 
-  <!-- ============ 3 · DATA (on axis) ============ -->
+  <!-- ============ 3 · DATA (near axis, at the bearing) ============ -->
   <path class="thin" d="M450 350 l-12 -7 v14 z" fill="#7d7d7d"/>
   <path class="sRot" d="M610 350 l12 -7 v14 z" fill="#4dd0e1"/>
   <line x1="450" y1="350" x2="610" y2="350" stroke="#4dd0e1" stroke-width="2" stroke-dasharray="3 5"/>
   <text class="accb" x="472" y="382" font-size="14" text-anchor="middle">3 &#183; DATA</text>
-  <text class="sub" font-size="11" text-anchor="middle"><tspan x="472" y="399">on-axis free-space optical</tspan><tspan x="472" y="412">a still point on the axis</tspan></text>
+  <text class="sub" font-size="11" text-anchor="middle"><tspan x="472" y="399">near-axis free-space optical</tspan><tspan x="472" y="412">heads at the bearing hand off</tspan></text>
 
   <!-- ============ 4 · THERMAL ============ -->
   <text class="warn" x="472" y="446" font-size="14" text-anchor="middle">4 &#183; THERMAL</text>

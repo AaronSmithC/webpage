@@ -69,8 +69,8 @@
     </p>
 
     <figure class="diagram">
-      <img src="images/hub_ring_boundary_diagram.svg" alt="Schematic cross-section of the hub/ring boundary: crew and cargo cross as cyclic pods through a despun magazine and ring-face vestibule; power crosses by a contactless rotary transformer; data by an on-axis free-space optical link; and heat is rejected independently on each side. No continuous rotary seal in any path."/>
-      <figcaption>Schematic of the boundary (not to scale). Crew &amp; cargo cross as cyclic pods, power by a contactless rotary transformer, data by an on-axis optical link, and heat is rejected independently on each side &#8212; no continuous rotary seal in any path.</figcaption>
+      <img src="images/hub_ring_boundary_diagram.svg" alt="Schematic cross-section of the hub/ring boundary: crew and cargo cross as cyclic pods through a despun magazine and ring-face vestibule; power crosses by a contactless rotary transformer; data by a near-axis free-space optical link at the hub/ring bearing; and heat is rejected independently on each side. No continuous rotary seal in any path."/>
+      <figcaption>Schematic of the boundary (not to scale). Crew &amp; cargo cross as cyclic pods, power by a contactless rotary transformer, data by a near-axis optical link at the hub/ring bearing, and heat is rejected independently on each side &#8212; no continuous rotary seal in any path.</figcaption>
     </figure>
 
     <div class="toc">
@@ -135,10 +135,11 @@
         <div class="card">
           <h3>Despun Magazine</h3>
           <ul>
-            <li>Disc carousel co-located with each ring face; diameter just exceeds hub outer wall</li>
-            <li>Five pod berths arrayed around rim, rotation axis parallel to station spin axis</li>
-            <li>Loads despun from hub-internal corridor; spins up to ring rate for transfer</li>
-            <li>Reaction wheels absorb spin-up/down torque; water ballast compensates partial-load asymmetry</li>
+            <li>Annular drum on a despun spine core at each ring face, between the hub bulkhead and the ring face; outer diameter just exceeds the hub wall</li>
+            <li>Four pod berths around the rim, matching the four ring-face vestibules so that all pods transfer together; rotation axis on the station spin axis</li>
+            <li>Locked to the hub or to the ring at all times except while driven between them; a lock engages only inside a rate and phase tolerance</li>
+            <li>Loads despun from the hub-internal corridor; spins up to ring rate for transfer</li>
+            <li>Drive stator on the ring face, rotor on the drum: spin-up torque reacts into the ring, whose angular momentum is millions of times the drum's, so no reaction wheels are needed; partial-load asymmetry is a small bearing load, trimmed by water ballast</li>
             <li>Contactless relationship with ring during spin-up; no seal is slipping under pressure at any phase</li>
           </ul>
         </div>
@@ -167,9 +168,11 @@
       <h3 style="margin-top:1.25rem;">Sizing & Cadence</h3>
       <p>
         With a design complement of roughly 3,000–5,000 permanent crew distributed across three identical
-        rings, per-vestibule peak load is well within the capacity of 5-chamber magazines operating on a
-        scheduled ~15–20 minute cycle. Surge mode (~10 minute cycles) supports full-ring evacuation in
-        under two hours without relying on any single vestibule.
+        rings, a four-berth magazine on a scheduled ~15–20 minute cycle carries about 64 crew per hour per
+        ring face, and surge mode (~10 minute cycles, six per pod) about 140. The crossing is sized for
+        scheduled traffic. It is not the evacuation route: each ring is its own refuge, sectored so that an
+        incident in one sector is survived in the next, and a ring remains habitable indefinitely with its
+        crossings out of service.
       </p>
 
       <h3 style="margin-top:1.25rem;">Crew Safety Layers</h3>
@@ -291,16 +294,18 @@
     <section id="data">
       <h2>5. Data Crossings</h2>
       <p>
-        Data crosses the boundary via <strong>free-space optical links on the station spin axis</strong>.
-        The geometry is naturally favorable: an on-axis point is stationary in both the hub and ring
-        reference frames, so no mechanical rotation of the link itself is required.
+        Data crosses the boundary via <strong>free-space optical links at the hub/ring bearing, close to the
+        spin axis</strong>. The despun spine core passes through the ring's bearing, so no ring-side element
+        sits on the axis itself; instead several ring-side optical heads around the bearing hand off to the
+        hub-side receiver as the ring turns, with overlapping fields so there is no gap. No mechanical
+        rotation of the link itself is required.
       </p>
 
       <div class="grid">
         <div class="card">
-          <h3>On-Axis Optical</h3>
+          <h3>Near-Axis Optical</h3>
           <ul>
-            <li>Redundant transceivers at the hub/ring interface, aligned along the station spin axis</li>
+            <li>Four or more ring-side heads at the hub/ring bearing, handing off to the hub-side receiver with overlapping fields</li>
             <li>Bandwidth and latency sufficient for all station operational and crew traffic</li>
             <li>No EMI, no contact wear, no continuous rotary mechanical interface</li>
           </ul>
@@ -362,7 +367,7 @@
           <tr><td>Bulk water</td><td>Sealed MTCs carried as cargo pod payload</td><td>No</td></tr>
           <tr><td>Pressurant gas</td><td>Sealed gas cartridges carried as cargo pod payload</td><td>No</td></tr>
           <tr><td>Power</td><td>Rotary transformer (contactless inductive)</td><td>No</td></tr>
-          <tr><td>Data</td><td>On-axis free-space optical</td><td>No</td></tr>
+          <tr><td>Data</td><td>Near-axis free-space optical with handoff</td><td>No</td></tr>
           <tr><td>Thermal</td><td>Rejected on each side independently</td><td>No</td></tr>
         </tbody>
       </table>
