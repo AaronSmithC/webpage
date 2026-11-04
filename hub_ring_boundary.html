@@ -6,7 +6,7 @@
 
   <title>Aegis Station — Hub/Ring Boundary</title>
 
-  <meta name="description" content="How people, cargo, power, data, and thermal flows cross the rotational boundary between Aegis Station's despun hub and its rotating habitat rings. No slip rings. No continuous rotary seals."/>
+  <meta name="description" content="How crew, cargo, power, data and heat cross between Aegis Station's despun hub and its rotating habitat rings: a drum locked to one frame or the other and driven between them, built as flight software and run through its fault library in simulation. No slip rings. No continuous rotary seals."/>
   <meta name="keywords" content="Aegis Station, hub ring boundary, despun magazine, transfer pod, rotary transformer, free-space optical, contactless power, rotating habitat"/>
   <meta name="author" content="Aegis Station"/>
 
@@ -51,6 +51,20 @@
     figure.diagram { margin: 1.5rem 0 0.5rem; border:1px solid #2b2b2b; background:#0f0f0f; border-radius:14px; padding:1rem 1rem 0.9rem; }
     figure.diagram img { width:100%; height:auto; display:block; }
     figure.diagram figcaption { margin:0.7rem 0 0; font-size:0.9rem; color:#b9b9b9; line-height:1.55; }
+    figure.diagram video { width:100%; height:auto; display:block; border-radius:8px; }
+    /* the animated cycle (from the Rev 0 concept page) */
+    .anim { --acc:#4dd0e1; --acc-dim:#1e5e66; --warn:#d3756a; --hub:#8f8f8f; --hub-dim:#3a3a3a; --ring-dim:#143a40; --fg:#e6e6e6; --surface:#101010; --line:#2b2b2b; --muted:#9a9a9a; }
+    .anim svg { display:block; width:100%; height:auto; color:var(--fg); }
+    .anim svg text { font-family:"Open Sans", system-ui, sans-serif; font-size:11px; fill:var(--fg); }
+    .anim svg .lab { fill:var(--muted); font-size:10px; }
+    .anim svg .hd { font-family:"Orbitron", system-ui, sans-serif; font-size:11px; letter-spacing:.8px; fill:var(--fg); }
+    .anim svg .num { font-variant-numeric:tabular-nums; }
+    .ctl { display:flex; flex-wrap:wrap; gap:.6rem 1rem; align-items:center; margin:.2rem 0 .6rem; font-size:.85rem; color:#9a9a9a; }
+    .ctl button { font:inherit; font-family:"Orbitron", system-ui, sans-serif; font-size:.75rem; letter-spacing:.6px; color:#e6e6e6; background:#0b0b0b; border:1px solid #2b2b2b; border-radius:8px; padding:.4rem .8rem; cursor:pointer; }
+    .ctl button:focus-visible, .ctl input:focus-visible { outline:2px solid #4dd0e1; outline-offset:2px; }
+    .ctl input[type=range] { flex:1 1 200px; min-width:0; accent-color:#4dd0e1; }
+    .ctl .ro { font-variant-numeric:tabular-nums; color:#e6e6e6; }
+    .finding { border-left:3px solid #4dd0e1; padding:0.2rem 0 0.2rem 1rem; margin:1rem 0; color:#d7d7d7; }
   </style>
 </head>
 
@@ -62,205 +76,317 @@
 
     <p class="section-lead">
       The hub/ring boundary is the interface between Aegis Station's despun central hub and its three
-      co-rotating habitat rings. Everything the station needs to move — crew, cargo, water, power, data,
-      heat — crosses this boundary. The architectural principle is singular: <strong>no continuous
-      rotary mechanical interface carries a life-critical flow.</strong> No slip rings. No continuous
-      rotary fluid seals. Every crossing is either contactless, cyclic, or eliminated entirely by
-      distributing the function across both sides.
+      co-rotating habitat rings. Everything the station needs to move &#8212; crew, cargo, water, power, data,
+      heat &#8212; crosses it. The principle is singular: <strong>no continuous rotary mechanical interface
+      carries a life-critical flow.</strong> No slip rings. No continuous rotary seals. Every crossing is
+      contactless, cyclic, or removed by giving each side its own copy of the function.
+    </p>
+    <p class="section-lead">
+      This page is the crossing read as a mechanism, then built as flight software and run. The mechanism is
+      a drum that is locked to the hub, locked to the ring, or being driven between them, and never free.
+      The software is a seven-application flight computer image, a physics simulator of the drum, its locks,
+      its berths and its bearings, and an operator console; the image has crossed hub to ring, run every
+      fault in its library, and recorded each run.
     </p>
 
     <figure class="diagram">
       <img src="images/hub_ring_boundary_diagram.svg" alt="Schematic cross-section of the hub/ring boundary: crew and cargo cross as cyclic pods through a despun magazine and ring-face vestibule; power crosses by a contactless rotary transformer; data by a near-axis free-space optical link at the hub/ring bearing; and heat is rejected independently on each side. No continuous rotary seal in any path."/>
-      <figcaption>Schematic of the boundary (not to scale). Crew &amp; cargo cross as cyclic pods, power by a contactless rotary transformer, data by a near-axis optical link at the hub/ring bearing, and heat is rejected independently on each side &#8212; no continuous rotary seal in any path.</figcaption>
+      <figcaption>The boundary, not to scale. Crew and cargo cross as pods carried by a drum, power by a contactless rotary transformer, data by a near-axis optical link at the main bearing, and heat is rejected on each side &#8212; no continuous rotary seal in any path.</figcaption>
     </figure>
 
     <div class="toc">
       <strong style="font-family: Orbitron, system-ui, sans-serif;">On this page</strong>
       <ul>
-        <li><a href="#principle">1. Design Principle</a></li>
-        <li><a href="#people">2. Crew Crossings</a></li>
-        <li><a href="#cargo">3. Cargo & Bulk Fluids</a></li>
-        <li><a href="#power">4. Power Crossings</a></li>
-        <li><a href="#data">5. Data Crossings</a></li>
-        <li><a href="#thermal">6. Thermal Crossings</a></li>
-        <li><a href="#summary">7. Boundary Summary</a></li>
+        <li><a href="#principle">1. The principle</a></li>
+        <li><a href="#mechanism">2. The crossing as a mechanism</a></li>
+        <li><a href="#cycle">3. One cycle</a></li>
+        <li><a href="#simulation">4. What the simulation showed</a></li>
+        <li><a href="#cargo">5. Cargo and bulk fluids</a></li>
+        <li><a href="#power">6. Power</a></li>
+        <li><a href="#data">7. Data</a></li>
+        <li><a href="#thermal">8. Thermal</a></li>
+        <li><a href="#status">9. Summary, status and partnership</a></li>
       </ul>
     </div>
 
     <hr class="rule"/>
 
     <section id="principle">
-      <h2>1. Design Principle</h2>
+      <h2>1. The principle</h2>
       <p>
-        Continuous rotary mechanical interfaces — slip rings, brush assemblies, rotary fluid unions —
-        are the historically failure-prone elements of rotating space systems. Wear, contamination,
-        seal degradation, and single-point failure modes have driven substantial operational problems
-        on existing platforms. Aegis Station eliminates them at the hub/ring boundary.
+        Continuous rotary mechanical interfaces &#8212; slip rings, brush assemblies, rotary fluid unions &#8212;
+        are the historically failure-prone elements of rotating space systems: wear, contamination, seal
+        degradation, single points of failure. Aegis Station does not have them at the hub/ring boundary.
+        Each flow is handled by the mechanism matched to its duty cycle:
       </p>
-      <p>Each flow across the boundary is handled by the mechanism best matched to its duty cycle:</p>
       <div class="card">
         <ul>
-          <li><strong>Cyclic mechanical transfer</strong> for crew, cargo, and bulk fluids — carried by standardized pods through despun magazines and ring-face vestibules.</li>
-          <li><strong>Contactless coupling</strong> for power and data — rotary transformers for power, free-space optical links for data.</li>
-          <li><strong>Function distribution</strong> for thermal and selected utilities — heat is rejected on the ring directly; the ring carries its own independent services where doing so is cheaper than crossing the boundary.</li>
+          <li><strong>Cyclic mechanical transfer</strong> for crew, cargo and bulk fluids: pods carried by a drum between the hub and the ring, mated to one or the other and never in motion against anything they are sealed to.</li>
+          <li><strong>Contactless coupling</strong> for power and data: a rotary transformer across an air gap, and free-space optical heads at the bearing.</li>
+          <li><strong>Function distribution</strong> for heat and utilities: each side rejects its own heat and carries its own services where that is cheaper than crossing.</li>
         </ul>
       </div>
       <p>
-        The hub becomes an interface bus, not a utility umbilical. The rings are substantially autonomous
-        systems connected to the hub through a small number of well-characterized, well-behaved crossings.
+        The hub is an interface, not an umbilical. A ring with every crossing out of service stays habitable
+        on its own power, life support and radiators. The crossing is sized for traffic: each ring is its own
+        refuge, sectored, and is not evacuated through the hub.
       </p>
     </section>
 
     <hr class="rule"/>
 
-    <section id="people">
-      <h2>2. Crew Crossings</h2>
+    <section id="mechanism">
+      <h2>2. The crossing as a mechanism</h2>
       <p>
-        Crew cross the boundary inside <strong>transit pods</strong> — pressurized, seat-equipped
-        vessels with independent life support, moved through a cyclic transfer mechanism that never
-        requires continuous relative motion between a sealed pressurized volume and a rotating structure.
+        At each ring face a despun spine core, 7 m across, passes through the ring collar's 8 m main bearing.
+        On the core, between the hub bulkhead and the collar face, rides an annular magazine drum, 24 m across
+        and 8 m long. Four through-berths at 9 m radius hold pods, 3.5 m by 7 m with a hatch at each end. The
+        hub bulkhead has four ports; the collar face has four vestibules; the berths match both. A hub lock
+        and a ring lock make the drum's frame explicit; a drive on the collar carries it between them; a
+        brake on the drum's bearing stops it without the drive; a 1.1 m axial stroke pushes a pod out of its
+        berth to mate with a port or a vestibule. Every interface is a bearing or a lock, and none of them is a seal.
       </p>
-
-      <div class="grid">
-        <div class="card">
-          <h3>Transit Pod</h3>
-          <ul>
-            <li>Common ~3.5 m external envelope; 4 crew nominal, 6 crew contingency evac load</li>
-            <li>Independent ECLSS with ~24-hour endurance at nominal load</li>
-            <li>Per-seat LEA-class pressure suits with umbilical-compatible interfaces</li>
-            <li>Manual hatch operation — no power, no comms, no software in the safety path</li>
-            <li>Pod long axis aligns with station spin axis; "floor" points outward from hub centerline</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>Despun Magazine</h3>
-          <ul>
-            <li>Annular drum on a despun spine core at each ring face, between the hub bulkhead and the ring face; 24 m across, 8 m long, its outer diameter just exceeding the hub wall</li>
-            <li>Four pod berths around the rim, matching the four ring-face vestibules so that all pods transfer together; rotation axis on the station spin axis</li>
-            <li>Locked to the hub or to the ring at all times except while driven between them; a lock engages only inside a rate and phase tolerance</li>
-            <li>Loads despun from the hub-internal corridor; spins up to ring rate for transfer</li>
-            <li>Drive stator on the ring face, rotor on the drum: spin-up torque reacts into the ring, whose angular momentum is millions of times the drum's, so no reaction wheels are needed; partial-load asymmetry is a small bearing load, trimmed by water ballast</li>
-            <li>Contactless relationship with ring during spin-up; no seal is slipping under pressure at any phase</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>Axial Transfer</h3>
-          <ul>
-            <li>At co-rotation, pod is pushed <strong>axially</strong> forward into a ring-face receptacle</li>
-            <li>Both sides are at the same radius and angular rate — the transfer is a simple linear motion in the rotating frame</li>
-            <li>No rotary fluid or gas seal is traversed; pressure mate occurs between two co-rotating surfaces</li>
-            <li>Mechanism is bidirectional for pod retrieval</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>Ring-Face Vestibule</h3>
-          <ul>
-            <li>Pressurized volume on the ring's inner (hub-facing) surface where pods mate</li>
-            <li>Crew disembark in low-g; take ring-internal lifts outward to the rim habitat level</li>
-            <li>Pod stays at the boundary; no pod traverses the ring's radial depth</li>
-            <li>Four vestibules per ring, distributed around the ring face for redundancy and walking-distance coverage</li>
-          </ul>
-        </div>
-      </div>
 
       <figure class="diagram">
         <img src="images/hub_ring_crossing_section.svg" alt="Axial section through one crossing station: the despun hub and spine core on the left, the magazine drum between the hub bulkhead and the ring collar face with pods at 9 m radius, the rotating ring collar on the right with its vestibules, and the main bearing carrying the rotary transformer and the near-axis optical link."/>
-        <figcaption>One crossing station, cut along the spin axis (Rev 0 concept, 8 px per metre; the clearances are drawn at 1 m and built at 0.6 m). Grey is despun (hub, spine core, bulkhead), cyan is rotating (collar, spokes), and the drum belongs to neither frame. Pods sit in through-berths at 9 m radius with a hatch at each end: pushed 1.1 m aft they mate to the hub bulkhead, pushed 1.1 m forward to the collar's vestibules. The cargo drum is the mirror image on the ring's aft face.</figcaption>
+        <figcaption>One crossing station cut along the spin axis (8 px per metre; clearances drawn at 1 m, built at 0.6 m). Grey is despun (hub, spine core, bulkhead), cyan is rotating (collar, spokes), and the drum belongs to neither until a lock says so. Pods sit in through-berths at 9 m radius: pushed aft they mate to the hub bulkhead, pushed forward to the collar's vestibules. The cargo drum is the mirror image on the ring's aft face.</figcaption>
       </figure>
 
       <figure class="diagram">
         <img src="images/hub_ring_crossing_frames.svg" alt="Looking along the axis: four pods at 9 m radius in an annular drum around the 7 m core, the hub bulkhead ports fixed and the ring's four vestibules turning at ring rate; beside it the three frames the drum can belong to, the two locks between them, the rules of the mechanism, where the drive's torque goes, and what happens on a stall between frames."/>
-        <figcaption>Along the axis, before alignment, with the ring's vestibules 20&deg; ahead of the drum's pods. The drum is locked to the hub, locked to the ring, or being driven between them, and never free. The drive's torque reacts into the ring, whose angular momentum is tens of millions of times the drum's. A stall between frames is survived in the pod and ended on the brake.</figcaption>
+        <figcaption>Along the axis, with the ring's vestibules 20&deg; ahead of the drum's pods. Three frames, two locks, one drive: the drum is locked to the hub, locked to the ring, or driven between them. A lock engages only inside a rate and phase tolerance and fails safe outside it; a release under drive torque faults it; the executive refuses to torque a locked drum or to push a pod toward a frame that is not locked, and the mechanism enforces the same rules on its own.</figcaption>
       </figure>
 
-      <h3 style="margin-top:1.25rem;">Sizing & Cadence</h3>
+      <div class="grid">
+        <div class="card">
+          <h3>The drum</h3>
+          <ul>
+            <li>An annulus on the spine core, its outer diameter just past the hub wall; about 60 t of structure, 7.6 million kg&middot;m&sup2; with four passenger pods aboard, three times that with cargo</li>
+            <li>Four berths at 90&deg;, so all four pods transfer together; the four vestibules match</li>
+            <li>Water ballast in two tanks on the drum trims the load of a part-filled drum; a single loaded cargo pod alone is about 12 kN on the drum bearing</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>The locks and the drive</h3>
+          <ul>
+            <li>Lock tolerance 10 mm at the berths and 0.01 rpm, a fifth of the capture envelope, so a locked drum always captures</li>
+            <li>Drive stator on the collar, rotor on the drum: the spin-up torque reacts into the ring, whose angular momentum is tens of millions of times the drum's. No reaction wheels</li>
+            <li>The brake acts toward the hub frame and needs no drive: it is the way home on a stall</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>The pods</h3>
+          <ul>
+            <li>3.5 m by 7 m, a hatch at each end, 4 crew nominal and 6 in contingency; the cargo variant carries one 45 t water cartridge</li>
+            <li>Independent life support for 24 hours and a pressure hull of its own: the stall between frames is survived in the pod</li>
+            <li>The hatches are sensed, never driven, and are mechanically held unless the pod is hard-mated with the pressure across the seal under 1 kPa</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>The stroke and the mate</h3>
+          <ul>
+            <li>1.1 m at 20 mm/s: soft capture at 1.0 m, hard mate at 1.1 m, then the tunnel between pod and port is equalized and leak-checked for 60 s before a hatch will open</li>
+            <li>Both sides share one axis and one rate, so the mate is a linear motion in the rotating frame; no seal slips at any phase</li>
+            <li>Gravity in a pod at ring rate is about 0.02 g, floor outward; crew step into the vestibule and take a lift in a spoke to the rim</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="margin-top:1.25rem;">Figures</h3>
+      <table>
+        <thead><tr><th>Figure</th><th>Value</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td>Station</td><td>ring centreline 350 m, floor 397 m, 1 g at the floor at 1.50 rpm</td><td>the hub 20 m across, the spine core 7 m through an 8 m bearing</td></tr>
+          <tr><td>Magazine drum</td><td>24 m across, 8 m bore, 8 m long</td><td>an annulus on the despun spine core between the hub bulkhead and the ring collar face</td></tr>
+          <tr><td>Berths</td><td>four, at 9 m radius, 90&deg; apart</td><td>matching the four hub ports and the four vestibules</td></tr>
+          <tr><td>Pod</td><td>3.5 m &times; 7 m, a hatch at each end, about 8 t</td><td>4 crew nominal, 6 in contingency; a loaded cargo pod about 53 t</td></tr>
+          <tr><td>Push stroke</td><td>1.1 m each way at 20 mm/s</td><td>soft capture at 1.0 m, hard mate with a static seal, equalization, a 60 s leak check</td></tr>
+          <tr><td>Lock tolerance</td><td>10 mm at the berth radius, 0.01 rpm</td><td>engagement fails safe outside it; a release under torque faults the lock</td></tr>
+          <tr><td>Spin-up</td><td>120 s at about 10 kN&middot;m</td><td>passenger drum, about 1.5 kW peak; the cargo drum about 14 kN&middot;m</td></tr>
+          <tr><td>Gravity in a pod at ring rate</td><td>about 0.02 g</td><td>floor outward</td></tr>
+          <tr><td>One-way cycle</td><td>about 7.5 min for the mechanism</td><td>seal, retract, spin, lock, push, mate, as run in simulation; boarding and disembarking are the crew's time on top</td></tr>
+          <tr><td>Throughput per ring face</td><td>64 crew/h nominal, about 144 in surge</td><td>sized for scheduled traffic; the ring is its own refuge</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="rule"/>
+
+    <section id="cycle">
+      <h2>3. One cycle</h2>
       <p>
-        With a design complement of roughly 3,000–5,000 permanent crew distributed across three identical
-        rings, a four-berth magazine on a scheduled ~15–20 minute cycle carries about 64 crew per hour per
-        ring face, and surge mode (~10 minute cycles, six per pod) about 140. The crossing is sized for
-        scheduled traffic. It is not the evacuation route: each ring is its own refuge, sectored so that an
-        incident in one sector is survived in the next, and a ring remains habitable indefinitely with its
-        crossings out of service.
+        An outbound crossing: <strong>boarding</strong> with the drum locked to the hub and the pods mated to
+        the bulkhead ports; <strong>seal</strong>, hatches closed and pods pressurized; <strong>retract</strong>
+        the pods into the drum; <strong>spin</strong>, releasing the hub lock, ramping to ring rate, closing the
+        residual angle to the vestibules and engaging the ring lock; <strong>push</strong> the pods to the
+        vestibules; <strong>mate</strong>, equalize and leak-check; <strong>disembark</strong> at the ring. The
+        return is the same with the frames exchanged. The scene below is the phase model of the concept, the
+        ring at its true rate, scrubbable to any second; the simulation's own timings are in the next section.
+      </p>
+      <figure class="diagram anim">
+        <div class="ctl">
+          <button id="play" type="button" aria-pressed="true">PAUSE</button>
+          <input id="scrub" type="range" min="0" max="900" value="0" step="1" aria-label="Time into the crossing, seconds">
+          <span class="ro" id="ro">t = 00:00 &middot; BOARDING</span>
+        </div>
+        <svg id="cyc" viewBox="0 0 900 440" role="img" aria-label="Animated end view of the drum spinning up from the hub frame to the ring frame while the ring turns, with a side strip showing the pods' axial stroke, both locks, and the executive's phase">
+      <defs>
+        <marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--acc)"/></marker>
+      </defs>
+      <g transform="translate(220 220)">
+        <circle r="150" fill="none" stroke="var(--acc)" stroke-width="2" stroke-dasharray="10 6"/>
+        <g id="ringg">
+          <g id="recs"></g>
+          <line x1="0" y1="-150" x2="0" y2="-162" stroke="var(--acc)" stroke-width="3"/>
+        </g>
+        <g id="hubports"></g>
+        <g id="drum">
+          <circle r="96" fill="var(--surface)" stroke="var(--fg)" stroke-width="2"/>
+          <g id="pods"></g>
+          <line x1="0" y1="-96" x2="0" y2="-104" stroke="var(--fg)" stroke-width="3"/>
+        </g>
+        <circle r="32" fill="var(--hub-dim)" stroke="var(--hub)" stroke-width="2"/>
+        <text class="lab" x="0" y="4" text-anchor="middle">core</text>
+        <text class="lab" x="0" y="192" text-anchor="middle">cyan tick: a vestibule · white tick: a pod · grey ring: hub ports</text>
+      </g>
+      <!-- side strip: section mini at right -->
+      <g transform="translate(470 40)">
+        <text class="hd" x="0" y="0">THE DRIVE</text>
+        <text class="num" x="0" y="22">ring  <tspan id="wr">1.50</tspan> rpm</text>
+        <text class="num" x="0" y="40">drum  <tspan id="wd">0.00</tspan> rpm</text>
+        <text class="num" x="0" y="58">Δθ to vestibule  <tspan id="dth">0.0</tspan>° · <tspan id="dmm">0</tspan> mm at r 9 m</text>
+        <text class="num" x="0" y="76">torque  <tspan id="tq">0.0</tspan> kN·m · a<tspan style="font-size:8px">tan</tspan> <tspan id="at">0.000</tspan> m/s²</text>
+        <text class="hd" x="0" y="112">THE LOCKS</text>
+        <rect id="lkh" x="0" y="122" width="110" height="22" rx="4" fill="var(--warn)"/><text x="55" y="137" text-anchor="middle" style="fill:#fff;font-size:10px">HUB LOCK</text>
+        <rect id="lkr" x="120" y="122" width="110" height="22" rx="4" fill="var(--line)"/><text x="175" y="137" text-anchor="middle" style="fill:#fff;font-size:10px">RING LOCK</text>
+        <text class="hd" x="0" y="184">THE BERTHS · axial stroke</text>
+        <!-- mini section: hub bulkhead at x=0..6, drum 20..84, collar 98..140; pod 24..80 moving ±11 -->
+        <g transform="translate(0 196)">
+          <rect x="0" y="0" width="6" height="40" fill="var(--hub)"/>
+          <rect x="20" y="0" width="64" height="40" fill="none" stroke="var(--fg)" stroke-width="1.5"/>
+          <rect x="98" y="0" width="44" height="40" fill="var(--ring-dim)" stroke="var(--acc)" stroke-width="1.5"/>
+          <rect id="podx" x="24" y="8" width="56" height="24" rx="6" fill="var(--ring-dim)" stroke="var(--acc)" stroke-width="2"/>
+          <text class="lab" x="3" y="54" text-anchor="middle">hub</text>
+          <text class="lab" x="52" y="54" text-anchor="middle">berth</text>
+          <text class="lab" x="120" y="54" text-anchor="middle">vestibule</text>
+          <text class="num" x="160" y="24">stroke <tspan id="stk">-1.10</tspan> m · mate <tspan id="mate">HUB</tspan></text>
+          <text class="num" x="160" y="42">pod ΔP <tspan id="dp">0.0</tspan> kPa · hatches <tspan id="htc">OPEN</tspan></text>
+        </g>
+        <text class="hd" x="0" y="286">THE EXECUTIVE</text>
+        <g id="band" transform="translate(0 296)"></g>
+        <text class="lab" x="0" y="372">15× real time · the ring at its 1.50 rpm · 15 min outbound half of a 30 min round trip</text>
+        <text class="lab" x="0" y="388">spin-up 120 s at 1.31 mrad/s² · align closes a residual of up to 45° with a rate offset of up to 0.2 rpm</text>
+      </g>
+    </svg>
+        <figcaption>The outbound crossing as the operator's console draws it: boarding with the hub lock set, pods retracted and sealed, both locks off while the drive runs, the residual angle closed, ring lock set, push, mate, hatches open. The numbers are the phase model's, with four 8 t pods aboard.</figcaption>
+      </figure>
+    </section>
+
+    <hr class="rule"/>
+
+    <section id="simulation">
+      <h2>4. What the simulation showed</h2>
+      <p>
+        The crossing was built as flight software on NASA's core Flight System, on the pattern Aegis Station
+        uses for its vehicles: seven applications (the executive that runs the cycle and refuses what the
+        rules forbid; the drive loop with its two locks; the four berths; and monitors for the main bearing's
+        despin, the drum's balance, the rotary transformer and the optical link) beside the stock fault-response
+        applications, against a physics simulator of the drum, the locks, the strokes, the pressures, the
+        bearings, the transformer and the heads, in lockstep with the flight computer's clock. The image was
+        then run through the fault library its requirements review asks for, each run judged on the flight
+        computer's own record: the executive's phase and its reasons, the Limit Checker's actionpoints and the
+        stored command sequences they start.
       </p>
 
+      <figure class="diagram">
+        <video controls muted playsinline preload="metadata" poster="images/hub_ring_crossing_poster.jpg">
+          <source src="media/hub_ring_crossing.mp4" type="video/mp4">
+        </video>
+        <figcaption>A crossing from the hub to a ring on the simulator, run from the operator's console and recorded from the live telemetry, played at twenty times mission time. Mid-spin the hub's despin drive is lost: the hub starts to turn with the ring, the bearing monitor flags it at 0.01 rpm, the Limit Checker holds the crossing with the drum between frames, the drive is restored, the hub is despun again, and the crossing resumes to the ring. Left, the end view from the hub: the pods at the drum's angle, the vestibules at the ring's, the hub ports fixed. Right, the four strokes, the locks, the drive's commanded and sensed torque, the drum's rate against the ring's, and the monitors.</figcaption>
+      </figure>
+
+      <h3>The nominal crossing</h3>
+      <p>
+        On the flight computer image, from the operator's second command with the hatches closed to the pods
+        ready at the ring: seal 5 s, retract 56 s, spin 164 s (release 2, ramp 111, align 49, engage 2), lock
+        and push 59 s, mate with equalization and leak check 152 s &#8212; 436 s in all, 441 to 455 s across the
+        later runs as the schedule falls, no fault, no refusal, the hub at zero rate throughout. Boarding, the
+        pods docking at the hub ports and leak-checking, takes 210 s before that. The mechanism's time is about
+        seven and a half minutes each way; the crew's boarding and disembarking are not timed by the executive.
+        Two thirds of the spin is the ramp; the rest is closing the residual angle the ramp leaves, which is
+        where a faster cycle would come from.
+      </p>
+
+      <h3>The fault library</h3>
       <table>
-        <thead><tr><th>Rev 0 figure</th><th>Value</th><th>Note</th></tr></thead>
+        <thead><tr><th>Fault</th><th>Injected</th><th>What the flight computer did</th></tr></thead>
         <tbody>
-          <tr><td>Magazine drum</td><td>24 m across, 8 m bore, 8 m long</td><td>an annulus on the despun spine core, between the hub bulkhead and the ring collar face</td></tr>
-          <tr><td>Berths</td><td>four, at 9 m radius, 90&deg; apart</td><td>matching the four vestibules on the ring face</td></tr>
-          <tr><td>Pod</td><td>3.5 m &times; 7 m, a hatch at each end</td><td>4 crew nominal, 6 in contingency; cargo variant carries one 45 t MTC</td></tr>
-          <tr><td>Push stroke</td><td>1.1 m each way</td><td>soft capture at 1.0 m within &plusmn;50 mm, hard mate with a static seal</td></tr>
-          <tr><td>Lock tolerance</td><td>10 mm at the berth radius, 0.01 rpm</td><td>a fifth of the capture envelope, so a locked drum always captures</td></tr>
-          <tr><td>Spin-up</td><td>120 s at about 10 kN&middot;m</td><td>passenger drum; peak drive power about 1.5 kW; the cargo drum takes 240 s</td></tr>
-          <tr><td>Gravity in a pod at ring rate</td><td>about 0.02 g</td><td>floor outward; crew step into the vestibule and take a lift in a spoke to the rim</td></tr>
-          <tr><td>One-way cycle</td><td>about 15 min</td><td>board, seal, retract, spin, align, lock, push, mate, disembark</td></tr>
-          <tr><td>Throughput per ring face</td><td>64 crew/h nominal, about 140 in surge</td><td>sized for scheduled traffic; the ring is its own refuge</td></tr>
+          <tr><td>Drive stall below half rate</td><td>drive torque lost 40 s into the ramp, 34 % of ring rate</td><td>the drive's own stall rule faulted within 1 s; the executive aborted and braked; the Limit Checker ran its brake sequence; the drum stopped between frames in 15 s; restored and resumed, home at the hub</td></tr>
+          <tr><td>Drive stall above half rate</td><td>the same at 90 s, 75 %</td><td>the same chain; the brake took 31 s from 1.1 rpm; home at the hub, because the brake acts toward the hub by construction and there is no way to the ring without the drive</td></tr>
+          <tr><td>Operator abort below half rate</td><td>ABORT 20 s into the ramp</td><td>the drive turned back; locked to the hub in 83 s</td></tr>
+          <tr><td>Operator abort above half rate</td><td>the stored abort sequence started from the ground 100 s into the ramp</td><td>the drive finished to the ring; locked to the ring in 71 s</td></tr>
+          <tr><td>A lock that will not release</td><td>the hub lock stuck engaged before the crossing</td><td>the mechanism refused the release and faulted the lock; the drive reported a lock fault with no torque commanded; the executive aborted on a drum that never moved; freed and cleared, idle at the hub</td></tr>
+          <tr><td>A lock that misses</td><td>the drum's angle forced 20 mm off while the ring lock's dogs seat</td><td>the engagement failed safe, the drive re-indexed and engaged on the retry; the crossing completed with no fault and no trip</td></tr>
+          <tr><td>A push without the lock</td><td>a pod pushed toward the ring with only the hub locked, bypassing the executive</td><td>the probe met the moving port, the stroke halted at 1.0 m on the capture miss, the berth faulted, the executive held, the Limit Checker ran its hold sequence; cleared and retracted, idle</td></tr>
+          <tr><td>A leak on the mate</td><td>a 0.1 kPa/s seal leak after hard mate at the ring</td><td>the leak was judged during equalization within a tick; the executive held with the hatches kept shut; fixed, cleared, the crossing completed</td></tr>
+          <tr><td>A hatch out of sequence</td><td>a hatch tried before equalization; a hatch opened during the leak check</td><td>the first was refused by the mechanism; the second was flagged in 0.3 s, the executive held, the Limit Checker tripped in 1.3 s; closed and cleared, boarding completed</td></tr>
+          <tr><td>Imbalance over limit</td><td>one 53 t cargo pod alone with three 8 t pods</td><td>the executive sized the ramp to the load cells; the balance monitor flagged the imbalance and pumped the ballast to its limit; the crossing completed in 455 s</td></tr>
+          <tr><td>Transformer gap drift</td><td>the rotary transformer's gap to 12.5 mm during the spin</td><td>the unit shut down and the power monitor said so; the Limit Checker raised an event and started nothing, because the ring is on its own power; the crossing completed; a reset at 5 mm cleared it</td></tr>
+          <tr><td>An optical head out</td><td>one of the four ring-side heads faulted during the spin</td><td>the link dropped once a revolution for the gap the head left, 89 s of outage over 62 handoffs with none over 60 s, the RF backup up; no hold; the crossing completed</td></tr>
+          <tr><td>Hub despin lost</td><td>the hub's despin drive lost 20 s into the ramp</td><td>the hub reached 0.01 rpm in 16 s and the bearing monitor flagged it; the Limit Checker held the crossing with the drive holding rate between frames; restored, the hub was despun in 7 s; resumed, the crossing completed</td></tr>
         </tbody>
       </table>
 
-      <h3 style="margin-top:1.25rem;">Crew Safety Layers</h3>
-      <table>
-        <thead><tr><th>Layer</th><th>Function</th></tr></thead>
-        <tbody>
-          <tr><td>Pressurized hub corridor &amp; vestibule</td><td>Nominal shirtsleeve environment on both sides of the crossing</td></tr>
-          <tr><td>Pod hull &amp; independent ECLSS</td><td>Sealed volume, hours of independent life support</td></tr>
-          <tr><td>LEA pressure suits, per seat</td><td>Pressure containment if both pressurized volumes fail</td></tr>
-          <tr><td>Manual egress &amp; mechanical hatches</td><td>Power-independent exit to a pressurized refuge</td></tr>
-        </tbody>
-      </table>
+      <div class="finding">
+        <p><strong>What the full stack found that unit tests could not.</strong> Every one of these responses had been shown in the standalone tests first. The image found two things more. The executive accepted a HOLD during an abort, and the Limit Checker's drive-fault rule sent one the moment the executive left the spin phase to abort: the hold suspended the abort and the way to resume it was lost. The executive now refuses a hold during an abort, resumes an abort from such a hold, and the Limit Checker's rule excludes the abort. And two rows of the review's expected-outcome table were wrong: a stall above half rate cannot finish to the ring, because the brake is toward the hub; and a lock that will not release is a drive fault and an abort, not a hold. The table was corrected to what the mechanism does.</p>
+      </div>
+
+      <figure class="diagram">
+        <img src="images/hub_ring_console.jpg" alt="The operator console at the end of a crossing: the executive at DISEMBARK in the ring frame, the drum's end view with the four pods at the vestibules, the strokes extended to the ring collar, the ring lock engaged and the hub lock released, the drum at 1.500 rpm, the hub at zero, the transformer coupled, head 3 carrying the link, every Limit Checker actionpoint passing."/>
+        <figcaption>The operator's console at the end of a crossing: four pods ready at the ring with the hatches shut, the ring lock engaged, the drum at 1.500 rpm of the ring's 1.50, the hub at zero, the transformer coupled at 95 %, head 3 carrying the link after 109 handoffs, every actionpoint passing. The operator's words are CYCLE, HOLD, RESUME, ABORT, SAFE and CLEAR; the geometry the page draws comes from the simulator's own definitions, not from the page.</figcaption>
+      </figure>
     </section>
 
     <hr class="rule"/>
 
     <section id="cargo">
-      <h2>3. Cargo & Bulk Fluids</h2>
+      <h2>5. Cargo and bulk fluids</h2>
       <p>
-        Cargo crosses the boundary by the <strong>same pod form factor</strong> as crew, in a parallel
-        cargo-variant magazine at each ring. This eliminates continuous rotary fluid unions entirely —
-        bulk water, pressurant gas, and other fluids cross as sealed cartridges, not as flowing streams
-        through rotating plumbing.
+        Cargo crosses in the <strong>same pod form factor</strong> as crew, on a mirror-image cargo drum at
+        each ring face. Bulk water, pressurant gas and other fluids cross as sealed cartridges, not as flowing
+        streams through rotating plumbing, so there is no continuous rotary fluid union anywhere on the station.
       </p>
-
       <div class="grid">
         <div class="card">
-          <h3>Cargo Pod</h3>
+          <h3>Cargo pod</h3>
           <ul>
-            <li>Shared external envelope and transfer interface with passenger pod</li>
-            <li>Internal cradle accepts a single 45-tonne MTC, standard cargo modules, or outsize hardware</li>
-            <li>Pressurized or unpressurized per mission; active thermal for sensitive payloads</li>
-            <li>No life support; full internal envelope available for payload mass</li>
+            <li>Shared envelope and transfer interface with the passenger pod; no life support, the full envelope for payload</li>
+            <li>An internal cradle for one 45 t water cartridge, standard modules or outsize hardware</li>
+            <li>Pressurized or not per mission; active thermal for sensitive payloads</li>
           </ul>
         </div>
-
         <div class="card">
-          <h3>Cargo Magazine</h3>
+          <h3>Cargo drum</h3>
           <ul>
-            <li>Mechanically identical to passenger magazine; parallel hardware per ring face</li>
-            <li>Scheduled independently of passenger cadence to avoid interference</li>
-            <li>Can carry a passenger pod in contingency if a passenger magazine is out of service</li>
+            <li>Mechanically identical to the passenger drum, three times its inertia loaded, 240 s to ring rate at the same acceleration</li>
+            <li>Scheduled independently of the passenger cadence</li>
+            <li>Takes a passenger pod in contingency if a passenger drum is out of service</li>
           </ul>
         </div>
-
         <div class="card">
-          <h3>Bulk Fluid Transfer</h3>
+          <h3>Bulk fluids</h3>
           <ul>
-            <li>Water for ring shielding arrives as sealed MTCs carried on cargo pods</li>
-            <li>Cartridges discharge inside the ring at pressure-equalized dry transfer interfaces</li>
-            <li>Empty cartridges return the same way for surface refill</li>
-            <li>Pressurant gas uses dedicated gas cartridges on the same transit path — no rotary gas union</li>
+            <li>Water for the ring's shielding arrives as sealed cartridges on cargo pods and is discharged inside the ring at dry, pressure-equalized interfaces</li>
+            <li>Empty cartridges return the same way for refill on the surface</li>
+            <li>Pressurant gas in dedicated cartridges on the same path</li>
           </ul>
         </div>
-
         <div class="card">
-          <h3>What This Eliminates</h3>
+          <h3>What this removes</h3>
           <ul>
-            <li>No continuous rotary water line crossing the boundary</li>
-            <li>No pressurant gas rotary seal</li>
+            <li>No rotary water line, no rotary gas seal</li>
             <li>No shared failure mode between fluid transfer and structural rotation</li>
-            <li>Fluid seal life is no longer a station-level reliability driver</li>
+            <li>Fluid seal life stops being a station-level reliability driver</li>
           </ul>
         </div>
       </div>
@@ -269,47 +395,43 @@
     <hr class="rule"/>
 
     <section id="power">
-      <h2>4. Power Crossings</h2>
+      <h2>6. Power</h2>
       <p>
-        Power crosses the boundary via <strong>contactless inductive coupling</strong> — a rotary
-        transformer whose primary and secondary windings rotate relative to each other across a small
-        air gap. No brushes. No sliding contact. No wear item on the power path.
+        Power crosses by <strong>contactless inductive coupling</strong>: a rotary transformer at the main
+        bearing whose primary and secondary turn against each other across a gap of a few millimetres. No
+        brushes, no sliding contact, no wear item on the power path.
       </p>
-
       <div class="grid">
         <div class="card">
-          <h3>Primary Power Path</h3>
+          <h3>Primary path</h3>
           <ul>
-            <li>Rotary transformer at each ring interface; primary on hub, secondary on ring</li>
-            <li>High-frequency AC link; efficiency in the high 90s is achievable at scale</li>
-            <li>No contact means no contamination, no brush dust, no wear-limited service life</li>
+            <li>A rotary transformer at each ring interface, the primary on the hub side and the secondary on the collar</li>
+            <li>A high-frequency link; efficiency in the mid 90s at the nominal gap, falling with the gap, shut down above 12 mm</li>
+            <li>Gap, frequency, coil temperatures and transferred power monitored by the crossing's own software</li>
           </ul>
         </div>
-
         <div class="card">
-          <h3>Ring-Mounted Generation</h3>
+          <h3>Ring-mounted generation</h3>
           <ul>
-            <li>Each ring carries independent PV and storage sufficient for core life support and essential loads</li>
-            <li>Rotary-transformer path is primary; ring-mounted power is backup and peaking</li>
-            <li>Ring can survive a complete hub-power outage indefinitely on its own generation and storage</li>
+            <li>Each ring carries its own arrays and storage for life support and essential loads</li>
+            <li>The transformer is primary; the ring's own power is backup and peaking</li>
+            <li>A ring survives a complete hub-power outage on its own; a transformer shutdown is an event the crossing notes and carries on through</li>
           </ul>
         </div>
-
         <div class="card">
-          <h3>No Slip Rings</h3>
+          <h3>No slip rings</h3>
           <ul>
-            <li>Slip rings and brush assemblies are excluded from the boundary architecture</li>
-            <li>Historic rotating-power problems (brush wear, contamination, arcing) do not exist here</li>
+            <li>Slip rings and brush assemblies are excluded from the boundary</li>
+            <li>Brush wear, contamination and arcing do not exist here</li>
             <li>Maintenance on the boundary power path is scheduled, not reactive</li>
           </ul>
         </div>
-
         <div class="card">
-          <h3>Fault Isolation</h3>
+          <h3>Fault isolation</h3>
           <ul>
-            <li>Primary and ring-local power are independent circuits with no shared fault domain</li>
-            <li>Transformer isolation inherently blocks common-mode faults between hub and ring buses</li>
-            <li>Loss of any single ring does not propagate to the hub or to other rings</li>
+            <li>Hub and ring power are independent circuits with no shared fault domain</li>
+            <li>Transformer isolation blocks common-mode faults between the buses</li>
+            <li>The loss of one ring does not propagate to the hub or to the others</li>
           </ul>
         </div>
       </div>
@@ -318,31 +440,29 @@
     <hr class="rule"/>
 
     <section id="data">
-      <h2>5. Data Crossings</h2>
+      <h2>7. Data</h2>
       <p>
-        Data crosses the boundary via <strong>free-space optical links at the hub/ring bearing, close to the
-        spin axis</strong>. The despun spine core passes through the ring's bearing, so no ring-side element
-        sits on the axis itself; instead several ring-side optical heads around the bearing hand off to the
-        hub-side receiver as the ring turns, with overlapping fields so there is no gap. No mechanical
-        rotation of the link itself is required.
+        Data crosses by <strong>free-space optical links at the main bearing, close to the spin axis</strong>.
+        The spine core passes through the bearing, so nothing on the ring side can sit on the axis itself;
+        four ring-side heads around the bearing, with fields of &plusmn;50&deg; that overlap, hand off to the
+        hub-side receiver as the ring turns. No mechanical rotation of the link is required, and the link was
+        run with a head out: it dropped once a revolution for the gap the head left and never for long enough to matter.
       </p>
-
       <div class="grid">
         <div class="card">
-          <h3>Near-Axis Optical</h3>
+          <h3>Near-axis optical</h3>
           <ul>
-            <li>Four or more ring-side heads at the hub/ring bearing, handing off to the hub-side receiver with overlapping fields</li>
-            <li>Bandwidth and latency sufficient for all station operational and crew traffic</li>
+            <li>Four heads at the bearing, four handoffs a revolution, overlapping fields</li>
+            <li>Bandwidth and latency for all station operational and crew traffic</li>
             <li>No EMI, no contact wear, no continuous rotary mechanical interface</li>
           </ul>
         </div>
-
         <div class="card">
-          <h3>Redundant Paths</h3>
+          <h3>Redundant paths</h3>
           <ul>
-            <li>Each ring carries multiple independent optical transceivers for fault tolerance</li>
-            <li>Low-rate RF backup for safing and initial reacquisition after outage</li>
-            <li>Optical fiber paralleling the crew transit path provides a wired redundant route</li>
+            <li>A low-rate RF backup for safing and reacquisition; the crossing holds only if the optical link is down for more than 60 s with no RF</li>
+            <li>Ring systems buffer through an outage</li>
+            <li>Fibre paralleling the crew transit path as a wired route</li>
           </ul>
         </div>
       </div>
@@ -351,29 +471,27 @@
     <hr class="rule"/>
 
     <section id="thermal">
-      <h2>6. Thermal Crossings</h2>
+      <h2>8. Thermal</h2>
       <p>
-        Most station waste heat <strong>does not cross the boundary</strong>. Ring-generated heat is
-        rejected by ring-mounted radiators on the rotating structure. This eliminates the need for a
-        continuous rotary fluid coupling on a working thermal loop, which would otherwise be one of the
-        highest-duty-cycle and highest-consequence wear items on the station.
+        Most of the station's waste heat <strong>does not cross the boundary</strong>. Ring heat is rejected
+        by ring-mounted radiators on the rotating structure, hub heat by hub-mounted radiators, which removes
+        what would otherwise be the highest-duty-cycle wear item on the station: a continuous rotary fluid
+        coupling on a working thermal loop.
       </p>
-
       <div class="grid">
         <div class="card">
-          <h3>Ring-Side Rejection</h3>
+          <h3>Ring-side rejection</h3>
           <ul>
-            <li>Habitat thermal loads are handled entirely on the ring by ring-mounted radiators</li>
-            <li>Rotation geometry is compatible with radiator view factor management</li>
+            <li>Habitat thermal loads handled entirely on the ring</li>
+            <li>Rotation geometry compatible with radiator view-factor management</li>
             <li>No thermal working fluid crosses the boundary in the primary path</li>
           </ul>
         </div>
-
         <div class="card">
-          <h3>Hub-Side Rejection</h3>
+          <h3>Hub-side rejection</h3>
           <ul>
-            <li>Hub equipment heat is rejected on hub-mounted radiators, also without boundary crossing</li>
-            <li>Small hub/ring coupling only via air exchange through pressurized transit corridors — a known, benign path</li>
+            <li>Hub equipment heat rejected on the hub's own radiators</li>
+            <li>The only thermal coupling is air exchange through the pressurized transit path, a known and benign one</li>
           </ul>
         </div>
       </div>
@@ -381,39 +499,130 @@
 
     <hr class="rule"/>
 
-    <section id="summary">
-      <h2>7. Boundary Summary</h2>
+    <section id="status">
+      <h2>9. Summary, status and partnership</h2>
       <table>
         <thead>
-          <tr><th>Flow</th><th>Crossing Mechanism</th><th>Continuous Rotary Seal?</th></tr>
+          <tr><th>Flow</th><th>Crossing</th><th>Continuous rotary seal?</th></tr>
         </thead>
         <tbody>
-          <tr><td>Crew</td><td>Cyclic pod transfer via despun magazine and ring-face vestibule</td><td>No</td></tr>
-          <tr><td>Cargo</td><td>Cyclic pod transfer via cargo magazine</td><td>No</td></tr>
-          <tr><td>Bulk water</td><td>Sealed MTCs carried as cargo pod payload</td><td>No</td></tr>
+          <tr><td>Crew</td><td>Pods on a drum locked to one frame or the other and driven between them</td><td>No</td></tr>
+          <tr><td>Cargo</td><td>The same, on the cargo drum</td><td>No</td></tr>
+          <tr><td>Bulk water</td><td>Sealed cartridges carried as cargo pod payload</td><td>No</td></tr>
           <tr><td>Pressurant gas</td><td>Sealed gas cartridges carried as cargo pod payload</td><td>No</td></tr>
-          <tr><td>Power</td><td>Rotary transformer (contactless inductive)</td><td>No</td></tr>
+          <tr><td>Power</td><td>Rotary transformer, contactless inductive</td><td>No</td></tr>
           <tr><td>Data</td><td>Near-axis free-space optical with handoff</td><td>No</td></tr>
           <tr><td>Thermal</td><td>Rejected on each side independently</td><td>No</td></tr>
         </tbody>
       </table>
       <p style="margin-top:1.25rem;">
-        The hub/ring boundary carries every flow the station needs without a single continuous rotary
-        mechanical seal in any life-critical path. Cyclic transfers are bounded, well-characterized,
-        and maintainable. Contactless couplings have no wear items. Functions that can be distributed
-        across both sides are, removing the crossing entirely.
+        <strong>What exists.</strong> A requirements review of the crossing with its budgets, trades and hazards;
+        the flight software, its simulator and its console, complete through a nominal crossing, the fault
+        library above and a recorded, played-back run; and the drawings on this page. The requirements review
+        is at its first baseline on these results.
+      </p>
+      <p>
+        <strong>What is a model.</strong> Everything. No part of the crossing has been built. The drum's mass,
+        the bearing friction, the lock's seating time, the tunnel's equalization and the transformer's efficiency
+        are placeholders chosen to be plausible and marked as such; the analyses that replace them (the lock's
+        seating dynamics, the brake's sizing, an 8 m bearing in vacuum, the drum's structure) are the next work.
+        What the simulation demonstrates is the sequence and its interlocks: that the rules of the mechanism,
+        kept twice over by the executive and by the mechanism itself, do what the review says they do, and
+        that every fault in the library ends somewhere safe.
+      </p>
+      <p>
+        <strong>Partnership.</strong> The crossing's flight software, its simulator, the console and the recorded
+        runs are complete and are proprietary to Aegis Station. They are not slated for public release. The work
+        is open to partnership: Aegis Station shares the code for evaluation with qualified organizations under
+        agreement, and is looking for a bearing partner for the main bearing and a mechanisms partner for the
+        locks and the stroke. The station's other rotating-boundary systems &#8212; the ring's balance, the
+        cartridge berthing on the cargo drum's far side, the shield fill &#8212; follow the same path.
       </p>
     </section>
 
     <hr class="rule"/>
 
     <p class="note">
-      This page describes the boundary only. Ring-internal architecture, hub infrastructure, and
-      overall station design are addressed elsewhere in the program documentation.
+      This page describes the boundary only. Ring-internal architecture, hub infrastructure and the overall
+      station design are addressed elsewhere in the program documentation.
     </p>
 
-    <a class="back" href="index.html">← Back to Home</a>
+    <a class="back" href="index.html">&#8592; Back to Home</a>
 
   </div>
+<script>
+(function(){
+  // ---- the phase model: one outbound crossing, hub to ring, in real seconds ----
+  const RPM=1.50, W=RPM*2*Math.PI/60;           // ring rate, rad/s: 1 g at the 397 m floor
+  const R=9, I=7.4e6;                            // berth radius m, passenger drum inertia kg m^2
+  const PH=[ ['BOARDING',0,240],['SEAL',240,300],['RETRACT',300,360],['SPIN-UP',360,480],['ALIGN',480,540],
+             ['RING LOCK · PUSH',540,600],['MATE · LEAK CHECK',600,720],['DISEMBARK',720,900] ];
+  const T=900, SPEED=15;
+  const ALPHA=W/120;
+  // drum angle: 0 until 360; constant accel 360..480; align 480..540 closes residual with smoothstep; locked after.
+  function ringAng(t){return W*t}
+  function drumState(t){
+    let th=0,wd=0,tq=0;
+    if(t<360){th=0;wd=0}
+    else if(t<480){const s=t-360;th=0.5*ALPHA*s*s;wd=ALPHA*s;tq=I*ALPHA}
+    else{
+      const th1=0.5*ALPHA*120*120;                       // angle at end of spin-up
+      const resid=((ringAng(480)-th1)%(Math.PI/2)+Math.PI/2)%(Math.PI/2);  // vestibule spacing 90°
+      const d=resid>Math.PI/4?resid-Math.PI/2:resid;     // shortest way
+      if(t<540){const s=(t-480)/60,sm=s*s*(3-2*s);th=th1+W*(t-480)+d*sm;wd=W+d*(6*s*(1-s))/60;tq=I*d*(6-12*s)/3600}
+      else{th=ringAng(t)-(ringAng(480)-th1-d);wd=W;tq=0}  // locked: exactly aligned (drum angle ≡ ring angle mod 90°)
+    }
+    return {th,wd,tq}
+  }
+  function stroke(t){ // m, negative toward hub
+    if(t<300)return -1.1; if(t<360)return -1.1*(1-(t-300)/60); if(t<540)return 0;
+    if(t<600)return 1.1*(t-540)/60; return 1.1 }
+  function phase(t){for(const p of PH)if(t<p[2])return p;return PH[PH.length-1]}
+  const $=id=>document.getElementById(id), svgNS='http://www.w3.org/2000/svg';
+  function el(n,a,parent){const e=document.createElementNS(svgNS,n);for(const k in a)e.setAttribute(k,a[k]);parent.appendChild(e);return e}
+  // static geometry
+  const recs=$('recs'),pods=$('pods'),hp=$('hubports');
+  for(let k=0;k<4;k++){const a=k*Math.PI/2,x=112*Math.cos(a),y=112*Math.sin(a);
+    el('circle',{cx:x,cy:y,r:22,fill:'none',stroke:'var(--acc)','stroke-width':'2','stroke-dasharray':'5 3'},recs);
+    el('circle',{cx:x,cy:y,r:17,fill:'none',stroke:'var(--hub)','stroke-width':'1.5'},hp);
+    el('circle',{cx:x,cy:y,r:17,fill:'var(--ring-dim)',stroke:'var(--acc)','stroke-width':'2',class:'pod'},pods);
+  }
+  // band
+  const band=$('band');
+  PH.forEach((p,i)=>{const x=p[1]/T*400,w=(p[2]-p[1])/T*400;
+    el('rect',{x,y:0,width:w,height:18,fill:i%2?'var(--ring-dim)':'var(--surface)',stroke:'var(--line)','stroke-width':'1'},band);});
+  const cur=el('rect',{x:0,y:-3,width:2,height:24,fill:'var(--acc)'},band);
+  const bl=el('text',{x:0,y:34,class:'num'},band); bl.textContent='';
+  PH.forEach((p,i)=>{if(i%2===0){const t=el('text',{x:p[1]/T*400+2,y:50,class:'lab'},band);t.textContent=p[0].split(' ')[0]}});
+  const fmt=(v,d)=>v.toFixed(d);
+  function render(t){
+    const th=ringAng(t),ds=drumState(t),p=phase(t),s=stroke(t);
+    $('ringg').setAttribute('transform',`rotate(${th*180/Math.PI})`);
+    $('drum').setAttribute('transform',`rotate(${ds.th*180/Math.PI})`);
+    let d=((th-ds.th)%(Math.PI/2)+Math.PI/2)%(Math.PI/2); if(d>Math.PI/4)d-=Math.PI/2;
+    if(t>=540)d=0;
+    $('wr').textContent=fmt(RPM,2); $('wd').textContent=fmt(ds.wd*60/(2*Math.PI),2);
+    $('dth').textContent=fmt(d*180/Math.PI,1); $('dmm').textContent=Math.round(Math.abs(d)*R*1000);
+    $('tq').textContent=fmt(Math.abs(ds.tq)/1000,1); $('at').textContent=fmt(Math.abs(ds.tq)/I*R,3);
+    const hubL=t<360, ringL=t>=540;
+    $('lkh').setAttribute('fill',hubL?'var(--warn)':'var(--line)'); $('lkr').setAttribute('fill',ringL?'var(--warn)':'var(--line)');
+    $('podx').setAttribute('x',24+s/1.1*11); $('stk').textContent=(s>=0?'+':'')+fmt(s,2);
+    $('mate').textContent=t<300?'HUB':(t>=600?'RING':'—');
+    const mated=t<300||t>=600; $('dp').textContent=mated?'0.0':'101.3';
+    $('htc').textContent=(t<240||t>=720)?'OPEN':'CLOSED';
+    for(const c of pods.children)c.setAttribute('fill',mated?'var(--acc-dim)':'var(--ring-dim)');
+    cur.setAttribute('x',t/T*400); bl.textContent=p[0];
+    const mm=String(Math.floor(t/60)).padStart(2,'0'),ss=String(Math.floor(t%60)).padStart(2,'0');
+    $('ro').textContent=`t = ${mm}:${ss} · ${p[0]}`;
+    if(document.activeElement!==$('scrub'))$('scrub').value=Math.round(t);
+  }
+  let t=0,playing=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches),last=null;
+  $('play').textContent=playing?'PAUSE':'PLAY'; $('play').setAttribute('aria-pressed',String(playing));
+  function tick(now){ if(!playing)return; if(last!=null){t+=(now-last)/1000*SPEED; if(t>=T)t=0} last=now; render(t); requestAnimationFrame(tick) }
+  $('play').addEventListener('click',()=>{playing=!playing;$('play').textContent=playing?'PAUSE':'PLAY';$('play').setAttribute('aria-pressed',String(playing));last=null;if(playing)requestAnimationFrame(tick)});
+  $('scrub').addEventListener('input',e=>{t=parseFloat(e.target.value);render(t)});
+  render(0); if(playing)requestAnimationFrame(tick);
+})();
+</script>
 </body>
 </html>
