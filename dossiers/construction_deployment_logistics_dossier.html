@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aegis Station — Construction &amp; Deployment Logistics</title>
+<meta name="author" content="Aegis Station">
+<style>
+  @page {
+    size: Letter;
+    margin: 0.7in 0.85in 0.8in;
+    background: #0d0d0d;
+    @bottom-center {
+      content: "Aegis Station — Construction & Deployment Logistics  |  Page " counter(page);
+      font-family: 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+      font-size: 7.5pt;
+      color: #7a7a80;
+    }
+  }
+
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: #0d0d0d;
+  }
+
+  body {
+    margin: 0;
+    background: #0d0d0d;
+    color: #b9b9bf;
+    font-family: 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+    font-size: 9pt;
+    line-height: 1.48;
+  }
+
+  .kicker { font-size: 9pt; color: #8a8a90; letter-spacing: 0.6pt; text-transform: uppercase; margin-bottom: 6pt; }
+  h1 { font-size: 30pt; font-weight: 700; color: #ffffff; margin: 0 0 6pt; letter-spacing: -0.5pt; }
+  .subtitle { font-size: 9.5pt; color: #a4a4aa; margin-bottom: 8pt; }
+  .lead { font-size: 11pt; color: #d0d0d4; line-height: 1.55; margin: 0; }
+
+  h2 { font-size: 16.5pt; font-weight: 700; color: #ffffff; margin: 15pt 0 7pt; break-after: avoid; }
+  h3 { font-size: 12.5pt; font-weight: 700; color: #ffffff; margin: 16pt 0 4pt; break-after: avoid; }
+  p { margin: 0 0 9pt; }
+  .sub { color: #a4a4aa; margin: 0 0 9pt; break-after: avoid; }
+
+  table { width: 100%; border-collapse: collapse; margin: 4pt 0 6pt; font-size: 8.6pt; }
+  tr { break-inside: avoid; }
+  td, th { padding: 4.2pt 9pt; border: 0.75pt solid #2a2a2e; vertical-align: top; text-align: left; }
+  table.kv td:first-child { width: 31%; font-weight: 700; color: #e8e8ea; background: #18181b; }
+  table.kv td { background: #111113; color: #b9b9bf; }
+  table.chg th { background: #1f1f23; color: #ededf0; font-weight: 700; }
+  table.chg td { background: #111113; }
+  table.chg td:first-child { width: 25%; font-weight: 700; color: #e8e8ea; background: #18181b; }
+  table.chg td:nth-child(2) { width: 27%; }
+
+  .note { font-size: 8.5pt; color: #7c7c82; margin: 4pt 0 0; }
+
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 6pt 0 7pt; break-inside: avoid; }
+  .card { border: 0.75pt solid #2a2a2e; background: #111113; padding: 9pt 12pt 9pt; }
+  .card + .card { border-left: 0; }
+  .card h4 { font-size: 11pt; font-weight: 700; color: #ffffff; margin: 0 0 3pt; }
+  .card .what { margin: 0 0 5pt; color: #b9b9bf; }
+  .card ul { list-style: none; margin: 0 0 6pt; padding: 0 0 0 12pt; }
+  .card li { margin-bottom: 3pt; padding-left: 8pt; text-indent: -8pt; }
+  .card li::before { content: "• "; color: #8a8a90; }
+  .card .tags { font-size: 7.8pt; color: #86868c; margin: 0; }
+
+  .execution { margin-top: 14pt; break-inside: avoid; }
+  .execution .tags { font-size: 7.8pt; color: #86868c; }
+
+  .end-footer {
+    margin-top: 26pt;
+    padding-top: 12pt;
+    border-top: 0.75pt solid #303034;
+    text-align: center;
+    font-size: 8pt;
+    color: #77777d;
+    line-height: 1.7;
+  }
+
+  section { border-top: 0.75pt solid #303034; margin-top: 16pt; break-inside: auto; }
+  section.keep { break-inside: avoid; }
+  section > p:not(.note), .sub, h2, h3 { break-after: avoid; }
+
+  h1 { font-size: 25pt; }
+  ul.plain { margin: 0 0 8pt; padding-left: 16pt; }
+  ul.plain li { margin-bottom: 2.5pt; }
+  .figure { margin: 8pt 0 8pt; break-inside: avoid; }
+  .figure img { width: 100%; display: block; border: 0.75pt solid #2a2a2e; }
+  .figure .cap { font-size: 8pt; color: #7c7c82; margin-top: 4pt; }
+  .flow { border: 0.75pt solid #2a2a2e; background: #111113; padding: 10pt 12pt; margin: 6pt auto 8pt; width: 62%; text-align: center; break-inside: avoid; }
+  .flow .step { font-weight: 700; color: #e8e8ea; }
+  .flow .arrow { color: #7c7c82; line-height: 1.3; }
+  table.chg.cost td:nth-child(2) { width: 38%; }
+  table.chg.cost td:nth-child(3) { width: 24%; }
+  table.chg tr.total td { color: #ffffff; font-weight: 700; background: #18181b; }
+</style>
+</head>
+<body>
+
+  <div class="kicker">Aegis Station</div>
+  <h1>Construction &amp; Deployment Logistics</h1>
+  <div class="subtitle">Modular. Redundant. Scaled for full Earth gravity. &nbsp;·&nbsp; 1g Configuration &nbsp;·&nbsp; November 2026 &nbsp;·&nbsp; Supersedes the April 2026 edition</div>
+  <p class="lead">
+    Aegis Station is deployed in phases, ring by ring, with core operations starting long before full completion. This
+    modular approach spreads cost, reduces risk, and enables early returns on investment. Each ring is a self-contained
+    system — physically and operationally isolated from the others — allowing phased crew arrival, testing, and
+    activation.
+  </p>
+
+  <section class="keep">
+    <h2>1. Deployment Approach</h2>
+    <p class="sub">Dry-orbit assembly and in-situ resource utilization as core principles.</p>
+    <p>
+      Aegis Station is a modular, rotating habitat constructed in lunar orbit. Rather than launching a fully assembled
+      station or supplying shielding water from Earth, the approach is built around dry-orbit assembly and in-situ
+      resource utilization. Components arrive unshielded and are assembled in place; water for radiation shielding is
+      sourced entirely from the Moon.
+    </p>
+    <p style="break-after:auto">
+      Water shielding is not a deliverable shipped from Earth. It is the first product of the lunar economy, extracted,
+      processed, and delivered by the same logistics infrastructure that will sustain the station for decades.
+    </p>
+  </section>
+
+  <section>
+    <h2>2. Assembly in Three Stages</h2>
+    <h3>Stage 1: Launch &amp; Delivery</h3>
+    <ul class="plain">
+      <li>Ring segments, hub modules, and dry structures launched on heavy-lift vehicles</li>
+      <li>Orbital transfer between Earth and the Moon by the Earth–Aegis Long-Hauler fleet</li>
+      <li>Each launch manifest is a discrete structural or systems package</li>
+      <li>No water launched from Earth</li>
+    </ul>
+    <h3>Stage 2: Assembly in Lunar Orbit</h3>
+    <ul class="plain">
+      <li>Assembly in a stable 100 km circular lunar orbit</li>
+      <li>Axis-first: central hub modules are connected along the spine before ring construction begins</li>
+      <li>Each ring is formed from 8 arc segments, robotically placed and locked into alignment</li>
+      <li>Utility systems integrated at the segment level before ring closure</li>
+      <li>The central hub is non-rotating; a ring spins up only after it is shielded and verified</li>
+    </ul>
+    <h3>Stage 3: Shielding with Lunar Water</h3>
+    <ul class="plain">
+      <li>Tanker operations begin in parallel with structural assembly</li>
+      <li>A fleet of 82 tankers delivers 6.0 million metric tons of lunar water into the outer hull of the rings</li>
+      <li>Rings are filled and balanced before they rotate; crew occupancy of a ring waits on its fill</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>3. Phased Ring Activation</h2>
+    <p>
+      Each ring is a self-contained, fault-isolated system with independent power, life support, and thermal control.
+      This isolation supports phased crew arrival and systematic testing. Ring 1 serves as the pathfinder: it is spun
+      up to 1g once its shield is filled and balanced and the ring is verified, hosts the initial operations and
+      engineering crews, and validates all systems before Rings 2 and 3 follow.
+    </p>
+    <table class="kv">
+      <tr><td>Ring 1</td><td>Operational approximately 18 months from construction start; first pressurized, inhabited ring</td></tr>
+      <tr><td>Rings 2 &amp; 3</td><td>Follow at 12–18 month intervals after Ring 1; each adds crew capacity, redundancy, and operational volume</td></tr>
+      <tr><td>Design complement</td><td>Three rings operational, month 42–54</td></tr>
+    </table>
+    <div class="figure">
+      <img src="../images/construction_timeline.svg" alt="Construction timetable from first component delivery through three-ring activation">
+      <div class="cap">Construction timetable, months from construction start. Planning-grade: ring intervals are requirements, not a demonstrated schedule.</div>
+    </div>
+  </section>
+
+  <section class="keep">
+    <h2>4. Shielding Operations</h2>
+    <p>Each ring receives water through five evenly spaced fill ports, supplied by cartridge-based delivery systems.</p>
+    <p>
+      For the initial fill, the ring remains stationary. This simplifies mass distribution, avoids dynamic slosh
+      complications, and allows for controlled pressurization of the shield layer. The ring structure is engineered to
+      handle full shielding mass while static, and to spin up safely after shielding is complete.
+    </p>
+    <p>
+      Once filled, the ring is gradually brought up to its operational rotation rate to generate 1g at the outer floor.
+      Top-offs and maintenance fills, which involve much smaller volumes, are made while the ring is spinning: sealed
+      cartridges are carried through the hub/ring boundary on cargo pods and discharged inside the ring.
+    </p>
+    <table class="kv">
+      <tr><td>Per-ring shield mass</td><td>~2.01 million metric tons</td></tr>
+      <tr><td>Total shield mass</td><td>~6.0 million metric tons</td></tr>
+      <tr><td>Tanker payload</td><td>45 metric tons</td></tr>
+      <tr><td>Number of tankers</td><td>82</td></tr>
+      <tr><td>Daily delivery capacity</td><td>~3,690 metric tons / day</td></tr>
+      <tr><td>Fill time per ring</td><td>~18 months at fleet cadence</td></tr>
+      <tr><td>Full station fill time</td><td>~4.5 years</td></tr>
+    </table>
+  </section>
+
+  <section class="keep">
+    <h2>5. Cost Breakdown</h2>
+    <table class="chg cost">
+      <tr><th>Component</th><th>Basis</th><th>Estimated cost</th></tr>
+      <tr><td>Launch of dry ring structure</td><td>~660,000 metric tons at $2,500/kg</td><td>~$1.65 trillion</td></tr>
+      <tr><td>Transfer to lunar orbit</td><td>Scaled with dry mass</td><td>~$55–165 billion</td></tr>
+      <tr><td>Lunar water sourcing + fill</td><td>~6.0 million metric tons at $150/kg</td><td>~$905 billion</td></tr>
+      <tr class="total"><td>Total construction phase</td><td></td><td>~$2.6–2.7 trillion</td></tr>
+    </table>
+    <p class="note">
+      Covers the dry structure of three rings (~220,000 metric tons each), the shield water, orbital transfer, and
+      cartridge-based delivery. The per-kilogram rates are program targets, not bottom-up estimates. The hub, interior
+      outfitting, the surface refinery, power, mining, and the depot are not yet costed.
+    </p>
+  </section>
+
+  <section class="keep">
+    <h2>6. Why This Works</h2>
+    <ul class="plain">
+      <li>Modular deployment reduces critical path complexity</li>
+      <li>Rings deliver incremental value before full buildout</li>
+      <li>Shielding is integrated into the structure — no external tanks</li>
+      <li>Long-hauler and tanker fleets operate in their optimal domains</li>
+      <li>The 1g specification supports long-term health and crew retention</li>
+    </ul>
+  </section>
+
+  <section class="keep">
+    <h2>7. Fleet Architecture</h2>
+    <div class="twocol">
+      <div class="card">
+        <h4>Long-Hauler Fleet</h4>
+        <p class="what">Dry components from Earth to lunar orbit.</p>
+        <ul>
+          <li>Assembled and tested in LEO</li>
+          <li>Fully reusable, modular vehicles</li>
+          <li>Fleet size follows the structural delivery cadence (Section 10)</li>
+          <li>Remains in service after construction for crew rotation and resupply</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Lunar Tanker Fleet</h4>
+        <p class="what">Shield water from the lunar surface to the station.</p>
+        <ul>
+          <li>Assembled in lunar orbit</li>
+          <li>Each tanker lifts 45 metric tons of water per trip</li>
+          <li>Operates in closed loop: lunar surface → Aegis Station</li>
+          <li>A fleet of 82 tankers fills the station in ~4.5 years</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="keep">
+    <h2>8. Logistics Flow</h2>
+    <div class="flow">
+      <div class="step">Earth Launches → LEO</div><div class="arrow">↓</div>
+      <div class="step">Long-Hauler Assembled &amp; Deployed → LLO</div><div class="arrow">↓</div>
+      <div class="step">Aegis Station Assembled (dry) in LLO</div><div class="arrow">↓</div>
+      <div class="step">Tankers Assembled in LLO → Descend to Moon</div><div class="arrow">↓</div>
+      <div class="step">Tankers Lift Water → Return to Station in LLO</div>
+    </div>
+    <p style="break-after:auto">
+      This path minimizes Earth lift cost, isolates risk domains, and maximizes throughput across the entire build
+      sequence.
+    </p>
+  </section>
+
+  <section class="keep">
+    <h2>9. Modular Radial Modules for Gravity Simulation</h2>
+    <p>
+      Aegis Station enables precise gravity experimentation by installing modular segments along radial booms or
+      structural spokes extending inward from the rings. These modules can be positioned at any desired radius from the
+      central hub, enabling finely tuned simulation of partial gravity environments.
+    </p>
+    <p>
+      The station's rotation rate is fixed to generate 1g at the 397-meter floor. At this angular velocity
+      (~0.157 rad/s, 1.50 RPM), specific gravity levels occur at the following radii:
+    </p>
+    <table class="chg">
+      <tr><th>Environment</th><th>Target gravity</th><th>Required radius</th></tr>
+      <tr><td>Earth (1g)</td><td>9.81 m/s²</td><td>397 m</td></tr>
+      <tr><td>Mars (0.38g)</td><td>3.73 m/s²</td><td>151 m</td></tr>
+      <tr><td>Moon (0.165g)</td><td>1.62 m/s²</td><td>66 m</td></tr>
+    </table>
+    <ul class="plain" style="margin-top:8pt">
+      <li>Human adaptation studies (cardiovascular, skeletal, muscular)</li>
+      <li>Martian or lunar habitat prototyping</li>
+      <li>Agricultural tests in simulated gravity</li>
+      <li>Equipment validation in fractional G</li>
+    </ul>
+  </section>
+
+  <section class="keep">
+    <h2>10. Open Items</h2>
+    <p class="sub">What does not yet close, carried as open.</p>
+    <table class="kv">
+      <tr><td>Earth-launch cadence</td><td>The dry structure of one ring is ~220,000 metric tons. Delivering it within the first year of construction is about 600 metric tons a day to lunar orbit. That cadence is a requirement, not a demonstrated capability, and the Long-Hauler fleet is not yet sized for it.</td></tr>
+      <tr><td>Ring interval</td><td>At fleet cadence one ring's shield is about 18 months of deliveries. The 12-month end of the ring interval needs water delivered ahead of the ring or a higher cadence.</td></tr>
+      <tr><td>Structure mass</td><td>~220,000 metric tons per ring is a concept-level sizing for the spin and pressure loads with conventional materials. A bottom-up structural budget is not yet done, and the hub mass is not yet stated.</td></tr>
+      <tr><td>Cost basis</td><td>The per-kilogram rates are program targets. The hub, interior outfitting, surface refinery, power, mining, and depot are not yet costed.</td></tr>
+    </table>
+  </section>
+
+  <section class="keep">
+    <h2>11. Changes From the April 2026 Edition</h2>
+    <table class="chg">
+      <tr><th>Item</th><th>April 2026</th><th>This edition</th></tr>
+      <tr><td>Assembly location</td><td>Rings assembled in LEO and transferred by tug</td><td>Assembled in 100 km lunar orbit, axis-first, 8 arc segments per ring</td></tr>
+      <tr><td>Shield mass</td><td>~1.1 million metric tons per ring, ~3.3 million total</td><td>~2.01 million metric tons per ring, ~6.0 million total</td></tr>
+      <tr><td>Tanker fleet</td><td>45 tankers, ~2,025 metric tons / day</td><td>82 tankers, ~3,690 metric tons / day</td></tr>
+      <tr><td>Dry structure</td><td>~120,000 metric tons for the station</td><td>~220,000 metric tons per ring, ~660,000 for three rings</td></tr>
+      <tr><td>Construction cost</td><td>~$805 billion</td><td>~$2.6–2.7 trillion, at the same per-kilogram rates</td></tr>
+      <tr><td>Timeline</td><td>Illustrative, years 1–10</td><td>Months from construction start: Ring 1 at ~month 18, design complement at month 42–54</td></tr>
+      <tr><td>Top-offs</td><td>Synchronized cartridge vestibules on the spinning ring</td><td>Sealed cartridges through the hub/ring boundary on cargo pods</td></tr>
+      <tr><td>Gravity radii</td><td>1g at 400 m; Mars 152.3 m, Moon 68.1 m</td><td>1g at the 397 m floor; Mars 151 m, Moon 66 m</td></tr>
+    </table>
+  </section>
+
+  <div class="end-footer">
+    Aegis Station — Construction &amp; Deployment Logistics · 1g Configuration · Classification: Unrestricted<br>
+    contact@aegisstation.com · aegisstation.com
+  </div>
+
+</body>
+</html>
