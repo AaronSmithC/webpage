@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 476" role="img" aria-labelledby="t d" font-family="'Open Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">
+<title id="t">The window for the main bearing's tilt stiffness</title><desc id="d">Two lines against bearing tilt stiffness on logarithmic axes. Softer bearings let a fault lean a ring further, past the crossing gap below about 1e9 N m per radian; stiffer bearings pass more moment into the hub's neck, reaching its limit near 3e10. Between about 1e9 and 1e10 neither limit is reached.</desc>
+<rect width="860" height="476" fill="#0f0f0f"/>
+<text x="80.0" y="28.0" font-size="15" fill="#e8e8e8" text-anchor="start" font-weight="700">A fault leans a ring; a leaning ring loads the hub</text>
+<text x="80.0" y="46.0" font-size="12.5" fill="#8a8a8a" text-anchor="start" font-weight="400">share of each limit, %, against the main bearing's stiffness in tilt</text>
+<rect x="289.9" y="60" width="300.3" height="310" fill="#ffffff" opacity="0.045"/><text x="440.0" y="78.0" font-size="12.5" fill="#b9b9b9" text-anchor="middle" font-weight="400">neither happens</text>
+<line x1="80.0" y1="338.9" x2="800.0" y2="338.9" stroke="#2b2b2b" stroke-width="1"/><text x="70.0" y="342.9" font-size="12" fill="#8a8a8a" text-anchor="end" font-weight="400">1</text>
+<line x1="80.0" y1="289.6" x2="800.0" y2="289.6" stroke="#2b2b2b" stroke-width="1"/><text x="70.0" y="293.6" font-size="12" fill="#8a8a8a" text-anchor="end" font-weight="400">3</text>
+<line x1="80.0" y1="235.6" x2="800.0" y2="235.6" stroke="#2b2b2b" stroke-width="1"/><text x="70.0" y="239.6" font-size="12" fill="#8a8a8a" text-anchor="end" font-weight="400">10</text>
+<line x1="80.0" y1="186.3" x2="800.0" y2="186.3" stroke="#2b2b2b" stroke-width="1"/><text x="70.0" y="190.3" font-size="12" fill="#8a8a8a" text-anchor="end" font-weight="400">30</text>
+<line x1="80.0" y1="132.2" x2="800.0" y2="132.2" stroke="#2b2b2b" stroke-width="1"/><text x="70.0" y="136.2" font-size="12" fill="#8a8a8a" text-anchor="end" font-weight="400">100</text>
+<line x1="80.0" y1="82.9" x2="800.0" y2="82.9" stroke="#2b2b2b" stroke-width="1"/><text x="70.0" y="86.9" font-size="12" fill="#8a8a8a" text-anchor="end" font-weight="400">300</text>
+<text x="132.9" y="390.0" font-size="12" fill="#8a8a8a" text-anchor="middle" font-weight="400">3×10⁸</text>
+<text x="289.9" y="390.0" font-size="12" fill="#8a8a8a" text-anchor="middle" font-weight="400">10⁹</text>
+<text x="433.1" y="390.0" font-size="12" fill="#8a8a8a" text-anchor="middle" font-weight="400">3×10⁹</text>
+<text x="590.1" y="390.0" font-size="12" fill="#8a8a8a" text-anchor="middle" font-weight="400">10¹⁰</text>
+<text x="733.4" y="390.0" font-size="12" fill="#8a8a8a" text-anchor="middle" font-weight="400">3×10¹⁰</text>
+<text x="440.0" y="412.0" font-size="12.5" fill="#8a8a8a" text-anchor="middle" font-weight="400">bearing tilt stiffness, N m per radian</text>
+<line x1="80.0" y1="132.2" x2="800.0" y2="132.2" stroke="#e66767" stroke-width="1"/><text x="796.0" y="126.2" font-size="12" fill="#b9b9b9" text-anchor="end" font-weight="400">the limit</text>
+<path d="M132.9 88.3 L289.9 136.3 L433.1 185.8 L590.1 240.5 L733.4 291.7" fill="none" stroke="#3987e5" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M132.9 340.1 L289.9 286.1 L433.1 236.8 L590.1 182.7 L733.4 133.4" fill="none" stroke="#d95926" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="132.9" cy="88.3" r="5" fill="#3987e5" stroke="#0f0f0f" stroke-width="2"/>
+<circle cx="289.9" cy="136.3" r="5" fill="#3987e5" stroke="#0f0f0f" stroke-width="2"/>
+<circle cx="433.1" cy="185.8" r="5" fill="#3987e5" stroke="#0f0f0f" stroke-width="2"/>
+<circle cx="590.1" cy="240.5" r="5" fill="#3987e5" stroke="#0f0f0f" stroke-width="2"/>
+<circle cx="733.4" cy="291.7" r="5" fill="#3987e5" stroke="#0f0f0f" stroke-width="2"/>
+<circle cx="132.9" cy="340.1" r="5" fill="#d95926" stroke="#0f0f0f" stroke-width="2"/>
+<circle cx="289.9" cy="286.1" r="5" fill="#d95926" stroke="#0f0f0f" stroke-width="2"/>
+<circle cx="433.1" cy="236.8" r="5" fill="#d95926" stroke="#0f0f0f" stroke-width="2"/>
+<circle cx="590.1" cy="182.7" r="5" fill="#d95926" stroke="#0f0f0f" stroke-width="2"/>
+<circle cx="733.4" cy="133.4" r="5" fill="#d95926" stroke="#0f0f0f" stroke-width="2"/>
+<text x="142.9" y="92.3" font-size="12.5" fill="#e8e8e8" text-anchor="start" font-weight="400">266 %: the ring is through the gap</text>
+<text x="723.4" y="153.4" font-size="12.5" fill="#e8e8e8" text-anchor="end" font-weight="400">97 %</text>
+<line x1="433.1" y1="86.0" x2="433.1" y2="370.0" stroke="#8a8a8a" stroke-width="1"/><text x="439.1" y="362.0" font-size="12" fill="#b9b9b9" text-anchor="start" font-weight="400">working design</text>
+<rect x="80" y="433" width="14" height="3" rx="1.5" fill="#3987e5"/><text x="102.0" y="439.0" font-size="12.5" fill="#b9b9b9" text-anchor="start" font-weight="400">a pod pair stuck on for an hour: the ring's lean against the hub, as a share of the gap at the crossing</text><rect x="80" y="453" width="14" height="3" rx="1.5" fill="#d95926"/><text x="102.0" y="459.0" font-size="12.5" fill="#b9b9b9" text-anchor="start" font-weight="400">a ring leaning all the way to that gap: the moment it puts into the hub's neck, as a share of the neck's limit</text>
+</svg>

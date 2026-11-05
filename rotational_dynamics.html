@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+  <title>Aegis Station — Rotational Dynamics</title>
+
+  <meta name="description" content="Aegis Station as bodies that turn: three 2.2 million tonne rings on a hub that does not turn. Balance by pumped water, the resonances crossed in a spin-up, holding a ring's axis with pulsed pods, and what keeps the rings apart and the hub whole. From a dynamics model, a live simulator and recorded runs."/>
+  <meta name="keywords" content="Aegis Station, rotational dynamics, rotating habitat, spin-up, resonance, balance, trim, gyroscopic, attitude control, artificial gravity"/>
+  <meta name="author" content="Aegis Station"/>
+
+  <meta property="og:title" content="Aegis Station — Rotational Dynamics"/>
+  <meta property="og:description" content="Balance, spin-up and stability of a three-ring rotating habitat, from a model, a simulator and recorded runs."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="https://aegisstation.com/images/station_spin_up_held_poster.jpg"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+
+  <style>
+    body { background:#0b0b0b; color:#e8e8e8; font-family:"Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem; }
+    .kicker { color:#bdbdbd; margin: 0 0 0.75rem; }
+    h1, h2, h3 { font-family:"Orbitron", system-ui, sans-serif; letter-spacing: 0.5px; }
+    h1 { font-size: 2.1rem; margin: 0.25rem 0 0.75rem; }
+    h2 { font-size: 1.35rem; margin: 2.0rem 0 0.75rem; }
+    h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color:#f0f0f0; }
+    p { line-height: 1.65; color:#d7d7d7; }
+    a { color:#ffffff; text-decoration: underline; }
+    .rule { border:0; border-top:1px solid #2d2d2d; margin: 1.75rem 0; }
+    .note { color:#b9b9b9; font-size: 0.95rem; }
+    .grid { display:grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 760px) { .grid { grid-template-columns: 1fr 1fr; } }
+    .card { border: 1px solid #2b2b2b; background: #101010; border-radius: 14px; padding: 1.1rem 1.1rem; box-shadow: 0 4px 14px rgba(0,0,0,0.35); }
+    .card ul { margin: 0.6rem 0 0; padding-left: 1.1rem; color:#d7d7d7; }
+    .card li { margin: 0.35rem 0; }
+    .toc { border: 1px solid #2b2b2b; background: #0f0f0f; border-radius: 14px; padding: 1rem 1rem; margin-top: 1.25rem; }
+    .toc a { text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    .toc ul { list-style:none; padding:0; margin:0; line-height:1.75; }
+    .pill { display:inline-block; padding: 0.25rem 0.55rem; border-radius: 999px; border:1px solid #2b2b2b; background:#141414; font-size: 0.85rem; color:#cfcfcf; margin-right: 0.4rem; margin-top: 0.35rem; }
+    .back { display:inline-block; margin-top: 1rem; padding: 0.7rem 1.0rem; border-radius: 10px; border:1px solid #2b2b2b; background:#141414; text-decoration:none; }
+    .back:hover { background:#1a1a1a; }
+    .section-lead { color:#cfcfcf; }
+    table { width:100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 0.95rem; }
+    th, td { text-align:left; padding: 0.55rem 0.7rem; border-bottom: 1px solid #2b2b2b; vertical-align: top; }
+    th { color:#f0f0f0; font-family:"Orbitron", system-ui, sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.5px; }
+    tbody tr:nth-child(even) { background:#0e0e0e; }
+    tbody tr:nth-child(odd) { background:#121212; }
+    figure.diagram { margin: 1.5rem 0 0.5rem; border:1px solid #2b2b2b; background:#0f0f0f; border-radius:14px; padding:1rem 1rem 0.9rem; }
+    figure.diagram img { width:100%; height:auto; display:block; }
+    figure.diagram figcaption { margin:0.7rem 0 0; font-size:0.9rem; color:#b9b9b9; line-height:1.55; }
+    figure.diagram video { width:100%; height:auto; display:block; border-radius:8px; }
+    /* the animated cycle (from the Rev 0 concept page) */
+    .anim { --acc:#4dd0e1; --acc-dim:#1e5e66; --warn:#d3756a; --hub:#8f8f8f; --hub-dim:#3a3a3a; --ring-dim:#143a40; --fg:#e6e6e6; --surface:#101010; --line:#2b2b2b; --muted:#9a9a9a; }
+    .anim svg { display:block; width:100%; height:auto; color:var(--fg); }
+    .anim svg text { font-family:"Open Sans", system-ui, sans-serif; font-size:11px; fill:var(--fg); }
+    .anim svg .lab { fill:var(--muted); font-size:10px; }
+    .anim svg .hd { font-family:"Orbitron", system-ui, sans-serif; font-size:11px; letter-spacing:.8px; fill:var(--fg); }
+    .anim svg .num { font-variant-numeric:tabular-nums; }
+    .ctl { display:flex; flex-wrap:wrap; gap:.6rem 1rem; align-items:center; margin:.2rem 0 .6rem; font-size:.85rem; color:#9a9a9a; }
+    .ctl button { font:inherit; font-family:"Orbitron", system-ui, sans-serif; font-size:.75rem; letter-spacing:.6px; color:#e6e6e6; background:#0b0b0b; border:1px solid #2b2b2b; border-radius:8px; padding:.4rem .8rem; cursor:pointer; }
+    .ctl button:focus-visible, .ctl input:focus-visible { outline:2px solid #4dd0e1; outline-offset:2px; }
+    .ctl input[type=range] { flex:1 1 200px; min-width:0; accent-color:#4dd0e1; }
+    .ctl .ro { font-variant-numeric:tabular-nums; color:#e6e6e6; }
+    .finding { border-left:3px solid #4dd0e1; padding:0.2rem 0 0.2rem 1rem; margin:1rem 0; color:#d7d7d7; }
+    figure.diagram img, figure.diagram video { border-radius:8px; }
+    .wrap p { margin: 0 0 0.9rem; }
+    .wrap figure.diagram figcaption, .wrap .card p:last-child { margin-bottom: 0; }
+    .tablewrap { overflow-x: auto; }
+    .tablewrap table { min-width: 560px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <p class="kicker"><a href="aegis_station.html" style="color:inherit;">Aegis Station</a></p>
+    <h1>Rotational Dynamics</h1>
+
+    <p class="section-lead">
+      Aegis Station is three rings, each 2.23 million tonnes, turning at 1.50 rpm on a hub 650 m long that does
+      not turn. This page is the station read as bodies that turn: what keeps a ring balanced, what happens on
+      the way up to speed, what holds a ring's axis where it should be, and what would have to go wrong for a
+      ring to reach its neighbour or for the hub to break.
+    </p>
+    <p class="section-lead">
+      Behind it is a dynamics model, a simulator that steps the model live, an operator console, and recorded
+      runs. The figures are drawn from the model's results and the clips are those recordings. No part of this
+      is built. Every limit on the page is a placeholder and is called one.
+    </p>
+
+    <figure class="diagram">
+      <img src="images/station_dynamics_bodies.svg" alt="A side view to scale: a 650 metre hub that does not turn, three rings 200 metres apart each 350 metres from the axis to the centre of a 100 metre tube, a dock at each end of the hub, and a neck with a main bearing where the hub passes through each ring."/>
+      <figcaption>The station from the side, to scale. The hub is the light body: it is not yet sized, and is taken as 100,000 t against 2.23 million for each ring. Where the hub passes through a ring it narrows to a core inside the ring's collar, and the ring rides on a main bearing there.</figcaption>
+    </figure>
+
+    <div class="toc">
+      <strong style="font-family: Orbitron, system-ui, sans-serif;">On this page</strong>
+      <ul>
+        <li><a href="#bodies">1. The station as bodies that turn</a></li>
+        <li><a href="#limits">2. Two things that must never happen</a></li>
+        <li><a href="#balance">3. Balance by pumped water</a></li>
+        <li><a href="#spinup">4. Getting up to speed</a></li>
+        <li><a href="#holding">5. Holding it there</a></li>
+        <li><a href="#day">6. A normal day, and a fault</a></li>
+        <li><a href="#changed">7. What changed as the model grew</a></li>
+        <li><a href="#open">8. What is open</a></li>
+        <li><a href="#status">9. Status</a></li>
+      </ul>
+    </div>
+
+    <hr class="rule"/>
+
+    <section id="bodies">
+      <h2>1. The station as bodies that turn</h2>
+      <p>
+        A ring is a wheel and a gyroscope at once. As a wheel it has a rate and a balance. As a gyroscope it has
+        an axis that it keeps unless something pushes on it, and it answers a push at right angles. Three of
+        them sit on one hub, and the hub is light enough that the rings carry it about, not the other way round.
+      </p>
+      <table>
+        <thead><tr><th>Quantity</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Ring mass</td><td>2.23 Mt: 2.01 Mt of shield water, 0.22 Mt of structure</td></tr>
+          <tr><td>Spin rate</td><td>1.50 rpm, one turn in 40 s, 1 g at the 397 m floor, 63 m/s at the rim</td></tr>
+          <tr><td>Angular momentum</td><td>4.5 &#215; 10<sup>13</sup> N m s per ring</td></tr>
+          <tr><td>Propellant to spin one ring up</td><td>about 25,000 t, 1.1 % of the ring</td></tr>
+          <tr><td>Segments</td><td>40 per ring, each about 50,000 t of water; 1 % of each free to move for trim</td></tr>
+          <tr><td>Pods</td><td>8 per ring at the rim, as 4 pairs, 27 kN each along the axis</td></tr>
+          <tr><td>Hub</td><td>650 m, with a dock at each end; its mass is not yet sized and is taken as 100,000 t</td></tr>
+        </tbody>
+      </table>
+      <p>
+        The model has the hub as a bending beam with five stations, each ring free to tilt at its bearing, the
+        share of a ring's water that does not follow it as a separate body, pods that are on or off, trim pumps
+        with a rate and a range, and an actuator at each bearing. It is linear, good to a few degrees, which is
+        further than anything here is allowed to go.
+      </p>
+    </section>
+
+    <section id="limits">
+      <h2>2. Two things that must never happen</h2>
+      <p>
+        The rings must not reach each other, and they must not break the hub. Both come down to how stiffly a
+        ring is held in tilt at its main bearing.
+      </p>
+      <div class="card">
+        <ul>
+          <li><strong>Rings touching.</strong> Two rings 200 m apart with 100 m tubes meet when one leans 16.6&#176; against the other. Long before that, a ring leaning 2.9&#176; against the hub closes the 0.6 m gap at the <a href="hub_ring_boundary.html">hub/ring crossing</a>. That gap is the limit that counts.</li>
+          <li><strong>The hub breaking.</strong> It would go at a neck, where the hub narrows to pass through a ring's collar. The hub's loads are taken there.</li>
+        </ul>
+      </div>
+      <p>
+        Hold a ring stiffly and it cannot lean, but a turning ring tied rigidly to a hub that has started to
+        wobble has to drag the whole station round with it, and the moment goes through the neck. In the least
+        steady state the model has (one ring turning beside two filled rings at rest), on a stiff bearing and
+        left alone, the neck's placeholder limit is passed at 0.04&#176; of wobble, 48 minutes after a 0.01&#176;
+        start. Hold a ring softly and it keeps its own plane while the hub moves under it, but a fault can lean
+        it a long way before the bearing catches it.
+      </p>
+      <figure class="diagram">
+        <img src="images/station_bearing_window.svg" alt="Two lines against bearing tilt stiffness on logarithmic axes. Softer bearings let a fault lean a ring further, past the crossing gap below about 10 to the 9 newton metres per radian. Stiffer bearings pass more moment into the hub's neck, reaching its limit near 3 times 10 to the 10. Between about 10 to the 9 and 10 to the 10 neither limit is reached."/>
+        <figcaption>The window. Too soft, and a pod pair stuck on for an hour takes a ring through the crossing gap and most of the way to its neighbour. Too stiff, and a ring leaning as far as the gap has already put the neck at its limit. Between about 10<sup>9</sup> and 10<sup>10</sup> N m per radian neither happens in anything run so far. The first stiffness the model was given, 3 &#215; 10<sup>10</sup>, sits at the stiff edge.</figcaption>
+      </figure>
+      <p>
+        The working design is a bearing soft in tilt, about 3 &#215; 10<sup>9</sup> N m per radian, with an
+        actuator at each bearing for damping, and a hub soft enough that its bending resonance is crossed early
+        in a spin-up. On it, in the faults run so far (a pod pair or a bearing actuator stuck on, a top-off
+        landing in one segment, all control lost in the least steady state), the furthest a ring leans against
+        the hub is 30 % of the crossing gap and the most a neck carries is 17 % of its limit. The case that
+        comes nearest a limit is not a fault but an omission: a spin-up with the balance held, in section 4.
+      </p>
+      <p class="note">
+        The bearing's limit (5 &#215; 10<sup>7</sup> N m in tilt) and the neck's (1.5 &#215; 10<sup>9</sup> N m in
+        bending) are placeholders with no design behind them. What the model gives is how the loads move with
+        the choices, not whether a particular bearing survives.
+      </p>
+    </section>
+
+    <section id="balance">
+      <h2>3. Balance by pumped water</h2>
+      <p>
+        A lived-in ring is never quite even. A load off-centre moves the ring's mass centre off the bearing
+        axis, and because the hub is the light body, the hub is what gets carried round, once a turn. The
+        shield is water in 40 segments, so the correction is to pump a little of it from one side to the other.
+      </p>
+      <p>
+        The water is not teleported. Pumps have a rate, segments have a range, and water moving round a turning
+        ring pushes on it while it moves, because it is turning faster or slower than the ring it is in. A
+        correction made evenly over a time T adds 2 / (spin rate &#215; T) of the load it is removing:
+      </p>
+      <table>
+        <thead><tr><th>Correction made over</th><th>Extra load from the water in motion</th></tr></thead>
+        <tbody>
+          <tr><td>13 seconds</td><td>as much again</td></tr>
+          <tr><td>2 minutes</td><td>a tenth</td></tr>
+          <tr><td>20 minutes</td><td>one part in a hundred</td></tr>
+        </tbody>
+      </table>
+      <p>
+        So the pumps are not the limit. At 100 kg/s each they could cancel a 45 t load in 25 seconds, and doing
+        so would load the hub half as much again as the load itself. Going slowly is the choice. The imbalance
+        is estimated from the motion (accelerometers on the hub at the three ring stations, load cells at the
+        three bearings, each reading turned back by the ring's angle and averaged) and the trim is moved
+        against the estimate over about an hour.
+      </p>
+      <figure class="diagram">
+        <img src="images/station_balance.svg" alt="Three lines over two hours. With the balance held the ring carries 45 tonnes of imbalance throughout. Balanced from the motion it falls to about 2 tonnes after an hour and a quarter of a tonne after two. With the manifest knowing the load the imbalance never appears."/>
+        <figcaption>A 45 t load brought down a spoke to the floor of one ring. Balanced from the motion, 34 t of water is moved and no segment uses more than half a percent of its trim range. If the manifest knows the load (what, where, when) the trim follows it down and the motion is left only what the manifest has wrong.</figcaption>
+      </figure>
+      <h3>What the readings can and cannot tell</h3>
+      <p>
+        At full rate the readings tell about 0.1 t at the floor. At low rates they tell much less, and a ring
+        at rest pushes on nothing and tells nothing. That matters for the fill: a ring is filled at rest and
+        then spun up through its first resonance as the fill left it. Without help from the bearing actuators
+        the off-centre part of the fill has to be under about 900 t, 0.05 % of the ring's water. With them,
+        about 2,300 t. Metering the fill by flow and by level in each segment is a requirement, and it is a
+        tighter one than the pumps or the trim range.
+      </p>
+    </section>
+
+    <section id="spinup">
+      <h2>4. Getting up to speed</h2>
+      <p>
+        An imbalance pushes once a turn, so as a ring comes up to rate it passes any natural motion of the
+        station that goes round at that rate. On the working design there are two. Under 0.1 rpm the hub rocks
+        against the rings on the bearings' tilt stiffness. Near 0.68 rpm the hub bends between the rings.
+      </p>
+      <p>
+        A resonance needs time to build, about as long as its motion takes to die out. The first is narrow and
+        a thirty-day spin-up is through it in minutes, so it never reaches its height; a dwell on it would. The
+        second is broad, and is met in full at any pace thrusters can give.
+      </p>
+      <figure class="diagram">
+        <img src="images/station_spin_up.svg" alt="Two panels, main bearing and hub neck, each showing load as a share of its placeholder limit against spin rate from 0 to 1.5 rpm. With the pumps held the bearing reaches 90 percent and the neck 99 percent of their limits at 0.69 rpm. With the pumps working neither passes 6 percent."/>
+        <figcaption>Three rings from rest to 1.50 rpm with 300, 150 and 80 t left off-centre by the fill. With the trim pumps held, the hub's bending crossing takes the neck to 99 % of its placeholder limit. With the balance working on the way up, that crossing passes unnoticed. These two runs are at a three-day pace, a tenth of the real time.</figcaption>
+      </figure>
+      <figure class="diagram">
+        <video controls muted playsinline preload="none" poster="images/station_spin_up_held_poster.jpg">
+          <source src="media/station_spin_up_held.mp4" type="video/mp4">
+        </video>
+        <figcaption>The spin-up with the pumps held, recorded from the simulator: three days in 45 seconds, motion drawn ten times life size. Left: the hub's line and the three ring planes, from the side and from above. Right: each ring seen along the axis. The squares under the picture fill as each limit is approached.</figcaption>
+      </figure>
+      <figure class="diagram">
+        <video controls muted playsinline preload="none" poster="images/station_spin_up_balanced_poster.jpg">
+          <source src="media/station_spin_up_balanced.mp4" type="video/mp4">
+        </video>
+        <figcaption>The same spin-up with the pumps working once the first crossing is behind, and a dwell at 0.5 rpm. Motion drawn a hundred times life size, and there is still little to see.</figcaption>
+      </figure>
+      <p>
+        At the real thirty-day pace, with the balance on throughout, the largest bearing load of the whole month
+        is 7.6 % of the limit, at 0.056 rpm on the second day. That is the first crossing itself, and it comes
+        before the readings can tell anything. The 300 t is down to 65 t by day three and under a tonne by day
+        ten. The bending crossing passes at 0.13 % of the neck's limit.
+      </p>
+      <p class="finding">
+        Hold the pumps through the first crossing. Just past it the readings begin to tell something, but what
+        they tell there is wrong, and acting on it made that crossing worse every time it was tried: 7.2 % of
+        the bearing limit against 5.6 % with all three rings coming up together, and 37 % against 4.6 % with one
+        ring coming up beside two at rest.
+      </p>
+    </section>
+
+    <section id="holding">
+      <h2>5. Holding it there</h2>
+      <p>
+        A ring's axis is held by pods at its rim firing along the axis. The pods are fixed to the ring and are
+        either on or off, so a pair can only push the way that is wanted as it passes that way, every five
+        seconds for one pair or another. Timing matters more than thrust:
+      </p>
+      <table>
+        <thead><tr><th>How a pair is fired</th><th>Propellant, against a thruster that could push any way at any moment</th></tr></thead>
+        <tbody>
+          <tr><td>In a pulse centred on the moment it passes the wanted direction</td><td>1 % more</td></tr>
+          <tr><td>From the moment it enters a 60&#176; window</td><td>26 % more</td></tr>
+          <tr><td>Whenever it can help at all</td><td>46 % more</td></tr>
+        </tbody>
+      </table>
+      <p>
+        The law has two terms on a turning ring: one that points the axis, pushing at right angles to the error
+        as a gyroscope requires, and one that opposes the tilt rate. Without the second the first feeds the
+        ring's own 20-second wobble. And the second is where the cost is, because it needs to know the tilt
+        rate.
+      </p>
+      <figure class="diagram">
+        <img src="images/station_reading_cost.svg" alt="Four bars. The ideal law costs 11 tonnes a day. Pods that are on or off cost 27. Taking the tilt rate from a noisy tilt reading costs 440. A rate sensor brings it back to 17."/>
+        <figcaption>Holding the least steady state the model has, for a day. Found from a tilt reading with a thousandth of a degree of noise, the rate is mostly noise and the pods answer it. With a rate sensor good to 0.00003&#176;/s the cost returns to what holding the station takes. The running propellant hangs on that sensor, not on the thrusters.</figcaption>
+      </figure>
+      <p>
+        Two smaller findings. A reading that arrives four to six seconds late is a quarter-turn late for the
+        20-second wobble and feeds it; bearing actuators or a rate sensor remove that band. And the floor under
+        which the pods stay off has to sit about three times clear of the reading's noise, or they fire for
+        nothing in normal running.
+      </p>
+    </section>
+
+    <section id="day">
+      <h2>6. A normal day, and a fault</h2>
+      <p>
+        Six hours of ordinary occurrences on the simulator: a shuttle docks, two water cartridges cross to a
+        ring and are emptied, a shift change gathers three hundred people on one side of a ring and disperses
+        them, a transit car makes three and a half circuits, cargo comes down a spoke, a tanker docks, stores
+        are stowed to one side, the shuttle leaves.
+      </p>
+      <figure class="diagram">
+        <video controls muted playsinline preload="none" poster="images/station_normal_day_poster.jpg">
+          <source src="media/station_normal_day.mp4" type="video/mp4">
+        </video>
+        <figcaption>A normal day, six hours in 45 seconds, motion drawn a hundred times life size. The trim pumps work and hold. No pod fires all day. The largest load on a bearing is 0.28 % of its limit, with the crowd on one ring and the transit car on another.</figcaption>
+      </figure>
+      <p>
+        Docking is not a load. A 53 t tanker meeting a dock with 0.05 m/s left sideways moves the dock a tenth
+        of a millimetre and puts 0.02 % of its limit on a neck; it would have to arrive sideways at about
+        280 m/s to reach that limit. With a ring trimmed to what the readings can tell, the hub moves 0.14 mm
+        once a turn, 0.3 micro-g sideways, which is what a laboratory fixed to the hub would feel.
+      </p>
+      <figure class="diagram">
+        <video controls muted playsinline preload="none" poster="images/station_pair_stuck_poster.jpg">
+          <source src="media/station_pair_stuck.mp4" type="video/mp4">
+        </video>
+        <figcaption>A fault: one ring turning, two at rest, and a pod pair of a ring at rest stuck on for an hour. The ring leans 0.06&#176;, about 2 % of the crossing gap, while its other pairs hold it and burn as much again as the stuck pair. On a turning ring the same fault averages to nothing in space; it reads to the balance as the ring being heavier on one side, and the pumps pass water fore and aft against it without being told.</figcaption>
+      </figure>
+    </section>
+
+    <section id="changed">
+      <h2>7. What changed as the model grew</h2>
+      <p>
+        A few early figures changed as the model was extended. They are listed because anyone checking this
+        work would want to know.
+      </p>
+      <div class="tablewrap"><table>
+        <thead><tr><th>What</th><th>Was</th><th>Is</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Propellant to turn or hold a ring's axis</td><td>21 t to bring a ring in from 0.1&#176;</td><td>43 t</td><td>A moment across the rim takes a pod on each side. Only one of the two had been counted, so every such figure doubled. Spin-up propellant was unaffected.</td></tr>
+          <tr><td>Resonances crossed in a spin-up</td><td>One</td><td>Two</td><td>The first sweep stepped over two narrow peaks. They are now found by search, and each is cut to what the spin-up has time to build, checked against runs in time.</td></tr>
+          <tr><td>Bearing actuator gain</td><td>10<sup>12</sup> N m s/rad</td><td>2 &#215; 10<sup>10</sup> on a soft bearing</td><td>The first gain was chosen beside a stiffer bearing. On a soft one it made the bearing act stiff once a turn. A recording from the simulator showed the actuator carrying fifty times the bearing's own moment.</td></tr>
+          <tr><td>When the balance acts</td><td>Whenever it had an estimate</td><td>Only when the estimate is worth having</td><td>At low spin rates the readings cannot tell an imbalance the trim could cancel, and just past the first resonance the estimate is wrong. Acting on either made things worse.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="open">
+      <h2>8. What is open</h2>
+      <div class="card">
+        <ul>
+          <li><strong>The bearing.</strong> Something soft in tilt that still carries a 2.2 Mt ring sideways, with its travel and its stops. The window above is a requirement on it; nothing is designed.</li>
+          <li><strong>What reads tilt and tilt rate on a turning ring.</strong> The running propellant depends on the rate reading more than on anything else on this page.</li>
+          <li><strong>Slosh.</strong> The share of the shield's water that does not follow its ring is carried as an unknown and swept. It decides whether a ring spun up beside rings at rest is steady without help. It waits on the shield's internal layout.</li>
+          <li><strong>The limits.</strong> Every load here is a share of a placeholder. A bearing and a neck with designs behind them would replace them.</li>
+          <li><strong>The fill.</strong> How the fill is metered evenly enough for the first crossing.</li>
+          <li><strong>Emergencies.</strong> A ring brought to rest in a hurry. Not started.</li>
+          <li><strong>Not in the model yet.</strong> Orbit keeping, the Moon's gravity gradient on the spin axis, a ring's own flexing, thermal bending of the hub, and the ring's rate changing as mass moves in or out along a spoke.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="status">
+      <h2>9. Status</h2>
+      <p>
+        <strong>What exists.</strong> A dynamics model in plain code with 126 checks against results known
+        without it; a simulator that steps the model live and takes commands; an operator console that watches
+        and steers the simulator; eighteen recorded runs, among them a normal day, the fill's traffic, and
+        spin-ups at a three-day pace and at the real thirty-day pace.
+      </p>
+      <p>
+        <strong>What is a model.</strong> Everything. No requirements review and no flight software exist for
+        this domain yet; the console steers the simulator directly. The stiffnesses, dampings, limits, noise
+        levels and pump sizes are placeholders chosen to be plausible, and the results are conditions (if the
+        bearing is this stiff, then this), not verdicts.
+      </p>
+      <p>
+        <strong>If something here is wrong.</strong> The model, the simulator and the recordings are
+        proprietary to Aegis Station and are not slated for public release; they are shared for evaluation with
+        qualified organizations under agreement. A correction is welcome from anyone:
+        <a href="mailto:contact@aegisstation.com">contact@aegisstation.com</a>.
+      </p>
+    </section>
+
+    <hr class="rule"/>
+    <a class="back" href="aegis_station.html">&#8592; Aegis Station</a>
+  </div>
+</body>
+</html>

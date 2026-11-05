@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+  <title>Aegis Station — The Station</title>
+
+  <meta name="description" content="Aegis Station in brief: three rings on a 650 m hub, 1 g at 1.50 rpm, six million tonnes of lunar water shielding, and an index of the station's systems with how far along each one is."/>
+  <meta name="keywords" content="Aegis Station, rotating habitat, artificial gravity, radiation shielding, lunar orbit, station systems"/>
+  <meta name="author" content="Aegis Station"/>
+
+  <meta property="og:title" content="Aegis Station — The Station"/>
+  <meta property="og:description" content="The station in numbers, and an index of its systems with the status of each."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="https://aegisstation.com/images/aegis-station-lunar-orbit.png"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+
+  <style>
+    body { background:#0b0b0b; color:#e8e8e8; font-family:"Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem; }
+    .kicker { color:#bdbdbd; margin: 0 0 0.75rem; }
+    h1, h2, h3 { font-family:"Orbitron", system-ui, sans-serif; letter-spacing: 0.5px; }
+    h1 { font-size: 2.1rem; margin: 0.25rem 0 0.75rem; }
+    h2 { font-size: 1.35rem; margin: 2.0rem 0 0.75rem; }
+    h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color:#f0f0f0; }
+    p { line-height: 1.65; color:#d7d7d7; }
+    a { color:#ffffff; text-decoration: underline; }
+    .rule { border:0; border-top:1px solid #2d2d2d; margin: 1.75rem 0; }
+    .note { color:#b9b9b9; font-size: 0.95rem; }
+    .grid { display:grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 760px) { .grid { grid-template-columns: 1fr 1fr; } }
+    .card { border: 1px solid #2b2b2b; background: #101010; border-radius: 14px; padding: 1.1rem 1.1rem; box-shadow: 0 4px 14px rgba(0,0,0,0.35); }
+    .card ul { margin: 0.6rem 0 0; padding-left: 1.1rem; color:#d7d7d7; }
+    .card li { margin: 0.35rem 0; }
+    .toc { border: 1px solid #2b2b2b; background: #0f0f0f; border-radius: 14px; padding: 1rem 1rem; margin-top: 1.25rem; }
+    .toc a { text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    .toc ul { list-style:none; padding:0; margin:0; line-height:1.75; }
+    .pill { display:inline-block; padding: 0.25rem 0.55rem; border-radius: 999px; border:1px solid #2b2b2b; background:#141414; font-size: 0.85rem; color:#cfcfcf; margin-right: 0.4rem; margin-top: 0.35rem; }
+    .back { display:inline-block; margin-top: 1rem; padding: 0.7rem 1.0rem; border-radius: 10px; border:1px solid #2b2b2b; background:#141414; text-decoration:none; }
+    .back:hover { background:#1a1a1a; }
+    .section-lead { color:#cfcfcf; }
+    table { width:100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 0.95rem; }
+    th, td { text-align:left; padding: 0.55rem 0.7rem; border-bottom: 1px solid #2b2b2b; vertical-align: top; }
+    th { color:#f0f0f0; font-family:"Orbitron", system-ui, sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.5px; }
+    tbody tr:nth-child(even) { background:#0e0e0e; }
+    tbody tr:nth-child(odd) { background:#121212; }
+    figure.diagram { margin: 1.5rem 0 0.5rem; border:1px solid #2b2b2b; background:#0f0f0f; border-radius:14px; padding:1rem 1rem 0.9rem; }
+    figure.diagram img { width:100%; height:auto; display:block; }
+    figure.diagram figcaption { margin:0.7rem 0 0; font-size:0.9rem; color:#b9b9b9; line-height:1.55; }
+    figure.diagram video { width:100%; height:auto; display:block; border-radius:8px; }
+    /* the animated cycle (from the Rev 0 concept page) */
+    .anim { --acc:#4dd0e1; --acc-dim:#1e5e66; --warn:#d3756a; --hub:#8f8f8f; --hub-dim:#3a3a3a; --ring-dim:#143a40; --fg:#e6e6e6; --surface:#101010; --line:#2b2b2b; --muted:#9a9a9a; }
+    .anim svg { display:block; width:100%; height:auto; color:var(--fg); }
+    .anim svg text { font-family:"Open Sans", system-ui, sans-serif; font-size:11px; fill:var(--fg); }
+    .anim svg .lab { fill:var(--muted); font-size:10px; }
+    .anim svg .hd { font-family:"Orbitron", system-ui, sans-serif; font-size:11px; letter-spacing:.8px; fill:var(--fg); }
+    .anim svg .num { font-variant-numeric:tabular-nums; }
+    .ctl { display:flex; flex-wrap:wrap; gap:.6rem 1rem; align-items:center; margin:.2rem 0 .6rem; font-size:.85rem; color:#9a9a9a; }
+    .ctl button { font:inherit; font-family:"Orbitron", system-ui, sans-serif; font-size:.75rem; letter-spacing:.6px; color:#e6e6e6; background:#0b0b0b; border:1px solid #2b2b2b; border-radius:8px; padding:.4rem .8rem; cursor:pointer; }
+    .ctl button:focus-visible, .ctl input:focus-visible { outline:2px solid #4dd0e1; outline-offset:2px; }
+    .ctl input[type=range] { flex:1 1 200px; min-width:0; accent-color:#4dd0e1; }
+    .ctl .ro { font-variant-numeric:tabular-nums; color:#e6e6e6; }
+    .finding { border-left:3px solid #4dd0e1; padding:0.2rem 0 0.2rem 1rem; margin:1rem 0; color:#d7d7d7; }
+    figure.diagram img, figure.diagram video { border-radius:8px; }
+    .wrap p { margin: 0 0 0.9rem; }
+    .wrap figure.diagram figcaption, .wrap .card p:last-child { margin-bottom: 0; }
+    .tablewrap { overflow-x: auto; }
+    .tablewrap table { min-width: 560px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <p class="kicker">Aegis Station</p>
+    <h1>The Station</h1>
+
+    <p class="section-lead">
+      Aegis Station is a rotating habitat for lunar orbit: three rings on a hub that does not turn, each ring
+      turning at 1.50 rpm for 1 g at its floor and shielded by three metres of water mined on the Moon. This
+      page is the station in brief and an index of its systems, with how far along each one is.
+    </p>
+
+    <figure class="diagram">
+      <img src="images/aegis-station-lunar-orbit.png" alt="Aegis Station in lunar orbit: three rings on a central hub."/>
+      <figcaption>The station in lunar orbit. Three rings, 200 m apart, on a 650 m hub.</figcaption>
+    </figure>
+
+    <div class="toc">
+      <strong style="font-family: Orbitron, system-ui, sans-serif;">On this page</strong>
+      <ul>
+        <li><a href="#numbers">1. The station in numbers</a></li>
+        <li><a href="#systems">2. Systems</a></li>
+        <li><a href="#around">3. Building, filling and living in it</a></li>
+        <li><a href="#reference">4. Reference</a></li>
+      </ul>
+    </div>
+
+    <hr class="rule"/>
+
+    <section id="numbers">
+      <h2>1. The station in numbers</h2>
+      <table>
+        <thead><tr><th>Quantity</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Rings</td><td>3, spaced 200 m along the hub</td></tr>
+          <tr><td>Ring centreline radius</td><td>350 m; outer hull at 400 m</td></tr>
+          <tr><td>Tube</td><td>100 m across</td></tr>
+          <tr><td>Floor</td><td>397 m from the rotation axis</td></tr>
+          <tr><td>Spin rate and gravity</td><td>1.50 rpm, 1.0 g at the floor</td></tr>
+          <tr><td>Shield</td><td>3 m of lunar water in the tube wall, 47 to 50 m from the tube's centre</td></tr>
+          <tr><td>Shield mass</td><td>2.01 Mt per ring, 6.0 Mt in all</td></tr>
+          <tr><td>Dry structure</td><td>about 220,000 t per ring</td></tr>
+          <tr><td>Usable volume</td><td>over 1,000,000 m<sup>3</sup> per ring</td></tr>
+          <tr><td>Hub</td><td>650 m, not rotating, with docking at both ends</td></tr>
+        </tbody>
+      </table>
+      <p class="note">From the master dossier, v3.1. The shield's mass follows from its geometry: 2&#960;<sup>2</sup> &#215; 350 &#215; (50<sup>2</sup> &#8722; 47<sup>2</sup>) is 2.01 million cubic metres a ring.</p>
+    </section>
+
+    <section id="systems">
+      <h2>2. Systems</h2>
+      <p>
+        Each system has a line here, and a page when there is work to show. The status says what exists, in the
+        order the work is done: a concept, then a model, then a simulator and flight software run against it.
+        No part of the station has been built or flown.
+      </p>
+      <div class="tablewrap"><table>
+        <thead><tr><th>System</th><th>What it covers</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><a href="rotational_dynamics.html">Rotational dynamics</a></td><td>Balance by pumped water, spin-up and its resonances, holding a ring's axis, and what keeps rings apart and the hub whole</td><td>Modelled and simulated, with an operator console and recorded runs. No flight software yet.</td></tr>
+          <tr><td><a href="hub_ring_boundary.html">Hub/ring boundary</a></td><td>How crew, cargo, power, data and heat cross between the hub and a turning ring with no continuous rotary seal</td><td>Requirements review, flight software, simulator and console; the fault library has been run.</td></tr>
+          <tr><td><a href="ahid.html">Hull inspection</a></td><td>A resident free-flyer that inspects the outside of the station without a spacewalk, and the <a href="extravehicular-structural-inspection-capability.html">crew-assisted inspection capability</a> beside it</td><td>Flight software and simulator for the drone; a requirements reference for the crew capability.</td></tr>
+          <tr><td>Shield and fluid systems</td><td>Segmented water containment, fill and top-off, monitoring. A <a href="centrifugal-water-shield-demonstration.html">demonstration of one shield segment</a> is defined</td><td>Concept, with a demonstration defined. The shield's internal layout is open.</td></tr>
+          <tr><td>Structures</td><td>The rings, the hub and the load paths between them under spin</td><td>Concept-level sizing only.</td></tr>
+          <tr><td>Artificial gravity</td><td>The radius and spin rate people can live with. An <a href="artificial-gravity-requirements-evaluation.html">in-orbit evaluation</a> is defined</td><td>Requirements reference.</td></tr>
+          <tr><td>Life support (ECLSS)</td><td>Air, water recovery, waste, contamination control and fire</td><td>Not started.</td></tr>
+          <tr><td>Power</td><td>Generation, storage and distribution. The crossing of power into a turning ring is on the hub/ring boundary page</td><td>Not started.</td></tr>
+          <tr><td>Thermal</td><td>Heat rejection on each side of the rotating boundary</td><td>Not started.</td></tr>
+          <tr><td>Operations and safety</td><td>Compartments, isolation of a ring, emergency routes</td><td>Not started.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="around">
+      <h2>3. Building, filling and living in it</h2>
+      <div class="grid">
+        <div class="card">
+          <h3 style="margin-top:0;">Construction and deployment</h3>
+          <p>How the rings are assembled dry in orbit, then filled and brought up to speed. <a href="construction-logistics.html">Construction &amp; deployment logistics</a>.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0;">Water</h3>
+          <p>Six million tonnes of shield water, mined at the lunar south pole and flown up 45 t at a time. <a href="waterlogistics.html">Lunar water logistics</a> and the <a href="lunar_tanker_fleet.html">tanker fleet</a>.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0;">Interiors</h3>
+          <p>Early explorations of the spaces a permanent community needs. <a href="interiors.html">Life aboard</a>.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0;">The program</h3>
+          <p>How the station sits among the vehicles, surface systems and logistics around it. <a href="program_architecture_and_technical_domains.html">Program architecture and technical domains</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="reference">
+      <h2>4. Reference</h2>
+      <p>
+        The master dossier is the station's reference document: its specifications, the shield, the fill, the
+        hub, interior zoning, and the engineering topics still open.
+        <a href="dossiers/Aegis_Station_Master_Dossier.pdf">Master dossier, v3.1 (PDF)</a>.
+      </p>
+    </section>
+
+    <hr class="rule"/>
+    <a class="back" href="index.html">&#8592; Back to Home</a>
+  </div>
+</body>
+</html>
