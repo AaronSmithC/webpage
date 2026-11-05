@@ -80,9 +80,10 @@
 
     <p class="section-lead">
       Aegis Station is three rings, each 2.23 million tonnes, turning at 1.50 rpm on a hub 650 m long that does
-      not turn. This page is the station read as bodies that turn: what keeps a ring balanced, what happens on
-      the way up to speed, what holds a ring's axis where it should be, and what would have to go wrong for a
-      ring to reach its neighbour or for the hub to break.
+      not turn. This page is the station read as bodies that turn, through its three phases: the fill, with
+      every ring at rest; the spin-up, all three together; and normal operation. It says what keeps a ring
+      balanced, what is crossed on the way up to speed, what holds a ring's axis where it should be, and what
+      would have to go wrong for a ring to reach its neighbour or for the hub to break.
     </p>
     <p class="section-lead">
       Behind it is a dynamics model, a simulator that steps the model live, an operator console, and recorded
@@ -100,10 +101,10 @@
       <ul>
         <li><a href="#bodies">1. The station as bodies that turn</a></li>
         <li><a href="#limits">2. Two things that must never happen</a></li>
-        <li><a href="#balance">3. Balance by pumped water</a></li>
-        <li><a href="#spinup">4. Getting up to speed</a></li>
-        <li><a href="#holding">5. Holding it there</a></li>
-        <li><a href="#day">6. A normal day, and a fault</a></li>
+        <li><a href="#phases">3. Three phases</a></li>
+        <li><a href="#fill">4. The fill</a></li>
+        <li><a href="#spinup">5. The spin-up</a></li>
+        <li><a href="#normal">6. Normal operation</a></li>
         <li><a href="#changed">7. What changed as the model grew</a></li>
         <li><a href="#open">8. What is open</a></li>
         <li><a href="#status">9. Status</a></li>
@@ -152,24 +153,24 @@
         </ul>
       </div>
       <p>
-        Hold a ring stiffly and it cannot lean, but a turning ring tied rigidly to a hub that has started to
-        wobble has to drag the whole station round with it, and the moment goes through the neck. In the least
-        steady state the model has (one ring turning beside two filled rings at rest), on a stiff bearing and
-        left alone, the neck's placeholder limit is passed at 0.04&#176; of wobble, 48 minutes after a 0.01&#176;
-        start. Hold a ring softly and it keeps its own plane while the hub moves under it, but a fault can lean
-        it a long way before the bearing catches it.
+        Hold a ring stiffly and it cannot lean far, but what lean it takes goes into the hub's neck as bending.
+        At 3 &#215; 10<sup>10</sup> N m per radian, the first stiffness the model was given, a ring leaning as far
+        as the crossing gap has the neck at 97 % of its placeholder limit. Hold a ring softly and it keeps its
+        own plane while the hub moves under it, but a fault can lean it a long way before the bearing catches
+        it.
       </p>
       <figure class="diagram">
         <img src="images/station_bearing_window.svg" alt="Two lines against bearing tilt stiffness on logarithmic axes. Softer bearings let a fault lean a ring further, past the crossing gap below about 10 to the 9 newton metres per radian. Stiffer bearings pass more moment into the hub's neck, reaching its limit near 3 times 10 to the 10. Between about 10 to the 9 and 10 to the 10 neither limit is reached."/>
-        <figcaption>The window. Too soft, and a pod pair stuck on for an hour takes a ring through the crossing gap and most of the way to its neighbour. Too stiff, and a ring leaning as far as the gap has already put the neck at its limit. Between about 10<sup>9</sup> and 10<sup>10</sup> N m per radian neither happens in anything run so far. The first stiffness the model was given, 3 &#215; 10<sup>10</sup>, sits at the stiff edge.</figcaption>
+        <figcaption>The window. Too soft, and a pod pair stuck on for an hour during the fill, with nothing answering it, takes a ring through the crossing gap and halfway to its neighbour. Too stiff, and a ring leaning as far as the gap has already put the neck at its limit. Between about 10<sup>9</sup> and 10<sup>10</sup> N m per radian neither happens in anything run so far. The first stiffness the model was given, 3 &#215; 10<sup>10</sup>, sits at the stiff edge.</figcaption>
       </figure>
       <p>
         The working design is a bearing soft in tilt, about 3 &#215; 10<sup>9</sup> N m per radian, with an
         actuator at each bearing for damping, and a hub soft enough that its bending resonance is crossed early
-        in a spin-up. On it, in the faults run so far (a pod pair or a bearing actuator stuck on, a top-off
-        landing in one segment, all control lost in the least steady state), the furthest a ring leans against
-        the hub is 30 % of the crossing gap and the most a neck carries is 17 % of its limit. The case that
-        comes nearest a limit is not a fault but an omission: a spin-up with the balance held, in section 4.
+        in a spin-up. On it, in the faults run so far (a pod pair stuck on during the fill or in normal
+        operation, a bearing actuator stuck on, a top-off landing in one segment, all control lost), the
+        furthest a ring leans against the hub is 21 % of the crossing gap, the most a neck carries is 17 % of
+        its limit, and the most a bearing carries is 62 % of its own. The case that comes nearest a limit is
+        not a fault but an omission: a spin-up with the balance held, in section 5.
       </p>
       <p class="note">
         The bearing's limit (5 &#215; 10<sup>7</sup> N m in tilt) and the neck's (1.5 &#215; 10<sup>9</sup> N m in
@@ -178,8 +179,118 @@
       </p>
     </section>
 
-    <section id="balance">
-      <h2>3. Balance by pumped water</h2>
+    <section id="phases">
+      <h2>3. Three phases</h2>
+      <p>
+        The rings move together. All three are filled at rest, all three are spun up together, and they turn
+        together from then on. A spin-down is the spin-up run backwards, again all three. At no time does one
+        ring stand still beside another that turns: that is the least steady arrangement the model has, and
+        this rule is what keeps the station out of it.
+      </p>
+      <p>
+        Three things act on the station's motion. Trim pumps move a little of the shield's water between
+        segments, to put a ring's mass centre back on its axis. Pods at the rim fire along the axis, to turn or
+        hold a ring's plane. An actuator at each main bearing damps a ring's tilt against the hub.
+      </p>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Phase</th><th>The rings</th><th>What steadies the station</th><th>What the phase asks for</th></tr></thead>
+        <tbody>
+          <tr><td><a href="#fill">The fill</a></td><td>At rest, each taking on 2.01 Mt of water</td><td>Pods hold each ring as an ordinary body</td><td>An even fill, because a ring at rest tells nothing about its balance</td></tr>
+          <tr><td><a href="#spinup">The spin-up</a></td><td>From rest to 1.50 rpm together, over about thirty days</td><td>Trim pumps, once the readings tell them something; bearing actuators</td><td>Two resonances crossed without building up</td></tr>
+          <tr><td><a href="#normal">Normal operation</a></td><td>At 1.50 rpm</td><td>Trim pumps for balance, pods for the axis, bearing actuators for damping</td><td>A good reading of tilt rate</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="fill">
+      <h2>4. The fill</h2>
+      <p>
+        Each ring takes on its water at rest. Tankers dock at the two ends of the hub, full cartridges are
+        carried along it to a ring and empties come back. At the fleet's cadence a tanker arrives or leaves
+        every 18 minutes.
+      </p>
+      <p>
+        The hub hardly notices the traffic. A 53 t tanker meeting a dock with 0.05 m/s left sideways moves the
+        dock a tenth of a millimetre and puts 0.02 % of its limit on a neck; it would have to arrive sideways
+        at about 280 m/s to reach that limit. Docking is not a load in any phase.
+      </p>
+      <h3>What cannot be read</h3>
+      <p>
+        A ring's balance is read from what it does to the hub as it turns. A ring at rest pushes on nothing and
+        tells nothing. In three hours of the fill on the simulator, with 2 % of one ring's delivery landing
+        unevenly, 8 t builds off-centre and nothing shows it.
+      </p>
+      <p>
+        That puts a requirement on the fill. The rings are spun up through their first resonance as the fill
+        left them. Without help from the bearing actuators the off-centre part of a ring's fill has to be under
+        about 900 t, 0.05 % of its water. With them, about 2,300 t. Metering the fill by flow and by level in
+        each segment is a requirement, and it is a tighter one than the pumps or the trim range.
+      </p>
+      <h3>A fault during the fill</h3>
+      <p>
+        A ring at rest is not a gyroscope. A push leans it the way it is pushed, with only the bearing's
+        stiffness against it, so the fill is when a stuck pod matters most. One pod pair stuck on for an hour
+        with nothing answering it leans its ring 0.59&#176; against the hub on the working design, 21 % of the
+        crossing gap, and puts 62 % of its placeholder limit on the bearing. This is the fault that sets the
+        soft edge of the window in section 2.
+      </p>
+      <figure class="diagram">
+        <video controls muted playsinline preload="none" poster="images/station_fill_fault_poster.jpg">
+          <source src="media/station_fill_fault.mp4" type="video/mp4">
+        </video>
+        <figcaption>The same fault with the ring's other pairs answering, recorded from the simulator: two and a half hours in two minutes, motion drawn a hundred times life size. Every ring is at rest and 60 % full, and tankers dock before and after. Ring 2 leans 0.08&#176;, under 3 % of the crossing gap, and its other pairs burn as much again as the stuck pair in holding it, 89 t between them. Left: the hub's line and the three ring planes, from the side and from above. Right: each ring seen along the axis. The squares under the picture fill as each limit is approached.</figcaption>
+      </figure>
+    </section>
+
+    <section id="spinup">
+      <h2>5. The spin-up</h2>
+      <p>
+        All three rings come up together, from rest to 1.50 rpm over about thirty days. An imbalance pushes
+        once a turn, so on the way up the rings pass any natural motion of the station that goes round at that
+        rate. On the working design there are two. Under 0.1 rpm the hub rocks against the rings on the
+        bearings' tilt stiffness. Near 0.68 rpm the hub bends between the rings.
+      </p>
+      <p>
+        A resonance needs time to build, about as long as its motion takes to die out. The first is narrow and
+        a thirty-day spin-up is through it in minutes, so it never reaches its height; a dwell on it would. The
+        second is broad, and is met in full at any pace thrusters can give.
+      </p>
+      <figure class="diagram">
+        <img src="images/station_spin_up.svg" alt="Two panels, main bearing and hub neck, each showing load as a share of its placeholder limit against spin rate from 0 to 1.5 rpm. With the pumps held the bearing reaches 90 percent and the neck 99 percent of their limits at 0.69 rpm. With the pumps working neither passes 6 percent."/>
+        <figcaption>Three rings from rest to 1.50 rpm with 300, 150 and 80 t left off-centre by the fill. With the trim pumps held, the hub's bending crossing takes the neck to 99 % of its placeholder limit. With the balance working on the way up, that crossing passes unnoticed. These two runs are at a three-day pace, a tenth of the real time.</figcaption>
+      </figure>
+      <figure class="diagram">
+        <video controls muted playsinline preload="none" poster="images/station_spin_up_held_poster.jpg">
+          <source src="media/station_spin_up_held.mp4" type="video/mp4">
+        </video>
+        <figcaption>The spin-up with the pumps held, recorded from the simulator: three days in two minutes, motion drawn ten times life size. The bending crossing comes a little under halfway through.</figcaption>
+      </figure>
+      <figure class="diagram">
+        <video controls muted playsinline preload="none" poster="images/station_spin_up_balanced_poster.jpg">
+          <source src="media/station_spin_up_balanced.mp4" type="video/mp4">
+        </video>
+        <figcaption>The same spin-up with the pumps working once the first crossing is behind, and a dwell at 0.5 rpm. Motion drawn a hundred times life size, and there is still little to see.</figcaption>
+      </figure>
+      <p>
+        At the real thirty-day pace, with the balance on throughout, the largest bearing load of the whole month
+        is 7.6 % of the limit, at 0.056 rpm on the second day. That is the first crossing itself, and it comes
+        before the readings can tell anything. The 300 t is down to 65 t by day three and under a tonne by day
+        ten. The bending crossing passes at 0.13 % of the neck's limit.
+      </p>
+      <p class="finding">
+        Hold the pumps through the first crossing. Just past it the readings begin to tell something, but what
+        they tell there is wrong, and acting on it made that crossing worse: 7.2 % of the bearing limit against
+        5.6 % with the pumps held until 0.10 rpm.
+      </p>
+    </section>
+
+    <section id="normal">
+      <h2>6. Normal operation</h2>
+      <p>
+        All three rings at 1.50 rpm, and people living in them. The balance is kept by pumped water, the axes
+        are held by the pods, and the station's ordinary traffic goes on.
+      </p>
+      <h3>Balance by pumped water</h3>
       <p>
         A lived-in ring is never quite even. A load off-centre moves the ring's mass centre off the bearing
         axis, and because the hub is the light body, the hub is what gets carried round, once a turn. The
@@ -203,67 +314,13 @@
         so would load the hub half as much again as the load itself. Going slowly is the choice. The imbalance
         is estimated from the motion (accelerometers on the hub at the three ring stations, load cells at the
         three bearings, each reading turned back by the ring's angle and averaged) and the trim is moved
-        against the estimate over about an hour.
+        against the estimate over about an hour. At full rate the readings tell about 0.1 t at the floor.
       </p>
       <figure class="diagram">
         <img src="images/station_balance.svg" alt="Three lines over two hours. With the balance held the ring carries 45 tonnes of imbalance throughout. Balanced from the motion it falls to about 2 tonnes after an hour and a quarter of a tonne after two. With the manifest knowing the load the imbalance never appears."/>
         <figcaption>A 45 t load brought down a spoke to the floor of one ring. Balanced from the motion, 34 t of water is moved and no segment uses more than half a percent of its trim range. If the manifest knows the load (what, where, when) the trim follows it down and the motion is left only what the manifest has wrong.</figcaption>
       </figure>
-      <h3>What the readings can and cannot tell</h3>
-      <p>
-        At full rate the readings tell about 0.1 t at the floor. At low rates they tell much less, and a ring
-        at rest pushes on nothing and tells nothing. That matters for the fill: a ring is filled at rest and
-        then spun up through its first resonance as the fill left it. Without help from the bearing actuators
-        the off-centre part of the fill has to be under about 900 t, 0.05 % of the ring's water. With them,
-        about 2,300 t. Metering the fill by flow and by level in each segment is a requirement, and it is a
-        tighter one than the pumps or the trim range.
-      </p>
-    </section>
-
-    <section id="spinup">
-      <h2>4. Getting up to speed</h2>
-      <p>
-        An imbalance pushes once a turn, so as a ring comes up to rate it passes any natural motion of the
-        station that goes round at that rate. On the working design there are two. Under 0.1 rpm the hub rocks
-        against the rings on the bearings' tilt stiffness. Near 0.68 rpm the hub bends between the rings.
-      </p>
-      <p>
-        A resonance needs time to build, about as long as its motion takes to die out. The first is narrow and
-        a thirty-day spin-up is through it in minutes, so it never reaches its height; a dwell on it would. The
-        second is broad, and is met in full at any pace thrusters can give.
-      </p>
-      <figure class="diagram">
-        <img src="images/station_spin_up.svg" alt="Two panels, main bearing and hub neck, each showing load as a share of its placeholder limit against spin rate from 0 to 1.5 rpm. With the pumps held the bearing reaches 90 percent and the neck 99 percent of their limits at 0.69 rpm. With the pumps working neither passes 6 percent."/>
-        <figcaption>Three rings from rest to 1.50 rpm with 300, 150 and 80 t left off-centre by the fill. With the trim pumps held, the hub's bending crossing takes the neck to 99 % of its placeholder limit. With the balance working on the way up, that crossing passes unnoticed. These two runs are at a three-day pace, a tenth of the real time.</figcaption>
-      </figure>
-      <figure class="diagram">
-        <video controls muted playsinline preload="none" poster="images/station_spin_up_held_poster.jpg">
-          <source src="media/station_spin_up_held.mp4" type="video/mp4">
-        </video>
-        <figcaption>The spin-up with the pumps held, recorded from the simulator: three days in 45 seconds, motion drawn ten times life size. Left: the hub's line and the three ring planes, from the side and from above. Right: each ring seen along the axis. The squares under the picture fill as each limit is approached.</figcaption>
-      </figure>
-      <figure class="diagram">
-        <video controls muted playsinline preload="none" poster="images/station_spin_up_balanced_poster.jpg">
-          <source src="media/station_spin_up_balanced.mp4" type="video/mp4">
-        </video>
-        <figcaption>The same spin-up with the pumps working once the first crossing is behind, and a dwell at 0.5 rpm. Motion drawn a hundred times life size, and there is still little to see.</figcaption>
-      </figure>
-      <p>
-        At the real thirty-day pace, with the balance on throughout, the largest bearing load of the whole month
-        is 7.6 % of the limit, at 0.056 rpm on the second day. That is the first crossing itself, and it comes
-        before the readings can tell anything. The 300 t is down to 65 t by day three and under a tonne by day
-        ten. The bending crossing passes at 0.13 % of the neck's limit.
-      </p>
-      <p class="finding">
-        Hold the pumps through the first crossing. Just past it the readings begin to tell something, but what
-        they tell there is wrong, and acting on it made that crossing worse every time it was tried: 7.2 % of
-        the bearing limit against 5.6 % with all three rings coming up together, and 37 % against 4.6 % with one
-        ring coming up beside two at rest.
-      </p>
-    </section>
-
-    <section id="holding">
-      <h2>5. Holding it there</h2>
+      <h3>Holding the axis</h3>
       <p>
         A ring's axis is held by pods at its rim firing along the axis. The pods are fixed to the ring and are
         either on or off, so a pair can only push the way that is wanted as it passes that way, every five
@@ -278,25 +335,19 @@
         </tbody>
       </table>
       <p>
-        The law has two terms on a turning ring: one that points the axis, pushing at right angles to the error
-        as a gyroscope requires, and one that opposes the tilt rate. Without the second the first feeds the
-        ring's own 20-second wobble. And the second is where the cost is, because it needs to know the tilt
-        rate.
+        The law has two terms: one that points the axis, pushing at right angles to the error as a gyroscope
+        requires, and one that opposes the tilt rate. Without the second the first feeds the ring's own
+        20-second wobble. And the second is where the cost is, because it needs to know the tilt rate.
       </p>
       <figure class="diagram">
-        <img src="images/station_reading_cost.svg" alt="Four bars. The ideal law costs 11 tonnes a day. Pods that are on or off cost 27. Taking the tilt rate from a noisy tilt reading costs 440. A rate sensor brings it back to 17."/>
-        <figcaption>Holding the least steady state the model has, for a day. Found from a tilt reading with a thousandth of a degree of noise, the rate is mostly noise and the pods answer it. With a rate sensor good to 0.00003&#176;/s the cost returns to what holding the station takes. The running propellant hangs on that sensor, not on the thrusters.</figcaption>
+        <img src="images/station_reading_cost.svg" alt="Three bars. With the tilt rate taken from a noisy tilt reading the pods burn 24 tonnes a day. A rate sensor brings that to 9. With the pods left off below three thousandths of a degree it is 0."/>
+        <figcaption>Normal operation with a 45 t load off-centre on one ring. Nothing needs holding, so anything burned is the reading's doing. With the tilt rate taken from a tilt reading that has a thousandth of a degree of noise, the pods burn 24 t a day answering noise. A rate sensor good to 0.00003&#176;/s brings that to 9. With the floor under which the pods stay off set three times clear of the noise, they do not fire at all. This run is on the model's first, stiffer bearing and has yet to be repeated on the working design.</figcaption>
       </figure>
       <p>
-        Two smaller findings. A reading that arrives four to six seconds late is a quarter-turn late for the
-        20-second wobble and feeds it; bearing actuators or a rate sensor remove that band. And the floor under
-        which the pods stay off has to sit about three times clear of the reading's noise, or they fire for
-        nothing in normal running.
+        One more finding. A reading that arrives four to six seconds late is a quarter-turn late for the
+        20-second wobble and feeds it; bearing actuators or a rate sensor remove that band.
       </p>
-    </section>
-
-    <section id="day">
-      <h2>6. A normal day, and a fault</h2>
+      <h3>A normal day</h3>
       <p>
         Six hours of ordinary occurrences on the simulator: a shuttle docks, two water cartridges cross to a
         ring and are emptied, a shift change gathers three hundred people on one side of a ring and disperses
@@ -307,20 +358,24 @@
         <video controls muted playsinline preload="none" poster="images/station_normal_day_poster.jpg">
           <source src="media/station_normal_day.mp4" type="video/mp4">
         </video>
-        <figcaption>A normal day, six hours in 45 seconds, motion drawn a hundred times life size. The trim pumps work and hold. No pod fires all day. The largest load on a bearing is 0.28 % of its limit, with the crowd on one ring and the transit car on another.</figcaption>
+        <figcaption>A normal day, six hours in two minutes, motion drawn a hundred times life size. The trim pumps work and hold. No pod fires all day. The largest load on a bearing is 0.28 % of its limit, with the crowd on one ring and the transit car on another.</figcaption>
       </figure>
       <p>
-        Docking is not a load. A 53 t tanker meeting a dock with 0.05 m/s left sideways moves the dock a tenth
-        of a millimetre and puts 0.02 % of its limit on a neck; it would have to arrive sideways at about
-        280 m/s to reach that limit. With a ring trimmed to what the readings can tell, the hub moves 0.14 mm
-        once a turn, 0.3 micro-g sideways, which is what a laboratory fixed to the hub would feel.
+        With a ring trimmed to what the readings can tell, the hub moves 0.14 mm once a turn, 0.3 micro-g
+        sideways, which is what a laboratory fixed to the hub would feel.
       </p>
-      <figure class="diagram">
-        <video controls muted playsinline preload="none" poster="images/station_pair_stuck_poster.jpg">
-          <source src="media/station_pair_stuck.mp4" type="video/mp4">
-        </video>
-        <figcaption>A fault: one ring turning, two at rest, and a pod pair of a ring at rest stuck on for an hour. The ring leans 0.06&#176;, about 2 % of the crossing gap, while its other pairs hold it and burn as much again as the stuck pair. On a turning ring the same fault averages to nothing in space; it reads to the balance as the ring being heavier on one side, and the pumps pass water fore and aft against it without being told.</figcaption>
-      </figure>
+      <h3>Faults in normal operation</h3>
+      <p>
+        A turning ring is hard to move, and the faults that lean a ring at rest do much less to it.
+      </p>
+      <div class="card">
+        <ul>
+          <li><strong>A pod pair stuck on for an hour.</strong> The ring carries the pair round, so its push averages to nothing in space and the lean stays under a thousandth of a degree. It reads to the balance as the ring being heavier on one side, and the pumps pass 80 t of water fore and aft against it without being told.</li>
+          <li><strong>A bearing actuator stuck at its full moment for an hour.</strong> Its ring leans 0.27&#176; against the hub, 10 % of the crossing gap.</li>
+          <li><strong>A day's top-off landing in one segment, never trimmed.</strong> 8 % of the crossing gap and 17 % of the neck's limit.</li>
+          <li><strong>All control lost for a day.</strong> Nothing grows. A wobble left alone dies out by itself, over years.</li>
+        </ul>
+      </div>
     </section>
 
     <section id="changed">
@@ -345,11 +400,11 @@
       <div class="card">
         <ul>
           <li><strong>The bearing.</strong> Something soft in tilt that still carries a 2.2 Mt ring sideways, with its travel and its stops. The window above is a requirement on it; nothing is designed.</li>
-          <li><strong>What reads tilt and tilt rate on a turning ring.</strong> The running propellant depends on the rate reading more than on anything else on this page.</li>
-          <li><strong>Slosh.</strong> The share of the shield's water that does not follow its ring is carried as an unknown and swept. It decides whether a ring spun up beside rings at rest is steady without help. It waits on the shield's internal layout.</li>
+          <li><strong>What reads tilt and tilt rate on a turning ring.</strong> Whether the pods burn anything in normal operation depends on it.</li>
+          <li><strong>Slosh.</strong> The share of the shield's water that does not follow its ring is carried as an unknown and swept. It waits on the shield's internal layout.</li>
           <li><strong>The limits.</strong> Every load here is a share of a placeholder. A bearing and a neck with designs behind them would replace them.</li>
           <li><strong>The fill.</strong> How the fill is metered evenly enough for the first crossing.</li>
-          <li><strong>Emergencies.</strong> A ring brought to rest in a hurry. Not started.</li>
+          <li><strong>Emergencies.</strong> All three rings brought to rest in a hurry. Not started.</li>
           <li><strong>Not in the model yet.</strong> Orbit keeping, the Moon's gravity gradient on the spin axis, a ring's own flexing, thermal bending of the hub, and the ring's rate changing as mass moves in or out along a spoke.</li>
         </ul>
       </div>
@@ -358,9 +413,9 @@
     <section id="status">
       <h2>9. Status</h2>
       <p>
-        <strong>What exists.</strong> A dynamics model in plain code with 126 checks against results known
+        <strong>What exists.</strong> A dynamics model in plain code with 125 checks against results known
         without it; a simulator that steps the model live and takes commands; an operator console that watches
-        and steers the simulator; eighteen recorded runs, among them a normal day, the fill's traffic, and
+        and steers the simulator; sixteen recorded runs, among them a normal day, the fill's traffic, a fault during the fill, and
         spin-ups at a three-day pace and at the real thirty-day pace.
       </p>
       <p>
