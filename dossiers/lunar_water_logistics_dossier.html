@@ -355,19 +355,22 @@
   <hr>
 
   <section class="section">
-    <h2>9. Cost Considerations</h2>
+    <h2>9. Quantities</h2>
+    <p>
+      Cost is not yet estimated. This revision states what the fill moves and what moves it, which are the numbers a
+      cost would be built from.
+    </p>
     <table>
-      <tr><th>Source</th><th>Cost per kg delivered</th><th>Cost per Olympic pool</th></tr>
-      <tr><td>Earth-launched</td><td>$2,500</td><td>~$6.25 billion</td></tr>
-      <tr><td>Lunar-sourced, target</td><td>$150</td><td>~$375 million</td></tr>
+      <tr><th>Item</th><th>Quantity</th></tr>
+      <tr><td>Shield water delivered</td><td>~6.0 million tonnes</td></tr>
+      <tr><td>Cartridge loads</td><td>~134,000</td></tr>
+      <tr><td>Water mined, cargo plus propellant</td><td>~14 million tonnes; ~8,300 t/day at fleet cadence</td></tr>
+      <tr><td>Tankers</td><td>82, each flying about 1,600 cycles</td></tr>
+      <tr><td>Pads and berths</td><td>11 at the 3.2-hour ceiling; 15 recommended</td></tr>
+      <tr><td>Engines over the campaign</td><td>~5,400–10,700; 800–1,600 t landed on the Moon</td></tr>
+      <tr><td>Surface refinery</td><td>Of order 1.5 GW continuous</td></tr>
+      <tr><td>Cartridge pool, mining, and depot hardware</td><td>Not yet sized</td></tr>
     </table>
-    <table>
-      <tr><th>Scenario</th><th>Total</th></tr>
-      <tr><td>Earth-launched water, 6.0 Mt</td><td>~$15 trillion</td></tr>
-      <tr><td>Lunar water, delivery only, at $150/kg</td><td>~$905 billion</td></tr>
-      <tr><td>Surface refinery, power, mining, and depot</td><td>Not yet costed; stated on the program pages as they close</td></tr>
-    </table>
-    <p class="note">The $150/kg figure is a program target, not a bottom-up estimate. Rev A stated $247.5 billion for delivery, which was inconsistent with its own per-kilogram figure; Rev B corrected it. Rev C restates both totals for the 6.0 Mt shield at the per-kilogram rates above. Under Rev A the methane import alone, at any plausible landed price, would have exceeded this delivery total every few years of the campaign.</p>
   </section>
 
   <hr>
@@ -415,7 +418,7 @@
     <table class="breakable">
       <thead><tr><th>Item</th><th>Status</th></tr></thead>
       <tr><td>Daily turnaround</td><td>3,690 t/day at 45 t per sortie is one flight per tanker per day for the whole campaign, about 1,600 cycles per airframe. This is a requirement, not an assumption; the fill time is derived from it. It is an airliner cadence in an environment gentler than any reusable booster faces: no reentry, no aerodynamic load, one-sixth-g landings. What it demands is stated in the rows below: engines as scheduled replacement items, a pad turnaround of 2.6 hours, and a refinery sized to the cadence. No reusable orbital-class vehicle has yet flown daily; that is what the fleet has to demonstrate, not a reason to plan for less.</td></tr>
-      <tr><td>Engine pipeline</td><td>Each engine position sees roughly 500 hours of burn over an airframe life, many times any demonstrated engine life, so engines are scheduled replacement items. At 50–100 sorties per engine set, four engines per vehicle, the campaign consumes about 5,400–10,700 engines, three to seven a day from a single printed part number, 800–1,600 t landed on the Moon. As serial printed 40 kN-class engines at $0.5–2 M each that is $5–18 B, one to two percent of the delivery target; at legacy bespoke hydrolox pricing it would be $110–220 B. Engine life is the lever: 200 sorties per set quarters the count. Life-expired engines stay at the pad as the first refurbishment demand on the surface.</td></tr>
+      <tr><td>Engine pipeline</td><td>Each engine position sees roughly 500 hours of burn over an airframe life, many times any demonstrated engine life, so engines are scheduled replacement items. At 50–100 sorties per engine set, four engines per vehicle, the campaign consumes about 5,400–10,700 engines, three to seven a day from a single printed part number, 800–1,600 t landed on the Moon. Engine life is the lever: 200 sorties per set quarters the count. Life-expired engines stay at the pad as the first refurbishment demand on the surface.</td></tr>
       <tr><td>Vehicle dry mass</td><td>The vehicle must close at 45 t of payload to lunar orbit. The stated launch and propellant figures imply roughly 5 t of structure, tanks, engines, and cartridge shell, which is aggressive for a lander. A bottom-up mass budget that closes at 45 t, with the launch mass that requires, is the open item. Not done in this revision.</td></tr>
       <tr><td>Surface power</td><td>Electrolysis and hydrogen liquefaction at fleet cadence are of order 1.5 GW continuous, about 18 MW per daily sortie. LUNET node sizing does not cover this; the pad refinery is a separate facility and is not yet sized.</td></tr>
       <tr><td>Cartridge reuse</td><td>The cartridge is infrastructure, not a consumable, but its cycle life and bladder material are undefined. Fleet size of cartridges bounds throughput.</td></tr>
@@ -442,8 +445,7 @@
       <tr><td>Pads and berths</td><td>Six at the 3.2-hour ceiling, eight recommended</td><td>Eleven at the 3.2-hour ceiling, fifteen recommended</td></tr>
       <tr><td>Engines over the campaign</td><td>~3,000–6,000</td><td>~5,400–10,700</td></tr>
       <tr><td>Surface refinery power</td><td>Hundreds of megawatts</td><td>Of order 1.5 GW</td></tr>
-      <tr><td>Delivery cost at $150/kg</td><td>~$495 billion</td><td>~$905 billion</td></tr>
-      <tr><td>Earth-launch comparison at $2,500/kg</td><td>~$4.1 trillion</td><td>~$15 trillion; the Rev B figure did not match its own per-kilogram rate</td></tr>
+      <tr><td>Cost figures</td><td>Per-kilogram rates and campaign totals</td><td>Removed; Section 9 states quantities</td></tr>
     </table>
     <h3>Rev A to Rev B</h3>
     <table>
@@ -453,8 +455,6 @@
       <tr><td>Water handling</td><td>"Cryogenic transport tanks", "cryogenic storage tanks", "cryogenic transfer lines"</td><td>Ambient water in bladder cartridges; only the propellants are cryogenic</td></tr>
       <tr><td>Surface nodes</td><td>Remote Operations Nodes</td><td>LUNET utility nodes plus a refinery-class pad</td></tr>
       <tr><td>Depot</td><td>Not described</td><td>First customer; commissions on first cartridge; hydrogen retained for tanker top-off</td></tr>
-      <tr><td>Delivery cost</td><td>~$247.5 billion</td><td>~$495 billion, matching $150/kg × 3.3 Mt</td></tr>
-      <tr><td>Infrastructure cost</td><td>~$400–500 billion</td><td>Not yet costed</td></tr>
       <tr><td>Open items</td><td>Not stated</td><td>Section 11</td></tr>
       <tr><td>Refuelling</td><td>Not stated</td><td>Fluid couplings at the surface pad, fill-on-demand from a buffered store; swappable propellant modules and routine depot top-off rejected (Section 5)</td></tr>
     </table>
