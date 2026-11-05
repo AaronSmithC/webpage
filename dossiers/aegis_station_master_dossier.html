@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aegis Station — Master Dossier v3.1</title>
+<meta name="author" content="Aegis Station">
+<style>
+  @page {
+    size: Letter;
+    margin: 0.7in 0.85in 0.8in;
+    background: #0d0d0d;
+    @bottom-center {
+      content: "Aegis Station — Master Dossier v3.1  |  Page " counter(page);
+      font-family: 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+      font-size: 7.5pt;
+      color: #7a7a80;
+    }
+  }
+
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: #0d0d0d;
+  }
+
+  body {
+    margin: 0;
+    background: #0d0d0d;
+    color: #b9b9bf;
+    font-family: 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+    font-size: 9pt;
+    line-height: 1.48;
+  }
+
+  .kicker { font-size: 9pt; color: #8a8a90; letter-spacing: 0.6pt; text-transform: uppercase; margin-bottom: 6pt; }
+  h1 { font-size: 30pt; font-weight: 700; color: #ffffff; margin: 0 0 6pt; letter-spacing: -0.5pt; }
+  .subtitle { font-size: 9.5pt; color: #a4a4aa; margin-bottom: 8pt; }
+  .lead { font-size: 11pt; color: #d0d0d4; line-height: 1.55; margin: 0; }
+
+  h2 { font-size: 16.5pt; font-weight: 700; color: #ffffff; margin: 15pt 0 7pt; break-after: avoid; }
+  h3 { font-size: 12.5pt; font-weight: 700; color: #ffffff; margin: 16pt 0 4pt; break-after: avoid; }
+  p { margin: 0 0 9pt; }
+  .sub { color: #a4a4aa; margin: 0 0 9pt; break-after: avoid; }
+
+  table { width: 100%; border-collapse: collapse; margin: 4pt 0 6pt; font-size: 8.6pt; }
+  tr { break-inside: avoid; }
+  td, th { padding: 4.2pt 9pt; border: 0.75pt solid #2a2a2e; vertical-align: top; text-align: left; }
+  table.kv td:first-child { width: 31%; font-weight: 700; color: #e8e8ea; background: #18181b; }
+  table.kv td { background: #111113; color: #b9b9bf; }
+  table.chg th { background: #1f1f23; color: #ededf0; font-weight: 700; }
+  table.chg td { background: #111113; }
+  table.chg td:first-child { width: 25%; font-weight: 700; color: #e8e8ea; background: #18181b; }
+  table.chg td:nth-child(2) { width: 27%; }
+
+  .note { font-size: 8.5pt; color: #7c7c82; margin: 4pt 0 0; }
+
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 6pt 0 7pt; break-inside: avoid; }
+  .card { border: 0.75pt solid #2a2a2e; background: #111113; padding: 9pt 12pt 9pt; }
+  .card + .card { border-left: 0; }
+  .card h4 { font-size: 11pt; font-weight: 700; color: #ffffff; margin: 0 0 3pt; }
+  .card .what { margin: 0 0 5pt; color: #b9b9bf; }
+  .card ul { list-style: none; margin: 0 0 6pt; padding: 0 0 0 12pt; }
+  .card li { margin-bottom: 3pt; padding-left: 8pt; text-indent: -8pt; }
+  .card li::before { content: "• "; color: #8a8a90; }
+  .card .tags { font-size: 7.8pt; color: #86868c; margin: 0; }
+
+  .execution { margin-top: 14pt; break-inside: avoid; }
+  .execution .tags { font-size: 7.8pt; color: #86868c; }
+
+  .end-footer {
+    margin-top: 26pt;
+    padding-top: 12pt;
+    border-top: 0.75pt solid #303034;
+    text-align: center;
+    font-size: 8pt;
+    color: #77777d;
+    line-height: 1.7;
+  }
+
+  section { border-top: 0.75pt solid #303034; margin-top: 16pt; break-inside: auto; }
+  section.keep { break-inside: avoid; }
+  section > p:not(.note), .sub, h2, h3 { break-after: avoid; }
+</style>
+</head>
+<body>
+
+  <div class="kicker">Aegis Station</div>
+  <h1>Master Dossier</h1>
+  <div class="subtitle">v3.1 — 1g Configuration, Integrated Program Architecture &nbsp;·&nbsp; November 2026 &nbsp;·&nbsp; Supersedes v3.0</div>
+  <p class="lead">
+    Aegis Station is a modular, shielded, rotating space habitat designed for construction in lunar orbit using
+    attainable technology and lunar-derived water. It provides Earth-like living conditions through full artificial
+    gravity and radiation protection, forming the backbone of a permanent human presence beyond Earth. The station is
+    one element within a broader system-of-systems architecture that includes transportation, shielding logistics,
+    autonomy, in-space assembly, and lunar surface operations.
+  </p>
+
+
+  <section class="keep">
+    <h2>1. Vision &amp; Strategic Value</h2>
+    <p>
+      Aegis Station is designed from first principles around the realities of deep-space human habitation: radiation
+      kills, zero-gravity degrades physiology, and resupply from Earth is prohibitively expensive. The program resolves
+      all three constraints simultaneously — shielding from local lunar water, artificial gravity through rotation, and
+      logistical self-sufficiency through in-situ resource utilization.
+    </p>
+    <table class="kv">
+      <tr><td>Full radiation shielding</td><td>3-meter water jacket sourced from lunar polar ice — no Earth-launched mass required</td></tr>
+      <tr><td>Artificial 1g gravity</td><td>Rotational spin at ~1.50 RPM; 1g at 397 m floor height</td></tr>
+      <tr><td>Massive usable volume</td><td>&gt;1 million m³ per ring for residential, industrial, agricultural, and research use</td></tr>
+      <tr><td>Triple-ring redundancy</td><td>Three independent rings; any ring can be sealed without compromising station function</td></tr>
+      <tr><td>Cislunar logistics node</td><td>Integrated hub for lunar surface, orbital, and interplanetary operations</td></tr>
+      <tr><td>Replicability</td><td>Architecture scales to Mars orbit, Deimos, icy moons, or asteroid-belt outposts</td></tr>
+    </table>
+  </section>
+
+
+  <section>
+    <h2>2. Final Specifications</h2>
+    <p class="sub">All figures reflect the 1g configuration with full shielding mass.</p>
+    <table class="kv">
+      <tr><td>Ring centerline radius</td><td>350 meters</td></tr>
+      <tr><td>Tube (torus) radius</td><td>50 meters (full tube diameter: 100 m)</td></tr>
+      <tr><td>Outer hull radius</td><td>400 meters</td></tr>
+      <tr><td>Shield layer</td><td>47 – 50 m from tube center (3 m thick, lunar water)</td></tr>
+      <tr><td>Utility zone</td><td>40 – 47 m (pressurized; crew-accessible)</td></tr>
+      <tr><td>Pressurized hab zone</td><td>0 – 40 m inner radius within tube</td></tr>
+      <tr><td>Floor height</td><td>~397 m from rotation axis</td></tr>
+      <tr><td>Target gravity</td><td>~1.0 g at floor level</td></tr>
+      <tr><td>Spin rate</td><td>~1.50 RPM</td></tr>
+      <tr><td>Number of rings</td><td>3</td></tr>
+      <tr><td>Ring spacing</td><td>200 meters</td></tr>
+      <tr><td>Central hub length</td><td>650 meters (non-rotating)</td></tr>
+      <tr><td>Usable volume / ring</td><td>&gt;1,000,000 m³</td></tr>
+      <tr><td>Dry structure mass / ring</td><td>~220,000 metric tons</td></tr>
+      <tr><td>Shield mass / ring</td><td>~2,010,000 metric tons</td></tr>
+      <tr><td>Water-to-structure ratio</td><td>~9 : 1</td></tr>
+      <tr><td>Total shield volume</td><td>~6.0 million m³ (~2,400 Olympic pools)</td></tr>
+      <tr><td>Total shield mass</td><td>~6.0 million metric tons</td></tr>
+    </table>
+    <p class="note">
+      Shield volume is the shell between tube radii of 47 m and 50 m on the 350 m centerline:
+      2π² × 350 × (50² − 47²) ≈ 2.01 million m³ per ring, 6.03 million m³ for three rings. The spin rate is the rate
+      that gives 1 g at the 397 m floor.
+    </p>
+  </section>
+
+
+  <section class="keep">
+    <h2>3. Shield Architecture</h2>
+    <p class="sub">Water as both structural shielding and an active operational system.</p>
+    <p>
+      The radiation shield uses lunar-sourced water in a 3-meter layer flush against the outer hull. This approach
+      eliminates dependence on Earth-launched shielding mass while creating a dual-use system: the same water volume
+      supports life support, heat dissipation, and biosecurity functions.
+    </p>
+    <div class="twocol">
+      <div class="card">
+        <h4>Shield Structure</h4>
+        <p class="what">Physical layout and compartmentalization.</p>
+        <ul>
+          <li>5 radial zones per ring with vertical segmentation</li>
+          <li>Slosh suppression and resilience through compartment isolation</li>
+          <li>Fill interfaces at 5 rotating vestibules per ring; top-offs through the hub/ring boundary</li>
+        </ul>
+        <p class="tags">Fluids · CFD · Radiation · Compartmentalization</p>
+      </div>
+      <div class="card">
+        <h4>Active Systems</h4>
+        <p class="what">Fluid management and monitoring.</p>
+        <ul>
+          <li>Active circulation supporting ECLSS and heat rejection</li>
+          <li>Flow control, filtration, and sensor-rich dynamic monitoring</li>
+          <li>Fault isolation and rerouting on segment failure</li>
+        </ul>
+        <p class="tags">Thermal · ECLSS · Sensors · Fault isolation</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="keep">
+    <h2>4. Shield Fill Operations</h2>
+    <p class="sub">82 dedicated tankers executing a ~4.5-year initial fill campaign.</p>
+    <p>
+      Water is delivered as modular 45-ton sealed cartridges, handled externally without pressurized transfer, and
+      drained into ring reservoirs via centripetal flow once synchronized with ring rotation. Initial fill occurs with
+      rings stationary; ongoing top-offs arrive as sealed cartridges through the hub/ring boundary at operational spin
+      rate.
+    </p>
+    <table class="kv">
+      <tr><td>Cartridge format</td><td>Modular 45-ton sealed water cartridges</td></tr>
+      <tr><td>Tanker fleet (fill)</td><td>82 dedicated lunar tankers @ 45 MT payload each</td></tr>
+      <tr><td>Daily throughput</td><td>~3,690 metric tons / day</td></tr>
+      <tr><td>Initial fill duration</td><td>~4.5 years for complete shield across all rings</td></tr>
+      <tr><td>Loading method</td><td>External cartridge insertion into 5 rotating vestibules per ring</td></tr>
+      <tr><td>Draining method</td><td>Spin-synchronized centripetal flow into ring reservoirs</td></tr>
+      <tr><td>Initial fill protocol</td><td>Rings stationary; full shield mass loaded prior to spin-up</td></tr>
+      <tr><td>Operational top-offs</td><td>Sealed cartridges carried through the hub/ring boundary on cargo pods and discharged inside the ring at operational spin rate; inertial balance maintained</td></tr>
+    </table>
+  </section>
+
+
+  <section class="keep">
+    <h2>5. Construction &amp; Deployment</h2>
+    <p class="sub">Two-phase approach: dry assembly in orbit, then shield fill and spin-up.</p>
+    <div class="twocol">
+      <div class="card">
+        <h4>Phase 1 — Dry Assembly</h4>
+        <p class="what">Structure-first, no water mass.</p>
+        <ul>
+          <li>Launch and assemble rings in lunar orbit — dry, no shielding</li>
+          <li>Install shield bladders, plumbing, and fluid routing</li>
+          <li>Integrate core utilities, docking arms, and central spine</li>
+          <li>Commission life support and power systems pre-fill</li>
+        </ul>
+        <p class="tags">Orbital assembly · Robotics · Structures · Logistics</p>
+      </div>
+      <div class="card">
+        <h4>Phase 2 — Fill &amp; Spin-Up</h4>
+        <p class="what">Shield loading and station activation.</p>
+        <ul>
+          <li>Deliver water via tanker cartridge campaign (~4.5 years)</li>
+          <li>Fill all three rings before initiating spin-up sequence</li>
+          <li>Bring station to full 1g at ~397 m floor height</li>
+          <li>Activate life support, utilities, and transport systems</li>
+        </ul>
+        <p class="tags">ISRU logistics · Spin-up · ECLSS · Commissioning</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="keep">
+    <h2>6. Central Hub</h2>
+    <p class="sub">650-meter non-rotating spine connecting all rings and hosting zero-G operations.</p>
+    <p>
+      The central hub is the program's logistics and science backbone. It hosts docking, crew transit, zero-G
+      workspaces, and the foundational infrastructure for expanding station capabilities over time.
+    </p>
+    <div class="twocol">
+      <div class="card">
+        <h4>Core Functions</h4>
+        <p class="what">Transit, docking, and operations.</p>
+        <ul>
+          <li>Docking arms at both ends — keep ring area clear for tanker access</li>
+          <li>Pressurized transit pods for crew/cargo movement to rings</li>
+          <li>Manual egress corridors as shielded backup routes</li>
+          <li>Zero-G workspaces: labs, foundries, hydroponics, fabrication</li>
+        </ul>
+        <p class="tags">Docking · Transit · Zero-G ops · Human factors</p>
+      </div>
+      <div class="card">
+        <h4>Radial Modules — Gravity Simulation</h4>
+        <p class="what">Variable-G research capability.</p>
+        <ul>
+          <li>Pressurized habitats on radial booms scale gravity from 0 to 1g</li>
+          <li>Long-duration physiology trials at Mars and lunar gravity levels</li>
+          <li>Agricultural tests and equipment validation under fractional G</li>
+          <li>Pre-deployment testing for planetary settlement hardware</li>
+        </ul>
+        <p class="tags">Research · Physiology · Agriculture · Hardware dev</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="keep">
+    <h2>7. Habitat Interior &amp; Zoning</h2>
+    <p class="sub">Over 1 million m³ of usable volume per ring, organized across functional zones.</p>
+    <table class="kv">
+      <tr><td>Residential blocks</td><td>Private quarters, communal areas, and social infrastructure</td></tr>
+      <tr><td>Hydroponics &amp; food systems</td><td>Continuous food production integrated with water and atmosphere loops</td></tr>
+      <tr><td>Industrial decks</td><td>Manufacturing, fabrication, and maintenance operations</td></tr>
+      <tr><td>Parks &amp; social spaces</td><td>Open-area green space, recreation, and crew wellbeing environments</td></tr>
+      <tr><td>Medical &amp; emergency areas</td><td>Trauma care, quarantine, and emergency response facilities</td></tr>
+      <tr><td>Combustion policy</td><td>Open flame permitted only inside hardened fire shelter modules</td></tr>
+    </table>
+  </section>
+
+
+  <section class="keep">
+    <h2>8. Emergency Preparedness</h2>
+    <p class="sub">Redundancy is designed in, not bolted on.</p>
+    <div class="twocol">
+      <div class="card">
+        <h4>Isolation &amp; Redundancy</h4>
+        <p class="what">Fail-safe ring and life support design.</p>
+        <ul>
+          <li>Any ring can be sealed without compromising station function</li>
+          <li>Life support sized for 3× the operational crew load</li>
+          <li>Compartmentalized shielding: local failures don't compromise total protection</li>
+          <li>Emergency routing via transit pods and manual egress corridors</li>
+        </ul>
+        <p class="tags">Safety · Redundancy · ECLSS · Isolation</p>
+      </div>
+      <div class="card">
+        <h4>Inspection &amp; Monitoring</h4>
+        <p class="what">Proactive hull and system health management.</p>
+        <ul>
+          <li>AHID (Automated Hull Inspection Drone) fleet for continuous monitoring</li>
+          <li>Micrometeoroid damage detection, trending, and repair support</li>
+          <li>ESIC (Extravehicular Structural Inspection Capability) for crew-assisted survey</li>
+          <li>Sensor-rich shield fluid monitoring for pressure, flow, and contamination</li>
+        </ul>
+        <p class="tags">Inspection · Autonomy · ESIC · Damage trending</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <h2>9. Logistics Chain &amp; Support Hardware</h2>
+    <p class="sub">Material handling is a first-class engineering domain in a program of this scale.</p>
+    <p>
+      The station's logistics architecture spans lunar surface extraction, orbital tanker operations, crew transport,
+      and interplanetary freight. Each vehicle class is purpose-designed and integrated into a coherent supply chain.
+    </p>
+    <div class="twocol">
+      <div class="card">
+        <h4>Lunar Tanker Fleet</h4>
+        <p class="what">Autonomous surface-to-orbit water transport.</p>
+        <ul>
+          <li>82 tankers, 45 MT payload each, sustained cadence operations</li>
+          <li>Autonomous ascent/descent cycles with reliability-focused design</li>
+          <li>Post-fill repurposing: resupply, depot missions, and fuel delivery</li>
+        </ul>
+        <p class="tags">Autonomy · Propulsion · Fleet ops · ISRU</p>
+      </div>
+      <div class="card">
+        <h4>Luna–Aegis Shuttle</h4>
+        <p class="what">Reusable crew/cargo ferry.</p>
+        <ul>
+          <li>Short-range reusable lander: 2–6 crew + cargo</li>
+          <li>Precision landing, surface handling, and rapid reflight</li>
+          <li>Docking automation, crew safety, and life-support-in-transit</li>
+        </ul>
+        <p class="tags">Reusable lander · Human rating · Docking · Avionics</p>
+      </div>
+    </div>
+    <div class="twocol second">
+      <div class="card">
+        <h4>Earth–Aegis Long-Hauler</h4>
+        <p class="what">Interorbital freight and passenger transport.</p>
+        <ul>
+          <li>Modular passenger and freight integration, mission-tailorable</li>
+          <li>Depot-based refueling; rendezvous and docking automation</li>
+          <li>Propulsion blocks, thermal management, and maintainable configurations</li>
+        </ul>
+        <p class="tags">Transport · Propulsion · Thermal · Docking</p>
+      </div>
+      <div class="card">
+        <h4>Aegis-Class Rover</h4>
+        <p class="what">Pressurized surface operations platform.</p>
+        <ul>
+          <li>Surface scouting, prospecting, and ISRU site support</li>
+          <li>Autonomous navigation in polar regolith and low-light terrain</li>
+          <li>Docking/handling interfaces with shuttles and surface depots</li>
+        </ul>
+        <p class="tags">Mobility · Autonomy · ISRU support · Human factors</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <h2>10. Program Architecture &amp; Technical Domains</h2>
+    <p>
+      Aegis Station is a system-of-systems program. The orbital habitat is one element within a broader architecture.
+      Centralized integration authority preserves architectural intent while allowing flexible, best-in-class
+      implementation across specialist teams.
+    </p>
+
+    <h3>10.1 Orbital Habitat Systems</h3>
+    <p class="sub">Rotating structures, shielding, life support, power, and long-duration operability.</p>
+    <div class="twocol">
+      <div class="card">
+        <h4>Large-Scale Rotating Structures</h4>
+        <p class="what">Structural engineering at full scale under 1g loads.</p>
+        <ul>
+          <li>Ring fabrication, modular segmentation, and orbital assembly tolerances</li>
+          <li>Hub–ring interfaces, load paths, and structural margins under spin</li>
+          <li>Materials, fatigue life, micrometeoroid tolerance, and maintainability</li>
+        </ul>
+        <p class="tags">Aerospace structures · FEA / loads · Mechanisms · Orbital assembly</p>
+      </div>
+      <div class="card">
+        <h4>Rotational Dynamics &amp; Stability</h4>
+        <p class="what">Spin-up, resonance, and mass management.</p>
+        <ul>
+          <li>Spin-up sequencing, damping, and vibration / modal management</li>
+          <li>Mass asymmetry handling, trim, and operational balance constraints</li>
+          <li>Attitude control interactions with rotating masses</li>
+        </ul>
+        <p class="tags">Dynamics · Controls · Vibration · GNC</p>
+      </div>
+    </div>
+    <div class="twocol second">
+      <div class="card">
+        <h4>Radiation Shielding &amp; Fluid Systems</h4>
+        <p class="what">Water shielding as protection and operational fluid.</p>
+        <ul>
+          <li>Segmented water containment, slosh suppression, and fault isolation</li>
+          <li>Fill / top-off logistics, flow control, monitoring, and filtration</li>
+          <li>Thermal coupling and heat rejection integration</li>
+        </ul>
+        <p class="tags">Fluids · CFD · Thermal · Radiation</p>
+      </div>
+      <div class="card">
+        <h4>ECLSS</h4>
+        <p class="what">Long-duration crew systems built around reliability and safety.</p>
+        <ul>
+          <li>Air revitalization, water recovery, and waste processing</li>
+          <li>Biosecurity, contamination control, and sensor-rich monitoring</li>
+          <li>Fire containment strategies compatible with artificial gravity</li>
+        </ul>
+        <p class="tags">ECLSS · Reliability · Safety · Human factors</p>
+      </div>
+    </div>
+    <div class="twocol second">
+      <div class="card">
+        <h4>Power Generation &amp; Distribution</h4>
+        <p class="what">High-availability architecture with fault containment.</p>
+        <ul>
+          <li>Solar array systems, storage, and power management electronics</li>
+          <li>Rotating-to-fixed power transfer, distribution buses, and protection</li>
+          <li>Load shedding, redundancy zoning, and maintainable layouts</li>
+        </ul>
+        <p class="tags">Power · Energy storage · Redundancy · Fault protection</p>
+      </div>
+      <div class="card">
+        <h4>Habitat Ops &amp; Safety Architecture</h4>
+        <p class="what">Operating rules and physical design for continuity.</p>
+        <ul>
+          <li>Compartmentalization, isolation strategy, and emergency routing</li>
+          <li>Maintainability, spares strategy, and on-orbit servicing provisions</li>
+          <li>Operations planning, telemetry, and autonomy support</li>
+        </ul>
+        <p class="tags">Ops · Safety · Maintainability · Autonomy</p>
+      </div>
+    </div>
+
+    <h3>10.2 Transportation &amp; Logistics Systems</h3>
+    <p class="sub">Moving mass — water, propellant, cargo, crew — between lunar surface, orbit, and Earth.</p>
+    <div class="twocol">
+      <div class="card">
+        <h4>Lunar Tanker Fleet</h4>
+        <p class="what">Autonomous surface-to-orbit water transport at sustained cadence.</p>
+        <ul>
+          <li>Autonomous ascent/descent cycles, turnaround, and reliability engineering</li>
+          <li>Cartridge handling, transfer interfaces, and docking/berthing systems</li>
+          <li>Fleet operations, maintenance regimes, spares, and performance tracking</li>
+        </ul>
+        <p class="tags">Autonomy · Propulsion · Fleet ops · Ground systems</p>
+      </div>
+      <div class="card">
+        <h4>Luna–Aegis Shuttle</h4>
+        <p class="what">Reusable crew/cargo ferry linking polar sites and station.</p>
+        <ul>
+          <li>Precision landing, surface handling, and rapid reflight considerations</li>
+          <li>Docking automation, crew safety, and life-support-in-transit</li>
+          <li>Interfaces to rovers, depots, and station logistics</li>
+        </ul>
+        <p class="tags">Reusable lander · Docking · Human rating · Avionics</p>
+      </div>
+    </div>
+    <div class="twocol second">
+      <div class="card">
+        <h4>Earth–Aegis Long-Hauler</h4>
+        <p class="what">Interorbital transport and cargo movement at scale.</p>
+        <ul>
+          <li>Modular freight and passenger integration, mission tailoring</li>
+          <li>Propulsion blocks, power/thermal, and maintainable configurations</li>
+          <li>Rendezvous, docking, and depot-based refueling interfaces</li>
+        </ul>
+        <p class="tags">Transport · Propulsion · Thermal · Docking</p>
+      </div>
+      <div class="card">
+        <h4>Orbital Logistics &amp; Handling</h4>
+        <p class="what">Material handling as a first-class system.</p>
+        <ul>
+          <li>Docking/berthing, pressurized transfer, and cargo staging</li>
+          <li>Cartridge insertion/removal and inertial balance management</li>
+          <li>Inventory tracking, spares logistics, and warehousing in orbit</li>
+        </ul>
+        <p class="tags">Material handling · Interfaces · Inventory · Ops</p>
+      </div>
+    </div>
+
+    <h3>10.3 Lunar Surface Systems</h3>
+    <p class="sub">Extraction, processing, storage, mobility, and reliability through polar thermal extremes.</p>
+    <div class="twocol">
+      <div class="card">
+        <h4>ISRU &amp; Water Extraction</h4>
+        <p class="what">Volatile extraction feeding orbital logistics.</p>
+        <ul>
+          <li>Excavation and feed handling for icy regolith</li>
+          <li>Thermal processing, separation, storage, and transfer hardware</li>
+          <li>Quality control, contamination control, and system health monitoring</li>
+        </ul>
+        <p class="tags">ISRU · Cryo / thermal · Process engineering · Reliability</p>
+      </div>
+      <div class="card">
+        <h4>Surface Mobility &amp; Logistics</h4>
+        <p class="what">Rovers supporting prospecting, transport, and ops.</p>
+        <ul>
+          <li>Pressurized mobility, suspension/traction, and maintainability</li>
+          <li>Navigation and autonomy in regolith, low-light, polar terrain</li>
+          <li>Docking/handling interfaces with shuttles and surface depots</li>
+        </ul>
+        <p class="tags">Mobility · Autonomy · Thermal · Human factors</p>
+      </div>
+    </div>
+    <div class="twocol second">
+      <div class="card">
+        <h4>Surface Power &amp; Thermal Survival</h4>
+        <p class="what">Power for sustained ops and recovery modes.</p>
+        <ul>
+          <li>Solar + storage sizing, power management, and redundancy</li>
+          <li>Thermal control for polar extremes and survival provisions</li>
+          <li>Charging, staging, and depot-based logistics support</li>
+        </ul>
+        <p class="tags">Power · Thermal · Night survival · Depots</p>
+      </div>
+      <div class="card">
+        <h4>Surface Ops &amp; Field Maintenance</h4>
+        <p class="what">Keeping systems running is part of the architecture.</p>
+        <ul>
+          <li>Field-replaceable modules, toolchains, and repair workflows</li>
+          <li>Diagnostics, telemetry, and remote support pathways</li>
+          <li>Spare parts logistics and reliability planning</li>
+        </ul>
+        <p class="tags">Ops · Maintainability · Telemetry · Reliability</p>
+      </div>
+    </div>
+
+    <h3>10.4 In-Space Assembly &amp; Maintenance</h3>
+    <p class="sub">Assembling, inspecting, and sustaining large infrastructure in lunar orbit over decades.</p>
+    <div class="twocol">
+      <div class="card">
+        <h4>Modular Orbital Assembly</h4>
+        <p class="what">Robotic and human-compatible assembly of large structures.</p>
+        <ul>
+          <li>Assembly robotics, manipulators, fixtures, and alignment methods</li>
+          <li>EVA tool compatibility and maintainable interface design</li>
+          <li>Construction sequencing, tolerance stack-up, and verification</li>
+        </ul>
+        <p class="tags">Robotics · EVA · Construction · Verification</p>
+      </div>
+      <div class="card">
+        <h4>ESIC — Extravehicular Structural Inspection</h4>
+        <p class="what">External inspection as an operational capability.</p>
+        <ul>
+          <li>Hull inspection, micrometeoroid damage detection, and trending</li>
+          <li>Autonomous and crew-assisted inspection workflows</li>
+          <li>Repair support provisions and interface to maintenance planning</li>
+        </ul>
+        <p class="tags">Inspection · Autonomy · Repair support · Ops</p>
+      </div>
+    </div>
+
+    <h3>10.5 Program-Level Integration</h3>
+    <p class="sub">Preserving architectural intent while enabling flexible implementation across organizations.</p>
+    <div class="twocol">
+      <div class="card">
+        <h4>Systems Architecture Authority</h4>
+        <p class="what">Centralized authority for intent, performance, and trades.</p>
+        <ul>
+          <li>Architecture baselines, requirements flowdown, and trade studies</li>
+          <li>Design intent preservation and end-state alignment</li>
+          <li>Cross-domain coordination and decision discipline</li>
+        </ul>
+        <p class="tags">Architecture · Trade studies · Requirements</p>
+      </div>
+      <div class="card">
+        <h4>Interface Control &amp; Configuration Management</h4>
+        <p class="what">Where large programs succeed or fail.</p>
+        <ul>
+          <li>Interface Control Documents (ICDs) and verification ownership</li>
+          <li>Configuration baselines, change control, and traceability</li>
+          <li>Integration sequencing and readiness gates</li>
+        </ul>
+        <p class="tags">ICDs · Config control · Verification</p>
+      </div>
+    </div>
+    <div class="twocol second">
+      <div class="card">
+        <h4>Integration, Test &amp; Verification</h4>
+        <p class="what">Demonstrating the system meets intent at program scale.</p>
+        <ul>
+          <li>Incremental integration plans and system-level test strategy</li>
+          <li>Simulation, hardware-in-the-loop, and operational rehearsal</li>
+          <li>Independent verification and validation where appropriate</li>
+        </ul>
+        <p class="tags">IT&amp;V · Simulation · Readiness</p>
+      </div>
+      <div class="card">
+        <h4>Program Management &amp; MBSE</h4>
+        <p class="what">Schedule, risk, cost, and model-based traceability.</p>
+        <ul>
+          <li>Risk management, schedule discipline, and milestone governance</li>
+          <li>Model-Based Systems Engineering (MBSE) for traceability and integration</li>
+          <li>Operations planning and lifecycle sustainment considerations</li>
+        </ul>
+        <p class="tags">PM · Risk · MBSE · Lifecycle</p>
+      </div>
+    </div>
+
+    <div class="execution">
+      <h3>Execution Model</h3>
+      <p>
+        Best-in-class subsystem implementation paired with centralized integration authority. Implementation remains
+        flexible. Architectural intent does not. Domain teams with relevant heritage — space-rated systems, lunar
+        surface operations, high-reliability autonomy, large-scale structures, ECLSS, ISRU, or orbital assembly — are
+        designed to integrate as specialist contributors into a coherent, buildable program.
+      </p>
+      <p class="tags">Open architecture · Specialist integration · Heritage welcome</p>
+    </div>
+  </section>
+
+
+  <section class="keep">
+    <h2>11. Open Engineering Topics</h2>
+    <p class="sub">Active development areas requiring further study and experimental work.</p>
+    <table class="kv">
+      <tr><td>Slosh dynamics</td><td>Rotational fill under spin; multi-compartment fluid behavior at habitat scale</td></tr>
+      <tr><td>Segment fault handling</td><td>Fluid rerouting, pressure equalization, and isolation on compartment failure</td></tr>
+      <tr><td>Coriolis effects</td><td>Large-volume water flow management under continuous rotation</td></tr>
+      <tr><td>Microbial suppression</td><td>Long-term biosecurity inside the shield fluid over multi-decade operational life</td></tr>
+      <tr><td>Mass asymmetry</td><td>Structural and dynamic implications during partial-fill stages and asymmetric damage</td></tr>
+      <tr><td>Spin-up resonance</td><td>Modal response under combined structural and fluid mass during spin-up sequencing</td></tr>
+      <tr><td>Shield replenishment rate</td><td>Minimum viable top-off cadence balancing shield integrity with tanker fleet sizing</td></tr>
+    </table>
+  </section>
+
+
+  <section class="keep">
+    <h2>12. Replicability &amp; Growth</h2>
+    <p>
+      The Aegis architecture is not a one-off. Any location with accessible local water — Mars orbit, Deimos, icy
+      moons, or asteroid-belt outposts — becomes a viable site for an Aegis-type installation. The program's modular
+      design, standardized interfaces, and logistics framework are intentionally transferable, forming the repeatable
+      backbone of a multi-node interplanetary civilization.
+    </p>
+    <table class="kv">
+      <tr><td>Lunar orbit</td><td>Primary program location; water from polar ice deposits</td></tr>
+      <tr><td>Mars orbit</td><td>Phobos/Deimos water access; cislunar logistics patterns replicate directly</td></tr>
+      <tr><td>Icy moons</td><td>Europa, Ganymede, Callisto as long-range staging grounds</td></tr>
+      <tr><td>Asteroid belt</td><td>Compatible with water-rich C-type asteroid mining operations</td></tr>
+      <tr><td>Expansion</td><td>Modular add-ons and docking provisions for mission-specific growth at any node</td></tr>
+    </table>
+  </section>
+
+
+  <section class="keep">
+    <h2>13. Changes From v3.0</h2>
+    <p class="sub">The geometry is unchanged. The figures derived from it are recomputed, and the structure is resized.</p>
+    <table class="chg">
+      <tr><th>Item</th><th>v3.0</th><th>v3.1</th></tr>
+      <tr><td>Spin rate</td><td>~1.33 RPM</td><td>~1.50 RPM, the rate that gives 1 g at the 397 m floor</td></tr>
+      <tr><td>Shield mass / ring</td><td>~1,100,000 metric tons</td><td>~2,010,000 metric tons, the full 3 m shell between tube radii of 47 m and 50 m</td></tr>
+      <tr><td>Total shield volume</td><td>~3.3 million m³ (~1,320 Olympic pools)</td><td>~6.0 million m³ (~2,400 Olympic pools)</td></tr>
+      <tr><td>Total shield mass</td><td>~3.3 million metric tons</td><td>~6.0 million metric tons</td></tr>
+      <tr><td>Dry structure mass / ring</td><td>~120,000 metric tons</td><td>~220,000 metric tons, resized for the spin and pressure loads with conventional materials</td></tr>
+      <tr><td>Water-to-structure ratio</td><td>~27 : 1</td><td>~9 : 1, shield mass per ring over dry structure mass per ring</td></tr>
+      <tr><td>Tanker fleet (fill)</td><td>45 tankers</td><td>82 tankers, sized to hold the ~4.5-year fill</td></tr>
+      <tr><td>Daily throughput</td><td>~2,025 metric tons / day</td><td>~3,690 metric tons / day</td></tr>
+      <tr><td>Operational top-offs</td><td>Cartridges loaded at the rotating vestibules at spin rate</td><td>Sealed cartridges carried through the hub/ring boundary on cargo pods</td></tr>
+    </table>
+  </section>
+
+  <div class="end-footer">
+    Aegis Station — Master Dossier v3.1 · 1g Configuration, Integrated Program Architecture · Classification: Unrestricted
+  </div>
+
+</body>
+</html>
