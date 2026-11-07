@@ -161,7 +161,7 @@
     .audience tr.lead td{border-bottom:0}
     figure{margin:1.4rem 0}
     figure a{display:block;border:1px solid var(--border);border-radius:10px;overflow:hidden}
-    figure img{width:100%;display:block}
+    figure img, figure video{width:100%;display:block;border-radius:10px}
     figcaption{font-size:.85rem;color:var(--text-dim);margin-top:.5rem;line-height:1.5}
     footer{margin-top:2.5rem;font-size:.9rem;color:var(--text-dim)}
     footer strong{color:var(--text-secondary)}
@@ -203,7 +203,7 @@
 <body>
 <div class="wrap">
 
-  <div class="eyebrow">Validation Platform &bull; Rev B, September 2026</div>
+  <div class="eyebrow">Validation Platform &bull; Rev B, September 2026, read against its model and flight software November 2026</div>
   <h1>Gradient One</h1>
   <p class="lede">
     A three-arm rotating research platform that places <strong>1g, Mars gravity, lunar gravity and a
@@ -395,7 +395,7 @@
     <table>
       <thead><tr><th>Flow</th><th>Crossing</th><th>Heritage</th></tr></thead>
       <tbody>
-        <tr><td>Crew and cargo</td><td>A transfer lock: a short pressurized cylinder on the bearing that clamps to the despun node, spins up to 1.6 rpm, and clamps to the rotating hub. Hatches on both faces. No seal ever slips under pressure.</td><td>Hatches and docking mechanisms; the station's transit-pod magazine in miniature</td></tr>
+        <tr><td>Crew and cargo</td><td>A transfer lock: a short pressurized cylinder on the bearing that clamps to the despun node, spins up to 1.6 rpm, and clamps to the rotating hub. Hatches on both faces. No seal ever slips under pressure. <em>Proposed, November 2026:</em> the station's <a href="hub_ring_boundary.html">crossing</a> scaled to three chambers, one per arm, a 10 m drum on a 4 m bearing between the hub's upper face and the node's lower face, 19.5 t with its chambers and mechanisms; its drive reacts into the rotor, since into the node it would take most of the despin drive. At 1.60 rpm against the station's 1.50, Gradient One tests the station's mechanism at flight rate.</td><td>Hatches and docking mechanisms; the station's transit-pod magazine in miniature</td></tr>
         <tr><td>Power</td><td>Contactless rotary transformer across the bearing. Arrays and battery on the despun side.</td><td>Rotary transformers in flight mechanisms; no slip ring</td></tr>
         <tr><td>Data</td><td>Free-space optical link on the spin axis.</td><td>Optical intersatellite links</td></tr>
         <tr><td>Heat</td><td>Rejected on each side independently. No fluid crosses.</td><td>Body and panel radiators</td></tr>
@@ -416,12 +416,31 @@
     <h2>Dynamics and balance</h2>
     <div class="grid">
       <div class="cell"><strong>Major-axis spinner</strong><span>A three-arm rotor in a plane has a spin-axis inertia twice its transverse inertia. Energy dissipation from crew, fluids and flexure drives it toward the spin it already has. A two-arm dumbbell does not have that property, which is why Rev B has three arms.</span></div>
-      <div class="cell"><strong>Self-balancing</strong><span>Three identical tip modules balance in the plane. The Moon and Mars modules and consumables are trimmed by pumping water between three 4 t tip tanks, which double as the water reserve.</span></div>
-      <div class="cell"><strong>Spin-up is cheap</strong><span>Angular momentum 1.8 GN&middot;m&middot;s, kinetic energy 43 kWh. Spin-up from the tip thruster pods costs about 1.8 t of propellant at 300 s. A full spin-down for a repair and re-spin is affordable.</span></div>
+      <div class="cell"><strong>Self-balancing</strong><span>Three identical tip modules balance in the plane. The Moon and Mars modules leave the mass centre about 11 m off the axis, which the model showed the water cannot carry: 14 t is placed at the tips of arms A and C so that with nothing moving the vehicle stays as it is, and the water in the tip tanks (with room in them, not full) trims what activity disturbs. Each transit car has a balance weight that moves against it at the mass ratio.</span></div>
+      <div class="cell"><strong>Spin-up is cheap, with one event in it</strong><span>Angular momentum 2.6 GN&middot;m&middot;s as modelled with growth, crew and the docked vehicles. Spin-up from the tip pods takes 3.5 hours and about 2.5 t of propellant at 300 s; an unplanned spin-down 3.4 hours. On the way up and down the arms pass their first in-plane rate near 0.42 rpm and swing about 4 m at the tips there, driven by the Earth's gradient rather than imbalance; the hinge stiffness and damping that set that figure are placeholders, and a real damper or a ramp that does not dwell in the band is a design item.</span></div>
       <div class="cell"><strong>Loads are small</strong><span>Tension at the hub end of the most loaded arm is about 360 kN, which is 18 cm&sup2; of aluminium at 200 MPa. The arm is sized by stiffness and by the car rail, not by strength.</span></div>
-      <div class="cell"><strong>Mass excursions</strong><span>One person moving from the 1g band to the hub shifts the centre of mass 16 cm. A 2 t car moving the length of an arm shifts it 3 m. Car transits are scheduled and trimmed in advance; the untrimmed case is a planned measurement.</span></div>
-      <div class="cell"><strong>Attitude</strong><span>The spin axis is held near the orbit normal. Gravity gradient precesses a flat rotor at this rate about the orbit normal at roughly 28&deg; per day, faster than the 4.9&deg; per day nodal regression, so the axis follows the orbit with a lag of order 10&deg; without propellant. Confirming that coupled motion is an open item.</span></div>
+      <div class="cell"><strong>Mass excursions</strong><span>One person moving from the 1g band to the hub shifts the centre of mass 16 cm; ten people walking about move it a tonne-metre, which sets the trim's floor. A car alone swings the other arms 9 m at their tips; with its weight moving against it, 1.5 m, and the weight going out pays for the car coming in. A docking at the node is microradians. The weight as sized balances a 2.8 t car over the whole rail, so a tip-to-hub transit carries 400 kg: the weight's sizing is a design item.</span></div>
+      <div class="cell"><strong>Attitude</strong><span>The spin axis rides near the orbit normal. Gravity gradient precesses the rotor about the normal at roughly 28&deg; per day, faster than the 4.9&deg; per day nodal regression, so the axis follows the orbit about 9&deg; behind without propellant; the coupled motion is confirmed in the model, by altitude and inclination. The Earth also keeps a 35-microradian rocking of the axis going at twice a turn, because the despun node's mass sits 10 m up the axis; the node's offset is the lever, and a design item.</span></div>
     </div>
+  </section>
+
+  <section class="card" id="simulation">
+    <h2>The vehicle in simulation</h2>
+    <p>
+      Since Rev B the vehicle has a dynamics model (the hub, three arms hinged for flap and lag, the despun node on
+      its bearing, the cars and their weights, the water between the tanks, the pods, the Earth's pull across it) and
+      a flight software built on it: seven applications on a NASA cFS image, a C plant held to the model, an operator
+      console, a fault library of twelve scenarios flown on the image, and the vehicle's own telemetry alphabet with
+      every scenario kept as a tape. The figures in the cells above are the model's. The clip is a spin-up from rest
+      on the flight software's image, cut to a couple of minutes.
+    </p>
+    <figure>
+      <video controls muted playsinline preload="metadata" poster="images/g1_spin_up_poster.jpg">
+        <source src="media/g1_spin_up_composite.mp4" type="video/mp4">
+        Your browser does not play MP4 video.
+      </video>
+      <figcaption>Gradient One leaving rest, simulated, recorded from the flight software's telemetry and drawn from it: the three pods along the turn open, the climb, the pass through the arms' in-plane rate near 0.42 rpm where the arms swing some 4 m at the tips and the monitor says so, and the end in OPERATE at 1.5985 rpm, 1 g at the tip modules. Left, the vehicle in its own frame with the arms' lag drawn forty times; under it the arms edge on with their flap out of the plane drawn two hundred times, labelled in centimetres; right, the rails, the spin, the wobble and the node. Each piece runs at its own pace; the three and a half hours are not kept in proportion.</figcaption>
+    </figure>
   </section>
 
   <section class="card">
@@ -669,6 +688,7 @@
         <tr><td>Mass</td><td>Not stated</td><td>~227 t bottom-up with 20 % growth</td></tr>
         <tr><td>Cost</td><td>$0.6&ndash;1.4 B</td><td>$5&ndash;10 B to first campaign; ~$1 B per year to operate</td></tr>
         <tr><td>Attitude, orbit, power, reboost, loads</td><td>Not stated</td><td>Stated, with the arithmetic in the dossier</td></tr>
+        <tr><td>Model and software (November 2026)</td><td>None</td><td>A dynamics model with its control laws; a flight software on a cFS image with a console, a fault library and a telemetry alphabet; the dynamics cells above read against them</td></tr>
       </tbody>
     </table>
   </section>
@@ -676,9 +696,11 @@
   <section class="card" id="open-items">
     <h2>Open items</h2>
     <ul>
-      <li><strong>Coupled attitude simulation.</strong> The gravity-gradient precession estimate is a closed-form rate for a flat rotor. The bounded motion of the spin axis with nodal regression, the despun node's own pointing, and array shadowing need a simulation before the orbit is fixed.</li>
-      <li><strong>Transfer lock cycle.</strong> Spin-up torque on a loaded lock, its reaction into the bearing, cycle time and leak budget per cycle are unsized. The station's magazine concept is the starting point.</li>
-      <li><strong>Arm first modes.</strong> A 344 m open truss with a moving 2 t car; stiffness and damping requirements, and whether the car's Coriolis load, about 1.3 kN at 2 m/s, sets the rail design.</li>
+      <li><strong>Coupled attitude simulation.</strong> Done in the model (November 2026): the axis rides about 9&deg; off the orbit normal and keeps station with the orbit's plane for nothing, by altitude and inclination; holding the normal by thrust would cost tens of tonnes a year. Array shadowing and the node's own pointing remain.</li>
+      <li><strong>Transfer lock cycle.</strong> Sized as a proposal (November 2026): the station's crossing at three chambers, 19.5 t, with the drive reacting into the rotor; see the boundary table. The leak budget per cycle and the chambers' outfit are not yet sized. Taking it into the mass budget is a Rev C change.</li>
+      <li><strong>Arm first modes.</strong> The model finds the first in-plane rate near 0.42 rpm, passed on every spin change with a swing of about 4 m at the tips on placeholder stiffness and damping; the car's Coriolis load is carried by the weight that moves against it. The truss's real hinge stiffness and damping, and the ramp's pace through the band, are the item.</li>
+      <li><strong>The balance weight's sizing.</strong> As sized it balances a 2.8 t car over the whole rail, and the car is 2.4 t empty: 400 kg of payload for a tip-to-hub transit. A heavier weight, a longer weight rail, or the payload written at 400 kg.</li>
+      <li><strong>The despun node's offset.</strong> Its mass 10 m up the axis is the lever for the Earth's twice-a-turn rocking of the axis; on the rotor's plane, or balanced across it, the rocking goes. The bearing's friction, a placeholder, sets how fast the node is lost when its drive fails (11 s as modelled).</li>
       <li><strong>Module thermal at 1g.</strong> Natural convection inside the 1g and partial-g modules changes cabin air handling and condensation behaviour from the ISS design basis; a benefit, but an unmodelled one.</li>
       <li><strong>Assembly sequence.</strong> Arm erection and module hanging before spin-up, with a robotic and EVA crew campaign, is costed but not sequenced.</li>
     </ul>
