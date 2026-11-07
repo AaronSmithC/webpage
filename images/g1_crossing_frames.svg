@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" role="img" aria-labelledby="title desc">
+  <title id="title">Gradient One crossing — from the node down the axis, three frames and two locks, Rev C</title>
+  <desc id="desc">End view of the drum from the node: three chambers at 2.5 m radius in a drum of 8 m around the despun core, the rotor's three ports fixed at the arms' angles under the chambers and the node's three ports, turning at minus the spin, drawn 20 degrees off; beside it the three frames the drum can belong to, the two locks, the rules of the mechanism, where the drive's torque goes and what happens on a stall</desc>
+  <style>
+    text{font-family:"Open Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:11px;fill:#e6e6e6;}
+    .lab{fill:#9a9a9a;font-size:10px;} .hd{font-family:"Orbitron",system-ui,sans-serif;font-size:11px;letter-spacing:.8px;fill:#e6e6e6;}
+    .acc{fill:#4dd0e1;} .num{font-variant-numeric:tabular-nums;} .dim{stroke:#9a9a9a;stroke-width:1;fill:none;} .dimt{fill:#9a9a9a;font-size:10px;}
+  </style>
+  <rect x="0" y="0" width="900" height="440" fill="#0f0f0f"/>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e6e6e6"/></marker>
+    <marker id="arA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4dd0e1"/></marker>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#9a9a9a" stroke-width="1"/></pattern>
+  </defs>
+  <g transform="translate(210 220)">
+    <circle r="132.0" fill="none" stroke="#4dd0e1" stroke-width="2" stroke-dasharray="10 6"/>
+    <line x1="0.0" y1="-132.0" x2="0.0" y2="-162.0" stroke="#4dd0e1" stroke-width="2.5"/><text class="acc" x="0.0" y="-170.0" text-anchor="middle">A</text>
+    <line x1="-114.3" y1="66.0" x2="-140.3" y2="81.0" stroke="#4dd0e1" stroke-width="2.5"/><text class="acc" x="-150.7" y="91.0" text-anchor="middle">B</text>
+    <line x1="114.3" y1="66.0" x2="140.3" y2="81.0" stroke="#4dd0e1" stroke-width="2.5"/><text class="acc" x="150.7" y="91.0" text-anchor="middle">C</text>
+    <g transform="rotate(-20)">
+      <circle cx="0.0" cy="-55.0" r="26.0" fill="none" stroke="#8f8f8f" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <circle cx="-47.6" cy="27.5" r="26.0" fill="none" stroke="#8f8f8f" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <circle cx="47.6" cy="27.5" r="26.0" fill="none" stroke="#8f8f8f" stroke-width="1.5" stroke-dasharray="4 3"/>
+    </g>
+    <circle r="88.0" fill="#101010" stroke="#e6e6e6" stroke-width="2"/>
+    <circle r="33.0" fill="url(#hatch)" stroke="#e6e6e6" stroke-width="1"/><circle r="27.5" fill="#3a3a3a" stroke="#8f8f8f" stroke-width="2"/>
+    <circle cx="0.0" cy="-55.0" r="22.0" fill="#143a40" stroke="#4dd0e1" stroke-width="2"/>
+    <circle cx="-47.6" cy="27.5" r="22.0" fill="#143a40" stroke="#4dd0e1" stroke-width="2"/>
+    <circle cx="47.6" cy="27.5" r="22.0" fill="#143a40" stroke="#4dd0e1" stroke-width="2"/>
+    <line x1="0" y1="-53.0" x2="0" y2="-69.0" stroke="#4dd0e1" stroke-width="1.2" marker-end="url(#arA)"/>
+    <path d="M -67.6 -127.1 A 144 144 0 0 0 -127.1 -67.6" fill="none" stroke="#4dd0e1" stroke-width="2" marker-end="url(#arA)"/>
+    <text class="acc num" x="0" y="-186" text-anchor="middle">rotor 1.60 rpm · 0.42 m/s at the berths</text>
+    <text class="lab" x="0" y="4" text-anchor="middle">core</text><text class="lab" x="59" y="-30" text-anchor="middle">drum</text>
+    <text class="lab" x="0" y="-51" text-anchor="middle">chamber</text>
+    <text class="dimt" x="94" y="-44">Ø 8 m</text><text class="dimt" x="72" y="58" text-anchor="middle">r 2.5 m</text>
+    <text class="dimt" x="0" y="168" text-anchor="middle">cyan: the rotor; its three ports sit under the chambers</text>
+    <text class="dimt" x="0" y="182" text-anchor="middle">dashed grey: the node's ports, 20° off before the align</text>
+  </g>
+  <g transform="translate(430 44)">
+    <text class="hd" x="0" y="0">THREE FRAMES, TWO LOCKS</text>
+    <text class="lab" x="0" y="18">Locked to the rotor, locked to the node, or driven between them; its idle is on the rotor.</text>
+    <g transform="translate(0 30)">
+      <rect x="0" y="0" width="130" height="50" rx="8" fill="#143a40" stroke="#4dd0e1" stroke-width="2"/><text class="hd acc" x="65" y="21" text-anchor="middle">ROTOR</text><text class="lab" x="65" y="38" text-anchor="middle">1.60 rpm · the arms' ports</text>
+      <rect x="170" y="0" width="130" height="50" rx="8" fill="#101010" stroke="#e6e6e6" stroke-width="2"/><text class="hd" x="235" y="21" text-anchor="middle">DRUM</text><text class="lab" x="235" y="38" text-anchor="middle">1.60 → 0 rpm in 120 s</text>
+      <rect x="340" y="0" width="130" height="50" rx="8" fill="#3a3a3a" stroke="#8f8f8f" stroke-width="2"/><text class="hd" x="405" y="21" text-anchor="middle">NODE</text><text class="lab" x="405" y="38" text-anchor="middle">0 rpm · despun · its ports</text>
+      <rect x="130" y="16" width="40" height="18" fill="#d3756a" opacity=".9"/><text x="150" y="29" text-anchor="middle" style="font-size:9px;fill:#fff">LOCK</text>
+      <rect x="300" y="16" width="40" height="18" fill="#d3756a" opacity=".9"/><text x="320" y="29" text-anchor="middle" style="font-size:9px;fill:#fff">LOCK</text>
+    </g>
+    <text class="hd" x="0" y="104">RULES OF THE MECHANISM (NONE IN A HATCH'S PATH)</text>
+    <text class="" x="0" y="124">· a lock releases only under 10 N·m on its dogs, every chamber retracted and sealed</text>
+    <text class="" x="0" y="139">· the drive torques only with both locks released; never two locks in</text>
+    <text class="" x="0" y="154">· a lock engages only inside 3e-4 rad/s and 10 mm at the berths; three tries, then a fault</text>
+    <text class="" x="0" y="169">· a berth pushes only with that side's lock engaged; a push past it misses, safely</text>
+    <text class="" x="0" y="184">· a hatch opens only hard-mated under 1 kPa; no stroke with a hatch open</text>
+    <text class="hd" x="0" y="207">THE TORQUE GOES INTO THE ROTOR</text>
+    <text class="lab" x="0" y="227">Stator on the hub, rotor on the drum. A crossing moves 1.9e+04 N·m·s against the rotor's</text>
+    <text class="lab" x="0" y="242">2.6e+09: one part in 139,130. Into the node it would take 37 % of the despin drive.</text>
+    <text class="hd" x="0" y="265">A STALL BETWEEN FRAMES</text>
+    <text class="lab" x="0" y="285">No brake. A drive lost mid-crossing leaves the drum coasting on its bearing; the loop faults</text>
+    <text class="lab" x="0" y="300">and holds, and the chambers keep their crew until the drive is back. The node lost on the</text>
+    <text class="lab" x="0" y="315">way to it holds the crossing where the drum floats; it carries on once the node is held.</text>
+  </g>
+</svg>

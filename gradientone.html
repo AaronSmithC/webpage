@@ -410,7 +410,7 @@
     <table>
       <thead><tr><th>Flow</th><th>Crossing</th><th>Heritage</th></tr></thead>
       <tbody>
-        <tr><td>Crew and cargo</td><td>The crossing (Rev C): the station's <a href="hub_ring_boundary.html">crossing</a> scaled to three chambers, one per arm. An 8 m drum, 4 m long, on a 3 m bearing between the hub's upper face and the node's lower face, 13.8 t with its chambers and mechanisms, its mass centre 5.5 m up the axis. The drum idles locked to the rotor with its chambers at the arms' ports; to cross, the chambers retract and seal, the rotor lock releases, the drum's own drive brings it to rest against the node (about three minutes under 200 N&middot;m), the node lock engages within 10 mm at the berths, and the chambers push a metre to the node's ports and mate; the hatches open only with the tunnel equalized. No seal ever slips under pressure. The drive reacts into the rotor, since into the node it would take 37 % of the despin drive. Six crew a cycle, the whole crew of ten in two. At 1.60 rpm against the station's 1.50, Gradient One tests the station's mechanism at flight rate with a seventieth of its inertia.</td><td>Hatches and docking mechanisms; the station's transit-pod magazine in miniature</td></tr>
+        <tr><td>Crew and cargo</td><td>The crossing (Rev C): the station's <a href="hub_ring_boundary.html">crossing</a> scaled to three chambers, one per arm. An 8 m drum, 4 m long, on a 3 m bearing between the hub's upper face and the node's lower face, 13.8 t with its chambers and mechanisms, its mass centre 5.5 m up the axis. The drum idles locked to the rotor with its chambers at the arms' ports; to cross, the chambers retract and seal, the rotor lock releases, the drum's own drive brings it to rest against the node (about three minutes under 200 N&middot;m), the node lock engages within 10 mm at the berths, and the chambers push a metre to the node's ports and mate; the hatches open only with the tunnel equalized. No seal ever slips under pressure. The drive reacts into the rotor, since into the node it would take 37 % of the despin drive. Six crew a cycle, the whole crew of ten in two. At 1.60 rpm against the station's 1.50, Gradient One tests the station's mechanism at flight rate with a seventieth of its inertia. The mechanism, its drawings and its figures are in <a href="#crossing">the crossing</a> below.</td><td>Hatches and docking mechanisms; the station's transit-pod magazine in miniature</td></tr>
         <tr><td>Power</td><td>Contactless rotary transformer across the bearing. Arrays and battery on the despun side.</td><td>Rotary transformers in flight mechanisms; no slip ring</td></tr>
         <tr><td>Data</td><td>Free-space optical link on the spin axis.</td><td>Optical intersatellite links</td></tr>
         <tr><td>Heat</td><td>Rejected on each side independently. No fluid crosses.</td><td>Body and panel radiators</td></tr>
@@ -434,6 +434,81 @@
       and the kick a fifth of the threshold. The drum's mass up the axis eases the Earth's rocking of the node a
       little, from 34 to 33 microradians, by lifting the mass centre toward it.
     </p>
+  </section>
+
+  <section class="card" id="crossing">
+    <h2>The crossing</h2>
+    <p>
+      Between the rotating hub and the despun node there is no rotary seal and no slip ring. Crew cross the
+      boundary in a drum of three chambers that belongs to one frame or the other and is never free by design: it
+      idles locked to the rotor with its chambers at the three arms' ports on the hub's upper face, and to cross,
+      the chambers retract and seal, the rotor lock releases, the drum's own drive brings it to rest against the
+      node, the node lock engages, and the chambers push a metre to the node's ports and mate. It is the station's
+      <a href="hub_ring_boundary.html#mechanism">crossing</a> at three chambers instead of four, at the station's
+      spin rate with a seventieth of its inertia, and every rule of the station's mechanism holds here unchanged.
+    </p>
+
+    <figure>
+      <img src="images/g1_crossing_section.svg" alt="Axial section through the Gradient One crossing: the rotating hub on the left with the arm-root ring and an arm, its upper face with three ports at 2.5 m radius, the drum between the hub and the node with its three chambers, the rotor lock and the node lock, the drive reacting into the rotor, the despun core through the drum's bore on the main bearing, and the despun node on the right."/>
+      <figcaption>The crossing cut along the spin axis, 30 px per metre, generated from the sizing model. Cyan turns, grey is despun, and the drum is neither until a lock says so. The hub's upper face at +3 m carries three ports at 2.5 m from the axis, one to an arm; the drum, 8 m across and 4 m long, sits between +3.5 and +7.5 m on a bearing around the despun core, with the node's lower face at +8 m. A chamber pushed down mates to the hub, pushed up to the node. The hub's face and the node's are drawn out to the locks' reach; the ports at 2.5 m lie outside the hub's 4.5 m hull, on the face.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="images/g1_crossing_frames.svg" alt="Looking down the axis from the node: three chambers at 2.5 m radius in an 8 m drum around the despun core, the rotor's three ports at the arms' angles under the chambers and the node's three ports drawn 20 degrees off; beside it the three frames the drum can belong to, the two locks between them, the rules of the mechanism, where the drive's torque goes, and what happens on a stall between frames."/>
+      <figcaption>From the node, with the node's ports 20&deg; off the chambers before the align. Three frames, two locks, one drive: the drum is locked to the rotor, locked to the node, or driven between them. A lock engages only inside a rate and phase tolerance and fails safe outside it; a release under load jams its dogs and faults; the flight software refuses to torque a locked drum or to push a chamber toward a frame that is not locked, and the mechanism enforces the same rules on its own.</figcaption>
+    </figure>
+
+    <div class="grid">
+      <div class="cell"><strong>The drum</strong><span>An annulus 8 m across with a 3 m bore, 4 m long, on a bearing around the 2.5 m despun core that carries the corridor from the node down to the hub. 7 t of structure, 13.8 t with its three chambers and their mechanisms, 1.1 &times; 10<sup>5</sup> kg&middot;m&sup2; with crew aboard. Its mass centre is 5.5 m up the axis, 76 t&middot;m against the node's 482.</span></div>
+      <div class="cell"><strong>The locks and the drive</strong><span>Lock tolerance 10 mm at the berths and 3 &times; 10<sup>-4</sup> rad/s, a third of the station's, because the engagement hands the node the drum's share of their remaining rate and the node must not be called lost by it. The drive's stator is on the hub and its rotor on the drum, so the torque reacts into the rotor: 156 N&middot;m for 120 s, 26 W at the peak, moves the rotor's spin by one part in 139,000. Into the node it would take 37 % of the despin drive. There is no brake.</span></div>
+      <div class="cell"><strong>The chambers</strong><span>Three, 2 m across and 3 m long, a hatch at each end, two crew each, 1.6 t; six crew a cycle, the whole crew of ten in two. At 2.5 m from the axis they see 0.007 g at rate, floor outward. The hatches are sensed, never driven, and open only hard-mated with the tunnel under 1 kPa.</span></div>
+      <div class="cell"><strong>The stroke and the mate</strong><span>1.0 m each way at 20 mm/s: soft capture at 0.9 m if the frame on that side holds the drum, else a miss; hard mate after 3 s; the tunnel equalized and leak-checked for 60 s under 0.1 kPa/min before a hatch will open. Both sides share the axis and the rate, so the mate is a linear motion in the drum's frame and no seal slips at any phase.</span></div>
+    </div>
+
+    <h3>A crossing, rotor to node</h3>
+    <ol>
+      <li>Every chamber retracts and seals: 1 m at 20 mm/s, 50 s. Nothing moves with a chamber out or a hatch open.</li>
+      <li>The rotor lock releases, under 10 N&middot;m sensed on its dogs.</li>
+      <li>The drive ramps the drum to rest against the node, 120 s inside its 200 N&middot;m; the torque reacts into the rotor.</li>
+      <li>A loop aligns the chambers to the node's ports, then the node lock engages inside 10 mm and 3 &times; 10<sup>-4</sup> rad/s, three tries before a fault.</li>
+      <li>The chambers push a metre: soft capture at 0.9 m, hard mate, the tunnel equalized, a 60 s leak check.</li>
+      <li>The hatches open. The way back is the same sentence toward the rotor.</li>
+    </ol>
+
+    <h3>On the flight software's image</h3>
+    <p>
+      The crossing is in the <a href="#simulation">simulation</a> since Rev C: the drum and its berths in the plant,
+      two applications and the executive's two words on the cFS image, two Limit Checker rows and two stored sequences,
+      seven scenarios in the fault library (a crossing both ways, a stalled drive, a lock that will not engage, a push
+      toward a frame that does not hold the drum, a leak, a hatch out of sequence, and the node lost mid-crossing). On the
+      image the drum goes to the node in 182 s of drive and back in 207 s, at its 200 N&middot;m most of the way; three
+      chambers are ready at a side's ports in 216 s; the node is held to 7.8 &times; 10<sup>-5</sup> rad/s through it,
+      and the spin stays where it was. The console draws the crossing as the station's does: the drum from the node with
+      the chambers at their phase to the arms' ports and the node's ports at theirs, the strokes beside it.
+    </p>
+    <figure>
+      <img src="images/g1_crossing_console.jpg" alt="The operator console's crossing view at the end of a crossing: the drum seen from the node with its three chambers at the node's ports, each ready, the drum's rim cyan for the node lock, the rotor's ports at the arms' angles swung away; beside it the three strokes pushed a metre to the node's face with the hatches closed, the frames text saying the drum is on the node with the node lock engaged, and the geometry from the plant's headers."/>
+      <figcaption>The console at the end of a crossing to the node, on the flight software's image: the three chambers ready at the node's ports, the node lock engaged and the rotor lock released, the drum turning with the node at &minus;0.1674 rad/s against the rotor, the strokes out a metre to the node's face. Nothing in the drawing is integrated; every mark is a field of the latest telemetry packet.</figcaption>
+    </figure>
+
+    <h3>Figures</h3>
+    <table>
+      <thead><tr><th>Figure</th><th>Value</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>Vehicle</td><td>350 m to the tip modules, 1 g there at 1.60 rpm</td><td>the hub a 4.5 m hull 6 m long inside the 12 m arm-root ring, its upper face at +3 m; the node's lower face at +8 m, its mass centre at +10 m</td></tr>
+        <tr><td>Drum</td><td>8 m across, 3 m bore, 4 m long, 13.8 t with its chambers</td><td>on a bearing around the 2.5 m despun core, between +3.5 and +7.5 m; 1.1 &times; 10<sup>5</sup> kg&middot;m&sup2; with crew aboard</td></tr>
+        <tr><td>Berths</td><td>three, at 2.5 m radius, 120&deg; apart</td><td>matching the three ports on the hub's upper face, one to an arm, and the three on the node's lower face</td></tr>
+        <tr><td>Chamber</td><td>2 m &times; 3 m, a hatch at each end, 1.6 t</td><td>two crew each; 0.42 m/s and 0.007 g at rate, floor outward</td></tr>
+        <tr><td>Push stroke</td><td>1.0 m each way at 20 mm/s</td><td>soft capture at 0.9 m, hard mate after 3 s, equalization, a 60 s leak check under 0.1 kPa/min</td></tr>
+        <tr><td>Lock tolerance</td><td>10 mm at the berths, 3 &times; 10<sup>-4</sup> rad/s</td><td>a third of the station's rate tolerance; engagement fails safe outside it, three tries; a release under load jams the dogs</td></tr>
+        <tr><td>Drive</td><td>156 N&middot;m for 120 s, 26 W peak, 1.6 kJ a crossing</td><td>stator on the hub, rotor on the drum; the flight software's limit 200 N&middot;m; 183 N&middot;m with a tonne of cargo in each chamber</td></tr>
+        <tr><td>What the rotor feels</td><td>one part in 139,000 of its momentum</td><td>1.9 &times; 10<sup>4</sup> N&middot;m&middot;s of 2.6 &times; 10<sup>9</sup>; into the node the drive would take 37 % of the despin drive's 500 N&middot;m</td></tr>
+        <tr><td>What the node feels</td><td>the lock's engagement: 7.8 &times; 10<sup>-5</sup> rad/s on the image, 2.0 &times; 10<sup>-5</sup> in the model</td><td>against 1.0 &times; 10<sup>-4</sup>, where the node is called lost; the station's tolerance would give half the threshold</td></tr>
+        <tr><td>One way</td><td>about 3 min of drive, 3&frac12; min of stroke and leak check</td><td>182 s to the node and 207 s back on the image, the chambers ready 216 s after a push; 12 min nominal with the crew's boarding</td></tr>
+        <tr><td>Throughput</td><td>6 crew a cycle, 30 an hour</td><td>the whole crew of ten in two cycles</td></tr>
+      </tbody>
+    </table>
+    <p class="mini">The sizing is option C of the crossing sizing in the systems model (the hub's dimensions as they are, the chambers at 2.5 m), November 2026; the drawings are generated from it. The flight software's figures are ADR-0015 of the Gradient One flight software. Open: the leak budget per cycle, the chambers' outfit, a brake toward the rotor as the station has, and the trim's bill for a tip load with the drum up the axis.</p>
   </section>
 
   <section class="card">
