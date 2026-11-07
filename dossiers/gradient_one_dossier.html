@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Gradient One — Design Dossier Rev B</title>
+<title>Gradient One — Design Dossier Rev C</title>
 <style>
   @page { size: Letter; margin: 0; }
 
@@ -145,7 +145,7 @@
   <div class="kicker">Aegis Station</div>
   <h1>Gradient One</h1>
   <div class="subtitle">Three-Arm Multi-Gravity Validation Platform, 1.6 rpm</div>
-  <div class="meta">Design Dossier &nbsp;|&nbsp; Rev B — September 2026 &nbsp;|&nbsp; Not for Hardware Commitment</div>
+  <div class="meta">Design Dossier &nbsp;|&nbsp; Rev C — November 2026 (Rev B, September 2026, with the crossing taken in) &nbsp;|&nbsp; Not for Hardware Commitment</div>
 
   <hr>
   <section>
@@ -153,6 +153,7 @@
     <p>Gradient One (G1) is a rotating orbital research platform that places Earth gravity, Mars gravity, lunar gravity and a rotating microgravity hub in one vehicle at one spin rate, for six-month crewed campaigns. It is the platform defined to close the Artificial Gravity Requirements Evaluation (AGRE) and to retire the rotating-structure risks that Aegis Station carries as assumptions: 1g at 1.6 rpm for months, the hub/rotor boundary under rotation, radial fluids at full head, balance authority, and spin transients with crew aboard.</p>
     <p>Two questions, one vehicle. The station's question is whether people can live and work for months at 1g produced by rotation at 1.6 rpm. The surface program's question is how bone, cardiovascular, ocular and plant endpoints respond to lunar and Mars gravity over months, against a 1g control in the same vehicle. Both need several gravity levels, held for a long time, in one place, with rotation present.</p>
     <div class="callout"><strong>Rev B in one paragraph.</strong> The single-arm truss with a counterweight becomes a self-balancing three-arm rotor that spins about its major axis. The despun hub becomes a small docking node joined to a rotating 0g hub by a cyclic transfer lock, contactless power and an optical data link, with no continuous rotary seal in any life-critical path. Campaigns move from 30–90 days to 180 days, crew from 2–4 to 10, because the requirements ask for six-month exposures. Mass is bottom-up at about 227 t. The cost class moves from $0.6–1.4 B to $5–10 B to first campaign.</div>
+    <div class="callout"><strong>Rev C in one paragraph.</strong> Rev B with its one unspecified element specified. The transfer lock, carried as a 2 t placeholder, becomes the station's crossing scaled to Gradient One: a drum of three two-crew chambers between the rotating hub's upper face and the despun node's lower face, locked to one frame or the other and spun between them by its own drive, 13.8 t dry with its chambers and mechanisms. The hub's dimensions are fixed with it. The vehicle grows to about 242 t on orbit; nothing else in the sizing moves. The crossing is in the dynamics model as a body with its own spin and two locks, and the flight software flies it end to end; the figures are on the Gradient One page.</div>
   </section>
 
   <hr>
@@ -180,18 +181,18 @@
   <hr>
   <section>
     <h2>3. Configuration</h2>
-    <p>A Y-shaped rotor: three open-truss arms at 120°, each about 344 m from hub port to tip, with an identical habitat module hung from each tip at the 1g radius. The lunar module sits inboard on arm A and the Mars module inboard on arm B. A rotating hub module joins the arms and houses the 0g crew. A despun node on the spin axis carries three docking ports, six deployable arrays on two gimbals, reboost thrusters and antennas.</p>
-    <img src="../Gradient_One_RevB_Arrangement.svg" alt="Gradient One Rev B arrangement drawing" style="width:100%;height:auto;margin:6pt 0 10pt;">
+    <p>A Y-shaped rotor: three open-truss arms at 120°, each about 344 m from hub port to tip, with an identical habitat module hung from each tip at the 1g radius. The lunar module sits inboard on arm A and the Mars module inboard on arm B. A rotating hub module joins the arms and houses the 0g crew: a 4.5 m node-class hull 6 m long inside the 12 m ring the arms hinge on, its upper face 3 m up the axis. A despun node on the spin axis, its lower face at 8 m, carries three docking ports, six deployable arrays on two gimbals, reboost thrusters and antennas. Between the two faces sits the crossing (section 5): an 8 m drum, 4 m long, on a 3 m bearing, its three chambers at 2.5 m from the axis, one to each arm's port.</p>
+    <img src="../Gradient_One_RevC_Arrangement.svg" alt="Gradient One Rev C arrangement drawing" style="width:100%;height:auto;margin:6pt 0 10pt;">
     <h3>Why three arms</h3>
     <p>A planar rotor with three or more equal arms has spin-axis inertia twice its transverse inertia, so it spins about its major axis and energy dissipation from crew, fluids and flexure drives it toward the spin it already has. A two-arm dumbbell has equal spin and in-plane transverse inertia and no such preference. Three identical tip modules also balance in the plane without a dead counterweight, which removes the Rev A counterweight and its ambiguity.</p>
     <h3>Why 350 m and 1.6 rpm</h3>
     <p>Earth is the 1g control for the biology; the radius is chosen because 1g at 1.6 rpm is the station's operating point and AGRE reports tolerance per spin rate. The sizing model quantifies the alternative:</p>
     <table>
-      <tr><th>Parameter</th><th>Rev B, 1.6 rpm</th><th>Alternative, 3 rpm</th></tr>
+      <tr><th>Parameter</th><th>Rev C, 1.6 rpm</th><th>Alternative, 3 rpm</th></tr>
       <tr><td>1g / Mars / Moon radius</td><td>350 / 132 / 58 m</td><td>99 / 38 / 16 m</td></tr>
       <tr><td>Coriolis at 1 m/s</td><td>3.4 % g</td><td>6.4 % g</td></tr>
-      <tr><td>On-orbit mass</td><td>~227 t</td><td>~194 t</td></tr>
-      <tr><td>Saving</td><td>–</td><td>~33 t, ~14 %, arms only; modules, boundary, assembly and operations unchanged</td></tr>
+      <tr><td>On-orbit mass</td><td>~242 t</td><td>~209 t</td></tr>
+      <tr><td>Saving</td><td>–</td><td>~32 t, ~13 %, arms only; modules, boundary, assembly and operations unchanged</td></tr>
       <tr><td>Measures the station's column of the AGRE table</td><td>Yes</td><td>No</td></tr>
     </table>
     <p class="note">Radius is cheap on this vehicle; crew-rated volume is what costs. The 1g band earns its 350 m because the arm to reach it is a few tonnes of truss and the question it answers is the station's.</p>
@@ -206,7 +207,8 @@
       <tr><td>1g habitats A and B</td><td>Crew quarters, galley, exercise, hygiene; vehicle water recovery and oxygen generation</td><td>Water processing at 1g uses gravity phase separation and is itself a validation item</td></tr>
       <tr><td>1g laboratory C</td><td>Bioregenerative growth racks; radial fluids and two-phase test bed; medical and imaging suite for all bands</td><td>Same hull as A and B</td></tr>
       <tr><td>Mars and Moon modules</td><td>Two crew each; growth racks; physiology instrumentation</td><td>Atmosphere revitalization local; water processed at 1g and returned by the arm lines</td></tr>
-      <tr><td>Rotating hub</td><td>Node-class, three radial arm ports, one axial port to the boundary; two crew at 0g with ISS-type microgravity life support; rotor contingency refuge</td><td>14 t</td></tr>
+      <tr><td>Rotating hub</td><td>Node-class, 4.5 m across and 6 m long inside the arm-root ring; three radial arm ports, one axial port to the crossing on its upper face; two crew at 0g with ISS-type microgravity life support; rotor contingency refuge</td><td>14 t</td></tr>
+      <tr><td>The crossing</td><td>A drum of three two-crew chambers between the hub and the node, locked to one frame or the other, spun between them by its own drive; the chambers push a metre to the ports and mate; hatches on both faces</td><td>13.8 t dry: 7 t drum, three 1.6 t chambers, 2 t of locks, berths and drive</td></tr>
       <tr><td>Despun node</td><td>Three docking ports, arrays, battery, reboost, communications; pressurized for transit and cargo handling only</td><td>8 t pressurized, plus boundary and power hardware</td></tr>
     </table>
     <p>Three decks give a measured gravity gradient between floors (AGRE-F-004) and radial stair and ladder transit (AGRE-F-002) inside every module, without the pressurized spoke a full-scale habitat would need.</p>
@@ -215,16 +217,33 @@
   <hr>
   <section>
     <h2>5. Hub/rotor boundary</h2>
-    <p>Rev B adopts the principle of the station's hub/ring boundary: no continuous rotary mechanical interface carries a life-critical flow. Every crossing is cyclic, contactless, or eliminated by distributing the function to both sides.</p>
+    <p>Rev B adopted the principle of the station's hub/ring boundary: no continuous rotary mechanical interface carries a life-critical flow. Every crossing is cyclic, contactless, or eliminated by distributing the function to both sides.</p>
     <table>
       <tr><th>Flow</th><th>Crossing</th><th>Heritage</th></tr>
-      <tr><td>Crew and cargo</td><td>Transfer lock: a short pressurized cylinder on the bearing that clamps to the despun node, spins up to 1.6 rpm, and clamps to the rotating hub; hatches on both faces; no seal slips under pressure</td><td>Hatches and docking mechanisms; the station's transit-pod magazine in miniature</td></tr>
+      <tr><td>Crew and cargo</td><td>The crossing (Rev C): the station's crossing at three chambers. The drum idles locked to the rotor with its chambers at the arms' ports; to cross, the chambers retract and seal, the rotor lock releases, the drum's drive brings it to rest against the node, the node lock engages within 10 mm at the berths, the chambers push a metre to the node's ports and mate, and the hatches open only with the tunnel equalized. No seal slips under pressure. The drive reacts into the rotor.</td><td>Hatches and docking mechanisms; the station's crossing at the station's rate with a seventieth of its inertia</td></tr>
       <tr><td>Power</td><td>Contactless rotary transformer across the bearing; arrays and battery on the despun side</td><td>Rotary transformers in flight mechanisms</td></tr>
       <tr><td>Data</td><td>Free-space optical link on the spin axis</td><td>Optical intersatellite links</td></tr>
       <tr><td>Heat</td><td>Rejected on each side independently; no fluid crosses</td><td>Body and panel radiators</td></tr>
       <tr><td>Thrust and torque</td><td>Reboost thrust from the despun node passes through the bearing as a radial load; a bearing drive holds the node despun</td><td>Dual-spin spacecraft</td></tr>
     </table>
     <p>The vehicle is a dual-spin spacecraft: a rotor spinning about its major axis and a despun platform on the same bearing, an arrangement flown for decades on communications satellites at far higher rates. A seized bearing turns the node into a co-rotating hub; the two crew vehicles that remain docked for the whole campaign are the crew's way home in either case. The boundary's performance under rotation is a campaign objective (AGRE-F-012) at the station's spin rate.</p>
+    <h3>The crossing, sized</h3>
+    <table>
+      <tr><th>Quantity</th><th>Value</th><th>Basis</th></tr>
+      <tr><td>Drum</td><td>8.0 m outer diameter, 3.0 m bore over a 2.5 m core, 4.0 m long</td><td>Option C of the sizing, 2026-11-07: the hub's dimensions as they are</td></tr>
+      <tr><td>Chambers</td><td>Three, 2.0 m across, two crew each, at 2.5 m from the axis</td><td>One to each arm's port</td></tr>
+      <tr><td>Where it sits</td><td>Mass centre 5.5 m up the axis, between the hub's face at 3 m and the node's at 8 m</td><td></td></tr>
+      <tr><td>Mass</td><td>13.8 t dry; 16.6 t with growth</td><td>Replaces the 2 t transfer-lock placeholder</td></tr>
+      <tr><td>Speed and gravity at a berth</td><td>0.42 m/s; 0.007 g in a chamber at rate</td><td>The station's 1.41 m/s</td></tr>
+      <tr><td>Drum inertia, crew aboard</td><td>1.1 × 10⁵ kg·m²</td><td>A seventieth of the station's passenger drum</td></tr>
+      <tr><td>Angular momentum at rate</td><td>1.9 × 10⁴ N·m·s, 1 in 140,000 of the rotor's</td><td></td></tr>
+      <tr><td>Drive torque, crew / cargo</td><td>156 / 183 N·m over 120 s; peak power 26 W</td><td>Into the node it would take 37 % of the 500 N·m despin drive, so the drive reacts into the rotor</td></tr>
+      <tr><td>Lock tolerance</td><td>10 mm at the berths (0.23°); 3 × 10⁻⁴ rad/s on rate</td><td>A third of the station's on rate: the engagement kicks the node</td></tr>
+      <tr><td>Push stroke</td><td>1.0 m; soft capture at 0.9 m, hard mate at 1.0 m</td><td></td></tr>
+      <tr><td>Throughput</td><td>Six crew a cycle, thirty an hour; the whole crew in two cycles</td><td></td></tr>
+      <tr><td>What a crossing costs the rotor</td><td>4 parts in a million of its spin; nothing to the despin drive but the bearing's friction</td><td>Dynamics model, section 9 of its report</td></tr>
+      <tr><td>What the engagement costs the node</td><td>2 × 10⁻⁵ rad/s at Gradient One's tolerance, a fifth of the lost threshold</td><td>Dynamics model</td></tr>
+    </table>
   </section>
 
   <hr>
@@ -239,13 +258,13 @@
       <tr><td>Spin-up propellant</td><td>~1.8 t</td><td>Tip thruster pods at 357 m, Isp 300 s</td></tr>
       <tr><td>Tension at hub, most loaded arm</td><td>~360 kN</td><td>Tip module, trim tank, car, arm self-load, Mars module</td></tr>
       <tr><td>Equivalent aluminium section</td><td>18 cm² at 200 MPa</td><td>Arm sized by stiffness and rail, not strength</td></tr>
-      <tr><td>CM shift, one person 1g to hub</td><td>0.16 m</td><td>100 kg × 350 m / 227 t</td></tr>
-      <tr><td>CM shift, one car tip to hub</td><td>3.1 m</td><td>2 t × 350 m / 227 t; trimmed in advance</td></tr>
+      <tr><td>CM shift, one person 1g to hub</td><td>0.15 m</td><td>100 kg × 350 m / 242 t</td></tr>
+      <tr><td>CM shift, one car tip to hub</td><td>2.9 m</td><td>2 t × 350 m / 242 t; trimmed in advance, and carried by the car's balance weight</td></tr>
       <tr><td>Trim authority</td><td>Three 4 t tip tanks, water pumped between them</td><td>Also the vehicle water reserve</td></tr>
       <tr><td>Car Coriolis load at 2 m/s</td><td>~1.3 kN</td><td>2 m ω v</td></tr>
     </table>
     <h3>Attitude</h3>
-    <p>The spin axis is held near the orbit normal so that the reboost direction stays in the plane the despun node can point in. For a flat rotor the orbit-averaged gravity-gradient torque precesses the spin axis about the orbit normal at Ω = ¾ n² cos θ / ω, about 28° per day at 450 km. The orbit normal itself regresses at 4.9° per day at 51.6°. The axis therefore follows the orbit with a lag of order 10°, without propellant. The coupled motion, including the despun node's pointing and array shadowing, is an open item for simulation before the orbit is fixed.</p>
+    <p>The spin axis is held near the orbit normal so that the reboost direction stays in the plane the despun node can point in. For a flat rotor the orbit-averaged gravity-gradient torque precesses the spin axis about the orbit normal at Ω = ¾ n² cos θ / ω, about 28° per day at 450 km. The orbit normal itself regresses at 4.9° per day at 51.6°. The axis therefore follows the orbit with a lag of order 10°, without propellant. The coupled motion is confirmed in the dynamics model (November 2026): the axis rides about 9° off the orbit normal and keeps station with the orbit's plane for nothing; the despun node's pointing and array shadowing remain open.</p>
   </section>
 
   <hr>
@@ -259,7 +278,7 @@
   <section>
     <h2>8. Systems</h2>
     <table>
-      <tr><th>System</th><th>Rev B sizing</th></tr>
+      <tr><th>System</th><th>Rev C sizing</th></tr>
       <tr><td>Orbit</td><td>450 km, 51.6°. Effective drag area ~900 m² (modules, arrays, trusses at 15 % fill, node); drag ~0.09 N at mean solar density; Δv ~12 m/s per year; reboost ~0.9 t per year at Isp 300 s from the despun node.</td></tr>
       <tr><td>Power</td><td>Load ~55 kW: five habitat modules at 5 kW; hub and node 6 kW; growth racks, 6 m² per band at 0.6 kW/m², 11 kW; exercise, medical and science 8 kW; arm utilities, cars, trim pumps and heaters 5 kW. Six 20 kW deployable arrays on two gimbals: ~102 kW sunlit at end of life, ~58 kW orbit-average. Battery 82 kWh for a 36-minute eclipse at 40 % depth of discharge. Arm distribution at 300 V DC, ~1 t of copper.</td></tr>
       <tr><td>Thermal</td><td>Rejected per module by body-mounted and arm-mounted panels, ~0.5 t per module. No long fluid loops; nothing crosses the boundary.</td></tr>
@@ -298,17 +317,17 @@
       <tr><td>Tip trim tanks × 3, dry, and thruster pods × 3</td><td>2.7 t</td><td></td></tr>
       <tr><td>Despun node, pressurized</td><td>8.0 t</td><td>Three docking ports</td></tr>
       <tr><td>Bearing, rotary transformer, optical link, drive</td><td>3.0 t</td><td></td></tr>
-      <tr><td>Transfer lock</td><td>2.0 t</td><td></td></tr>
+      <tr><td>The crossing: drum, three chambers, mechanisms</td><td>13.8 t</td><td>Crossing sizing, option C; replaces the 2 t transfer-lock placeholder</td></tr>
       <tr><td>Solar arrays × 6, gimbals × 2, battery</td><td>6.0 t</td><td>0.4 t per 20 kW array; 1.2 t per gimbal; 82 kWh</td></tr>
       <tr><td>Reboost propulsion dry, comms, GN&amp;C, avionics</td><td>1.8 t</td><td></td></tr>
-      <tr><td><strong>Dry hardware</strong></td><td><strong>167.9 t</strong></td><td></td></tr>
-      <tr><td>Growth, 20 % on dry hardware</td><td>33.6 t</td><td></td></tr>
+      <tr><td><strong>Dry hardware</strong></td><td><strong>180.5 t</strong></td><td>Rev B: 167.9 t</td></tr>
+      <tr><td>Growth, 20 % on dry hardware</td><td>36.1 t</td><td></td></tr>
       <tr><td>Trim and reserve water</td><td>12.0 t</td><td>Three 4 t tip tanks</td></tr>
       <tr><td>Consumables at campaign start</td><td>10.0 t</td><td>7.2 t plus spares</td></tr>
       <tr><td>Propellant</td><td>3.0 t</td><td>Spin-up reserve plus two years of reboost</td></tr>
-      <tr><td><strong>On orbit, campaign start</strong></td><td><strong>~227 t</strong></td><td>Excludes docked visiting vehicles</td></tr>
+      <tr><td><strong>On orbit, campaign start</strong></td><td><strong>~242 t</strong></td><td>Excludes docked visiting vehicles. Rev B: ~227 t</td></tr>
     </table>
-    <p class="note">Rev A carried no mass budget. Its "does not assume" list excluded a 250–500 t vehicle; Rev B lands under that because the arms are light and the modules are few, not because the vehicle is small.</p>
+    <p class="note">Rev A carried no mass budget. Its "does not assume" list excluded a 250–500 t vehicle; Rev B landed under that, and Rev C does with the crossing in, because the arms are light and the modules are few, not because the vehicle is small. The dynamics model carries 289 t: this budget with the crew, the two docked crew vehicles, the cars' balance weights and the mass placed at two tips to make the arms even.</p>
   </section>
 
   <hr>
@@ -322,20 +341,20 @@
       <tr><td>Despun node, boundary hardware, arrays</td><td>$0.5 B</td><td>$0.9 B</td></tr>
       <tr><td>Arms, cars, trim system, arm utilities</td><td>$0.3 B</td><td>$0.6 B</td></tr>
       <tr><td>Integration, test, ground segment, operations development</td><td>$0.5 B</td><td>$0.8 B</td></tr>
-      <tr><td>Launch of ~230 t</td><td>$0.4 B, heavy lift, 3–4 flights</td><td>$2.0 B, medium lift, ~15 flights</td></tr>
+      <tr><td>Launch of ~240 t</td><td>$0.4 B, heavy lift, 3–4 flights</td><td>$2.0 B, medium lift, ~15 flights</td></tr>
       <tr><td>On-orbit assembly campaign, robotic and EVA</td><td>$0.4 B</td><td>$0.7 B</td></tr>
       <tr><td>Subtotal</td><td>$4.0 B</td><td>$7.9 B</td></tr>
       <tr><td><strong>To first campaign, with 30 % reserves</strong></td><td><strong>$5.2 B</strong></td><td><strong>$10.3 B</strong></td></tr>
       <tr><td>Operations per year: two crew flights, three cargo flights, ground</td><td>$0.8 B</td><td>$1.1 B</td></tr>
     </table>
-    <p class="note">Development timeline of 8–10 years to first campaign is retained from Rev A and is consistent with the Gateway analog. The number that moved is the price.</p>
+    <p class="note">Development timeline of 8–10 years to first campaign is retained from Rev A and is consistent with the Gateway analog. The number that moved is the price. The crossing drum sits inside the boundary-hardware line and is not estimated separately; the Rev C mass moves the launch line by less than its own spread.</p>
   </section>
 
   <hr>
   <section>
     <h2>12. Requirement closure</h2>
     <table>
-      <tr><th>AGRE</th><th>Closure on Gradient One Rev B</th></tr>
+      <tr><th>AGRE</th><th>Closure on Gradient One Rev C</th></tr>
       <tr><td>F-001, F-007, F-008</td><td>Four gravity levels in one vehicle including a 1g control and a rotating 0g control sharing every confound; six-month exposures per subject</td></tr>
       <tr><td>F-002 to F-006</td><td>Coriolis, cross-coupled head movement, inter-deck gradient, adaptation and inter-band transitions at 1.6 rpm; spin-rate sensitivity not resolved</td></tr>
       <tr><td>F-009</td><td>Spin-up and spin-down with crew aboard are affordable and planned transients, including one simulated unplanned spin-down</td></tr>
@@ -349,16 +368,17 @@
   <section>
     <h2>13. What changed from Rev A</h2>
     <table>
-      <tr><th>Item</th><th>Rev A</th><th>Rev B</th></tr>
+      <tr><th>Item</th><th>Rev A</th><th>Rev B, and Rev C where marked</th></tr>
       <tr><td>Rotor</td><td>Single truss, water counterweight "beyond the outer band"</td><td>Three arms at 120°, three identical 1g tip modules, self-balancing, major-axis spin</td></tr>
       <tr><td>Hub</td><td>Non-rotating hub; docking and refuge; crossing unspecified</td><td>Rotating 0g hub on the rotor; small despun docking node; cyclic transfer lock, contactless power and data</td></tr>
       <tr><td>0g control</td><td>In the non-rotating hub</td><td>Rotating hub, so rotation and gravity level are separable</td></tr>
       <tr><td>Modules</td><td>"Pods", unsized</td><td>One common 17 t module, five copies, hung radially, three decks</td></tr>
       <tr><td>Radial transit</td><td>Pressurized transition corridor</td><td>Pressurized car on an arm rail; spoke tube deferred, +60 t if adopted</td></tr>
       <tr><td>Campaign</td><td>30–90 days, 2–4 crew</td><td>180 days, 10 crew, 60-day shakedown first</td></tr>
-      <tr><td>Mass</td><td>Not stated</td><td>~227 t bottom-up with 20 % growth</td></tr>
+      <tr><td>Mass</td><td>Not stated</td><td>~227 t bottom-up with 20 % growth; ~242 t in Rev C with the crossing</td></tr>
       <tr><td>Cost</td><td>$0.6–1.4 B</td><td>$5–10 B to first campaign; ~$1 B per year to operate</td></tr>
       <tr><td>Attitude, orbit, power, reboost, loads</td><td>Not stated</td><td>Stated above</td></tr>
+      <tr><td>The crossing (Rev C, November 2026)</td><td>None</td><td>Rev B's transfer lock, a 2 t placeholder, becomes the station's crossing at three chambers, 13.8 t, sized, modelled and flown in the flight software; the hub's dimensions fixed with it</td></tr>
     </table>
   </section>
 
@@ -366,8 +386,9 @@
   <section>
     <h2>14. Open items</h2>
     <ul>
-      <li><strong>Coupled attitude simulation.</strong> Bounded motion of the spin axis with nodal regression, despun node pointing and array shadowing, before the orbit is fixed.</li>
-      <li><strong>Transfer lock cycle.</strong> Spin-up torque on a loaded lock, reaction into the bearing, cycle time and leak budget per cycle.</li>
+      <li><strong>Coupled attitude simulation.</strong> Done in the dynamics model (November 2026); despun node pointing and array shadowing remain.</li>
+      <li><strong>The crossing.</strong> Taken in Rev C. What remains: the leak budget per cycle, the chambers' outfit, the lock's tolerance on rate set with the bearing's real friction and the lock's real engagement, and a drum that coasts when its drive is lost.</li>
+      <li><strong>The trim's law on the Rev C vehicle.</strong> The drum's mass up the axis joins the node's in what a tip load tilts the principal axis against: a tonne at a tip wobbles the vehicle at 5.5 × 10⁻⁵ rad/s against Rev B's 3.0 × 10⁻⁵, and the pods fire 80 s against 9 s to take it out. The wobble floor and the law's gain were sized on Rev B.</li>
       <li><strong>Arm first modes.</strong> Stiffness and damping of a 344 m open truss with a moving 2 t car; whether the car's Coriolis load sets the rail design.</li>
       <li><strong>Module thermal at 1g.</strong> Natural convection inside the 1g and partial-g modules changes cabin air handling and condensation behaviour from the ISS design basis.</li>
       <li><strong>Assembly sequence.</strong> Arm erection and module hanging before spin-up, with the robotic and EVA campaign, is costed but not sequenced.</li>
@@ -377,11 +398,11 @@
   <hr>
   <section>
     <h2>15. Ownership and partnership</h2>
-    <p>Developed under Aegis Station Infrastructure LLC. Engagement models: cooperative agreements, agency campaign partnerships, international research participation, commercial biological payload contracts. Full title remains with ASI unless otherwise negotiated. The Rev A dossier (September 2026) is retained as an archive.</p>
+    <p>Developed under Aegis Station Infrastructure LLC. Engagement models: cooperative agreements, agency campaign partnerships, international research participation, commercial biological payload contracts. Full title remains with ASI unless otherwise negotiated. The Rev A and Rev B dossiers (September 2026) are retained as archives.</p>
   </section>
 
   <div class="end-footer">
-    Aegis Station — Gradient One · Design Dossier Rev B · Classification: Unrestricted<br>
+    Aegis Station — Gradient One · Design Dossier Rev C · Classification: Unrestricted<br>
     contact@aegisstation.com · aegisstation.com
   </div>
 
