@@ -1074,7 +1074,7 @@
       <img src="images/fc_fleet_overview.png" alt="Fleet Commander — fleet overview" style="width:100%; display:block;">
     </div>
     <div class="image-caption reveal">
-      <span class="caption-text">FIG. 01 &mdash; Fleet Overview: water throughput, mode breakdown, pad &amp; berth occupancy</span>
+      <span class="caption-text">FIG. 01 &mdash; Fleet Overview: water throughput, the schedule as flown on the fleet clock (launches in the last 24 hours, time after the slot, hours a pad and a berth are held), mode breakdown, pad &amp; berth occupancy &mdash; here fourteen hours into the first fleet day, the cadence still filling</span>
       <span class="caption-ref">FC-CONSOLE-001</span>
     </div>
 
@@ -1090,7 +1090,7 @@
       <img src="images/fc_pad_status.png" alt="Fleet Commander — pad and berth deconfliction" style="width:100%; display:block;">
     </div>
     <div class="image-caption reveal">
-      <span class="caption-text">FIG. 03 &mdash; Pad &amp; Berth Status: 11 surface pads, 11 station berths, FIFO berthing queue &mdash; here at the surge, nine berths taken and 63 ships waiting</span>
+      <span class="caption-text">FIG. 03 &mdash; Pad &amp; Berth Status: 11 surface pads, 11 station berths, FIFO berthing queue &mdash; here on the schedule, each pad showing its stage, the swap arm's step, the fill's step and the minutes to its liftoff</span>
       <span class="caption-ref">FC-CONSOLE-003</span>
     </div>
 
@@ -1166,13 +1166,13 @@
         <div class="mission-card-accent"></div>
         <div class="mission-card-num">01 &mdash; DISPATCH</div>
         <h3>Sortie Scheduling</h3>
-        <p>Selects which vehicle flies the next sortie from state-of-charge, thermal state, maintenance status and position &mdash; maximising water delivered per unit time.</p>
+        <p>Launch slots stand every 17.6 minutes, 82 a day. A tanker is given the earliest slot its servicing can make and lifts off at it; between pads that finish together the choice is scored on state of charge, idle time, position and wear.</p>
       </div>
       <div class="mission-card">
         <div class="mission-card-accent"></div>
         <div class="mission-card-num">02 &mdash; DECONFLICT</div>
         <h3>Pad &amp; Berth Management</h3>
-        <p>Each surface pad is a conveyor: a returning tanker lands on the shortest queue, only its head is serviced and a launch advances the line, so dispatch is limited by vehicle availability and not by pad count. Eleven station berths sit behind a FIFO berthing queue when the station is saturated.</p>
+        <p>Each surface pad has a line: a returning tanker joins the shortest and waits on the apron. The head of a line is called onto its pad one servicing time before the launch slot it has been given, so a pad is held for servicing and nothing else. On the pad the swap arm and the propellant fill work together, 2.6 hours from the call to liftoff; a berth's arm swaps the cartridge in 1.3. Eleven station berths sit behind a FIFO berthing queue.</p>
       </div>
       <div class="mission-card">
         <div class="mission-card-accent"></div>
@@ -1196,7 +1196,7 @@
         <div class="mission-card-accent"></div>
         <div class="mission-card-num">06 &mdash; OPTIMISE</div>
         <h3>Throughput &amp; Awareness</h3>
-        <p>Aggregates 84 telemetry streams into fleet-wide situational awareness, paces each ship's simulator through its coasts, and drives the conveyor of sorties that keeps water flowing to station.</p>
+        <p>Aggregates 84 telemetry streams into fleet-wide situational awareness, paces each ship's simulator through its coasts, keeps one fleet clock for the pads, the berths and the launch slots, and reports the schedule as flown: launches in the last day, time after the slot, hours a pad and a berth were held.</p>
       </div>
     </div>
   </div>
@@ -1212,31 +1212,33 @@
     </div>
     <div class="s2s-body reveal" style="max-width: none;">
       <p>The coordinator exists and runs the fleet closed-loop in simulation, as of November 2026: 84 copies of the tanker's flight software, each flying its own water sortie on liquid oxygen and liquid hydrogen, under one ground process. The ships fly themselves. The coordinator decides who flies, when a ship may lift, which berth it takes and when it is released, and which pad it comes home to &mdash; the gates that stand on a shared resource or a ground operation &mdash; and sends each one when the ship's telemetry says it is ready. Everything between the gates is the vehicle's own. The fleet is the one the fill campaign is sized at: 82 tankers flying and a reserve of two, with eleven pads and eleven berths.</p>
-      <p>The run is the fleet from a fresh launch through two full water cycles: 82 ships in service, two in reserve, 164 sorties completed, no anomaly, no comms loss and no safing in any vehicle, and no telemetry packet dropped. Every ship passed its go/no-go for the round trip on the 45 t it loaded at the pad, and nothing was taken on at the station. With every ship ready at once, the dispatcher sent all 82 up within three seconds and the fleet flew as a formation; the pads and berths are what spread it. All 82 arrived at the station within four seconds of each other and queued 78 deep for eleven berths; the berths cleared the queue in two minutes, the landings spread over the same two and the turnarounds over four, and the second cycle held that spread without adding to it. Mean cycle 1,446 s, utilization 0.98. That is still the decision taken: no dispatch cadence. The surge is what the system produces and the queues absorb it.</p>
-      <p>On the host, the 84 stacks are 168 processes and 2,100 message queues, and the run held a fifth of a sixteen-core machine with the coordinator's one-second broadcast holding its second. The two pictures below are that run played back from its tape, 323,140 words of the coordinator's alphabet.</p>
+      <p>The first run at this size, on 9 November, had no schedule: a turnaround was half a minute of telemetry-gated steps and every ready ship was dispatched at once. All 82 went up within three seconds, arrived at the station within four seconds of each other and queued 78 deep for eleven berths. It showed that one process could manage 84 stacks through 164 sorties with no anomaly and no telemetry packet dropped, and nothing about the fill, which is stated against a launch every 18 minutes and a pad held for at most 3.2 hours.</p>
+      <p>The run of 10 November is on that schedule. The coordinator keeps one fleet clock, running at the same twenty times real time as the coasts. Launch slots stand on it every 17.6 minutes. Every tanker on the ground waits in a pad's line on the apron and is called onto the pad one servicing time before its slot. The pad's equipment then takes its time: safe and vent checks, the swap arm pulling the empty cartridge and seating a full one while the couplings chill, transfer 45 t of propellant and purge, then inspection and liftoff at the slot. Those steps and their times are the water logistics dossier's, 2.6 hours in all; a berth's arm takes 1.3. Each step ends only when its time has passed and the ship's telemetry shows what the step was for.</p>
+      <p>Over 2.14 fleet days the fleet made 167 liftoffs in 167 consecutive slots, 82 of them in the last 24 hours, each on average 16 seconds after its slot and never more than 40. A pad was held 2.58 hours and a berth 1.34, against the 3.2 that eleven of each allow. On the second day nine of the eleven pads and five of the eleven berths were the most in use at once, the berth queue never held more than one ship, and each tanker lifted off 23.9 hours after its last: one flight a day. No anomaly, no safing, no step overrun.</p>
+      <p>On the host, the 84 stacks are 168 processes and 2,100 message queues, and the run held a fifth of a sixteen-core machine with the coordinator's one-second broadcast holding its second. The two pictures below are the two runs played back from their tapes: the surge of 9 November, and the schedule on its second day.</p>
     </div>
     <div class="mission-grid reveal" style="grid-template-columns: 1fr 1fr; gap: 24px; background: none; margin-top: 28px;">
       <div>
         <div style="border: 1px solid var(--border); overflow: hidden; line-height: 0;">
-          <img src="images/fc_fleet_surge.png" alt="The fleet coordinator's playback at tick 999 of the two-cycle run of 84: the sortie drawn as a loop with the station's eleven berths across the top and the eleven pads along the bottom, 84 vehicle cards around the edge, 77 of them reading BERTH and five at berths, the 77 in three rows of dots in the berth FIFO under the station, the reserve pair sitting above pads 2 and 3" style="width:100%; display:block;"/>
+          <img src="images/fc_fleet_surge.png" alt="The fleet coordinator's playback at tick 999 of the 9 November run of 84, which had no launch cadence: the sortie drawn as a loop with the station's eleven berths across the top and the eleven pads along the bottom, 84 vehicle cards around the edge, 77 of them reading BERTH and five at berths, the 77 in three rows of dots in the berth FIFO under the station, the reserve pair sitting above pads 2 and 3" style="width:100%; display:block;"/>
         </div>
         <div class="image-caption">
-          <span class="caption-text">The surge, tick 999: all 82 ships in service entered BERTHING within four ticks. Five are at berths and 77 wait in the FIFO under the station; the reserve pair sit above pads 2 and 3. Every element drawn is a field of the coordinator's 1&nbsp;Hz broadcast.</span>
+          <span class="caption-text">Without a cadence, 9 November, tick 999: all 82 ships in service entered BERTHING within four ticks. Five are at berths and 77 wait in the FIFO under the station; the reserve pair sit above pads 2 and 3. Every element drawn is a field of the coordinator's 1&nbsp;Hz broadcast.</span>
           <span class="caption-ref" style="white-space: nowrap; margin-left: 24px;">FC-SIM-001</span>
         </div>
       </div>
       <div>
         <div style="border: 1px solid var(--border); overflow: hidden; line-height: 0;">
-          <img src="images/fc_fleet_spread.png" alt="The fleet coordinator's playback at tick 2499 of the same run: the ships spread around the loop as a string of dots, a cluster near the top of the coast up, three at berths, a long string coasting down the right side and eight deorbiting, the pads free with the reserve pair above pads 2 and 3" style="width:100%; display:block;"/>
+          <img src="images/fc_fleet_schedule.png" alt="The fleet coordinator's playback at tick 6024 of the 10 November run, on the schedule: nine of the eleven pads along the bottom captioned service, safe or inspect with four or five tankers stacked on the apron above each, pads 4 and 5 free with five waiting; five ships at berths across the top; a few dots on each leg of the loop; the centre text reading fleet day 2 09:15, 82 launches in 24 h of 82, 0.3 min after the slot, pad held 2.6 h, berth held 1.3 h, 9 on pads, 43 on the apron" style="width:100%; display:block;"/>
         </div>
         <div class="image-caption">
-          <span class="caption-text">The second cycle, tick 2499: 82 sorties completed, mean cycle 1,494 s, utilization 0.98. The formation has dissolved into a string around the loop &mdash; 68 coasting, three inserting, three at the station, eight deorbiting &mdash; and the berth FIFO is empty.</span>
+          <span class="caption-text">On the schedule, 10 November, fleet day 2 at 09:15: 82 launches in the last 24 hours. Nine pads are servicing, with the tankers waiting on each apron stacked above; five ships are at berths and none is queued. The ships in flight are about four times too many: burns are flown in real time under a clock running at twenty.</span>
           <span class="caption-ref" style="white-space: nowrap; margin-left: 24px;">FC-SIM-002</span>
         </div>
       </div>
     </div>
     <div class="s2s-body reveal" style="max-width: none; margin-top: 28px;">
-      <p>What the coordinator does not do is stated as plainly. It holds no position for anything: a pad is a name, there is no map, and the loop in the picture is the sortie, not geometry. Each simulated ship has its own ground and no station, so the eleven pads and eleven berths are the coordinator's bookkeeping until the vehicles share one simulated world, which is the open architecture decision the <a href="lunar_tanker_fleet.html" style="color: var(--ice);">tanker page</a> names. The run does not show the fill's schedule: a turnaround here is about half a minute of telemetry-gated steps, not the 2.6 hours the pad is sized on, the coasts are run at twenty times real time, and there is no launch every eighteen minutes, so the eleven pads and berths are never pressed the way the campaign will press them. The simulation is deterministic, so the queues never grow past the first cycle. No fault has yet been put to the fleet in a run; the abort path and the operator's own acts are the next runs. Surface-to-surface routing is a duty type without routing logic. The fleet has run against simulated vehicles only.</p>
+      <p>What the coordinator does not do is stated as plainly. It holds no position for anything: a pad is a name, there is no map, and the loop in the picture is the sortie, not geometry. Each simulated ship has its own ground and no station, so the eleven pads and eleven berths are the coordinator's bookkeeping until the vehicles share one simulated world, which is the open architecture decision the <a href="lunar_tanker_fleet.html" style="color: var(--ice);">tanker page</a> names. The schedule run has its own limits. Every step took exactly its tabled time, so the run shows that the cadence closes at 2.6 hours on eleven pads and does not show what a slow transfer, a stalled swap or a pad out of service does to it. The split of the swap's 50 minutes into steps and all of the berth's times are the model's own; the dossier gives a berth only its ceiling. A tanker lands into a pad's line and reaches the pad in no time, where the dossier has an apron and nothing that moves a tanker to it. Nothing waits for a pad to come under the orbit. And the burns are flown in real time under a clock at twenty, so about 26 ships were in flight at once where a sortie in proportion would have about seven; pad hours, berth hours and launches per day do not depend on that. No fault has yet been put to the fleet in a run; the abort path and the operator's own acts are the next runs. Surface-to-surface routing is a duty type without routing logic. The fleet has run against simulated vehicles only.</p>
     </div>
   </div>
 </section>

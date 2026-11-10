@@ -87,7 +87,7 @@
   <div class="kicker">Aegis Station</div>
   <h1>Lunar Water Logistics</h1>
   <div class="subtitle">6 Million Tonnes of Lunar Water to Lunar Orbit, on a Fleet That Imports Nothing</div>
-  <div class="meta">Architecture Reference Document &nbsp;|&nbsp; Rev C — November 2026 &nbsp;|&nbsp; Not for Hardware Commitment</div>
+  <div class="meta">Architecture Reference Document &nbsp;|&nbsp; Rev D — November 2026 &nbsp;|&nbsp; Not for Hardware Commitment</div>
 
   <hr>
 
@@ -109,6 +109,15 @@
     <p>
       Rev C corrects the shield mass to the full 3 m shell of the station's geometry, 6.0 million tonnes where Rev B carried 3.3, and resizes the campaign to hold the fill time. The architecture is otherwise unchanged and is stated here as a baseline, not a closed design: 82 tankers, 3,690 tonnes a day, a fill of roughly 4.5 years, and the Lunar Orbital Propellant Depot as the fleet's first
       customer before the station exists. Section 11 lists what does not yet close.
+    </p>
+    <p>
+      Rev D takes the vehicle cycle from stated to simulated. The fleet coordinator now flies 84 copies of the tanker's
+      flight software on this document's schedule, a launch slot every 17.6 minutes and the pad steps of Section 5 at
+      their stated times, and holds 82 launches a day on eleven pads with each pad occupied 2.6 hours. The same run
+      shows where this document was loose: a berth that only swaps a cartridge is held about 1.3 hours, not 3.2; a
+      tanker is busy about six hours of its day, so the fleet of 82 follows from one flight a day per airframe and not
+      from the cycle; and the apron every tanker waits on has no stated way on or off it. No quantity in Section 9
+      changes. Section 5 carries the result, Section 11 the corrections and the new open items.
     </p>
   </section>
 
@@ -241,7 +250,7 @@
       <tr><td>Propellant aboard</td><td>Couple and chill lines 20 min, transfer 60–75 min, disconnect, leak check and purge 15 min</td><td>Disconnect and remove spent module 25 min, install, latch, connect and leak-check 35 min, chill engine feed 10 min</td></tr>
       <tr><td>Inspection and prelaunch</td><td>30 min</td><td>30 min</td></tr>
       <tr><td><strong>Pad time, steps overlapped</strong></td><td><strong>~2.6 h</strong></td><td><strong>~2.0 h</strong></td></tr>
-      <tr><td>Pad time, sequential</td><td>~3.5 h</td><td>~2.7 h</td></tr>
+      <tr><td>Pad time, sequential</td><td>~3.4 h</td><td>~2.7 h</td></tr>
     </table>
     <table class="breakable">
       <thead><tr><th>Consequence</th><th>Fluid couplings</th><th>Swappable modules</th></tr></thead>
@@ -268,14 +277,15 @@
       <tr><td>Return-leg propellant</td><td>Lifted from the surface, ~3–5 t</td><td>Taken on at the depot, ~3–5 t of hydrolox per sortie</td></tr>
       <tr><td>Ascent saving</td><td>None</td><td>Not lifting the return propellant saves ~6–9 t of ascent propellant, worth roughly +3–4 t of payload per sortie</td></tr>
       <tr><td>What it costs in orbit</td><td>Nothing</td><td>3–5 t of hydrolox per sortie is ~6 t of water electrolysed at the depot per sortie, ~530 t/day at fleet cadence, of order 160 MW of orbital power and a large 20 K storage bank</td></tr>
-      <tr><td>Berth time</td><td>Cartridge swap only</td><td>Cartridge swap plus a second cryogenic connection and transfer per cycle, on the resource the capacity row says is as tight as the pad</td></tr>
+      <tr><td>Berth time</td><td>Cartridge swap only</td><td>Cartridge swap plus a second cryogenic connection and transfer per cycle, roughly doubling a berth visit that is otherwise about 1.3 hours</td></tr>
       <tr><td>Where the power already is</td><td>The refinery is on the surface and is sized for the ascent load anyway; the return leg is a ~10 % increment on it</td><td>Moves a tenth of the refinery into orbit for a tenth more payload</td></tr>
     </table>
     <p>
       Depot top-off is the right answer for the Hauler, which cannot lift its return propellant from Earth economically,
       and for any vehicle that arrives from elsewhere. For a tanker that departs from a pad with a refinery on it, the
-      return leg is a small increment on a plant that already exists, and buying it in orbit instead costs berth time and
-      an orbital power plant. The tanker fills at the surface. Depot top-off stays available as an option for
+      return leg is a small increment on a plant that already exists, and buying it in orbit instead costs an orbital
+      power plant and a second cryogenic connection on every cycle. Berth time is not what decides it: the simulated
+      cycle below leaves the berths half idle. The tanker fills at the surface. Depot top-off stays available as an option for
       contingency and for post-fill operations when the depot has surplus, and the depot interface is unchanged.
     </p>
 
@@ -285,6 +295,36 @@
       2.6 hours, ceiling 3.2. <em>Swappable propellant modules and routine depot top-off are rejected for the water
       tanker. Fifteen pads are recommended over eleven for margin: eleven hold the cadence only at the 3.2-hour ceiling, fifteen hold it with a pad occupancy up to 4.4 hours, so a slow transfer or a pad out of service does not stall the fill.</em>
     </div>
+
+    <h3>The cycle as simulated</h3>
+    <p>
+      The fleet coordinator runs this cycle closed-loop against the tanker's flight software: 84 instances, 82 flying
+      and a standby reserve of two, eleven pads and eleven berths. Launch slots stand every 17.6 minutes. A tanker
+      waits in a pad's line on the apron and is called onto the pad one servicing time before its slot, so a pad is
+      held for servicing only. Each step ends when its time has passed and the vehicle's telemetry shows what the
+      step was for. The pad steps and times are the fluid-coupling column above, with the transfer at 75 minutes.
+      Over 2.14 simulated days:
+    </p>
+    <table class="breakable">
+      <thead><tr><th>Measure</th><th>Simulated</th><th>This document</th></tr></thead>
+      <tr><td>Launches in 24 hours</td><td>82, in consecutive slots, none missed</td><td>82</td></tr>
+      <tr><td>Interval between launches</td><td>17.6 min mean, 17.0 to 18.1</td><td>One every 18 minutes</td></tr>
+      <tr><td>Pad held, call to liftoff</td><td>2.58 h</td><td>2.6 h target, 3.2 h ceiling</td></tr>
+      <tr><td>Pads in use</td><td>8.9 of 11 on average, never more than 9</td><td>9 at 2.6 h</td></tr>
+      <tr><td>Berth held, capture to release</td><td>1.34 h</td><td>3.2 h ceiling; no steps stated</td></tr>
+      <tr><td>Berths in use</td><td>4.6 of 11 on average, never more than 5</td><td>11</td></tr>
+      <tr><td>Ships queued for a berth</td><td>Never more than 1</td><td>Not stated</td></tr>
+      <tr><td>One tanker, liftoff to next liftoff</td><td>23.9 h</td><td>One flight a day</td></tr>
+    </table>
+    <p>
+      The pad arithmetic of this section holds: 82 a day on nine pads at 2.6 hours, with two of the eleven idle at any
+      moment. What the run adds to the steps above is its own, not this document's, and is assumed until hardware
+      says otherwise: the 50-minute swap divided into unlatch 5, pull 15, seat 15, latch 5 and check 10 minutes; and
+      a berth visit of 15 minutes of safing, the same 50-minute swap seating an empty cartridge, and 15 minutes of
+      departure checks. The transfer at 75 minutes for 45 t is 8.3 kg/s of oxygen and 1.4 kg/s of hydrogen, so oxygen
+      sets the time and the hydrogen rate sits under the 2–5 kg/s quoted above.
+    </p>
+    <p class="note">What the run does not show: every step took exactly its stated time, so the 0.6 hours between the 2.6-hour target and the 3.2-hour ceiling was never drawn on, and the case for fifteen pads, a slow transfer or a pad out of service, is still argued and not measured. Assumptions A1 to A3 of Section 11 are assumed in the simulation exactly as here. Nothing in it waits for a pad to come under the orbit.</p>
   </section>
 
   <hr>
@@ -333,6 +373,7 @@
     <h3>Surface</h3>
     <ul>
       <li>Launch pads with dust control and blast deflection</li>
+      <li>An apron beside the pads where tankers wait between flights, about sixty of the 82 at any moment; how a tanker moves between apron and pad is open (Section 11)</li>
       <li>Cartridge fill, staging, and ground inventory of displaced inert gas</li>
       <li>Pad-side electrolysis and liquefaction: the refinery that fuels the fleet</li>
       <li>LUNET utility nodes for surface mobility, refuelling, and inter-node exchange</li>
@@ -366,7 +407,8 @@
       <tr><td>Cartridge loads</td><td>~134,000</td></tr>
       <tr><td>Water mined, cargo plus propellant</td><td>~14 million tonnes; ~8,300 t/day at fleet cadence</td></tr>
       <tr><td>Tankers</td><td>82, each flying about 1,600 cycles</td></tr>
-      <tr><td>Pads and berths</td><td>11 at the 3.2-hour ceiling; 15 recommended</td></tr>
+      <tr><td>Pads</td><td>11 at the 3.2-hour ceiling, 9 in use at the 2.6-hour target; 15 recommended</td></tr>
+      <tr><td>Berths</td><td>11 carried; about 5 in use if a berth visit is a cartridge swap only (Section 11)</td></tr>
       <tr><td>Engines over the campaign</td><td>~5,400–10,700; 800–1,600 t landed on the Moon</td></tr>
       <tr><td>Surface refinery</td><td>Of order 1.5 GW continuous</td></tr>
       <tr><td>Cartridge pool, mining, and depot hardware</td><td>Not yet sized</td></tr>
@@ -397,7 +439,7 @@
   <section class="section">
     <h2>11. Open Items</h2>
     <p>
-      Rev B fixed the propellant decision. Rev C resizes the campaign for the corrected shield mass and leaves the vehicle cycle as stated. The following do not yet
+      Rev B fixed the propellant decision. Rev C resized the campaign for the corrected shield mass and left the vehicle cycle as stated. Rev D has the cycle simulated (Section 5) and revises the rows below against it. The following do not yet
       close and are carried as open, not hidden.
     </p>
     <h3>Scope and assumptions for the fleet analysis</h3>
@@ -417,13 +459,16 @@
     </p>
     <table class="breakable">
       <thead><tr><th>Item</th><th>Status</th></tr></thead>
-      <tr><td>Daily turnaround</td><td>3,690 t/day at 45 t per sortie is one flight per tanker per day for the whole campaign, about 1,600 cycles per airframe. This is a requirement, not an assumption; the fill time is derived from it. It is an airliner cadence in an environment gentler than any reusable booster faces: no reentry, no aerodynamic load, one-sixth-g landings. What it demands is stated in the rows below: engines as scheduled replacement items, a pad turnaround of 2.6 hours, and a refinery sized to the cadence. No reusable orbital-class vehicle has yet flown daily; that is what the fleet has to demonstrate, not a reason to plan for less.</td></tr>
+      <tr><td>Daily turnaround</td><td>3,690 t/day at 45 t per sortie is one flight per tanker per day for the whole campaign, about 1,600 cycles per airframe. This is a requirement, not an assumption; the fill time is derived from it. It is an airliner cadence in an environment gentler than any reusable booster faces: no reentry, no aerodynamic load, one-sixth-g landings. What it demands is stated in the rows below: engines as scheduled replacement items, a pad turnaround of 2.6 hours, and a refinery sized to the cadence. No reusable orbital-class vehicle has yet flown daily; that is what the fleet has to demonstrate, not a reason to plan for less. <strong>Rev D:</strong> the cycle itself is about six hours, 2.6 at the pad, about two in flight and 1.3 at the berth, so a tanker flying once a day waits on the apron about eighteen hours of the twenty-four and about sixty of the 82 are parked at any moment. Throughput is bounded by pad-hours, about 100 launches a day on eleven pads at 2.6 hours, not by the number of tankers. The fleet of 82 is therefore what one flight a day per airframe requires. Flying each airframe two or three times a day would deliver the same water with a third to a half of the airframes and the same number of engines, sorties and pad-hours; whether airframe life or airframe count is the cheaper thing to spend is not decided here, and 82 is carried.</td></tr>
       <tr><td>Engine pipeline</td><td>Each engine position sees roughly 500 hours of burn over an airframe life, many times any demonstrated engine life, so engines are scheduled replacement items. At 50–100 sorties per engine set, four engines per vehicle, the campaign consumes about 5,400–10,700 engines, three to seven a day from a single printed part number, 800–1,600 t landed on the Moon. Engine life is the lever: 200 sorties per set quarters the count. Life-expired engines stay at the pad as the first refurbishment demand on the surface.</td></tr>
-      <tr><td>Vehicle dry mass</td><td>The vehicle must close at 45 t of payload to lunar orbit. The stated launch and propellant figures imply roughly 5 t of structure, tanks, engines, and cartridge shell, which is aggressive for a lander. A bottom-up mass budget that closes at 45 t, with the launch mass that requires, is the open item. Not done in this revision.</td></tr>
+      <tr><td>Vehicle dry mass</td><td>The vehicle must close at 45 t of payload to lunar orbit. The stated launch and propellant figures imply roughly 5 t of structure, tanks, engines, and cartridge shell, which is aggressive for a lander. A bottom-up mass budget that closes at 45 t, with the launch mass that requires, is the open item. Not done in this revision. <strong>Rev D:</strong> the vehicle the flight software flies is not this one. It is 12 t dry with three 120 kN engines and 102 t at liftoff, budgets 1,870 m/s for each leg with 3 % and 10 % reserves where Section 3 states 2,600 and 1,800 m/s, and closes the round trip on the same 45 t of propellant, reaching orbit with 9.3 t and landing with 1.2 t. Each vehicle closes on its own figures; they have not been reconciled. The flight-profile work also finds a liftoff thrust-to-weight of two or better is needed to leave the pad, about 330 kN at that mass, against the four small engines counted in the row above.</td></tr>
+      <tr><td>Payload per sortie</td><td><strong>New in Rev D.</strong> This document counts 45 t of water per sortie. The cartridge the flight software carries is 45 t full with a 1 t shell that comes back, 44 t of water delivered: 3,608 t/day at 82 sorties, 2 % under the 3,690 the fill time is derived from. Either the full cartridge is 46 t or the fill is about five weeks longer. Not resolved.</td></tr>
       <tr><td>Surface power</td><td>Electrolysis and hydrogen liquefaction at fleet cadence are of order 1.5 GW continuous, about 18 MW per daily sortie. LUNET node sizing does not cover this; the pad refinery is a separate facility and is not yet sized.</td></tr>
       <tr><td>Cartridge reuse</td><td>The cartridge is infrastructure, not a consumable, but its cycle life and bladder material are undefined. Fleet size of cartridges bounds throughput.</td></tr>
-      <tr><td>Loading-site capacity</td><td>Eighty-two sorties a day is one launch every 18 minutes. With eleven pads and eleven berths, each tanker may hold a pad for at most 3.2 hours and a berth for at most 3.2 hours, all steps included. The fleet dispatch ADR carries a 4–8 hour placeholder for the swap; this requirement supersedes it. Pads are cheap against megawatts: seventeen pads relax the turnaround to five hours. A tanker waiting on propellant or a cartridge must not hold a pad; it waits on an apron, so pad occupancy measures servicing only.</td></tr>
-      <tr><td>Turnaround target</td><td>Closed to a target by Section 5: fluid couplings at the surface, 2.6 hours with cartridge swap and propellant transfer overlapped, 3.2 hour ceiling for eleven pads. Still open: whether a 2.6 hour turnaround is achievable in practice with the cargo and coupling hardware as designed. Fifteen pads recommended for margin.</td></tr>
+      <tr><td>Loading-site capacity</td><td>Eighty-two sorties a day is one launch every 18 minutes. With eleven pads and eleven berths, each tanker may hold a pad for at most 3.2 hours and a berth for at most 3.2 hours, all steps included. The flight software's dispatch ADR carried a 4–8 hour placeholder for the swap; this requirement superseded it and the fleet coordinator now runs to it (Section 5). Pads are cheap against megawatts: seventeen pads relax the turnaround to five hours. A tanker waiting on propellant or a cartridge must not hold a pad; it waits on an apron, so pad occupancy measures servicing only. <strong>Rev D:</strong> the pads behave as stated, nine in use at 2.6 hours. The berths do not: earlier revisions called the berth as tight as the pad and gave it the same ceiling without any steps. A berth visit that is a cartridge swap and checks is about 1.3 hours and keeps five berths in use. Eleven are carried until the berth's steps are stated by the station side; shield-side discharge or cartridge handling done while the tanker is berthed would lengthen the visit, and nothing here says whether it is.</td></tr>
+      <tr><td>Apron and landing</td><td><strong>New in Rev D.</strong> Section 5 starts the pad clock at landing and ends it at liftoff, 2.6 hours. A tanker flying once a day is on the ground about twenty hours, so it does not stay on the pad it landed on, and this document has said only that it waits on an apron. Either a tanker lands on a pad and is moved off and back, which is two moves of an empty tanker and a landing that occupies a pad outside the 2.6 hours; or it lands on the apron, which then needs the dust control and blast deflection the pads have. The simulation takes the second without the cost: a tanker lands into a pad's line, reaches the pad in no time, and has its safe-and-vent checks when it is called. The apron's size, its surface, and how a tanker moves across it are not designed.</td></tr>
+      <tr><td>Orbital phasing</td><td><strong>New in Rev D as a row;</strong> named among the fleet's limits since Rev B and never analysed. A tanker leaving a berth can reach a given pad only when the pad is near the orbit's ground track, and a launch reaches the station only in a window. Neither the 17.6-minute slots nor the berth release in the simulation account for it. The effect on berth time and on the evenness of the launch cadence is open.</td></tr>
+      <tr><td>Turnaround target</td><td>Closed to a target by Section 5: fluid couplings at the surface, 2.6 hours with cartridge swap and propellant transfer overlapped, 3.2 hour ceiling for eleven pads. Still open: whether a 2.6 hour turnaround is achievable in practice with the cargo and coupling hardware as designed. Fifteen pads recommended for margin. <strong>Rev D:</strong> simulated at the stated step times the target holds, 2.58 hours a pad with every launch in its slot. That shows the steps add up and the schedule closes; it does not show the steps can be done in those times, and no step was allowed to run long. The margin case, step times that vary and a pad out of service on eleven pads and on fifteen, is the next run.</td></tr>
       <tr><td>Airframe availability</td><td>Eighty-two sorties a day requires eighty-two airframes available every day. Airframes in engine swap or inspection are in addition to that number, not subtracted from it. The size of the maintenance rotation follows from engine-swap time and inspection intervals and is not yet set.</td></tr>
       <tr><td>Resource base</td><td>Shield water plus propellant water is about 14 million tonnes against polar ice estimates that span two orders of magnitude. Deposit assessment is the gate, and it is why the program is waiting.</td></tr>
     </table>
@@ -433,6 +478,20 @@
 
   <section class="section">
     <h2>12. Changes From the Previous Revision</h2>
+    <h3>Rev C to Rev D</h3>
+    <table>
+      <tr><th>Item</th><th>Rev C</th><th>Rev D</th></tr>
+      <tr><td>Vehicle cycle</td><td>Stated</td><td>Simulated closed-loop against the flight software at the stated step times: 82 launches a day held on eleven pads (Section 5)</td></tr>
+      <tr><td>Pad time, sequential</td><td>~3.5 h</td><td>~3.4 h, the sum of the steps with a 75-minute transfer</td></tr>
+      <tr><td>Berth time</td><td>3.2-hour ceiling, "as tight as the pad"</td><td>About 1.3 hours for a cartridge swap; five of eleven berths in use; eleven carried pending the station's berth steps</td></tr>
+      <tr><td>Case against depot top-off</td><td>Berth time and an orbital power plant</td><td>An orbital power plant and a second cryogenic connection per cycle; berth time is not scarce</td></tr>
+      <tr><td>Fleet size</td><td>82, sized by the fill</td><td>82 carried; stated as following from one flight a day per airframe, the cycle being about six hours and pads the bound on throughput</td></tr>
+      <tr><td>Apron</td><td>Named</td><td>Listed as infrastructure; landing place and movement to the pad opened as an item</td></tr>
+      <tr><td>Vehicle</td><td>One vehicle, ~5 t dry, open</td><td>The flight software's 12 t vehicle recorded beside it, unreconciled</td></tr>
+      <tr><td>Payload per sortie</td><td>45 t of water</td><td>45 t carried; the 1 t cartridge shell, 44 t delivered, opened as an item</td></tr>
+      <tr><td>Orbital phasing</td><td>Named as a limit</td><td>Opened as an item</td></tr>
+      <tr><td>Quantities</td><td></td><td>Unchanged, with pads and berths now on separate rows</td></tr>
+    </table>
     <h3>Rev B to Rev C</h3>
     <table>
       <tr><th>Item</th><th>Rev B</th><th>Rev C</th></tr>
@@ -461,7 +520,7 @@
   </section>
 
   <div class="end-footer">
-    Aegis Station — Lunar Water Logistics · Architecture Reference · Rev C · Classification: Unrestricted<br>
+    Aegis Station — Lunar Water Logistics · Architecture Reference · Rev D · Classification: Unrestricted<br>
     contact@aegisstation.com · aegisstation.com
   </div>
 
