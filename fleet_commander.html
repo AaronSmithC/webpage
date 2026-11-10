@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fleet Commander — Aegis Station Lunar Tanker Fleet Ground Control</title>
-<meta name="description" content="The ground-side coordinator for the Aegis Station lunar tanker fleet — dispatch scheduling, pad deconfliction, standby reserves and water-throughput optimisation across 45 autonomous tankers.">
+<meta name="description" content="The ground-side coordinator for the Aegis Station lunar tanker fleet — dispatch scheduling, pad deconfliction, standby reserves and water-throughput optimisation across 84 autonomous tankers.">
 <link rel="icon" href="favicon_from_art.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -999,15 +999,15 @@
       <p class="hero-tagline">
         The ground-side coordinator that dispatches sorties, deconflicts pads,
         holds emergency reserves, and maximises water throughput to station &mdash;
-        one console commanding the entire 45-tanker constellation.
+        one console commanding the entire 84-tanker constellation.
       </p>
       <div class="hero-stats">
         <div class="stat">
-          <div class="stat-value">45</div>
+          <div class="stat-value">84</div>
           <div class="stat-label">Tankers / 1 Console</div>
         </div>
         <div class="stat">
-          <div class="stat-value">6 + 6</div>
+          <div class="stat-value">11 + 11</div>
           <div class="stat-label">Pads / Berths</div>
         </div>
         <div class="stat">
@@ -1044,7 +1044,7 @@
           it orchestrates the fleet.
         </p>
         <p>
-          It talks to all 45 vehicles over the same CCSDS-over-UDP link an individual
+          It talks to all 84 vehicles over the same CCSDS-over-UDP link an individual
           operator console uses &mdash; every tanker is an independent command and
           telemetry endpoint. The coordinator aggregates per-vehicle telemetry into
           fleet-wide situational awareness at 1 Hz and issues a small, well-defined
@@ -1090,7 +1090,7 @@
       <img src="images/fc_pad_status.png" alt="Fleet Commander — pad and berth deconfliction" style="width:100%; display:block;">
     </div>
     <div class="image-caption reveal">
-      <span class="caption-text">FIG. 03 &mdash; Pad &amp; Berth Status: 6 surface pads, 6 station berths, FIFO berthing queue</span>
+      <span class="caption-text">FIG. 03 &mdash; Pad &amp; Berth Status: 11 surface pads, 11 station berths, FIFO berthing queue &mdash; here at the surge, nine berths taken and 63 ships waiting</span>
       <span class="caption-ref">FC-CONSOLE-003</span>
     </div>
 
@@ -1144,8 +1144,8 @@
       <div class="s2s-callout-label">Clean Separation &mdash; FSW ADR-0006 / 0014</div>
       <div class="s2s-callout-desc" style="font-size:14px;">
         The interface is the only coupling between ground and flight. Vehicle FSW is
-        one image flown in 45 copies on each ship's flight processor; the coordinator
-        is a single ground instance managing all 45. Different deployment target,
+        one image flown in 84 copies on each ship's flight processor; the coordinator
+        is a single ground instance managing all 84. Different deployment target,
         different scaling model, different safety boundary &mdash; joined by one
         deterministic command/telemetry contract.
       </div>
@@ -1172,7 +1172,7 @@
         <div class="mission-card-accent"></div>
         <div class="mission-card-num">02 &mdash; DECONFLICT</div>
         <h3>Pad &amp; Berth Management</h3>
-        <p>Each surface pad is a conveyor: a returning tanker lands on the shortest queue, only its head is serviced and a launch advances the line, so dispatch is limited by vehicle availability and not by pad count. Six station berths sit behind a FIFO berthing queue when the station is saturated.</p>
+        <p>Each surface pad is a conveyor: a returning tanker lands on the shortest queue, only its head is serviced and a launch advances the line, so dispatch is limited by vehicle availability and not by pad count. Eleven station berths sit behind a FIFO berthing queue when the station is saturated.</p>
       </div>
       <div class="mission-card">
         <div class="mission-card-accent"></div>
@@ -1196,7 +1196,7 @@
         <div class="mission-card-accent"></div>
         <div class="mission-card-num">06 &mdash; OPTIMISE</div>
         <h3>Throughput &amp; Awareness</h3>
-        <p>Aggregates 45 telemetry streams into fleet-wide situational awareness, paces each ship's simulator through its coasts, and drives the conveyor of sorties that keeps water flowing to station.</p>
+        <p>Aggregates 84 telemetry streams into fleet-wide situational awareness, paces each ship's simulator through its coasts, and drives the conveyor of sorties that keeps water flowing to station.</p>
       </div>
     </div>
   </div>
@@ -1211,8 +1211,9 @@
       <div class="section-rule"></div>
     </div>
     <div class="s2s-body reveal" style="max-width: none;">
-      <p>The coordinator exists and runs the fleet closed-loop in simulation, as of October 2026: 45 copies of the tanker's flight software, each flying its own water sortie, under one ground process. The ships fly themselves. The coordinator decides who flies, when a ship may lift, which berth it takes and when it is released, and which pad it comes home to &mdash; the gates that stand on a shared resource or a ground operation &mdash; and sends each one when the ship's telemetry says it is ready. Everything between the gates is the vehicle's own. The run is a 45-tanker fleet; the fill campaign is now sized at 82.</p>
-      <p>The run shown is the fleet from a fresh launch through two full water cycles: 43 ships in service, two in reserve, 86 sorties completed, no anomaly, no comms loss and no safing in any vehicle. With every ship ready at once, the dispatcher sent all 43 up together and the fleet flew as a formation; the pads and berths are what spread it. All 43 arrived at the station within a second of each other and queued 39 deep for six berths; the landings spread over a minute and a half and the turnarounds over three and a half, and the second cycle held that spread without adding to it. Mean cycle 1,481 s, utilization 0.96. That is the decision taken: no dispatch cadence. The surge is what the system produces and the queues absorb it.</p>
+      <p>The coordinator exists and runs the fleet closed-loop in simulation, as of November 2026: 84 copies of the tanker's flight software, each flying its own water sortie on liquid oxygen and liquid hydrogen, under one ground process. The ships fly themselves. The coordinator decides who flies, when a ship may lift, which berth it takes and when it is released, and which pad it comes home to &mdash; the gates that stand on a shared resource or a ground operation &mdash; and sends each one when the ship's telemetry says it is ready. Everything between the gates is the vehicle's own. The fleet is the one the fill campaign is sized at: 82 tankers flying and a reserve of two, with eleven pads and eleven berths.</p>
+      <p>The run is the fleet from a fresh launch through two full water cycles: 82 ships in service, two in reserve, 164 sorties completed, no anomaly, no comms loss and no safing in any vehicle, and no telemetry packet dropped. Every ship passed its go/no-go for the round trip on the 45 t it loaded at the pad, and nothing was taken on at the station. With every ship ready at once, the dispatcher sent all 82 up within three seconds and the fleet flew as a formation; the pads and berths are what spread it. All 82 arrived at the station within four seconds of each other and queued 78 deep for eleven berths; the berths cleared the queue in two minutes, the landings spread over the same two and the turnarounds over four, and the second cycle held that spread without adding to it. Mean cycle 1,446 s, utilization 0.98. That is still the decision taken: no dispatch cadence. The surge is what the system produces and the queues absorb it.</p>
+      <p>On the host, the 84 stacks are 168 processes and 2,100 message queues, and the run held a fifth of a sixteen-core machine with the coordinator's one-second broadcast holding its second. The two pictures below are the October run of 45 ships on six pads and six berths, kept because the tape player that draws them has not yet been given the larger fleet; the shape they show, the surge and its dissolving, is the same.</p>
     </div>
     <div class="mission-grid reveal" style="grid-template-columns: 1fr 1fr; gap: 24px; background: none; margin-top: 28px;">
       <div>
@@ -1220,7 +1221,7 @@
           <img src="images/fc_fleet_surge.png" alt="The fleet coordinator's playback at tick 949 of the two-cycle run: the sortie drawn as a loop with the station's six berths across the top and the six pads along the bottom, 45 vehicle cards around the edge all reading BERTH, four ships at berths and thirty-nine in two rows of dots in the berth FIFO under the station, the reserve pair sitting above pads 1 and 2, the mode histogram with 39 in BERTHING, the dominant-mode band and the last twenty seconds of the fleet counts below" style="width:100%; display:block;"/>
         </div>
         <div class="image-caption">
-          <span class="caption-text">The surge, tick 949: all 43 ships in service entered BERTHING within one tick. Four are at berths and 39 wait in the FIFO under the station; the reserve pair sit above pads 1 and 2. Every element drawn is a field of the coordinator's 1&nbsp;Hz broadcast.</span>
+          <span class="caption-text">The surge in the October run of 45, tick 949: all 43 ships in service entered BERTHING within one tick. Four are at berths and 39 wait in the FIFO under the station; the reserve pair sit above pads 1 and 2. Every element drawn is a field of the coordinator's 1&nbsp;Hz broadcast.</span>
           <span class="caption-ref" style="white-space: nowrap; margin-left: 24px;">FC-SIM-001</span>
         </div>
       </div>
@@ -1229,13 +1230,13 @@
           <img src="images/fc_fleet_spread.png" alt="The fleet coordinator's playback at tick 2509 of the two-cycle run: the ships spread around the loop as a string of dots, two climbing the ascent and coast, two at berths, a cluster coasting down the right side and four deorbiting, the pads free with the reserve pair above them, the centre reading 43 completed, berth FIFO 2, utilization 0.96 and mean cycle 1,481 s, the mode histogram with 34 in COAST, and the dominant-mode band and traces below" style="width:100%; display:block;"/>
         </div>
         <div class="image-caption">
-          <span class="caption-text">The second cycle, tick 2509: 43 sorties completed, mean cycle 1,481 s, utilization 0.96. The formation has dissolved into a string around the loop &mdash; 34 coasting, one inserting, two berthing, two at the station, four deorbiting &mdash; and the berth FIFO is two deep.</span>
+          <span class="caption-text">The second cycle of the same run, tick 2509: 43 sorties completed, mean cycle 1,481 s, utilization 0.96. The formation has dissolved into a string around the loop &mdash; 34 coasting, one inserting, two berthing, two at the station, four deorbiting &mdash; and the berth FIFO is two deep.</span>
           <span class="caption-ref" style="white-space: nowrap; margin-left: 24px;">FC-SIM-002</span>
         </div>
       </div>
     </div>
     <div class="s2s-body reveal" style="max-width: none; margin-top: 28px;">
-      <p>What the coordinator does not do is stated as plainly. It holds no position for anything: a pad is a name, there is no map, and the loop in the picture is the sortie, not geometry. Each simulated ship has its own ground and no station, so the six pads and six berths are the coordinator's bookkeeping until the vehicles share one simulated world, which is the open architecture decision the <a href="lunar_tanker_fleet.html" style="color: var(--ice);">tanker page</a> names. The simulation is deterministic, so the queues never grow past the first cycle. No fault has yet been put to the fleet in a run; the abort path and the operator's own acts are the next runs. Surface-to-surface routing is a duty type without routing logic. The fleet has run against simulated vehicles only.</p>
+      <p>What the coordinator does not do is stated as plainly. It holds no position for anything: a pad is a name, there is no map, and the loop in the picture is the sortie, not geometry. Each simulated ship has its own ground and no station, so the eleven pads and eleven berths are the coordinator's bookkeeping until the vehicles share one simulated world, which is the open architecture decision the <a href="lunar_tanker_fleet.html" style="color: var(--ice);">tanker page</a> names. The run does not show the fill's schedule: a turnaround here is about half a minute of telemetry-gated steps, not the 2.6 hours the pad is sized on, the coasts are run at twenty times real time, and there is no launch every eighteen minutes, so the eleven pads and berths are never pressed the way the campaign will press them. The simulation is deterministic, so the queues never grow past the first cycle. No fault has yet been put to the fleet in a run; the abort path and the operator's own acts are the next runs. Surface-to-surface routing is a duty type without routing logic. The fleet has run against simulated vehicles only.</p>
     </div>
   </div>
 </section>
