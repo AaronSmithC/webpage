@@ -1078,6 +1078,15 @@
           has two vehicles on it and no vehicle stands idle that could be working.
         </p>
         <p>
+          Aegis Station does not intend to design its own excavators or
+          dumpers. The machines that work a site will be whoever's are on it,
+          so the Foreman is written to take <strong>any vehicle that can
+          state its duty</strong>: which of its states mean idle, working,
+          done and faulted, which kinds of station its work visits, and what
+          it reports. That statement is one file. Nothing in the Foreman is
+          written for a particular machine.
+        </p>
+        <p>
           It is the generalisation of the
           <a href="fleet_commander.html" style="color: var(--ice);">Fleet Commander</a>
           that runs the lunar tanker fleet. The tankers taught it what a
@@ -1242,7 +1251,7 @@
     <div class="s2s-body reveal" style="max-width: none;">
       <p>The Foreman exists and runs, as of November 2026. What it has run is of two kinds, and they should not be confused.</p>
       <p><strong>Real flight software.</strong> The <a href="wok.html" style="color: var(--ice);">WOK water prospector</a> is the one surface vehicle with flight software today, and the Foreman runs it. Two copies of that software were started by a separate launcher, checked in to an empty shift with the prospector's duty manifest, formed a fleet on a survey grid, and were dispatched and tracked on their own telemetry. Nothing in the Foreman is written for the WOK: its states, its commands and the layout of its telemetry are all read from its manifest.</p>
-      <p><strong>Simulated vehicles.</strong> There is no excavator or dumper flight software yet, so the pit on this page is worked by stand-ins that drive across a map at a fixed speed, take the same commands and report the same states a vehicle would. The run pictured is six excavators and four dumpers, one of each held in reserve, with the plant taking a load every 90 seconds. In 93 minutes of site time the excavators made 262 runs from three dig faces and the dumpers 61 hauls, delivering 265 tonnes to the hopper with 106 tonnes left on the stockpile. No vehicle faulted, none was flagged as stuck, and no station step overran.</p>
+      <p><strong>Generic vehicles, simulated.</strong> The excavators and dumpers on this page are nobody's design. They are generic stand-ins for the earthmovers a site would bring, each described to the Foreman by the same one-file duty statement a real machine would supply: they drive across a map at a fixed speed, take the same commands and report the same states. The run pictured is six excavators and four dumpers, one of each held in reserve, with the plant taking a load every 90 seconds. In 93 minutes of site time the excavators made 262 runs from three dig faces and the dumpers 61 hauls, delivering 265 tonnes to the hopper with 106 tonnes left on the stockpile. No vehicle faulted, none was flagged as stuck, and no station step overran.</p>
       <p>The useful result is the shape, not the tonnage. The excavators dig faster than the plant will take it, so the pile grows; the dumpers spend their waiting at the hopper, not at the loading bays; and the board says so in one row. Change the plant's rate or add a dig face in the site plan and the same fleets rearrange themselves around it.</p>
     </div>
     <div class="mission-grid reveal" style="grid-template-columns: 1fr; gap: 24px; background: none; margin-top: 28px;">

@@ -693,6 +693,28 @@ footer a:hover { color: var(--accent); }
   </div>
 </section>
 
+<!-- ═══════════ SURFACE FLEETS ═══════════ -->
+
+<section id="surface-fleets">
+  <div class="container">
+    <h2>Surface Fleet Coordination</h2>
+    <p><em>The Foreman &mdash; many machines, one site, whoever built them</em></p>
+    <p>
+      A lunar site is worked by fleets of ordinary machines: excavators, dumpers, prospectors. Aegis Station does not intend to design its own earthmovers. The Foreman is the software that coordinates them, and it is written to work with whatever hardware a site brings: a vehicle type describes its duty in one file and checks in, the site describes its stations in another, and the Foreman decides who goes where, in what order, so that no station has two machines on it and none stands idle that could be working.
+    </p>
+    <ul class="specs">
+      <li>Any vehicle that can state its duty: its working states, the stations it needs, what it reports</li>
+      <li>Stations shared between fleets, first come, first served &mdash; dig faces, loading bays, hoppers, chargers</li>
+      <li>Shows where a site is short before it is built: which station is waited on, and by how many</li>
+      <li>Runs the WOK prospector's flight software today; excavators and dumpers in simulation as generic stand-ins</li>
+    </ul>
+    <div class="gallery-grid" style="grid-template-columns: 1fr;">
+      <a href="foreman.html"><img alt="Illustration of a lunar regolith pit from above: tracked excavators digging at three faces and tipping on a stockpile, dump trucks loading behind it and queueing at a processing plant's hopper, two charging stations between" src="images/foreman-pit-hero.jpg" style="aspect-ratio:16/9;"/></a>
+    </div>
+    <a class="btn" href="foreman.html">View Full Technical Page →</a>
+  </div>
+</section>
+
 <!-- ═══════════ LOGISTICS ═══════════ -->
 
 <section id="logistics">
