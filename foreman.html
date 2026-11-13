@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foreman — Surface Fleet Coordination for the Aegis Moonbase</title>
+<meta name="description" content="The Foreman runs a fleet of like vehicles on one duty — excavators, dumpers, prospectors — across a surface site whose stations they share. A vehicle type declares its duty in one file and checks in; the Foreman decides who goes where, in what order.">
+<link rel="icon" href="favicon_from_art.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<style>
+  /* ─── RESET & BASE ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --void:       #050810;
+    --deep:       #090e1a;
+    --surface:    #0d1528;
+    --panel:      #111d35;
+    --border:     #1e3158;
+    --muted:      #2a4470;
+    --amber:      #e8a825;
+    --amber-dim:  #a0721a;
+    --amber-glow: #f5c84a;
+    --ice:        #a8cce8;
+    --ice-dim:    #5a8ab0;
+    --text:       #c8d8ec;
+    --text-dim:   #6a8aaa;
+    --white:      #eef4fa;
+    --danger:     #e85c2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--void);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── STARFIELD ─── */
+  .starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .starfield::before,
+  .starfield::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 42% 8%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 62%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 83% 75%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 45%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 33%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 48% 55%, rgba(168,204,232,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 77% 12%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 93% 88%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 95%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 3% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 67% 78%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 25%, rgba(255,255,255,0.3) 0%, transparent 100%);
+  }
+  .starfield::after {
+    transform: rotate(180deg) scale(1.2);
+    opacity: 0.5;
+  }
+
+  /* ─── GRID OVERLAY ─── */
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(30,49,88,0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,49,88,0.15) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  /* ─── LAYOUT ─── */
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(5,8,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--ice-dim); font-weight: 400; }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--amber); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -40px;
+    right: -40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), var(--amber-dim), var(--border), transparent);
+  }
+  .hero-content {
+    max-width: 800px;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .eyebrow-line {
+    width: 40px;
+    height: 1px;
+    background: var(--amber);
+  }
+  .eyebrow-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 8px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 em {
+    display: block;
+    color: var(--amber);
+    font-style: normal;
+    font-size: 0.55em;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+  .hero-tagline {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--ice);
+    max-width: 520px;
+    margin: 28px 0 48px;
+    animation: fadeUp 0.8s 0.2s ease both;
+    line-height: 1.6;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 580px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .stat {
+    background: var(--deep);
+    padding: 20px 24px;
+    position: relative;
+  }
+  .stat::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .stat:hover::after { background: var(--amber); }
+  .stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--amber-glow);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .section-number {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--amber-dim);
+    letter-spacing: 0.12em;
+  }
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ─── IMAGE SECTION ─── */
+  .image-section {
+    padding: 100px 0 80px;
+  }
+  .image-placeholder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/7;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s;
+  }
+  .image-placeholder:hover { border-color: var(--muted); }
+  .image-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(30,49,88,0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,49,88,0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .image-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(232,168,37,0.03) 0%, transparent 70%);
+  }
+  /* Corner accents */
+  .img-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--amber-dim);
+    border-style: solid;
+  }
+  .img-corner.tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
+  .img-corner.tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
+  .img-corner.bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
+  .img-corner.br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+  .placeholder-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .placeholder-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    opacity: 0.25;
+  }
+  .placeholder-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .placeholder-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .image-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .caption-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+  .caption-ref {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+  }
+
+  /* ─── MISSION OVERVIEW ─── */
+  .mission-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-top: 40px;
+  }
+  .mission-card {
+    background: var(--deep);
+    padding: 36px 32px;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .mission-card:hover { background: var(--surface); }
+  .mission-card-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    color: var(--amber-dim);
+    letter-spacing: 0.15em;
+    margin-bottom: 20px;
+  }
+  .mission-card h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .mission-card p {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .mission-card-accent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .mission-card:hover .mission-card-accent { background: var(--amber); }
+
+  /* ─── SPECS TABLE ─── */
+  .specs-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .specs-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  .specs-group h4 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(30,49,88,0.5);
+    gap: 16px;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-key {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+  .spec-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ice);
+    text-align: right;
+  }
+
+  /* ─── S2S SECTION ─── */
+  .s2s-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .s2s-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .s2s-callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    padding: 28px;
+  }
+  .s2s-callout-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .s2s-callout-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--amber-glow);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .s2s-callout-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .s2s-body { }
+  .s2s-body p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .s2s-scenarios {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 40px;
+  }
+  .scenario {
+    background: var(--deep);
+    padding: 28px;
+    transition: background 0.3s;
+  }
+  .scenario:hover { background: var(--panel); }
+  .scenario-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .scenario-tag::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--amber-dim);
+  }
+  .scenario h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .scenario p {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* ─── DOCUMENT LINK ─── */
+  .doc-section {
+    padding: 80px 0 60px;
+    border-top: 1px solid var(--border);
+  }
+  .doc-card {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    background: var(--deep);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    max-width: 700px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .doc-card:hover {
+    border-color: var(--amber-dim);
+    box-shadow: 0 0 40px rgba(232,168,37,0.08);
+  }
+  .doc-icon-panel {
+    width: 80px;
+    background: var(--amber);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .doc-icon-panel svg {
+    width: 32px;
+    height: 32px;
+    fill: var(--void);
+  }
+  .doc-info {
+    padding: 24px 28px;
+    flex: 1;
+  }
+  .doc-type {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .doc-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+    letter-spacing: 0.03em;
+  }
+  .doc-subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .doc-action {
+    display: flex;
+    align-items: center;
+    padding: 24px 28px;
+    flex-shrink: 0;
+    border-left: 1px solid var(--border);
+  }
+  .doc-link {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--amber);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.2s, color 0.2s;
+  }
+  .doc-link:hover { gap: 14px; color: var(--amber-glow); }
+  .doc-link-arrow { font-size: 16px; }
+
+  /* ─── PROPELLANT SECTION ─── */
+  .prop-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .prop-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+    margin-bottom: 48px;
+  }
+  .prop-callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--ice-dim);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .prop-stat-block { }
+  .prop-stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ice-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .prop-stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--ice);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .prop-stat-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .prop-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+  .prop-body p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .prop-body p:last-child { margin-bottom: 0; }
+  .prop-phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+  .phase-card {
+    background: var(--deep);
+    padding: 32px 28px;
+    position: relative;
+    transition: background 0.3s;
+    overflow: hidden;
+  }
+  .phase-card:hover { background: var(--panel); }
+  .phase-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .phase-card:nth-child(1)::after { background: var(--amber-dim); }
+  .phase-card:nth-child(2)::after { background: var(--muted); }
+  .phase-card:nth-child(3)::after { background: var(--ice-dim); }
+  .phase-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .phase-card:nth-child(2) .phase-tag { color: var(--muted); }
+  .phase-card:nth-child(3) .phase-tag { color: var(--ice-dim); }
+  .phase-timeline {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 14px;
+    letter-spacing: 0.05em;
+  }
+  .phase-prop {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--amber-glow);
+    margin-bottom: 14px;
+    letter-spacing: 0.06em;
+  }
+  .phase-card:nth-child(2) .phase-prop { color: var(--text-dim); }
+  .phase-card:nth-child(3) .phase-prop { color: var(--ice); }
+  .phase-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .prop-tech-bar {
+    margin-top: 48px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .tech-bar-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .tech-bar-items {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .tech-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tech-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .tech-item-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    margin-top: 60px;
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .footer-copy {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #2ecc71;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(46,204,113,0.4); }
+    50%       { opacity: 0.7; box-shadow: 0 0 0 4px rgba(46,204,113,0); }
+  }
+  @keyframes scanline {
+    from { transform: translateY(-100%); }
+    to   { transform: translateY(100vh); }
+  }
+
+  /* ─── CARTRIDGE SECTION ─── */
+  .cartridge-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .cartridge-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .cartridge-image-wrap {
+    position: relative;
+  }
+  .cartridge-image-wrap img {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--border);
+    filter: brightness(0.92) contrast(1.05);
+  }
+  .cartridge-image-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+  }
+  .cartridge-content {}
+  .cartridge-intro {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .cartridge-specs {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .cartridge-specs-header {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    padding: 14px 20px;
+    background: var(--deep);
+    border-bottom: 1px solid var(--border);
+  }
+  .cartridge-spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(30,49,88,0.5);
+    gap: 16px;
+  }
+  .cartridge-spec-row:last-child { border-bottom: none; }
+  .cartridge-spec-key {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+  .cartridge-spec-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ice);
+    text-align: right;
+  }
+  .cartridge-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+  }
+  .cartridge-feature {
+    background: var(--deep);
+    padding: 20px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .cartridge-feature:hover { background: var(--panel); }
+  .cartridge-feature::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 2px;
+    background: var(--amber-dim);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .cartridge-feature:hover::before { opacity: 1; }
+  .cartridge-feature-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .cartridge-feature-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* Fade-in on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+<div class="starfield"></div>
+<div class="grid-overlay"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">FOREMAN <span>/ Aegis Station</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="mixed-fleet-surface-operations.html">&larr; Surface Operations</a></li>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#board">Shift Board</a></li>
+      <li><a href="#contract">What, Where, Who</a></li>
+      <li><a href="#functions">Functions</a></li>
+      <li><a href="#simulation">Simulation</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="page-wrap">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow-text">Aegis Station Surface Operations</div>
+      </div>
+      <h1>Foreman<em>Coordination for Fleets of Like Vehicles on the Surface</em></h1>
+      <p class="hero-tagline">
+        Before a moonbase has one of everything, it has many of a few things:
+        excavators, haulers, prospectors. The Foreman runs a gang of identical
+        vehicles on one duty, on a site whose stations they share with the gang
+        beside them &mdash; and keeps every one of them working.
+      </p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">N &times; 1</div>
+          <div class="stat-label">Vehicles / One Duty</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">1 File</div>
+          <div class="stat-label">To Add a Vehicle Type</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">0</div>
+          <div class="stat-label">Vehicles It Drives</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 — OVERVIEW -->
+<section class="mission-section" id="overview">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 01</span>
+      <span class="section-title">Why a Foreman</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="s2s-intro reveal">
+      <div class="s2s-callout">
+        <div class="s2s-callout-label">Safety Boundary</div>
+        <div class="s2s-callout-value">Mission-Critical</div>
+        <div class="s2s-callout-desc">
+          Not safety-critical. The Foreman never drives a vehicle. Each one
+          runs its own software and owns its own safety; if the Foreman stops,
+          every vehicle finishes what it is doing and holds.
+        </div>
+      </div>
+      <div class="s2s-body">
+        <p>
+          Surface work is repetitive work. Regolith is dug a bucket at a time,
+          hauled a load at a time, surveyed a cell at a time, and the way a site
+          gets more of it done is more of the same machine. That makes the
+          hard problem a site problem, not a vehicle problem: six excavators
+          and three dig faces, four dumpers and one plant hopper, and every one
+          of them needing the same two chargers.
+        </p>
+        <p>
+          The Foreman is the software for that tier. It sits between a single
+          vehicle, which knows how to dig, and the
+          <a href="mixed-fleet-surface-operations.html" style="color: var(--ice);">Marshal</a>,
+          which plans a whole build with one of each kind of machine. A Foreman
+          has <strong>one kind of vehicle and one duty</strong>, repeated, and
+          one job: decide who goes where, in what order, so that no station
+          has two vehicles on it and no vehicle stands idle that could be working.
+        </p>
+        <p>
+          It is the generalisation of the
+          <a href="fleet_commander.html" style="color: var(--ice);">Fleet Commander</a>
+          that runs the lunar tanker fleet. The tankers taught it what a
+          coordinator of many identical vehicles has to do. The Foreman does
+          that for any vehicle that can say what its duty is.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 — SHIFT BOARD -->
+<section class="image-section" id="board">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 02</span>
+      <span class="section-title">The Shift Board</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <p class="reveal" style="font-family:'Share Tech Mono', monospace; font-size:12px;
+       letter-spacing:0.06em; color:var(--text-dim); line-height:1.8; margin:-24px 0 40px; max-width:760px;">
+      Frames below are screen captures of one run, 93 minutes into a shift in
+      simulation: six excavators and four dumpers working one pit, at four
+      times real time.
+    </p>
+
+    <div class="reveal" style="border:1px solid var(--border); overflow:hidden; line-height:0;">
+      <img src="images/foreman-pit-overview.png" alt="The Foreman shift board's overview: a map of a pit on a 50 metre grid with three dig faces along the bottom, two tipping lanes under a stockpile in the middle, two loading bays above it, a plant hopper at the upper right and two chargers between; orange excavators and blue dumpers drawn as arrowheads where each is, pointing where it is heading; under the map a card for each fleet with its runs done, how many are working and its utilization" style="width:100%; display:block;">
+    </div>
+    <div class="image-caption reveal">
+      <span class="caption-text">FIG. 01 &mdash; The site, with every fleet that works it. Each vehicle is drawn where it is and pointing where it is going. A ring is a station: solid while a vehicle holds it, with the work being done named under it and a count of those waiting their turn. The stockpile and the hopper show their tonnes.</span>
+      <span class="caption-ref">FM-BOARD-001</span>
+    </div>
+
+    <div class="reveal" style="border:1px solid var(--border); overflow:hidden; line-height:0; margin-top:48px;">
+      <img src="images/foreman-excavator-fleet.png" alt="The excavator fleet's tab: the fleet clock at four times real time, a table of dig face, tip and charger with how long each is held, how many are in use and how many vehicles wait; six vehicle cards, one idle and marked reserve, the others digging, tipping or driving, each with where it is on its route; an event log; and at the right the site map and one vehicle's detail" style="width:100%; display:block;">
+    </div>
+    <div class="image-caption reveal">
+      <span class="caption-text">FIG. 02 &mdash; One fleet, one tab. The table is the answer a site planner wants: for each kind of station, how long a vehicle holds one, how many are in use, how many vehicles are waiting. One excavator is held in reserve to take over if another stops.</span>
+      <span class="caption-ref">FM-BOARD-002</span>
+    </div>
+
+    <div class="reveal" style="border:1px solid var(--border); overflow:hidden; line-height:0; margin-top:48px;">
+      <img src="images/foreman-dumper-fleet.png" alt="The dumper fleet's tab: loading bays held a little over a minute with almost no wait, the hopper held fifteen seconds with nearly two dumpers waiting for it on average; three dumpers working, two of them in the hopper's line and one called onto it with seven seconds to its slot" style="width:100%; display:block;">
+    </div>
+    <div class="image-caption reveal">
+      <span class="caption-text">FIG. 03 &mdash; The dumpers, and the pit's bottleneck in one row: the hopper is in use a sixth of the time and has two dumpers waiting for it, because the plant takes one load every 90 seconds. The dumper called onto it has seven seconds to its slot.</span>
+      <span class="caption-ref">FM-BOARD-003</span>
+    </div>
+  </div>
+</section>
+
+<!-- 03 — WHAT, WHERE, WHO -->
+<section class="specs-section" id="contract">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 03</span>
+      <span class="section-title">What, Where, and Who Goes Next</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="s2s-body reveal" style="max-width: none; margin-bottom: 32px;">
+      <p>Three things have to be said to run a fleet, and they belong to three different owners. Keeping them apart is what lets a new machine, or a rearranged site, be a change to one file and not to the software.</p>
+    </div>
+    <div class="specs-layout reveal" style="grid-template-columns: 1fr 1fr 1fr;">
+      <div class="specs-group">
+        <h4>The Vehicle Says What</h4>
+        <div class="spec-row"><span class="spec-key">Duty states</span><span class="spec-val">IDLE / WORKING / DONE / FAULT</span></div>
+        <div class="spec-row"><span class="spec-key">Its route</span><span class="spec-val">STATION KINDS, IN ORDER</span></div>
+        <div class="spec-row"><span class="spec-key">Its work</span><span class="spec-val">VERB, AND WHAT SHOWS IT DONE</span></div>
+        <div class="spec-row"><span class="spec-key">What it reports</span><span class="spec-val">FIELDS WITH UNITS</span></div>
+        <div class="spec-row"><span class="spec-key">Form</span><span class="spec-val">ONE DUTY MANIFEST</span></div>
+      </div>
+      <div class="specs-group">
+        <h4>The Site Says Where</h4>
+        <div class="spec-row"><span class="spec-key">Stations</span><span class="spec-val">KIND, NAME, PLACE</span></div>
+        <div class="spec-row"><span class="spec-key">Site equipment</span><span class="spec-val">ITS OWN TIMED STEPS</span></div>
+        <div class="spec-row"><span class="spec-key">Cadence</span><span class="spec-val">ONE RELEASE EVERY N s</span></div>
+        <div class="spec-row"><span class="spec-key">Sharing</span><span class="spec-val">ANY FLEET THAT NEEDS IT</span></div>
+        <div class="spec-row"><span class="spec-key">Form</span><span class="spec-val">ONE SITE PLAN</span></div>
+      </div>
+      <div class="specs-group">
+        <h4>The Foreman Decides Who</h4>
+        <div class="spec-row"><span class="spec-key">Orders</span><span class="spec-val">ONE PER IDLE VEHICLE</span></div>
+        <div class="spec-row"><span class="spec-key">Lines</span><span class="spec-val">FIRST COME, FIRST SERVED</span></div>
+        <div class="spec-row"><span class="spec-key">Stations</span><span class="spec-val">ONE VEHICLE AT A TIME</span></div>
+        <div class="spec-row"><span class="spec-key">Completion</span><span class="spec-val">ON TELEMETRY, NOT A TIMER</span></div>
+        <div class="spec-row"><span class="spec-key">Fleet telemetry</span><span class="spec-val">2 Hz</span></div>
+      </div>
+    </div>
+    <div class="s2s-callout reveal" style="margin-top:40px; max-width:none;">
+      <div class="s2s-callout-label">A Fleet Is Whoever Has Checked In</div>
+      <div class="s2s-callout-desc" style="font-size:14px;">
+        The Foreman does not start its vehicles. A vehicle arrives at a running
+        shift with its duty manifest and says how it can be reached. If a fleet
+        with that duty exists, it joins it. If none does and the site has every
+        kind of station the duty needs, it founds one. If the site cannot host
+        it, it is refused and told which stations are missing. A vehicle that
+        leaves finishes the job it has first.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 — FUNCTIONS -->
+<section class="mission-section" id="functions">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 04</span>
+      <span class="section-title">What It Coordinates</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="mission-grid reveal">
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">01 &mdash; SATURATE</div>
+        <h3>Keep Every Vehicle Working</h3>
+        <p>An idle vehicle is given the next job at once. The fleet is limited by its stations and its vehicles, never by someone noticing that one is free.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">02 &mdash; DECONFLICT</div>
+        <h3>One Vehicle on a Station</h3>
+        <p>Every station has a line. A vehicle waits its turn a few metres off, is called on when the station is free, and holds it only while it is being worked on. Two loading bays serve four dumpers because a bay is free again the moment its dumper pulls away.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">03 &mdash; SHARE</div>
+        <h3>Stations Between Fleets</h3>
+        <p>A charger does not belong to the excavators or the dumpers. Both fleets wait in the one line and are served in the order they arrived, with nothing above the two Foremen to arbitrate.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">04 &mdash; SCHEDULE</div>
+        <h3>Meet a Downstream Rate</h3>
+        <p>When a plant takes one load every so many seconds, the hopper keeps slots. A dumper is called onto it just in time for its slot, so the hopper is held for the tip and the waiting happens in the line.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">05 &mdash; RESPOND</div>
+        <h3>Heal Around a Stopped Vehicle</h3>
+        <p>When a vehicle faults, its job goes back to the front of the queue, its station is freed, and a vehicle held in reserve takes the job. A vehicle that sits too long in one state is flagged; one that is waiting for a reason the site explains is not.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-accent"></div>
+        <div class="mission-card-num">06 &mdash; MEASURE</div>
+        <h3>Tell the Planner What Is Short</h3>
+        <p>For each kind of station: how long one is held, how many are in use, how many vehicles wait. Whether the site needs a fourth dig face, a second hopper or another dumper is read off the board.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 — AS RUN IN SIMULATION -->
+<section class="specs-section" id="simulation" style="border-top: 1px solid var(--border);">
+  <div class="page-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">// 05</span>
+      <span class="section-title">A Pit, as Run in Simulation</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="s2s-body reveal" style="max-width: none;">
+      <p>The Foreman exists and runs, as of November 2026. What it has run is of two kinds, and they should not be confused.</p>
+      <p><strong>Real flight software.</strong> The <a href="wok.html" style="color: var(--ice);">WOK water prospector</a> is the one surface vehicle with flight software today, and the Foreman runs it. Two copies of that software were started by a separate launcher, checked in to an empty shift with the prospector's duty manifest, formed a fleet on a survey grid, and were dispatched and tracked on their own telemetry. Nothing in the Foreman is written for the WOK: its states, its commands and the layout of its telemetry are all read from its manifest.</p>
+      <p><strong>Simulated vehicles.</strong> There is no excavator or dumper flight software yet, so the pit on this page is worked by stand-ins that drive across a map at a fixed speed, take the same commands and report the same states a vehicle would. The run pictured is six excavators and four dumpers, one of each held in reserve, with the plant taking a load every 90 seconds. In 93 minutes of site time the excavators made 262 runs from three dig faces and the dumpers 61 hauls, delivering 265 tonnes to the hopper with 106 tonnes left on the stockpile. No vehicle faulted, none was flagged as stuck, and no station step overran.</p>
+      <p>The useful result is the shape, not the tonnage. The excavators dig faster than the plant will take it, so the pile grows; the dumpers spend their waiting at the hopper, not at the loading bays; and the board says so in one row. Change the plant's rate or add a dig face in the site plan and the same fleets rearrange themselves around it.</p>
+    </div>
+    <div class="mission-grid reveal" style="grid-template-columns: 1fr; gap: 24px; background: none; margin-top: 28px;">
+      <div>
+        <div style="border: 1px solid var(--border); overflow: hidden; line-height: 0;">
+          <img src="images/foreman-tape.png" alt="The shift board's Tape tab: the excavator fleet drawn from its recorded words as a map of the pit with stations and vehicles, a line of fleet figures, and a card for each vehicle with its state and where it is on its route" style="width:100%; display:block;"/>
+        </div>
+        <div class="image-caption">
+          <span class="caption-text">The same fleet as a record. Every tick the Foreman's view of its fleet is written down in a fixed vocabulary generated from the vehicle's manifest and the site's stations, with its decisions and any faults beside it, so a shift can be replayed and studied afterwards.</span>
+          <span class="caption-ref" style="white-space: nowrap; margin-left: 24px;">FM-SIM-001</span>
+        </div>
+      </div>
+    </div>
+    <div class="s2s-body reveal" style="max-width: none; margin-top: 28px;">
+      <p>What it does not do is stated as plainly. The pit's distances, speeds, loads and times are the simulation's own and come from no vehicle design. The stand-ins drive in straight lines and nothing keeps two of them apart on the way; only the stations are deconflicted. The site's own equipment, such as a loader at a bay, is a timed step and not a machine. Vehicles check in through a launcher that speaks for them, on the same computer, over a link with no authentication; a vehicle that announces itself over a real radio link is not built. And the tanker fleet still runs under its own Fleet Commander: expressing a tanker's sortie, with its launch windows and booked berths, as a Foreman duty is designed for and not yet done.</p>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="page-wrap">
+    <div class="footer-inner">
+      <div class="footer-logo">Foreman &mdash; Aegis Station Surface Operations</div>
+      <div class="footer-copy">
+        <span class="status-dot"></span>Shift: Nominal
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+<p style="text-align:center;font-size:13px;margin:24px 0 40px;"><a href="index.html">&larr; Back to Aegis Station</a></p>
+</body>
+</html>
