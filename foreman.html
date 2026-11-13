@@ -966,6 +966,26 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* ─── FOREMAN HERO: the pit, behind the text ─── */
+  .hero-pit {
+    background:
+      linear-gradient(180deg, rgba(5,8,16,0.55) 0%, rgba(5,8,16,0) 22%, rgba(5,8,16,0) 70%, var(--void) 100%),
+      linear-gradient(90deg, rgba(5,8,16,0.95) 0%, rgba(5,8,16,0.88) 34%, rgba(5,8,16,0.45) 62%, rgba(5,8,16,0.12) 100%),
+      url('images/foreman-pit-hero.jpg') center / cover no-repeat;
+  }
+  .hero-credit {
+    position: absolute; right: 28px; bottom: 18px;
+    font-family: 'Share Tech Mono', monospace; font-size: 10px;
+    letter-spacing: 0.08em; color: var(--text-dim);
+  }
+  @media (max-width: 900px) {
+    .hero-pit {
+      background:
+        linear-gradient(180deg, rgba(5,8,16,0.88) 0%, rgba(5,8,16,0.80) 60%, var(--void) 100%),
+        url('images/foreman-pit-hero.jpg') center / cover no-repeat;
+    }
+  }
 </style>
 </head>
 <body>
@@ -988,7 +1008,7 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero hero-pit" role="img" aria-label="Illustration: a lunar regolith pit from above. Tracked excavators dig at three faces and carry buckets to a stockpile with two tipping lanes; dump trucks are loaded at bays behind the pile and queue at a processing plant's intake hopper; two charging stations stand between.">
   <div class="page-wrap">
     <div class="hero-content">
       <div class="hero-eyebrow">
@@ -1018,6 +1038,7 @@
       </div>
     </div>
   </div>
+  <div class="hero-credit">Illustration of the pit. The run pictured below is the simulation.</div>
 </section>
 
 <!-- 01 — OVERVIEW -->
