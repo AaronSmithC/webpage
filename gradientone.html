@@ -5,18 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gradient One | Multi-Gravity Validation Platform, Rev C</title>
   <meta name="description" content="Gradient One Rev C: a three-arm rotating research platform placing 1g, Mars gravity, lunar gravity and a rotating microgravity hub in one vehicle at 1.6 rpm, for six-month crewed campaigns. Bottom-up mass of about 240 t with the crossing between the rotor and the despun node, a stated cost class, and the hub/rotor boundary built on the station's own principle." />
+  <link rel="icon" href="favicon_from_art.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0f14;
-      --bg-raised:#10161e;
-      --bg-card:#11181f;
-      --border:#22303c;
-      --border-soft:#1a2530;
-      --accent:#6fc3d9;
-      --accent-dim:rgba(111,195,217,0.12);
-      --text:#d7dee6;
-      --text-secondary:#a7b3bf;
-      --text-dim:#6d7a86;
+      --void:#050810; --deep:#090e1a; --surface:#0d1528; --panel:#111d35; --border:#1e3158; --muted:#2a4470;
+      --amber:#e8a825; --amber-dim:#a0721a; --amber-glow:#f5c84a; --ice:#a8cce8; --ice-dim:#5a8ab0;
+      --text:#c8d8ec; --text-dim:#6a8aaa; --white:#eef4fa;
+      /* this page's own names, on that palette */
+      --bg:var(--void);
+      --bg-raised:var(--deep);
+      --bg-card:rgba(13,21,40,0.86);
+      --border-soft:#16254a;
+      --accent:var(--ice);
+      --accent-dim:rgba(168,204,232,0.08);
+      --text-secondary:#a9bdd6;
       --good:#8fd18f;
     }
     *{box-sizing:border-box}
@@ -26,12 +31,14 @@
       margin:0;
       background:var(--bg);
       color:var(--text);
-      font:400 1rem/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      font:300 1rem/1.7 'DM Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
       -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
     }
+    strong,b{font-weight:500}
     a{color:var(--accent);text-decoration:none}
     a:hover{opacity:.85}
-    .wrap{max-width:880px;margin:0 auto;padding:3.5rem 1.4rem 4rem}
+    .wrap{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:2.5rem 1.4rem 4rem}
     .eyebrow{
       font-size:.8rem;
       letter-spacing:.14em;
@@ -54,11 +61,15 @@
     }
     .lede strong{color:var(--text)}
     h2{
-      font-size:1.25rem;
-      color:#fff;
-      font-weight:600;
-      margin:0 0 .8rem;
-      letter-spacing:-.005em;
+      font-family:'Orbitron',monospace;
+      font-size:.84rem;
+      color:var(--white);
+      font-weight:700;
+      margin:0 0 1rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      padding-bottom:.7rem;
+      border-bottom:1px solid var(--border);
     }
     h3{
       font-size:1rem;
@@ -72,7 +83,7 @@
     .card{
       background:var(--bg-card);
       border:1px solid var(--border);
-      border-radius:10px;
+      border-radius:2px;
       padding:1.5rem 1.6rem;
       margin:1.4rem 0;
     }
@@ -88,7 +99,7 @@
       white-space:nowrap;
     }
     .callout{
-      border-left:3px solid var(--accent);
+      border-left:3px solid var(--amber);
       background:var(--accent-dim);
       border-radius:0 8px 8px 0;
       padding:.9rem 1.1rem;
@@ -114,6 +125,7 @@
       font-size:.92rem;
     }
     th{
+      font-family:'Share Tech Mono',monospace;
       text-align:left;
       color:var(--text-dim);
       font-weight:600;
@@ -163,8 +175,8 @@
     figure a{display:block;border:1px solid var(--border);border-radius:10px;overflow:hidden}
     figure img, figure video{width:100%;display:block;border-radius:10px}
     figcaption{font-size:.85rem;color:var(--text-dim);margin-top:.5rem;line-height:1.5}
-    footer{margin-top:2.5rem;font-size:.9rem;color:var(--text-dim)}
-    footer strong{color:var(--text-secondary)}
+    .contact{margin-top:2.5rem;font-size:.9rem;color:var(--text-dim)}
+    .contact strong{color:var(--text-secondary)}
     @media (max-width:640px){
       .wrap{padding:2.5rem 1.1rem 3rem}
       .twoCol{grid-template-columns:1fr}
@@ -198,20 +210,364 @@
         color:var(--text-dim);
       }
     }
+
+  /* ─── STARFIELD ─── */
+  .starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .starfield::before,
+  .starfield::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 42% 8%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 62%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 83% 75%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 45%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 33%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 48% 55%, rgba(168,204,232,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 77% 12%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 93% 88%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 95%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 3% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 67% 78%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 25%, rgba(255,255,255,0.3) 0%, transparent 100%);
+  }
+  .starfield::after {
+    transform: rotate(180deg) scale(1.2);
+    opacity: 0.5;
+  }
+
+  /* ─── GRID OVERLAY ─── */
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(30,49,88,0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,49,88,0.15) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  /* ─── LAYOUT ─── */
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(5,8,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--ice-dim); font-weight: 400; }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--amber); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -40px;
+    right: -40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), var(--amber-dim), var(--border), transparent);
+  }
+  .hero-content {
+    max-width: 800px;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .eyebrow-line {
+    width: 40px;
+    height: 1px;
+    background: var(--amber);
+  }
+  .eyebrow-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 8px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 em {
+    display: block;
+    color: var(--amber);
+    font-style: normal;
+    font-size: 0.55em;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+  .hero-tagline {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--ice);
+    max-width: 520px;
+    margin: 28px 0 48px;
+    animation: fadeUp 0.8s 0.2s ease both;
+    line-height: 1.6;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 580px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .stat {
+    background: var(--deep);
+    padding: 20px 24px;
+    position: relative;
+  }
+  .stat::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .stat:hover::after { background: var(--amber); }
+  .stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--amber-glow);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    margin-top: 60px;
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .footer-copy {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #2ecc71;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(46,204,113,0.4); }
+    50%       { opacity: 0.7; box-shadow: 0 0 0 4px rgba(46,204,113,0); }
+  }
+  @keyframes scanline {
+    from { transform: translateY(-100%); }
+    to   { transform: translateY(100vh); }
+  }
+
+  .nav-links, .nav-links li { margin: 0; padding: 0; }
+  section[id] { scroll-margin-top: 72px; }
+  .hero h1 { margin: 0 0 8px; }
+  footer .page-wrap { z-index: 1; }
+  /* ─── GRADIENT ONE HERO: the vehicle in orbit, behind the text ─── */
+  .hero-g1 {
+    background:
+      linear-gradient(180deg, rgba(5,8,16,0.55) 0%, rgba(5,8,16,0) 22%, rgba(5,8,16,0) 70%, var(--void) 100%),
+      linear-gradient(90deg, rgba(5,8,16,0.95) 0%, rgba(5,8,16,0.88) 34%, rgba(5,8,16,0.45) 62%, rgba(5,8,16,0.12) 100%),
+      url('images/gradient-one-hero.jpg') center / cover no-repeat;
+  }
+  .hero-g1 .hero-tagline { max-width: 600px; margin-bottom: 20px; }
+  .hero-g1 .hero-tagline a { color: var(--amber-glow); }
+  .hero-g1 .hero-tagline strong { color: var(--white); font-weight: 500; }
+  .hero-rev {
+    font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+    color: var(--text-dim); max-width: 600px; margin: 0 0 40px; line-height: 1.6;
+    animation: fadeUp 0.8s 0.25s ease both;
+  }
+  .hero-credit {
+    position: absolute; right: 28px; bottom: 18px; max-width: 560px; text-align: right;
+    font-family: 'Share Tech Mono', monospace; font-size: 10px;
+    letter-spacing: 0.08em; color: var(--text-dim);
+  }
+  @media (max-width: 900px) {
+    nav { padding: 0 16px; }
+    .nav-links { gap: 14px; overflow-x: auto; }
+    .nav-links li:nth-child(n+3) { display: none; }
+    .nav-logo span { display: none; }
+    .page-wrap { padding: 0 20px; }
+    .hero-g1 {
+      background:
+        linear-gradient(180deg, rgba(5,8,16,0.88) 0%, rgba(5,8,16,0.80) 60%, var(--void) 100%),
+        url('images/gradient-one-hero.jpg') center / cover no-repeat;
+    }
+    .hero-credit { position: static; text-align: left; padding: 0 20px 18px; }
+    .hero { flex-direction: column; justify-content: center; align-items: stretch; }
+  }
   </style>
 </head>
 <body>
-<div class="wrap">
+<div class="starfield"></div>
+<div class="grid-overlay"></div>
 
-  <div class="eyebrow">Validation Platform &bull; Rev C, November 2026: Rev B of September with the crossing taken into the vehicle, read against its model and flight software</div>
-  <h1>Gradient One</h1>
-  <p class="lede">
-    A three-arm rotating research platform that places <strong>1g, Mars gravity, lunar gravity and a
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">GRADIENT ONE <span>/ Aegis Station</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#who-this-is-for">Who It Is For</a></li>
+      <li><a href="#crossing">The Crossing</a></li>
+      <li><a href="#simulation">Simulation</a></li>
+      <li><a href="#cost-class">Cost</a></li>
+      <li><a href="#build-map">Build</a></li>
+      <li><a href="#open-items">Open Items</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero hero-g1" role="img" aria-label="Gradient One Rev B in low Earth orbit: three long open-truss arms at 120 degrees from a small hub, an identical pressurised module hung along each arm at the tip with a radiator panel, a water tank and a thruster pod beyond it, two more modules inboard on two of the arms, and a despun node on the hub axis carrying six solar array wings and docked crew and cargo vehicles, Earth below">
+  <div class="page-wrap">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow-text">Validation Platform &bull; Rev C, November 2026</div>
+      </div>
+      <h1>Gradient One<em>Multi-Gravity Validation Platform</em></h1>
+      <p class="hero-tagline">
+        A three-arm rotating research platform that places <strong>1g, Mars gravity, lunar gravity and a
     rotating microgravity hub</strong> in one vehicle at one spin rate, for six-month crewed campaigns.
     It exists to produce the dataset that the
     <a href="artificial-gravity-requirements-evaluation.html">Artificial Gravity Requirements Evaluation</a>
     defines, and to retire the rotating-structure risks that Aegis Station carries as assumptions.
-  </p>
+      </p>
+      <p class="hero-rev">Rev B of September with the crossing taken into the vehicle, read against its model and flight software</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">1.6 rpm</div>
+          <div class="stat-label">One Spin Rate</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">4 Levels</div>
+          <div class="stat-label">1g / Mars / Moon / 0g Hub</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">6 Months</div>
+          <div class="stat-label">Crewed Campaigns</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-credit">Gradient One Rev B: three-arm rotor with the 1g modules at the tips, the Moon and Mars modules inboard, and the despun docking node with its arrays on the spin axis. Concept render.</div>
+</section>
+
+<div class="wrap">
 
   <section class="card" id="who-this-is-for">
     <h2>Who this is for</h2>
@@ -257,11 +613,6 @@
       </tbody>
     </table>
   </section>
-
-  <figure>
-    <img src="images/gradient-one-g1-2.png" alt="Gradient One Rev B in low Earth orbit: three long open-truss arms at 120 degrees from a small hub, an identical pressurised module hung along each arm at the tip with a radiator panel, a water tank and a thruster pod beyond it, two more modules inboard on two of the arms, and a despun node on the hub axis carrying six solar array wings and docked crew and cargo vehicles, Earth below">
-    <figcaption>Gradient One Rev B: three-arm rotor with the 1g modules at the tips, the Moon and Mars modules inboard, and the despun docking node with its arrays on the spin axis. Concept render.</figcaption>
-  </figure>
 
   <div class="callout">
     <strong>Rev B, September 2026.</strong> Rebuilt from the sizing up. The single-arm truss with a
@@ -532,15 +883,15 @@
       a flight software built on it: nine applications on a NASA cFS image (the crossing's drum and berths among them
       since Rev C), a C plant held to the model, an operator console, a fault library of nineteen scenarios flown on
       the image, and the vehicle's own telemetry alphabet with every scenario kept as a tape. The figures in the cells
-      above are the model's. The clip is a spin-up from rest on the flight software's image, cut to a couple of
-      minutes.
+      above are the model's. The clip is a crew of six arriving, flown on the flight software's image: fifty minutes of the vehicle in two
+      and a half.
     </p>
     <figure>
-      <video controls muted playsinline preload="metadata" poster="images/g1_spin_up_poster.jpg">
-        <source src="media/g1_spin_up_composite.mp4" type="video/mp4">
+      <video controls muted playsinline preload="metadata" poster="images/g1_arrival_poster.jpg">
+        <source src="media/g1_arrival.mp4" type="video/mp4">
         Your browser does not play MP4 video.
       </video>
-      <figcaption>Gradient One leaving rest, simulated, recorded from the flight software's telemetry and drawn from it: the three pods along the turn open, the climb, the pass through the arms' in-plane rate near 0.42 rpm where the arms swing some 4 m at the tips and the monitor says so, and the end in OPERATE at 1.5985 rpm, 1 g at the tip modules. Left, the vehicle in its own frame with the arms' lag drawn forty times; under it the arms edge on with their flap out of the plane drawn two hundred times, labelled in centimetres; right, the rails, the spin, the wobble and the node. Each piece runs at its own pace; the three and a half hours are not kept in proportion.</figcaption>
+      <figcaption>A crew of six arriving, simulated, recorded from the flight software's telemetry and drawn from it, at twenty times mission time. Six have landed at the despun node and the three cars wait at the hub. The drum is carried to the node (two and a half minutes), its three chambers pushed to the node's ports, two aboard each; back to the turning side, where each pair steps into its arm's car. One car at a time: two to the Moon module on arm A, two to the Mars module on arm B, two to the 1&nbsp;g module at tip C, each car's weight running the other way to keep the arm balanced; then the cars come home empty. No pod along the turn fires: the spin law holds the momentum, so the spin rises from 1.605 to 1.623 rpm as mass sits inboard (the tips briefly at 1.05&nbsp;g) and comes back to 1.609 with the cars home, a quarter of a percent above where it began, for the six now living outboard and the weights standing short of where they were. Top left, the vehicle in its own frame, the tip tanks' water lying outboard, the arms' lag drawn forty times; under it the arms edge on; under that the crossing seen from the node, the drum's chambers between the rotor's ports and the node's.</figcaption>
     </figure>
   </section>
 
@@ -831,12 +1182,20 @@
     </p>
   </section>
 
-  <footer>
+  <p class="contact">
     <strong>Contact:</strong> <a href="mailto:contact@aegisstation.com">contact@aegisstation.com</a><br>
     &copy; 2026 Aegis Station Infrastructure LLC
-  </footer>
+  </p>
 
 </div>
+<footer>
+  <div class="page-wrap">
+    <div class="footer-inner">
+      <div class="footer-logo">Gradient One &mdash; Aegis Station</div>
+      <div class="footer-copy">Rev C &middot; November 2026</div>
+    </div>
+  </div>
+</footer>
 <p style="text-align:center;font-size:13px;margin:24px 0 40px;"><a href="index.html">&larr; Back to Aegis Station</a></p>
 </body>
 </html>
