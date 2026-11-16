@@ -103,6 +103,7 @@
     color: #b9b9bf;
     vertical-align: top;
   }
+  tr { break-inside: avoid; }
   tr:nth-child(even) td { background: #141416; }
   tr:nth-child(odd) td { background: #101012; }
   td strong { color: #e8e8ea; }
@@ -166,9 +167,10 @@
     <p>
       Rev C is a correction and its consequences. Rev B stated that this orbit has no eclipse season; it has one
       (Section 3). Throttling through the shadow, a higher orbit with no shadow, and a low-inclination orbit were each
-      priced, and the battery was taken. The array grows from 5,400 to 7,630 m², node mass from ~65 to ~84 t with 20 %
+      priced, and the battery was taken. The array grows from 5,400 to 7,630 m², node mass from ~65 to ~86 t with 20 %
       growth, and the launch price at which the node reaches parity with a terrestrial hall falls from about $300 to
-      about $240 per kilogram to sun-synchronous orbit. The radiation environment is now taken from a trapped-proton
+      about $230 per kilogram to sun-synchronous orbit. The coolant is chosen: two loops, glycol-water on the trays
+      and silicone oil in the wings (Section 5). The radiation environment is now taken from a trapped-proton
       model. The Rev B thermal sizing, vault, data path and tray refresh stand. Parity remains a launch-price gate;
       the node itself is buildable with current spaceflight technology.
     </p>
@@ -212,9 +214,9 @@
     <table>
       <tr><th>Option</th><th>What it takes</th><th>Verdict</th></tr>
       <tr><td>Throttle in the shadow</td><td>No added hardware. 95 % of a megawatt-year delivered at end of life; array 10 % short on the worst 90 days; radiator wings cycle ~50 K every orbit of the season</td><td>Not taken. The node is a megawatt</td></tr>
-      <tr><td>~1,600 km dawn-dusk, 102.5°, no shadow</td><td>6,400 m² array; ~74 t launched including 5.6 t of xenon for the climb from 650 km and for disposal</td><td>Not taken. Inner proton belt: ~5,400 rad per year behind the same wall, 37 times the 650 km figure; half of each orbit in protons above 30 MeV; no natural decay</td></tr>
-      <tr><td>650 km, 28.5°, battery</td><td>35 min eclipse every orbit: 2,124 kWh battery, 7,777 m² gimballed array, 2,512 m² unshaded radiators, ~98 t</td><td>Not taken. On a common launch footing its parity price is about 10 % better, inside the uncertainty; it takes twice the proton dose and its array, battery and wings all move or cycle every orbit</td></tr>
-      <tr><td><strong>650 km dawn-dusk, battery</strong></td><td><strong>1,182 kWh battery, 7,630 m² fixed array, ~84 t</strong></td><td><strong>Rev C baseline</strong></td></tr>
+      <tr><td>~1,600 km dawn-dusk, 102.5°, no shadow</td><td>6,400 m² array; ~76 t launched including 5.6 t of xenon for the climb from 650 km and for disposal</td><td>Not taken. Inner proton belt: ~5,400 rad per year behind the same wall, 37 times the 650 km figure; half of each orbit in protons above 30 MeV; no natural decay</td></tr>
+      <tr><td>650 km, 28.5°, battery</td><td>35 min eclipse every orbit: 2,124 kWh battery, 7,777 m² gimballed array, 2,512 m² unshaded radiators, ~100 t</td><td>Not taken. On a common launch footing its parity price is about 12 % better, inside the uncertainty; it takes twice the proton dose and its array, battery and wings all move or cycle every orbit</td></tr>
+      <tr><td><strong>650 km dawn-dusk, battery</strong></td><td><strong>1,182 kWh battery, 7,630 m² fixed array, ~86 t</strong></td><td><strong>Rev C baseline</strong></td></tr>
     </table>
     <p class="note">Rev B set out to delete the battery because everything downstream is simpler without one. The array is still fixed, the sun constant and the radiators shaded. For 276 days nothing cycles; for 89 the battery does, and because it carries the full load nothing else does.</p>
   </section>
@@ -255,20 +257,24 @@
       <tr><th>Parameter</th><th>Value</th></tr>
       <tr><td>Heat rejected</td><td>1.2 MW</td></tr>
       <tr><td>Radiator area</td><td>~2,000 m² two-sided for the load, 2,035 m² with the battery's losses; two 50 × 20 m wings, zenith and nadir of the truss</td></tr>
-      <tr><td>Loop</td><td>Single-phase pumped, redundant pumps, isolable sections per wing</td></tr>
+      <tr><td>Loops</td><td>Two, single-phase, each with redundant pumps: 60 % propylene glycol-water in the vault, through the trays; silicone oil in the wings (freezes at 162 K), isolable sections per wing; a counterflow heat exchanger between, 5 K approach</td></tr>
+      <tr><td>Why two</td><td>Wings with no load settle near 205 K. Glycol-water alone freezes in them at 223 K within two hours; a cold-tolerant fluid alone, through cold plates made for glycol-water, does not carry the megawatt</td></tr>
+      <tr><td>What it costs</td><td>5 K on the trays' coolant; ~1.9 t; ~19 kW of pumping against ~10</td></tr>
       <tr><td>Panel mass</td><td>6 kg/m² deployable pumped-loop panel; ~12 t</td></tr>
       <tr><td>Coatings</td><td>Atomic-oxygen tolerant; ram-facing wing faces</td></tr>
       <tr><td>Growth path</td><td>Hotter-tolerant accelerator generations raise rejection per m² on the same wings</td></tr>
     </table>
-    <h3>Loop model, first results</h3>
+    <h3>Loop model, first results (two loops)</h3>
     <table>
       <tr><th>Case</th><th>Result</th></tr>
-      <tr><td>Margin</td><td>~1,070 kW of accelerator with eight wing sections before the junction limit; ~980 kW with seven</td></tr>
-      <tr><td>Section punctured</td><td>Isolated in seconds with about a kilogram of coolant lost; load held to what seven sections carry</td></tr>
-      <tr><td>Coolant flow lost</td><td>Trays warm ~8 K per minute; junction limit in ~90 s. Standby pump in seconds with no effect on the load</td></tr>
-      <tr><td>Load removed</td><td>Wings settle near 205 K. A water-glycol coolant freezes in them within one to two hours. <strong>Coolant not chosen; open.</strong></td></tr>
+      <tr><td>Margin</td><td>~1,020 kW of accelerator with eight wing sections before the junction limit; ~930 kW with seven</td></tr>
+      <tr><td>Section punctured</td><td>Isolated in seconds with about a kilogram of oil lost; load held to what seven sections carry; the vault's loop is not touched</td></tr>
+      <tr><td>Coolant flow lost</td><td>Trays warm ~8 K per minute; junction limit in under a minute. Standby pump in seconds with no effect on the load; both pumps of either loop gone, the trays are off inside eight seconds</td></tr>
+      <tr><td>Load removed</td><td>The wing pumps slow to hold the vault at 300 K; the wings go to 200 K and stay there a day with nothing frozen, and take the megawatt straight back</td></tr>
+      <tr><td>Sun lost for a day</td><td>The vault held at 300 K on survival loads; two thirds of the battery left</td></tr>
+      <tr><td>The hazard</td><td>Cold oil pumped hard through the exchanger against a cold vault freezes its water side inside three hours. Holding the vault's temperature with the wing pumps prevents it</td></tr>
     </table>
-    <p class="note">From a time-stepping model of the trays, the loop and the wings by section (November 2026), calibrated to the sizing point above. Its tray heat capacity, coolant, overhead split and sink temperature are first assumptions; the results are directions, not specifications.</p>
+    <p class="note">From a time-stepping model of the trays, the loop and the wings by section (November 2026), calibrated to the sizing point above. Its tray heat capacity, overhead split, sink temperature, the vault shell's loss and a pump that turns at under a percent of its speed are first assumptions; the results are directions, not specifications.</p>
   </section>
 
   <hr>
@@ -336,16 +342,17 @@
       <tr><th>Group</th><th>Basis</th><th>Mass (t)</th></tr>
       <tr><td>Solar array sheet</td><td>7,630 m² at 2.5 kg/m²</td><td>19.1</td></tr>
       <tr><td>Radiator wings and loop</td><td>2,035 m² at 6 kg/m²</td><td>12.4</td></tr>
+      <tr><td>Second loop</td><td>Exchanger, second pump pair, the wings' fill of silicone oil</td><td>1.9</td></tr>
       <tr><td>Battery</td><td>1,182 kWh at 150 Wh/kg, × 1.15</td><td>9.1</td></tr>
       <tr><td>Compute trays and storage</td><td>1 MW IT at ~12 kg/kW</td><td>12.0</td></tr>
       <tr><td>Vault structure and shielding</td><td>⌀4 × 10 m, 10–15 mm Al-eq, rails</td><td>5.0</td></tr>
       <tr><td>Power conversion, distribution, pumps, fluid, avionics, comms</td><td>Allocation</td><td>5.0</td></tr>
       <tr><td>Truss, mechanisms, attitude control, electric propulsion and propellant</td><td>Allocation</td><td>7.0</td></tr>
-      <tr><td>Subtotal</td><td></td><td>69.6</td></tr>
-      <tr><td>Growth margin, 20 %</td><td></td><td>13.9</td></tr>
-      <tr><td><strong>Node mass</strong></td><td></td><td><strong>~84</strong></td></tr>
+      <tr><td>Subtotal</td><td></td><td>71.5</td></tr>
+      <tr><td>Growth margin, 20 %</td><td></td><td>14.3</td></tr>
+      <tr><td><strong>Node mass</strong></td><td></td><td><strong>~86</strong></td></tr>
     </table>
-    <p class="note">Rev 1.1 carried 40–80 t for 200–500 kW of accelerator. Rev B carried ~65 t for 1,000 kW with the water shield and batteries gone and compute at liquid-cooled rack density. Rev C adds 18 t: 9 t of battery, 6 t of array, and the growth margin on both. A refresh relaunches only the ~12 t of trays and storage.</p>
+    <p class="note">Rev 1.1 carried 40–80 t for 200–500 kW of accelerator. Rev B carried ~65 t for 1,000 kW with the water shield and batteries gone and compute at liquid-cooled rack density. Rev C adds 21 t: 9 t of battery, 6 t of array, 2 t for the second loop, and the growth margin on all three. A refresh relaunches only the ~12 t of trays and storage.</p>
   </section>
 
   <hr>
@@ -374,16 +381,16 @@
       replaces all of it with launch mass.
     </p>
     <table>
-      <tr><th>Launch price to SSO</th><th>Launch cost per 84 t node</th><th>Against $15–20 M terrestrial plant + power</th></tr>
-      <tr><td>$3,000 /kg</td><td>$251 M</td><td>13× worse</td></tr>
-      <tr><td>$1,500 /kg</td><td>$125 M</td><td>6× worse</td></tr>
-      <tr><td>$500 /kg</td><td>$42 M</td><td>~2× worse</td></tr>
-      <tr><td>$300 /kg</td><td>$25 M</td><td>a quarter worse</td></tr>
-      <tr><td><strong>$240 /kg</strong></td><td><strong>$20 M</strong></td><td><strong>parity</strong></td></tr>
+      <tr><th>Launch price to SSO</th><th>Launch cost per 86 t node</th><th>Against $15–20 M terrestrial plant + power</th></tr>
+      <tr><td>$3,000 /kg</td><td>$257 M</td><td>13× worse</td></tr>
+      <tr><td>$1,500 /kg</td><td>$129 M</td><td>6× worse</td></tr>
+      <tr><td>$500 /kg</td><td>$43 M</td><td>~2× worse</td></tr>
+      <tr><td>$300 /kg</td><td>$26 M</td><td>a third worse</td></tr>
+      <tr><td><strong>$230 /kg</strong></td><td><strong>$20 M</strong></td><td><strong>parity</strong></td></tr>
       <tr><td>$200 /kg</td><td>$17 M</td><td>better</td></tr>
-      <tr><td>$100 /kg</td><td>$8 M</td><td>2× better</td></tr>
+      <tr><td>$100 /kg</td><td>$9 M</td><td>2× better</td></tr>
     </table>
-    <p class="note">Crossover near $240/kg (Rev B: $300/kg, for a node that could not hold its load 89 days a year), before on-orbit assembly, qualification and operations (which push it lower) and before the value of skipping a multi-year grid queue (which pushes it higher). Refresh at $500/kg relaunches ~12 t for ~$6 M against $40 M or more of hardware inside, so refresh does not decide the case. The gate is launch price, not technology.</p>
+    <p class="note">Crossover near $230/kg (Rev B: $300/kg, for a node that could not hold its load 89 days a year), before on-orbit assembly, qualification and operations (which push it lower) and before the value of skipping a multi-year grid queue (which pushes it higher). Refresh at $500/kg relaunches ~12 t for ~$6 M against $40 M or more of hardware inside, so refresh does not decide the case. The gate is launch price, not technology.</p>
   </section>
 
   <hr>
@@ -425,7 +432,7 @@
 
   <section class="section">
     <h2>13. Changes</h2>
-    <table>
+    <table style="break-inside: auto;">
       <tr><th>Item</th><th>Rev 1.1</th><th>Rev B</th><th>Rev C</th></tr>
       <tr><td>Orbit</td><td>500–600 km generic; 35 % eclipse</td><td>650 km dawn-dusk SSO; stated as no eclipse</td><td>Same orbit; shadow up to 19.6 min on 89 days a year</td></tr>
       <tr><td>Eclipse storage</td><td>2.6 t/MW or throttling</td><td>Safe-mode pack only</td><td>1,182 kWh, 9.1 t; full load through the shadow</td></tr>
@@ -433,10 +440,11 @@
       <tr><td>Radiator area</td><td>1,800–3,300 m²/MW at 290–330 K</td><td>~1,700 m²/MW at 315 K mean; 2,000 m² per node</td><td>2,035 m² per node</td></tr>
       <tr><td>Solar area</td><td>~2,500 m²/MW BOL</td><td>~4,500 m²/MW EOL; 5,400 m² per node</td><td>~5,000 m²/MW EOL; 7,630 m² per node</td></tr>
       <tr><td>Shielding</td><td>15–50 t water and structure</td><td>~5 t aluminium vault; 3–5 year tray refresh</td><td>Unchanged; dose from a proton model, ~150 rad per year</td></tr>
-      <tr><td>Node mass</td><td>40–80 t</td><td>~65 t bottom-up, 20 % growth</td><td>~84 t</td></tr>
+      <tr><td>Node mass</td><td>40–80 t</td><td>~65 t bottom-up, 20 % growth</td><td>~86 t</td></tr>
+      <tr><td>Coolant</td><td>Not stated</td><td>Single-phase loop; no fluid named</td><td>Two loops: glycol-water on the trays, silicone oil in the wings</td></tr>
       <tr><td>Use case</td><td>Power density, thermal isolation, space adjacency</td><td>Batch training and inference; space-native data second</td><td>Unchanged</td></tr>
       <tr><td>Data path</td><td>Not stated</td><td>Launched storage up, optical down, budget stated</td><td>Unchanged</td></tr>
-      <tr><td>Economics</td><td>Not stated</td><td>Parity near $300/kg to SSO</td><td>Parity near $240/kg to SSO</td></tr>
+      <tr><td>Economics</td><td>Not stated</td><td>Parity near $300/kg to SSO</td><td>Parity near $230/kg to SSO</td></tr>
       <tr><td>Alternatives</td><td>Not stated</td><td>Not stated</td><td>Throttle, 1,600 km and 28.5° priced (Section 3)</td></tr>
     </table>
   </section>
