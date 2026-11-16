@@ -20,7 +20,8 @@
     line-height: 1.5;
   }
 
-  .doc { padding: 0.85in 0.9in 0.9in; }
+  .doc { padding: 0.85in 0.9in 0.2in; }
+  .doc .doc { padding-bottom: 0; }   /* the wrapper is doubled; one bottom margin is enough */
 
   /* ── Header block ── */
   .kicker {
@@ -127,13 +128,14 @@
 
   /* ── Footer ── */
   .end-footer {
-    margin-top: 34pt;
-    padding-top: 14pt;
+    margin-top: 16pt;
+    padding-top: 10pt;
     border-top: 0.75pt solid #303034;
     text-align: center;
     font-size: 8.5pt;
     color: #6c6c72;
     line-height: 1.7;
+    break-inside: avoid;
   }
 
   .section { break-inside: auto; }
