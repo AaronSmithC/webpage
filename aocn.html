@@ -5,7 +5,7 @@
   <title>AOCN | Aegis Orbital Compute Node</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description"
-        content="The Aegis Orbital Compute Node (AOCN) is a 1 MW batch-compute node for a dawn-dusk sun-synchronous orbit: eclipse-free solar power, pumped-loop radiators, a shielded COTS compute vault, and a launch-cost break-even stated in the open." />
+        content="The Aegis Orbital Compute Node (AOCN) is a 1 MW batch-compute node for a dawn-dusk sun-synchronous orbit: a fixed solar array with a battery for the shadow season, pumped-loop radiators, a shielded COTS compute vault, and a launch-cost break-even stated in the open." />
 
   <style>
     :root{
@@ -260,8 +260,8 @@
   <div style="background:#0d0f18; border-bottom:1px solid var(--stroke); padding: 18px 0;">
     <div class="container">
       <div class="revision-banner">
-        <strong>Rev B — September 2026.</strong>
-        Rebuilt from the sizing up. The orbit moves to a 650 km dawn-dusk sun-synchronous orbit, which has no eclipse season and deletes the battery problem. The node is sized as 1 MW of accelerator load, not 200–500 kW inside a 1–2 MW bus. Solar area is stated end-of-life with the derates shown. Water shielding is replaced by an aluminium compute vault with a planned refresh cycle. The page now says what the node is for, what the data path is, and at what launch price it beats a building. Rev 1.1 thermal arithmetic is retained and checked; its dossier remains available below.
+        <strong>Rev C — November 2026.</strong>
+        A correction and its consequences. Rev B said the 650 km dawn-dusk orbit has no eclipse. It has a shadow season: 89 days a year, up to 19.6 minutes an orbit. Rev C keeps the orbit and carries the full load through the shadow on a 1,182 kWh battery. The array grows from 5,400 to 7,630 m², the node from ~65 to ~84 t, and the break-even launch price falls from about $300 to about $240 per kilogram. Throttling, a higher orbit with no shadow, and a low-inclination orbit were each priced and are shown in the orbit section. The radiation figures now come from a trapped-proton model instead of a rule of thumb. The Rev B thermal sizing stands.
       </div>
     </div>
   </div>
@@ -272,8 +272,8 @@
       <h3>What It Is</h3>
       <p>
         The <strong>Aegis Orbital Compute Node (AOCN)</strong> is a free-flying compute unit: one megawatt of commercial
-        accelerators in a shielded vault, a fixed solar sheet that faces the sun all year, and pumped-loop radiators
-        that never see it. It runs <strong>batch work</strong>: model training, large-scale inference, simulation, and the
+        accelerators in a shielded vault, a fixed solar sheet that faces the sun all year, a battery for the weeks
+        when the Earth gets in the way, and pumped-loop radiators that never see the sun. It runs <strong>batch work</strong>: model training, large-scale inference, simulation, and the
         processing of data that is already in orbit. It does not run a cloud. Nothing on it answers a request in
         milliseconds, and nothing on it needs to.
       </p>
@@ -283,11 +283,12 @@
         three to five years while the power and thermal plant stays.
       </p>
       <div class="spec-grid">
-        <div class="spec"><strong>Orbit</strong>650 km dawn-dusk sun-synchronous, ~98° inclination<div class="note">No eclipse at any point in the year above ~620 km; the sun stays within 24° of the orbit normal</div></div>
+        <div class="spec"><strong>Orbit</strong>650 km dawn-dusk sun-synchronous, ~98° inclination<div class="note">Sunlit all orbit for 276 days a year; a shadow of up to 19.6 min an orbit for the other 89, carried on the battery</div></div>
         <div class="spec"><strong>Accelerator load</strong>1.0 MW IT<div class="note">1.2 MW electrical at end of life, with pumps, conversion, comms and attitude control inside the 20 % overhead</div></div>
-        <div class="spec"><strong>Solar array</strong>5,400 m², fixed, no gimbal<div class="note">~223 W/m² end-of-life after the derates in the power section</div></div>
-        <div class="spec"><strong>Radiators</strong>2,000 m² two-sided, 315 K mean<div class="note">~590 W/m² effective; edge-on to the sun and to the Earth limb</div></div>
-        <div class="spec"><strong>Node mass</strong>~65 t with 20 % growth<div class="note">Bottom-up budget in the mass section</div></div>
+        <div class="spec"><strong>Solar array</strong>7,630 m², fixed, no gimbal<div class="note">~200 W/m² end-of-life on the worst day; sized for the load and for refilling the battery</div></div>
+        <div class="spec"><strong>Battery</strong>1,182 kWh, ~9 t<div class="note">393 kWh through the longest shadow at 35 % depth of discharge; about 1,300 cycles a year</div></div>
+        <div class="spec"><strong>Radiators</strong>2,035 m² two-sided, 315 K mean<div class="note">~590 W/m² effective; edge-on to the sun and to the Earth limb</div></div>
+        <div class="spec"><strong>Node mass</strong>~84 t with 20 % growth<div class="note">Bottom-up budget in the mass section</div></div>
         <div class="spec"><strong>Servicing</strong>Robotic, EVA-compatible interfaces<div class="note">Unpressurised vault; compute trays swap on rails, wings and array blankets are line-replaceable</div></div>
       </div>
     </div>
@@ -305,8 +306,9 @@
       <p>
         Terrestrial AI capacity is gated by interconnect queues measured in years, by water for cooling, and by
         siting permits. In orbit none of those exist. Power is not free; it costs launched array mass. But a square
-        metre of array in a dawn-dusk orbit produces about <strong>four and a half times</strong> the energy of the same
-        square metre on the ground, because it is lit 100 % of the time at full solar constant and needs no storage.
+        metre of array in a dawn-dusk orbit produces <strong>more than four times</strong> the energy of the same
+        square metre on the ground, because it is lit about 96 % of the year at the full solar constant and needs
+        storage for twenty minutes at a time, not for a night.
         The question is whether that buys back the launch cost, and the economics section answers it with a number
         rather than a mood.
       </p>
@@ -330,8 +332,8 @@
 
       <div class="assumption-note">
         <strong>What AOCN is not.</strong> It is not a cloud region, not an edge for latency-sensitive traffic, and not a
-        claim that orbital compute is cheaper today. At current launch prices it is two to five times the cost of a
-        terrestrial hall for the same accelerators. The page states where that crosses over.
+        claim that orbital compute is cheaper today. At current launch prices the plant around the accelerators costs
+        two to six times what a terrestrial hall and its power do. The page states where that crosses over.
       </div>
     </div>
   </section>
@@ -361,32 +363,55 @@
     <div class="container">
       <h3>Orbit Selection</h3>
       <p>
-        Rev 1.1 assumed a generic 500–600 km orbit with a 35 % worst-case eclipse and either 2.6 t of battery per
-        megawatt or a throttled duty cycle. The battery figure was cell-level; at a LEO-survivable depth of discharge
-        and pack overhead it is closer to <strong>12 t per node</strong>. That is a sizing problem, not a barrier; a node with a
-        battery is buildable. Rev B chooses the orbit that does not need one, because everything downstream gets simpler:
-        a fixed array, a constant sun, one radiator plane, and no charge cycle every orbit. Nothing moves and nothing cycles.
+        A <strong>dawn-dusk sun-synchronous orbit</strong> keeps its plane at the day-night terminator all year, so a
+        flat array in that plane faces the sun without moving. Rev B chose it at <strong>650 km</strong> believing it
+        had no eclipse at any season. That was wrong, and the error is worth showing. A sun-synchronous plane at
+        650 km is inclined 98°, so its normal lies 8° off the equator. Add the 23.4° tilt of the Earth's axis and the
+        sun reaches <strong>31.4°</strong> off the orbit normal at one solstice; the Earth begins to cover it at 24.8°.
+        Rev B counted the 23.4° and left out the 8°.
       </p>
       <p>
-        A <strong>dawn-dusk sun-synchronous orbit</strong> keeps its plane at the day-night terminator all year. The sun
-        sits within about 24° of the orbit normal. Above roughly 620 km the Earth never gets between the node and
-        the sun, at any season. AOCN Rev B baselines <strong>650 km</strong>.
+        The result is a <strong>shadow season of 89 days a year</strong>, with up to <strong>19.6 minutes</strong> of
+        shadow in each 97.6-minute orbit at its middle. For the other 276 days the node is sunlit all the way round.
+        The array's worst day is the same day, and it falls near aphelion. No dawn-dusk orbit below about 1,400 km
+        escapes this, because the inclination that keeps the plane sun-synchronous climbs with altitude.
+      </p>
+
+      <h4>Four answers, priced</h4>
+      <table class="thermal-table">
+        <thead><tr><th>Option</th><th>What it takes</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Throttle in the shadow</td><td>Nothing added. The node delivers 95 % of a megawatt-year, is short of array on its worst 90 days, and its radiator wings swing about 50 K every orbit of the season</td><td>Not taken. A node that idles is not a megawatt</td></tr>
+          <tr><td>Raise the orbit to ~1,600 km, where a dawn-dusk plane has no shadow</td><td>The lightest node on paper, ~74 t with 5.6 t of xenon to climb and to come down again</td><td>Not taken. It is in the inner proton belt: about 37 times the dose behind the vault wall, a tray at its planning limit in months, and a dead node that never decays</td></tr>
+          <tr><td>650 km at 28.5° with a battery</td><td>A 35-minute eclipse every orbit of the year: 2,100 kWh of battery, a gimballed array, unshaded radiators, ~98 t</td><td>Not taken. Cheaper launch nearly pays for the mass, within about 10 %, but it takes twice the proton dose and everything on it moves or cycles</td></tr>
+          <tr><td><strong>650 km dawn-dusk with a battery (Rev C)</strong></td><td><strong>1,182 kWh of battery, a 7,630 m² fixed array, ~84 t</strong></td><td><strong>Baseline</strong></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:16px;">
+        Rev B set out to delete the battery because everything downstream gets simpler without one. Most of that
+        survives. The array is still a fixed sheet, the sun is still constant, the radiators still sit in the array's
+        shade. Nothing moves. For 276 days nothing cycles; for 89 the battery does, and because it carries the full
+        load, nothing else does.
       </p>
       <ul>
-        <li><strong>No eclipse, no battery.</strong> A small pack for safe-mode only. Compute runs continuously.</li>
+        <li><strong>Shadow season.</strong> Centred on the June solstice for an 18:00 ascending node, on December for 06:00. The battery section sizes it.</li>
         <li><strong>Fixed geometry.</strong> The array is a flat sheet in the orbit plane facing the sun; it needs no gimbal. Radiators lie in the plane containing the sun vector and nadir, so their faces look along the velocity vector, never at the sun and only obliquely at Earth. The array shades them as well.</li>
         <li><strong>Ground contact.</strong> Both poles every orbit, which is what makes the optical downlink budget work.</li>
-        <li><strong>Drag.</strong> The array is edge-on to the velocity vector; the radiators are not. About 2,100 m² of ram area at 650 km costs ~13 m/s per year, under 50 kg of xenon per year on electric propulsion. Atomic-oxygen-tolerant radiator coatings are required.</li>
-        <li><strong>Radiation.</strong> The price of the orbit. A polar orbit crosses the auroral horns and the South Atlantic Anomaly; total dose is several times an ISS-orbit figure. The vault section carries it.</li>
+        <li><strong>Drag.</strong> The array is edge-on to the velocity vector; the radiators are not. About 2,100 m² of ram area at 650 km costs ~13 m/s per year, about 70 kg of xenon per year on electric propulsion. Atomic-oxygen-tolerant radiator coatings are required. The same drag brings a dead node down, which the higher orbit could not promise.</li>
+        <li><strong>Radiation.</strong> Behind the vault wall the dose is trapped protons from the South Atlantic Anomaly, about 150 rad a year. The electrons of the polar horns stop in the wall. The vault section carries it.</li>
       </ul>
 
       <h4>Arrangement</h4>
       <div class="spec" style="padding:10px; margin-top:12px;">
-        <img src="images/AOCN_RevB_blueprint.png" alt="Blueprint-style illustration of the AOCN Rev B arrangement: sun's-eye view of the array sheet with the vault and edge-on wings at its centre, a view along the flight direction with sun rays stopping at the array, the vault on the truss and two radiator wings behind, and detail insets of the array edge, vault, truss joint, radiator ribs and thruster pod" style="width:100%;height:auto;">
+        <img src="images/AOCN_RevB_blueprint.png" alt="Blueprint-style illustration of the AOCN arrangement as drawn for Rev B: sun's-eye view of the array sheet with the vault and edge-on wings at its centre, a view along the flight direction with sun rays stopping at the array, the vault on the truss and two radiator wings behind, and detail insets of the array edge, vault, truss joint, radiator ribs and thruster pod" style="width:100%;height:auto;">
       </div>
       <div class="spec" style="padding:10px; margin-top:12px;">
-        <img src="AOCN_RevB_Arrangement.svg" alt="AOCN Rev B arrangement drawing: sun's-eye view of the 90 by 60 metre array sheet with radiators edge-on behind it, and a view along the velocity vector showing the array edge-on, the compute vault on a truss, and two 50 by 20 metre radiator wings" style="width:100%;height:auto;">
+        <img src="AOCN_RevC_Arrangement.svg" alt="AOCN Rev C arrangement drawing: sun's-eye view of the 109 by 70 metre array sheet with radiators edge-on behind it, and a view along the velocity vector showing the array edge-on, the compute vault with its battery on a truss, and two 50 by 20 metre radiator wings" style="width:100%;height:auto;">
       </div>
+      <p class="note" style="margin-top:12px; color:var(--muted); font-size:0.9rem;">
+        The arrangement drawing is Rev C's. The illustration above it and the image at the top of the page were made
+        for Rev B: the array sheet they show is 90 × 60 m, not 109 × 70 m, and the battery is not drawn.
+      </p>
     </div>
   </section>
 
@@ -423,6 +448,17 @@
         deployable pumped-loop panels the wings weigh about 12 t. If a future accelerator generation tolerates
         hotter coolant, the same wings reject more; the plant does not need to change when the trays do.
       </p>
+      <h4>What a model of the loop adds</h4>
+      <p>
+        A time-stepping model of the trays, the loop and the wings by section (November 2026) reproduces this sizing
+        point and shows where it is thin. Its tray, coolant and overhead figures are first assumptions, so these are
+        directions, not specifications.
+      </p>
+      <ul>
+        <li><strong>Margin.</strong> With all eight wing sections the loop carries about 1,070 kW of accelerator before the junctions reach their limit; with seven, about 980 kW. A punctured section is isolated in seconds and costs a few percent of the load, not the node.</li>
+        <li><strong>Pumps.</strong> With no coolant flow the trays warm about 8 K a minute and reach the junction limit in about a minute and a half. Changing to the standby pump takes seconds and the load does not notice.</li>
+        <li><strong>The cold case.</strong> The wings that reject 1.2 MW keep rejecting when the load comes off, and settle near 205 K. A water-glycol coolant would freeze in them within an hour or two; the fluid is not chosen, and this is what will choose it.</li>
+      </ul>
     </div>
   </section>
 
@@ -433,7 +469,8 @@
       <p>
         Rev 1.1 sized the array at ~2,500 m² per MW from beginning-of-life cell efficiency at normal incidence. That
         is the number for a new panel pointed perfectly on the day it deploys. The array has to make 1.2 MW on its
-        last day, at its worst sun angle, through a blanket that is not all cells.
+        last day, at its worst sun angle, through a blanket that is not all cells. In Rev C it has to do that on a
+        day with a shadow in it, and refill the battery in the sunlit part of the same orbit.
       </p>
       <table class="thermal-table">
         <thead><tr><th>Step</th><th>Factor</th><th>Running value</th></tr></thead>
@@ -442,15 +479,36 @@
           <tr><td>Blanket packing (cells, gaps, harness, hinges)</td><td>0.85</td><td>336 W/m²</td></tr>
           <tr><td>Radiation degradation, 10 years in a polar orbit</td><td>0.85</td><td>285 W/m²</td></tr>
           <tr><td>Operating temperature derate</td><td>0.85</td><td>243 W/m²</td></tr>
-          <tr><td>Worst-season sun angle, fixed array (cos 23.4°)</td><td>0.92</td><td><strong>223 W/m² end-of-life</strong></td></tr>
+          <tr><td>Worst-season sun angle, fixed array (cos 31.4°)</td><td>0.85</td><td>207 W/m²</td></tr>
+          <tr><td>Earth near aphelion in the same season</td><td>0.97</td><td><strong>200 W/m² end-of-life</strong></td></tr>
         </tbody>
       </table>
       <div class="spec-grid">
-        <div class="spec"><strong>Area per MW electrical, EOL</strong>~4,500 m²<div class="note">Rev 1.1 said ~2,500; the difference is the derates, not the physics</div></div>
-        <div class="spec"><strong>Node array</strong>5,400 m² for 1.2 MW<div class="note">Carried as a 90 × 60 m sheet; deployable-blanket mass ~2.5 kg/m², ~13.5 t</div></div>
-        <div class="spec"><strong>Capacity factor</strong>~100 %<div class="note">Against 20–25 % for ground solar; the array's only real advantage, and it is a large one</div></div>
-        <div class="spec"><strong>Storage</strong>Safe-mode pack only<div class="note">No eclipse to bridge; sizing on the order of 50 kWh for attitude, comms and heaters through a fault</div></div>
+        <div class="spec"><strong>Area per MW electrical, EOL</strong>~5,000 m²<div class="note">Rev 1.1 said ~2,500 and Rev B ~4,500; the differences are the derates and the true worst sun angle, not the physics</div></div>
+        <div class="spec"><strong>Node array</strong>7,630 m² for 1.53 MW<div class="note">1.2 MW of load and 0.33 MW to refill the battery. Carried as a 109 × 70 m sheet; deployable-blanket mass ~2.5 kg/m², ~19 t</div></div>
+        <div class="spec"><strong>Capacity factor</strong>~96 % lit, 100 % delivered<div class="note">Against 20–25 % for ground solar; the array's only real advantage, and it is a large one</div></div>
+        <div class="spec"><strong>Rev B's array</strong>1.08 MW on its worst day<div class="note">The 5,400 m² sheet was 10 % short at end of life before any battery was asked of it</div></div>
       </div>
+
+      <h4>The battery</h4>
+      <table class="thermal-table">
+        <thead><tr><th>Step</th><th>Basis</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Longest shadow</td><td>June solstice, 650 km</td><td>19.6 min of 97.6</td></tr>
+          <tr><td>Energy through it</td><td>1.2 MW electrical</td><td>393 kWh</td></tr>
+          <tr><td>Pack energy</td><td>35 % depth of discharge, 95 % discharge efficiency</td><td><strong>1,182 kWh</strong></td></tr>
+          <tr><td>Pack mass</td><td>150 Wh/kg at pack level, × 1.15 for thermal control, structure and management</td><td><strong>9.1 t</strong></td></tr>
+          <tr><td>Recharge</td><td>92 % round trip, inside the 78 sunlit minutes</td><td>329 kW of array</td></tr>
+          <tr><td>Duty</td><td>About 15 shadows a day for 89 days</td><td>~1,300 cycles a year</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:16px;">
+        Flown in the plant model at the June solstice at end of life, the node holds its megawatt through the shadow,
+        the pack falls to 67 % and is full again before the next one, and the loop's temperatures do not move. A
+        quarter of an every-orbit duty would support a deeper discharge and a pack nearer 5 t; the 35 % rule is kept
+        until a cell is chosen. The same pack is the safe mode: with the sun lost it carries the survival loads for
+        days, where Rev B's 50 kWh carried them for hours.
+      </p>
     </div>
   </section>
 
@@ -464,7 +522,9 @@
         upset rate, and a refresh plan.
       </p>
       <ul>
-        <li><strong>Total dose.</strong> A 650 km polar orbit delivers on the order of several kilorad per year behind thin aluminium, dominated by South Atlantic Anomaly protons. Commercial accelerators and memory have been shown tolerant into the 10–30 krad range. A vault wall of <strong>10–15 mm aluminium-equivalent</strong> cuts the annual dose by a factor of three to five and puts a 3–5 year tray life inside the envelope. That interval already matches the commercial hardware cycle.</li>
+        <li><strong>What flies.</strong> The accelerators, memory, processors, network and storage are commercial parts, screened and proton-tested but not hardened. Nothing hardened comes within orders of magnitude of them, and the economics on this page are those of commercial hardware. Everything that keeps the node alive is the opposite: the flight computer, the tray power switches that clear a latch-up, the bus converters and the pump and valve controllers are space-grade.</li>
+        <li><strong>Total dose.</strong> Behind a vault wall of <strong>10–15 mm aluminium-equivalent</strong> the dose is about <strong>150 rad a year</strong>, nearly all of it protons from the South Atlantic Anomaly (AP8 model at solar minimum; protons only, good to about a factor of two). The wall stops the electrons of the polar horns outright but takes only about a third off the protons between 5 and 15 mm, so it is not thickened further. A tray is planned to 2 krad, where commercial memory can begin to misbehave, well short of the 10–30 krad at which parts fail. Five years is about 0.75 krad. The 3–5 year tray life is set by the commercial hardware cycle, not by the dose.</li>
+        <li><strong>Why not higher.</strong> The same wall at 1,600 km sees about 5,400 rad a year, and the node would spend half of every orbit in protons above 30 MeV against 8 % here. That is what ruled out the orbit with no shadow.</li>
         <li><strong>Upsets.</strong> Polar and SAA passes raise the single-event rate on unhardened parts. The answer is architectural: ECC memory, frequent checkpointing to the local storage pool, and scheduling that expects a few percent of throughput lost to restarts. This is the open engineering question on the node and the page does not pretend it is closed.</li>
         <li><strong>Geometry.</strong> The vault is an unpressurised cylinder, ⌀4 × 10 m, with cold-plated trays on rails so a robotic servicer can swap a tray without breaking the coolant loop. Storage, power conversion, and the loop pumps live in the same shell. Vault structure and shielding together are ~5 t, not 15–50.</li>
         <li><strong>Serviceability.</strong> Interfaces are EVA-compatible so a crewed servicing mission is possible, but nothing on the node requires a person. The array blankets and radiator wings are line-replaceable units on the same truss standard.</li>
@@ -479,21 +539,23 @@
       <table class="thermal-table">
         <thead><tr><th>Group</th><th>Basis</th><th>Mass (t)</th></tr></thead>
         <tbody>
-          <tr><td>Solar array sheet</td><td>5,400 m² at 2.5 kg/m² deployable blanket</td><td>13.5</td></tr>
-          <tr><td>Radiator wings and loop</td><td>2,000 m² at 6 kg/m² pumped-loop panel</td><td>12.2</td></tr>
+          <tr><td>Solar array sheet</td><td>7,630 m² at 2.5 kg/m² deployable blanket</td><td>19.1</td></tr>
+          <tr><td>Radiator wings and loop</td><td>2,035 m² at 6 kg/m² pumped-loop panel; the battery's losses add 35 m²</td><td>12.4</td></tr>
+          <tr><td>Battery</td><td>1,182 kWh at 150 Wh/kg, × 1.15 pack overhead</td><td>9.1</td></tr>
           <tr><td>Compute trays and storage</td><td>1 MW IT at ~12 kg/kW, liquid-cooled rack density</td><td>12.0</td></tr>
           <tr><td>Vault structure and shielding</td><td>⌀4 × 10 m shell, 10–15 mm Al-equivalent, rails</td><td>5.0</td></tr>
           <tr><td>Power conversion, distribution, pumps, fluid, avionics, comms</td><td>Allocation</td><td>5.0</td></tr>
           <tr><td>Truss, deployment mechanisms, attitude control, electric propulsion and propellant</td><td>Allocation</td><td>7.0</td></tr>
-          <tr><td>Subtotal</td><td></td><td>54.7</td></tr>
-          <tr><td>Growth margin, 20 %</td><td></td><td>10.9</td></tr>
-          <tr><td><strong>Node mass</strong></td><td></td><td><strong>~65</strong></td></tr>
+          <tr><td>Subtotal</td><td></td><td>69.6</td></tr>
+          <tr><td>Growth margin, 20 %</td><td></td><td>13.9</td></tr>
+          <tr><td><strong>Node mass</strong></td><td></td><td><strong>~84</strong></td></tr>
         </tbody>
       </table>
       <p class="note" style="margin-top:12px; color:var(--muted); font-size:0.9rem;">
-        Rev 1.1 carried 40–80 t for 200–500 kW of accelerator. Rev B carries ~65 t for 1,000 kW. The change is not
-        optimism; it is the removal of the water shield and the batteries, and the accounting of compute at the
-        density liquid-cooled racks actually achieve. The refresh cycle relaunches only the 12 t of trays.
+        Rev 1.1 carried 40–80 t for 200–500 kW of accelerator. Rev B carried ~65 t for 1,000 kW by removing the water
+        shield and the batteries and counting compute at the density liquid-cooled racks actually achieve. Rev C puts
+        18 t back: 9 t of battery, 6 t of array to refill it and to cover the true worst sun angle, and the growth
+        margin on both. The refresh cycle relaunches only the 12 t of trays.
       </p>
     </div>
   </section>
@@ -510,25 +572,30 @@
         <strong>$15–20 M per MW</strong> of plant and power, before the years spent waiting for an interconnect.
       </p>
       <p>
-        The orbital node replaces all of that with launch mass. At 65 t per megawatt:
+        The orbital node replaces all of that with launch mass. At 84 t per megawatt:
       </p>
       <table class="thermal-table">
         <thead><tr><th>Launch price</th><th>Launch cost per MW node</th><th>Against $15–20 M terrestrial plant + power</th></tr></thead>
         <tbody>
-          <tr><td>$3,000 /kg</td><td>$195 M</td><td>10× worse</td></tr>
-          <tr><td>$1,500 /kg</td><td>$98 M</td><td>5× worse</td></tr>
-          <tr><td>$500 /kg</td><td>$33 M</td><td>~2× worse</td></tr>
-          <tr><td><strong>$300 /kg</strong></td><td><strong>$20 M</strong></td><td><strong>parity</strong></td></tr>
-          <tr><td>$200 /kg</td><td>$13 M</td><td>better</td></tr>
-          <tr><td>$100 /kg</td><td>$7 M</td><td>2–3× better</td></tr>
+          <tr><td>$3,000 /kg</td><td>$251 M</td><td>13× worse</td></tr>
+          <tr><td>$1,500 /kg</td><td>$125 M</td><td>6× worse</td></tr>
+          <tr><td>$500 /kg</td><td>$42 M</td><td>~2× worse</td></tr>
+          <tr><td>$300 /kg</td><td>$25 M</td><td>a quarter worse</td></tr>
+          <tr><td><strong>$240 /kg</strong></td><td><strong>$20 M</strong></td><td><strong>parity</strong></td></tr>
+          <tr><td>$200 /kg</td><td>$17 M</td><td>better</td></tr>
+          <tr><td>$100 /kg</td><td>$8 M</td><td>2× better</td></tr>
         </tbody>
       </table>
       <p style="margin-top:16px;">
-        The crossover sits near <strong>$300 per kilogram to sun-synchronous orbit</strong>, before counting on-orbit
+        The crossover sits near <strong>$240 per kilogram to sun-synchronous orbit</strong>, before counting on-orbit
         assembly, qualification, and the operations team, which push it lower, and before counting the value of
         skipping a multi-year grid queue, which pushes it higher. That price does not exist today. It is the stated
         goal of fully reusable heavy launch, and the point of writing the number down is that it is a
         launch-price gate, not a technology gate. Everything else on this page is buildable now.
+      </p>
+      <p>
+        Rev B put the crossover at $300. The difference is not the price of the battery decision; it is the price of
+        the correction. The $300 node could not hold its load for 89 days of the year.
       </p>
       <div class="assumption-note">
         <strong>Refresh.</strong> Each accelerator generation relaunches ~12 t of trays and storage per node. At
@@ -544,7 +611,7 @@
       <p>
         Nothing in the node gets easier when it gets bigger. Deployed area, bending modes, pointing disturbance,
         fault-domain size, and the mass of any single failure all grow faster than the compute they carry. A 1 MW node
-        is already a 90 m sheet with 50 m wings. The unit is fixed and the fleet grows.
+        is already a 109 m sheet with 50 m wings. The unit is fixed and the fleet grows.
       </p>
       <ul>
         <li><strong>Plane fill.</strong> Nodes in the same dawn-dusk plane share ground stations and can crosslink for distributed training. Ten nodes is 10 MW of accelerator in one plane with one ground segment.</li>
@@ -592,20 +659,21 @@
   <!-- 12. REV B CHANGES -->
   <section>
     <div class="container">
-      <h3>What Changed From Rev 1.1</h3>
+      <h3>What Changed</h3>
       <table class="thermal-table">
-        <thead><tr><th>Item</th><th>Rev 1.1</th><th>Rev B</th></tr></thead>
+        <thead><tr><th>Item</th><th>Rev 1.1</th><th>Rev B</th><th>Rev C</th></tr></thead>
         <tbody>
-          <tr><td>Orbit</td><td>500–600 km, generic; 35 % eclipse</td><td>650 km dawn-dusk sun-synchronous; no eclipse</td></tr>
-          <tr><td>Eclipse storage</td><td>2.6 t/MW battery or throttling</td><td>Safe-mode pack only</td></tr>
-          <tr><td>Accelerator load</td><td>200–500 kW in a 1–2 MW bus</td><td>1.0 MW IT, 1.2 MW electrical</td></tr>
-          <tr><td>Radiator area</td><td>1,800–3,300 m²/MW at 290–330 K</td><td>~1,700 m²/MW at 315 K mean; 2,000 m² per node</td></tr>
-          <tr><td>Solar area</td><td>~2,500 m²/MW, beginning of life</td><td>~4,500 m²/MW end of life; 5,400 m² per node</td></tr>
-          <tr><td>Shielding</td><td>15–50 t water and structure</td><td>~5 t aluminium vault; 3–5 year tray refresh</td></tr>
-          <tr><td>Node mass</td><td>40–80 t</td><td>~65 t, bottom-up with 20 % growth</td></tr>
-          <tr><td>Use case</td><td>"Power density, thermal isolation, space adjacency"</td><td>Batch training and inference; space-native data second</td></tr>
-          <tr><td>Data path</td><td>Not stated</td><td>Launched storage up, optical down, budget stated</td></tr>
-          <tr><td>Economics</td><td>Not stated</td><td>Break-even near $300/kg to SSO, shown as a table</td></tr>
+          <tr><td>Orbit</td><td>500–600 km, generic; 35 % eclipse</td><td>650 km dawn-dusk sun-synchronous; "no eclipse"</td><td>The same orbit; a shadow of up to 19.6 min on 89 days a year</td></tr>
+          <tr><td>Eclipse storage</td><td>2.6 t/MW battery or throttling</td><td>Safe-mode pack only</td><td>1,182 kWh, 9.1 t; full load through the shadow</td></tr>
+          <tr><td>Accelerator load</td><td>200–500 kW in a 1–2 MW bus</td><td>1.0 MW IT, 1.2 MW electrical</td><td>Unchanged</td></tr>
+          <tr><td>Radiator area</td><td>1,800–3,300 m²/MW at 290–330 K</td><td>~1,700 m²/MW at 315 K mean; 2,000 m² per node</td><td>2,035 m² per node</td></tr>
+          <tr><td>Solar area</td><td>~2,500 m²/MW, beginning of life</td><td>~4,500 m²/MW end of life; 5,400 m² per node</td><td>~5,000 m²/MW end of life; 7,630 m² per node</td></tr>
+          <tr><td>Shielding</td><td>15–50 t water and structure</td><td>~5 t aluminium vault; 3–5 year tray refresh</td><td>Unchanged; dose now from a proton model, ~150 rad a year</td></tr>
+          <tr><td>Node mass</td><td>40–80 t</td><td>~65 t, bottom-up with 20 % growth</td><td>~84 t</td></tr>
+          <tr><td>Use case</td><td>"Power density, thermal isolation, space adjacency"</td><td>Batch training and inference; space-native data second</td><td>Unchanged</td></tr>
+          <tr><td>Data path</td><td>Not stated</td><td>Launched storage up, optical down, budget stated</td><td>Unchanged</td></tr>
+          <tr><td>Economics</td><td>Not stated</td><td>Break-even near $300/kg to SSO, shown as a table</td><td>Break-even near $240/kg to SSO</td></tr>
+          <tr><td>Alternatives</td><td>Not stated</td><td>Not stated</td><td>Throttle, 1,600 km and 28.5° priced and shown</td></tr>
         </tbody>
       </table>
     </div>
@@ -616,13 +684,14 @@
     <div class="container">
       <h3>Technical Reference</h3>
       <p>
-        The Rev B architecture reference document carries the sizing set above with its bases, the mass budget,
-        the economics table, and the lunar polar variant.
+        The architecture reference document is still Rev B. Its thermal sizing, vault, data path and lunar polar
+        variant stand; its orbit, storage, array, mass and economics are superseded by this page. A Rev C dossier
+        will replace it.
       </p>
 
       <div class="spec" style="max-width: 720px; margin: 24px auto 0; text-align:center;">
         <a class="btn btn-primary" href="dossiers/Aegis_Orbital_Compute_Node.pdf" target="_blank" rel="noopener">
-          View / Technical Dossier (PDF) — Rev B
+          View / Technical Dossier (PDF) — Rev B, superseded in part
         </a>
         <div style="margin-top: 12px; color: var(--muted); font-size: 0.95rem;">
           If the PDF doesn't open in your browser, right-click and choose "Save Link As…"<br>
