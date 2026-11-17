@@ -1049,15 +1049,17 @@ footer a:hover { color: var(--accent); }
       The Aegis Orbital Compute Node (AOCN) is a 1 MW batch-compute node for a dawn-dusk sun-synchronous orbit. It's not a cloud replacement — it's a fixed unit of training and inference capacity where the grid, water, and permits don't exist and launch mass is the only bill. Rev C, November 2026, carries a battery through the orbit's shadow season.
     </p>
     <ul class="specs" style="text-align:left; display:inline-block;">
-      <li><strong>Orbit:</strong> 650 km dawn-dusk SSO — no eclipse at any season, no battery, fixed array</li>
-      <li><strong>Load:</strong> 1.0 MW of accelerators, 1.2 MW electrical end-of-life; ~65 t node</li>
-      <li><strong>Radiators:</strong> 2,000 m² two-sided at 315 K mean, edge-on to the sun</li>
-      <li><strong>Solar:</strong> 5,400 m² fixed sheet, ~223 W/m² end-of-life with derates stated</li>
-      <li><strong>Break-even:</strong> parity with a terrestrial hall near $300/kg to orbit — a launch-price gate, not a technology gate</li>
+      <li><strong>Orbit:</strong> 650 km dawn-dusk SSO — a shadow on 89 days of the year, up to 19.6 minutes an orbit, carried at full load on a 1,182 kWh battery</li>
+      <li><strong>Load:</strong> 1.0 MW of accelerators, 1.2 MW electrical end-of-life; ~86 t node</li>
+      <li><strong>Heat:</strong> 2,000 m² of radiator wings edge-on to the sun; glycol-water on the trays, silicone oil in the wings</li>
+      <li><strong>Solar:</strong> 7,630 m² fixed sheet, the sun 3° to 31° off it through the year</li>
+      <li><strong>Break-even:</strong> parity with a terrestrial hall near $230/kg to orbit — a launch-price gate, not a technology gate</li>
+      <li><strong>In simulation:</strong> a year flown on its flight software's control laws — 97.5 % of a megawatt-year delivered, every shadow carried</li>
     </ul>
-    <div class="btn-row" style="justify-content:center;">
-      <a class="btn" href="aocn.html">Explore AOCN →</a>
-    </div>
+    <a class="banner-link" href="aocn.html">
+      <img src="images/AOCN_concept.png" alt="The Aegis Orbital Compute Node in a dawn-dusk orbit: a single sunlit array sheet with the compute vault and two radiator wings behind it"/>
+    </a>
+    <a class="arrow-link" href="aocn.html" style="justify-content:center;">Visit the AOCN Page</a>
     <p class="subdued" style="margin-top:1rem;">Heat rejection and array area set the scale in space. AOCN sizes both and says what it costs.</p>
   </div>
 </section>
