@@ -206,7 +206,7 @@
       <tr><td>Array pointing</td><td>Fixed sheet in the orbit plane, facing the sun; no gimbal</td></tr>
       <tr><td>Radiator pointing</td><td>Wings in the plane containing the sun vector and nadir; faces look along ±velocity, never at the sun, obliquely at Earth; shaded by the array</td></tr>
       <tr><td>Drag makeup</td><td>~2,100 m² ram area; ~13 m/s per year; ~70 kg xenon per year on electric propulsion at mean solar activity. The same drag removes a dead node</td></tr>
-      <tr><td>Ground contact</td><td>Both poles every orbit; ~150 min per day of contact with a single high-latitude terminal</td></tr>
+      <tr><td>Ground contact</td><td>Both poles every orbit; above 10&deg;, ~87 min per day with one high-latitude terminal, ~160 min with one near each pole</td></tr>
       <tr><td>Radiation</td><td>Behind the vault wall, trapped protons from the South Atlantic Anomaly, ~150 rad per year; the electrons of the auroral horns stop in the wall (Section 7)</td></tr>
     </table>
     <p class="note">Rev B gave the sun angle as ≤ 23.4° and the orbit as eclipse-free above ~620 km. That counted the axial tilt and omitted the 8° of the orbit normal. No dawn-dusk orbit below about 1,400 km is free of shadow, because the sun-synchronous inclination rises with altitude.</p>
@@ -228,7 +228,7 @@
     <table>
       <tr><th>Leg</th><th>Method</th><th>Capacity</th><th>Note</th></tr>
       <tr><td>Dataset up</td><td>Launched solid-state storage installed with each tray refresh</td><td>10 PB ≈ 164 × 61 TB drives, &lt; 0.5 t</td><td>Cheaper and faster than any uplink</td></tr>
-      <tr><td>Results down</td><td>Optical to polar ground stations; Ka-band fallback</td><td>~110 TB/day at 100 Gb/s over ~150 min of contact</td><td>1 TB checkpoint at 10 Gb/s: ~13 min; station diversity covers weather</td></tr>
+      <tr><td>Results down</td><td>Optical to two polar ground terminals; Ka-band to say what is waiting</td><td>~115 TB/day at 100 Gb/s over ~160 min above 10&deg;, clear skies; about half with the skies clear half the time</td><td>One terminal: ~87 min, ~63 TB/day. Ka-band at 1 Gb/s: 1&ndash;3 TB/day, not a fallback for results</td></tr>
       <tr><td>Tasking, telemetry</td><td>RF via relay, continuous</td><td>kb/s to Mb/s</td><td>Ground plans, node executes autonomously between contacts</td></tr>
       <tr><td>Node to node</td><td>Optical crosslink within the plane</td><td>10–100 Gb/s</td><td>Distributed training across nodes; not required for one node</td></tr>
     </table>
@@ -443,7 +443,7 @@
       <tr><td>Node mass</td><td>40–80 t</td><td>~65 t bottom-up, 20 % growth</td><td>~86 t</td></tr>
       <tr><td>Coolant</td><td>Not stated</td><td>Single-phase loop; no fluid named</td><td>Two loops: glycol-water on the trays, silicone oil in the wings</td></tr>
       <tr><td>Use case</td><td>Power density, thermal isolation, space adjacency</td><td>Batch training and inference; space-native data second</td><td>Unchanged</td></tr>
-      <tr><td>Data path</td><td>Not stated</td><td>Launched storage up, optical down, budget stated</td><td>Unchanged</td></tr>
+      <tr><td>Data path</td><td>Not stated</td><td>Launched storage up, optical down; ~110 TB/day with one terminal</td><td>Two polar terminals for that budget; one gives ~87 min above 10&deg;, ~63 TB/day</td></tr>
       <tr><td>Economics</td><td>Not stated</td><td>Parity near $300/kg to SSO</td><td>Parity near $230/kg to SSO</td></tr>
       <tr><td>Alternatives</td><td>Not stated</td><td>Not stated</td><td>Throttle, 1,600 km and 28.5° priced (Section 3)</td></tr>
     </table>

@@ -349,14 +349,18 @@
         <thead><tr><th>Leg</th><th>Method</th><th>Capacity</th><th>Note</th></tr></thead>
         <tbody>
           <tr><td>Dataset up</td><td>Launched solid-state storage, installed with each compute refresh</td><td>10 PB ≈ 164 × 61 TB drives, &lt; 0.5 t</td><td>Cheaper and faster than any uplink; refreshed with the trays it feeds</td></tr>
-          <tr><td>Results down</td><td>Optical to polar ground stations, Ka-band RF fallback</td><td>~110 TB/day at 100 Gb/s over ~150 min of contact</td><td>A 1 TB checkpoint at 10 Gb/s takes ~13 min; weather handled by station diversity</td></tr>
+          <tr><td>Results down</td><td>Optical to two polar ground terminals, one near each pole; Ka-band RF to say what is waiting</td><td>~115 TB/day at 100 Gb/s over ~160 min of contact above 10&deg;, under clear skies; about half that with the skies clear half the time</td><td>One terminal alone: ~87 min and ~63 TB/day. Ka-band at 1 Gb/s carries 1&ndash;3 TB/day and is not a fallback for results; cloud is covered by more terminals</td></tr>
           <tr><td>Tasking and telemetry</td><td>RF, continuous via relay</td><td>kb/s to Mb/s</td><td>Autonomous operation between contacts; ground plans, node executes</td></tr>
           <tr><td>Node to node</td><td>Optical crosslink within a plane</td><td>10–100 Gb/s</td><td>For distributed training across nodes in the same orbit plane; not required for a single node</td></tr>
         </tbody>
       </table>
       <p class="note" style="margin-top:12px; color:var(--muted); font-size:0.9rem;">
-        Dawn-dusk sun-synchronous orbits cross both poles every ~97 minutes. A single high-latitude optical terminal
-        sees the node on most passes; two terminals on different continents cover weather.
+        Dawn-dusk sun-synchronous orbits cross both poles every ~98 minutes. A high-latitude terminal sees the node
+        on eleven passes a day, but an optical link is not used at the horizon: above 10&deg; one terminal has the
+        node 87 minutes a day, not the 150 Rev B gave, which was to the horizon. A terminal near each pole gives
+        about 160 minutes and never more than an orbit's wait. Flown for a simulated year with the node making 20 TB
+        of results a day (a figure this page does not have and has assumed), two terminals sent all of it with the
+        skies clear half the time, and were at most a day's results behind.
       </p>
     </div>
   </section>
@@ -722,7 +726,7 @@
           <tr><td>Node mass</td><td>40–80 t</td><td>~65 t, bottom-up with 20 % growth</td><td>~86 t</td></tr>
           <tr><td>Coolant</td><td>Not stated</td><td>"A pumped single-phase loop"; no fluid named</td><td>Two loops: water-glycol on the trays, silicone oil in the wings, a heat exchanger between</td></tr>
           <tr><td>Use case</td><td>"Power density, thermal isolation, space adjacency"</td><td>Batch training and inference; space-native data second</td><td>Unchanged</td></tr>
-          <tr><td>Data path</td><td>Not stated</td><td>Launched storage up, optical down, budget stated</td><td>Unchanged</td></tr>
+          <tr><td>Data path</td><td>Not stated</td><td>Launched storage up, optical down; ~110 TB/day over ~150 min with one terminal</td><td>Two polar terminals for that budget: one gives ~87 min above 10&deg; and ~63 TB/day</td></tr>
           <tr><td>Economics</td><td>Not stated</td><td>Break-even near $300/kg to SSO, shown as a table</td><td>Break-even near $230/kg to SSO</td></tr>
           <tr><td>Alternatives</td><td>Not stated</td><td>Not stated</td><td>Throttle, 1,600 km and 28.5° priced and shown</td></tr>
         </tbody>
