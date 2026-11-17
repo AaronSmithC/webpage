@@ -145,6 +145,9 @@
     }
 
     /* Assumption correction callout */
+    figure{margin:1.4rem 0}
+    figure video{width:100%;display:block;border-radius:10px;border:1px solid rgba(255,255,255,.08)}
+    figcaption{font-size:.85rem;color:var(--muted);margin-top:.5rem;line-height:1.5}
     .assumption-note {
       background: var(--warn);
       border: 1px solid var(--warn-border);
@@ -545,6 +548,36 @@
         <li><strong>Geometry.</strong> The vault is an unpressurised cylinder, ⌀4 × 10 m, with cold-plated trays on rails so a robotic servicer can swap a tray without breaking the coolant loop. Storage, power conversion, and the loop pumps live in the same shell. Vault structure and shielding together are ~5 t, not 15–50.</li>
         <li><strong>Serviceability.</strong> Interfaces are EVA-compatible so a crewed servicing mission is possible, but nothing on the node requires a person. The array blankets and radiator wings are line-replaceable units on the same truss standard.</li>
       </ul>
+    </div>
+  </section>
+
+  <!-- 7a. SIMULATION -->
+  <section id="simulation">
+    <div class="container">
+      <h3>The Node in Simulation</h3>
+      <p>
+        Since Rev C the node has a model of its power, its heat and its payload (the array and the pack through the
+        shadow, the trays, both coolant loops and the wings by section, and the protons of the South Atlantic Anomaly
+        over a ground track), and a flight software built on it: six applications on a NASA cFS image, a C plant held
+        to the model state for state, an operator console, a fault library of fourteen scenarios flown on the image,
+        and the node's own telemetry alphabet with every scenario kept as a tape. The figures in the loop model's
+        notes above are that model's.
+      </p>
+      <p>
+        A year has been flown on it, every one of its 5,387 orbits, with the flight software's control laws on the
+        plant: the node at ten years old, its payload upset three times a day in each of four zones. It delivered
+        <strong>97.5 % of a megawatt-year</strong>. All 1,318 shadows were carried at full load, the pack never under
+        66 %, and the megawatt was never limited. What it lost went to checkpoints and to 4,526 upsets, nearly all of
+        them in the anomaly, which the track crosses on four orbits in five. At ten times that rate of upsets it
+        delivered 93.6 %. The rate itself is not known for this hardware and is the model's largest open figure.
+      </p>
+      <figure>
+        <video controls muted playsinline preload="metadata" poster="images/aocn_year_poster.jpg">
+          <source src="media/aocn_year.mp4" type="video/mp4">
+          Your browser does not play MP4 video.
+        </video>
+        <figcaption>The node on its orbit at four times of that year, simulated, two revolutions at each, drawn from the place and the sun's direction its flight software reports. The view is from the sun: the orbit is nearly face on, the array lies in its plane, and the node is in the Earth's shadow when it passes behind the disc. Early March and October, the sun 3&deg; off the array; 21 June, 31&deg; off and 19.7 minutes of shadow on every orbit, the pack down to 66 % and full again nine minutes before the next; December, 15&deg;. The array is fixed and gives the cosine of that angle. The red patch is the South Atlantic Anomaly, turning with the Earth. An orbit of 98 minutes is nine seconds here.</figcaption>
+      </figure>
     </div>
   </section>
 
