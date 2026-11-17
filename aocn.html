@@ -146,7 +146,7 @@
 
     /* Assumption correction callout */
     figure{margin:1.4rem 0}
-    figure video{width:100%;display:block;border-radius:10px;border:1px solid rgba(255,255,255,.08)}
+    figure video, figure img{width:100%;display:block;border-radius:10px;border:1px solid rgba(255,255,255,.08)}
     figcaption{font-size:.85rem;color:var(--muted);margin-top:.5rem;line-height:1.5}
     .assumption-note {
       background: var(--warn);
@@ -562,8 +562,8 @@
       <p>
         Since Rev C the node has a model of its power, its heat and its payload (the array and the pack through the
         shadow, the trays, both coolant loops and the wings by section, and the protons of the South Atlantic Anomaly
-        over a ground track), and a flight software built on it: six applications on a NASA cFS image, a C plant held
-        to the model state for state, an operator console, a fault library of fourteen scenarios flown on the image,
+        over a ground track, and the ground terminals it passes over), and a flight software built on it: seven applications on a NASA cFS image, a C plant held
+        to the model state for state, an operator console, a fault library of sixteen scenarios flown on the image,
         and the node's own telemetry alphabet with every scenario kept as a tape. The figures in the loop model's
         notes above are that model's.
       </p>
@@ -581,6 +581,10 @@
           Your browser does not play MP4 video.
         </video>
         <figcaption>The node on its orbit at four times of that year, simulated, two revolutions at each, drawn from the place and the sun's direction its flight software reports. The view is from the sun: the orbit is nearly face on, the array lies in its plane, and the node is in the Earth's shadow when it passes behind the disc. Early March and October, the sun 3&deg; off the array; 21 June, 31&deg; off and 19.7 minutes of shadow on every orbit, the pack down to 66 % and full again nine minutes before the next; December, 15&deg;. The array is fixed and gives the cosine of that angle. The red patch is the South Atlantic Anomaly, turning with the Earth. An orbit of 98 minutes is nine seconds here.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/aocn_console.jpg" alt="The node's operator console: the executive in OPERATE at 1,000 kW, the pack at 67 percent and recharging after a shadow, the orbit seen from the sun with the node over the South Atlantic, four tray zones, the payload's work and the protons, the links and results, both coolant loops and eight wing sections, and the event log" loading="lazy">
+        <figcaption>The operator console on the flight software's image, 21 June of a node ten years old, three minutes out of the day's first shadow. The executive is in OPERATE at the megawatt with nothing limiting it; the pack carried the 19.6 minutes, went down a third to 66 %, and is taking 358 kW back. The node is at 46&deg; S over the South Atlantic, in the anomaly: 71 protons per cm&sup2; per second, and the checkpoint interval has come down from six hours to 26 minutes. Both coolant loops are at their settled temperatures, 0.8 TB of results wait for the next ground terminal, and neither is in view.</figcaption>
       </figure>
     </div>
   </section>
@@ -727,6 +731,7 @@
           <tr><td>Coolant</td><td>Not stated</td><td>"A pumped single-phase loop"; no fluid named</td><td>Two loops: water-glycol on the trays, silicone oil in the wings, a heat exchanger between</td></tr>
           <tr><td>Use case</td><td>"Power density, thermal isolation, space adjacency"</td><td>Batch training and inference; space-native data second</td><td>Unchanged</td></tr>
           <tr><td>Data path</td><td>Not stated</td><td>Launched storage up, optical down; ~110 TB/day over ~150 min with one terminal</td><td>Two polar terminals for that budget: one gives ~87 min above 10&deg; and ~63 TB/day</td></tr>
+          <tr><td>Model and software</td><td>None</td><td>None</td><td>A model of power, heat, payload and links; flight software on a cFS image with a console, a fault library and a telemetry alphabet; a year flown in simulation</td></tr>
           <tr><td>Economics</td><td>Not stated</td><td>Break-even near $300/kg to SSO, shown as a table</td><td>Break-even near $230/kg to SSO</td></tr>
           <tr><td>Alternatives</td><td>Not stated</td><td>Not stated</td><td>Throttle, 1,600 km and 28.5° priced and shown</td></tr>
         </tbody>

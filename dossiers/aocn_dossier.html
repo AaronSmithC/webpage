@@ -431,7 +431,31 @@
   <hr>
 
   <section class="section">
-    <h2>13. Changes</h2>
+    <h2>13. The Node in Simulation</h2>
+    <p>
+      Since Rev C the node has a model of its power, its heat, its payload and its links, and a flight software built
+      on it: seven applications on a NASA cFS image, a C plant held to the model state for state, an operator console,
+      a fault library of sixteen scenarios flown on the image, and the node's own telemetry alphabet with every
+      scenario kept as a tape. The loop model's figures in Section 5 are that model's.
+    </p>
+    <table>
+      <tr><th>A year flown, 5,387 orbits, the node ten years old</th><th>Result</th></tr>
+      <tr><td>Megawatt-year delivered</td><td>97.5 % (8.54 GWh), with the payload upset three times a day in each of four zones; 93.6 % at ten times that</td></tr>
+      <tr><td>Shadows</td><td>1,318 orbits in 89 days, every one carried at full load; pack never under 66 %, full at least 8.6 min before each</td></tr>
+      <tr><td>Megawatt limited</td><td>Never; hottest junction 356 K of a 363 K limit</td></tr>
+      <tr><td>Upsets</td><td>4,526, nearly all in the South Atlantic Anomaly, which the track crosses on four orbits in five; 0.6 % of the work lost</td></tr>
+      <tr><td>Results down</td><td>All of an assumed 20 TB a day through two polar terminals, with the skies clear half the time; at most a day's results waiting</td></tr>
+      <tr><td>Dose behind the vault wall</td><td>152 rad</td></tr>
+    </table>
+    <p class="note">The rate of upsets for this hardware and how much the payload has to send are not known and are the model's two largest open figures. The year is the flight software's control laws on the plant, a second a step; what happens when something fails is the fault library's.</p>
+    <img src="../images/aocn_console.jpg" alt="The node's operator console" style="width:100%; border-radius:8px; border:1px solid #2a2a2e; margin-top:10px;">
+    <p class="note">The operator console on the flight software's image, 21 June of a node ten years old, three minutes out of the day's first shadow. The executive is in OPERATE at the megawatt with nothing limiting it; the pack carried the 19.6 minutes, went down a third to 66 %, and is taking 358 kW back. The node is at 46&deg; S over the South Atlantic, in the anomaly: 71 protons per cm&sup2; per second, and the checkpoint interval has come down from six hours to 26 minutes. Both coolant loops are at their settled temperatures, 0.8 TB of results wait for the next ground terminal, and neither is in view.</p>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <h2>14. Changes</h2>
     <table style="break-inside: auto;">
       <tr><th>Item</th><th>Rev 1.1</th><th>Rev B</th><th>Rev C</th></tr>
       <tr><td>Orbit</td><td>500–600 km generic; 35 % eclipse</td><td>650 km dawn-dusk SSO; stated as no eclipse</td><td>Same orbit; shadow up to 19.6 min on 89 days a year</td></tr>
@@ -444,6 +468,7 @@
       <tr><td>Coolant</td><td>Not stated</td><td>Single-phase loop; no fluid named</td><td>Two loops: glycol-water on the trays, silicone oil in the wings</td></tr>
       <tr><td>Use case</td><td>Power density, thermal isolation, space adjacency</td><td>Batch training and inference; space-native data second</td><td>Unchanged</td></tr>
       <tr><td>Data path</td><td>Not stated</td><td>Launched storage up, optical down; ~110 TB/day with one terminal</td><td>Two polar terminals for that budget; one gives ~87 min above 10&deg;, ~63 TB/day</td></tr>
+      <tr><td>Model and software</td><td>None</td><td>None</td><td>A model of power, heat, payload and links; flight software on a cFS image with a console, a fault library and a telemetry alphabet; a year flown (Section 13)</td></tr>
       <tr><td>Economics</td><td>Not stated</td><td>Parity near $300/kg to SSO</td><td>Parity near $230/kg to SSO</td></tr>
       <tr><td>Alternatives</td><td>Not stated</td><td>Not stated</td><td>Throttle, 1,600 km and 28.5° priced (Section 3)</td></tr>
     </table>
