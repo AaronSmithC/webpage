@@ -404,7 +404,8 @@
         <li><strong>Shadow season.</strong> Centred on the June solstice for an 18:00 ascending node, on December for 06:00. The battery section sizes it.</li>
         <li><strong>Fixed geometry.</strong> The array is a flat sheet in the orbit plane facing the sun; it needs no gimbal. Radiators lie in the plane containing the sun vector and nadir, so their faces look along the velocity vector, never at the sun and only obliquely at Earth. The array shades them as well.</li>
         <li><strong>Ground contact.</strong> Both poles every orbit, which is what makes the optical downlink budget work.</li>
-        <li><strong>Drag.</strong> The array is edge-on to the velocity vector; the radiators are not. About 2,100 m² of ram area at 650 km costs ~13 m/s per year, about 70 kg of xenon per year on electric propulsion. Atomic-oxygen-tolerant radiator coatings are required. The same drag brings a dead node down, which the higher orbit could not promise.</li>
+        <li><strong>Drag.</strong> The array is edge-on to the velocity vector; the radiators are not. About 2,000 m² of ram area, with the shear on the array's two faces adding a quarter to it, costs about 4 m/s and 17 kg of xenon a year in ordinary air, and about 18 m/s and 87 kg at an active sun (Rev B's 13 m/s and 70 kg was near the active figure). One of two 0.3 N thrusters holds the node within 250 m of its height on a raise every two weeks, fired only in the sun and only on a full pack. Atomic-oxygen-tolerant radiator coatings are required.</li>
+        <li><strong>The end.</strong> The same drag brings a dead node down, which the higher orbit could not promise: in about eleven years in ordinary air, two at an active sun. But 86 t does not all burn, and Rev B did not say where it lands. The thrusters cannot choose: below about 400 km the air pushes harder than they do. Steering the whole node to an ocean takes a chemical stage of 4 to 7 t. Steering only the vault, with the array blanket and the radiator panels released to burn, takes about a tonne and a half. <strong>This is not decided</strong>; it is the node's largest open design question.</li>
         <li><strong>Radiation.</strong> Behind the vault wall the dose is trapped protons from the South Atlantic Anomaly, about 150 rad a year. The electrons of the polar horns stop in the wall. The vault section carries it.</li>
       </ul>
 
@@ -562,8 +563,8 @@
       <p>
         Since Rev C the node has a model of its power, its heat and its payload (the array and the pack through the
         shadow, the trays, both coolant loops and the wings by section, and the protons of the South Atlantic Anomaly
-        over a ground track, and the ground terminals it passes over), and a flight software built on it: seven applications on a NASA cFS image, a C plant held
-        to the model state for state, an operator console, a fault library of sixteen scenarios flown on the image,
+        over a ground track, the ground terminals it passes over, and the air that slows it), and a flight software built on it: eight applications on a NASA cFS image, a C plant held
+        to the model state for state, an operator console, a fault library of seventeen scenarios flown on the image,
         and the node's own telemetry alphabet with every scenario kept as a tape. The figures in the loop model's
         notes above are that model's.
       </p>
@@ -731,6 +732,7 @@
           <tr><td>Coolant</td><td>Not stated</td><td>"A pumped single-phase loop"; no fluid named</td><td>Two loops: water-glycol on the trays, silicone oil in the wings, a heat exchanger between</td></tr>
           <tr><td>Use case</td><td>"Power density, thermal isolation, space adjacency"</td><td>Batch training and inference; space-native data second</td><td>Unchanged</td></tr>
           <tr><td>Data path</td><td>Not stated</td><td>Launched storage up, optical down; ~110 TB/day over ~150 min with one terminal</td><td>Two polar terminals for that budget: one gives ~87 min above 10&deg; and ~63 TB/day</td></tr>
+          <tr><td>End of life</td><td>Not stated</td><td>"The same drag removes a dead node"</td><td>Open: 86 t does not all burn; a controlled end adds 1.5 to 7 t and is traded, not decided</td></tr>
           <tr><td>Model and software</td><td>None</td><td>None</td><td>A model of power, heat, payload and links; flight software on a cFS image with a console, a fault library and a telemetry alphabet; a year flown in simulation</td></tr>
           <tr><td>Economics</td><td>Not stated</td><td>Break-even near $300/kg to SSO, shown as a table</td><td>Break-even near $230/kg to SSO</td></tr>
           <tr><td>Alternatives</td><td>Not stated</td><td>Not stated</td><td>Throttle, 1,600 km and 28.5° priced and shown</td></tr>

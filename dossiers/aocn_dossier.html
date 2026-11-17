@@ -205,7 +205,8 @@
       <tr><td>Energy storage</td><td>1,182 kWh; full load through the shadow (Section 6)</td></tr>
       <tr><td>Array pointing</td><td>Fixed sheet in the orbit plane, facing the sun; no gimbal</td></tr>
       <tr><td>Radiator pointing</td><td>Wings in the plane containing the sun vector and nadir; faces look along ±velocity, never at the sun, obliquely at Earth; shaded by the array</td></tr>
-      <tr><td>Drag makeup</td><td>~2,100 m² ram area; ~13 m/s per year; ~70 kg xenon per year on electric propulsion at mean solar activity. The same drag removes a dead node</td></tr>
+      <tr><td>Drag makeup</td><td>~2,000 m² ram area plus the array's shear; ~4 m/s and ~17 kg xenon per year in ordinary air, ~18 m/s and ~87 kg at an active sun; a 250 m raise every two weeks on one of two 0.3 N thrusters, fired in the sun on a full pack</td></tr>
+      <tr><td>End of life</td><td><strong>Open.</strong> Drag brings a dead node down in ~11 years (2 at an active sun), but 86 t does not all burn and the thrusters cannot steer it below ~400 km. A controlled end adds 1.5 t (the vault alone, the sheet and wings released to burn) to 7 t (the whole node from 650 km)</td></tr>
       <tr><td>Ground contact</td><td>Both poles every orbit; above 10&deg;, ~87 min per day with one high-latitude terminal, ~160 min with one near each pole</td></tr>
       <tr><td>Radiation</td><td>Behind the vault wall, trapped protons from the South Atlantic Anomaly, ~150 rad per year; the electrons of the auroral horns stop in the wall (Section 7)</td></tr>
     </table>
@@ -434,8 +435,8 @@
     <h2>13. The Node in Simulation</h2>
     <p>
       Since Rev C the node has a model of its power, its heat, its payload and its links, and a flight software built
-      on it: seven applications on a NASA cFS image, a C plant held to the model state for state, an operator console,
-      a fault library of sixteen scenarios flown on the image, and the node's own telemetry alphabet with every
+      on it: eight applications on a NASA cFS image, a C plant held to the model state for state, an operator console,
+      a fault library of seventeen scenarios flown on the image, and the node's own telemetry alphabet with every
       scenario kept as a tape. The loop model's figures in Section 5 are that model's.
     </p>
     <table>
@@ -468,6 +469,7 @@
       <tr><td>Coolant</td><td>Not stated</td><td>Single-phase loop; no fluid named</td><td>Two loops: glycol-water on the trays, silicone oil in the wings</td></tr>
       <tr><td>Use case</td><td>Power density, thermal isolation, space adjacency</td><td>Batch training and inference; space-native data second</td><td>Unchanged</td></tr>
       <tr><td>Data path</td><td>Not stated</td><td>Launched storage up, optical down; ~110 TB/day with one terminal</td><td>Two polar terminals for that budget; one gives ~87 min above 10&deg;, ~63 TB/day</td></tr>
+      <tr><td>End of life</td><td>Not stated</td><td>"Drag removes a dead node"</td><td>Open: a controlled end adds 1.5 to 7 t; traded, not decided</td></tr>
       <tr><td>Model and software</td><td>None</td><td>None</td><td>A model of power, heat, payload and links; flight software on a cFS image with a console, a fault library and a telemetry alphabet; a year flown (Section 13)</td></tr>
       <tr><td>Economics</td><td>Not stated</td><td>Parity near $300/kg to SSO</td><td>Parity near $230/kg to SSO</td></tr>
       <tr><td>Alternatives</td><td>Not stated</td><td>Not stated</td><td>Throttle, 1,600 km and 28.5° priced (Section 3)</td></tr>
