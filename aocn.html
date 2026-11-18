@@ -405,7 +405,7 @@
         <li><strong>Fixed geometry.</strong> The array is a flat sheet in the orbit plane facing the sun; it needs no gimbal. Radiators lie in the plane containing the sun vector and nadir, so their faces look along the velocity vector, never at the sun and only obliquely at Earth. The array shades them as well.</li>
         <li><strong>Ground contact.</strong> Both poles every orbit, which is what makes the optical downlink budget work.</li>
         <li><strong>Drag.</strong> The array is edge-on to the velocity vector; the radiators are not. About 2,000 m² of ram area, with the shear on the array's two faces adding a quarter to it, costs about 4 m/s and 17 kg of xenon a year in ordinary air, and about 18 m/s and 87 kg at an active sun (Rev B's 13 m/s and 70 kg was near the active figure). One of two 0.3 N thrusters holds the node within 250 m of its height on a raise every two weeks, fired only in the sun and only on a full pack. Atomic-oxygen-tolerant radiator coatings are required.</li>
-        <li><strong>The end.</strong> The same drag brings a dead node down, which the higher orbit could not promise: in about eleven years in ordinary air, two at an active sun. But 86 t does not all burn, and Rev B did not say where it lands. The thrusters cannot choose: below about 400 km the air pushes harder than they do. Steering the whole node to an ocean takes a chemical stage of 4 to 7 t. Steering only the vault, with the array blanket and the radiator panels released to burn, takes about a tonne and a half. <strong>This is not decided</strong>; it is the node's largest open design question.</li>
+        <li><strong>The end.</strong> The same drag brings a dead node down, which the higher orbit could not promise: in about eleven years in ordinary air, two at an active sun. But 86 t does not all burn, and Rev B did not say where it lands. The thrusters cannot choose: below about 400 km the air pushes harder than they do. Steering the whole node to an ocean takes a chemical stage of 4 to 7 t. Steering only the vault, with the array blanket and the radiator panels released to burn, takes about a tonne and a half. A vault that docks itself (the vault section) would be steered down from 650 km at every refresh, the last included, without waiting on a node that still answers. <strong>This is not decided</strong>; it is the node's largest open design question.</li>
         <li><strong>Radiation.</strong> Behind the vault wall the dose is trapped protons from the South Atlantic Anomaly, about 150 rad a year. The electrons of the polar horns stop in the wall. The vault section carries it.</li>
       </ul>
 
@@ -552,6 +552,7 @@
         <li><strong>Upsets.</strong> Polar and SAA passes raise the single-event rate on unhardened parts. The answer is architectural: ECC memory, frequent checkpointing to the local storage pool, and scheduling that expects a few percent of throughput lost to restarts. This is the open engineering question on the node and the page does not pretend it is closed.</li>
         <li><strong>Geometry.</strong> The vault is an unpressurised cylinder, ⌀4 × 10 m, with cold-plated trays on rails so a robotic servicer can swap a tray without breaking the coolant loop. Storage, power conversion, and the loop pumps live in the same shell. Vault structure and shielding together are ~5 t, not 15–50.</li>
         <li><strong>Serviceability.</strong> Interfaces are EVA-compatible so a crewed servicing mission is possible, but nothing on the node requires a person. The array blankets and radiator wings are line-replaceable units on the same truss standard.</li>
+        <li><strong>A vault that docks itself.</strong> No vehicle flies that can swap a tray. What does fly, and has for decades, is a module of this mass docking itself, so the refresh was traded. The idea is not this page's: Starcloud's <a href="https://starcloudinc.github.io/wp.pdf" target="_blank" rel="noopener">white paper of 2024</a> docks compute containers to a hub through one port for power, network and cooling, and undocks them to re-enter. What is added here is the size of that joint for a megawatt. The whole vault, with its trays, their coolant loop and the heat exchanger, goes up as one module, docks to the truss, and takes itself down at the end of its trays' life. The megawatt crosses the joint as four zones of 278 kW, mated with their breakers open, and the only fluid that crosses is the wings' silicone oil; the trays' loop is filled and tested on the ground and never opened in orbit. It is about 21 t at each refresh against 12 t for trays alone (25 and 14 with growth) and adds 3.5 t to the node, which takes the break-even from about $233 to $224 a kilogram. It needs no servicer. It rests on joints nobody has flown at this size: ten pairs of 38 mm couplings for 28 kg/s of oil, or one pair of 119 mm. <strong>This is traded, not decided</strong>; the node on this page is still the one a servicer refreshes.</li>
       </ul>
     </div>
   </section>
@@ -658,7 +659,7 @@
       </p>
       <div class="assumption-note">
         <strong>Refresh.</strong> Each accelerator generation relaunches ~12 t of trays and storage per node. At
-        $500 /kg that is $6 M against $40 M or more of hardware inside them, so refresh cost is not what decides the case.
+        $500 /kg that is $6 M against $40 M or more of hardware inside them, so refresh cost is not what decides the case. A vault that docks itself relaunches about 21 t, $10.5 M at that price, and it still is not.
       </div>
     </div>
   </section>
@@ -675,7 +676,7 @@
       <ul>
         <li><strong>Plane fill.</strong> Nodes in the same dawn-dusk plane share ground stations and can crosslink for distributed training. Ten nodes is 10 MW of accelerator in one plane with one ground segment.</li>
         <li><strong>Independent failure.</strong> A punctured loop or a lost wing takes out one node, throttled, not a fleet.</li>
-        <li><strong>Same servicer.</strong> One robotic servicing vehicle and one tray standard cover every node in the plane.</li>
+        <li><strong>Same servicer.</strong> One robotic servicing vehicle and one tray standard cover every node in the plane; or, if the vault docks itself, one module standard and no servicer.</li>
         <li><strong>Lifecycle split.</strong> Plant lasts 10–15 years; trays turn over in 3–5. The plant is the asset; the trays are inventory.</li>
       </ul>
     </div>
@@ -732,6 +733,7 @@
           <tr><td>Coolant</td><td>Not stated</td><td>"A pumped single-phase loop"; no fluid named</td><td>Two loops: water-glycol on the trays, silicone oil in the wings, a heat exchanger between</td></tr>
           <tr><td>Use case</td><td>"Power density, thermal isolation, space adjacency"</td><td>Batch training and inference; space-native data second</td><td>Unchanged</td></tr>
           <tr><td>Data path</td><td>Not stated</td><td>Launched storage up, optical down; ~110 TB/day over ~150 min with one terminal</td><td>Two polar terminals for that budget: one gives ~87 min above 10&deg; and ~63 TB/day</td></tr>
+          <tr><td>Refresh</td><td>Compute swappable, robotically or by a crew</td><td>Trays on rails, swapped by a robotic servicer</td><td>Unchanged; a vault that docks itself is traded, not decided: ~21 t a refresh, 3.5 t on the node, no servicer</td></tr>
           <tr><td>End of life</td><td>Not stated</td><td>"The same drag removes a dead node"</td><td>Open: 86 t does not all burn; a controlled end adds 1.5 to 7 t and is traded, not decided</td></tr>
           <tr><td>Model and software</td><td>None</td><td>None</td><td>A model of power, heat, payload and links; flight software on a cFS image with a console, a fault library and a telemetry alphabet; a year flown in simulation</td></tr>
           <tr><td>Economics</td><td>Not stated</td><td>Break-even near $300/kg to SSO, shown as a table</td><td>Break-even near $230/kg to SSO</td></tr>
