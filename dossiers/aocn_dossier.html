@@ -206,7 +206,7 @@
       <tr><td>Array pointing</td><td>Fixed sheet in the orbit plane, facing the sun; no gimbal</td></tr>
       <tr><td>Radiator pointing</td><td>Wings in the plane containing the sun vector and nadir; faces look along ±velocity, never at the sun, obliquely at Earth; shaded by the array</td></tr>
       <tr><td>Drag makeup</td><td>~2,000 m² ram area plus the array's shear; ~4 m/s and ~17 kg xenon per year in ordinary air, ~18 m/s and ~87 kg at an active sun; a 250 m raise every two weeks on one of two 0.3 N thrusters, fired in the sun on a full pack</td></tr>
-      <tr><td>End of life</td><td><strong>Open.</strong> Drag brings a dead node down in ~11 years (2 at an active sun), but 86 t does not all burn and the thrusters cannot steer it below ~400 km. A controlled end adds 1.5 t (the vault alone, the sheet and wings released to burn) to 7 t (the whole node from 650 km)</td></tr>
+      <tr><td>End of life</td><td><strong>Open.</strong> Drag brings a dead node down in ~11 years (2 at an active sun), but 86 t does not all burn and the thrusters cannot steer it below ~400 km. A controlled end adds 1.5 t (the vault alone, the sheet and wings released to burn) to 7 t (the whole node from 650 km). A vault that docks itself (Section 7) is steered down from 650 km at every refresh, the last included</td></tr>
       <tr><td>Ground contact</td><td>Both poles every orbit; above 10&deg;, ~87 min per day with one high-latitude terminal, ~160 min with one near each pole</td></tr>
       <tr><td>Radiation</td><td>Behind the vault wall, trapped protons from the South Atlantic Anomaly, ~150 rad per year; the electrons of the auroral horns stop in the wall (Section 7)</td></tr>
     </table>
@@ -331,6 +331,7 @@
       <tr><td>Tray life</td><td>3–5 years, set by the commercial hardware cycle, not by dose</td></tr>
       <tr><td>Upset handling</td><td>ECC memory, frequent checkpoint to local storage, scheduling that expects a few percent throughput lost to restarts on polar and SAA passes. <strong>Open question; not closed in Rev C.</strong></td></tr>
       <tr><td>Servicing</td><td>Cold-plated trays on rails, swappable by a robotic servicer without breaking the loop; EVA-compatible interfaces; array blankets and radiator wings line-replaceable</td></tr>
+      <tr><td>Refresh without a servicer</td><td><strong>Traded, not decided.</strong> No vehicle flies that can swap a tray; a module of this mass docking itself has flown for decades. The vault as that module: trays, their loop and the heat exchanger in one, docked to the truss and taken down by itself at the end of its trays' life. Across the joint: four zones of 278 kW, mated with their breakers open, and the wings' silicone oil, 28 kg/s, in ten pairs of 38 mm couplings or one pair of 119 mm, neither flown at this size. ~21 t per refresh against 12 t for trays alone (25 and 14 with growth); 3.5 t on the node, parity $233 to $224/kg; no servicer. Docking compute modules to a hub is Starcloud's proposal of 2024; the size of the joint for a megawatt is what is added here</td></tr>
       <tr><td>Vault structure and shielding mass</td><td>~5 t</td></tr>
     </table>
   </section>
@@ -391,7 +392,7 @@
       <tr><td>$200 /kg</td><td>$17 M</td><td>better</td></tr>
       <tr><td>$100 /kg</td><td>$9 M</td><td>2× better</td></tr>
     </table>
-    <p class="note">Crossover near $230/kg (Rev B: $300/kg, for a node that could not hold its load 89 days a year), before on-orbit assembly, qualification and operations (which push it lower) and before the value of skipping a multi-year grid queue (which pushes it higher). Refresh at $500/kg relaunches ~12 t for ~$6 M against $40 M or more of hardware inside, so refresh does not decide the case. The gate is launch price, not technology.</p>
+    <p class="note">Crossover near $230/kg (Rev B: $300/kg, for a node that could not hold its load 89 days a year), before on-orbit assembly, qualification and operations (which push it lower) and before the value of skipping a multi-year grid queue (which pushes it higher). Refresh at $500/kg relaunches ~12 t for ~$6 M against $40 M or more of hardware inside, so refresh does not decide the case; a vault that docks itself relaunches ~21 t for ~$10.5 M, and still does not. The gate is launch price, not technology.</p>
   </section>
 
   <hr>
@@ -402,7 +403,7 @@
       <li><strong>Fixed unit.</strong> Deployed area, bending modes, pointing disturbance and fault-domain size grow faster than the compute they carry. The 1 MW node is the unit; the fleet grows.</li>
       <li><strong>Plane fill.</strong> Nodes in one dawn-dusk plane share ground stations and crosslink; ten nodes is 10 MW with one ground segment.</li>
       <li><strong>Independent failure.</strong> A punctured loop or lost wing throttles one node, not the fleet.</li>
-      <li><strong>One servicer, one tray standard.</strong></li>
+      <li><strong>One servicer, one tray standard.</strong> Or, with a vault that docks itself, one module standard and no servicer.</li>
       <li><strong>Lifecycle split.</strong> Plant 10–15 years; trays 3–5. The plant is the asset; the trays are inventory.</li>
     </ul>
   </section>
@@ -469,6 +470,7 @@
       <tr><td>Coolant</td><td>Not stated</td><td>Single-phase loop; no fluid named</td><td>Two loops: glycol-water on the trays, silicone oil in the wings</td></tr>
       <tr><td>Use case</td><td>Power density, thermal isolation, space adjacency</td><td>Batch training and inference; space-native data second</td><td>Unchanged</td></tr>
       <tr><td>Data path</td><td>Not stated</td><td>Launched storage up, optical down; ~110 TB/day with one terminal</td><td>Two polar terminals for that budget; one gives ~87 min above 10&deg;, ~63 TB/day</td></tr>
+      <tr><td>Refresh</td><td>Compute swappable, robotically or by a crew</td><td>Trays on rails, swapped by a robotic servicer</td><td>Unchanged; a vault that docks itself traded, not decided (Section 7)</td></tr>
       <tr><td>End of life</td><td>Not stated</td><td>"Drag removes a dead node"</td><td>Open: a controlled end adds 1.5 to 7 t; traded, not decided</td></tr>
       <tr><td>Model and software</td><td>None</td><td>None</td><td>A model of power, heat, payload and links; flight software on a cFS image with a console, a fault library and a telemetry alphabet; a year flown (Section 13)</td></tr>
       <tr><td>Economics</td><td>Not stated</td><td>Parity near $300/kg to SSO</td><td>Parity near $230/kg to SSO</td></tr>
