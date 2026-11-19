@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Price of Waiting &mdash; Aegis Station</title>
+<meta name="description" content="An orbital megawatt costs more than one on the ground. The comparison assumes the megawatt on the ground is there to buy. A note on what the wait for power costs, what buyers already pay to shorten it, and what orbit does and does not escape.">
+<meta property="og:title" content="The Price of Waiting &mdash; Aegis Station">
+<meta property="og:description" content="Orbital compute loses the dollar-for-dollar comparison. The comparison assumes the megawatt on the ground is there to buy.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aegisstation.com/the-price-of-waiting.html">
+<meta property="og:image" content="https://aegisstation.com/images/price-of-waiting-hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0a0e15;
+    --bg-panel:  #0e141d;
+    --ink:       #d9e1ea;
+    --ink-dim:   #8a94a3;
+    --water:     #6fb6d8;
+    --water-deep:#3f7f9e;
+    --hair:      rgba(217, 225, 234, 0.12);
+    --hair-soft: rgba(217, 225, 234, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 1.14rem;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--water); text-decoration: none; }
+  a:hover, a:focus-visible { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--water); outline-offset: 3px; }
+
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+  .wrap-wide { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  .masthead {
+    border-bottom: 1px solid var(--hair);
+    background: rgba(10, 14, 21, 0.9);
+  }
+  .masthead .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 3.4rem;
+  }
+  .brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .brand a { color: var(--ink); }
+  .brand a:hover { color: var(--water); }
+  .masthead .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  header.hero {
+    background:
+      radial-gradient(120% 80% at 85% -10%, rgba(63, 127, 158, 0.16), transparent 60%),
+      var(--bg);
+  }
+  header.hero .wrap { padding-top: 5rem; padding-bottom: 3.2rem; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--water); margin-bottom: 1.6rem;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: clamp(2.3rem, 6vw, 3.5rem);
+    line-height: 1.05; letter-spacing: -0.02em;
+    color: #eef3f8;
+  }
+  .dek {
+    margin-top: 1.6rem;
+    font-size: 1.2rem; line-height: 1.6;
+    color: var(--ink-dim);
+    max-width: 34rem;
+  }
+  .dek strong { color: var(--ink); font-weight: 500; }
+
+  figure.art { margin: 0; }
+  figure.art img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--hair-soft);
+    border-radius: 4px;
+  }
+  figure.art figcaption {
+    margin-top: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; line-height: 1.6; letter-spacing: 0.06em;
+    color: var(--ink-dim);
+  }
+  .hero-art {
+    border-bottom: 1px solid var(--hair-soft);
+    padding-bottom: 3rem;
+    background: var(--bg);
+  }
+
+  main .wrap { padding-top: 3.5rem; padding-bottom: 2rem; }
+  main p { margin-bottom: 1.5rem; }
+  main figure.art { margin: 2.6rem 0 3rem; }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500; font-size: 1.5rem; letter-spacing: -0.01em;
+    color: #eef3f8;
+    margin: 3.2rem 0 1.3rem;
+    padding-top: 0.4rem;
+  }
+  h2 .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; font-weight: 400;
+    color: var(--water-deep);
+    letter-spacing: 0.1em;
+    margin-right: 0.8rem;
+    vertical-align: 0.28em;
+  }
+
+  em { color: var(--ink); font-style: italic; }
+
+  .pull {
+    margin: 3rem 0;
+    padding: 1.6rem 0 1.6rem 1.6rem;
+    border-left: 2px solid var(--water);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
+    font-size: 1.55rem; line-height: 1.35; letter-spacing: -0.01em;
+    color: #eef3f8;
+  }
+
+  ul.plain { margin: 0 0 1.5rem 1.2rem; }
+  ul.plain li { margin-bottom: 0.6rem; }
+  ul.plain li strong { color: var(--ink); font-weight: 500; }
+
+  footer {
+    margin-top: 3rem;
+    border-top: 1px solid var(--hair);
+    background: var(--bg-panel);
+  }
+  footer .wrap { padding-top: 2.4rem; padding-bottom: 4rem; }
+  .sig {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--ink); font-size: 0.98rem; font-weight: 500;
+  }
+  .sig span { color: var(--ink-dim); font-weight: 400; }
+  .backrow {
+    margin-top: 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    display: flex; gap: 1.4rem; flex-wrap: wrap;
+  }
+  .backrow a { color: var(--ink-dim); }
+  .backrow a:hover { color: var(--water); }
+
+  @media (max-width: 600px) {
+    body { font-size: 1.06rem; }
+    header.hero .wrap { padding-top: 3.5rem; padding-bottom: 2.4rem; }
+    .hero-art { padding-bottom: 2.4rem; }
+    .pull { font-size: 1.3rem; }
+    h2 .num { display: block; margin: 0 0 0.3rem; }
+  }
+
+  .sources { margin-top: 3.2rem; padding-top: 1.6rem; border-top: 1px solid var(--hair); }
+  .sources h3 {
+    font-family: 'IBM Plex Mono', monospace; font-weight: 400;
+    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-dim); margin-bottom: 1rem;
+  }
+  .sources ul { margin: 0 0 0 1.2rem; font-size: 0.92rem; line-height: 1.6; color: var(--ink-dim); }
+  .sources li { margin-bottom: 0.5rem; }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wrap">
+    <div class="brand"><a href="index.html">Aegis Station</a></div>
+    <div class="kicker">Strategic Note</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Orbital Compute</div>
+    <h1>The Price of Waiting</h1>
+    <p class="dek">An orbital megawatt costs more than one on the ground, and will for years. <strong>The comparison assumes the megawatt on the ground is there to buy.</strong> Increasingly it is not, and the wait has a price.</p>
+  </div>
+</header>
+
+<div class="hero-art">
+  <div class="wrap-wide">
+    <figure class="art">
+      <img src="images/price-of-waiting-hero.jpg" width="1672" height="941"
+           alt="Two identical orbital compute nodes on the same orbit above Earth's dawn line, one near and one small in the distance: each a large flat solar array at one end, a cylindrical vault, and a truss carrying radiator panels.">
+      <figcaption>Two nodes on one orbit, above the line between day and night. The second is the first again. Concept render.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+
+    <p>The <a href="aocn.html">Aegis Orbital Compute Node</a> is a one-megawatt data hall in a 650&nbsp;km orbit. Its page carries a table that sets the node against a terrestrial hall, and the node loses at every launch price on offer today. This note does not argue with that table. It argues that the table answers a narrower question than the one buyers now face.</p>
+
+    <h2><span class="num">01</span>What the comparison says</h2>
+
+    <p>Both halls buy the same accelerators. What differs is the plant around them. On the ground that is $10 to $15&nbsp;million a megawatt to build and under a million a year in power. In orbit it is 86&nbsp;t of launch mass, and the two meet at about $230 a kilogram to sun-synchronous orbit. That price does not exist. At $500 a kilogram the node costs about twice what the hall does.</p>
+
+    <p>The table is also kind to the node. It prices the launch and not the array, battery, radiators and structure that are launched. Nobody has built a megawatt of spacecraft at ground prices. At the price per kilogram of the cheapest satellites flown, by outside estimates, that hardware is another $46 to $100&nbsp;million a megawatt, and no launch price brings the node level with a hall. So on cost alone the ground wins, and it is not close.</p>
+
+    <h2><span class="num">02</span>What the wait costs</h2>
+
+    <p>The comparison takes the terrestrial megawatt as available on the day it is wanted. Berkeley Lab&rsquo;s count of the grid queue puts the median power plant built in 2025 at more than five years from request to operation. For the data centers on the other side of the meter, JLL&rsquo;s 2026 outlook is reported as more than four years on average to a grid connection in the main US markets, and about seven in Northern Virginia.</p>
+
+    <p>A megawatt of accelerators that is running earns its operator roughly $8 to $11&nbsp;million a year in revenue, on current filings and analyst estimates. Four years of waiting is $32 to $44&nbsp;million of revenue that is not earned, two to four times what the hall costs to build. That is revenue and not profit, and the chips are the larger bill. But it is the right size of number to set beside the node&rsquo;s premium, and the usual comparison sets it at zero.</p>
+
+    <figure class="art">
+      <img src="images/price-of-waiting-pad.jpg" width="1672" height="941"
+           alt="An empty graded gravel pad at dusk beside a fenced substation yard with bare concrete transformer pads and conduit stubs, and a single transmission tower on the horizon with no lines to the site.">
+      <figcaption>A site that is ready. The connection is four years out. Illustration.</figcaption>
+    </figure>
+
+    <div class="pull">The comparison assumes the megawatt on the ground is there to buy.</div>
+
+    <h2><span class="num">03</span>Three ways to a megawatt on the ground</h2>
+
+    <p>Buyers already know this, and they already pay to shorten the wait. There are three routes.</p>
+
+    <ul class="plain">
+      <li><strong>Wait for the grid.</strong> Four years and up, as above. Some pay to bring supply with them: analysts put the price of power from one restarted nuclear unit at $98 to $115 a megawatt-hour over twenty years, about twice the market price beside it. The contract price was not disclosed.</li>
+      <li><strong>Bring a turbine.</strong> On-site gas is estimated at $100 to $165 a megawatt-hour against $90 to $95 from the grid. But the turbines are queued too. One of the three large makers reported 122&nbsp;GW of orders and reserved slots in October 2026 against about 20&nbsp;GW a year of output, which is five to six years of production. A new combined-cycle plant cost 66&nbsp;% more in 2025 than in 2023.</li>
+      <li><strong>Run ahead of the permit.</strong> The fastest build on record was reported running 122 days after its owner chose to supply its own power from trailer-mounted turbines. A Clean Air Act suit filed in April 2026 alleges 27 such turbines at a sister site ran without an air permit. In October a federal judge declined to dismiss it and rejected the argument that the turbines were exempt as mobile sources. Nothing has been found against the operator, and the case is open.</li>
+    </ul>
+
+    <p>The premium on power is small. Fifty dollars more a megawatt-hour is about $0.4&nbsp;million a megawatt-year, a few percent of what the megawatt earns. Buyers pay it without much argument, which says the wait is what they are pricing and not the power.</p>
+
+    <figure class="art">
+      <img src="images/price-of-waiting-turbines.jpg" width="1672" height="941"
+           alt="A long row of identical gas turbine generators on trailers, parked nose to tail across a paved lot and receding to the horizon at sunrise.">
+      <figcaption>The other route. The turbines are queued too. Illustration.</figcaption>
+    </figure>
+
+    <h2><span class="num">04</span>The slope</h2>
+
+    <p>Some of the wait will shorten. Grid operators are moving to study connection requests in batches, utilities are writing tariffs that make large loads pay for what they need, the turbine makers are adding output, and each generation of chips does more with a megawatt. These help the queue. They do not help the neighbours. Data Center Watch counted $64&nbsp;billion of US projects blocked or delayed by local opposition from 2023 to early 2025, and about 120 projects worth $198&nbsp;billion in the first half of 2026 alone, with more than 800 opposition groups in 49 states. Those totals mix blocked with delayed, and some of the delayed will be built. The objections are often reasonable. A hall draws the power of a town, may draw its water, and employs few people once it is built. The people asked to live beside one are entitled to say no, and more of them are.</p>
+
+    <p>That gives the ground a cost per site that rises. Each new site is a new negotiation over land, power, water and a permit, with a different utility and a different county, and the sites with spare capacity and willing neighbours go first. Supply may catch up with the queue in the 2030s. No amount of building catches up with a county that has said no.</p>
+
+    <p>A node&rsquo;s cost falls with each one built. The second node is the first node again, from the same line, on the same launch vehicle, into the same orbit, and it needs nothing from the ground that the first did not. A single-site comparison cannot show this, because it compares two points and the difference is in the slopes.</p>
+
+    <h2><span class="num">05</span>What orbit does not escape</h2>
+
+    <p>Orbit has its own permissions. A node needs a spectrum licence, an approved plan for its end of life, and a place on a launch manifest. These are queues too. They are fewer, they are set nationally and not county by county, and they do not multiply with each node. But they are real, and orbit has neighbours of its own: every object placed there is one more to track and to steer clear of. That is an argument for a megawatt in one node and not in dozens of small satellites, which the <a href="aocn.html">AOCN page</a> sets out.</p>
+
+    <p>A fleet has ceilings of its own. A gigawatt is a thousand nodes, 86,000&nbsp;t. At a hundred tonnes a launch, which no vehicle yet delivers to that orbit, it is about 860 launches, and the ground adds gigawatts every year. The orbit is finite too. The 650&nbsp;km ring is 44,100&nbsp;km around, so a thousand nodes fly 44&nbsp;km apart, and a hundred thousand would fly 440&nbsp;m apart, which is not a spacing anyone would license. Past a few gigawatts a fleet needs other altitudes, each with its own shadow and its own radiation. Orbit is a route for the megawatts that cannot be sited. It does not replace the ground.</p>
+
+    <p>Nor is the first node fast. It is 86&nbsp;t, it needs heavy lift at a price that is not yet offered, and it has to be assembled or unfolded in orbit by means nobody has demonstrated at that size. The argument here is about the tenth node and the hundredth, not about beating a turbine to next summer.</p>
+
+    <p>Aegis is a design shop and does not build nodes. What it can do is state the trade plainly. Orbital compute is not a cheaper megawatt. It is a megawatt that can be ordered again, and again, without asking anyone new. Whether that is worth the premium depends on what the wait costs the buyer, and the buyers have begun to say what it costs them.</p>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li>Node mass, launch table and break-even: <a href="aocn.html">the AOCN page</a>. Hardware at satellite prices: the AOCN model&rsquo;s hardware cost line, on outside estimates of $650 to $1,400 a kilogram. None is a quotation.</li>
+        <li>Grid queue: Lawrence Berkeley National Laboratory, <a href="https://emp.lbl.gov/queues">Queued Up, 2026 edition</a>. Data center connection times: JLL 2026 Global Data Center Outlook, as reported.</li>
+        <li>Revenue per megawatt: operator filings and analyst estimates for GPU cloud providers, mid-2026, as reported. Multi-year contracts are reported higher.</li>
+        <li>Nuclear restart price: Jefferies and Morgan Stanley estimates, via <a href="https://www.utilitydive.com/news/constellation-three-mile-island-nuclear-power-plant-microsoft-data-center-ppa/727652/">Utility Dive</a>.</li>
+        <li>On-site gas cost: <a href="https://www.rabobank.com/knowledge/d011532274-the-marathon-can-behind-the-meter-data-center-power-solutions-endure-the-decade-in-the-us">RaboResearch</a>. Turbine backlog: <a href="https://www.sec.gov/Archives/edgar/data/0001996810/000199681026000162/gevpressrelease3q26.htm">GE Vernova, third quarter 2026</a>. Plant cost: <a href="https://www.bloomberg.com/news/articles/2026-04-23/cost-to-build-natural-gas-fired-power-plant-surges-66-bnef-says">BloombergNEF, via Bloomberg</a>.</li>
+        <li>Turbine suit and ruling: <a href="https://earthjustice.org/press/2026/xai-sued-for-illegal-power-plant">Earthjustice</a>; <a href="https://www.cnbc.com/2026/10/31/xai-naacp-clean-air-act-lawsuit-dismissal.html">CNBC</a>.</li>
+        <li>Local opposition: <a href="https://www.datacenterwatch.org/report">Data Center Watch</a>; first half of 2026 via <a href="https://www.statista.com/chart/36774/growing-opposition-to-data-centers-in-the-us/">Statista</a>.</li>
+      </ul>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sig">A.S. <span>&mdash; Principal Architect, Aegis Station</span></div>
+    <div class="backrow">
+      <a href="aocn.html">Orbital Compute Node</a>
+      <a href="engagement.html">How to Engage</a>
+      <a href="index.html">&larr; Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
