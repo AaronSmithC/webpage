@@ -80,10 +80,11 @@
 
     <p class="section-lead">
       Aegis Station is three rings, each 2.23 million tonnes, turning at 1.50 rpm on a hub 650 m long that does
-      not turn. This page is the station read as bodies that turn, through its three phases: the fill, with
-      every ring at rest; the spin-up, all three together; and normal operation. It says what keeps a ring
-      balanced, what is crossed on the way up to speed, what holds a ring's axis where it should be, and what
-      would have to go wrong for a ring to reach its neighbour or for the hub to break.
+      not turn. This page is the station read as bodies that turn, through its three phases: the fill, the
+      spin-up and normal operation, first with the rings moving together and then in the order of the
+      deployment plan, each ring brought online as it is filled. It says what keeps a ring balanced, what is
+      crossed on the way up to speed, what holds a ring's axis where it should be, and what would have to go
+      wrong for a ring to reach its neighbour or for the hub to break.
     </p>
     <p class="section-lead">
       Behind it is a dynamics model, a simulator that steps the model live, an operator console, and recorded
@@ -104,10 +105,11 @@
         <li><a href="#phases">3. Three phases</a></li>
         <li><a href="#fill">4. The fill</a></li>
         <li><a href="#spinup">5. The spin-up</a></li>
-        <li><a href="#normal">6. Normal operation</a></li>
-        <li><a href="#changed">7. What changed as the model grew</a></li>
-        <li><a href="#open">8. What is open</a></li>
-        <li><a href="#status">9. Status</a></li>
+        <li><a href="#asfilled">6. A ring at a time, as each is filled</a></li>
+        <li><a href="#normal">7. Normal operation</a></li>
+        <li><a href="#changed">8. What changed as the model grew</a></li>
+        <li><a href="#open">9. What is open</a></li>
+        <li><a href="#status">10. Status</a></li>
       </ul>
     </div>
 
@@ -182,10 +184,16 @@
     <section id="phases">
       <h2>3. Three phases</h2>
       <p>
-        The rings move together. All three are filled at rest, all three are spun up together, and they turn
-        together from then on. A spin-down is the spin-up run backwards, again all three. At no time does one
-        ring stand still beside another that turns: that is the least steady arrangement the model has, and
-        this rule is what keeps the station out of it.
+        The simplest way through the phases is for the rings to move together: all three filled at rest, all
+        three spun up together, turning together from then on, and a spin-down the spin-up run backwards.
+        Sections 4 and 5 take the fill and the spin-up that way. It keeps the station out of the arrangement
+        the first model found least steady, one ring turning beside others at rest.
+      </p>
+      <p>
+        The deployment plan is the other way: each ring is brought online when its shield is full, so that the
+        first is lived in while the next is still being filled. That puts the station in the arrangement the
+        rule avoids, for months at a time. Whether it holds depends on how the rings are tied to the hub, and
+        on the working design it does. <a href="#asfilled">Section 6</a> runs it.
       </p>
       <p>
         Three things act on the station's motion. Trim pumps move a little of the shield's water between
@@ -196,7 +204,7 @@
         <thead><tr><th>Phase</th><th>The rings</th><th>What steadies the station</th><th>What the phase asks for</th></tr></thead>
         <tbody>
           <tr><td><a href="#fill">The fill</a></td><td>At rest, each taking on 2.01 Mt of water</td><td>Pods hold each ring as an ordinary body</td><td>An even fill, because a ring at rest tells nothing about its balance</td></tr>
-          <tr><td><a href="#spinup">The spin-up</a></td><td>From rest to 1.50 rpm together, over about thirty days</td><td>Trim pumps, once the readings tell them something; bearing actuators</td><td>Two resonances crossed without building up</td></tr>
+          <tr><td><a href="#spinup">The spin-up</a></td><td>From rest to 1.50 rpm, together over about thirty days, or <a href="#asfilled">one at a time</a> as each is filled</td><td>Trim pumps, once the readings tell them something; bearing actuators</td><td>Two resonances crossed without building up</td></tr>
           <tr><td><a href="#normal">Normal operation</a></td><td>At 1.50 rpm</td><td>Trim pumps for balance, pods for the axis, bearing actuators for damping</td><td>A good reading of tilt rate</td></tr>
         </tbody>
       </table></div>
@@ -284,8 +292,108 @@
       </p>
     </section>
 
+    <section id="asfilled">
+      <h2>6. A ring at a time, as each is filled</h2>
+      <p>
+        Ring 1 is filled and spun up beside two dry rings. Ring 2 is filled at rest beside it and spun up, and
+        then ring 3. On the simulator each spin-up is run at the full thrust of the ring's eight spin pods,
+        27 kN each, which takes six days; that thrust is a placeholder, and it also sets how fast a ring could
+        be brought to rest in an emergency. The months a fill takes are not run: a fill is four steps an hour
+        apart, and the states it passes through are checked separately, below.
+      </p>
+      <p>
+        The order does not change the propellant. Bringing a filled ring to 1.50 rpm takes its angular momentum
+        over the rim's radius and the exhaust speed, about 25,300 t, whether the rings come up together, one at
+        a time or in pairs: 76,000 t for the three. A ring spun up empty takes a ninth of that, but its water
+        then has to be brought to the ring's speed as it comes aboard, and the total is the same.
+      </p>
+      <h3>Does a ring at rest beside a turning one hold</h3>
+      <p>
+        The measure that first raised the question is the ratio of the spinning inertia to the inertia across
+        the axis. Above 1, a body left alone keeps its axis; below 1, a rigid body with anything loose inside it
+        slowly tumbles. With ring 2 full and at rest beside ring 1 the ratio is 0.76.
+      </p>
+      <div class="tablewrap"><table>
+        <thead><tr><th>State</th><th>Ratio</th><th>Left alone</th><th>With thrusters and bearing actuators</th></tr></thead>
+        <tbody>
+          <tr><td>Ring 1 turning, rings 2 and 3 empty</td><td>1.30</td><td>a wobble dies out, by e in 6 days</td><td>in an hour</td></tr>
+          <tr><td>Ring 1 turning, ring 2 half full at rest</td><td>0.95</td><td>dies out, 8 to 19 days</td><td>in an hour</td></tr>
+          <tr><td>Ring 1 turning, ring 2 full at rest</td><td>0.76</td><td>dies out, 12 to 40 days</td><td>in an hour</td></tr>
+          <tr><td>Rings 1 and 2 turning, ring 3 full at rest</td><td>0.92</td><td>neither grows nor dies</td><td>in an hour</td></tr>
+          <tr><td>All three turning</td><td>1.39</td><td>neither grows nor dies</td><td>in under two hours</td></tr>
+        </tbody>
+      </table></div>
+      <p>
+        Nothing grows at any stage of the fill. The range in "left alone" is the slosh unknown: the longer
+        figure is with the water in a ring at rest damping nothing. A ratio below 1 matters to a station that
+        moves as one rigid body. On bearings soft in tilt each ring keeps its own plane, and the turning ring
+        does not have to drag the others round with it.
+      </p>
+      <p class="finding">
+        The tumble needs a station tied rigidly. With bearings a million times stiffer than the working design
+        and the water in the rings at rest damping nothing, a wobble with one ring turning beside two full rings
+        at rest grows by e in 42 minutes, and a ring brought up that way has the hub's neck past its limit
+        before it reaches full rate, under two days in.
+        Thrusters on every ring hold even that, for 54 t of propellant. It is the same choice as in section 2:
+        the stiff bearing is what breaks the hub.
+      </p>
+      <h3>What the trim pumps do for it</h3>
+      <p>
+        A ring coming up beside a ring already at full rate crosses the hub's bending resonance on its own, and
+        the resonance is in a different place with only some of the rings full and turning: near 1.0 rpm for
+        ring 2, near 0.7 for ring 3. Whatever its fill left off-centre is what pushes there.
+      </p>
+      <figure class="diagram">
+        <img src="images/station_as_filled.svg" alt="Two panels, main bearing and hub neck, each showing load as a share of its placeholder limit over nineteen days. With the pumps held the bearing reaches 37 percent and the neck 29 percent on day 10, as ring 2 comes up beside ring 1, and again about 16 percent on day 15 as ring 3 comes up. With the pumps working neither passes 3 percent."/>
+        <figcaption>The deployment order with 300, 150 and 80 t left off-centre by the three fills. With the trim pumps held, each ring carries its residue up through the bending crossing: 37 % of the bearing's placeholder limit and 29 % of the neck's as ring 2 comes up. With the pumps working, the largest bearing load in the nineteen days is 2.5 % and the neck's is under a tenth of a percent.</figcaption>
+      </figure>
+      <p>
+        Both runs hold. The difference is margin and propellant: holding the rings' tilt burns 275 t with the
+        pumps held and 58 t with them working, most of that by the rings still at rest. For the pumps to work
+        here the balance has to read rings turning at different rates, each at its own. It tells two rates apart
+        when they differ by 0.16 rpm or more, takes out of each reading what the other rings are estimated to
+        carry, and averages twice. A ring still comes through its first crossing, under 0.1 rpm, as its fill
+        left it, with its pumps held, so the fill's evenness is the same requirement as in section 4, and the
+        residues here are well inside it.
+      </p>
+      <figure class="diagram">
+        <video controls muted playsinline preload="none" poster="images/station_as_filled_poster.jpg">
+          <source src="media/station_as_filled.mp4" type="video/mp4">
+        </video>
+        <figcaption>The same nineteen days twice, recorded from the simulator: the trim pumps held above, working below. Each piece is the same moment in both, and both are drawn thirty times life size. Ring 1 leaves rest; ring 2 is filled beside it; ring 2 comes up through its crossing near 1.0 rpm, where the hub bends with the pumps held and does not with them working; ring 3 follows; all three at 1.50 rpm. With the pumps held the imbalance stays where the fill left it for the whole run.</figcaption>
+      </figure>
+      <h3>Keeping the hub still</h3>
+      <p>
+        A bearing drags, and whatever torque it passes turns the hub with the ring. The hub is light about its
+        own axis: left to a dragging bearing it would be turning with the ring within hours. How much a bearing
+        of this size drags is not known, so these are for 100 kN m from one ring at full rate, and scale with
+        it.
+      </p>
+      <table>
+        <thead><tr><th>How the hub is held</th><th>What it takes</th></tr></thead>
+        <tbody>
+          <tr><td>A motor at the bearing giving the ring the torque the bearing drags with</td><td>16 kW, and no propellant</td></tr>
+          <tr><td>Thrusters at the rim of a ring at rest, braked to the hub</td><td>5 t a day</td></tr>
+          <tr><td>Thrusters on the hub itself, at its 10 m radius</td><td>196 t a day</td></tr>
+        </tbody>
+      </table>
+      <p>
+        The drag is a loss inside the station, and making it up from inside leaves nothing on the hub; answering
+        it with thrusters on a 10 m arm is the expensive way to do the same thing. During deployment there is
+        always a ring at rest to hold the hub by, and a full one makes the hub too heavy to turn in any time
+        that matters. Once all three rings turn there is none, so normal operation wants the motors. The runs
+        above have them on, and the hub does not move.
+      </p>
+      <p class="note">
+        What this section does not show: the months of filling beside a turning ring, which are here only as the
+        states in the table; what a part-filled shield's water does, which waits on the shield's layout; and a
+        fault of the spin drive during a spin-up. One is known: a spin pod that does not fire at the start of a
+        spin-up turns the whole station about 3&#176; in space within the hour, before the rings' spin stiffens it.
+      </p>
+    </section>
+
     <section id="normal">
-      <h2>6. Normal operation</h2>
+      <h2>7. Normal operation</h2>
       <p>
         All three rings at 1.50 rpm, and people living in them. The balance is kept by pumped water, the axes
         are held by the pods, and the station's ordinary traffic goes on.
@@ -379,7 +487,7 @@
     </section>
 
     <section id="changed">
-      <h2>7. What changed as the model grew</h2>
+      <h2>8. What changed as the model grew</h2>
       <p>
         A few early figures changed as the model was extended. They are listed because anyone checking this
         work would want to know.
@@ -390,13 +498,15 @@
           <tr><td>Propellant to turn or hold a ring's axis</td><td>21 t to bring a ring in from 0.1&#176;</td><td>43 t</td><td>A moment across the rim takes a pod on each side. Only one of the two had been counted, so every such figure doubled. Spin-up propellant was unaffected.</td></tr>
           <tr><td>Resonances crossed in a spin-up</td><td>One</td><td>Two</td><td>The first sweep stepped over two narrow peaks. They are now found by search, and each is cut to what the spin-up has time to build, checked against runs in time.</td></tr>
           <tr><td>Bearing actuator gain</td><td>10<sup>12</sup> N m s/rad</td><td>2 &#215; 10<sup>10</sup> on a soft bearing</td><td>The first gain was chosen beside a stiffer bearing. On a soft one it made the bearing act stiff once a turn. A recording from the simulator showed the actuator carrying fifty times the bearing's own moment.</td></tr>
+          <tr><td>One ring turning beside rings at rest</td><td>Ruled out: the rings move together</td><td>Holds on the working design, and is the deployment plan</td><td>The first model held the rings rigidly on the hub's axis, and there this arrangement tumbles. With each ring free to tilt at a soft bearing it does not, at any stage of a fill.</td></tr>
+          <tr><td>The balance with rings at different rates</td><td>Read nothing</td><td>Each ring read at its own rate</td><td>The estimator had assumed one rate for every turning ring. A ring brought up beside a turning one then crossed the hub's bending with its fill's residue untrimmed, the neck near half its limit.</td></tr>
           <tr><td>When the balance acts</td><td>Whenever it had an estimate</td><td>Only when the estimate is worth having</td><td>At low spin rates the readings cannot tell an imbalance the trim could cancel, and just past the first resonance the estimate is wrong. Acting on either made things worse.</td></tr>
         </tbody>
       </table></div>
     </section>
 
     <section id="open">
-      <h2>8. What is open</h2>
+      <h2>9. What is open</h2>
       <div class="card">
         <ul>
           <li><strong>The bearing.</strong> Something soft in tilt that still carries a 2.2 Mt ring sideways, with its travel and its stops. The window above is a requirement on it; nothing is designed.</li>
@@ -404,19 +514,22 @@
           <li><strong>Slosh.</strong> The share of the shield's water that does not follow its ring is carried as an unknown and swept. It waits on the shield's internal layout.</li>
           <li><strong>The limits.</strong> Every load here is a share of a placeholder. A bearing and a neck with designs behind them would replace them.</li>
           <li><strong>The fill.</strong> How the fill is metered evenly enough for the first crossing.</li>
-          <li><strong>Emergencies.</strong> All three rings brought to rest in a hurry. Not started.</li>
+          <li><strong>Emergencies.</strong> All three rings brought to rest in a hurry. The pods set the pace: six days at the placeholder thrust, with both crossings met in reverse. What that does to people and to loose water as gravity falls is not started.</li>
+          <li><strong>Bearing drag.</strong> How much torque a main bearing passes to the hub. It sizes the bearing motors, and nothing here says what it is.</li>
+          <li><strong>The spin pods.</strong> Their thrust sets how long a spin-up or a spin-down takes, and what one of them failing does.</li>
           <li><strong>Not in the model yet.</strong> Orbit keeping, the Moon's gravity gradient on the spin axis, a ring's own flexing, thermal bending of the hub, and the ring's rate changing as mass moves in or out along a spoke.</li>
         </ul>
       </div>
     </section>
 
     <section id="status">
-      <h2>9. Status</h2>
+      <h2>10. Status</h2>
       <p>
-        <strong>What exists.</strong> A dynamics model in plain code with 125 checks against results known
+        <strong>What exists.</strong> A dynamics model in plain code with 187 checks against results known
         without it; a simulator that steps the model live and takes commands; an operator console that watches
-        and steers the simulator; sixteen recorded runs, among them a normal day, the fill's traffic, a fault during the fill, and
-        spin-ups at a three-day pace and at the real thirty-day pace.
+        and steers the simulator; thirty-six recorded runs, among them a normal day, the fill's traffic, a fault during the fill,
+        spin-ups at a three-day pace and at the real thirty-day pace, the deployment order with each ring brought
+        online as it is filled, spin-downs, and faults of the spin drive.
       </p>
       <p>
         <strong>What is a model.</strong> Everything. No requirements review and no flight software exist for
